@@ -1,0 +1,46 @@
+Package: tidyquant
+Type: Package
+Title: Tidy quantitative analysis tools
+Version: 0.1.0
+Date: 2016-12-31
+Authors@R: person("Matt", "Dancho", email = "mdancho@gmail.com", 
+    role = c("aut", "cre"))
+Maintainer: Matt Dancho <mdancho@gmail.com>
+Description: Bringing quantatitive analytics to the tidyverse. The tidyquant 
+    package provides a convient wrapper to various quantmod and TTR package 
+    functions and returns the objects in the tidy tibble format. The main 
+    advantage is being able to use quantitative functions with the tidyverse
+    function including purrr, dplyr, tidyr, ggplot2, lubridate, etc. See 
+    the tidyquant website for more information, documentation and examples.
+URL: https://github.com/mdancho84/tidyquant
+BugReports: https://github.com/mdancho84/tidyquant/issues
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends:
+    R (>= 3.0),
+    quantmod (>= 0.4-7),
+    TTR (>= 0.23-1)
+Imports:
+    devtools (>= 1.12.0),
+    dplyr (>= 0.05),
+    lubridate (>= 1.6.0),
+    magrittr (>= 1.5), 
+    purrr (>= 0.2.2),
+    rvest (>= 0.3.2),
+    stats (>= 3.3.0),
+    stringr (>= 1.1.0),
+    tibble (>= 1.2),
+    tidyr (>= 0.6.0),
+    timeSeries (>= 3022.101.2),
+    tseries (>= 0.10-36),
+    xml2 (>= 1.0.0),
+    xts (>= 0.9-7),
+    zoo (>= 1.7-13)
+Suggests:
+    tidyverse,
+    knitr,
+    rmarkdown,
+    testthat
+RoxygenNote: 5.0.1
+VignetteBuilder: knitr

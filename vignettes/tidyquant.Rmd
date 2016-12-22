@@ -1,0 +1,267 @@
+---
+title: "Introduction to tidyquant"
+author: "Matt Dancho"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+> Bringing quantitative financial analysis to the tidyverse
+
+# Overview
+
+The [tidy data principles](https://www.jstatsoft.org/article/view/v059i10) are a cornerstone of data management and data modeling workflow. The foundation for tidy data management is the `tidyverse`, a collection of _R packages_ that work in harmony and are well documented in [R for Data Science](http://r4ds.had.co.nz/). Using this infrastructure and the core tidy concepts, we can apply the tidy data principles to quantitative financial analysis. The purpose of `tidyquant` is to bridge the gap between the best quantitative resources for collecting and analyzing quantitative data, `quantmod` and `TTR`, and the tidy data infrastructure of the `tidyverse`.
+
+# Prerequisites
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(message = FALSE,
+                      warning = FALSE,
+                      fig.width = 6)
+devtools::load_all()
+```
+
+Load the following packages to get started.
+
+```{r}
+library(tidyverse)  # ggplot2, purrr, dplyr, tidyr, readr, tibble
+library(tidyquant)  # tidyquant, quantmod, TTR 
+```
+
+# Benefits
+
+The `tidyquant` philosophy:
+
+* A few core functions with a lot of power, that have a
+* simple I/O that can be extended, which
+* leverage the quantitative analysis power of `quantmod` and `TTR`, and 
+* works seemlessly within the `tidyverse`.
+
+## A Few Core Functions with A Lot of Power
+
+Minimizing the number of functions reduces the learning curve. Functions are grouped into verbs for efficient collection and manipulation of quantitative data: 
+
+* __Get Quantitative Data, `tq_get()`:__ Litterally a one-stop-shop to get data from various web-sources. The options include stock lists for 18 stock indexes, stock prices, dividends and splits from Yahoo Finance, financial statements from Google Finance, metal prices and exchange rates from Oanda, and economic data from the FRED database. 
+
+* __Transform Quantitative Data, `tq_transform()`:__ Transforms the results of `tq_get()`. The result is typically a different shape than the input (hence "transformed"). An example is periodicity aggregation from daily to monthly.
+
+* __Mutate Quantitative Data, `tq_mutate()`:__ Adds a column or set of columns to the tibble with the calculated attributes (hence the original tibble is returned, mutated with the additional columns). An example is getting the MACD, which mutates the original input by adding MACD and signal components columns. 
+
+* __Coerce Quantitative Data from Other Time Series Formats, `as_tibble()`:__ Coercing `xts`, `zoo`, `timeSeries`, and the other various _R_ time-based objects was a pain. `tidyquant::as_tibble()` provides an easy way to preserve row names so no data is lost when coercing to `tibble`.
+
+### Get Quantitative Data
+
+The `tq_get()` function is used to collect all data, from stock prices to financial statements, to metals and exchange rates, to economic data, by changing the `get` argument.
+
+__Stock Index:__
+
+A wide range of stock index / exchange lists can be retrieved using `get = "stock.index"`. To get a full list of the options, set `x = "options"`. 
+
+```{r}
+tq_get("options", get = "stock.index")
+```
+
+Set `x` as one of the options in the list of options above, and `get = "stock.index"` to get the desired stock index / exchange.
+
+```{r}
+tq_get("sp500", get = "stock.index")
+```
+
+The data source is [www.marketvolume.com](http://www.marketvolume.com/indexes_exchanges/).
+
+__Stock Prices:__
+
+The stock prices can be retrieved succinctly using `get = "stock.prices"`.  
+
+```{r}
+appl_price  <- tq_get("AAPL", get = "stock.prices")
+appl_price 
+```
+
+Note that by default, the open, high, low, and close (OHLC) stock prices are adjusted to account for dividends and stock splits. If we want unadjusted stock prices, just set `adjust = FALSE`. 
+
+The data source is [yahoo finance](https://finance.yahoo.com/).
+
+__Dividends and Splits:__
+
+Dividends and splits are easily obtained using `get = "divs.splits"`. 
+
+```{r}
+appl_divs_splits <- tq_get("AAPL", get = "divs.splits")
+appl_divs_splits
+```
+
+The data source is [yahoo finance](https://finance.yahoo.com/).
+
+__Financial Statements:__
+
+For any given stock, a total of six financials statements are retrieved as nested tibbles, one for each combination of statement type (Income Statement, Balance Sheet, and Cash Flow) and period (by annual and quarter). 
+
+```{r}
+fb_financials <- tq_get("FB", get = "financials")
+fb_financials
+```
+
+The statement information can be extracted by selecting (`dplyr::select()`) and filtering (`dplyr::filter()`) to the desired statement and unnesting (`tidyr::unnest()`) the results.
+
+```{r}
+fb_financials %>%
+    filter(type == "IS") %>%
+    select(annual) %>%
+    unnest()
+```
+
+The data source is [google finance](https://www.google.com/finance).
+
+__Exchange Rates:__
+
+Exchange rates are entered as currency pairs using "/" notation (e.g `"EUR/USD"`), and by setting `get = "exchange.rates"`. 
+
+```{r}
+eur_usd <- tq_get("EUR/USD", get = "exchange.rates", from = "2000-01-01")
+eur_usd %>%
+    ggplot(aes(x = date, y = exchange.rate)) +
+    geom_line() + 
+    ggtitle("EUR/USD Exchange Rate")
+```
+
+The data source is [Oanda](https://www.oanda.com/), and list of currencies to compare can be found on [Oanda's currency converter](https://www.oanda.com/currency/converter/). It may make more sense to get this data from the FRED (See [Economic Data](#economic-data) below) since the max period for Oanda is 5-years.
+
+__Metal Prices:__
+
+Metal prices are very similar to stock prices. Set `get = "metal.prices"` along with the appropriate commodity symbol (e.g. XAU (gold) , XAG (silver), XPD (palladium), or XPT (platinum)). 
+
+```{r}
+plat_price_eur <- tq_get("plat", get = "metal.prices", 
+                         from = "2000-01-01", base.currency = "EUR")
+plat_price_eur %>%
+    ggplot(aes(x = date, y = price)) +
+    geom_line() + 
+    ggtitle("Platinum Prices (EUR)")
+```
+
+The data source is [Oanda](https://www.oanda.com/). It may make more sense to get this data from the FRED (See [Economic Data](#economic-data) below) since the max period for Oanda is 5-years.
+
+<a class="anchor" id="economic-data"></a>
+__Economic Data: __ 
+
+A wealth of economic data can be extracted from the Federal Reserve Economic Data (FRED) database. The FRED contains litteraly over 10K data sets that are free to use. See the [FRED categories](https://fred.stlouisfed.org/categories) to narrow down the data base and to get data codes. The [WTI Crude Oil Prices](https://fred.stlouisfed.org/series/DCOILWTICO) are shown below.
+
+```{r,}
+wti_price_usd <- tq_get("DCOILWTICO", get = "economic.data")
+wti_price_usd %>%
+    ggplot(aes(x = date, y = price)) +
+    geom_line() + 
+    ggtitle("WTI Crude Prices")
+```
+
+We can also get exchange rates. [CAD to USD exchange rates](https://fred.stlouisfed.org/series/DEXCAUS) are shown below. Note that the default column name is `price`, which may not be accurate for all data sets depending on the unit retreived.
+
+```{r}
+cad_usd <- tq_get("DEXCAUS", get = "economic.data")
+cad_usd %>%
+    ggplot(aes(x = date, y = price)) +
+    geom_line() + 
+    ggtitle("CAD to USD exchange rate") +
+    ylab("")
+```
+
+
+### Transform Quantiative Data
+
+The `tq_transform()` function is used to transform / mutate the data obtained from `tq_get()`.
+
+TODO
+
+### Mutate Quantitative Data
+
+TODO
+
+### Coercing Time Series Objects to Tibble
+
+The `tidyquant::as_tibble()` function includes a `preserve_row_names`, which is useful when coercing one of the many time formats (e.g. `xts`, `zoo`, `timeSeries`, `ts`) or `matrix` objects that contain valuable information in the row names. This makes bridging the gap between the various quantitative analysis packages and the `tidyverse` much easier.
+
+```{r}
+# Create xts object from a matrix
+vals = matrix(c(500, 504, 503))
+date = c("2016-01-01", "2016-01-02", "2016-01-03") 
+rownames(vals) <- date
+time_series_xts <- xts::as.xts(vals)
+time_series_xts
+```
+
+Coerce to `tibble` by setting `preserve_row_names = TRUE`.
+
+```{r}
+time_series_tbl <- tidyquant::as_tibble(time_series_xts, preserve_row_names = TRUE)
+time_series_tbl
+```
+
+## Simple I/O That Can Be Extended
+
+Each function has one primary input and one output. The rationale behind this is simple: let the function handle the operation, let the `tidyverse` handle the iteration. This allows chaining operations with the pipe (`%>%`), and mapping to extend to lists of many stocks, exchange rates, metals, economic data, financial statements, etc. 
+
+For example, say we'd like to retrieve the stock prices for the FANG tech stocks, Facebook, Amazon, Netflix and Google. We know how perform this on one stock using `tq_get()`, but how can we extend this? 
+
+This is easy by processing a `tibble` of stock symbols using `dplyr::mutate` and `purrr::map`. The result is the stock prices for each stock nested in one `tibble`. 
+
+```{r}
+fang <- tibble(symbol = c("FB", "AMZN", "NFLX", "GOOGL")) %>%
+    mutate(stock.prices = map(symbol, tq_get)) 
+fang
+```
+
+Using `tidyr::unnest`, we can unnest to get a one-level `tibble`. We have all the information in one data frame that can be filtered, sorted, and modified using the `tidyverse`. 
+
+```{r}
+fang %>% unnest()
+```
+
+
+## Leverages Quantitative Power of `quantmod` and `TTR`
+
+You may already know and love `quantmod` or `TTR`, which is why the core functionality is still intact. 
+
+Filter dates by passing `from` or `to` arguments.
+
+```{r}
+tq_get("FB", get = "stock.prices", from = "2016-01-01", to = "2016-01-15")
+```
+
+
+Pass arguments like `base.currency` that work in `quantmod::getMetals()` to the `tq_get()` function. 
+
+```{r}
+tq_get("gold", get = "metal.prices", base.currency = "EUR")
+```
+
+## Works Seemlessly within the `tidyverse`
+
+All results are returned as a `tibble`, no exceptions. We saw this with `fang` stocks, where a nested `tibble` was generated.
+
+```{r}
+fang
+```
+
+We can now use `tidyverse` verbs to manipulate and visualize the data.
+
+```{r, fig.width = 7, fig.height = 5}
+fang %>%
+    unnest() %>%
+    filter(date >= "2013-01-01") %>%
+    select(symbol, date, close) %>%
+    ggplot(aes(x = date, y = close)) + 
+    geom_line(aes(col = symbol)) +
+    facet_wrap(~ symbol, ncol = 2, scales = "free_y") + 
+    theme(legend.position = "top")
+```
+
+
+# Recap
+
+Hopefully now you see how `tidyquant` helps to bring quantative analytics to the `tidyverse`. With four easy-to-use functions, you can efficiently leverage the quantitative power of `quantmod` and `TTR` with the data management infrastructure of the `tidyverse`.
+
