@@ -346,7 +346,7 @@ tq_get_util_2 <-
 # Util 3: Used for tq_get() `get` options:
 #     stock.index     -> web scraped from www.marketvolume.com
 tq_get_util_3 <-
-    function(x, get, ...) {
+    function(x, get, use_fallback = FALSE, ...) {
 
     x <- stringr::str_to_upper(x) %>%
          stringr::str_trim(side = "both") %>%
@@ -385,7 +385,7 @@ tq_get_util_3 <-
     # Show options or collect data
     if (x == "OPTIONS") {
 
-        index_list[-1]
+        ret <- index_list[-1]
 
     } else {
 
@@ -466,47 +466,81 @@ tq_get_util_3 <-
 
         )
 
+        if (!use_fallback) {
 
-        # Base path and page rows from www.marketvolume.com
-        base_path_1 <- "http://www.marketvolume.com/indexes_exchanges/"
-        base_path_2 <- ".asp?s="
-        base_path_3 <- "&row="
-        base_path <- paste0(base_path_1, vars$a, base_path_2, vars$b, base_path_3)
+            # Base path and page rows from www.marketvolume.com
+            base_path_1 <- "http://www.marketvolume.com/indexes_exchanges/"
+            base_path_2 <- ".asp?s="
+            base_path_3 <- "&row="
+            base_path <- paste0(base_path_1, vars$a, base_path_2, vars$b, base_path_3)
 
-        # Get page numbers; Add 1 to max page to adjust for 250 stock list expansion.
-        row_num <- seq(from = 0, by = 250, length.out = vars$max_page + 1)
+            # Get page numbers; Add 1 to max page to adjust for 250 stock list expansion.
+            row_num <- seq(from = 0, by = 250, length.out = vars$max_page + 1)
 
-        message("Getting data...\n")
+            message("Getting data...\n")
 
-        # function to map
-        get_stock_index <- function(base_path, row_num) {
-            path <- paste0(base_path, row_num)
-            # rvest functions: Get table of stocks
-            stock_table <- xml2::read_html(path) %>%
-                rvest::html_node("table") %>%
-                rvest::html_table()
-            # Format table
-            stock_table <- stock_table[-1, 1:2] %>%
-                tibble::as_tibble() %>%
-                dplyr::rename(symbol = X1, company = X2)
-            stock_table
+            # Function to map
+            get_stock_index <- function(base_path, row_num) {
+                path <- paste0(base_path, row_num)
+                # rvest functions: Get table of stocks
+                stock_table <- xml2::read_html(curl::curl(path, handle = curl::new_handle("useragent" = "Mozilla/5.0"))) %>%
+                    rvest::html_node("table") %>%
+                    rvest::html_table()
+                # Format table
+                stock_table <- stock_table[-1, 1:2] %>%
+                    tibble::as_tibble() %>%
+                    dplyr::rename(symbol = X1, company = X2)
+                stock_table
+            }
+
+            # Map function; return stockindex
+            stock_index <- tryCatch({
+
+                tibble::tibble(row_num) %>%
+                    dplyr::mutate(
+                        stock_table = purrr::map(row_num,
+                                                 function(.x) get_stock_index(base_path = base_path, row_num = .x)
+                        )
+                    ) %>%
+                    tidyr::unnest() %>%
+                    dplyr::select(-row_num) %>%
+                    dplyr::mutate_all(function(x) stringr::str_trim(x, side = 'both') %>%
+                                          stringr::str_to_upper()) %>%
+                    dplyr::distinct()
+
+            }, error = function(e) {
+
+                path <- paste0(base_path, 0)
+                con <- pipe(path)
+                close(con)
+                warning(paste0("Could not access ", path, ". ",
+                                "If problem persists, try setting `use_fallback = TRUE` ",
+                                "to return the last dowloaded data set."))
+
+                NA
+
+            })
+
+        } else {
+
+            # load("R/sysdata.rda")
+            date.dload <- stock_indexes %>%
+                dplyr::filter(index.option == x) %>%
+                dplyr::select(date.downloaded)
+            message(paste0("Using fallback dataset last downloaded ",
+                           date.dload[[1]]), ".")
+            stock_index <- stock_indexes %>%
+                dplyr::filter(index.option == x) %>%
+                dplyr::select(index.components) %>%
+                tidyr::unnest()
+
         }
 
-        # Map function; return stockindex
-        stock_index <- tibble::tibble(row_num) %>%
-            dplyr::mutate(
-                stock_table = purrr::map(row_num,
-                    function(.x) get_stock_index(base_path = base_path, row_num = .x)
-                )
-            ) %>%
-            tidyr::unnest() %>%
-            dplyr::select(-row_num) %>%
-            dplyr::mutate_all(function(x) stringr::str_trim(x, side = 'both') %>%
-                                  stringr::str_to_upper()) %>%
-            dplyr::distinct()
 
-        stock_index
+        ret <- stock_index
 
     }
+
+    ret
 
 }
