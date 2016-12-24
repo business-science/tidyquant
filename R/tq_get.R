@@ -7,7 +7,7 @@
 #' \itemize{
 #'   \item \code{"stock.index"}: Get a list of all stocks in an index or exchange
 #'   from \href{http://www.marketvolume.com/indexes_exchanges/}{marketvolume}.
-#'   Set \code{x = "options"} to get the full list.
+#'   Set \code{x = "options"} to get the list of index options available.
 #'   \item \code{"stock.prices"}: Get the stock prices for a stock symbol from
 #'   \href{https://finance.yahoo.com/}{Yahoo}.
 #'   \item \code{"divs.splits"}: Get the dividends and splits for a stock symbol
@@ -31,9 +31,12 @@
 #'   \item \code{to}: A character string representing a end date in
 #'   YYYY-MM-DD format. No effect on \code{get = "stock.index"} or
 #'   \code{get = "financials"}.
-#'   \item \code{adjust}: Affects \code{get = stock.prices} only. A boolean
+#'   \item \code{adjust}: Affects \code{get = "stock.prices"} only. A boolean
 #'   representing whether stock prices should be
 #'   adjusted for dividends and splits. Set to \code{TRUE} by default.
+#'   \item \code{use_fallback}: Affects \code{get = "stock.index"} only. A boolean
+#'   representing whether to use the fall back data set for a stock index. Useful
+#'   if the data cannot be fetched from the website. Set to \code{FALSE} by default.
 #' }
 #'
 #'
@@ -50,48 +53,50 @@
 #'
 #' @examples
 #' # Load libraries
-#' library(tidyverse)
 #' library(tidyquant)
 #'
 #' ##### Basic Functionality
-#' # Get a stock list
-#' # index_list <- c(
+#'
+#' # Get the list of stocks in a stock index from www.marketvolume.com
+#' # options <- c(
 #' #     "DOWJONES", "DJI", "DJT", "DJU","SP100", "SP400", "SP500", "SP600",
 #' #     "RUSSELL1000", "RUSSELL2000", "RUSSELL3000", "AMEX", "AMEXGOLD",
 #' #     "AMEXOIL", "NASDAQ", "NASDAQ100", "NYSE", "SOX"
 #' #      )
 #' tq_get("SP500", get = "stock.index")
 #'
-#' # Get stock prices for a stock; TTR::getYahooData()
+#' # Get stock prices for a stock from Yahoo
 #' aapl_stock_prices <- tq_get("AAPL")
 #' cvx_stock_prices  <- tq_get("CVX", get = "stock.prices", adjust = FALSE,
 #'                             from = "2014-01-01", to = "2015-01-01")
 #'
-#' # Get dividends and splits for a stock
+#' # Get dividends and splits for a stock from Yahoo
 #' tq_get("AAPL", get = "divs.splits", from = "2016-01-01")
 #'
-#' # Get financial statment data for a stock; quantmod::getFinancials()
+#' # Get financial statement data for a stock from Google
 #' appl_financials <- tq_get("AAPL", get = "financials")
 #'
-#' # Get exchange rate data for a currency combindation; quantmod::getFX()
+#' # Get exchange rate data from Oanda
 #' eur_usd <- tq_get("EUR/USD", get = "exchange.rates")
 #'
-#' # Get metals data for a commodity; quantmod::getMetals()
+#' # Get metal prices from Oanda
 #' plat_price_usd <- tq_get("plat", get = "metal.prices")
 #' gold_price_eur <- tq_get("gold", get = "metal.prices",
 #'                                  base.currency = "EUR")
 #'
-#' # Get FRED economic data for a commodity code; quantmod::getSymbols.FRED()
-#' # WTI crude oil spot prices
-#' tq_get("DCOILWTICO", get = "economic.data")
+#' # Get FRED economic data for a commodity code
+#' tq_get("DCOILWTICO", get = "economic.data") # WTI crude oil spot prices
 #'
 #'
 #' ##### Tidyverse functionality
 #'
-#' # Combine dplyr::mutate and purrr::map() to get a nested tibble
-#' # of historical stock prices from multiple stocks
+#' # Load libraries
+#' library(tidyverse)
+#'
+#' # Get a historical stock prices from multiple stocks
 #' FANG <- tibble(symbol = c("FB", "AMZN", "NFLX", "GOOGL")) %>%
-#'     mutate(stock.prices = map(symbol, tq_get)) %>%
+#'     mutate(stock.prices = map(.x = symbol,
+#'                               ~ tq_get(.x, get = "stock.prices"))) %>%
 #'     unnest()
 #'
 

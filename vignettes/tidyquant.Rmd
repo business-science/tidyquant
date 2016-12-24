@@ -115,6 +115,15 @@ fb_financials %>%
     unnest()
 ```
 
+A slightly more powerful example is looking at all quarterly statements together. This is easy to do with `unnest` and `spread` from the `tidyr` package.
+
+```{r}
+fb_financials %>%
+    tidyr::unnest(quarter) %>% 
+    tidyr::spread(key = date, value = value)
+```
+
+
 The data source is [google finance](https://www.google.com/finance).
 
 __Exchange Rates:__

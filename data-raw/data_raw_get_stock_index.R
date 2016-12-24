@@ -27,7 +27,9 @@ re_run_fallback <- function() {
     if (!exists("stock_indexes")) {
 
         # if no stock_indexes, build the first instance
+
         stock_indexes <- get_stock_indexes(group, index.option, date.downloaded)
+
         devtools::use_data(stock_indexes, internal = TRUE)
 
     } else {
@@ -39,6 +41,7 @@ re_run_fallback <- function() {
 
         stock_indexes_new <- get_stock_indexes(group, index.option, date.downloaded)
 
+        # Compare new data to old. If new data could not be retrieved, use old
         stock_indexes_comp <- dplyr::bind_cols(stock_indexes_new, stock_indexes_old) %>%
             dplyr::mutate(len = purrr::map_int(index.components, length)) %>%
             dplyr::mutate(index.components = ifelse(len != 1, index.components, index.components.old),
@@ -46,6 +49,7 @@ re_run_fallback <- function() {
 
         stock_indexes <- stock_indexes_comp %>%
             dplyr::select(group:date.downloaded)
+
         devtools::use_data(stock_indexes, internal = TRUE, overwrite = TRUE)
 
     }

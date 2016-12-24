@@ -3,43 +3,47 @@
 \name{as_tibble}
 \alias{as_tibble}
 \title{Coerce to tibble. Enable preserving row names when coercing matrix
-and time-series-like objects with row names to tibbles}
+and time-series-like objects with row names.}
 \usage{
 as_tibble(x, preserve_row_names = FALSE, ...)
 }
 \arguments{
 \item{x}{A list, matrix, xts, zoo, timeSeries, etc object.}
 
-\item{preserve_row_names}{When \code{TRUE}, creates a row.names column with
-names of rows.}
+\item{preserve_row_names}{Used during coercion from matrix, xts, zoo,
+timeSeries, etc objects that have row names. When \code{TRUE}, creates
+a \code{row.names} column with names of rows as character class.}
 
 \item{...}{Additional parameters passed to the appropriate
-\code{\link[tibble]{as_tibble}}
-function.}
+\code{\link[tibble]{as_tibble}} function.}
 }
 \value{
 Returns a \code{tibble} object.
 }
 \description{
 Coerce to tibble. Enable preserving row names when coercing matrix
-and time-series-like objects with row names to tibbles
+and time-series-like objects with row names.
 }
 \details{
-\code{tidyquant::as_tibble} is a wrapper for \code{\link[tibble]{as_tibble}}
-that includes a \code{preserve_row_names} argument. When \code{preserve_row_names = TRUE},
-a new column, \code{row.names}, is created during object coercion.
-
-It is possible to convert \code{xts}, \code{zoo}, \code{timeSeries}, \code{ts},
-and \code{irts} objects.
+\code{as_tibble} is a wrapper for \code{tibble::as_tibble}
+that includes a \code{preserve_row_names} argument. The function is designed
+to coerce \code{xts}, \code{zoo}, \code{timeSeries}, \code{ts}, and \code{irts}
+objects that are used frequently in quantitative financial analysis.
+When \code{preserve_row_names = TRUE} is specified, a new column,
+\code{row.names}, is created during object coercion as a character class.
 }
 \examples{
 # Load libraries
 library(tidyquant)
 
+# Matrix coercion to tibble
 m <- matrix(rnorm(50), ncol = 5)
 colnames(m) <- c("a", "b", "c", "d", "e")
 rownames(m) <- letters[1:nrow(m)]
 m_tbl <- as_tibble(m, preserve_row_names = TRUE)
 
+# xts coercion to tibble
+quantmod::getSymbols("AAPL", auto.assign = FALSE) \%>\%
+    as_tibble(preserve_row_names = TRUE)
 }
 

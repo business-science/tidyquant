@@ -1,21 +1,21 @@
 #' Coerce to tibble. Enable preserving row names when coercing matrix
-#' and time-series-like objects with row names to tibbles
+#' and time-series-like objects with row names.
 #'
 #' @param x A list, matrix, xts, zoo, timeSeries, etc object.
-#' @param preserve_row_names When \code{TRUE}, creates a row.names column with
-#' names of rows.
+#' @param preserve_row_names Used during coercion from matrix, xts, zoo,
+#' timeSeries, etc objects that have row names. When \code{TRUE}, creates
+#' a \code{row.names} column with names of rows as character class.
 #' @param ... Additional parameters passed to the appropriate
-#' \code{\link[tibble]{as_tibble}}
-#' function.
+#' \code{\link[tibble]{as_tibble}} function.
 #'
 #' @return Returns a \code{tibble} object.
 #'
-#' @details \code{tidyquant::as_tibble} is a wrapper for \code{\link[tibble]{as_tibble}}
-#' that includes a \code{preserve_row_names} argument. When \code{preserve_row_names = TRUE},
-#' a new column, \code{row.names}, is created during object coercion.
-#'
-#' It is possible to convert \code{xts}, \code{zoo}, \code{timeSeries}, \code{ts},
-#' and \code{irts} objects.
+#' @details \code{as_tibble} is a wrapper for \code{tibble::as_tibble}
+#' that includes a \code{preserve_row_names} argument. The function is designed
+#' to coerce \code{xts}, \code{zoo}, \code{timeSeries}, \code{ts}, and \code{irts}
+#' objects that are used frequently in quantitative financial analysis.
+#' When \code{preserve_row_names = TRUE} is specified, a new column,
+#' \code{row.names}, is created during object coercion as a character class.
 #'
 #'
 #' @export
@@ -24,42 +24,65 @@
 #' # Load libraries
 #' library(tidyquant)
 #'
+#' # Matrix coercion to tibble
 #' m <- matrix(rnorm(50), ncol = 5)
 #' colnames(m) <- c("a", "b", "c", "d", "e")
 #' rownames(m) <- letters[1:nrow(m)]
 #' m_tbl <- as_tibble(m, preserve_row_names = TRUE)
 #'
+#' # xts coercion to tibble
+#' quantmod::getSymbols("AAPL", auto.assign = FALSE) %>%
+#'     as_tibble(preserve_row_names = TRUE)
 
 as_tibble <- function(x, preserve_row_names = FALSE, ...) {
 
+    warn <- FALSE
+
     # Handle various time series objects
-    if (xts::is.xts(x) ||
-        zoo::is.zoo(x) ||
-        timeSeries::is.timeSeries(x) ||
-        stats::is.ts(x)) {
+    ret <- tryCatch({
 
-        ret <- matrix_to_tibble(as.matrix(x), preserve_row_names, ...)
+        if (xts::is.xts(x) ||
+            zoo::is.zoo(x) ||
+            timeSeries::is.timeSeries(x) ||
+            stats::is.ts(x)) {
 
-    } else if (tseries::is.irts(x)) {
+            matrix_to_tibble(as.matrix(x), preserve_row_names, ...)
 
-        ret <- matrix_to_tibble(x %>% xts::as.xts() %>% as.matrix(),
-                                preserve_row_names, ...)
+        } else if (tseries::is.irts(x)) {
 
-    } else if (is.matrix(x)) {
+            matrix_to_tibble(x %>% xts::as.xts() %>% as.matrix(),
+                                    preserve_row_names, ...)
 
-        ret <- matrix_to_tibble(x, preserve_row_names, ...)
+        } else if (is.matrix(x)) {
 
-    } else {
+            matrix_to_tibble(x, preserve_row_names, ...)
 
-        ret <- tibble::as_tibble(x, ...)
+        } else {
 
+            if (preserve_row_names) warn <- TRUE
+            tibble::as_tibble(x, ...)
+
+        }
+
+    }, error = function(e) {
+
+        warning(paste0("Error at ", x,
+                       ": Could not convert to tibble. Check input."))
+        NA
+
+    })
+
+    if (warn) {
+        warning(paste0("\nWarning at input ", x, ":",
+                       "\nPreserving row names not used for this object class.",
+                       " Object was otherwise converted to tibble successfully."))
     }
 
     ret
 
 }
 
-# UTILITY FUNCTIONS FOR as_tibble()
+# UTILITY FUNCTIONS
 
 # matrix to tibble conversion:
 #     allow preserving rownames when converting to tibble

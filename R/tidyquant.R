@@ -1,11 +1,9 @@
-#' tidyquant: Bridging the gap between quantitative analysis with quantmod
-#' and the data management workflow of the tidyverse
+#' tidyquant: Bringing quantitative financial analysis to the tidyverse
 #'
 #' The main advantage of \code{tidyquant} is to
 #' bridge the gap between the best quantitative resources for collecting and
-#' manipulating quantitative data, \code{quantmod}, \code{TTR}, and
-#' \code{PerformanceAnalytics}, and the data modeling workflow
-#' infrastructure of the \code{tidyverse}.
+#' manipulating quantitative data, \code{quantmod} and \code{TTR}, and the data
+#' modeling workflow and infrastructure of the \code{tidyverse}.
 #'
 #' @details
 #' In this package, \code{tidyquant} functions and supporting data sets are
