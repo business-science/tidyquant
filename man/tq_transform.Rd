@@ -3,22 +3,33 @@
 \name{tq_transform}
 \alias{tq_transform}
 \alias{tq_transform_}
+\alias{tq_transform_fun_options}
+\alias{tq_transform_xy}
+\alias{tq_transform_xy_}
 \title{Transforms quantitative data with results in \code{tibble} format}
 \usage{
-tq_transform_(x, col, transform, ...)
+tq_transform(data, x_fun = OHLCV, transform_fun, ...)
 
-tq_transform(x, col, transform, ...)
+tq_transform_(data, x_fun = "OHLCV", transform_fun, ...)
+
+tq_transform_xy(data, .x, .y = NULL, transform_fun, ...)
+
+tq_transform_xy_(data, .x, .y = NULL, transform_fun, ...)
+
+tq_transform_fun_options()
 }
 \arguments{
-\item{x}{A \code{tibble} (tidy data frame) of data from \code{\link{tq_get}}.}
+\item{data}{A \code{tibble} (tidy data frame) of data from \code{\link{tq_get}}.}
 
-\item{col}{The column to use during transformation}
+\item{x_fun}{The \code{quantmod} function that identifes columns to pass to
+the transformation function. Options include c(Op, Hi, Lo, Cl, Vo, Ad,
+HLC, OHLC, OHLCV).}
 
-\item{transform}{A character string representing the type of transformation
-to perform. Options include "lag", "next", "delt", "first"
-"last", "to.period", "period.apply", and "period.return".}
+\item{transform_fun}{The transformation function from either the \code{xts},
+\code{quantmod}, or \code{TTR} package. Execute \code{tq_transform_fun_options()}
+to see the full list of options by package.}
 
-\item{...}{Additional parameters passed to the appropriate \code{quantmod}
+\item{...}{Additional parameters passed to the appropriate transformation
 function.}
 }
 \value{
@@ -28,46 +39,67 @@ Returns data in the form of a \code{tibble} object.
 Transforms quantitative data with results in \code{tibble} format
 }
 \details{
-\code{tq_transform} is a wrapper for various \code{quantmod} functions
+\code{tq_transform} is a very flexible wrapper for various \code{xts},
+\code{quantmod} and \code{TTR} functions
 that returns the results as a \code{tibble}. The main advantage is the
-function can be used with \code{purrr}, \code{tidyr}, and \code{dplyr} verbs.
+function can be used with the \code{tidyverse}.
+
+\code{x_fun} is the \code{quantmod} Open, High, Low, Close (OHLC) transformation.
+The function returns a column or set of columns from \code{data} that are passed to the
+\code{transfer_fun}. In Example 1 below, \code{Cl} returns the "close" price and sends
+this to the transfer function, \code{periodReturn}.
+
+\code{transfer_fun} is the function that performs the work. In Example 1, this
+is \code{periodReturn}, which calculates the period returns. The \code{...}
+functions are additional arguments passed to the \code{transfer_fun}. Think of
+the whole operation in Example 1 as the close price, obtained by \code{x_fun = Cl},
+is being sent to the \code{periodReturn} function along
+with additional arguments defining how to perform the period return, which
+includes \code{period = "daily"} and \code{type = "log"}.
+
+\code{tq_transform_xy} is designed to enable working with (1) transformation
+functions that require two primary inputs (e.g. EVWMA, VWAP, etc) and (2) data
+that is not in OHLC format. Example 2 shows the first benefit in action:
+using the EVWMA function that uses volume to defind the moving average period.
+The two variables do not fall into a single OHLC code (i.e. CV does not exist).
+The xy form gets us out of this problem. Example 3 shows the second benefit
+in action: Some functions are useful to non-OHLC data, and defining .x = price
+allows us to transform WTI crude prices from daily to monthly periodicity.
+
+\code{tq_tranform_} and \code{tq_transform_xy_} are setup for Non-Standard
+Evaluation (NSE). This enables programatically changing column names by modifying
+the text representations. Example 4 shows the difference in implemenation.
+Note that character strings are being passed to the variables instead of
+unquoted variable names. See \code{vignette("nse")} for more information.
 }
 \examples{
 # Load libraries
-library(tidyverse)
 library(tidyquant)
 
 ##### Basic Functionality
 
 fb_stock_prices  <- tq_get("FB", get = "stock.prices")
 
-# lag
-
-
-# next
-
-
-# delt
-
-# first
-
-
-# last
-
-
-# to.period
-
-
-# period.apply
-
-
-# period.return
+# Example 1: Return logarithmic daily returns using periodReturn()
 fb_stock_prices \%>\%
-    tq_transform(col = adjusted, transform = "period.return", k = 1)
+    tq_transform(x_fun = Cl, transform_fun = periodReturn,
+                 period = "daily", type = "log")
 
+# Example 2: Use tq_transform_xy to use functions with two columns required
+fb_stock_prices \%>\%
+    tq_transform_xy(.x = close, .y = volume, transform_fun = EVWMA)
 
-##### Non-standard evaluation: Programming with tq_tranform_()
-col_var <- "adjusted"
-tq_transform_(fb_stock_prices, col = col_var, transform = "period.return")
+# Example 3: Using tq_transform_xy to work with non-OHLC data
+tq_get("DCOILWTICO", get = "economic.data") \%>\%
+    tq_transform_xy(.x = price, transform_fun = to.period,
+                    period = "months", OHLC = FALSE)
+
+# Example 4: Non-standard evaluation:
+# Programming with tq_tranform_() and tq_transform_xy_()
+col_name <- "adjusted"
+transform <- "periodReturn"
+period <- c("daily", "weekly", "monthly")
+tq_transform_xy_(fb_stock_prices, .x = col_name, transform_fun = transform,
+                 period = period[[1]])
 }
 

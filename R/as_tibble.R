@@ -34,6 +34,8 @@
 #' quantmod::getSymbols("AAPL", auto.assign = FALSE) %>%
 #'     as_tibble(preserve_row_names = TRUE)
 
+# PRIMARY FUNCTIONS ----
+
 as_tibble <- function(x, preserve_row_names = FALSE, ...) {
 
     warn <- FALSE
@@ -82,7 +84,7 @@ as_tibble <- function(x, preserve_row_names = FALSE, ...) {
 
 }
 
-# UTILITY FUNCTIONS
+# UTILITY FUNCTIONS ----
 
 # matrix to tibble conversion:
 #     allow preserving rownames when converting to tibble
@@ -107,7 +109,8 @@ matrix_to_tibble <- function(x, preserve_row_names, ...) {
 
         } else {
 
-            warning("Warning: No row names to preserve")
+            warning(paste0("Warning: No row names to preserve. ",
+                           "Object otherwise converted to tibble successfully."))
             tibble::as_tibble(x, ...)
         }
 

@@ -20,11 +20,13 @@ LazyData: true
 Depends:
     R (>= 3.0),
     quantmod (>= 0.4-7),
-    TTR (>= 0.23-1)
+    TTR (>= 0.23-1),
+    xts (>= 0.9-7)
 Imports:
     curl (>= 2.3),
     devtools (>= 1.12.0),
     dplyr (>= 0.05),
+    lazyeval (>= 0.2.0),
     lubridate (>= 1.6.0),
     magrittr (>= 1.5), 
     purrr (>= 0.2.2),
@@ -36,7 +38,6 @@ Imports:
     timeSeries (>= 3022.101.2),
     tseries (>= 0.10-36),
     xml2 (>= 1.0.0),
-    xts (>= 0.9-7),
     zoo (>= 1.7-13)
 Suggests:
     tidyverse,

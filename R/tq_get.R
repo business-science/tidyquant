@@ -100,6 +100,8 @@
 #'     unnest()
 #'
 
+# PRIMARY FUNCTIONS ----
+
 tq_get <- function(x, get = "stock.prices", ...) {
 
     # Check get
@@ -109,7 +111,8 @@ tq_get <- function(x, get = "stock.prices", ...) {
         stringr::str_replace_all("s$", "")
 
     get_list <- c("stockprice",
-                  "divssplit",
+                  "dividend",
+                  "split",
                   "metalprice",
                   "exchangerate",
                   "financial",
@@ -127,8 +130,9 @@ tq_get <- function(x, get = "stock.prices", ...) {
 
     # Setup switches based on get
     ret <- switch(get,
-                  stockprice   = tq_get_util_1(x, get, ...),
-                  divssplit    = tq_get_util_1(x, get, ...),
+                  stockprice   = tq_get_util_2(x, get, ...),
+                  dividend     = tq_get_util_2(x, get, ...),
+                  split        = tq_get_util_2(x, get, ...),
                   financial    = tq_get_util_2(x, get, ...),
                   metalprice   = tq_get_util_2(x, get, ...),
                   exchangerate = tq_get_util_2(x, get, ...),
@@ -140,7 +144,7 @@ tq_get <- function(x, get = "stock.prices", ...) {
 
 }
 
-# UTILITY FUNCTIONS
+# UTILITY FUNCTIONS ----
 
 # Util 1: Used for tq_get() `get` options:
 #     stock.prices -> From TTR::getYahooData()
@@ -250,25 +254,40 @@ tq_get_util_2 <-
 
     # Setup switches based on get
     vars <- switch(get,
+                   stockprice   = list(chr_x      = "stock symbol",
+                                       fun        = quantmod::getSymbols,
+                                       chr_fun    = "quantmod::getSymbols",
+                                       list_names = c("open", "high", "low", "close", "volume", "adjusted"),
+                                       source     = "yahoo"),
+                   dividend     = list(chr_x      = "stock symbol",
+                                       fun        = quantmod::getDividends,
+                                       chr_fun    = "quantmod::getDividends",
+                                       list_names = "dividends",
+                                       source     = "yahoo"),
+                   split        = list(chr_x      = "stock symbol",
+                                       fun        = quantmod::getSplits,
+                                       chr_fun    = "quantmod::getSplits",
+                                       list_names = "splits",
+                                       source     = "yahoo"),
                    financial    = list(chr_x      = "stock symbol",
-                                         fun        = quantmod::getFinancials,
-                                         chr_fun    = "quantmod::getFinancials",
-                                         source     = "google"),
+                                       fun        = quantmod::getFinancials,
+                                       chr_fun    = "quantmod::getFinancials",
+                                       source     = "google"),
                    metalprice   = list(chr_x      = "metal symbol",
-                                         fun        = quantmod::getMetals,
-                                         chr_fun    = "quantmod::getMetals",
-                                         list_names = "price",
-                                         source     = "oanda"),
+                                       fun        = quantmod::getMetals,
+                                       chr_fun    = "quantmod::getMetals",
+                                       list_names = "price",
+                                       source     = "oanda"),
                    exchangerate = list(chr_x      = "exchange rate combination",
-                                         fun        = quantmod::getFX,
-                                         chr_fun    = "quantmod::getFX",
-                                         list_names = "exchange.rate",
-                                         source     = "oanda"),
+                                       fun        = quantmod::getFX,
+                                       chr_fun    = "quantmod::getFX",
+                                       list_names = "exchange.rate",
+                                       source     = "oanda"),
                    economicdata = list(chr_x      = "economic symbol",
-                                         fun        = quantmod::getSymbols,
-                                         chr_fun    = "quantmod::getSymbols.FRED",
-                                         list_names = "price",
-                                         source     = "FRED")
+                                       fun        = quantmod::getSymbols,
+                                       chr_fun    = "quantmod::getSymbols.FRED",
+                                       list_names = "price",
+                                       source     = "FRED")
     )
 
     # Check x

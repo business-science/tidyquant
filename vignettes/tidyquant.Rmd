@@ -36,10 +36,10 @@ library(tidyquant)  # tidyquant, quantmod, TTR
 
 The `tidyquant` philosophy:
 
-* A few core functions with a lot of power, that have a
-* simple I/O that can be extended, which
+* A few core functions with a lot of power, that 
 * leverage the quantitative analysis power of `quantmod` and `TTR`, and 
-* works seemlessly within the `tidyverse`.
+* works seemlessly within the `tidyverse` with an
+* I/O built to be scaled.
 
 ## A Few Core Functions with A Lot of Power
 
@@ -49,9 +49,9 @@ Minimizing the number of functions reduces the learning curve. Functions are gro
 
 * __Transform Quantitative Data, `tq_transform()`:__ Transforms the results of `tq_get()`. The result is typically a different shape than the input (hence "transformed"). An example is periodicity aggregation from daily to monthly.
 
-* __Mutate Quantitative Data, `tq_mutate()`:__ Adds a column or set of columns to the tibble with the calculated attributes (hence the original tibble is returned, mutated with the additional columns). An example is getting the MACD, which mutates the original input by adding MACD and signal components columns. 
+* __Mutate Quantitative Data, `tq_mutate()`:__ Adds a column or set of columns to the tibble with the calculated attributes (hence the original tibble is returned, mutated with the additional columns). An example is getting the MACD, which mutates the original input by adding MACD and Signal columns. 
 
-* __Coerce Quantitative Data from Other Time Series Formats, `as_tibble()`:__ Coercing `xts`, `zoo`, `timeSeries`, and the other various _R_ time-based objects was a pain. `tidyquant::as_tibble()` provides an easy way to preserve row names so no data is lost when coercing to `tibble`.
+* __Coerce Quantitative Data Between `tibble` and `xts` formats, `as_tibble()` and `as_xts()`:__ Coercing `xts`, `zoo`, `timeSeries`, and the other various _R_ time-based objects to and from `tibble` or `data.frame` objects was a pain due to the date/time being stored as row names in time-based objects. `tidyquant::as_tibble()` provides an easy way to preserve row names so no data is lost when coercing to `tibble`. `tidyquant::as_xts()` provides a way to coerce objects that inherit the `data.frame` class to `xts` objects by specifying a column that contains dates (must be `date` class).
 
 ### Get Quantitative Data
 
@@ -82,17 +82,22 @@ appl_price  <- tq_get("AAPL", get = "stock.prices")
 appl_price 
 ```
 
-Note that by default, the open, high, low, and close (OHLC) stock prices are adjusted to account for dividends and stock splits. If we want unadjusted stock prices, just set `adjust = FALSE`. 
-
 The data source is [yahoo finance](https://finance.yahoo.com/).
 
 __Dividends and Splits:__
 
-Dividends and splits are easily obtained using `get = "divs.splits"`. 
+Dividends are easily obtained using `get = "dividends"`. 
 
 ```{r}
-appl_divs_splits <- tq_get("AAPL", get = "divs.splits")
-appl_divs_splits
+appl_divs <- tq_get("AAPL", get = "dividends", from = "1990-01-01")
+appl_divs
+```
+
+And, stock splits are easily obtained using `get = "splits"`. 
+
+```{r}
+appl_splits <- tq_get("AAPL", get = "splits", from = "1990-01-01")
+appl_splits
 ```
 
 The data source is [yahoo finance](https://finance.yahoo.com/).
@@ -158,7 +163,7 @@ The data source is [Oanda](https://www.oanda.com/). It may make more sense to ge
 <a class="anchor" id="economic-data"></a>
 __Economic Data: __ 
 
-A wealth of economic data can be extracted from the Federal Reserve Economic Data (FRED) database. The FRED contains litteraly over 10K data sets that are free to use. See the [FRED categories](https://fred.stlouisfed.org/categories) to narrow down the data base and to get data codes. The [WTI Crude Oil Prices](https://fred.stlouisfed.org/series/DCOILWTICO) are shown below.
+A wealth of economic data can be extracted from the Federal Reserve Economic Data (FRED) database. The [WTI Crude Oil Prices](https://fred.stlouisfed.org/series/DCOILWTICO) are shown below.
 
 ```{r,}
 wti_price_usd <- tq_get("DCOILWTICO", get = "economic.data")
@@ -179,6 +184,7 @@ cad_usd %>%
     ylab("")
 ```
 
+The FRED contains litteraly over 10K data sets that are free to use. See the [FRED categories](https://fred.stlouisfed.org/categories) to narrow down the data base and to get data codes. 
 
 ### Transform Quantiative Data
 
@@ -192,7 +198,9 @@ TODO
 
 ### Coercing Time Series Objects to Tibble
 
-The `tidyquant::as_tibble()` function includes a `preserve_row_names`, which is useful when coercing one of the many time formats (e.g. `xts`, `zoo`, `timeSeries`, `ts`) or `matrix` objects that contain valuable information in the row names. This makes bridging the gap between the various quantitative analysis packages and the `tidyverse` much easier.
+The `tidyquant::as_tibble()` function includes a `preserve_row_names` argument, which is useful when coercing one of the many time formats (e.g. `xts`, `zoo`, `timeSeries`, `ts`) or `matrix` objects that contain valuable information in the row names. This makes bridging the gap between the various quantitative analysis packages and the `tidyverse` much easier.
+
+Let's start with an `xts` object.
 
 ```{r}
 # Create xts object from a matrix
@@ -203,20 +211,119 @@ time_series_xts <- xts::as.xts(vals)
 time_series_xts
 ```
 
-Coerce to `tibble` by setting `preserve_row_names = TRUE`.
+We can easily coerce to `tibble` by setting `preserve_row_names = TRUE`. Note the return class is `character`.
 
 ```{r}
 time_series_tbl <- tidyquant::as_tibble(time_series_xts, preserve_row_names = TRUE)
 time_series_tbl
 ```
 
-## Simple I/O That Can Be Extended
+Converting to date is one extra step with `lubridate`.
 
-Each function has one primary input and one output. The rationale behind this is simple: let the function handle the operation, let the `tidyverse` handle the iteration. This allows chaining operations with the pipe (`%>%`), and mapping to extend to lists of many stocks, exchange rates, metals, economic data, financial statements, etc. 
+```{r}
+time_series_tbl <- time_series_tbl %>%
+    mutate(row.names = lubridate::ymd(row.names))
+time_series_tbl
+```
 
-For example, say we'd like to retrieve the stock prices for the FANG tech stocks, Facebook, Amazon, Netflix and Google. We know how perform this on one stock using `tq_get()`, but how can we extend this? 
+And we can even convert back to `xts` with the `as_xts()` function. Make sure to set the date column argument to the column name containing the date (`date_col = row.names`).
 
-This is easy by processing a `tibble` of stock symbols using `dplyr::mutate` and `purrr::map`. The result is the stock prices for each stock nested in one `tibble`. 
+```{r}
+time_series_xts <- time_series_tbl %>%
+    as_xts(date_col = row.names)
+time_series_xts
+```
+
+
+## Leverage the Quantitative Power of `quantmod` and `TTR`
+
+You may already know and love `xts`, `quantmod` and `TTR`, which is why the core functionality is still intact. Using `tq_transform()` and `tq_mutate()`, we can apply the `xts`, `quantmod` and `TTR` functions. A full list of functions is displayed by executing `tq_transform_fun_options`.
+
+```{r}
+tq_transform_fun_options()
+```
+
+
+### xts Functionality
+
+* period apply functions
+
+* to.period functions
+
+### quantmod Functionality
+
+* Delt functions
+    * Lag / Next
+    * ClCl, HiCl, LoCl, LoHi, OpCl, OpHi, OpLo, OpOp
+
+* periodReturn functions
+
+### TTR Functionality
+
+Here' a list of compatible functions from `TTR`:
+
+* Welles Wilder's Directional Movement Index: 
+    *  `ADX(HLC, n = 14, maType, ...)`
+* Bollinger Bands: 
+    *  `BBands(HLC, n = 20, maType, sd = 2, ...)`: Bollinger Bands
+* Rate of Change / Momentum: 
+    * `ROC(x, n = 1, type = c("continuous", "discrete"), na.pad = TRUE)`: Rate of Change
+    * `momentum(x, n = 1, na.pad = TRUE)`: Momentum
+* Moving Averages (maType):
+    * `SMA(x, n = 10, ...)`: Simple Moving Average
+    * `EMA(x, n = 10, wilder = FALSE, ratio = NULL, ...)`: Exponential Moving Average
+    * `DEMA(x, n = 10, v = 1, wilder = FALSE, ratio = NULL)`: Double Exponential Moving Average
+    * `WMA(x, n = 10, wts = 1:n, ...)`: Weighted Moving Average
+    * `EVWMA(price, volume, n = 10, ...)`: Elastic, Volume-Weighted Moving Average
+    * `ZLEMA(x, n = 10, ratio = NULL, ...)`: Zero Lag Exponential Moving Average
+    * `VWAP(price, volume, n = 10, ...)`: Volume-Weighted Moving Average Price
+    * `VMA(x, w, ratio = 1, ...)`: Variable-Length Moving Average
+    * `HMA(x, n = 20, ...)`: Hull Moving Average
+    * `ALMA(x, n = 9, offset = 0.85, sigma = 6, ...)`: Arnaud Legoux Moving Average
+* MACD Oscilator: 
+    *  `MACD(x, nFast = 12, nSlow = 26, nSig = 9, maType, percent = TRUE, ...)`
+* Relative Strength Index: 
+    *  `RSI(price, n = 14, maType, ...)`
+* runFun: 
+    * `runSum(x, n = 10, cumulative = FALSE)`: returns sums over a n-period moving window.
+    * `runMin(x, n = 10, cumulative = FALSE)`: returns minimums over a n-period moving window.
+    * `runMax(x, n = 10, cumulative = FALSE)`: returns maximums over a n-period moving window.
+    * `runMean(x, n = 10, cumulative = FALSE)`: returns means over a n-period moving window.
+    * `runMedian(x, n = 10, non.unique = "mean", cumulative = FALSE)`: returns medians over a n-period moving window.
+    * `runCov(x, y, n = 10, use = "all.obs", sample = TRUE, cumulative = FALSE)`: returns covariances over a n-period moving window.
+    * `runCor(x, y, n = 10, use = "all.obs", sample = TRUE, cumulative = FALSE)`: returns correlations over a n-period moving window.
+    * `runVar(x, y = NULL, n = 10, sample = TRUE, cumulative = FALSE)`: returns variances over a n-period moving window.
+    * `runSD(x, n = 10, sample = TRUE, cumulative = FALSE)`: returns standard deviations over a n-period moving window.
+    * `runMAD(x, n = 10, center = NULL, stat = "median", constant = 1.4826, non.unique = "mean", cumulative = FALSE)`: returns median/mean absolute deviations over a n-period moving window.
+    * `wilderSum(x, n = 10)`: retuns a Welles Wilder style weighted sum over a n-period moving window.
+* Stochastic Oscillator / Stochastic Momentum Index:
+    * `stoch(HLC, nFastK = 14, nFastD = 3, nSlowD = 3, maType, bounded = TRUE, smooth = 1, ...)`: Stochastic Oscillator
+    * `SMI(HLC, n = 13, nFast = 2, nSlow = 25, nSig = 9, maType, bounded = TRUE, ...)`: Stochastic Momentum Index
+
+
+### Quantitative Power In Action
+
+Using `tq_transform()` we can extend the functionality.
+
+#### Example 1: Getting the max values of each quarter.
+
+The `xts::apply.quarterly` function that is part of the period apply group can be used to return. 
+
+```{r}
+tq_get("AAPL", get = "stock.prices") %>%
+    tq_transform(x_fun = Cl, transform_fun = apply.quarterly, FUN = max)
+```
+
+
+
+## Works Seemlessly within the `tidyverse`
+
+This allows chaining operations with the pipe (`%>%`), and mapping to extend to lists of many stocks, exchange rates, metals, economic data, financial statements, etc. 
+
+
+## I/O Built to be Scaled
+
+Each function has one primary input and one output. The rationale behind this is simple: let the function handle the operation, let the `tidyverse` handle the iteration. For example, say we'd like to retrieve the stock prices for the FANG tech stocks, Facebook, Amazon, Netflix and Google. We know how perform this on one stock using `tq_get()`, but how can we extend this? This is easy by processing a `tibble` of stock symbols using `dplyr::mutate` and `purrr::map`. The result is the stock prices for each stock nested in one `tibble`. 
 
 ```{r}
 fang <- tibble(symbol = c("FB", "AMZN", "NFLX", "GOOGL")) %>%
@@ -230,47 +337,33 @@ Using `tidyr::unnest`, we can unnest to get a one-level `tibble`. We have all th
 fang %>% unnest()
 ```
 
-
-## Leverages Quantitative Power of `quantmod` and `TTR`
-
-You may already know and love `quantmod` or `TTR`, which is why the core functionality is still intact. 
-
-Filter dates by passing `from` or `to` arguments.
-
-```{r}
-tq_get("FB", get = "stock.prices", from = "2016-01-01", to = "2016-01-15")
-```
-
-
-Pass arguments like `base.currency` that work in `quantmod::getMetals()` to the `tq_get()` function. 
-
-```{r}
-tq_get("gold", get = "metal.prices", base.currency = "EUR")
-```
-
-## Works Seemlessly within the `tidyverse`
-
 All results are returned as a `tibble`, no exceptions. We saw this with `fang` stocks, where a nested `tibble` was generated.
 
 ```{r}
 fang
 ```
 
-We can now use `tidyverse` verbs to manipulate and visualize the data.
+We can now use `tidyverse` verbs to manipulate and visualize the data for many stocks.
 
 ```{r, fig.width = 7, fig.height = 5}
 fang %>%
     unnest() %>%
     filter(date >= "2013-01-01") %>%
-    select(symbol, date, close) %>%
-    ggplot(aes(x = date, y = close)) + 
+    select(symbol, date, adjusted) %>%
+    ggplot(aes(x = date, y = adjusted)) + 
     geom_line(aes(col = symbol)) +
     facet_wrap(~ symbol, ncol = 2, scales = "free_y") + 
     theme(legend.position = "top")
 ```
 
+### Functions Return NA on Error
+
+
+Pros: Long running scripts are not interrupted because of one 
+
+Cons: Errors can go unnoticed if not looking at warnings and not reviewing results
 
 # Recap
 
-Hopefully now you see how `tidyquant` helps to bring quantative analytics to the `tidyverse`. With four easy-to-use functions, you can efficiently leverage the quantitative power of `quantmod` and `TTR` with the data management infrastructure of the `tidyverse`.
+Hopefully now you see how `tidyquant` helps to bring quantative analytics to the `tidyverse`. With a few easy-to-use functions, you can efficiently leverage the quantitative power of `quantmod` and `TTR` with the data management infrastructure and scale-ability of the `tidyverse`.
 

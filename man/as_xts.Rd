@@ -5,15 +5,16 @@
 \alias{as_xts_}
 \title{Coerce objects to xts, designed to work with tibble and data.frame objects}
 \usage{
-as_xts_(x, date_col = NULL, ...)
-
 as_xts(x, date_col = NULL, ...)
+
+as_xts_(x, date_col = NULL, ...)
 }
 \arguments{
 \item{x}{A data.frame (with date column), matrix, xts, zoo, timeSeries, etc object.}
 
-\item{date_col}{For data.frame-like objects. Must specify a date column that
-is in a standard unambigous date class.}
+\item{date_col}{Required for objects that inherit the \code{data.frame} class.
+Must specify a date column that is of the \code{date} class. Unused for
+non-data.frame objects.}
 
 \item{...}{Additional parameters passed to \code{xts::as.xts}.}
 }
@@ -33,8 +34,8 @@ date column must be in a date format (i.e. \code{date} class).
 (NSE). See \code{vignette("nse")} for details.
 
 It is possible to coerce non-data.frame-like objects including
-\code{zoo}, \code{timeSeries}, \code{ts}, and \code{irts} objects. There is no
-need to specify the \code{date_col} argument.
+\code{zoo}, \code{timeSeries}, \code{ts}, and \code{irts} objects.
+There is no need to specify the \code{date_col} argument.
 }
 \examples{
 # Load libraries

@@ -19,7 +19,7 @@
 #' @docType package
 #' @name tidyquant
 #'
-#' @importFrom magrittr "%>%"
+#' @import magrittr
 #' @import quantmod
 #' @import TTR
 NULL

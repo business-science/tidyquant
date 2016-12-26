@@ -1,30 +1,22 @@
 library(tidyquant)
 
 #### Setup
-get <- "divs.splits"
+get <- "splits"
 context(paste0("Testing tq_get(get = '", get, "')"))
 
 test1 <- tq_get("AAPL", get = get,
-                from = "2016-01-01", to = "2016-06-01",
-                adjust = TRUE, type = "splits")
+                from = "2000-01-01", to = "2016-06-01")
 
-
-test2 <- tq_get("AAPL", get = get,
-                from = "2016-01-01", to = "2016-06-01",
-                adjust = FALSE, type = "price")
 
 #### Tests
 
 test_that("Test returns tibble with correct rows and columns.", {
     # Tibble
     expect_is(test1, "tbl")
-    expect_is(test2, "tbl")
     # Rows
-    expect_equal(nrow(test1), 2)
-    expect_equal(nrow(test2), 2)
+    expect_equal(nrow(test1), 3)
     # Columns
-    expect_equal(ncol(test1), 4)
-    expect_equal(ncol(test2), 4)
+    expect_equal(ncol(test1), 2)
 })
 
 test_that("Test prints warning message on invalid x input.", {

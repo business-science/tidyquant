@@ -1,8 +1,9 @@
 #' Coerce objects to xts, designed to work with tibble and data.frame objects
 #'
 #' @param x A data.frame (with date column), matrix, xts, zoo, timeSeries, etc object.
-#' @param date_col For data.frame-like objects. Must specify a date column that
-#' is in a standard unambigous date class.
+#' @param date_col Required for objects that inherit the \code{data.frame} class.
+#' Must specify a date column that is of the \code{date} class. Unused for
+#' non-data.frame objects.
 #' @param ... Additional parameters passed to \code{xts::as.xts}.
 #'
 #' @return Returns a \code{xts} object.
@@ -16,8 +17,8 @@
 #' (NSE). See \code{vignette("nse")} for details.
 #'
 #' It is possible to coerce non-data.frame-like objects including
-#' \code{zoo}, \code{timeSeries}, \code{ts}, and \code{irts} objects. There is no
-#' need to specify the \code{date_col} argument.
+#' \code{zoo}, \code{timeSeries}, \code{ts}, and \code{irts} objects.
+#' There is no need to specify the \code{date_col} argument.
 #'
 #'
 #' @name as_xts
@@ -37,6 +38,18 @@
 #'     as_xts_(date_col = x)
 #'
 
+# PRIMARY FUNCTIONS ----
+
+as_xts <- function(x, date_col = NULL, ...) {
+
+    date_col <- deparse(substitute(date_col))
+
+    as_xts_(x, date_col, ...)
+
+}
+
+#' @rdname as_xts
+#' @export
 
 as_xts_ <- function(x, date_col = NULL, ...) {
 
@@ -81,55 +94,7 @@ as_xts_ <- function(x, date_col = NULL, ...) {
 }
 
 
-#' @rdname as_xts
-#' @export
-as_xts <- function(x, date_col = NULL, ...) {
+# UTILITY FUNCTIONS ----
 
-    date_col <- col_name(substitute(date_col))
-
-    as_xts_(x, date_col, ...)
-
-}
-
-# @rdname as_xts
-# @export
-# as.xts_ <- function(x, date_col = NULL, ...) {
-#     as_xts_(x, date_col = NULL, ...)
-# }
-#
-# @rdname as_xts
-# @export
-# as.xts <- function(x, date_col = NULL, ...) {
-#     as_xts(x, date_col = NULL, ...)
-# }
-
-# UTILITY FUNCTIONS
-
-find_date_cols <- function(x) {
-
-    # Functions
-    is_date_class <- function(x) inherits(x, 'Date')
-
-    is_char_date <- function(col) {
-        check_na <- col %>%
-            as.character() %>%
-            #as.Date(format = "%y/%m/%d") %>%
-            lubridate::ymd() %>%
-            is.na()
-        !all(check_na) # check for any na's
-    }
-
-    # Check for date class
-    ret <- sapply(x, function(x) is_date_class(x))
-
-    # If none, check for character columns that can be converted
-    if (sum(ret) == 0) {
-
-        ret <- sapply(x, is_char_date)
-
-    }
-
-    ret
-
-}
+# See utils.R
 
