@@ -1,9 +1,12 @@
-#' Transforms quantitative data with results in \code{tibble} format
+#' Transforms quantitative data (returns new variables in new tibble)
 #'
 #' @param data A \code{tibble} (tidy data frame) of data from \code{\link{tq_get}}.
 #' @param x_fun The \code{quantmod} function that identifes columns to pass to
-#' the transformation function. Options include c(Op, Hi, Lo, Cl, Vo, Ad,
+#' the transformation function. OHLCV is \code{quantmod} terminology for
+#' open, high, low, close, and volume. Options include c(Op, Hi, Lo, Cl, Vo, Ad,
 #' HLC, OHLC, OHLCV).
+#' @param .x,.y Column names of variables to be passed to the transformation
+#' function (instead of OHLC functions).
 #' @param transform_fun The transformation function from either the \code{xts},
 #' \code{quantmod}, or \code{TTR} package. Execute \code{tq_transform_fun_options()}
 #' to see the full list of options by package.
@@ -13,18 +16,18 @@
 #' @return Returns data in the form of a \code{tibble} object.
 #'
 #' @details \code{tq_transform} is a very flexible wrapper for various \code{xts},
-#' \code{quantmod} and \code{TTR} functions
-#' that returns the results as a \code{tibble}. The main advantage is the
+#' \code{quantmod} and \code{TTR} functions. The main advantage is the
+#' results are returned as a \code{tibble} and the
 #' function can be used with the \code{tidyverse}.
 #'
-#' \code{x_fun} is the \code{quantmod} Open, High, Low, Close (OHLC) transformation.
+#' \code{x_fun} is one of the various \code{quantmod} Open, High, Low, Close (OHLC) functions.
 #' The function returns a column or set of columns from \code{data} that are passed to the
-#' \code{transfer_fun}. In Example 1 below, \code{Cl} returns the "close" price and sends
-#' this to the transfer function, \code{periodReturn}.
+#' \code{transform_fun}. In Example 1 below, \code{Cl} returns the "close" price and sends
+#' this to the transform function, \code{periodReturn}.
 #'
-#' \code{transfer_fun} is the function that performs the work. In Example 1, this
+#' \code{transform_fun} is the function that performs the work. In Example 1, this
 #' is \code{periodReturn}, which calculates the period returns. The \code{...}
-#' functions are additional arguments passed to the \code{transfer_fun}. Think of
+#' functions are additional arguments passed to the \code{transform_fun}. Think of
 #' the whole operation in Example 1 as the close price, obtained by \code{x_fun = Cl},
 #' is being sent to the \code{periodReturn} function along
 #' with additional arguments defining how to perform the period return, which
@@ -51,6 +54,7 @@
 #'
 #' @examples
 #' # Load libraries
+#' library(tidyverse)
 #' library(tidyquant)
 #'
 #' ##### Basic Functionality
@@ -222,7 +226,7 @@ tq_transform_xy_ <- function(data, .x, .y = NULL, transform_fun, ...) {
 
     ret <- tryCatch({
 
-        if (is.null(.y)) {
+        if (.y == "NULL" || is.null(.y)) {
             data %>%
                 as_xts_(date_col = date_col_name) %$%
                 # OHLCV() %$%
@@ -276,7 +280,7 @@ tq_transform_fun_options <- function() {
     pkg_regex_xts <- "apply|to\\.|period|lag|diff"
     funs_xts <- ls("package:xts")[stringr::str_detect(ls("package:xts"), pkg_regex_xts)]
 
-    pkg_regex_quantmod <- "Return|Delt|Lag|Next|^Op..|^Cl..|^Hi..|^Lo.."
+    pkg_regex_quantmod <- "Return|Delt|Lag|Next|^Op..|^Cl..|^Hi..|^Lo..|^series"
     funs_quantmod <- ls("package:quantmod")[stringr::str_detect(ls("package:quantmod"), pkg_regex_quantmod)]
 
     pkg_regex_ttr <- "^get*|^stock|^naCh" # NOT these

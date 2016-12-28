@@ -27,6 +27,7 @@
 #'
 #' @examples
 #' # Load libraries
+#' library(tidyverse)
 #' library(tidyquant)
 #'
 #' tq_get("AAPL", get = "stock.prices") %>%

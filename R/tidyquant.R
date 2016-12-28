@@ -22,4 +22,6 @@
 #' @import magrittr
 #' @import quantmod
 #' @import TTR
+#' @import xts
+#' @importFrom utils "data"
 NULL

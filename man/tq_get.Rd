@@ -64,25 +64,27 @@ can be seemlessly used with the tidyverse: \code{purrr}, \code{tidyr}, and
 }
 \examples{
 # Load libraries
+library(tidyverse)
 library(tidyquant)
 
 ##### Basic Functionality
 
 # Get the list of stocks in a stock index from www.marketvolume.com
-# options <- c(
+options <- tq_get("options", get = "stock.index")
+options
 #     "DOWJONES", "DJI", "DJT", "DJU","SP100", "SP400", "SP500", "SP600",
 #     "RUSSELL1000", "RUSSELL2000", "RUSSELL3000", "AMEX", "AMEXGOLD",
 #     "AMEXOIL", "NASDAQ", "NASDAQ100", "NYSE", "SOX"
-#      )
 tq_get("SP500", get = "stock.index")
 
 # Get stock prices for a stock from Yahoo
 aapl_stock_prices <- tq_get("AAPL")
-cvx_stock_prices  <- tq_get("CVX", get = "stock.prices", adjust = FALSE,
+cvx_stock_prices  <- tq_get("CVX", get = "stock.prices",
                             from = "2014-01-01", to = "2015-01-01")
 
 # Get dividends and splits for a stock from Yahoo
-tq_get("AAPL", get = "divs.splits", from = "2016-01-01")
+tq_get("AAPL", get = "dividends", from = "1990-01-01")
+tq_get("AAPL", get = "dividends", from = "1990-01-01")
 
 # Get financial statement data for a stock from Google
 appl_financials <- tq_get("AAPL", get = "financials")
@@ -100,9 +102,6 @@ tq_get("DCOILWTICO", get = "economic.data") # WTI crude oil spot prices
 
 
 ##### Tidyverse functionality
-
-# Load libraries
-library(tidyverse)
 
 # Get a historical stock prices from multiple stocks
 FANG <- tibble(symbol = c("FB", "AMZN", "NFLX", "GOOGL")) \%>\%

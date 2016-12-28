@@ -39,6 +39,7 @@ There is no need to specify the \code{date_col} argument.
 }
 \examples{
 # Load libraries
+library(tidyverse)
 library(tidyquant)
 
 tq_get("AAPL", get = "stock.prices") \%>\%

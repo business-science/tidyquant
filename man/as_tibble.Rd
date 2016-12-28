@@ -34,6 +34,7 @@ When \code{preserve_row_names = TRUE} is specified, a new column,
 }
 \examples{
 # Load libraries
+library(tidyverse)
 library(tidyquant)
 
 # Matrix coercion to tibble

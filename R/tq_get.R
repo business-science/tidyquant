@@ -53,25 +53,27 @@
 #'
 #' @examples
 #' # Load libraries
+#' library(tidyverse)
 #' library(tidyquant)
 #'
 #' ##### Basic Functionality
 #'
 #' # Get the list of stocks in a stock index from www.marketvolume.com
-#' # options <- c(
+#' options <- tq_get("options", get = "stock.index")
+#' options
 #' #     "DOWJONES", "DJI", "DJT", "DJU","SP100", "SP400", "SP500", "SP600",
 #' #     "RUSSELL1000", "RUSSELL2000", "RUSSELL3000", "AMEX", "AMEXGOLD",
 #' #     "AMEXOIL", "NASDAQ", "NASDAQ100", "NYSE", "SOX"
-#' #      )
 #' tq_get("SP500", get = "stock.index")
 #'
 #' # Get stock prices for a stock from Yahoo
 #' aapl_stock_prices <- tq_get("AAPL")
-#' cvx_stock_prices  <- tq_get("CVX", get = "stock.prices", adjust = FALSE,
+#' cvx_stock_prices  <- tq_get("CVX", get = "stock.prices",
 #'                             from = "2014-01-01", to = "2015-01-01")
 #'
 #' # Get dividends and splits for a stock from Yahoo
-#' tq_get("AAPL", get = "divs.splits", from = "2016-01-01")
+#' tq_get("AAPL", get = "dividends", from = "1990-01-01")
+#' tq_get("AAPL", get = "dividends", from = "1990-01-01")
 #'
 #' # Get financial statement data for a stock from Google
 #' appl_financials <- tq_get("AAPL", get = "financials")
@@ -89,9 +91,6 @@
 #'
 #'
 #' ##### Tidyverse functionality
-#'
-#' # Load libraries
-#' library(tidyverse)
 #'
 #' # Get a historical stock prices from multiple stocks
 #' FANG <- tibble(symbol = c("FB", "AMZN", "NFLX", "GOOGL")) %>%
@@ -146,97 +145,98 @@ tq_get <- function(x, get = "stock.prices", ...) {
 
 # UTILITY FUNCTIONS ----
 
+# NOT USED: ISSUE WITH getYahooData
 # Util 1: Used for tq_get() `get` options:
 #     stock.prices -> From TTR::getYahooData()
-tq_get_util_1 <-
-    function(x,
-             get,
-             from = as.character(paste0(lubridate::year(lubridate::today()) - 10, "-01-01")),
-             to   = as.character(lubridate::today()),
-             adjust = TRUE,
-             type = "price",
-             ...) {
-
-    # Convert `from` and `to` to appropriate format
-    from <- stringr::str_replace_all(from, pattern = "-", "")
-    to   <- stringr::str_replace_all(to,   pattern = "-", "")
-
-    # Setup switches based on `get`
-    vars <- switch(get,
-                   stockprice       = list(chr_x      = "stock symbol",
-                                           fun        = TTR::getYahooData,
-                                           chr_fun    = "TTR::getYahooData",
-                                           type       = "price"),
-                   divssplit        = list(chr_x      = "stock symbol",
-                                           fun        = TTR::getYahooData,
-                                           chr_fun    = "TTR::getYahooData",
-                                           type       = "split")
-    )
-
-    # Check x
-    if (!is.character(x)) {
-        err <- paste0("Error: x must be a character string in the form of a valid ",
-                      vars$chr_x)
-        stop(err)
-    }
-
-    # Get data; Handle errors
-    ret <- tryCatch({
-
-        suppressWarnings(
-            suppressMessages(
-                vars$fun(x, start = from, end = to, type = vars$type, adjust = adjust, ...)
-            )
-        )
-
-    }, error = function(e) {
-
-        warn <- paste0("Error at ", vars$chr_x, " ", x,
-                       " during call to ", vars$chr_fun, ".")
-        warning(warn)
-        return(NA) # Return NA on error
-
-    })
-
-    # Coerce to tibble
-    if (xts::is.xts(ret)) {
-
-        names(ret) <- names(ret) %>% stringr::str_to_lower()
-
-        ret <- ret %>%
-            tidyquant::as_tibble(preserve_row_names = TRUE) %>%
-            dplyr::rename(date = row.names) %>%
-            dplyr::mutate(date = lubridate::ymd(date))
-
-        # For stock.prices, if `adjust` is true and no dividends/splits detected,
-        # add columns to return same number of columns as when dividends/splits detected
-        if (get == "stockprice") {
-            if (adjust) {
-                if (ncol(ret) == 6) {
-
-                    add_cols <- tibble::tibble(
-                        unadj.close = ret$close,
-                        div         = as.double(rep(NA, nrow(ret))),
-                        split       = as.double(rep(NA, nrow(ret))),
-                        adj.div     = as.double(rep(NA, nrow(ret)))
-                    )
-
-                    ret <- dplyr::bind_cols(ret, add_cols)
-
-                }
-            }
-        }
-
-    } else if (is.data.frame(ret) && vars$type == "split") {
-
-        # If no splits, a zero-row data frame is returned
-        ret <- NA
-
-    }
-
-    ret
-
-}
+# tq_get_util_1 <-
+#     function(x,
+#              get,
+#              from = as.character(paste0(lubridate::year(lubridate::today()) - 10, "-01-01")),
+#              to   = as.character(lubridate::today()),
+#              adjust = TRUE,
+#              type = "price",
+#              ...) {
+#
+#     # Convert `from` and `to` to appropriate format
+#     from <- stringr::str_replace_all(from, pattern = "-", "")
+#     to   <- stringr::str_replace_all(to,   pattern = "-", "")
+#
+#     # Setup switches based on `get`
+#     vars <- switch(get,
+#                    stockprice       = list(chr_x      = "stock symbol",
+#                                            fun        = TTR::getYahooData,
+#                                            chr_fun    = "TTR::getYahooData",
+#                                            type       = "price"),
+#                    divssplit        = list(chr_x      = "stock symbol",
+#                                            fun        = TTR::getYahooData,
+#                                            chr_fun    = "TTR::getYahooData",
+#                                            type       = "split")
+#     )
+#
+#     # Check x
+#     if (!is.character(x)) {
+#         err <- paste0("Error: x must be a character string in the form of a valid ",
+#                       vars$chr_x)
+#         stop(err)
+#     }
+#
+#     # Get data; Handle errors
+#     ret <- tryCatch({
+#
+#         suppressWarnings(
+#             suppressMessages(
+#                 vars$fun(x, start = from, end = to, type = vars$type, adjust = adjust, ...)
+#             )
+#         )
+#
+#     }, error = function(e) {
+#
+#         warn <- paste0("Error at ", vars$chr_x, " ", x,
+#                        " during call to ", vars$chr_fun, ".")
+#         warning(warn)
+#         return(NA) # Return NA on error
+#
+#     })
+#
+#     # Coerce to tibble
+#     if (xts::is.xts(ret)) {
+#
+#         names(ret) <- names(ret) %>% stringr::str_to_lower()
+#
+#         ret <- ret %>%
+#             tidyquant::as_tibble(preserve_row_names = TRUE) %>%
+#             dplyr::rename(date = row.names) %>%
+#             dplyr::mutate(date = lubridate::ymd(date))
+#
+#         # For stock.prices, if `adjust` is true and no dividends/splits detected,
+#         # add columns to return same number of columns as when dividends/splits detected
+#         if (get == "stockprice") {
+#             if (adjust) {
+#                 if (ncol(ret) == 6) {
+#
+#                     add_cols <- tibble::tibble(
+#                         unadj.close = ret$close,
+#                         div         = as.double(rep(NA, nrow(ret))),
+#                         split       = as.double(rep(NA, nrow(ret))),
+#                         adj.div     = as.double(rep(NA, nrow(ret)))
+#                     )
+#
+#                     ret <- dplyr::bind_cols(ret, add_cols)
+#
+#                 }
+#             }
+#         }
+#
+#     } else if (is.data.frame(ret) && vars$type == "split") {
+#
+#         # If no splits, a zero-row data frame is returned
+#         ret <- NA
+#
+#     }
+#
+#     ret
+#
+# }
 
 
 

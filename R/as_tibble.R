@@ -22,6 +22,7 @@
 #'
 #' @examples
 #' # Load libraries
+#' library(tidyverse)
 #' library(tidyquant)
 #'
 #' # Matrix coercion to tibble
