@@ -8,7 +8,7 @@
 #' @param .x,.y Column names of variables to be passed to the mutatation
 #' function (instead of OHLC functions).
 #' @param mutate_fun The mutation function from either the \code{xts},
-#' \code{quantmod}, or \code{TTR} package. Execute \code{tq_transform_fun_options()}
+#' \code{quantmod}, or \code{TTR} package. Execute \code{tq_mutate_fun_options()}
 #' to see the full list of options by package.
 #' @param ... Additional parameters passed to the appropriate mutatation
 #' function.
@@ -25,7 +25,7 @@
 #' \code{mutate_fun}. In Example 1 below, \code{Cl} returns the "close" price and sends
 #' this to the mutate function, \code{periodReturn}.
 #'
-#' \code{transform_fun} is the function that performs the work. In Example 1, this
+#' \code{mutate_fun} is the function that performs the work. In Example 1, this
 #' is \code{periodReturn}, which calculates the period returns. The \code{...}
 #' functions are additional arguments passed to the \code{mutate_fun}. Think of
 #' the whole operation in Example 1 as the close price, obtained by \code{x_fun = Cl},
@@ -47,6 +47,8 @@
 #' the text representations. Example 4 shows the difference in implemenation.
 #' Note that character strings are being passed to the variables instead of
 #' unquoted variable names. See \code{vignette("nse")} for more information.
+#'
+#' @seealso \code{\link{tq_transform}}
 #'
 #' @name tq_mutate
 #'
@@ -75,7 +77,7 @@
 #'     tq_mutate_xy(.x = price, mutate_fun = lag.xts, k = 1, na.pad = TRUE)
 #'
 #' # Example 4: Non-standard evaluation:
-#' # Programming with tq_tranform_() and tq_mutate_xy_()
+#' # Programming with tq_mutate_() and tq_mutate_xy_()
 #' col_name <- "adjusted"
 #' mutate <- c("MACD", "SMA")
 #' tq_mutate_xy_(fb_stock_prices, .x = col_name, mutate_fun = mutate[[1]])
@@ -96,28 +98,10 @@ tq_mutate <- function(data, x_fun = OHLCV, mutate_fun, ...) {
 #' @export
 tq_mutate_ <- function(data, x_fun = "OHLCV", mutate_fun, ...) {
 
-    # Find date col
-    date_cols <- find_date_cols(data)
-    date_cols <- date_cols[date_cols == TRUE]
-    if (length(date_cols) == 0) {
-        stop("No date column found in x")
-    }
-    date_col_name <- names(date_cols)[[1]]
-    data_date <- eval(parse(text = paste0("data$", date_col_name)))
-
     # Get transformation
     ret <- tq_transform_(data = data, x_fun = x_fun, transform_fun = mutate_fun, ...)
 
-    # Join
-    if (identical(nrow(data), nrow(ret))) {
-        if (identical(data_date, ret$date)) {
-            ret <- merge(data, ret, by.x = date_col_name, by.y = "date") %>%
-                as_tibble()
-        }
-    } else {
-        warning("Could not join. Incompatible structures.")
-        ret <- NA
-    }
+    ret <- merge_two_tibbles(tib1 = data, tib2 = ret)
 
     ret
 
@@ -140,29 +124,53 @@ tq_mutate_xy <- function(data, .x, .y = NULL, mutate_fun, ...) {
 #' @export
 tq_mutate_xy_ <- function(data, .x, .y = NULL, mutate_fun, ...) {
 
-    # Find date col
-    date_cols <- find_date_cols(data)
-    date_cols <- date_cols[date_cols == TRUE]
-    if (length(date_cols) == 0) {
-        stop("No date column found in x")
-    }
-    date_col_name <- names(date_cols)[[1]]
-    data_date <- eval(parse(text = paste0("data$", date_col_name)))
 
     # Get transformation
     ret <- tq_transform_xy_(data = data, .x = .x, .y = .y, transform_fun = mutate_fun, ...)
 
-    # Join
-    if (identical(nrow(data), nrow(ret))) {
-        if (identical(data_date, ret$date)) {
-            ret <- merge(data, ret, by.x = date_col_name, by.y = "date") %>%
-                as_tibble()
-        }
-    } else {
-        warning("Could not join. Incompatible structures.")
-        ret <- NA
-    }
+    ret <- merge_two_tibbles(tib1 = data, tib2 = ret)
 
     ret
 
+}
+
+#' @rdname tq_mutate
+#' @export
+tq_mutate_fun_options <- function() tq_transform_fun_options()
+
+
+# UTILITY FUNCTIONS ----
+
+# See utils.R for get_col_name_date_or_date_time()
+
+merge_two_tibbles <- function(tib1, tib2) {
+
+    # Gracefully handle errors
+    ret <- tryCatch({
+
+        # Find date or date-time col
+        col_name_date_tib1 <- get_col_name_date_or_date_time(tib1)
+        tib1_date <- eval(parse(text = paste0("tib1$", col_name_date_tib1)))
+
+        col_name_date_tib2 <- get_col_name_date_or_date_time(tib2)
+        tib2_date <- eval(parse(text = paste0("tib2$", col_name_date_tib2)))
+
+        # Merge results
+        if (identical(nrow(tib1), nrow(tib1))) {
+            if (identical(tib1_date, tib2_date)) {
+                merge(tib1, tib2, by.x = col_name_date_tib1, by.y = col_name_date_tib2) %>%
+                    as_tibble()
+            }
+        } else {
+
+            warning("Could not join. Incompatible structures.")
+            NA
+        }
+
+    }, error = function(e) {
+
+        warning(paste0(e))
+        NA
+
+    })
 }

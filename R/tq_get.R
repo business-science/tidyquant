@@ -5,9 +5,8 @@
 #' @param get A character string representing the type of data to get
 #' for \code{x}. Options include:
 #' \itemize{
-#'   \item \code{"stock.index"}: Get a list of all stocks in an index or exchange
+#'   \item \code{"stock.index"}: Get all stocks in an index or exchange
 #'   from \href{http://www.marketvolume.com/indexes_exchanges/}{marketvolume}.
-#'   Set \code{x = "options"} to get the list of index options available.
 #'   \item \code{"stock.prices"}: Get the stock prices for a stock symbol from
 #'   \href{https://finance.yahoo.com/}{Yahoo}.
 #'   \item \code{"divs.splits"}: Get the dividends and splits for a stock symbol
@@ -15,15 +14,15 @@
 #'   \item \code{"financials"}: Get the income, balance sheet, and cash flow
 #'   financial statements for a stock symbol from
 #'   \href{https://www.google.com/finance}{Google}.
+#'   \item \code{"economic.data"}: Get economic data from
+#'   \href{https://fred.stlouisfed.org/}{FRED}.
 #'   \item \code{"metal.prices"}: Get the metal prices from
 #'   \href{https://www.oanda.com/}{Oanda}.
 #'   \item \code{"exchange.rates"}: Get exchange rates from
 #'   \href{https://www.oanda.com/currency/converter/}{Oanda}.
-#'   \item \code{"economic.data"}: Get economic data from
-#'   \href{https://fred.stlouisfed.org/}{FRED}.
 #' }
-#' @param ... Additional parameters passed to the appropriate \code{quantmod} or
-#' \code{TTR} function. Popular optional parameters include:
+#' @param ... Additional parameters passed to the appropriate \code{quantmod}
+#' function. Common optional parameters include:
 #' \itemize{
 #'   \item \code{from}: Optional. A character string representing a start date in
 #'   YYYY-MM-DD format. No effect on \code{get = "stock.index"} or
@@ -31,23 +30,29 @@
 #'   \item \code{to}: A character string representing a end date in
 #'   YYYY-MM-DD format. No effect on \code{get = "stock.index"} or
 #'   \code{get = "financials"}.
-#'   \item \code{adjust}: Affects \code{get = "stock.prices"} only. A boolean
-#'   representing whether stock prices should be
-#'   adjusted for dividends and splits. Set to \code{TRUE} by default.
-#'   \item \code{use_fallback}: Affects \code{get = "stock.index"} only. A boolean
+#'   \item \code{use_fallback}: Set to \code{FALSE} by default.
+#'   Used with \code{get = "stock.index"} only. A boolean
 #'   representing whether to use the fall back data set for a stock index. Useful
-#'   if the data cannot be fetched from the website. Set to \code{FALSE} by default.
+#'   if the data cannot be fetched from the website. The fallback data returned is
+#'   accurate as of the date the package was last updated.
 #' }
 #'
 #'
 #' @return Returns data in the form of a \code{tibble} object.
 #'
-#' @details \code{tq_get} is a consolidated function that gets data from various
-#' web sources. The function is a wrapper for several \code{quantmod} and \code{TTR}
+#' @details
+#' \code{tq_get()} is a consolidated function that gets data from various
+#' web sources. The function is a wrapper for several \code{quantmod}
 #' functions. The results are always returned as a \code{tibble}. The advantages
 #' are (1) only one function is needed for all data sources and (2) the function
 #' can be seemlessly used with the tidyverse: \code{purrr}, \code{tidyr}, and
 #' \code{dplyr} verbs.
+#'
+#' \code{tq_get_stock_index_options()} returns a list of stock indexes you can
+#' choose from. Alternatively \code{tq_get("options", get = "stock.index")}
+#' can be used.
+#'
+#' @rdname tq_get
 #'
 #' @export
 #'
@@ -58,13 +63,11 @@
 #'
 #' ##### Basic Functionality
 #'
-#' # Get the list of stocks in a stock index from www.marketvolume.com
-#' options <- tq_get("options", get = "stock.index")
-#' options
-#' #     "DOWJONES", "DJI", "DJT", "DJU","SP100", "SP400", "SP500", "SP600",
-#' #     "RUSSELL1000", "RUSSELL2000", "RUSSELL3000", "AMEX", "AMEXGOLD",
-#' #     "AMEXOIL", "NASDAQ", "NASDAQ100", "NYSE", "SOX"
+#' # Get all stocks in a stock index from www.marketvolume.com
 #' tq_get("SP500", get = "stock.index")
+#'
+#' # Get the list of stock index options that can be used with tq_get(get = "stock.index")
+#' tq_get_stock_index_options()
 #'
 #' # Get stock prices for a stock from Yahoo
 #' aapl_stock_prices <- tq_get("AAPL")
@@ -78,6 +81,9 @@
 #' # Get financial statement data for a stock from Google
 #' appl_financials <- tq_get("AAPL", get = "financials")
 #'
+#' # Get FRED economic data for a commodity code
+#' tq_get("DCOILWTICO", get = "economic.data") # WTI crude oil spot prices
+#'
 #' # Get exchange rate data from Oanda
 #' eur_usd <- tq_get("EUR/USD", get = "exchange.rates")
 #'
@@ -85,10 +91,6 @@
 #' plat_price_usd <- tq_get("plat", get = "metal.prices")
 #' gold_price_eur <- tq_get("gold", get = "metal.prices",
 #'                                  base.currency = "EUR")
-#'
-#' # Get FRED economic data for a commodity code
-#' tq_get("DCOILWTICO", get = "economic.data") # WTI crude oil spot prices
-#'
 #'
 #' ##### Tidyverse functionality
 #'
@@ -141,6 +143,31 @@ tq_get <- function(x, get = "stock.prices", ...) {
 
     ret
 
+}
+
+
+#' @rdname tq_get
+#' @export
+tq_get_stock_index_options <- function() {
+    c(  "DOWJONES",
+        "DJI",
+        "DJT",
+        "DJU",
+        "SP100",
+        "SP400",
+        "SP500",
+        "SP600",
+        "RUSSELL1000",
+        "RUSSELL2000",
+        "RUSSELL3000",
+        "AMEX",
+        "AMEXGOLD",
+        "AMEXOIL",
+        "NASDAQ",
+        "NASDAQ100",
+        "NYSE",
+        "SOX"
+    )
 }
 
 # UTILITY FUNCTIONS ----
@@ -377,28 +404,8 @@ tq_get_util_3 <-
          stringr::str_replace_all("[[:punct:]]", "")
 
     # Check if x is an appropriate index
-    index_list <- c(
-        "OPTIONS",
-        "DOWJONES",
-        "DJI",
-        "DJT",
-        "DJU",
-        "SP100",
-        "SP400",
-        "SP500",
-        "SP600",
-        "RUSSELL1000",
-        "RUSSELL2000",
-        "RUSSELL3000",
-        "AMEX",
-        "AMEXGOLD",
-        "AMEXOIL",
-        "NASDAQ",
-        "NASDAQ100",
-        "NYSE",
-        "SOX"
-    )
-    if (!(x %in% index_list)) {
+    index_list <- tq_get_stock_index_options()
+    if (!(x %in% c(index_list, "OPTIONS"))) {
         err <- paste0("Error: x must be a character string in the form of a valid index.",
                       " The following are valid options:\n",
                       stringr::str_c(index_list, collapse = ", ")
@@ -409,7 +416,7 @@ tq_get_util_3 <-
     # Show options or collect data
     if (x == "OPTIONS") {
 
-        ret <- index_list[-1]
+        ret <- index_list
 
     } else {
 

@@ -28,23 +28,24 @@ devtools::load_all()
 Load the following packages to get started.
 
 ```{r}
-library(tidyverse)  # ggplot2, purrr, dplyr, tidyr, readr, tibble
-library(tidyquant)  # tidyquant, xts, quantmod, TTR 
+library(tidyquant)  # tidyquant, tidyverse, xts, quantmod, TTR 
 ```
 
 # Benefits
 
 The `tidyquant` philosophy:
 
-* A few core functions with a lot of power, that 
-* leverage the quantitative analysis power of `xts`, `quantmod` and `TTR`, with an
-* I/O built to be scaled with the `tidyverse` workflow.
+* [A few core functions with a lot of power](#core-functions), that 
+* [leverage the quantitative analysis power of `xts`, `quantmod` and `TTR`](#quant-power), that are
+* [built to be scaled with the `tidyverse` workflow](#built-for-scale).
+
+<a class="anchor" id="core-functions"></a>
 
 ## A Few Core Functions with A Lot of Power
 
 Minimizing the number of functions reduces the learning curve. Functions are grouped into verbs for efficient collection and manipulation of quantitative data: 
 
-* __Get Quantitative Data, `tq_get()`:__ A one-stop-shop to get data from various web-sources.  
+* __Get Quantitative Data, `tq_get()`:__ A one-stop shop to get data from various web-sources.  
 
 * __Transform, `tq_transform()`, and Mutate, `tq_mutate()`, Quantitative Data: __ These are the workhorse functions that wrap around the `xts`, `quantmod`, and `TTR` packages. 
 
@@ -75,8 +76,8 @@ __Stock Prices, Dividends and Splits:__
 The stock prices can be retrieved succinctly using `get = "stock.prices"`.  
 
 ```{r}
-appl_price  <- tq_get("AAPL", get = "stock.prices", from = " 1990-01-01")
-appl_price 
+appl_prices  <- tq_get("AAPL", get = "stock.prices", from = " 1990-01-01")
+appl_prices 
 ```
 
 
@@ -179,17 +180,18 @@ Transform and mutate functions enable the `xts`, `quantmod` and `TTR` functions 
 __Transform Quantitative Data, `tq_transform()`:__ Transforms the results of `tq_get()`. The result is typically a different shape than the input (hence "transformed"). An example is periodicity aggregation from daily to monthly.
 
 ```{r}
-tq_get("FB") %>%
-    tq_transform(x_fun = OHLCV, transform_fun = to.monthly)
+fb_prices <- tq_get("FB") 
+fb_prices %>%
+    tq_transform(x_fun = OHLCV, transform_fun = to.monthly, OHLC = FALSE)
 ```
 
-`x_fun` is one of the various quantmod Open, High, Low, Close (OHLC) functions (see `?quantmod::OHLC`). The function returns a column or set of columns from data that are passed to the `transform_fun`. In example above, `OHLCV` selects the full list of prices and volumes from `data`, and sends this to the transform function, `to.monthly`, which transforms the periodicity from daily to monthly. Additional arguments can be passed to the `transform_fun` by way of `...`.
+`x_fun` is one of the various quantmod Open, High, Low, Close (OHLC) functions (see `?quantmod::OHLC`). The function returns a column or set of columns from data that are passed to the `transform_fun`. In example above, `OHLCV` selects the full list of prices and volumes from `data`, and sends this to the transform function, `to.monthly`, which transforms the periodicity from daily to monthly. Additional arguments can be passed to the `transform_fun` by way of `...`. Setting `OHLC = FALSE` is an example of this, which prevents `xts::to.monthly` from converting the results to OHLCV (we do this to prevent xts renaming the columns, see documentation `?to.monthly`). 
 
 
 __Mutate Quantitative Data, `tq_mutate()`:__ Adds a column or set of columns to the tibble with the calculated attributes (hence the original tibble is returned, mutated with the additional columns). An example is getting the `MACD` from `Cl` (close price), which mutates the original input by adding MACD and Signal columns. 
 
 ```{r}
-tq_get("FB") %>%
+fb_prices %>%
     tq_mutate(x_fun = Cl, mutate_fun = MACD)
 ```
 
@@ -199,8 +201,8 @@ _Transformation with two primary inputs: _
 
 EVWMA (exponential volume-weighted moving average)
 
-```{r}
-tq_get("FB") %>%
+```{r, message=FALSE, warning=FALSE}
+fb_prices %>%
     tq_mutate_xy(.x = close, .y = volume, mutate_fun = EVWMA)
 ```
 
@@ -208,8 +210,9 @@ _Working with non-OHLC data: _
 
 Transforming WTI Crude daily prices to monthly prices.
 
-```{r}
-tq_get("DCOILWTICO", get = "economic.data") %>%
+```{r, message=FALSE, warning=FALSE}
+wti_prices <- tq_get("DCOILWTICO", get = "economic.data") 
+wti_prices %>%    
     tq_transform_xy(.x = price, transform_fun = to.period,
                     period = "months", OHLC = FALSE)
 ```
@@ -390,8 +393,9 @@ tq_get("AAPL") %>%
 
 Note that for the MACD, we could have used `tq_mutate_xy()`, setting `.x = close`. However, for the BBands, we are forced to use `tq_mutate()` because of the HLC input.
 
+<a class="anchor" id="built-for-scale"></a>
 
-## I/O Built to be Scaled with the `tidyverse`
+## Built to be Scaled with the `tidyverse` Workflow
 
 Each function has one primary input and one output. This allows chaining operations with the pipe (`%>%`), and mapping to extend to lists of many stocks, exchange rates, metals, economic data, financial statements, etc. The rationale behind this is simple: let the function handle the operation, let the `tidyverse` handle the iteration. 
 

@@ -3,6 +3,7 @@
 \name{tq_mutate}
 \alias{tq_mutate}
 \alias{tq_mutate_}
+\alias{tq_mutate_fun_options}
 \alias{tq_mutate_xy}
 \alias{tq_mutate_xy_}
 \title{Mutates quantitative data (adds new variables to existing tibble)}
@@ -14,6 +15,8 @@ tq_mutate_(data, x_fun = "OHLCV", mutate_fun, ...)
 tq_mutate_xy(data, .x, .y = NULL, mutate_fun, ...)
 
 tq_mutate_xy_(data, .x, .y = NULL, mutate_fun, ...)
+
+tq_mutate_fun_options()
 }
 \arguments{
 \item{data}{A \code{tibble} (tidy data frame) of data from \code{\link{tq_get}}.}
@@ -24,7 +27,7 @@ open, high, low, close, and volume. Options include c(Op, Hi, Lo, Cl, Vo, Ad,
 HLC, OHLC, OHLCV).}
 
 \item{mutate_fun}{The mutation function from either the \code{xts},
-\code{quantmod}, or \code{TTR} package. Execute \code{tq_transform_fun_options()}
+\code{quantmod}, or \code{TTR} package. Execute \code{tq_mutate_fun_options()}
 to see the full list of options by package.}
 
 \item{...}{Additional parameters passed to the appropriate mutatation
@@ -50,7 +53,7 @@ The function returns a column or set of columns from \code{data} that are passed
 \code{mutate_fun}. In Example 1 below, \code{Cl} returns the "close" price and sends
 this to the mutate function, \code{periodReturn}.
 
-\code{transform_fun} is the function that performs the work. In Example 1, this
+\code{mutate_fun} is the function that performs the work. In Example 1, this
 is \code{periodReturn}, which calculates the period returns. The \code{...}
 functions are additional arguments passed to the \code{mutate_fun}. Think of
 the whole operation in Example 1 as the close price, obtained by \code{x_fun = Cl},
@@ -96,9 +99,12 @@ tq_get("DCOILWTICO", get = "economic.data") \%>\%
     tq_mutate_xy(.x = price, mutate_fun = lag.xts, k = 1, na.pad = TRUE)
 
 # Example 4: Non-standard evaluation:
-# Programming with tq_tranform_() and tq_mutate_xy_()
+# Programming with tq_mutate_() and tq_mutate_xy_()
 col_name <- "adjusted"
 mutate <- c("MACD", "SMA")
 tq_mutate_xy_(fb_stock_prices, .x = col_name, mutate_fun = mutate[[1]])
+}
+\seealso{
+\code{\link{tq_transform}}
 }
 

@@ -19,7 +19,9 @@ Encoding: UTF-8
 LazyData: true
 Depends:
     R (>= 3.0),
+    magrittr (>= 1.5),
     quantmod (>= 0.4-7),
+    tidyverse (>= 1.0.0),
     TTR (>= 0.23-1),
     xts (>= 0.9-7)
 Imports:
@@ -40,7 +42,6 @@ Imports:
     xml2 (>= 1.0.0),
     zoo (>= 1.7-13)
 Suggests:
-    tidyverse,
     knitr,
     rmarkdown,
     testthat

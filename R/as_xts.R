@@ -58,7 +58,7 @@ as_xts_ <- function(x, date_col = NULL, ...) {
 
         ret <- tryCatch({
 
-            # Select columns
+            # Select columns and reorder
             date <- x %>% dplyr::select_(date_col)
             not_date_names <- names(x)[names(x) != date_col]
             not_date <- x %>% dplyr::select_(.dots = as.list(not_date_names))

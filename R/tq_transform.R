@@ -48,6 +48,8 @@
 #' Note that character strings are being passed to the variables instead of
 #' unquoted variable names. See \code{vignette("nse")} for more information.
 #'
+#' @seealso \code{\link{tq_mutate}}
+#'
 #' @name tq_transform
 #'
 #' @export
@@ -99,79 +101,41 @@ tq_transform <- function(data, x_fun = OHLCV, transform_fun, ...) {
 #' @export
 tq_transform_ <- function(data, x_fun = "OHLCV", transform_fun, ...) {
 
-    # Check transform_fun in xts, quantmod or TTR
-    fun_options <- tq_transform_fun_options() %>%
-        unlist()
-
-    if (!(transform_fun %in% fun_options)) {
-        stop(paste0("transform_fun = '",
-                    transform_fun,
-                    "' not a valid option."))
-    }
-
-    # Check for x: either x, HLC, or price arguments
-    x_options <- c("Op", "Hi", "Lo", "Cl", "Vo", "Ad",
-                   "HLC", "OHLC", "OHLCV")
-    if (!(x_fun %in% x_options)) {
-        stop(paste0("x = '",
-                    x_fun,
-                    "' not a valid option."))
-    }
-
-    # Check data
-    if (!inherits(data, "data.frame")) {
-        stop("`data` must be a tibble or data.frame.")
-    }
-
-    # Find date col
-    date_cols <- find_date_cols(data)
-    date_cols <- date_cols[date_cols == TRUE]
-    if (length(date_cols) == 0) {
-        stop("No date column found in x")
-    }
-    date_col_name <- names(date_cols)[[1]]
-
-    # Convert inputs to functions
-    fun_x <- eval(parse(text = x_fun))
-    fun_transform <- eval(parse(text = transform_fun))
-
-    # Apply fun
-
+    # Graceful error handling
     ret <- tryCatch({
 
+        # Check transform_fun in xts, quantmod or TTR
+        check_transform_fun_options(transform_fun)
+
+        # Check for x: either x, HLC, or price arguments
+        check_x_fun_options(x_fun)
+
+        # Check data
+        check_data_is_data_frame(data)
+
+        # Find date or date-time col
+        date_col_name <- get_col_name_date_or_date_time(data)
+
+        # Convert inputs to functions
+        x_fun <- paste0("quantmod::", x_fun)
+        fun_x <- eval(parse(text = x_fun))
+        fun_transform <- eval(parse(text = transform_fun))
+
+        # Apply functions
         data %>%
             as_xts_(date_col = date_col_name) %>%
             fun_x() %>%
             fun_transform(...)
 
-
     }, error = function(e) {
 
-        warning("Error in tranform_fun")
+        warning(e)
         NA
 
     })
 
-    if (xts::is.xts(ret)) {
-
-        # Coerce to tibble
-        ret <- ret %>%
-            as_tibble(preserve_row_names = T) %>%
-            dplyr::rename(date = row.names)
-
-        # Fix names
-        names(ret) <- names(ret) %>%
-            stringr::str_to_lower() %>%
-            stringr::str_replace_all("[[:punct:]]", "")
-
-        # Detect date and convert
-        date_cols <- suppressWarnings(find_date_cols(ret))
-        date_cols <- date_cols[date_cols == TRUE]
-        if (length(date_cols) > 0) {
-            ret <- dplyr::mutate(ret, date = lubridate::ymd(date))
-        }
-
-    }
+    # Coerce to tibble and convert date / datetime
+    if (xts::is.xts(ret)) ret <- coerce_to_tibble(ret)
 
     ret
 
@@ -182,8 +146,6 @@ tq_transform_ <- function(data, x_fun = "OHLCV", transform_fun, ...) {
 tq_transform_xy <- function(data, .x, .y = NULL, transform_fun, ...) {
 
     # Convert to NSE
-    # .x <- deparse(substitute(.x))
-    # if (!is.null(.y)) .y <- deparse(substitute(.y))
     .x <- deparse(substitute(.x))
     .y <- deparse(substitute(.y))
     transform_fun <- deparse(substitute(transform_fun))
@@ -196,36 +158,25 @@ tq_transform_xy <- function(data, .x, .y = NULL, transform_fun, ...) {
 #' @export
 tq_transform_xy_ <- function(data, .x, .y = NULL, transform_fun, ...) {
 
-    # Check transform_fun in xts, quantmod or TTR
-    fun_options <- tq_transform_fun_options() %>%
-        unlist()
-
-    if (!(transform_fun %in% fun_options)) {
-        stop(paste0("transform_fun = '",
-                    transform_fun,
-                    "' not a valid option."))
-    }
-
-    # Check data
-    if (!inherits(data, "data.frame")) {
-        stop("`data` must be a tibble or data.frame.")
-    }
-
-    # Find date col
-    date_cols <- find_date_cols(data)
-    date_cols <- date_cols[date_cols == TRUE]
-    if (length(date_cols) == 0) {
-        stop("No date column found in x")
-    }
-    date_col_name <- names(date_cols)[[1]]
-
-    # Convert inputs to functions
-    fun_transform <- eval(parse(text = transform_fun))
-
-    # Apply fun
-
+    # Graceful error handling
     ret <- tryCatch({
 
+        # Check transform_fun in xts, quantmod or TTR
+        check_transform_fun_options(transform_fun)
+
+        # Check data
+        check_data_is_data_frame(data)
+
+        # Check .x and .y
+        check_x_y_valid(data, .x, .y)
+
+        # Find date or date-time col
+        date_col_name <- get_col_name_date_or_date_time(data)
+
+        # Convert inputs to functions
+        fun_transform <- eval(parse(text = transform_fun))
+
+        # Apply functions
         if (.y == "NULL" || is.null(.y)) {
             data %>%
                 as_xts_(date_col = date_col_name) %$%
@@ -236,38 +187,19 @@ tq_transform_xy_ <- function(data, .x, .y = NULL, transform_fun, ...) {
                 as_xts_(date_col = date_col_name) %$%
                 # OHLCV() %$%
                 fun_transform(eval(parse(text = .x)),
-                              eval(parse(text = .y)), ...)
+                              eval(parse(text = .y)),
+                              ...)
         }
-
-
 
     }, error = function(e) {
 
-        warning("Error in tranform_fun")
+        warning(e)
         NA
 
     })
 
-    if (xts::is.xts(ret)) {
-
-        # Coerce to tibble
-        ret <- ret %>%
-            as_tibble(preserve_row_names = T) %>%
-            dplyr::rename(date = row.names)
-
-        # Fix names
-        names(ret) <- names(ret) %>%
-            stringr::str_to_lower() %>%
-            stringr::str_replace_all("[[:punct:]]", "")
-
-        # Detect date and convert
-        date_cols <- suppressWarnings(find_date_cols(ret))
-        date_cols <- date_cols[date_cols == TRUE]
-        if (length(date_cols) > 0) {
-            ret <- dplyr::mutate(ret, date = lubridate::ymd(date))
-        }
-
-    }
+    # Coerce to tibble and convert date / datetime
+    if (xts::is.xts(ret)) {ret <- coerce_to_tibble(ret)}
 
     ret
 
@@ -298,3 +230,48 @@ tq_transform_fun_options <- function() {
 # UTILITY FUNCTIONS ----
 
 # See utils.R for find_date_cols
+
+check_transform_fun_options <- function(fun) {
+    fun_options <- tq_transform_fun_options() %>%
+        unlist()
+    if (!(fun %in% fun_options)) {
+        stop(paste0("transform_fun = '",
+                    fun,
+                    "' not a valid option."))
+    }
+}
+
+check_x_fun_options <- function(fun) {
+    x_options <- c("Op", "Hi", "Lo", "Cl", "Vo", "Ad",
+                   "HLC", "OHLC", "OHLCV")
+    if (!(fun %in% x_options)) {
+        stop(paste0("x = '",
+                    x_fun,
+                    "' not a valid option."))
+    }
+}
+
+check_data_is_data_frame <- function(data) {
+    if (!inherits(data, "data.frame")) {
+        stop("`data` must be a tibble or data.frame.")
+    }
+}
+
+check_x_y_valid <- function(data, .x, .y) {
+    if (!(.x %in% names(data))) stop(".x not a valid name.")
+    if (.y != "NULL" && !is.null(.y)) {
+        if (!(.y %in% names(data))) stop(paste0(.y, " .y not a valid name."))
+    }
+}
+
+coerce_to_tibble <- function(data) {
+    # Coerce to tibble
+    ret <- data %>%
+        as_tibble(preserve_row_names = TRUE) %>%
+        dplyr::rename(date = row.names)
+
+    # Convert to date
+    ret <- convert_date_cols(ret)
+
+    ret
+}

@@ -107,4 +107,7 @@ period <- c("daily", "weekly", "monthly")
 tq_transform_xy_(fb_stock_prices, .x = col_name, transform_fun = transform,
                  period = period[[1]])
 }
+\seealso{
+\code{\link{tq_mutate}}
+}
 
