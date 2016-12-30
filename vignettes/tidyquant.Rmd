@@ -150,10 +150,7 @@ A wealth of economic data can be extracted from the Federal Reserve Economic Dat
 
 ```{r,}
 wti_price_usd <- tq_get("DCOILWTICO", get = "economic.data")
-wti_price_usd %>%
-    ggplot(aes(x = date, y = price)) +
-    geom_line() + 
-    ggtitle("WTI Crude Prices")
+wti_price_usd 
 ```
 
 
@@ -166,10 +163,7 @@ Exchange rates are entered as currency pairs using "/" notation (e.g `"EUR/USD"`
 
 ```{r}
 eur_usd <- tq_get("EUR/USD", get = "exchange.rates", from = "2000-01-01")
-eur_usd %>%
-    ggplot(aes(x = date, y = exchange.rate)) +
-    geom_line() + 
-    ggtitle("EUR/USD Exchange Rate")
+eur_usd 
 ```
 
 The data source is [Oanda](https://www.oanda.com/), and list of currencies to compare can be found on [Oanda's currency converter](https://www.oanda.com/currency/converter/). It may make more sense to get this data from the FRED (See [Economic Data](#economic-data)) since the max period for Oanda is 5-years.
@@ -181,10 +175,7 @@ Metal prices are very similar to stock prices. Set `get = "metal.prices"` along 
 ```{r}
 plat_price_eur <- tq_get("plat", get = "metal.prices", 
                          from = "2000-01-01", base.currency = "EUR")
-plat_price_eur %>%
-    ggplot(aes(x = date, y = price)) +
-    geom_line() + 
-    ggtitle("Platinum Prices (EUR)")
+plat_price_eur 
 ```
 
 The data source is [Oanda](https://www.oanda.com/). It may make more sense to get this data from the FRED (See [Economic Data](#economic-data)) since the max period for Oanda is 5-years.

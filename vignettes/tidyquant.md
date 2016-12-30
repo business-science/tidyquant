@@ -263,13 +263,25 @@ A wealth of economic data can be extracted from the Federal Reserve Economic Dat
 
 ```r
 wti_price_usd <- tq_get("DCOILWTICO", get = "economic.data")
-wti_price_usd %>%
-    ggplot(aes(x = date, y = price)) +
-    geom_line() + 
-    ggtitle("WTI Crude Prices")
+wti_price_usd 
 ```
 
-![](tidyquant_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+```
+## # A tibble: 2,867 × 2
+##          date price
+##        <date> <dbl>
+## 1  2006-01-02    NA
+## 2  2006-01-03 63.11
+## 3  2006-01-04 63.41
+## 4  2006-01-05 62.81
+## 5  2006-01-06 64.21
+## 6  2006-01-09 63.56
+## 7  2006-01-10 63.41
+## 8  2006-01-11 63.91
+## 9  2006-01-12 63.96
+## 10 2006-01-13 63.86
+## # ... with 2,857 more rows
+```
 
 
 The FRED contains literally over 10K data sets that are free to use. See the [FRED categories](https://fred.stlouisfed.org/categories) to narrow down the data base and to get data codes. 
@@ -282,13 +294,25 @@ Exchange rates are entered as currency pairs using "/" notation (e.g `"EUR/USD"`
 
 ```r
 eur_usd <- tq_get("EUR/USD", get = "exchange.rates", from = "2000-01-01")
-eur_usd %>%
-    ggplot(aes(x = date, y = exchange.rate)) +
-    geom_line() + 
-    ggtitle("EUR/USD Exchange Rate")
+eur_usd 
 ```
 
-![](tidyquant_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+```
+## # A tibble: 1,827 × 2
+##          date exchange.rate
+##        <date>         <dbl>
+## 1  2011-12-30       1.29493
+## 2  2011-12-31       1.29618
+## 3  2012-01-01       1.29590
+## 4  2012-01-02       1.29375
+## 5  2012-01-03       1.30038
+## 6  2012-01-04       1.30036
+## 7  2012-01-05       1.28717
+## 8  2012-01-06       1.27698
+## 9  2012-01-07       1.27195
+## 10 2012-01-08       1.27151
+## # ... with 1,817 more rows
+```
 
 The data source is [Oanda](https://www.oanda.com/), and list of currencies to compare can be found on [Oanda's currency converter](https://www.oanda.com/currency/converter/). It may make more sense to get this data from the FRED (See [Economic Data](#economic-data)) since the max period for Oanda is 5-years.
 
@@ -300,13 +324,25 @@ Metal prices are very similar to stock prices. Set `get = "metal.prices"` along 
 ```r
 plat_price_eur <- tq_get("plat", get = "metal.prices", 
                          from = "2000-01-01", base.currency = "EUR")
-plat_price_eur %>%
-    ggplot(aes(x = date, y = price)) +
-    geom_line() + 
-    ggtitle("Platinum Prices (EUR)")
+plat_price_eur 
 ```
 
-![](tidyquant_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
+```
+## # A tibble: 1,827 × 2
+##          date   price
+##        <date>   <dbl>
+## 1  2011-12-30 1081.91
+## 2  2011-12-31 1080.87
+## 3  2012-01-01 1081.11
+## 4  2012-01-02 1085.99
+## 5  2012-01-03 1080.45
+## 6  2012-01-04 1080.47
+## 7  2012-01-05 1091.55
+## 8  2012-01-06 1100.26
+## 9  2012-01-07 1104.61
+## 10 2012-01-08 1097.12
+## # ... with 1,817 more rows
+```
 
 The data source is [Oanda](https://www.oanda.com/). It may make more sense to get this data from the FRED (See [Economic Data](#economic-data)) since the max period for Oanda is 5-years.
 
