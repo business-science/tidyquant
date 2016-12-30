@@ -205,4 +205,8 @@ tibble(symbol = c("AAPL", "GOOG", "AMZN", "FB", "AVGO", "SWKS","NVDA")) %>%
 Further Information
 -------------------
 
+<<<<<<< HEAD
 This just scratches the surface of the features. See the [`tidyqaunt` vignette](vignettes/tidyquant.md) for further details on the package.
+=======
+This just scratches the surface of the features. See the [`tidyqaunt` vignette](vignettes/tidyquant.Rmd) for further details on the package.
+>>>>>>> 7670a030ea64f0b9eb5dd889be78d7fd8bb3ea86
