@@ -1,0 +1,105 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+devtools::load_all()
+```
+
+# tidyquant
+
+[![Travis-CI Build Status](https://travis-ci.org/mdancho84/tidyquant.svg?branch=master)](https://travis-ci.org/mdancho84/tidyquant)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/tidyquant)](https://cran.r-project.org/package=tidyquant)
+
+
+`tidyquant` integrates the best quantitative resources for collecting and analyzing quantitative data, `xts`, `quantmod` and `TTR`, with the tidy data infrastructure of the `tidyverse` allowing for seamless interaction between each. 
+
+## Benefits
+
+__The `tidyquant` philosophy:__
+
+* __A few core functions with a lot of power, that__
+* __leverage the quantitative analysis power of `xts`, `quantmod` and `TTR`, and are__
+* __designed to be scaled with the `tidyverse` workflow.__
+
+## Installation
+
+To install from GitHub:
+
+```R
+# install.packages("devtools")
+devtools::install_github("mdancho84/tidyquant")
+```
+
+
+## Examples
+
+```{r, eval = FALSE}
+library(tidyquant) # Loads tidyquant, tidyverse, quantmod, TTR, and xts
+```
+
+
+### Getting Data (tq_get):
+
+`tq_get()` is the one-stop shop for retrieving data. The full list of get options are:
+
+```{r}
+tq_get_options()
+```
+
+Set `get = "stock.prices"` to get stock prices. Notice the output is always a `tibble`.
+
+```{r}
+aapl_prices <- tq_get("AAPL", get = "stock.prices")
+aapl_prices
+```
+
+Set `get = "financials"` to get financial statements.
+
+```{r}
+tq_get("AAPL", get = "financials")
+```
+
+
+
+
+### Transforming & Mutating Data (tq_transform and tq_mutate):
+
+The workhorse functions are `tq_transform()` and `tq_mutate()`, which leverage the power of `xts`, `quantmod`, and `TTR`. The full list of functions that can be used are:
+
+```{r}
+tq_transform_fun_options()
+```
+
+
+#### tq_transform
+
+First, let's use `tq_transform` to transform the periodicity of the `aapl_prices`. The `quantmod` OHLC codes are used to select the open, high, low, close, and volume (OHLCV) columns, which are then sent to the transformation function, `xts::to.period`, for transformation to monthly periodicity. We now have a much smaller data set containing the monthly prices. 
+
+```{r}
+aapl_prices %>%
+    tq_transform(x_fun = OHLCV, transform_fun = to.period, period = "months")
+```
+
+
+#### tq_mutate
+
+The brother of `tq_transform()` is `tq_mutate()`. While `tq_transform()` produces a new, transformed data set, `tq_mutate()` modifies the existing data set. Let's use `tq_mutate()` to add some Bollinger Bands and MACD using the closing prices (Cl in OHLC notation).
+
+```{r}
+aapl_prices %>%
+    tq_mutate(x_fun = Cl, mutate_fun = MACD) %>%
+    tq_mutate(x_fun = HLC, mutate_fun = BBands)
+```
+
+## Further Information
+
+See the [`tidyqaunt` vignette](vignettes/tidyquant.md) for further details on the package.
+

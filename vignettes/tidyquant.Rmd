@@ -14,7 +14,9 @@ vignette: >
 
 # Overview
 
-The purpose of `tidyquant` is to integrate the best quantitative resources for collecting and analyzing quantitative data, `xts`, `quantmod` and `TTR`, with the tidy data infrastructure of the `tidyverse`. The three primary quantitative packages that are the backbone for quantitative financial analysis in _R programming_ are: 
+`tidyquant` integrates the best quantitative resources for collecting and analyzing quantitative data, `xts`, `quantmod` and `TTR`, with the tidy data infrastructure of the `tidyverse` allowing for seamless interaction between each. 
+
+The three primary quantitative packages that are the backbone for quantitative financial analysis in _R programming_ are: 
 
 * [xts](https://cran.r-project.org/web/packages/xts/vignettes/xts.pdf), or [eXtensible time series](http://joshuaulrich.github.io/xts/index.html): The data structure for handling time-series data.
 * [quantmod](http://www.quantmod.com/): A package designed for retrieving, manipulating, and modeling and  quantitative data.
