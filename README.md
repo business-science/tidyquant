@@ -78,7 +78,7 @@ tq_get("AAPL", get = "financials")
 
 ### Transforming & Mutating Data (tq\_transform and tq\_mutate):
 
-The workhorse functions are `tq_transform()` and `tq_mutate()`, which leverage the power of `xts`, `quantmod`, and `TTR`. The full list of functions that can be used are:
+The workhorse functions are `tq_transform()` and `tq_mutate()`, which leverage the power of `xts`, `quantmod`, and `TTR`. The full list of `xts`, `quantmod`, and `TTR` functions that can be used are:
 
 ``` r
 tq_transform_fun_options()
@@ -130,7 +130,7 @@ tq_transform_fun_options()
 
 #### tq\_transform
 
-First, let's use `tq_transform` to transform the periodicity of the `aapl_prices`. The `quantmod` OHLC codes are used to select the open, high, low, close, and volume (OHLCV) columns, which are then sent to the transformation function, `xts::to.period`, for transformation to monthly periodicity. We now have a much smaller data set containing the monthly prices.
+`tq_transform()` returns a new data set that can either be in the same periodicity or a different periodicity as the original data set. Let's use `tq_transform` to transform the periodicity of the `aapl_prices`. The `quantmod` OHLC codes are used to select the open, high, low, close, and volume (OHLCV) columns, which are then sent to the transformation function, `xts::to.period`, for transformation to monthly periodicity. We now have a much smaller data set containing the monthly prices.
 
 ``` r
 aapl_prices %>%
@@ -153,7 +153,7 @@ aapl_prices %>%
 
 #### tq\_mutate
 
-The brother of `tq_transform()` is `tq_mutate()`. While `tq_transform()` produces a new, transformed data set, `tq_mutate()` modifies the existing data set. Let's use `tq_mutate()` to add some Bollinger Bands and MACD using the closing prices (Cl in OHLC notation).
+The brother of `tq_transform()` is `tq_mutate()`. While `tq_transform()` produces a new, transformed data set, `tq_mutate()` modifies the existing data set. There is one caveat: the mutation must be in the same periodicity as the original data set (otherwise you can't add columns because the rows will not match up). Let's use `tq_mutate()` to add some Bollinger Bands and MACD using the closing prices (Cl in OHLC notation).
 
 ``` r
 aapl_prices %>%
@@ -176,7 +176,33 @@ aapl_prices %>%
 #> #   up <dbl>, pctB <dbl>
 ```
 
+Scaling with the tidyverse
+--------------------------
+
+All functions return data sets as `tibbles`, which allows for interaction within the `tidyverse`. This means we can:
+
+-   Use `dplyr` and `tidyr` to select, filter, nest/unnest, etc.
+-   Use the pipe (`%>%`) for chaining operations.
+-   Seemlessly scale data retrieval and transformations/mutations using `purrr` to map functions.
+
+A very basic example is retrieving the stock prices for multiple stocks. We can do this by piping a tibble of stock symbols to a mutation that maps the `tq_get(get = "stock.prices")` function.
+
+``` r
+tibble(symbol = c("AAPL", "GOOG", "AMZN", "FB", "AVGO", "SWKS","NVDA")) %>%
+    mutate(stock.prices = map(.x = symbol, ~ tq_get(.x, get = "stock.prices")))
+#> # A tibble: 7 × 2
+#>   symbol         stock.prices
+#>    <chr>               <list>
+#> 1   AAPL <tibble [2,768 × 7]>
+#> 2   GOOG <tibble [2,768 × 7]>
+#> 3   AMZN <tibble [2,768 × 7]>
+#> 4     FB <tibble [1,162 × 7]>
+#> 5   AVGO <tibble [1,864 × 7]>
+#> 6   SWKS <tibble [2,768 × 7]>
+#> 7   NVDA <tibble [2,768 × 7]>
+```
+
 Further Information
 -------------------
 
-See the [`tidyqaunt` vignette](vignettes/tidyquant.md) for further details on the package.
+This just scratches the surface of the features. See the [`tidyqaunt` vignette](vignettes/tidyquant.Rmd) for further details on the package.
