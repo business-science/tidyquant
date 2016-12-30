@@ -96,8 +96,7 @@ fb_stock_prices \%>\%
 
 # Example 3: Using tq_transform_xy to work with non-OHLC data
 tq_get("DCOILWTICO", get = "economic.data") \%>\%
-    tq_transform_xy(.x = price, transform_fun = to.period,
-                    period = "months", OHLC = FALSE)
+    tq_transform_xy(.x = price, transform_fun = to.period, period = "months")
 
 # Example 4: Non-standard evaluation:
 # Programming with tq_tranform_() and tq_transform_xy_()

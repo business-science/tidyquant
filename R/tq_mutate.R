@@ -101,7 +101,7 @@ tq_mutate_ <- function(data, x_fun = "OHLCV", mutate_fun, ...) {
     # Get transformation
     ret <- tq_transform_(data = data, x_fun = x_fun, transform_fun = mutate_fun, ...)
 
-    ret <- merge_two_tibbles(tib1 = data, tib2 = ret)
+    ret <- merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
 
     ret
 
@@ -124,11 +124,10 @@ tq_mutate_xy <- function(data, .x, .y = NULL, mutate_fun, ...) {
 #' @export
 tq_mutate_xy_ <- function(data, .x, .y = NULL, mutate_fun, ...) {
 
-
     # Get transformation
     ret <- tq_transform_xy_(data = data, .x = .x, .y = .y, transform_fun = mutate_fun, ...)
 
-    ret <- merge_two_tibbles(tib1 = data, tib2 = ret)
+    ret <- merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
 
     ret
 
@@ -143,34 +142,34 @@ tq_mutate_fun_options <- function() tq_transform_fun_options()
 
 # See utils.R for get_col_name_date_or_date_time()
 
-merge_two_tibbles <- function(tib1, tib2) {
+merge_two_tibbles <- function(tib1, tib2, mutate_fun) {
 
-    # Gracefully handle errors
-    ret <- tryCatch({
+    # # Check if date column present in tib1
+    # date_cols_exist <- check_date_or_date_time_exists(tib1)
+    # if (!date_cols_exist) stop("No date or date-time columns to bind in mutation.")
+    #
+    # # Check if date column present in tib2
+    # date_cols_exist <- check_date_or_date_time_exists(tib2)
+    # if (!date_cols_exist) stop("No date or date-time columns to bind in mutation.")
+    #
+    # # Find date or date-time cols
+    # col_name_date_tib1 <- get_col_name_date_or_date_time(tib1)
+    # tib1_date <- eval(parse(text = paste0("tib1$", col_name_date_tib1)))
+    #
+    # col_name_date_tib2 <- get_col_name_date_or_date_time(tib2)
+    # tib2_date <- eval(parse(text = paste0("tib2$", col_name_date_tib2)))
 
-        # Find date or date-time col
-        col_name_date_tib1 <- get_col_name_date_or_date_time(tib1)
-        tib1_date <- eval(parse(text = paste0("tib1$", col_name_date_tib1)))
+    # Merge results
+    if (identical(nrow(tib1), nrow(tib2))) {
 
-        col_name_date_tib2 <- get_col_name_date_or_date_time(tib2)
-        tib2_date <- eval(parse(text = paste0("tib2$", col_name_date_tib2)))
+        ret <- dplyr::bind_cols(tib1, tib2[,-1])
 
-        # Merge results
-        if (identical(nrow(tib1), nrow(tib1))) {
-            if (identical(tib1_date, tib2_date)) {
-                merge(tib1, tib2, by.x = col_name_date_tib1, by.y = col_name_date_tib2) %>%
-                    as_tibble()
-            }
-        } else {
+    } else {
 
-            warning("Could not join. Incompatible structures.")
-            NA
-        }
+        stop("Could not join. Incompatible structures.")
 
-    }, error = function(e) {
+    }
 
-        warning(paste0(e))
-        NA
+    ret
 
-    })
 }

@@ -2,10 +2,13 @@
 % Please edit documentation in R/tq_get.R
 \name{tq_get}
 \alias{tq_get}
+\alias{tq_get_options}
 \alias{tq_get_stock_index_options}
 \title{Get quantitative data in \code{tibble} format}
 \usage{
 tq_get(x, get = "stock.prices", ...)
+
+tq_get_options()
 
 tq_get_stock_index_options()
 }
@@ -63,6 +66,9 @@ are (1) only one function is needed for all data sources and (2) the function
 can be seemlessly used with the tidyverse: \code{purrr}, \code{tidyr}, and
 \code{dplyr} verbs.
 
+\code{tq_get_options()} returns a list of valid `get` options you can
+choose from.
+
 \code{tq_get_stock_index_options()} returns a list of stock indexes you can
 choose from. Alternatively \code{tq_get("options", get = "stock.index")}
 can be used.
@@ -73,6 +79,9 @@ library(tidyverse)
 library(tidyquant)
 
 ##### Basic Functionality
+
+# Get the list of `get` options
+tq_get_options()
 
 # Get all stocks in a stock index from www.marketvolume.com
 tq_get("SP500", get = "stock.index")

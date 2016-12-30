@@ -48,6 +48,9 @@
 #' can be seemlessly used with the tidyverse: \code{purrr}, \code{tidyr}, and
 #' \code{dplyr} verbs.
 #'
+#' \code{tq_get_options()} returns a list of valid `get` options you can
+#' choose from.
+#'
 #' \code{tq_get_stock_index_options()} returns a list of stock indexes you can
 #' choose from. Alternatively \code{tq_get("options", get = "stock.index")}
 #' can be used.
@@ -62,6 +65,9 @@
 #' library(tidyquant)
 #'
 #' ##### Basic Functionality
+#'
+#' # Get the list of `get` options
+#' tq_get_options()
 #'
 #' # Get all stocks in a stock index from www.marketvolume.com
 #' tq_get("SP500", get = "stock.index")
@@ -111,14 +117,9 @@ tq_get <- function(x, get = "stock.prices", ...) {
         stringr::str_replace_all("[[:punct:]]", "") %>%
         stringr::str_replace_all("s$", "")
 
-    get_list <- c("stockprice",
-                  "dividend",
-                  "split",
-                  "metalprice",
-                  "exchangerate",
-                  "financial",
-                  "economicdata",
-                  "stockindex")
+    get_list <- tq_get_options() %>%
+        stringr::str_replace_all("[[:punct:]]", "") %>%
+        stringr::str_replace_all("s$", "")
     if (!(get %in% get_list)) {
         stop("Error: `get` must be a valid entry")
     }
@@ -143,6 +144,20 @@ tq_get <- function(x, get = "stock.prices", ...) {
 
     ret
 
+}
+
+#' @rdname tq_get
+#' @export
+tq_get_options <- function() {
+    c("stock.prices",
+      "stock.index",
+      "dividends",
+      "splits",
+      "financials",
+      "economic.data",
+      "exchange.rates",
+      "metal.prices"
+      )
 }
 
 

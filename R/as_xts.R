@@ -20,6 +20,7 @@
 #' \code{zoo}, \code{timeSeries}, \code{ts}, and \code{irts} objects.
 #' There is no need to specify the \code{date_col} argument.
 #'
+#' @seealso \code{\link{as_tibble}}
 #'
 #' @name as_xts
 #'
@@ -56,33 +57,26 @@ as_xts_ <- function(x, date_col = NULL, ...) {
 
     if (inherits(x, "data.frame")) {
 
-        ret <- tryCatch({
+        # Check date_col provided
+        if (is.null(date_col)) stop("`date_col` required for coercion from data.frame to xts")
 
-            # Select columns and reorder
-            date <- x %>% dplyr::select_(date_col)
-            not_date_names <- names(x)[names(x) != date_col]
-            not_date <- x %>% dplyr::select_(.dots = as.list(not_date_names))
-            x <- dplyr::bind_cols(date, not_date)
+        # Check date_col valid
+        if (!(date_col %in% names(x))) {
+            stop(paste0("date_col = ", date_col, " is invalid within names(x)"))
+        }
 
-            # Format order.by
-            eval(parse(text = "date_col"))
-            order.by <- eval(parse(text = stringr::str_c("x$", date_col)))
+        # Select columns and reorder
+        date <- x %>% dplyr::select_(date_col)
+        not_date_names <- names(x)[names(x) != date_col]
+        not_date <- x %>% dplyr::select_(.dots = as.list(not_date_names))
+        x <- dplyr::bind_cols(date, not_date)
 
-            # Convert tibble to xts
-            x_xts <- xts::xts(x[,-1], order.by = order.by)
+        # Format order.by
+        eval(parse(text = "date_col"))
+        order.by <- eval(parse(text = stringr::str_c("x$", date_col)))
 
-        }, error = function(e) {
-
-            suggestions <- find_date_cols(x)
-            suggestions <- suggestions[suggestions == TRUE]
-            suggestions <- stringr::str_c(names(suggestions), collapse = ", ")
-            warn <- paste0("Must specify a `date_col` that is in a standard ",
-                           "unambiguous date class. \nPossible date columns: ",
-                           ifelse(length(suggestions) > 0, suggestions, "None found"))
-            warning(warn)
-            NA
-
-        })
+        # Convert tibble to xts
+        ret <- xts::xts(x[,-1], order.by = order.by)
 
     } else {
 

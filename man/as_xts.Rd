@@ -51,4 +51,7 @@ tq_get("AAPL", get = "stock.prices") \%>\%
     as_xts_(date_col = x)
 
 }
+\seealso{
+\code{\link{as_tibble}}
+}
 

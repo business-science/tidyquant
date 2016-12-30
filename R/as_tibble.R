@@ -17,6 +17,7 @@
 #' When \code{preserve_row_names = TRUE} is specified, a new column,
 #' \code{row.names}, is created during object coercion as a character class.
 #'
+#' @seealso \code{\link{as_xts}}
 #'
 #' @export
 #'
@@ -91,9 +92,7 @@ as_tibble <- function(x, preserve_row_names = FALSE, ...) {
 #     allow preserving rownames when converting to tibble
 matrix_to_tibble <- function(x, preserve_row_names, ...) {
 
-    if (!is.matrix(x)) {
-        stop("Error: `x` is not a matrix object.")
-    }
+    if (!is.matrix(x)) stop("Error: `x` is not a matrix object.")
 
     if (preserve_row_names == TRUE) {
 
@@ -120,7 +119,6 @@ matrix_to_tibble <- function(x, preserve_row_names, ...) {
         tibble::as_tibble(x, ...)
 
     }
-
 }
 
 

@@ -56,8 +56,34 @@ find_date_time_cols <- function(x) {
 
 }
 
+# Checks a data frame and returns true / false if date or date-time column exists
+check_date_or_date_time_exists <- function(data) {
+
+    date_col_found = FALSE
+
+    # Check date
+    date_cols <- find_date_cols(data)
+    date_cols <- date_cols[date_cols == TRUE]
+
+    if (length(date_cols) > 0) {
+        date_col_found = TRUE
+    }
+
+    # Check date-time
+    date_cols <- find_date_time_cols(data)
+    date_cols <- date_cols[date_cols == TRUE]
+
+    if (length(date_cols) > 0) {
+        date_col_found = TRUE
+    }
+
+    date_col_found
+
+}
+
 # Takes a dateframe and returns name of date / date-time column
 get_col_name_date_or_date_time <- function(data) {
+
     date_cols <- find_date_cols(data)
     date_cols <- date_cols[date_cols == TRUE]
     if (length(date_cols) == 0) {
@@ -69,10 +95,18 @@ get_col_name_date_or_date_time <- function(data) {
     }
     date_col_name <- names(date_cols)[[1]]
     date_col_name
+
+}
+
+get_time_zone <- function(data, date_col_name) {
+
+    date_col_string <- paste0(deparse(substitute(data)), "$", date_col_name)
+    eval(parse(text = date_col_string)) %>%
+        lubridate::tz()
 }
 
 # Detects date / date-time and converts
-convert_date_cols <- function(data) {
+convert_date_cols <- function(data, time_zone = NULL) {
 
     date_cols <- find_date_cols(data)
     date_cols <- date_cols[date_cols == TRUE]
@@ -81,11 +115,10 @@ convert_date_cols <- function(data) {
     date_time_cols <- date_time_cols[date_time_cols == TRUE]
 
     # Convert date column to date
-    # TODO: This function needs to be reworked to improve handling
     if (length(date_cols) > 0) {
-        ret <- dplyr::mutate(data, date = lubridate::ymd(date))
+        ret <- dplyr::mutate(data, date = lubridate::ymd(date, tz = time_zone))
     } else if (length(date_time_cols) > 0) {
-        ret <- dplyr::mutate(data, date = lubridate::ymd_hms(date))
+        ret <- dplyr::mutate(data, date = lubridate::ymd_hms(date, tz = time_zone))
     } else {
         ret <- data
     }

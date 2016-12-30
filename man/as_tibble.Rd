@@ -47,4 +47,7 @@ m_tbl <- as_tibble(m, preserve_row_names = TRUE)
 quantmod::getSymbols("AAPL", auto.assign = FALSE) \%>\%
     as_tibble(preserve_row_names = TRUE)
 }
+\seealso{
+\code{\link{as_xts}}
+}
 

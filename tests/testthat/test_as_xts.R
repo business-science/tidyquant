@@ -32,11 +32,12 @@ test_that("Test returns tibble with correct rows and columns.", {
     expect_equal(ncol(test_xts), ncol(test_tib) - 1)
 })
 
-test_that("Test handle errors gracefully", {
-    # Returns warning
-    expect_warning(as_xts(test_err, date_col = date.char))
-    # Returns NA
-    expect_equal(suppressWarnings({
-        as_xts(test_err, date_col = date.char)
-    }), NA)
-})
+# Graceful error handling was removed from as_xts
+# test_that("Test handle errors gracefully", {
+#     # Returns warning
+#     expect_warning(as_xts(test_err, date_col = date.char))
+#     # Returns NA
+#     expect_equal(suppressWarnings({
+#         as_xts(test_err, date_col = date.char)
+#     }), NA)
+# })

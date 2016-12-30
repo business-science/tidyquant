@@ -74,8 +74,7 @@
 #'
 #' # Example 3: Using tq_transform_xy to work with non-OHLC data
 #' tq_get("DCOILWTICO", get = "economic.data") %>%
-#'     tq_transform_xy(.x = price, transform_fun = to.period,
-#'                     period = "months", OHLC = FALSE)
+#'     tq_transform_xy(.x = price, transform_fun = to.period, period = "months")
 #'
 #' # Example 4: Non-standard evaluation:
 #' # Programming with tq_tranform_() and tq_transform_xy_()
@@ -101,41 +100,46 @@ tq_transform <- function(data, x_fun = OHLCV, transform_fun, ...) {
 #' @export
 tq_transform_ <- function(data, x_fun = "OHLCV", transform_fun, ...) {
 
-    # Graceful error handling
-    ret <- tryCatch({
+    # Check transform_fun in xts, quantmod or TTR
+    check_transform_fun_options(transform_fun)
 
-        # Check transform_fun in xts, quantmod or TTR
-        check_transform_fun_options(transform_fun)
+    # Check for x: either x, HLC, or price arguments
+    check_x_fun_options(x_fun)
 
-        # Check for x: either x, HLC, or price arguments
-        check_x_fun_options(x_fun)
+    # Check data
+    check_data_is_data_frame(data)
 
-        # Check data
-        check_data_is_data_frame(data)
+    # Find date or date-time col
+    date_col_name <- get_col_name_date_or_date_time(data)
 
-        # Find date or date-time col
-        date_col_name <- get_col_name_date_or_date_time(data)
+    # Get timezone
+    time_zone <- get_time_zone(data, date_col_name)
 
-        # Convert inputs to functions
-        x_fun <- paste0("quantmod::", x_fun)
-        fun_x <- eval(parse(text = x_fun))
-        fun_transform <- eval(parse(text = transform_fun))
+    # Convert inputs to functions
+    x_fun <- paste0("quantmod::", x_fun)
+    fun_x <- eval(parse(text = x_fun))
+    fun_transform <- eval(parse(text = transform_fun))
 
-        # Apply functions
-        data %>%
+    # Patch for to.period functions
+    is_period_fun <- detect_period_fun(transform_fun)
+
+    # Apply functions
+    if (is_period_fun) {
+        # Add arg: OHLC = FALSE
+        ret <- data %>%
+            as_xts_(date_col = date_col_name) %>%
+            fun_x() %>%
+            fun_transform(OHLC = FALSE, ...)
+
+    } else {
+        ret <- data %>%
             as_xts_(date_col = date_col_name) %>%
             fun_x() %>%
             fun_transform(...)
-
-    }, error = function(e) {
-
-        warning(e)
-        NA
-
-    })
+    }
 
     # Coerce to tibble and convert date / datetime
-    if (xts::is.xts(ret)) ret <- coerce_to_tibble(ret)
+    if (xts::is.xts(ret)) ret <- coerce_to_tibble(ret, date_col_name, time_zone)
 
     ret
 
@@ -158,48 +162,62 @@ tq_transform_xy <- function(data, .x, .y = NULL, transform_fun, ...) {
 #' @export
 tq_transform_xy_ <- function(data, .x, .y = NULL, transform_fun, ...) {
 
-    # Graceful error handling
-    ret <- tryCatch({
+    # Check transform_fun in xts, quantmod or TTR
+    check_transform_fun_options(transform_fun)
 
-        # Check transform_fun in xts, quantmod or TTR
-        check_transform_fun_options(transform_fun)
+    # Check data
+    check_data_is_data_frame(data)
 
-        # Check data
-        check_data_is_data_frame(data)
+    # Check .x and .y
+    check_x_y_valid(data, .x, .y)
 
-        # Check .x and .y
-        check_x_y_valid(data, .x, .y)
+    # Find date or date-time col
+    date_col_name <- get_col_name_date_or_date_time(data)
 
-        # Find date or date-time col
-        date_col_name <- get_col_name_date_or_date_time(data)
+    # Get timezone
+    time_zone <- get_time_zone(data, date_col_name)
 
-        # Convert inputs to functions
-        fun_transform <- eval(parse(text = transform_fun))
+    # Convert inputs to functions
+    fun_transform <- eval(parse(text = transform_fun))
 
-        # Apply functions
+    # Patch for to.period functions
+    is_period_fun <- detect_period_fun(transform_fun)
+
+    # Apply functions
+    if (is_period_fun) {
+        # Add arg: OHLC = FALSE
         if (.y == "NULL" || is.null(.y)) {
-            data %>%
+            ret <- data %>%
+                as_xts_(date_col = date_col_name) %$%
+                # OHLCV() %$%
+                fun_transform(eval(parse(text = .x)), OHLC = FALSE, ...)
+        } else {
+            ret <- data %>%
+                as_xts_(date_col = date_col_name) %$%
+                # OHLCV() %$%
+                fun_transform(eval(parse(text = .x)),
+                              eval(parse(text = .y)),
+                              OHLC = FALSE,
+                              ...)
+        }
+    } else {
+        if (.y == "NULL" || is.null(.y)) {
+            ret <- data %>%
                 as_xts_(date_col = date_col_name) %$%
                 # OHLCV() %$%
                 fun_transform(eval(parse(text = .x)), ...)
         } else {
-            data %>%
+            ret <- data %>%
                 as_xts_(date_col = date_col_name) %$%
                 # OHLCV() %$%
                 fun_transform(eval(parse(text = .x)),
                               eval(parse(text = .y)),
                               ...)
         }
-
-    }, error = function(e) {
-
-        warning(e)
-        NA
-
-    })
+    }
 
     # Coerce to tibble and convert date / datetime
-    if (xts::is.xts(ret)) {ret <- coerce_to_tibble(ret)}
+    if (xts::is.xts(ret)) ret <- coerce_to_tibble(ret, date_col_name, time_zone)
 
     ret
 
@@ -235,9 +253,7 @@ check_transform_fun_options <- function(fun) {
     fun_options <- tq_transform_fun_options() %>%
         unlist()
     if (!(fun %in% fun_options)) {
-        stop(paste0("transform_fun = '",
-                    fun,
-                    "' not a valid option."))
+        stop(paste0("fun = ", fun, " not a valid option."))
     }
 }
 
@@ -245,9 +261,7 @@ check_x_fun_options <- function(fun) {
     x_options <- c("Op", "Hi", "Lo", "Cl", "Vo", "Ad",
                    "HLC", "OHLC", "OHLCV")
     if (!(fun %in% x_options)) {
-        stop(paste0("x = '",
-                    x_fun,
-                    "' not a valid option."))
+        stop(paste0("x_fun = ", x_fun, " not a valid name."))
     }
 }
 
@@ -258,20 +272,32 @@ check_data_is_data_frame <- function(data) {
 }
 
 check_x_y_valid <- function(data, .x, .y) {
-    if (!(.x %in% names(data))) stop(".x not a valid name.")
+    if (!(.x %in% names(data))) stop(paste0(".x = ", .x, " not a valid name."))
     if (.y != "NULL" && !is.null(.y)) {
-        if (!(.y %in% names(data))) stop(paste0(.y, " .y not a valid name."))
+        if (!(.y %in% names(data))) stop(paste0(".y = ", .y, " not a valid name."))
     }
 }
 
-coerce_to_tibble <- function(data) {
+coerce_to_tibble <- function(data, date_col_name, time_zone) {
     # Coerce to tibble
     ret <- data %>%
         as_tibble(preserve_row_names = TRUE) %>%
         dplyr::rename(date = row.names)
 
     # Convert to date
-    ret <- convert_date_cols(ret)
+    ret <- convert_date_cols(ret, time_zone)
+
+    # Rename row.names
+    names(ret)[[1]] <- date_col_name
 
     ret
+}
+
+detect_period_fun <- function(fun) {
+    is_period_fun <- FALSE
+    to_period_funs <- tq_transform_fun_options() %>%
+        unlist() %>%
+        stringr::str_subset("^to")
+    if (fun %in% to_period_funs) is_period_fun = TRUE
+    is_period_fun
 }

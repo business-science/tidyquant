@@ -1,12 +1,12 @@
 Package: tidyquant
 Type: Package
 Title: Tidy quantitative financial analysis
-Version: 0.1.0
+Version: 0.0.0.9000
 Date: 2016-12-31
 Authors@R: person("Matt", "Dancho", email = "mdancho@gmail.com", 
     role = c("aut", "cre"))
 Maintainer: Matt Dancho <mdancho@gmail.com>
-Description: Bringing quantatitive financial analytics to the tidyverse. The tidyquant 
+Description: Bringing quantatitive financial analysis to the tidyverse. The tidyquant 
     package provides a convient wrapper to various quantmod and TTR package 
     functions and returns the objects in the tidy tibble format. The main 
     advantage is being able to use quantitative functions with the tidyverse
@@ -30,7 +30,6 @@ Imports:
     dplyr (>= 0.05),
     lazyeval (>= 0.2.0),
     lubridate (>= 1.6.0),
-    magrittr (>= 1.5), 
     purrr (>= 0.2.2),
     rvest (>= 0.3.2),
     stats (>= 3.3.0),

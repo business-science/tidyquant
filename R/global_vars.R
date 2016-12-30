@@ -9,4 +9,5 @@ globalVariables(c("A",
                   "period",
                   "retrieve",
                   "type",
-                  "value"))
+                  "value",
+                  "x_fun"))
