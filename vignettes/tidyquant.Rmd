@@ -144,7 +144,8 @@ The data source is [google finance](https://www.google.com/finance).
 
 
 <a class="anchor" id="economic-data"></a>
-__Economic Data: __ 
+
+__Economic Data__: 
 
 A wealth of economic data can be extracted from the Federal Reserve Economic Data (FRED) database. The [WTI Crude Oil Prices](https://fred.stlouisfed.org/series/DCOILWTICO) are shown below.
 
