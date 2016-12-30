@@ -1,3 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^data-raw$
+^README\.Rmd$
+^README-.*\.png$
+^NEWS\.md$
+^\.travis\.yml$
