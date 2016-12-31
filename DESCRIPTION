@@ -6,12 +6,12 @@ Date: 2016-12-31
 Authors@R: person("Matt", "Dancho", email = "mdancho@gmail.com", 
     role = c("aut", "cre"))
 Maintainer: Matt Dancho <mdancho@gmail.com>
-Description: Bringing quantitative financial analysis to the ‘tidyverse’. The ‘tidyquant’ 
-    package provides a convenient wrapper to various ‘xts’, ‘quantmod’ and ‘TTR’ package 
-    functions and returns the objects in the tidy ‘tibble’ format. The main 
-    advantage is being able to use quantitative functions with the ‘tidyverse’
-    functions including ‘purrr’, ‘dplyr’, ‘tidyr’, ‘ggplot2’, ‘lubridate’, etc. See 
-    the ‘tidyquant’ website for more information, documentation and examples.
+Description: Bringing quantitative financial analysis to the 'tidyverse'. The 'tidyquant' 
+    package provides a convenient wrapper to various 'xts', 'quantmod' and 'TTR' package 
+    functions and returns the objects in the tidy 'tibble' format. The main 
+    advantage is being able to use quantitative functions with the 'tidyverse'
+    functions including 'purrr', 'dplyr', 'tidyr', 'ggplot2', 'lubridate', etc. See 
+    the 'tidyquant' website for more information, documentation and examples.
 URL: https://github.com/mdancho84/tidyquant
 BugReports: https://github.com/mdancho84/tidyquant/issues
 License: MIT + file LICENSE
