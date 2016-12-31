@@ -1,3 +1,7 @@
+## Release Summary
+This is the first release of tidyquant for CRAN review.
+
+
 ## Test environments
 * local Windows install, R 3.3.2
 * ubuntu 12.04 (on travis-ci), R 3.3.2
@@ -14,6 +18,4 @@ There were no ERRORs, WARNINGs, or NOTES.
   
 
 ## Downstream dependencies
-I have also run R CMD check on downstream dependencies of quantmod, xts, 
-TTR, tidyverse, lubridate, and magrittr. All packages that I could install
-have passed.
+I have also run R CMD check on downstream dependencies. No reverse dependencies were detected.
