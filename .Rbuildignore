@@ -3,7 +3,6 @@
 ^data-raw$
 ^README\.Rmd$
 ^README-.*\.png$
-^NEWS\.md$
 ^\.travis\.yml$
 ^cran-comments\.md$
 ^revdep$
