@@ -1,7 +1,7 @@
 Package: tidyquant
 Type: Package
 Title: Tidy quantitative financial analysis
-Version: 0.0.0.9001
+Version: 0.1.0
 Date: 2016-12-31
 Authors@R: person("Matt", "Dancho", email = "mdancho@gmail.com", 
     role = c("aut", "cre"))
@@ -20,7 +20,6 @@ LazyData: true
 Depends:
     R (>= 3.0),
     lubridate (>= 1.6.0),
-    magrittr (>= 1.5),
     quantmod (>= 0.4-7),
     tidyverse (>= 1.0.0),
     TTR (>= 0.23-1),
@@ -30,6 +29,7 @@ Imports:
     devtools (>= 1.12.0),
     dplyr (>= 0.05),
     lazyeval (>= 0.2.0),
+    magrittr (>= 1.5),
     purrr (>= 0.2.2),
     rvest (>= 0.3.2),
     stats (>= 3.3.0),

@@ -5,3 +5,4 @@
 ^README-.*\.png$
 ^NEWS\.md$
 ^\.travis\.yml$
+^cran-comments\.md$

@@ -27,7 +27,8 @@
 #' @docType package
 #' @name tidyquant
 #'
-#' @import magrittr
+#' @importFrom magrittr "%>%"
+#' @importFrom magrittr "%$%"
 #' @import quantmod
 #' @import TTR
 #' @import xts
