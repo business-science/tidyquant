@@ -11,9 +11,9 @@ Matt Dancho
 
 The three primary quantitative packages that are the backbone for quantitative financial analysis in _R programming_ are: 
 
-* [xts](https://cran.r-project.org/web/packages/xts/vignettes/xts.pdf), or [eXtensible time series](http://joshuaulrich.github.io/xts/index.html): The data structure for handling time-series data.
-* [quantmod](http://www.quantmod.com/): A package designed for retrieving, manipulating, and modeling and  quantitative data.
-* [TTR](https://cran.r-project.org/web/packages/TTR/TTR.pdf), or Technical Trading Rules: A package that includes various functions to compute technical trading equations for quantitative or trading data.
+* [xts](https://CRAN.R-project.org/package=xts), or [eXtensible time series](http://joshuaulrich.github.io/xts/index.html): The data structure for handling time-series data.
+* [quantmod](https://CRAN.R-project.org/package=quantmod), or [Quantitative Financial Modelling & Trading Framework for R](http://www.quantmod.com/): A package designed for retrieving, manipulating, and modeling and  quantitative data.
+* [TTR](https://CRAN.R-project.org/package=TTR), or Technical Trading Rules: A package that includes various functions to compute technical trading equations for quantitative or trading data.
 
 The [tidy data principles](https://www.jstatsoft.org/article/view/v059i10) are a cornerstone of data management and data modeling workflow. The foundation for tidy data management is the `tidyverse`, a collection of _R packages_: `ggplot2`, `dplyr`, `tidyr`, `purrr`, `readr`, `tibble`, that work in harmony, are built for scalability, and are well documented in [R for Data Science](http://r4ds.had.co.nz/). Using this infrastructure and the core tidy concepts, we can integrate the tidy data principles with the best quantitative financial analysis packages using the package, `tidyquant`. 
 
@@ -1059,8 +1059,8 @@ stocks
 ## 2     CNP CENTERPOINT ENERGY  0.008680819
 ## 3     IVZ            INVESCO  0.007007588
 ## 4      SE     SPECTRA ENERGY  0.006579937
-## 5    XRAY      DENTSPLY INTL  0.006211669
-## 6     EMC                EMC  0.006210331
+## 5     EMC                EMC  0.006261198
+## 6    XRAY      DENTSPLY INTL  0.006211669
 ## 7    INTC              INTEL  0.005163667
 ## 8       L              LOEWS  0.003371969
 ## 9     MNK   MALLINCKRODT PLC  0.002366373
