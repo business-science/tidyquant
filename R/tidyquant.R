@@ -33,4 +33,5 @@
 #' @import xts
 #' @importFrom utils "data"
 #' @import tidyverse
+#' @import lubridate
 NULL

@@ -1,12 +1,13 @@
 # Introduction to tidyquant
 Matt Dancho  
-`r Sys.Date()`  
+
+
 
 > Bringing quantitative financial analysis to the tidyverse
 
 # Overview
 
-`tidyquant` integrates the best quantitative resources for collecting and analyzing quantitative data, `xts`, `quantmod` and `TTR`, with the tidy data infrastructure of the `tidyverse` allowing for seamless interaction between each. 
+`tidyquant` integrates the best quantitative resources for collecting and analyzing quantitative data, `xts`, `quantmod` and `TTR`, with the tidy data infrastructure of the `tidyverse` allowing for seamless interaction between each and working within the `tidyverse`. 
 
 The three primary quantitative packages that are the backbone for quantitative financial analysis in _R programming_ are: 
 
@@ -14,26 +15,26 @@ The three primary quantitative packages that are the backbone for quantitative f
 * [quantmod](http://www.quantmod.com/): A package designed for retrieving, manipulating, and modeling and  quantitative data.
 * [TTR](https://cran.r-project.org/web/packages/TTR/TTR.pdf), or Technical Trading Rules: A package that includes various functions to compute technical trading equations for quantitative or trading data.
 
-The [tidy data principles](https://www.jstatsoft.org/article/view/v059i10) are a cornerstone of data management and data modeling workflow. The foundation for tidy data management is the `tidyverse`, a collection of _R packages:_ `ggplot2`, `dplyr`, `tidyr`, `purrr`, `readr`, `tibble`, that work in harmony, are built for scalability, and are well documented in [R for Data Science](http://r4ds.had.co.nz/). Using this infrastructure and the core tidy concepts, we can integrate the tidy data principles with the best quantitative financial analysis packages using the package, `tidyquant`. 
+The [tidy data principles](https://www.jstatsoft.org/article/view/v059i10) are a cornerstone of data management and data modeling workflow. The foundation for tidy data management is the `tidyverse`, a collection of _R packages_: `ggplot2`, `dplyr`, `tidyr`, `purrr`, `readr`, `tibble`, that work in harmony, are built for scalability, and are well documented in [R for Data Science](http://r4ds.had.co.nz/). Using this infrastructure and the core tidy concepts, we can integrate the tidy data principles with the best quantitative financial analysis packages using the package, `tidyquant`. 
 
 # Prerequisites
-
-
 
 Load the `tidyquant` package to get started.
 
 
 ```r
-library(tidyquant)  # Loads tidyquant, tidyverse, xts, quantmod, TTR 
+# Loads tidyquant, tidyverse, lubridate, xts, quantmod, TTR 
+library(tidyquant)  
 ```
+
 
 # Benefits
 
-__The `tidyquant` philosophy:__
+__The `tidyquant` philosophy__:
 
-* __[A few core functions with a lot of power, that](#core-functions)__
-* __[leverage the quantitative analysis power of `xts`, `quantmod` and `TTR`, and are](#quant-power)__
-* __[designed to be scaled with the `tidyverse` workflow](#built-for-scale).__
+* __A few core functions with a lot of power, that__
+* __leverage the quantitative analysis power of `xts`, `quantmod` and `TTR`, and are__
+* __designed to be used and scaled with the `tidyverse`.__
 
 <a class="anchor" id="core-functions"></a>
 
@@ -41,11 +42,11 @@ __The `tidyquant` philosophy:__
 
 Minimizing the number of functions reduces the learning curve. Functions are grouped into verbs for efficient collection and manipulation of quantitative data: 
 
-* __[Get Quantitative Data, `tq_get()`:](#tq-get)__ A one-stop shop to get data from various web-sources.  
+* __Get Quantitative Data, `tq_get()`__: A one-stop shop to get data from various web-sources.  
 
-* __[Transform, `tq_transform()`, and Mutate, `tq_mutate()`, Quantitative Data:](#tq-transform)__ These are the workhorse functions that wrap around the `xts`, `quantmod`, and `TTR` packages. 
+* __Transform, `tq_transform()`, and Mutate, `tq_mutate()`, Quantitative Data__: These are the workhorse functions that wrap around the `xts`, `quantmod`, and `TTR` packages. 
 
-* __[Coerce Quantitative Data Between tibble and xts formats, `as_tibble()` and `as_xts()`:](#tq-coerce)__ Coercing `xts`, `zoo`, `timeSeries`, and the other various _R_ time-based objects to and from `tibble` or `data.frame` objects was a pain due to the date/time being stored as row names in time-based objects. The tidyquant `as_tibble()` and `as_xts()` functions enable preservation of row names during coercion.
+* __Coerce Quantitative Data Between tibble and xts formats, `as_tibble()` and `as_xts()`__: Coercing `xts`, `zoo`, `timeSeries`, and the other various _R_ time-based objects to and from `tibble` or `data.frame` objects was a pain due to the date/time being stored as row names in time-based objects. The tidyquant `as_tibble()` and `as_xts()` functions enable preservation of row names during coercion.
 
 <a class="anchor" id="tq-get"></a>
 
@@ -64,7 +65,7 @@ tq_get_options()
 ```
 
 
-__Stock Index:__
+__Stock Index__:
 
 A wide range of stock index / exchange lists can be retrieved using `get = "stock.index"`. To get a full list of the options, use `tq_get_stock_index_options()`. 
 
@@ -106,18 +107,18 @@ tq_get("sp500", get = "stock.index")
 
 The data source is [www.marketvolume.com](http://www.marketvolume.com/indexes_exchanges/).
 
-__Stock Prices, Dividends and Splits:__
+__Stock Prices, Dividends and Splits__:
 
 The stock prices can be retrieved succinctly using `get = "stock.prices"`.  
 
 
 ```r
-appl_prices  <- tq_get("AAPL", get = "stock.prices", from = " 1990-01-01")
-appl_prices 
+aapl_prices  <- tq_get("AAPL", get = "stock.prices", from = " 1990-01-01")
+aapl_prices 
 ```
 
 ```
-## # A tibble: 6,804 × 7
+## # A tibble: 6,805 × 7
 ##          date   open   high   low  close   volume adjusted
 ##        <date>  <dbl>  <dbl> <dbl>  <dbl>    <dbl>    <dbl>
 ## 1  1990-01-02 35.250 37.500 35.00 37.250 45799600 1.132075
@@ -130,7 +131,7 @@ appl_prices
 ## 8  1990-01-11 36.250 36.250 34.50 34.500 52763200 1.048499
 ## 9  1990-01-12 34.250 34.750 33.75 34.500 42974400 1.048499
 ## 10 1990-01-15 34.500 35.750 34.25 34.250 40434800 1.040901
-## # ... with 6,794 more rows
+## # ... with 6,795 more rows
 ```
 
 
@@ -138,8 +139,8 @@ Dividends are obtained using `get = "dividends"`.
 
 
 ```r
-appl_divs <- tq_get("AAPL", get = "dividends", from = "1990-01-01")
-appl_divs
+aapl_divs <- tq_get("AAPL", get = "dividends", from = "1990-01-01")
+aapl_divs
 ```
 
 ```
@@ -163,8 +164,8 @@ Stock splits are obtained using `get = "splits"`.
 
 
 ```r
-appl_splits <- tq_get("AAPL", get = "splits", from = "1990-01-01")
-appl_splits
+aapl_splits <- tq_get("AAPL", get = "splits", from = "1990-01-01")
+aapl_splits
 ```
 
 ```
@@ -178,7 +179,7 @@ appl_splits
 
 The data source is [yahoo finance](https://finance.yahoo.com/).
 
-__Financial Statements:__
+__Financial Statements__:
 
 For any given stock, a total of six financials statements are retrieved as nested tibbles, one for each combination of statement type (Income Statement, Balance Sheet, and Cash Flow) and period (by annual and quarter). 
 
@@ -288,7 +289,7 @@ wti_price_usd
 The FRED contains literally over 10K data sets that are free to use. See the [FRED categories](https://fred.stlouisfed.org/categories) to narrow down the data base and to get data codes. 
 
 
-__Exchange Rates:__
+__Exchange Rates__:
 
 Exchange rates are entered as currency pairs using "/" notation (e.g `"EUR/USD"`), and by setting `get = "exchange.rates"`. 
 
@@ -302,22 +303,22 @@ eur_usd
 ## # A tibble: 1,827 × 2
 ##          date exchange.rate
 ##        <date>         <dbl>
-## 1  2011-12-30       1.29493
-## 2  2011-12-31       1.29618
-## 3  2012-01-01       1.29590
-## 4  2012-01-02       1.29375
-## 5  2012-01-03       1.30038
-## 6  2012-01-04       1.30036
-## 7  2012-01-05       1.28717
-## 8  2012-01-06       1.27698
-## 9  2012-01-07       1.27195
-## 10 2012-01-08       1.27151
+## 1  2011-12-31       1.29618
+## 2  2012-01-01       1.29590
+## 3  2012-01-02       1.29375
+## 4  2012-01-03       1.30038
+## 5  2012-01-04       1.30036
+## 6  2012-01-05       1.28717
+## 7  2012-01-06       1.27698
+## 8  2012-01-07       1.27195
+## 9  2012-01-08       1.27151
+## 10 2012-01-09       1.27272
 ## # ... with 1,817 more rows
 ```
 
 The data source is [Oanda](https://www.oanda.com/), and list of currencies to compare can be found on [Oanda's currency converter](https://www.oanda.com/currency/converter/). It may make more sense to get this data from the FRED (See [Economic Data](#economic-data)) since the max period for Oanda is 5-years.
 
-__Metal Prices:__
+__Metal Prices__:
 
 Metal prices are very similar to stock prices. Set `get = "metal.prices"` along with the appropriate commodity symbol (e.g. XAU (gold) , XAG (silver), XPD (palladium), or XPT (platinum)). 
 
@@ -332,16 +333,16 @@ plat_price_eur
 ## # A tibble: 1,827 × 2
 ##          date   price
 ##        <date>   <dbl>
-## 1  2011-12-30 1081.91
-## 2  2011-12-31 1080.87
-## 3  2012-01-01 1081.11
-## 4  2012-01-02 1085.99
-## 5  2012-01-03 1080.45
-## 6  2012-01-04 1080.47
-## 7  2012-01-05 1091.55
-## 8  2012-01-06 1100.26
-## 9  2012-01-07 1104.61
-## 10 2012-01-08 1097.12
+## 1  2011-12-31 1080.87
+## 2  2012-01-01 1081.11
+## 3  2012-01-02 1085.99
+## 4  2012-01-03 1080.45
+## 5  2012-01-04 1080.47
+## 6  2012-01-05 1091.55
+## 7  2012-01-06 1100.26
+## 8  2012-01-07 1104.61
+## 9  2012-01-08 1097.12
+## 10 2012-01-09 1096.08
 ## # ... with 1,817 more rows
 ```
 
@@ -353,7 +354,7 @@ The data source is [Oanda](https://www.oanda.com/). It may make more sense to ge
 
 Transform and mutate functions enable the `xts`, `quantmod` and `TTR` functions to shine (see [Leverage the Quantitative Power of `xts`, `quantmod` and `TTR`](#quant-power)):
 
-__Transform Quantitative Data, `tq_transform()`:__ 
+__Transform Quantitative Data, `tq_transform()`__: 
 
 Transforms the results of `tq_get()`. The result is typically a different shape than the input (hence "transformed"), although this is not a requirement. An example is periodicity aggregation from daily to monthly.
 
@@ -384,7 +385,7 @@ fb_prices %>%
 Let's go through what happened. `x_fun` is one of the various quantmod Open, High, Low, Close (OHLC) functions (see `?quantmod::OHLC`). The function returns a column or set of columns from data that are passed to the `transform_fun`. In example above, `OHLCV` selects the full list of prices and volumes from `data`, and sends this to the transform function, `to.monthly`, which transforms the periodicity from daily to monthly. Additional arguments can be passed to the `transform_fun` by way of `...`. 
 
 
-__Mutate Quantitative Data, `tq_mutate()`:__ 
+__Mutate Quantitative Data, `tq_mutate()`__: 
 
 Adds a column or set of columns to the tibble with the calculated attributes (hence the original tibble is returned, mutated with the additional columns). An example is getting the `MACD` from `Cl` (close price), which mutates the original input by adding MACD and Signal columns. 
 
@@ -395,7 +396,7 @@ fb_prices %>%
 ```
 
 ```
-## # A tibble: 1,162 × 9
+## # A tibble: 1,163 × 9
 ##          date  open  high   low close    volume adjusted  macd signal
 ##        <date> <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl> <dbl>  <dbl>
 ## 1  2012-05-18 42.05 45.00 38.00 38.23 573576400    38.23    NA     NA
@@ -408,19 +409,19 @@ fb_prices %>%
 ## 8  2012-05-30 28.70 29.55 27.86 28.19  57267900    28.19    NA     NA
 ## 9  2012-05-31 28.55 29.67 26.83 29.60 111639200    29.60    NA     NA
 ## 10 2012-06-01 28.89 29.15 27.39 27.72  41855500    27.72    NA     NA
-## # ... with 1,152 more rows
+## # ... with 1,153 more rows
 ```
 
 Note that a mutation can occur if, and only if, the mutation has the same structure of the original tibble. In other words, the calculation must have the same number of rows and row.names (or date fields), otherwise the mutation cannot be performed.
 
-__xy Variants, `tq_transform_xy` and `tq_mutate_xy`:__ 
+__xy Variants, `tq_transform_xy` and `tq_mutate_xy`__: 
 
 Enables working with:
 
 1. Transformation functions that require two primary inputs (e.g. EVWMA, VWAP, etc) 
 2. Data that is not in OHLC format. 
 
-_Transformation with two primary inputs: _
+_Transformation with two primary inputs_:
 
 EVWMA (exponential volume-weighted moving average) requires two inputs, price and volume, that are not in OHLC code format. To work with these columns, we can switch to the xy variants, `tq_transform_xy()` and `tq_mutate_xy()`. The only difference is instead of an `x_fun` argument, you use `.x` and `.y` arguments to pass the columns needed based on the `transform_fun` or `mutate_fun` documentation.
 
@@ -431,7 +432,7 @@ fb_prices %>%
 ```
 
 ```
-## # A tibble: 1,162 × 8
+## # A tibble: 1,163 × 8
 ##          date  open  high   low close    volume adjusted    V1
 ##        <date> <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl> <dbl>
 ## 1  2012-05-18 42.05 45.00 38.00 38.23 573576400    38.23    NA
@@ -444,10 +445,10 @@ fb_prices %>%
 ## 8  2012-05-30 28.70 29.55 27.86 28.19  57267900    28.19    NA
 ## 9  2012-05-31 28.55 29.67 26.83 29.60 111639200    29.60    NA
 ## 10 2012-06-01 28.89 29.15 27.39 27.72  41855500    27.72 27.72
-## # ... with 1,152 more rows
+## # ... with 1,153 more rows
 ```
 
-_Working with non-OHLC data: _
+_Working with non-OHLC data_:
 
 Returns from FRED, Oanda, and other sources do not have open, high, low, close, and volume (OHLCV) format. The following example shows how to transform WTI Crude daily prices to monthly prices. Since we only have a single column to pass, set the `.x = price` and leave the `.y = NULL`. This sends the price column to the `to.period` transformation fuction. 
 
@@ -482,7 +483,7 @@ wti_prices %>%
 
 Sometimes you want to work using a `tibble` and other times you want to work using a `xts` object. The `as_tibble()` and `as_xts()` functions are the key.
 
-__Coerce from time-series to tibble, `as_tibble()`:__
+__Coerce from time-series to tibble, `as_tibble()`__:
 
 The `tidyquant::as_tibble()` function includes a `preserve_row_names` argument, which is useful when coercing one of the many time formats (e.g. `xts`, `zoo`, `timeSeries`, `ts`) or `matrix` objects that contain valuable information in the row names. This makes bridging the gap between the various quantitative analysis packages and the `tidyverse` much easier.
 
@@ -540,7 +541,7 @@ time_series_tbl
 ## 3 2016-01-03   503
 ```
 
-__Coerce from tibble to xts, `as_xts()`:__
+__Coerce from tibble to xts, `as_xts()`__:
 
 We can convert back to `xts` with the tidyquant `as_xts()` function. Make sure to set the date column (`date_col`) argument to the column name containing the date (`date_col = row.names`). The date column must be in a date format (inherits either `Date` or `POSIXct` classes).
 
@@ -558,9 +559,102 @@ time_series_xts
 ## 2016-01-03 503
 ```
 
+<a class="anchor" id="tidyverse"></a>
+
+## Working in the tidyverse
+
+You probably already know and love `tidyverse` packages like `dplyr`, `tidyr`, `purrr`, `readr`, and `tibble` along with `lubridate` for working with date and datetime. `tidyquant` works solely in tibbles, so all of the `tidyverse` functionality is intact. 
+
+A simple example inspired by [Kan Nishida's blog](https://blog.exploratory.io/introducing-time-series-analysis-with-dplyr-60683587cf8a#.w6pvyi3d2) shows the `dplyr` and `lubridate` capability: Say we want the growth in the stock over the past year. We can do this with `dplyr` operations. 
+
+Getting the last year is simple with `dplyr` and `lubridate`. We first `select` the date and adjusted price (adjusted for stock splits). We then `filter` using `lubridate` date functions.
+
+
+```r
+aapl_prices %>%
+    select(date, adjusted) %>%
+    filter(date >= today() - years(1))
+```
+
+```
+## # A tibble: 253 × 2
+##          date  adjusted
+##        <date>     <dbl>
+## 1  2015-12-31 102.96903
+## 2  2016-01-04 103.05706
+## 3  2016-01-05 100.47452
+## 4  2016-01-06  98.50827
+## 5  2016-01-07  94.35077
+## 6  2016-01-08  94.84967
+## 7  2016-01-11  96.38550
+## 8  2016-01-12  97.78438
+## 9  2016-01-13  95.27031
+## 10 2016-01-14  97.35395
+## # ... with 243 more rows
+```
+
+We can also get a baseline price using the `first` function. Adding to our workflow, this looks like:
+
+
+```r
+aapl_prices %>%
+    select(date, adjusted) %>%
+    filter(date >= today() - years(1)) %>%
+    mutate(baseline = first(adjusted))
+```
+
+```
+## # A tibble: 253 × 3
+##          date  adjusted baseline
+##        <date>     <dbl>    <dbl>
+## 1  2015-12-31 102.96903  102.969
+## 2  2016-01-04 103.05706  102.969
+## 3  2016-01-05 100.47452  102.969
+## 4  2016-01-06  98.50827  102.969
+## 5  2016-01-07  94.35077  102.969
+## 6  2016-01-08  94.84967  102.969
+## 7  2016-01-11  96.38550  102.969
+## 8  2016-01-12  97.78438  102.969
+## 9  2016-01-13  95.27031  102.969
+## 10 2016-01-14  97.35395  102.969
+## # ... with 243 more rows
+```
+
+Growth and growth percent versus baseline columns can be added now. We tack on a final select statement to remove unnecessary columns. The final workflow looks like this:
+
+
+```r
+aapl_prices %>%
+    select(date, adjusted) %>%
+    filter(date >= today() - years(1)) %>%
+    mutate(baseline = first(adjusted),
+           growth = adjusted - baseline,
+           growth_pct = growth / baseline * 100) %>%
+    select(-(baseline:growth))
+```
+
+```
+## # A tibble: 253 × 3
+##          date  adjusted growth_pct
+##        <date>     <dbl>      <dbl>
+## 1  2015-12-31 102.96903  0.0000000
+## 2  2016-01-04 103.05706  0.0854995
+## 3  2016-01-05 100.47452 -2.4225751
+## 4  2016-01-06  98.50827 -4.3321348
+## 5  2016-01-07  94.35077 -8.3697559
+## 6  2016-01-08  94.84967 -7.8852393
+## 7  2016-01-11  96.38550 -6.3936946
+## 8  2016-01-12  97.78438 -5.0351540
+## 9  2016-01-13  95.27031 -7.4767271
+## 10 2016-01-14  97.35395 -5.4531690
+## # ... with 243 more rows
+```
+
+
+
 <a class="anchor" id="quant-power"></a>
 
-## Leverage the Quantitative Power of `xts`, `quantmod` and `TTR`
+## Leverage the Quantitative Power of xts, quantmod and TTR
 
 You may already know and love `xts`, `quantmod` and `TTR`, which is why the core functionality is fully intact. Using `tq_transform()` and `tq_mutate()`, we can apply the `xts`, `quantmod` and `TTR` functions. Entering `tq_transform_fun_options()` returns a list the transform functions by each package. We'll discuss these options by package briefly.
 
@@ -609,7 +703,7 @@ The `xts` functions that are compatible are listed above. Generally speaking, th
     * Convert a time series to time series of lower periodicity (e.g. convert daily to monthly periodicity).
     * Form: `to.period(x, period = 'months', k = 1, indexAt, name = NULL, OHLC = TRUE, ...)`.
     * Options include to.minutes, hourly, daily, weekly, monthly, quarterly, yearly.
-    * __Note 1 (Important):__ The return structure is different for `to.period` and the `to.monthly` (`to.weekly`, `to.quarterly`, etc) forms. `to.period` returns a date, while `to.months` returns a character MON YYYY. Best to use `to.period` if you want to work with time-series via `lubridate`.  
+    * __Note 1 (Important)__: The return structure is different for `to.period` and the `to.monthly` (`to.weekly`, `to.quarterly`, etc) forms. `to.period` returns a date, while `to.months` returns a character MON YYYY. Best to use `to.period` if you want to work with time-series via `lubridate`.  
      
 
 
@@ -776,7 +870,7 @@ AAPL %>%
 ```
 
 ```
-## # A tibble: 2,768 × 2
+## # A tibble: 2,769 × 2
 ##          date daily.returns
 ##        <dttm>         <dbl>
 ## 1  2006-01-03   0.000000000
@@ -789,7 +883,7 @@ AAPL %>%
 ## 8  2006-01-12   0.004637594
 ## 9  2006-01-13   0.015305252
 ## 10 2006-01-17  -0.010334731
-## # ... with 2,758 more rows
+## # ... with 2,759 more rows
 ```
 
 #### Example 3: Adding MACD and Bollinger Bands to a OHLC data set
@@ -804,7 +898,7 @@ AAPL %>%
 ```
 
 ```
-## # A tibble: 2,768 × 13
+## # A tibble: 2,769 × 13
 ##          date  open  high   low close    volume  adjusted  macd signal
 ##        <date> <dbl> <dbl> <dbl> <dbl>     <dbl>     <dbl> <dbl>  <dbl>
 ## 1  2006-01-03 72.38 74.75 72.25 74.75 201808600  9.726565    NA     NA
@@ -817,7 +911,7 @@ AAPL %>%
 ## 8  2006-01-12 84.97 86.40 83.62 84.29 320202400 10.967921    NA     NA
 ## 9  2006-01-13 84.99 86.01 84.60 85.59 194076400 11.137079    NA     NA
 ## 10 2006-01-17 85.70 86.38 83.87 84.71 208905900 11.022573    NA     NA
-## # ... with 2,758 more rows, and 4 more variables: dn <dbl>, mavg <dbl>,
+## # ... with 2,759 more rows, and 4 more variables: dn <dbl>, mavg <dbl>,
 ## #   up <dbl>, pctB <dbl>
 ```
 
@@ -835,7 +929,7 @@ AAPL %>%
 ```
 
 ```
-## # A tibble: 2,768 × 9
+## # A tibble: 2,769 × 9
 ##          date  open close Delt.0.arithmetic Delt.1.arithmetic
 ##        <date> <dbl> <dbl>             <dbl>             <dbl>
 ## 1  2006-01-03 72.38 74.75      0.0327438653                NA
@@ -848,7 +942,7 @@ AAPL %>%
 ## 8  2006-01-12 84.97 84.29     -0.0080028479       0.005367330
 ## 9  2006-01-13 84.99 85.59      0.0070596538       0.007296705
 ## 10 2006-01-17 85.70 84.71     -0.0115518788      -0.003294505
-## # ... with 2,758 more rows, and 4 more variables: Delt.2.arithmetic <dbl>,
+## # ... with 2,759 more rows, and 4 more variables: Delt.2.arithmetic <dbl>,
 ## #   Delt.3.arithmetic <dbl>, Delt.4.arithmetic <dbl>,
 ## #   Delt.5.arithmetic <dbl>
 ```
@@ -863,7 +957,7 @@ AAPL %>%
 ```
 
 ```
-## # A tibble: 2,768 × 4
+## # A tibble: 2,769 × 4
 ##          date  open close        OpCl..
 ##        <date> <dbl> <dbl>         <dbl>
 ## 1  2006-01-03 72.38 74.75  0.0327438653
@@ -876,13 +970,13 @@ AAPL %>%
 ## 8  2006-01-12 84.97 84.29 -0.0080028479
 ## 9  2006-01-13 84.99 85.59  0.0070596538
 ## 10 2006-01-17 85.70 84.71 -0.0115518788
-## # ... with 2,758 more rows
+## # ... with 2,759 more rows
 ```
 
 
 <a class="anchor" id="built-for-scale"></a>
 
-## Designed to be Scaled with the `tidyverse` Workflow
+## Designed to be Used and Scaled with the tidyverse
 
 Each function has one primary input and one output. This allows chaining operations with the pipe (`%>%`), and mapping to extend to lists of many stocks, exchange rates, metals, economic data, financial statements, etc. The rationale behind this is simple: let the function handle the operation, let the `tidyverse` handle the iteration. 
 
@@ -891,7 +985,7 @@ Rather than explain, let's go through a simple workflow using the `tidyverse`. W
 1. Analyze a single stock
 2. Scale to many stocks
 
-### Analyze a Single Stock
+#### Analyze a Single Stock
 
 In our hypothetical situation, we want to compare the mean monthly log returns (MMLR). First, let's come up with a function to help us collect log returns. The function below performs three operations internally. It first gets the stock prices using `tq_get()`. Then, it transforms the stock prices to period returns using `tq_transform()`. We add the `type = "log"` and `period = "monthly"` arguments to ensure we retrieve a tibble of monthly log returns. Last, we take the mean of the monthly returns to get MMLR.
 
@@ -914,7 +1008,7 @@ my_stock_analysis_fun("AAPL")
 ```
 
 ```
-## [1] 0.01882578
+## [1] 0.01876649
 ```
 
 
@@ -961,16 +1055,16 @@ stocks
 ## # A tibble: 10 × 3
 ##    symbol            company         mmlr
 ##     <chr>              <chr>        <dbl>
-## 1    FLIR       FLIR SYSTEMS  0.009394565
-## 2     CNP CENTERPOINT ENERGY  0.008708440
-## 3     IVZ            INVESCO  0.006947423
-## 4      SE     SPECTRA ENERGY  0.006594122
-## 5    XRAY      DENTSPLY INTL  0.006279602
+## 1    FLIR       FLIR SYSTEMS  0.009359061
+## 2     CNP CENTERPOINT ENERGY  0.008680819
+## 3     IVZ            INVESCO  0.007007588
+## 4      SE     SPECTRA ENERGY  0.006579937
+## 5    XRAY      DENTSPLY INTL  0.006211669
 ## 6     EMC                EMC  0.006210331
-## 7    INTC              INTEL  0.005244692
-## 8       L              LOEWS  0.003391356
-## 9     MNK   MALLINCKRODT PLC  0.002221213
-## 10    AIG      AMERICAN INTL -0.021056917
+## 7    INTC              INTEL  0.005163667
+## 8       L              LOEWS  0.003371969
+## 9     MNK   MALLINCKRODT PLC  0.002366373
+## 10    AIG      AMERICAN INTL -0.021078924
 ```
 
 And, we're done! We now have the MMLR for 10-years of stock data for 10 stocks. And, we can easily extend this to larger lists or stock indexes. For example, the entire S&amp;P500 could be analyzed removing the `sample_n()` following the call to `tq_get("SP500", get = "stock.index")`.
@@ -987,12 +1081,12 @@ Eventually you will run into a stock index, stock symbol, FRED data code, etc th
 
 This becomes painful when scaling if the functions return errors. So, the `tq_get()` function is designed to handle errors gracefully. What this means is a `NA` value is returned when an error is generated along with a gentle error warning. There are pros and cons to this approach that you may not agree with but I believe helps in the long run. Just be aware of what happens:
 
-* __Pros:__ Long running scripts are not interrupted because of one error
+* __Pros__: Long running scripts are not interrupted because of one error
 
-* __Cons:__ Errors flow downstream if not looking at warnings and not reviewing results
+* __Cons__: Errors flow downstream if not looking at warnings and not reviewing results
 
 
-__With `tq_get()`, Bad Apples Fail Gracefully:__
+__With `tq_get()`, Bad Apples Fail Gracefully__:
 
 Let's see an example when mapping to `tq_get()` to a long list of stocks with one `BAD APPLE`.
 
@@ -1022,16 +1116,16 @@ stock_list_with_one_bad_apple
 ## # A tibble: 10 × 2
 ##       symbol         stock.prices
 ##        <chr>               <list>
-## 1       AAPL <tibble [2,768 × 7]>
-## 2       GOOG <tibble [2,768 × 7]>
-## 3       AMZN <tibble [2,768 × 7]>
-## 4         FB <tibble [1,162 × 7]>
+## 1       AAPL <tibble [2,769 × 7]>
+## 2       GOOG <tibble [2,769 × 7]>
+## 3       AMZN <tibble [2,769 × 7]>
+## 4         FB <tibble [1,163 × 7]>
 ## 5  BAD APPLE            <lgl [1]>
-## 6       AVGO <tibble [1,864 × 7]>
-## 7       SWKS <tibble [2,768 × 7]>
-## 8       NVDA <tibble [2,768 × 7]>
-## 9          V <tibble [2,213 × 7]>
-## 10        MA <tibble [2,669 × 7]>
+## 6       AVGO <tibble [1,865 × 7]>
+## 7       SWKS <tibble [2,769 × 7]>
+## 8       NVDA <tibble [2,769 × 7]>
+## 9          V <tibble [2,214 × 7]>
+## 10        MA <tibble [2,670 × 7]>
 ```
 
 
@@ -1092,19 +1186,19 @@ stock_list_with_one_bad_apple
 ## # A tibble: 9 × 3
 ##   symbol         stock.prices    annual.returns
 ##    <chr>               <list>            <list>
-## 1   AAPL <tibble [2,768 × 7]> <tibble [11 × 2]>
-## 2   GOOG <tibble [2,768 × 7]> <tibble [11 × 2]>
-## 3   AMZN <tibble [2,768 × 7]> <tibble [11 × 2]>
-## 4     FB <tibble [1,162 × 7]>  <tibble [5 × 2]>
-## 5   AVGO <tibble [1,864 × 7]>  <tibble [8 × 2]>
-## 6   SWKS <tibble [2,768 × 7]> <tibble [11 × 2]>
-## 7   NVDA <tibble [2,768 × 7]> <tibble [11 × 2]>
-## 8      V <tibble [2,213 × 7]>  <tibble [9 × 2]>
-## 9     MA <tibble [2,669 × 7]> <tibble [11 × 2]>
+## 1   AAPL <tibble [2,769 × 7]> <tibble [11 × 2]>
+## 2   GOOG <tibble [2,769 × 7]> <tibble [11 × 2]>
+## 3   AMZN <tibble [2,769 × 7]> <tibble [11 × 2]>
+## 4     FB <tibble [1,163 × 7]>  <tibble [5 × 2]>
+## 5   AVGO <tibble [1,865 × 7]>  <tibble [8 × 2]>
+## 6   SWKS <tibble [2,769 × 7]> <tibble [11 × 2]>
+## 7   NVDA <tibble [2,769 × 7]> <tibble [11 × 2]>
+## 8      V <tibble [2,214 × 7]>  <tibble [9 × 2]>
+## 9     MA <tibble [2,670 × 7]> <tibble [11 × 2]>
 ```
 
 
-__Fall Back for Stock Indexes:__
+__Fall Back for Stock Indexes__:
 
 There's a fallback for the stock indexes too. Since the source, www.marketvolume.com, could change over time, an option is provided to pull stored data within the `tidyquant` package. The downside is that the data is only as accurate as the last update to `tidyquant`. Here's how to get the stock indexes locally if for some reason the website is down or has changed.
 

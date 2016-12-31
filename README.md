@@ -5,7 +5,7 @@ tidyquant
 
 [![Travis-CI Build Status](https://travis-ci.org/mdancho84/tidyquant.svg?branch=master)](https://travis-ci.org/mdancho84/tidyquant) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/tidyquant)](https://cran.r-project.org/package=tidyquant)
 
-`tidyquant` integrates the best quantitative resources for collecting and analyzing quantitative data, `xts`, `quantmod` and `TTR`, with the tidy data infrastructure of the `tidyverse` allowing for seamless interaction between each.
+`tidyquant` integrates the best quantitative resources for collecting and analyzing quantitative data, `xts`, `quantmod` and `TTR`, with the tidy data infrastructure of the `tidyverse` allowing for seamless interaction between each and working within the `tidyverse`.
 
 Benefits
 --------
@@ -14,7 +14,7 @@ Benefits
 
 -   **A few core functions with a lot of power, that**
 -   **leverage the quantitative analysis power of `xts`, `quantmod` and `TTR`, and are**
--   **designed to be scaled with the `tidyverse` workflow.**
+-   **designed to be used and scaled with the `tidyverse`.**
 
 Installation
 ------------
@@ -30,10 +30,11 @@ Examples
 --------
 
 ``` r
-library(tidyquant) # Loads tidyquant, tidyverse, quantmod, TTR, and xts
+# Loads tidyquant, tidyverse, lubridate, quantmod, TTR, and xts
+library(tidyquant) 
 ```
 
-### Getting Data (tq\_get):
+### Getting Data in Tibble Format:
 
 `tq_get()` is the one-stop shop for retrieving data. The full list of get options are:
 
@@ -43,12 +44,12 @@ tq_get_options()
 #> [5] "financials"     "economic.data"  "exchange.rates" "metal.prices"
 ```
 
-Set `get = "stock.prices"` to get stock prices. Notice the output is always a `tibble`.
+Set `get = "stock.prices"` to get stock prices. Notice the output is *always* a `tibble`.
 
 ``` r
 aapl_prices <- tq_get("AAPL", get = "stock.prices")
 aapl_prices
-#> # A tibble: 2,768 × 7
+#> # A tibble: 2,769 × 7
 #>          date  open  high   low close    volume  adjusted
 #>        <date> <dbl> <dbl> <dbl> <dbl>     <dbl>     <dbl>
 #> 1  2006-01-03 72.38 74.75 72.25 74.75 201808600  9.726565
@@ -61,10 +62,10 @@ aapl_prices
 #> 8  2006-01-12 84.97 86.40 83.62 84.29 320202400 10.967921
 #> 9  2006-01-13 84.99 86.01 84.60 85.59 194076400 11.137079
 #> 10 2006-01-17 85.70 86.38 83.87 84.71 208905900 11.022573
-#> # ... with 2,758 more rows
+#> # ... with 2,759 more rows
 ```
 
-Set `get = "financials"` to get financial statements.
+Set `get = "financials"` to get financial statements. The statements are returned as nested tibbles, that can be unnested and analyzed together.
 
 ``` r
 tq_get("AAPL", get = "financials")
@@ -76,9 +77,43 @@ tq_get("AAPL", get = "financials")
 #> 3    IS <tibble [196 × 4]> <tibble [245 × 4]>
 ```
 
-### Transforming & Mutating Data (tq\_transform and tq\_mutate):
+There are many other get options including stock indexes, dividends, splits, economic data from the FRED, and exchange rates and metals from Oanda.
 
-The workhorse functions are `tq_transform()` and `tq_mutate()`, which leverage the power of `xts`, `quantmod`, and `TTR`. The full list of `xts`, `quantmod`, and `TTR` functions that can be used are:
+### Working in the tidyverse
+
+You probably already know and love `tidyverse` packages like `dplyr`, `tidyr`, `purrr`, `readr`, and `tibble` along with `lubridate` for working with date and datetime. `tidyquant` works solely in tibbles, so all of the `tidyverse` functionality is intact.
+
+A simple example inspired by [Kan Nishida's blog](https://blog.exploratory.io/introducing-time-series-analysis-with-dplyr-60683587cf8a#.w6pvyi3d2) shows the `dplyr` and `lubridate` capability: Say we want the growth in the stock over the past year. We can do this with `dplyr` operations.
+
+Getting the last year is simple with `dplyr` and `lubridate`. We first `select` the date and adjusted price (adjusted for stock splits). We then `filter` using `lubridate` date functions. We can also get a baseline price using the `first` function. Growth and growth percent versus baseline columns can be added now. We tack on a final select statement to remove unnecessary columns. The final workflow looks like this:
+
+``` r
+aapl_prices %>%
+    select(date, adjusted) %>%
+    filter(date >= today() - years(1)) %>%
+    mutate(baseline = first(adjusted),
+           growth = adjusted - baseline,
+           growth_pct = growth / baseline * 100) %>%
+    select(-(baseline:growth))
+#> # A tibble: 253 × 3
+#>          date  adjusted growth_pct
+#>        <date>     <dbl>      <dbl>
+#> 1  2015-12-31 102.96903  0.0000000
+#> 2  2016-01-04 103.05706  0.0854995
+#> 3  2016-01-05 100.47452 -2.4225751
+#> 4  2016-01-06  98.50827 -4.3321348
+#> 5  2016-01-07  94.35077 -8.3697559
+#> 6  2016-01-08  94.84967 -7.8852393
+#> 7  2016-01-11  96.38550 -6.3936946
+#> 8  2016-01-12  97.78438 -5.0351540
+#> 9  2016-01-13  95.27031 -7.4767271
+#> 10 2016-01-14  97.35395 -5.4531690
+#> # ... with 243 more rows
+```
+
+### Transforming & Mutating Data with xts, quantmod, and TTR Functions
+
+You may already know and love `xts`, `quantmod`, and `TTR`, which is why the core functionality is fully integrated. The workhorse functions are `tq_transform()` and `tq_mutate()`. These functions leverage the power of `xts`, `quantmod`, and `TTR`. The full list of `xts`, `quantmod`, and `TTR` functions that can be used are:
 
 ``` r
 tq_transform_fun_options()
@@ -153,13 +188,13 @@ aapl_prices %>%
 
 #### tq\_mutate
 
-The brother of `tq_transform()` is `tq_mutate()`. While `tq_transform()` produces a new, transformed data set, `tq_mutate()` modifies the existing data set. There is one caveat: the mutation must be in the same periodicity as the original data set (otherwise you can't add columns because the rows will not match up). Let's use `tq_mutate()` to add some Bollinger Bands and MACD using the closing prices (Cl in OHLC notation).
+The cousin of `tq_transform()` is `tq_mutate()`. While `tq_transform()` produces a new, transformed data set, `tq_mutate()` modifies the existing data set. This is very useful for applying `TTR` functions like `BBands`, `MACD`, Moving Averages, etc. There is one caveat: the mutation must be in the same periodicity as the original data set (otherwise you can't add columns because the rows will not match up). Let's use `tq_mutate()` to add some Bollinger Bands and MACD using the closing prices (Cl in OHLC notation).
 
 ``` r
 aapl_prices %>%
     tq_mutate(x_fun = Cl, mutate_fun = MACD) %>%
     tq_mutate(x_fun = HLC, mutate_fun = BBands)
-#> # A tibble: 2,768 × 13
+#> # A tibble: 2,769 × 13
 #>          date  open  high   low close    volume  adjusted  macd signal
 #>        <date> <dbl> <dbl> <dbl> <dbl>     <dbl>     <dbl> <dbl>  <dbl>
 #> 1  2006-01-03 72.38 74.75 72.25 74.75 201808600  9.726565    NA     NA
@@ -172,18 +207,17 @@ aapl_prices %>%
 #> 8  2006-01-12 84.97 86.40 83.62 84.29 320202400 10.967921    NA     NA
 #> 9  2006-01-13 84.99 86.01 84.60 85.59 194076400 11.137079    NA     NA
 #> 10 2006-01-17 85.70 86.38 83.87 84.71 208905900 11.022573    NA     NA
-#> # ... with 2,758 more rows, and 4 more variables: dn <dbl>, mavg <dbl>,
+#> # ... with 2,759 more rows, and 4 more variables: dn <dbl>, mavg <dbl>,
 #> #   up <dbl>, pctB <dbl>
 ```
 
-Scaling with the tidyverse
---------------------------
+### Scaling with the tidyverse
 
 All functions return data sets as `tibbles`, which allows for interaction within the `tidyverse`. This means we can:
 
 -   Use `dplyr` and `tidyr` to select, filter, nest/unnest, etc.
 -   Use the pipe (`%>%`) for chaining operations.
--   Seemlessly scale data retrieval and transformations/mutations using `purrr` to map functions.
+-   Seamlessly scale data retrieval and transformations/mutations using `purrr` to map functions.
 
 A very basic example is retrieving the stock prices for multiple stocks. We can do this by piping a tibble of stock symbols to a mutation that maps the `tq_get(get = "stock.prices")` function.
 
@@ -193,16 +227,16 @@ tibble(symbol = c("AAPL", "GOOG", "AMZN", "FB", "AVGO", "SWKS","NVDA")) %>%
 #> # A tibble: 7 × 2
 #>   symbol         stock.prices
 #>    <chr>               <list>
-#> 1   AAPL <tibble [2,768 × 7]>
-#> 2   GOOG <tibble [2,768 × 7]>
-#> 3   AMZN <tibble [2,768 × 7]>
-#> 4     FB <tibble [1,162 × 7]>
-#> 5   AVGO <tibble [1,864 × 7]>
-#> 6   SWKS <tibble [2,768 × 7]>
-#> 7   NVDA <tibble [2,768 × 7]>
+#> 1   AAPL <tibble [2,769 × 7]>
+#> 2   GOOG <tibble [2,769 × 7]>
+#> 3   AMZN <tibble [2,769 × 7]>
+#> 4     FB <tibble [1,163 × 7]>
+#> 5   AVGO <tibble [1,865 × 7]>
+#> 6   SWKS <tibble [2,769 × 7]>
+#> 7   NVDA <tibble [2,769 × 7]>
 ```
 
 Further Information
 -------------------
 
-This just scratches the surface of the features. See the [`tidyqaunt` vignette](vignettes/tidyquant.md) for further details on the package.
+This just scratches the surface of the features. See the [`tidyquant` vignette](vignettes/tidyquant.md) for further details on the package.
