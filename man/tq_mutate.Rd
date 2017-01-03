@@ -12,9 +12,9 @@ tq_mutate(data, x_fun = OHLCV, mutate_fun, ...)
 
 tq_mutate_(data, x_fun = "OHLCV", mutate_fun, ...)
 
-tq_mutate_xy(data, .x, .y = NULL, mutate_fun, ...)
+tq_mutate_xy(data, x, y = NULL, mutate_fun, ...)
 
-tq_mutate_xy_(data, .x, .y = NULL, mutate_fun, ...)
+tq_mutate_xy_(data, x, y = NULL, mutate_fun, ...)
 
 tq_mutate_fun_options()
 }
@@ -33,7 +33,7 @@ to see the full list of options by package.}
 \item{...}{Additional parameters passed to the appropriate mutatation
 function.}
 
-\item{.x, .y}{Column names of variables to be passed to the mutatation
+\item{x, y}{Column names of variables to be passed to the mutatation
 function (instead of OHLC functions).}
 }
 \value{
@@ -67,7 +67,7 @@ that is not in OHLC format. Example 2 shows the first benefit in action:
 using the EVWMA function that uses volume to defind the moving average period.
 The two variables do not fall into a single OHLC code (i.e. CV does not exist).
 The xy form gets us out of this problem. Example 3 shows the second benefit
-in action: Some functions are useful to non-OHLC data, and defining .x = price
+in action: Some functions are useful to non-OHLC data, and defining x = price
 allows us to mutate WTI crude prices from daily to monthly periodicity.
 
 \code{tq_mutate_} and \code{tq_mutate_xy_} are setup for Non-Standard
@@ -92,17 +92,17 @@ fb_stock_prices \%>\%
 
 # Example 2: Use tq_mutate_xy to use functions with two columns required
 fb_stock_prices \%>\%
-    tq_mutate_xy(.x = close, .y = volume, mutate_fun = EVWMA)
+    tq_mutate_xy(x = close, y = volume, mutate_fun = EVWMA)
 
 # Example 3: Using tq_mutate_xy to work with non-OHLC data
 tq_get("DCOILWTICO", get = "economic.data") \%>\%
-    tq_mutate_xy(.x = price, mutate_fun = lag.xts, k = 1, na.pad = TRUE)
+    tq_mutate_xy(x = price, mutate_fun = lag.xts, k = 1, na.pad = TRUE)
 
 # Example 4: Non-standard evaluation:
 # Programming with tq_mutate_() and tq_mutate_xy_()
 col_name <- "adjusted"
 mutate <- c("MACD", "SMA")
-tq_mutate_xy_(fb_stock_prices, .x = col_name, mutate_fun = mutate[[1]])
+tq_mutate_xy_(fb_stock_prices, x = col_name, mutate_fun = mutate[[1]])
 }
 \seealso{
 \code{\link{tq_transform}}

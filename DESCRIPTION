@@ -1,7 +1,7 @@
 Package: tidyquant
 Type: Package
 Title: Tidy Quantitative Financial Analysis
-Version: 0.1.0
+Version: 0.1.0.9000
 Date: 2016-12-31
 Authors@R: person("Matt", "Dancho", email = "mdancho@gmail.com", 
     role = c("aut", "cre"))
@@ -18,7 +18,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
-    R (>= 3.0),
+    R (>= 3.3.2),
     lubridate (>= 1.6.0),
     quantmod (>= 0.4-7),
     tidyverse (>= 1.0.0),

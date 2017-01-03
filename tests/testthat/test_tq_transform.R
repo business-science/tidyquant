@@ -10,7 +10,7 @@ test1 <- AAPL %>%
 
 # Test 2: tq_transform_xy test
 test2 <- AAPL %>%
-    tq_transform_xy(.x = close, transform_fun = to.period, period = "months")
+    tq_transform_xy(x = close, transform_fun = to.period, period = "months")
 
 
 # Test 3: Test transform hourly data / Test transform timezone data
@@ -22,7 +22,7 @@ value <- rnorm(n = length(time_index))
 tz <- "Zulu"
 test3 <- tibble(time_index, value) %>%
     dplyr::mutate(time_index = lubridate::ymd_hms(time_index, tz = tz)) %>%
-    tq_transform_xy(.x = value, transform_fun = MACD)
+    tq_transform_xy(x = value, transform_fun = MACD)
 
 # Test 4: transform to.monthly which returns character dates
 test4 <- AAPL %>%
@@ -73,7 +73,7 @@ test_that("Test error on invalid data inputs.", {
     )
     expect_error(
         a = seq(1:100) %>%
-            tq_mutate_xy(.x = a, mutate_fun = to.monthly)
+            tq_mutate_xy(x = a, mutate_fun = to.monthly)
     )
 
     # No date columns
@@ -84,13 +84,13 @@ test_that("Test error on invalid data inputs.", {
     )
     expect_error(
         tibble(a = seq(1:100)) %>%
-            tq_mutate_xy(.x = a, mutate_fun = to.monthly),
+            tq_mutate_xy(x = a, mutate_fun = to.monthly),
         "No date or POSIXct column found in `data`."
     )
 })
 
-# Invalid x_fun, .x and .y inputs
-test_that("Test error on invalid x_fun, .x and .y inputs.", {
+# Invalid x_fun, x and y inputs
+test_that("Test error on invalid x_fun, x and y inputs.", {
 
     expect_error(
         {x_fun <- "err"
@@ -98,22 +98,22 @@ test_that("Test error on invalid x_fun, .x and .y inputs.", {
             tq_mutate_(x_fun = x_fun, mutate_fun = "to.monthly")}
     )
     expect_error(
-        {.x <-  "err"
+        {x <-  "err"
         AAPL %>%
-            tq_mutate_xy_(.x = .x, .y = "close", mutate_fun = "Delt", k = 1)},
-        paste0(".x = ", .x, " not a valid name.")
+            tq_mutate_xy_(x = x, y = "close", mutate_fun = "Delt", k = 1)},
+        paste0("x = ", x, " not a valid name.")
     )
     expect_error(
-        {.y <-  "err"
+        {y <-  "err"
         AAPL %>%
-            tq_mutate_xy_(.x = "open", .y = .y, mutate_fun = "Delt", k = 1)},
-        paste0(".y = ", .y, " not a valid name.")
+            tq_mutate_xy_(x = "open", y = y, mutate_fun = "Delt", k = 1)},
+        paste0("y = ", y, " not a valid name.")
     )
 
 })
 
-# Invalid mutate_fun, .x and .y inputs
-test_that("Test error on invalid x_fun, .x and .y inputs.", {
+# Invalid mutate_fun, x and y inputs
+test_that("Test error on invalid x_fun, x and y inputs.", {
 
     expect_error(
         {mutate_fun <- "err"

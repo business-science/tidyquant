@@ -222,21 +222,21 @@ Enables working with:
 
 _Transformation with two primary inputs_:
 
-EVWMA (exponential volume-weighted moving average) requires two inputs, price and volume, that are not in OHLC code format. To work with these columns, we can switch to the xy variants, `tq_transform_xy()` and `tq_mutate_xy()`. The only difference is instead of an `x_fun` argument, you use `.x` and `.y` arguments to pass the columns needed based on the `transform_fun` or `mutate_fun` documentation.
+EVWMA (exponential volume-weighted moving average) requires two inputs, price and volume, that are not in OHLC code format. To work with these columns, we can switch to the xy variants, `tq_transform_xy()` and `tq_mutate_xy()`. The only difference is instead of an `x_fun` argument, you use `x` and `y` arguments to pass the columns needed based on the `transform_fun` or `mutate_fun` documentation.
 
 ```{r, message=FALSE, warning=FALSE}
 fb_prices %>%
-    tq_mutate_xy(.x = close, .y = volume, mutate_fun = EVWMA)
+    tq_mutate_xy(x = close, y = volume, mutate_fun = EVWMA)
 ```
 
 _Working with non-OHLC data_:
 
-Returns from FRED, Oanda, and other sources do not have open, high, low, close, and volume (OHLCV) format. The following example shows how to transform WTI Crude daily prices to monthly prices. Since we only have a single column to pass, set the `.x = price` and leave the `.y = NULL`. This sends the price column to the `to.period` transformation fuction. 
+Returns from FRED, Oanda, and other sources do not have open, high, low, close, and volume (OHLCV) format. The following example shows how to transform WTI Crude daily prices to monthly prices. Since we only have a single column to pass, set the `x = price` and leave the `y = NULL`. This sends the price column to the `to.period` transformation fuction. 
 
 ```{r, message=FALSE, warning=FALSE}
 wti_prices <- tq_get("DCOILWTICO", get = "economic.data") 
 wti_prices %>%    
-    tq_transform_xy(.x = price, transform_fun = to.period,
+    tq_transform_xy(x = price, transform_fun = to.period,
                     period = "months")
 ```
 
@@ -450,7 +450,7 @@ AAPL %>%
     tq_transform(x_fun = Cl, transform_fun = apply.quarterly, FUN = max)
 ```
 
-Note that as an alternative you could use the xy form, replacing `x_fun = Cl` with `.x = close`.
+Note that as an alternative you could use the xy form, replacing `x_fun = Cl` with `x = close`.
 
 #### Example 2: Getting daily log returns 
 
@@ -473,15 +473,15 @@ AAPL %>%
     tq_mutate(HLC, BBands)
 ```
 
-Note that for the MACD, we could have used `tq_mutate_xy()`, setting `.x = close`. However, for the BBands, we are forced to use `tq_mutate()` because of the HLC input.
+Note that for the MACD, we could have used `tq_mutate_xy()`, setting `x = close`. However, for the BBands, we are forced to use `tq_mutate()` because of the HLC input.
 
 #### Example 4: Getting the Percentage Difference Between Open and Close from Zero to Five Periods 
 
-We can't use the `OpCl` function for this task since it only returns the percentage difference for a period lag of zero. We keep digging and we find the base `Delt` function from quantmod. In researching the function, we see that `Delt` takes one or two inputs, `k` a series of lags, and the type of difference, either arithmetic or log. We will set `.x = open` and `.y = close` and `k = 0:5` to get zero through five periods. The default `type = "arithmetic"` is acceptable, so there is no need to specify. The result is the percentage difference between the open and close prices for periods zero to five.
+We can't use the `OpCl` function for this task since it only returns the percentage difference for a period lag of zero. We keep digging and we find the base `Delt` function from quantmod. In researching the function, we see that `Delt` takes one or two inputs, `k` a series of lags, and the type of difference, either arithmetic or log. We will set `x = open` and `y = close` and `k = 0:5` to get zero through five periods. The default `type = "arithmetic"` is acceptable, so there is no need to specify. The result is the percentage difference between the open and close prices for periods zero to five.
 
 ```{r}
 AAPL %>%
-    tq_mutate_xy(.x = open, .y = close, mutate_fun = Delt, k = 0:5) %>%
+    tq_mutate_xy(x = open, y = close, mutate_fun = Delt, k = 0:5) %>%
     select(-c(high, low, volume, adjusted))
 ```
 
@@ -576,7 +576,7 @@ stock_list_with_one_bad_apple <- tibble(
                "AVGO", "SWKS","NVDA", "V", "MA")
 )
 stock_list_with_one_bad_apple <- stock_list_with_one_bad_apple %>%
-    mutate(stock.prices = map(.x = symbol, ~ tq_get(.x, get = "stock.prices")))
+    mutate(stock.prices = map(.x = symbol, ~ tq_get(x = .x, get = "stock.prices")))
 ```
 
 We get warned that there was an issue in the operation. With that said, we still get the full list of stocks.
@@ -592,7 +592,7 @@ Say hypothetically we didn't recognize the error message. An error shows up duri
 tryCatch({
     stock_list_with_one_bad_apple %>%
     mutate(annual.returns = map(.x = stock.prices, 
-                                ~ tq_transform(.x,
+                                ~ tq_transform(x = .x,
                                                x_fun = Ad, 
                                                transform_fun = periodReturn, 
                                                period = "yearly")
@@ -619,14 +619,14 @@ stock_list_with_one_bad_apple <- tibble(
                "AVGO", "SWKS","NVDA", "V", "MA")
     ) %>%
     # Step 1: Get stock prices
-    mutate(stock.prices = map(.x = symbol, ~ tq_get(.x, get = "stock.prices")),
-           class = map_chr(stock.prices, ~ class(.x)[[1]])) %>%
+    mutate(stock.prices = map(.x = symbol, ~ tq_get(x = .x, get = "stock.prices")),
+           class = map_chr(.x = stock.prices, ~ class(.x)[[1]])) %>%
     # Step 2: Filter out errors; errors have a class of "logical"
     filter(class != "logical") %>%
     select(-class) %>%
     # Step 3: Perform period returns
     mutate(annual.returns = map(.x = stock.prices, 
-                                ~ tq_transform(.x,
+                                ~ tq_transform(data = .x,
                                                x_fun = Ad, 
                                                transform_fun = periodReturn, 
                                                period = "yearly")

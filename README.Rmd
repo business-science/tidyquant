@@ -17,7 +17,8 @@ devtools::load_all()
 
 [![Travis-CI Build Status](https://travis-ci.org/mdancho84/tidyquant.svg?branch=master)](https://travis-ci.org/mdancho84/tidyquant)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/tidyquant)](https://cran.r-project.org/package=tidyquant)
-
+<!-- ![](http://cranlogs.r-pkg.org/badges/tidyquant?color=brightgreen)  -->
+<!-- ![](http://cranlogs.r-pkg.org/badges/grand-total/tidyquant?color=brightgreen) -->
 
 `tidyquant` integrates the best quantitative resources for collecting and analyzing quantitative data, `xts`, `quantmod` and `TTR`, with the tidy data infrastructure of the `tidyverse` allowing for seamless interaction between each and working within the `tidyverse`. 
 
@@ -31,9 +32,16 @@ __The `tidyquant` philosophy:__
 
 ## Installation
 
-To install from GitHub:
+To install from CRAN:
 
-```R
+```{r, eval = FALSE}
+install.packages("tidyquant")
+```
+
+
+Or, to install development version from GitHub:
+
+``` {r}
 # install.packages("devtools")
 devtools::install_github("mdancho84/tidyquant")
 ```

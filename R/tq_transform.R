@@ -5,7 +5,7 @@
 #' the transformation function. OHLCV is \code{quantmod} terminology for
 #' open, high, low, close, and volume. Options include c(Op, Hi, Lo, Cl, Vo, Ad,
 #' HLC, OHLC, OHLCV).
-#' @param .x,.y Column names of variables to be passed to the transformation
+#' @param x,y Column names of variables to be passed to the transformation
 #' function (instead of OHLC functions).
 #' @param transform_fun The transformation function from either the \code{xts},
 #' \code{quantmod}, or \code{TTR} package. Execute \code{tq_transform_fun_options()}
@@ -39,7 +39,7 @@
 #' using the EVWMA function that uses volume to defind the moving average period.
 #' The two variables do not fall into a single OHLC code (i.e. CV does not exist).
 #' The xy form gets us out of this problem. Example 3 shows the second benefit
-#' in action: Some functions are useful to non-OHLC data, and defining .x = price
+#' in action: Some functions are useful to non-OHLC data, and defining x = price
 #' allows us to transform WTI crude prices from daily to monthly periodicity.
 #'
 #' \code{tq_tranform_} and \code{tq_transform_xy_} are setup for Non-Standard
@@ -70,18 +70,18 @@
 #'
 #' # Example 2: Use tq_transform_xy to use functions with two columns required
 #' fb_stock_prices %>%
-#'     tq_transform_xy(.x = close, .y = volume, transform_fun = EVWMA)
+#'     tq_transform_xy(x = close, y = volume, transform_fun = EVWMA)
 #'
 #' # Example 3: Using tq_transform_xy to work with non-OHLC data
 #' tq_get("DCOILWTICO", get = "economic.data") %>%
-#'     tq_transform_xy(.x = price, transform_fun = to.period, period = "months")
+#'     tq_transform_xy(x = price, transform_fun = to.period, period = "months")
 #'
 #' # Example 4: Non-standard evaluation:
 #' # Programming with tq_tranform_() and tq_transform_xy_()
 #' col_name <- "adjusted"
 #' transform <- "periodReturn"
 #' period <- c("daily", "weekly", "monthly")
-#' tq_transform_xy_(fb_stock_prices, .x = col_name, transform_fun = transform,
+#' tq_transform_xy_(fb_stock_prices, x = col_name, transform_fun = transform,
 #'                  period = period[[1]])
 
 # PRIMARY FUNCTIONS ----
@@ -147,20 +147,20 @@ tq_transform_ <- function(data, x_fun = "OHLCV", transform_fun, ...) {
 
 #' @rdname tq_transform
 #' @export
-tq_transform_xy <- function(data, .x, .y = NULL, transform_fun, ...) {
+tq_transform_xy <- function(data, x, y = NULL, transform_fun, ...) {
 
     # Convert to NSE
-    .x <- deparse(substitute(.x))
-    .y <- deparse(substitute(.y))
+    x <- deparse(substitute(x))
+    y <- deparse(substitute(y))
     transform_fun <- deparse(substitute(transform_fun))
 
-    tq_transform_xy_(data, .x, .y, transform_fun, ...)
+    tq_transform_xy_(data, x, y, transform_fun, ...)
 
 }
 
 #' @rdname tq_transform
 #' @export
-tq_transform_xy_ <- function(data, .x, .y = NULL, transform_fun, ...) {
+tq_transform_xy_ <- function(data, x, y = NULL, transform_fun, ...) {
 
     # Check transform_fun in xts, quantmod or TTR
     check_transform_fun_options(transform_fun)
@@ -168,8 +168,8 @@ tq_transform_xy_ <- function(data, .x, .y = NULL, transform_fun, ...) {
     # Check data
     check_data_is_data_frame(data)
 
-    # Check .x and .y
-    check_x_y_valid(data, .x, .y)
+    # Check x and y
+    check_x_y_valid(data, x, y)
 
     # Find date or date-time col
     date_col_name <- get_col_name_date_or_date_time(data)
@@ -186,32 +186,32 @@ tq_transform_xy_ <- function(data, .x, .y = NULL, transform_fun, ...) {
     # Apply functions
     if (is_period_fun) {
         # Add arg: OHLC = FALSE
-        if (.y == "NULL" || is.null(.y)) {
+        if (y == "NULL" || is.null(y)) {
             ret <- data %>%
                 as_xts_(date_col = date_col_name) %$%
                 # OHLCV() %$%
-                fun_transform(eval(parse(text = .x)), OHLC = FALSE, ...)
+                fun_transform(eval(parse(text = x)), OHLC = FALSE, ...)
         } else {
             ret <- data %>%
                 as_xts_(date_col = date_col_name) %$%
                 # OHLCV() %$%
-                fun_transform(eval(parse(text = .x)),
-                              eval(parse(text = .y)),
+                fun_transform(eval(parse(text = x)),
+                              eval(parse(text = y)),
                               OHLC = FALSE,
                               ...)
         }
     } else {
-        if (.y == "NULL" || is.null(.y)) {
+        if (y == "NULL" || is.null(y)) {
             ret <- data %>%
                 as_xts_(date_col = date_col_name) %$%
                 # OHLCV() %$%
-                fun_transform(eval(parse(text = .x)), ...)
+                fun_transform(eval(parse(text = x)), ...)
         } else {
             ret <- data %>%
                 as_xts_(date_col = date_col_name) %$%
                 # OHLCV() %$%
-                fun_transform(eval(parse(text = .x)),
-                              eval(parse(text = .y)),
+                fun_transform(eval(parse(text = x)),
+                              eval(parse(text = y)),
                               ...)
         }
     }
@@ -271,10 +271,10 @@ check_data_is_data_frame <- function(data) {
     }
 }
 
-check_x_y_valid <- function(data, .x, .y) {
-    if (!(.x %in% names(data))) stop(paste0(".x = ", .x, " not a valid name."))
-    if (.y != "NULL" && !is.null(.y)) {
-        if (!(.y %in% names(data))) stop(paste0(".y = ", .y, " not a valid name."))
+check_x_y_valid <- function(data, x, y) {
+    if (!(x %in% names(data))) stop(paste0("x = ", x, " not a valid name."))
+    if (y != "NULL" && !is.null(y)) {
+        if (!(y %in% names(data))) stop(paste0("y = ", y, " not a valid name."))
     }
 }
 

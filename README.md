@@ -3,7 +3,7 @@
 tidyquant
 =========
 
-[![Travis-CI Build Status](https://travis-ci.org/mdancho84/tidyquant.svg?branch=master)](https://travis-ci.org/mdancho84/tidyquant) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/tidyquant)](https://cran.r-project.org/package=tidyquant)
+[![Travis-CI Build Status](https://travis-ci.org/mdancho84/tidyquant.svg?branch=master)](https://travis-ci.org/mdancho84/tidyquant) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/tidyquant)](https://cran.r-project.org/package=tidyquant) <!-- ![](http://cranlogs.r-pkg.org/badges/tidyquant?color=brightgreen)  --> <!-- ![](http://cranlogs.r-pkg.org/badges/grand-total/tidyquant?color=brightgreen) -->
 
 `tidyquant` integrates the best quantitative resources for collecting and analyzing quantitative data, `xts`, `quantmod` and `TTR`, with the tidy data infrastructure of the `tidyverse` allowing for seamless interaction between each and working within the `tidyverse`.
 
@@ -19,11 +19,31 @@ Benefits
 Installation
 ------------
 
-To install from GitHub:
+To install from CRAN:
+
+``` r
+install.packages("tidyquant")
+```
+
+Or, to install development version from GitHub:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("mdancho84/tidyquant")
+#> Downloading GitHub repo mdancho84/tidyquant@master
+#> from URL https://api.github.com/repos/mdancho84/tidyquant/zipball/master
+#> Installing tidyquant
+#> "C:/PROGRA~1/R/R-33~1.2/bin/x64/R" --no-site-file --no-environ --no-save  \
+#>   --no-restore --quiet CMD INSTALL  \
+#>   "C:/Users/mdancho/AppData/Local/Temp/Rtmp4gky7O/devtools4047b681109/mdancho84-tidyquant-97a243b"  \
+#>   --library="C:/Program Files/R/R-3.3.2/library" --install-tests
+#> 
+#> Reloading installed tidyquant
+#> 
+#> Attaching package: 'tidyquant'
+#> The following object is masked from 'package:tibble':
+#> 
+#>     as_tibble
 ```
 
 Examples
@@ -49,20 +69,20 @@ Set `get = "stock.prices"` to get stock prices. Notice the output is *always* a 
 ``` r
 aapl_prices <- tq_get("AAPL", get = "stock.prices")
 aapl_prices
-#> # A tibble: 2,769 × 7
-#>          date  open  high   low close    volume  adjusted
-#>        <date> <dbl> <dbl> <dbl> <dbl>     <dbl>     <dbl>
-#> 1  2006-01-03 72.38 74.75 72.25 74.75 201808600  9.726565
-#> 2  2006-01-04 75.13 75.98 74.50 74.97 154900900  9.755191
-#> 3  2006-01-05 74.83 74.90 73.75 74.38 112355600  9.678420
-#> 4  2006-01-06 75.25 76.70 74.55 76.30 176114400  9.928252
-#> 5  2006-01-09 76.73 77.20 75.74 76.05 168760200  9.895722
-#> 6  2006-01-10 76.25 81.89 75.83 80.86 569967300 10.521606
-#> 7  2006-01-11 83.84 84.80 82.59 83.90 373448600 10.917174
-#> 8  2006-01-12 84.97 86.40 83.62 84.29 320202400 10.967921
-#> 9  2006-01-13 84.99 86.01 84.60 85.59 194076400 11.137079
-#> 10 2006-01-17 85.70 86.38 83.87 84.71 208905900 11.022573
-#> # ... with 2,759 more rows
+#> # A tibble: 2,518 × 7
+#>          date  open  high   low close    volume adjusted
+#>        <date> <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl>
+#> 1  2007-01-03 86.29 86.58 81.90 83.80 309579900 10.90416
+#> 2  2007-01-04 84.05 85.95 83.82 85.66 211815100 11.14619
+#> 3  2007-01-05 85.77 86.20 84.40 85.05 208685400 11.06681
+#> 4  2007-01-08 85.96 86.53 85.28 85.47 199276700 11.12147
+#> 5  2007-01-09 86.45 92.98 85.15 92.57 837324600 12.04533
+#> 6  2007-01-10 94.75 97.80 93.45 97.00 738220000 12.62176
+#> 7  2007-01-11 95.94 96.78 95.10 95.80 360063200 12.46562
+#> 8  2007-01-12 94.59 95.06 93.23 94.62 328172600 12.31207
+#> 9  2007-01-16 95.68 97.25 95.45 97.10 311019100 12.63477
+#> 10 2007-01-17 97.56 97.60 94.82 94.95 411565000 12.35501
+#> # ... with 2,508 more rows
 ```
 
 Set `get = "financials"` to get financial statements. The statements are returned as nested tibbles, that can be unnested and analyzed together.
@@ -95,20 +115,20 @@ aapl_prices %>%
            growth = adjusted - baseline,
            growth_pct = growth / baseline * 100) %>%
     select(-(baseline:growth))
-#> # A tibble: 253 × 3
+#> # A tibble: 252 × 3
 #>          date  adjusted growth_pct
 #>        <date>     <dbl>      <dbl>
-#> 1  2015-12-31 102.96903  0.0000000
-#> 2  2016-01-04 103.05706  0.0854995
-#> 3  2016-01-05 100.47452 -2.4225751
-#> 4  2016-01-06  98.50827 -4.3321348
-#> 5  2016-01-07  94.35077 -8.3697559
-#> 6  2016-01-08  94.84967 -7.8852393
-#> 7  2016-01-11  96.38550 -6.3936946
-#> 8  2016-01-12  97.78438 -5.0351540
-#> 9  2016-01-13  95.27031 -7.4767271
-#> 10 2016-01-14  97.35395 -5.4531690
-#> # ... with 243 more rows
+#> 1  2016-01-04 103.05706   0.000000
+#> 2  2016-01-05 100.47452  -2.505932
+#> 3  2016-01-06  98.50827  -4.413861
+#> 4  2016-01-07  94.35077  -8.448032
+#> 5  2016-01-08  94.84967  -7.963930
+#> 6  2016-01-11  96.38550  -6.473659
+#> 7  2016-01-12  97.78438  -5.116279
+#> 8  2016-01-13  95.27031  -7.555766
+#> 9  2016-01-14  97.35395  -5.533937
+#> 10 2016-01-15  95.01597  -7.802565
+#> # ... with 242 more rows
 ```
 
 ### Transforming & Mutating Data with xts, quantmod, and TTR Functions
@@ -170,20 +190,20 @@ tq_transform_fun_options()
 ``` r
 aapl_prices %>%
     tq_transform(x_fun = OHLCV, transform_fun = to.period, period = "months")
-#> # A tibble: 132 × 6
-#>          date  open  high   low close    volume
-#>        <dttm> <dbl> <dbl> <dbl> <dbl>     <dbl>
-#> 1  2006-01-31 75.50 76.34 73.75 75.51 228385500
-#> 2  2006-02-28 71.58 72.40 68.10 68.49 316745100
-#> 3  2006-03-31 63.25 63.61 62.24 62.72 203839300
-#> 4  2006-04-28 69.38 71.30 69.20 70.39 190009400
-#> 5  2006-05-31 61.76 61.79 58.69 59.77 320244400
-#> 6  2006-06-30 57.59 57.75 56.50 57.27 184923900
-#> 7  2006-07-31 66.83 68.63 66.28 67.96 223210400
-#> 8  2006-08-31 67.28 68.30 66.66 67.85 143674300
-#> 9  2006-09-29 77.11 77.52 76.68 76.98 101453100
-#> 10 2006-10-31 81.45 81.68 80.23 81.08 125368600
-#> # ... with 122 more rows
+#> # A tibble: 120 × 6
+#>          date   open   high    low  close    volume
+#>        <dttm>  <dbl>  <dbl>  <dbl>  <dbl>     <dbl>
+#> 1  2007-01-31  84.86  86.00  84.35  85.73 214017300
+#> 2  2007-02-28  83.00  85.60  83.00  84.61 229868800
+#> 3  2007-03-30  94.28  94.68  92.75  92.91 150139500
+#> 4  2007-04-30 100.09 101.00  99.67  99.80 154127400
+#> 5  2007-05-31 120.07 122.17 119.54 121.19 324266600
+#> 6  2007-06-29 121.97 124.00 121.09 122.04 284460400
+#> 7  2007-07-31 142.97 143.48 131.52 131.76 440598200
+#> 8  2007-08-31 139.49 139.65 137.41 138.48 219221800
+#> 9  2007-09-28 153.44 154.60 152.75 153.47 153775300
+#> 10 2007-10-31 187.63 190.12 184.95 189.95 208327700
+#> # ... with 110 more rows
 ```
 
 #### tq\_mutate
@@ -194,20 +214,20 @@ The cousin of `tq_transform()` is `tq_mutate()`. While `tq_transform()` produces
 aapl_prices %>%
     tq_mutate(x_fun = Cl, mutate_fun = MACD) %>%
     tq_mutate(x_fun = HLC, mutate_fun = BBands)
-#> # A tibble: 2,769 × 13
-#>          date  open  high   low close    volume  adjusted  macd signal
-#>        <date> <dbl> <dbl> <dbl> <dbl>     <dbl>     <dbl> <dbl>  <dbl>
-#> 1  2006-01-03 72.38 74.75 72.25 74.75 201808600  9.726565    NA     NA
-#> 2  2006-01-04 75.13 75.98 74.50 74.97 154900900  9.755191    NA     NA
-#> 3  2006-01-05 74.83 74.90 73.75 74.38 112355600  9.678420    NA     NA
-#> 4  2006-01-06 75.25 76.70 74.55 76.30 176114400  9.928252    NA     NA
-#> 5  2006-01-09 76.73 77.20 75.74 76.05 168760200  9.895722    NA     NA
-#> 6  2006-01-10 76.25 81.89 75.83 80.86 569967300 10.521606    NA     NA
-#> 7  2006-01-11 83.84 84.80 82.59 83.90 373448600 10.917174    NA     NA
-#> 8  2006-01-12 84.97 86.40 83.62 84.29 320202400 10.967921    NA     NA
-#> 9  2006-01-13 84.99 86.01 84.60 85.59 194076400 11.137079    NA     NA
-#> 10 2006-01-17 85.70 86.38 83.87 84.71 208905900 11.022573    NA     NA
-#> # ... with 2,759 more rows, and 4 more variables: dn <dbl>, mavg <dbl>,
+#> # A tibble: 2,518 × 13
+#>          date  open  high   low close    volume adjusted  macd signal
+#>        <date> <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl> <dbl>  <dbl>
+#> 1  2007-01-03 86.29 86.58 81.90 83.80 309579900 10.90416    NA     NA
+#> 2  2007-01-04 84.05 85.95 83.82 85.66 211815100 11.14619    NA     NA
+#> 3  2007-01-05 85.77 86.20 84.40 85.05 208685400 11.06681    NA     NA
+#> 4  2007-01-08 85.96 86.53 85.28 85.47 199276700 11.12147    NA     NA
+#> 5  2007-01-09 86.45 92.98 85.15 92.57 837324600 12.04533    NA     NA
+#> 6  2007-01-10 94.75 97.80 93.45 97.00 738220000 12.62176    NA     NA
+#> 7  2007-01-11 95.94 96.78 95.10 95.80 360063200 12.46562    NA     NA
+#> 8  2007-01-12 94.59 95.06 93.23 94.62 328172600 12.31207    NA     NA
+#> 9  2007-01-16 95.68 97.25 95.45 97.10 311019100 12.63477    NA     NA
+#> 10 2007-01-17 97.56 97.60 94.82 94.95 411565000 12.35501    NA     NA
+#> # ... with 2,508 more rows, and 4 more variables: dn <dbl>, mavg <dbl>,
 #> #   up <dbl>, pctB <dbl>
 ```
 
@@ -227,13 +247,13 @@ tibble(symbol = c("AAPL", "GOOG", "AMZN", "FB", "AVGO", "SWKS","NVDA")) %>%
 #> # A tibble: 7 × 2
 #>   symbol         stock.prices
 #>    <chr>               <list>
-#> 1   AAPL <tibble [2,769 × 7]>
-#> 2   GOOG <tibble [2,769 × 7]>
-#> 3   AMZN <tibble [2,769 × 7]>
+#> 1   AAPL <tibble [2,518 × 7]>
+#> 2   GOOG <tibble [2,518 × 7]>
+#> 3   AMZN <tibble [2,518 × 7]>
 #> 4     FB <tibble [1,163 × 7]>
 #> 5   AVGO <tibble [1,865 × 7]>
-#> 6   SWKS <tibble [2,769 × 7]>
-#> 7   NVDA <tibble [2,769 × 7]>
+#> 6   SWKS <tibble [2,518 × 7]>
+#> 7   NVDA <tibble [2,518 × 7]>
 ```
 
 Further Information

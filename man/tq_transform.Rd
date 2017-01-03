@@ -12,9 +12,9 @@ tq_transform(data, x_fun = OHLCV, transform_fun, ...)
 
 tq_transform_(data, x_fun = "OHLCV", transform_fun, ...)
 
-tq_transform_xy(data, .x, .y = NULL, transform_fun, ...)
+tq_transform_xy(data, x, y = NULL, transform_fun, ...)
 
-tq_transform_xy_(data, .x, .y = NULL, transform_fun, ...)
+tq_transform_xy_(data, x, y = NULL, transform_fun, ...)
 
 tq_transform_fun_options()
 }
@@ -33,7 +33,7 @@ to see the full list of options by package.}
 \item{...}{Additional parameters passed to the appropriate transformation
 function.}
 
-\item{.x, .y}{Column names of variables to be passed to the transformation
+\item{x, y}{Column names of variables to be passed to the transformation
 function (instead of OHLC functions).}
 }
 \value{
@@ -67,7 +67,7 @@ that is not in OHLC format. Example 2 shows the first benefit in action:
 using the EVWMA function that uses volume to defind the moving average period.
 The two variables do not fall into a single OHLC code (i.e. CV does not exist).
 The xy form gets us out of this problem. Example 3 shows the second benefit
-in action: Some functions are useful to non-OHLC data, and defining .x = price
+in action: Some functions are useful to non-OHLC data, and defining x = price
 allows us to transform WTI crude prices from daily to monthly periodicity.
 
 \code{tq_tranform_} and \code{tq_transform_xy_} are setup for Non-Standard
@@ -92,18 +92,18 @@ fb_stock_prices \%>\%
 
 # Example 2: Use tq_transform_xy to use functions with two columns required
 fb_stock_prices \%>\%
-    tq_transform_xy(.x = close, .y = volume, transform_fun = EVWMA)
+    tq_transform_xy(x = close, y = volume, transform_fun = EVWMA)
 
 # Example 3: Using tq_transform_xy to work with non-OHLC data
 tq_get("DCOILWTICO", get = "economic.data") \%>\%
-    tq_transform_xy(.x = price, transform_fun = to.period, period = "months")
+    tq_transform_xy(x = price, transform_fun = to.period, period = "months")
 
 # Example 4: Non-standard evaluation:
 # Programming with tq_tranform_() and tq_transform_xy_()
 col_name <- "adjusted"
 transform <- "periodReturn"
 period <- c("daily", "weekly", "monthly")
-tq_transform_xy_(fb_stock_prices, .x = col_name, transform_fun = transform,
+tq_transform_xy_(fb_stock_prices, x = col_name, transform_fun = transform,
                  period = period[[1]])
 }
 \seealso{
