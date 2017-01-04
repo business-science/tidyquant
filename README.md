@@ -30,20 +30,6 @@ Or, to install development version from GitHub:
 ``` r
 # install.packages("devtools")
 devtools::install_github("mdancho84/tidyquant")
-#> Downloading GitHub repo mdancho84/tidyquant@master
-#> from URL https://api.github.com/repos/mdancho84/tidyquant/zipball/master
-#> Installing tidyquant
-#> "C:/PROGRA~1/R/R-33~1.2/bin/x64/R" --no-site-file --no-environ --no-save  \
-#>   --no-restore --quiet CMD INSTALL  \
-#>   "C:/Users/mdancho/AppData/Local/Temp/Rtmp4gky7O/devtools4047b681109/mdancho84-tidyquant-97a243b"  \
-#>   --library="C:/Program Files/R/R-3.3.2/library" --install-tests
-#> 
-#> Reloading installed tidyquant
-#> 
-#> Attaching package: 'tidyquant'
-#> The following object is masked from 'package:tibble':
-#> 
-#>     as_tibble
 ```
 
 Examples
@@ -137,6 +123,13 @@ You may already know and love `xts`, `quantmod`, and `TTR`, which is why the cor
 
 ``` r
 tq_transform_fun_options()
+#> $zoo
+#>  [1] "rollapply"          "rollapplyr"         "rollmax"           
+#>  [4] "rollmax.default"    "rollmaxr"           "rollmean"          
+#>  [7] "rollmean.default"   "rollmeanr"          "rollmedian"        
+#> [10] "rollmedian.default" "rollmedianr"        "rollsum"           
+#> [13] "rollsum.default"    "rollsumr"          
+#> 
 #> $xts
 #>  [1] "apply.daily"     "apply.monthly"   "apply.quarterly"
 #>  [4] "apply.weekly"    "apply.yearly"    "diff.xts"       
@@ -189,7 +182,7 @@ tq_transform_fun_options()
 
 ``` r
 aapl_prices %>%
-    tq_transform(x_fun = OHLCV, transform_fun = to.period, period = "months")
+    tq_transform(ohlc_fun = OHLCV, transform_fun = to.period, period = "months")
 #> # A tibble: 120 × 6
 #>          date   open   high    low  close    volume
 #>        <dttm>  <dbl>  <dbl>  <dbl>  <dbl>     <dbl>
@@ -212,8 +205,8 @@ The cousin of `tq_transform()` is `tq_mutate()`. While `tq_transform()` produces
 
 ``` r
 aapl_prices %>%
-    tq_mutate(x_fun = Cl, mutate_fun = MACD) %>%
-    tq_mutate(x_fun = HLC, mutate_fun = BBands)
+    tq_mutate(ohlc_fun = Cl, mutate_fun = MACD) %>%
+    tq_mutate(ohlc_fun = HLC, mutate_fun = BBands)
 #> # A tibble: 2,518 × 13
 #>          date  open  high   low close    volume adjusted  macd signal
 #>        <date> <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl> <dbl>  <dbl>
@@ -259,4 +252,4 @@ tibble(symbol = c("AAPL", "GOOG", "AMZN", "FB", "AVGO", "SWKS","NVDA")) %>%
 Further Information
 -------------------
 
-This just scratches the surface of the features. See the [`tidyquant` vignette](vignettes/tidyquant.md) for further details on the package.
+This just scratches the surface of the features. See the [`tidyquant` vignette](https://cran.r-project.org/web/packages/tidyquant/vignettes/tidyquant.html) for further details on the package.

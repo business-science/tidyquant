@@ -28,7 +28,6 @@ Imports:
     curl (>= 2.3),
     devtools (>= 1.12.0),
     dplyr (>= 0.05),
-    lazyeval (>= 0.2.0),
     magrittr (>= 1.5),
     purrr (>= 0.2.2),
     rvest (>= 0.3.2),

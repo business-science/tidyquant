@@ -6,7 +6,7 @@ AAPL <- tq_get("AAPL", get = "stock.prices", from = "2010-01-01", to = "2015-01-
 
 # Test 1: tq_transform to.period
 test1 <- AAPL %>%
-    tq_transform(x_fun = Cl, transform_fun = to.period, period = "months")
+    tq_transform(ohlc_fun = Cl, transform_fun = to.period, period = "months")
 
 # Test 2: tq_transform_xy test
 test2 <- AAPL %>%
@@ -26,7 +26,7 @@ test3 <- tibble(time_index, value) %>%
 
 # Test 4: transform to.monthly which returns character dates
 test4 <- AAPL %>%
-    tq_transform(x_fun = OHLCV, transform_fun = to.monthly)
+    tq_transform(ohlc_fun = OHLCV, transform_fun = to.monthly)
 
 
 #### Tests ----
@@ -69,7 +69,7 @@ test_that("Test error on invalid data inputs.", {
     # Non-data.frame objects
     expect_error(
         a = seq(1:100) %>%
-            tq_transform(x_fun = OHLCV, transform_fun = to.monthly)
+            tq_transform(ohlc_fun = OHLCV, transform_fun = to.monthly)
     )
     expect_error(
         a = seq(1:100) %>%
@@ -79,7 +79,7 @@ test_that("Test error on invalid data inputs.", {
     # No date columns
     expect_error(
         tibble(a = seq(1:100)) %>%
-            tq_mutate(x_fun = OHLCV, mutate_fun = to.monthly),
+            tq_mutate(ohlc_fun = OHLCV, mutate_fun = to.monthly),
         "No date or POSIXct column found in `data`."
     )
     expect_error(
@@ -89,13 +89,13 @@ test_that("Test error on invalid data inputs.", {
     )
 })
 
-# Invalid x_fun, x and y inputs
-test_that("Test error on invalid x_fun, x and y inputs.", {
+# Invalid ohlc_fun, x and y inputs
+test_that("Test error on invalid ohlc_fun, x and y inputs.", {
 
     expect_error(
-        {x_fun <- "err"
+        {ohlc_fun <- "err"
         AAPL %>%
-            tq_mutate_(x_fun = x_fun, mutate_fun = "to.monthly")}
+            tq_mutate_(ohlc_fun = ohlc_fun, mutate_fun = "to.monthly")}
     )
     expect_error(
         {x <-  "err"
@@ -113,12 +113,12 @@ test_that("Test error on invalid x_fun, x and y inputs.", {
 })
 
 # Invalid mutate_fun, x and y inputs
-test_that("Test error on invalid x_fun, x and y inputs.", {
+test_that("Test error on invalid ohlc_fun, x and y inputs.", {
 
     expect_error(
         {mutate_fun <- "err"
         AAPL %>%
-            tq_mutate_(x_fun = "close", mutate_fun = mutate_fun)},
+            tq_mutate_(ohlc_fun = "close", mutate_fun = mutate_fun)},
         paste0("fun = ", mutate_fun, " not a valid option.")
     )
 

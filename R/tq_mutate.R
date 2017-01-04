@@ -1,7 +1,7 @@
 #' Mutates quantitative data (adds new variables to existing tibble)
 #'
 #' @param data A \code{tibble} (tidy data frame) of data from \code{\link{tq_get}}.
-#' @param x_fun The \code{quantmod} function that identifes columns to pass to
+#' @param ohlc_fun The \code{quantmod} function that identifes columns to pass to
 #' the mutatation function. OHLCV is \code{quantmod} terminology for
 #' open, high, low, close, and volume. Options include c(Op, Hi, Lo, Cl, Vo, Ad,
 #' HLC, OHLC, OHLCV).
@@ -20,7 +20,7 @@
 #' results are returned as a \code{tibble} and the
 #' function can be used with the \code{tidyverse}.
 #'
-#' \code{x_fun} is one of the various \code{quantmod} Open, High, Low, Close (OHLC) functions.
+#' \code{ohlc_fun} is one of the various \code{quantmod} Open, High, Low, Close (OHLC) functions.
 #' The function returns a column or set of columns from \code{data} that are passed to the
 #' \code{mutate_fun}. In Example 1 below, \code{Cl} returns the "close" price and sends
 #' this to the mutate function, \code{periodReturn}.
@@ -28,7 +28,7 @@
 #' \code{mutate_fun} is the function that performs the work. In Example 1, this
 #' is \code{periodReturn}, which calculates the period returns. The \code{...}
 #' functions are additional arguments passed to the \code{mutate_fun}. Think of
-#' the whole operation in Example 1 as the close price, obtained by \code{x_fun = Cl},
+#' the whole operation in Example 1 as the close price, obtained by \code{ohlc_fun = Cl},
 #' is being sent to the \code{periodReturn} function along
 #' with additional arguments defining how to perform the period return, which
 #' includes \code{period = "daily"} and \code{type = "log"}.
@@ -65,7 +65,7 @@
 #'
 #' # Example 1: Return logarithmic daily returns using periodReturn()
 #' fb_stock_prices %>%
-#'     tq_mutate(x_fun = Cl, mutate_fun = periodReturn,
+#'     tq_mutate(ohlc_fun = Cl, mutate_fun = periodReturn,
 #'                  period = "daily", type = "log")
 #'
 #' # Example 2: Use tq_mutate_xy to use functions with two columns required
@@ -84,22 +84,22 @@
 
 # PRIMARY FUNCTIONS ----
 
-tq_mutate <- function(data, x_fun = OHLCV, mutate_fun, ...) {
+tq_mutate <- function(data, ohlc_fun = OHLCV, mutate_fun, ...) {
 
     # Convert to NSE
-    x_fun <- deparse(substitute(x_fun))
+    ohlc_fun <- deparse(substitute(ohlc_fun))
     mutate_fun <- deparse(substitute(mutate_fun))
 
-    tq_mutate_(data = data, x_fun = x_fun, mutate_fun = mutate_fun, ...)
+    tq_mutate_(data = data, ohlc_fun = ohlc_fun, mutate_fun = mutate_fun, ...)
 
 }
 
 #' @rdname tq_mutate
 #' @export
-tq_mutate_ <- function(data, x_fun = "OHLCV", mutate_fun, ...) {
+tq_mutate_ <- function(data, ohlc_fun = "OHLCV", mutate_fun, ...) {
 
     # Get transformation
-    ret <- tq_transform_(data = data, x_fun = x_fun, transform_fun = mutate_fun, ...)
+    ret <- tq_transform_(data = data, ohlc_fun = ohlc_fun, transform_fun = mutate_fun, ...)
 
     ret <- merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
 
@@ -140,24 +140,7 @@ tq_mutate_fun_options <- function() tq_transform_fun_options()
 
 # UTILITY FUNCTIONS ----
 
-# See utils.R for get_col_name_date_or_date_time()
-
 merge_two_tibbles <- function(tib1, tib2, mutate_fun) {
-
-    # # Check if date column present in tib1
-    # date_cols_exist <- check_date_or_date_time_exists(tib1)
-    # if (!date_cols_exist) stop("No date or date-time columns to bind in mutation.")
-    #
-    # # Check if date column present in tib2
-    # date_cols_exist <- check_date_or_date_time_exists(tib2)
-    # if (!date_cols_exist) stop("No date or date-time columns to bind in mutation.")
-    #
-    # # Find date or date-time cols
-    # col_name_date_tib1 <- get_col_name_date_or_date_time(tib1)
-    # tib1_date <- eval(parse(text = paste0("tib1$", col_name_date_tib1)))
-    #
-    # col_name_date_tib2 <- get_col_name_date_or_date_time(tib2)
-    # tib2_date <- eval(parse(text = paste0("tib2$", col_name_date_tib2)))
 
     # Merge results
     if (identical(nrow(tib1), nrow(tib2))) {
@@ -173,3 +156,4 @@ merge_two_tibbles <- function(tib1, tib2, mutate_fun) {
     ret
 
 }
+

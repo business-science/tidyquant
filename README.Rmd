@@ -41,7 +41,7 @@ install.packages("tidyquant")
 
 Or, to install development version from GitHub:
 
-``` {r}
+``` {r, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("mdancho84/tidyquant")
 ```
@@ -111,7 +111,7 @@ tq_transform_fun_options()
 
 ```{r}
 aapl_prices %>%
-    tq_transform(x_fun = OHLCV, transform_fun = to.period, period = "months")
+    tq_transform(ohlc_fun = OHLCV, transform_fun = to.period, period = "months")
 ```
 
 
@@ -121,8 +121,8 @@ The cousin of `tq_transform()` is `tq_mutate()`. While `tq_transform()` produces
 
 ```{r}
 aapl_prices %>%
-    tq_mutate(x_fun = Cl, mutate_fun = MACD) %>%
-    tq_mutate(x_fun = HLC, mutate_fun = BBands)
+    tq_mutate(ohlc_fun = Cl, mutate_fun = MACD) %>%
+    tq_mutate(ohlc_fun = HLC, mutate_fun = BBands)
 ```
 
 
@@ -144,5 +144,5 @@ tibble(symbol = c("AAPL", "GOOG", "AMZN", "FB", "AVGO", "SWKS","NVDA")) %>%
 
 ## Further Information
 
-This just scratches the surface of the features. See the [`tidyquant` vignette](vignettes/tidyquant.md) for further details on the package.
+This just scratches the surface of the features. See the [`tidyquant` vignette](https://cran.r-project.org/web/packages/tidyquant/vignettes/tidyquant.html) for further details on the package.
 

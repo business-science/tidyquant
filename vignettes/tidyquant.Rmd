@@ -3,7 +3,6 @@ title: "Introduction to tidyquant"
 author: "Matt Dancho"
 output: 
   rmarkdown::html_vignette:
-    keep_md: true
     toc: true
     toc_depth: 2
 vignette: >
@@ -196,10 +195,10 @@ Transforms the results of `tq_get()`. The result is typically a different shape 
 ```{r}
 fb_prices <- tq_get("FB") 
 fb_prices %>%
-    tq_transform(x_fun = OHLCV, transform_fun = to.monthly)
+    tq_transform(ohlc_fun = OHLCV, transform_fun = to.monthly)
 ```
 
-Let's go through what happened. `x_fun` is one of the various quantmod Open, High, Low, Close (OHLC) functions (see `?quantmod::OHLC`). The function returns a column or set of columns from data that are passed to the `transform_fun`. In example above, `OHLCV` selects the full list of prices and volumes from `data`, and sends this to the transform function, `to.monthly`, which transforms the periodicity from daily to monthly. Additional arguments can be passed to the `transform_fun` by way of `...`. 
+Let's go through what happened. `ohlc_fun` is one of the various quantmod Open, High, Low, Close (OHLC) functions (see `?quantmod::OHLC`). The function returns a column or set of columns from data that are passed to the `transform_fun`. In example above, `OHLCV` selects the full list of prices and volumes from `data`, and sends this to the transform function, `to.monthly`, which transforms the periodicity from daily to monthly. Additional arguments can be passed to the `transform_fun` by way of `...`. 
 
 
 __Mutate Quantitative Data, `tq_mutate()`__: 
@@ -208,7 +207,7 @@ Adds a column or set of columns to the tibble with the calculated attributes (he
 
 ```{r}
 fb_prices %>%
-    tq_mutate(x_fun = Cl, mutate_fun = MACD)
+    tq_mutate(ohlc_fun = Cl, mutate_fun = MACD)
 ```
 
 Note that a mutation can occur if, and only if, the mutation has the same structure of the original tibble. In other words, the calculation must have the same number of rows and row.names (or date fields), otherwise the mutation cannot be performed.
@@ -222,7 +221,7 @@ Enables working with:
 
 _Transformation with two primary inputs_:
 
-EVWMA (exponential volume-weighted moving average) requires two inputs, price and volume, that are not in OHLC code format. To work with these columns, we can switch to the xy variants, `tq_transform_xy()` and `tq_mutate_xy()`. The only difference is instead of an `x_fun` argument, you use `x` and `y` arguments to pass the columns needed based on the `transform_fun` or `mutate_fun` documentation.
+EVWMA (exponential volume-weighted moving average) requires two inputs, price and volume, that are not in OHLC code format. To work with these columns, we can switch to the xy variants, `tq_transform_xy()` and `tq_mutate_xy()`. The only difference is instead of an `ohlc_fun` argument, you use `x` and `y` arguments to pass the columns needed based on the `transform_fun` or `mutate_fun` documentation.
 
 ```{r, message=FALSE, warning=FALSE}
 fb_prices %>%
@@ -443,23 +442,23 @@ AAPL <- tq_get("AAPL")
 
 #### Example 1: Getting the max close price for each quarter.
 
-The `xts::apply.quarterly()` function that is part of the period apply group can be used to apply functions by quarterly time segments. Because we are seeking a return structure that is on a different time scale than the input (quarterly versus daily), we need to use a transform function. We select `tq_transform` and pass the close price using OHLC format via `x_fun = Cl`, and we send this subset of the data to the `apply.quarterly` function via the `transform_fun` argument. Looking at the documentation for `apply.quarterly`, we see that we can pass a function to the argument, `FUN`. We want the maximum values, so we set `FUN = max`. The result is the quarters returned as a date and the maximum closing price during the quarter returned as a double. 
+The `xts::apply.quarterly()` function that is part of the period apply group can be used to apply functions by quarterly time segments. Because we are seeking a return structure that is on a different time scale than the input (quarterly versus daily), we need to use a transform function. We select `tq_transform` and pass the close price using OHLC format via `ohlc_fun = Cl`, and we send this subset of the data to the `apply.quarterly` function via the `transform_fun` argument. Looking at the documentation for `apply.quarterly`, we see that we can pass a function to the argument, `FUN`. We want the maximum values, so we set `FUN = max`. The result is the quarters returned as a date and the maximum closing price during the quarter returned as a double. 
 
 ```{r}
 AAPL %>%
-    tq_transform(x_fun = Cl, transform_fun = apply.quarterly, FUN = max)
+    tq_transform(ohlc_fun = Cl, transform_fun = apply.quarterly, FUN = max)
 ```
 
-Note that as an alternative you could use the xy form, replacing `x_fun = Cl` with `x = close`.
+Note that as an alternative you could use the xy form, replacing `ohlc_fun = Cl` with `x = close`.
 
 #### Example 2: Getting daily log returns 
 
-The `quantmod::periodReturn()` function generates returns by periodicity. We have a few options here. Normally I go with a transform function, `tq_transform`, because the `periodReturn` function accepts different periodicity options, and anything other than daily will blow up a mutation. But, in our situation the period returns periodicity is the same as the stock prices periodicity (both daily), so we can use either. We want to use the adjusted closing prices column (adjusted for stock splits, which can make it appear that a stock is performing poorly if a split is included), so we set `x_fun = Ad`. We researched the `periodReturn` function, and we found that it accepts `type = "log"` and `period = "daily"`, which returns the daily log returns. 
+The `quantmod::periodReturn()` function generates returns by periodicity. We have a few options here. Normally I go with a transform function, `tq_transform`, because the `periodReturn` function accepts different periodicity options, and anything other than daily will blow up a mutation. But, in our situation the period returns periodicity is the same as the stock prices periodicity (both daily), so we can use either. We want to use the adjusted closing prices column (adjusted for stock splits, which can make it appear that a stock is performing poorly if a split is included), so we set `ohlc_fun = Ad`. We researched the `periodReturn` function, and we found that it accepts `type = "log"` and `period = "daily"`, which returns the daily log returns. 
 
 
 ```{r}
 AAPL %>%
-    tq_transform(x_fun = Ad, transform_fun = periodReturn, 
+    tq_transform(ohlc_fun = Ad, transform_fun = periodReturn, 
                  type = "log", period = "daily")
 ```
 
@@ -513,7 +512,7 @@ In our hypothetical situation, we want to compare the mean monthly log returns (
 my_stock_analysis_fun <- function(stock.symbol) {
     period.returns <- stock.symbol %>%
         tq_get(get = "stock.prices") %>%
-        tq_transform(x_fun = Ad, transform_fun = periodReturn, 
+        tq_transform(ohlc_fun = Ad, transform_fun = periodReturn, 
                      type = "log", period = "monthly")
     mean(period.returns$monthly.returns)
 }
@@ -593,7 +592,7 @@ tryCatch({
     stock_list_with_one_bad_apple %>%
     mutate(annual.returns = map(.x = stock.prices, 
                                 ~ tq_transform(x = .x,
-                                               x_fun = Ad, 
+                                               ohlc_fun = Ad, 
                                                transform_fun = periodReturn, 
                                                period = "yearly")
                                 )
@@ -627,7 +626,7 @@ stock_list_with_one_bad_apple <- tibble(
     # Step 3: Perform period returns
     mutate(annual.returns = map(.x = stock.prices, 
                                 ~ tq_transform(data = .x,
-                                               x_fun = Ad, 
+                                               ohlc_fun = Ad, 
                                                transform_fun = periodReturn, 
                                                period = "yearly")
                                 )

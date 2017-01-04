@@ -8,9 +8,9 @@
 \alias{tq_transform_xy_}
 \title{Transforms quantitative data (returns new variables in new tibble)}
 \usage{
-tq_transform(data, x_fun = OHLCV, transform_fun, ...)
+tq_transform(data, ohlc_fun = OHLCV, transform_fun, ...)
 
-tq_transform_(data, x_fun = "OHLCV", transform_fun, ...)
+tq_transform_(data, ohlc_fun = "OHLCV", transform_fun, ...)
 
 tq_transform_xy(data, x, y = NULL, transform_fun, ...)
 
@@ -21,7 +21,7 @@ tq_transform_fun_options()
 \arguments{
 \item{data}{A \code{tibble} (tidy data frame) of data from \code{\link{tq_get}}.}
 
-\item{x_fun}{The \code{quantmod} function that identifes columns to pass to
+\item{ohlc_fun}{The \code{quantmod} function that identifes columns to pass to
 the transformation function. OHLCV is \code{quantmod} terminology for
 open, high, low, close, and volume. Options include c(Op, Hi, Lo, Cl, Vo, Ad,
 HLC, OHLC, OHLCV).}
@@ -48,7 +48,7 @@ Transforms quantitative data (returns new variables in new tibble)
 results are returned as a \code{tibble} and the
 function can be used with the \code{tidyverse}.
 
-\code{x_fun} is one of the various \code{quantmod} Open, High, Low, Close (OHLC) functions.
+\code{ohlc_fun} is one of the various \code{quantmod} Open, High, Low, Close (OHLC) functions.
 The function returns a column or set of columns from \code{data} that are passed to the
 \code{transform_fun}. In Example 1 below, \code{Cl} returns the "close" price and sends
 this to the transform function, \code{periodReturn}.
@@ -56,7 +56,7 @@ this to the transform function, \code{periodReturn}.
 \code{transform_fun} is the function that performs the work. In Example 1, this
 is \code{periodReturn}, which calculates the period returns. The \code{...}
 functions are additional arguments passed to the \code{transform_fun}. Think of
-the whole operation in Example 1 as the close price, obtained by \code{x_fun = Cl},
+the whole operation in Example 1 as the close price, obtained by \code{ohlc_fun = Cl},
 is being sent to the \code{periodReturn} function along
 with additional arguments defining how to perform the period return, which
 includes \code{period = "daily"} and \code{type = "log"}.
@@ -87,7 +87,7 @@ fb_stock_prices  <- tq_get("FB", get = "stock.prices")
 
 # Example 1: Return logarithmic daily returns using periodReturn()
 fb_stock_prices \%>\%
-    tq_transform(x_fun = Cl, transform_fun = periodReturn,
+    tq_transform(ohlc_fun = Cl, transform_fun = periodReturn,
                  period = "daily", type = "log")
 
 # Example 2: Use tq_transform_xy to use functions with two columns required

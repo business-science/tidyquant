@@ -1,7 +1,7 @@
 #' Transforms quantitative data (returns new variables in new tibble)
 #'
 #' @param data A \code{tibble} (tidy data frame) of data from \code{\link{tq_get}}.
-#' @param x_fun The \code{quantmod} function that identifes columns to pass to
+#' @param ohlc_fun The \code{quantmod} function that identifes columns to pass to
 #' the transformation function. OHLCV is \code{quantmod} terminology for
 #' open, high, low, close, and volume. Options include c(Op, Hi, Lo, Cl, Vo, Ad,
 #' HLC, OHLC, OHLCV).
@@ -20,7 +20,7 @@
 #' results are returned as a \code{tibble} and the
 #' function can be used with the \code{tidyverse}.
 #'
-#' \code{x_fun} is one of the various \code{quantmod} Open, High, Low, Close (OHLC) functions.
+#' \code{ohlc_fun} is one of the various \code{quantmod} Open, High, Low, Close (OHLC) functions.
 #' The function returns a column or set of columns from \code{data} that are passed to the
 #' \code{transform_fun}. In Example 1 below, \code{Cl} returns the "close" price and sends
 #' this to the transform function, \code{periodReturn}.
@@ -28,7 +28,7 @@
 #' \code{transform_fun} is the function that performs the work. In Example 1, this
 #' is \code{periodReturn}, which calculates the period returns. The \code{...}
 #' functions are additional arguments passed to the \code{transform_fun}. Think of
-#' the whole operation in Example 1 as the close price, obtained by \code{x_fun = Cl},
+#' the whole operation in Example 1 as the close price, obtained by \code{ohlc_fun = Cl},
 #' is being sent to the \code{periodReturn} function along
 #' with additional arguments defining how to perform the period return, which
 #' includes \code{period = "daily"} and \code{type = "log"}.
@@ -65,7 +65,7 @@
 #'
 #' # Example 1: Return logarithmic daily returns using periodReturn()
 #' fb_stock_prices %>%
-#'     tq_transform(x_fun = Cl, transform_fun = periodReturn,
+#'     tq_transform(ohlc_fun = Cl, transform_fun = periodReturn,
 #'                  period = "daily", type = "log")
 #'
 #' # Example 2: Use tq_transform_xy to use functions with two columns required
@@ -86,25 +86,25 @@
 
 # PRIMARY FUNCTIONS ----
 
-tq_transform <- function(data, x_fun = OHLCV, transform_fun, ...) {
+tq_transform <- function(data, ohlc_fun = OHLCV, transform_fun, ...) {
 
     # Convert to NSE
-    x_fun <- deparse(substitute(x_fun))
+    ohlc_fun <- deparse(substitute(ohlc_fun))
     transform_fun <- deparse(substitute(transform_fun))
 
-    tq_transform_(data, x_fun, transform_fun, ...)
+    tq_transform_(data, ohlc_fun, transform_fun, ...)
 
 }
 
 #' @rdname tq_transform
 #' @export
-tq_transform_ <- function(data, x_fun = "OHLCV", transform_fun, ...) {
+tq_transform_ <- function(data, ohlc_fun = "OHLCV", transform_fun, ...) {
 
     # Check transform_fun in xts, quantmod or TTR
     check_transform_fun_options(transform_fun)
 
     # Check for x: either x, HLC, or price arguments
-    check_x_fun_options(x_fun)
+    check_ohlc_fun_options(ohlc_fun)
 
     # Check data
     check_data_is_data_frame(data)
@@ -116,8 +116,8 @@ tq_transform_ <- function(data, x_fun = "OHLCV", transform_fun, ...) {
     time_zone <- get_time_zone(data, date_col_name)
 
     # Convert inputs to functions
-    x_fun <- paste0("quantmod::", x_fun)
-    fun_x <- eval(parse(text = x_fun))
+    ohlc_fun <- paste0("quantmod::", ohlc_fun)
+    fun_x <- eval(parse(text = ohlc_fun))
     fun_transform <- eval(parse(text = transform_fun))
 
     # Patch for to.period functions
@@ -227,6 +227,9 @@ tq_transform_xy_ <- function(data, x, y = NULL, transform_fun, ...) {
 #' @export
 tq_transform_fun_options <- function() {
 
+    pkg_regex_zoo <- "roll"
+    funs_zoo <- ls("package:zoo")[stringr::str_detect(ls("package:zoo"), pkg_regex_zoo)]
+
     pkg_regex_xts <- "apply|to\\.|period|lag|diff"
     funs_xts <- ls("package:xts")[stringr::str_detect(ls("package:xts"), pkg_regex_xts)]
 
@@ -236,7 +239,8 @@ tq_transform_fun_options <- function() {
     pkg_regex_ttr <- "^get*|^stock|^naCh" # NOT these
     funs_ttr <- ls("package:TTR")[!stringr::str_detect(ls("package:TTR"), pkg_regex_ttr)]
 
-    fun_options <- list(xts = funs_xts,
+    fun_options <- list(zoo = funs_zoo,
+                        xts = funs_xts,
                         quantmod = funs_quantmod,
                         TTR = funs_ttr)
 
@@ -257,11 +261,11 @@ check_transform_fun_options <- function(fun) {
     }
 }
 
-check_x_fun_options <- function(fun) {
+check_ohlc_fun_options <- function(fun) {
     x_options <- c("Op", "Hi", "Lo", "Cl", "Vo", "Ad",
                    "HLC", "OHLC", "OHLCV")
     if (!(fun %in% x_options)) {
-        stop(paste0("x_fun = ", x_fun, " not a valid name."))
+        stop(paste0("ohlc_fun = ", ohlc_fun, " not a valid name."))
     }
 }
 
