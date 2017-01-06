@@ -32,7 +32,7 @@
 #' @import quantmod
 #' @import TTR
 #' @import xts
-#' @importFrom utils "data"
+#' @importFrom utils "data" "download.file" "read.csv"
 #' @import tidyverse
 #' @import lubridate
 NULL

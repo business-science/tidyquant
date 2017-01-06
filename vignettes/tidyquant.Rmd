@@ -1,6 +1,7 @@
 ---
 title: "Introduction to tidyquant"
 author: "Matt Dancho"
+date: "`r Sys.Date()`"
 output: 
   rmarkdown::html_vignette:
     toc: true
@@ -13,7 +14,8 @@ vignette: >
 
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
 knitr::opts_chunk$set(message = FALSE,
-                      warning = FALSE)
+                      warning = FALSE,
+                      fig.width = 6)
 # devtools::load_all() # Travis CI fails on load_all()
 ```
 
@@ -21,11 +23,11 @@ knitr::opts_chunk$set(message = FALSE,
 
 # Overview
 
-`tidyquant` integrates the best quantitative resources for collecting and analyzing quantitative data, `xts`, `quantmod` and `TTR`, with the tidy data infrastructure of the `tidyverse` allowing for seamless interaction between each and working within the `tidyverse`. 
+`tidyquant` integrates the best quantitative resources for collecting and analyzing quantitative data, `xts` and `zoo`, `quantmod` and `TTR`, with the tidy data infrastructure of the `tidyverse` allowing for seamless interaction between each and working within the `tidyverse`. 
 
 The three primary quantitative packages that are the backbone for quantitative financial analysis in _R programming_ are: 
 
-* [xts](https://CRAN.R-project.org/package=xts), or [eXtensible time series](http://joshuaulrich.github.io/xts/index.html): The data structure for handling time-series data.
+* [xts](https://CRAN.R-project.org/package=xts), or [eXtensible time series](http://joshuaulrich.github.io/xts/index.html): The data structure for handling time-series data. The underlying time-series structure is `zoo`, which is also integrated.
 * [quantmod](https://CRAN.R-project.org/package=quantmod), or [Quantitative Financial Modelling & Trading Framework for R](http://www.quantmod.com/): A package designed for retrieving, manipulating, and modeling and  quantitative data.
 * [TTR](https://CRAN.R-project.org/package=TTR), or Technical Trading Rules: A package that includes various functions to compute technical trading equations for quantitative or trading data.
 
@@ -119,14 +121,14 @@ __Financial Statements__:
 For any given stock, a total of six financials statements are retrieved as nested tibbles, one for each combination of statement type (Income Statement, Balance Sheet, and Cash Flow) and period (by annual and quarter). 
 
 ```{r}
-fb_financials <- tq_get("FB", get = "financials")
-fb_financials
+aapl_financials <- tq_get("AAPL", get = "financials")
+aapl_financials
 ```
 
 The statement information can be extracted by selecting (`dplyr::select()`) and filtering (`dplyr::filter()`) to the desired statement and unnesting (`tidyr::unnest()`) the results.
 
 ```{r}
-fb_financials %>%
+aapl_financials %>%
     filter(type == "IS") %>%
     select(annual) %>%
     unnest()
@@ -135,7 +137,7 @@ fb_financials %>%
 A slightly more powerful example is looking at all quarterly statements together. This is easy to do with `unnest` and `spread` from the `tidyr` package.
 
 ```{r}
-fb_financials %>%
+aapl_financials %>%
     unnest(quarter) %>% 
     spread(key = date, value = value)
 ```
@@ -143,6 +145,47 @@ fb_financials %>%
 
 The data source is [google finance](https://www.google.com/finance).
 
+
+__Key Ratios__:
+
+For any given stock, the key ratios are available for 10 years that are classified into the following sections:
+
+* __Financials__: These ratios include gross margin %, operating margin %, EPS, book value per share, and more.
+* __Profitability__: These ratios include margin as a percentage of sales (gross margin, operating margin, EBT margin, etc) and profitability metrics such as tax rate %, asset turnover, ROA, financial leverage, ROE, return on invested capital, and more.
+* __Growth__: These ratios include year over year, 3-year average, 5-year average, and 10-year average growth rates for revenue, operating income, net income, and EPS.
+* __Cash Flow__: These ratios include operating cash flow growth % YOY, free cash flow growth % YOY, capital expenditure as a % of sales, and more.
+* __Financial Health__: These ratios include balance sheet items as a percentage of total assets and liabilities, and liquidty/financial health metrics such as current ratio, quick ratio, debt/equity, and financial leverage.
+* __Efficiency Ratios__: These ratios include days sales outstanding, days inventory, inventory turnover, asset turnover and more. 
+
+To get the key ratios:
+
+```{r}
+aapl_key_ratios <- tq_get("AAPL", get = "key.ratios")
+aapl_key_ratios
+```
+
+The ratios can be filtered and unnested to peel away the hierarchical nesting layers and access the underlying data:
+
+```{r}
+aapl_key_ratios %>%
+    filter(section == "Financial Health") %>%
+    unnest()
+```
+
+Once we have a section, we can quickly access any of the sub.sections and/or categories. For example, we can easily chart the ratios in the "Liquidity/Financial Health" `sub.section` of the "Financial Health" `section`:
+
+```{r}
+aapl_key_ratios %>%
+    filter(section == "Financial Health") %>%
+    unnest() %>%
+    filter(sub.section == "Liquidty/Financial Health") %>%
+    ggplot(aes(x = date, y = value, col = category)) + 
+    geom_line() +
+    labs(title = "Financial Health Ratios for AAPL", x = "", y = "") +
+    lims(y = c(0, 4))
+```
+
+The data source is [Morningstar](http://www.morningstar.com/).
 
 <a class="anchor" id="economic-data"></a>
 
@@ -289,7 +332,7 @@ time_series_xts
 
 ## Working in the tidyverse
 
-You probably already know and love `tidyverse` packages like `dplyr`, `tidyr`, `purrr`, `readr`, and `tibble` along with `lubridate` for working with date and datetime. `tidyquant` works solely in tibbles, so all of the `tidyverse` functionality is intact. 
+You probably already know and love `tidyverse` packages like `ggplot2`, `dplyr`, `tidyr`, `purrr`, `readr`, and `tibble` along with `lubridate` for working with date and datetime. `tidyquant` works solely in tibbles, so all of the `tidyverse` functionality is intact. 
 
 A simple example inspired by [Kan Nishida's blog](https://blog.exploratory.io/introducing-time-series-analysis-with-dplyr-60683587cf8a#.w6pvyi3d2) shows the `dplyr` and `lubridate` capability: Say we want the growth in the stock over the past year. We can do this with `dplyr` operations. 
 
@@ -310,16 +353,27 @@ aapl_prices %>%
     mutate(baseline = first(adjusted))
 ```
 
-Growth and growth percent versus baseline columns can be added now. We tack on a final select statement to remove unnecessary columns. The final workflow looks like this:
+Growth and growth percent versus baseline columns can be added now. We tack on a final `select` statement to remove unnecessary columns. The final workflow looks like this:
 
 ```{r}
-aapl_prices %>%
+aapl_growth <- aapl_prices %>%
     select(date, adjusted) %>%
     filter(date >= today() - years(1)) %>%
     mutate(baseline = first(adjusted),
            growth = adjusted - baseline,
-           growth_pct = growth / baseline * 100) %>%
+           growth.pct = growth / baseline) %>%
     select(-(baseline:growth))
+aapl_growth
+```
+
+And, we can quickly plot using `ggplot2`.
+
+```{r}
+aapl_growth %>%
+    ggplot(aes(x = date, y = growth.pct)) + 
+    geom_line() +
+    labs(title = "AAPL: Growth Over One Year", x = "", y = "Growth") +
+    scale_y_continuous(labels = scales::percent)
 ```
 
 
@@ -328,11 +382,25 @@ aapl_prices %>%
 
 ## Leverage the Quantitative Power of xts, quantmod and TTR
 
-You may already know and love `xts`, `quantmod` and `TTR`, which is why the core functionality is fully intact. Using `tq_transform()` and `tq_mutate()`, we can apply the `xts`, `quantmod` and `TTR` functions. Entering `tq_transform_fun_options()` returns a list the transform functions by each package. We'll discuss these options by package briefly.
+You may already know and love `xts` / `zoo`, `quantmod` and `TTR`, which is why the core functionality is fully intact. Using `tq_transform()` and `tq_mutate()`, we can apply the `zoo`, `xts`, `quantmod` and `TTR` functions. Entering `tq_transform_fun_options()` returns a list the transform functions by each package. We'll discuss these options by package briefly.
 
 ```{r}
 tq_transform_fun_options() %>% str()
 ```
+
+### zoo Functionality
+
+```{r}
+# Get zoo functions that work with tq_transform and tq_mutate
+tq_transform_fun_options()$zoo
+```
+
+The `zoo` functions that are compatible are listed above. Generally speaking, these are the:
+
+* Roll Apply Functions:
+    * A generic function for applying a function to rolling margins.
+    * Form: `rollapply(data, width, FUN, ..., by = 1, by.column = TRUE, fill = if (na.pad) NA, na.pad = FALSE, partial = FALSE, align = c("center", "left", "right"), coredata = TRUE)`.
+    * Options include `rollmax`, `rollmean`, `rollmedian`, `rollsum`, etc.
 
 
 ### xts Functionality
@@ -440,7 +508,7 @@ AAPL <- tq_get("AAPL")
 ```
 
 
-#### Example 1: Getting the max close price for each quarter.
+#### Example 1: Getting the Max Close Price for Each Quarter.
 
 The `xts::apply.quarterly()` function that is part of the period apply group can be used to apply functions by quarterly time segments. Because we are seeking a return structure that is on a different time scale than the input (quarterly versus daily), we need to use a transform function. We select `tq_transform` and pass the close price using OHLC format via `ohlc_fun = Cl`, and we send this subset of the data to the `apply.quarterly` function via the `transform_fun` argument. Looking at the documentation for `apply.quarterly`, we see that we can pass a function to the argument, `FUN`. We want the maximum values, so we set `FUN = max`. The result is the quarters returned as a date and the maximum closing price during the quarter returned as a double. 
 
@@ -451,7 +519,7 @@ AAPL %>%
 
 Note that as an alternative you could use the xy form, replacing `ohlc_fun = Cl` with `x = close`.
 
-#### Example 2: Getting daily log returns 
+#### Example 2: Getting Daily Log Returns 
 
 The `quantmod::periodReturn()` function generates returns by periodicity. We have a few options here. Normally I go with a transform function, `tq_transform`, because the `periodReturn` function accepts different periodicity options, and anything other than daily will blow up a mutation. But, in our situation the period returns periodicity is the same as the stock prices periodicity (both daily), so we can use either. We want to use the adjusted closing prices column (adjusted for stock splits, which can make it appear that a stock is performing poorly if a split is included), so we set `ohlc_fun = Ad`. We researched the `periodReturn` function, and we found that it accepts `type = "log"` and `period = "daily"`, which returns the daily log returns. 
 
@@ -492,6 +560,21 @@ AAPL %>%
     select(-c(high, low, volume, adjusted))
 ```
 
+#### Example 4: Get the 5, 10, 15-Day Rolling Minimum and Maximum Values of the Adjusted Prices
+
+Rolling functions come from the `zoo` package. In reviewing the available options, we see that `rollmax` is present but no there is no `rollmin`. However, the generic `rollapply` function will work with any function, so let's use that. In reviewing the documentation, the `rollapply()` function takes three primary arguments: `data`, `width` and `FUN`. The `data` is passed using the `ohlc_fun` argument, so we don't need to worry about this. The `width` is the number of periods to apply the function, and for our situation this is 5, 10, and 15. The `FUN` is the function to apply, and for our situation this is `min` and `max`. We want the result to add columns to our data set, so we use the `tq_mutate()` function, which allows us to pipe (`%>%`) each mutation. Putting it all together:
+
+```{r}
+AAPL %>%
+    tq_mutate(Ad, rollapply, width = 5, FUN = min) %>%
+    tq_mutate(Ad, rollapply, width = 10, FUN = min) %>%
+    tq_mutate(Ad, rollapply, width = 15, FUN = min) %>%
+    tq_mutate(Ad, rollapply, width = 5, FUN = max) %>%
+    tq_mutate(Ad, rollapply, width = 10, FUN = max) %>%
+    tq_mutate(Ad, rollapply, width = 15, FUN = max)
+```
+
+Note that the new column names for the rolling minimums and maximums are just the `mutate_fun` name with a sequential suffix added, which is likely not descriptive enough for our applications. These can be renamed using the `rename` function (e.g. `rename(rolling.min.5 = rollapply)` for the five period rolling minimum). 
 
 <a class="anchor" id="built-for-scale"></a>
 
@@ -646,11 +729,5 @@ tq_get("SP500", get = "stock.index", use_fallback = TRUE)
 
 # Recap
 
-Hopefully now you see how `tidyquant` helps to integrate the best quantitative financial analysis packages with the `tidyverse`. The benefits are:
-
-* A few core functions with a lot of power, that
-* leverage the quantitative analysis power of `xts`, `quantmod` and `TTR`, and are
-* designed to be scaled with the `tidyverse` workflow.
-
-With a few, easy-to-use core functions, you can efficiently leverage the quantitative power of `xts`, `quantmod` and `TTR` with the data management infrastructure and scale-ability of the `tidyverse`. 
+Hopefully now you see how `tidyquant` helps to integrate the best quantitative financial analysis packages with the `tidyverse`. With a few, easy-to-use core functions, you can efficiently leverage the quantitative power of `xts` and `zoo`, `quantmod` and `TTR` with the data management infrastructure and scale-ability of the `tidyverse`. 
 

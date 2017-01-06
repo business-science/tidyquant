@@ -10,4 +10,10 @@ globalVariables(c("A",
                   "retrieve",
                   "type",
                   "value",
-                  "x_fun"))
+                  "x_fun",
+                  "ohlc_fun",
+                  "TTM",
+                  "X",
+                  "group",
+                  "section",
+                  "sub.section"))

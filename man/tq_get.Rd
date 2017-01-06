@@ -20,14 +20,19 @@ stock symbol, metal symbol, currency combination, FRED code, etc.}
 for \code{x}. Options include:
 \itemize{
   \item \code{"stock.index"}: Get all stocks in an index or exchange
-  from \href{http://www.marketvolume.com/indexes_exchanges/}{marketvolume}.
+  from \href{http://www.marketvolume.com/indexes_exchanges/}{marketvolume.com}.
   \item \code{"stock.prices"}: Get the stock prices for a stock symbol from
-  \href{https://finance.yahoo.com/}{Yahoo}.
-  \item \code{"divs.splits"}: Get the dividends and splits for a stock symbol
-  from \href{https://finance.yahoo.com/}{Yahoo}.
+  \href{https://finance.yahoo.com/}{Yahoo Finance}.
+  \item \code{"dividends"}: Get the dividends for a stock symbol
+  from \href{https://finance.yahoo.com/}{Yahoo Finance}.
+  \item \code{"splits"}: Get the splits for a stock symbol
+  from \href{https://finance.yahoo.com/}{Yahoo Finance}.
   \item \code{"financials"}: Get the income, balance sheet, and cash flow
   financial statements for a stock symbol from
-  \href{https://www.google.com/finance}{Google}.
+  \href{https://www.google.com/finance}{Google Finance}.
+  \item \code{"key.ratios"}: Get the growth, profitablity, financial health,
+  and efficiency ratios for a stock symbol from
+  \href{https://www.morningstar.com}{morningstar.com}.
   \item \code{"economic.data"}: Get economic data from
   \href{https://fred.stlouisfed.org/}{FRED}.
   \item \code{"metal.prices"}: Get the metal prices from
@@ -40,13 +45,13 @@ for \code{x}. Options include:
 function. Common optional parameters include:
 \itemize{
   \item \code{from}: Optional. A character string representing a start date in
-  YYYY-MM-DD format. No effect on \code{get = "stock.index"} or
-  \code{get = "financials"}.
+  YYYY-MM-DD format. No effect on \code{get = "stock.index"},
+  \code{"financials"}, or \code{"key.ratios"}.
   \item \code{to}: A character string representing a end date in
-  YYYY-MM-DD format. No effect on \code{get = "stock.index"} or
-  \code{get = "financials"}.
-  \item \code{use_fallback}: Set to \code{FALSE} by default.
-  Used with \code{get = "stock.index"} only. A boolean
+  YYYY-MM-DD format. No effect on \code{get = "stock.index"},
+  \code{get = "financials"}, or \code{"key.ratios"}.
+  \item \code{use_fallback}: Used with \code{get = "stock.index"} only.
+  Set to \code{FALSE} by default. A boolean
   representing whether to use the fall back data set for a stock index. Useful
   if the data cannot be fetched from the website. The fallback data returned is
   accurate as of the date the package was last updated.
@@ -96,10 +101,13 @@ cvx_stock_prices  <- tq_get("CVX", get = "stock.prices",
 
 # Get dividends and splits for a stock from Yahoo
 tq_get("AAPL", get = "dividends", from = "1990-01-01")
-tq_get("AAPL", get = "dividends", from = "1990-01-01")
+tq_get("AAPL", get = "splits", from = "1990-01-01")
 
 # Get financial statement data for a stock from Google
 appl_financials <- tq_get("AAPL", get = "financials")
+
+# Get key ratios for a stock from Morningstar
+appl_key_ratios <- tq_get("AAPL", get = "key.ratios")
 
 # Get FRED economic data for a commodity code
 tq_get("DCOILWTICO", get = "economic.data") # WTI crude oil spot prices

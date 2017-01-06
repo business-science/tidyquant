@@ -20,48 +20,51 @@ devtools::load_all()
 <!-- ![](http://cranlogs.r-pkg.org/badges/tidyquant?color=brightgreen)  -->
 <!-- ![](http://cranlogs.r-pkg.org/badges/grand-total/tidyquant?color=brightgreen) -->
 
-`tidyquant` integrates the best quantitative resources for collecting and analyzing quantitative data, `xts`, `quantmod` and `TTR`, with the tidy data infrastructure of the `tidyverse` allowing for seamless interaction between each and working within the `tidyverse`. 
+`tidyquant` integrates the best quantitative resources for collecting and analyzing quantitative data, `zoo`, `xts`, `quantmod` and `TTR`, with the tidy data infrastructure of the `tidyverse` allowing for seamless interaction between each and working within the `tidyverse`. 
 
 ## Benefits
 
 __The `tidyquant` philosophy:__
 
 * __A few core functions with a lot of power, that__
-* __leverage the quantitative analysis power of `xts`, `quantmod` and `TTR`, and are__
+* __leverage the quantitative analysis power of `zoo`, `xts`, `quantmod` and `TTR`, and are__
 * __designed to be used and scaled with the `tidyverse`.__
 
 ## Installation
 
-To install from CRAN:
-
-```{r, eval = FALSE}
-install.packages("tidyquant")
-```
-
-
-Or, to install development version from GitHub:
+Development Version with Latest Features:
 
 ``` {r, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("mdancho84/tidyquant")
 ```
 
+CRAN Approved Version: 
+
+```{r, eval = FALSE}
+install.packages("tidyquant")
+```
+
 
 ## Examples
 
+Start by loading `tidyquant`.
+
 ```{r, eval = FALSE}
-# Loads tidyquant, tidyverse, lubridate, quantmod, TTR, and xts
+# Loads tidyquant, tidyverse, lubridate, quantmod, TTR, and xts/zoo
 library(tidyquant) 
 ```
 
 
-### Getting Data in Tibble Format:
+### Getting Data:
 
 `tq_get()` is the one-stop shop for retrieving data. The full list of get options are:
 
 ```{r}
 tq_get_options()
 ```
+
+__Stock Prices__:
 
 Set `get = "stock.prices"` to get stock prices. Notice the output is _always_ a `tibble`.
 
@@ -70,21 +73,46 @@ aapl_prices <- tq_get("AAPL", get = "stock.prices")
 aapl_prices
 ```
 
+__Financial Statements__:
+
 Set `get = "financials"` to get financial statements. The statements are returned as nested tibbles, that can be unnested and analyzed together.
 
 ```{r}
 tq_get("AAPL", get = "financials")
 ```
 
-There are many other get options including stock indexes, dividends, splits, economic data from the FRED, and exchange rates and metals from Oanda.
+__Key Ratios__:
+
+Set `get = "key.ratios"` to get 10 years of key ratios (e.g. EPS, ROA, ROE, current ratio, debt/equity, inventory turnover, and many more), separated into seven primary sections. 
+
+```{r}
+tq_get("AAPL", get = "key.ratios")
+```
+
+__Stock Indexes__:
+
+There are `r tq_get_stock_index_options() %>% length()` indexes available to select from, which can be seen with a call to `tq_get_stock_index_options()`. 
+
+```{r}
+tq_get_stock_index_options()
+```
+
+Set `x` to one of the options and `get = "stock.index"` to get a full list of stocks within the specified index. 
+```{r}
+tq_get("SP500", get = "stock.index")
+```
+
+__Other Options__:
+
+There are many other get options including __dividends__, __splits__, __economic data__ from the FRED, and __exchange rates__ and __metal prices__ from Oanda.
 
 ### Working in the tidyverse
 
-You probably already know and love `tidyverse` packages like `dplyr`, `tidyr`, `purrr`, `readr`, and `tibble` along with `lubridate` for working with date and datetime. `tidyquant` works solely in tibbles, so all of the `tidyverse` functionality is intact. 
+You may already know and love `tidyverse` packages like `ggplot2`, `dplyr`, `tidyr`, `purrr`, `readr`, and `tibble` along with `lubridate` for working with date and datetime. `tidyquant` works solely in tibbles, so all of the `tidyverse` functionality is intact. 
 
 A simple example inspired by [Kan Nishida's blog](https://blog.exploratory.io/introducing-time-series-analysis-with-dplyr-60683587cf8a#.w6pvyi3d2) shows the `dplyr` and `lubridate` capability: Say we want the growth in the stock over the past year. We can do this with `dplyr` operations. 
 
-Getting the last year is simple with `dplyr` and `lubridate`. We first `select` the date and adjusted price (adjusted for stock splits). We then `filter` using `lubridate` date functions. We can also get a baseline price using the `first` function. Growth and growth percent versus baseline columns can be added now. We tack on a final select statement to remove unnecessary columns. The final workflow looks like this:
+Getting the last year is simple with `dplyr` and `lubridate`. We first `select` the date and adjusted price (adjusted for stock splits). We then `filter` using `lubridate` date functions. We can use the `mutate` to add columns to the data frame: Add the baseline price using the `first` function, add the growth and growth percent versus baseline columns using standard mathematical operations. We tack on a final `select` statement to remove unnecessary columns. The final workflow looks like this:
 
 ```{r}
 aapl_prices %>%
@@ -96,12 +124,12 @@ aapl_prices %>%
     select(-(baseline:growth))
 ```
 
-### Transforming & Mutating Data with xts, quantmod, and TTR Functions
+### Transforming & Mutating Data with zoo, xts, quantmod, and TTR Functions
 
-You may already know and love `xts`, `quantmod`, and `TTR`, which is why the core functionality is fully integrated. The workhorse functions are `tq_transform()` and `tq_mutate()`. These functions leverage the power of `xts`, `quantmod`, and `TTR`. The full list of `xts`, `quantmod`, and `TTR` functions that can be used are:
+You may already know and love `zoo`, `xts`, `quantmod`, and `TTR`, which is why the core functionality is fully integrated. The workhorse functions, `tq_transform()` and `tq_mutate()`, apply `zoo`, `xts`, `quantmod`, and `TTR` functions to `tibbles`. The full list of compatible functions are shown with a call to `tq_transform_fun_options()`. Remove the `%>% str()` to expand the list.
 
 ```{r}
-tq_transform_fun_options()
+tq_transform_fun_options() %>% str()
 ```
 
 
@@ -123,6 +151,24 @@ The cousin of `tq_transform()` is `tq_mutate()`. While `tq_transform()` produces
 aapl_prices %>%
     tq_mutate(ohlc_fun = Cl, mutate_fun = MACD) %>%
     tq_mutate(ohlc_fun = HLC, mutate_fun = BBands)
+```
+
+#### tq_tranform_xy and tq_mutate_xy 
+
+The "xy" variants are useful in situations where (1) you have two inputs (hence x and y) that don't fit into the OHLC function, or (2) you are working with a single column of non-OHLC data.
+
+__Two inputs that don't fit OHLC mold__:
+
+```{r}
+aapl_prices %>%
+    tq_mutate_xy(x = close, y = volume, mutate_fun = EVWMA)
+```
+
+__Working with a single column of non-OHLC data__:
+
+```{r}
+tq_get("GDPC1", get = "economic.data") %>%
+    tq_mutate_xy(x = price, mutate_fun = rollapply, width = 5, FUN = mean)
 ```
 
 

@@ -10,6 +10,19 @@ test1 <- AAPL %>%
     tq_mutate(HLC, BBands) %>%
     tq_mutate(OHLC, OpCl)
 
+# Test 1.1: tq_mutate piping test; test renaming of column names on mutate
+test1.1 <- AAPL %>%
+    tq_mutate(Cl, rollapply, width = 7, FUN = mean) %>%
+    tq_mutate(Op, SMA, n = 3) %>%
+    tq_mutate(Cl, rollapply, width = 9, FUN = mean) %>%
+    tq_mutate(Op, SMA, n = 5) %>%
+    tq_mutate(HLC, BBands, n = 20) %>%
+    tq_mutate(HLC, BBands, n = 50)
+
+test1.1_names <- c("date", "open", "high", "low", "close", "volume", "adjusted",
+                   "rollapply", "sma", "rollapply.1", "sma.1", "dn", "mavg",
+                   "up", "pctb", "dn.1", "mavg.1", "up.1", "pctb.1")
+
 # Test 2: tq_mutate_xy piping test
 test2 <- AAPL %>%
     tq_mutate_xy(x = close, mutate_fun = MACD) %>%
@@ -20,7 +33,6 @@ test2 <- AAPL %>%
 time_index <- seq(from = as.POSIXct("2012-05-15 07:00"),
                   to = as.POSIXct("2012-05-17 18:00"),
                   by = "hour")
-
 set.seed(1)
 value <- rnorm(n = length(time_index))
 hourly_data <- xts(value, order.by = time_index)
@@ -29,6 +41,7 @@ test3 <- hourly_data %>%
     dplyr::mutate(row.names = lubridate::ymd_hms(row.names, tz = "US/Mountain")) %>%
     tq_mutate_xy(x = V1, mutate_fun = MACD)
 
+# Test 4: Bind hourly data with tq_mutate_xy
 test4 <- tibble(time_index, value) %>%
     tq_mutate_xy(x = value, mutate_fun = MACD)
 
@@ -43,6 +56,11 @@ test_that("Test 1 returns tibble with correct rows and columns.", {
     expect_equal(nrow(test1), 1258)
     # Columns
     expect_equal(ncol(test1), 14)
+})
+
+test_that("Test 1.1 returns correct column names", {
+    # Column names
+    expect_equal(colnames(test1.1), test1.1_names)
 })
 
 test_that("Test 2 returns tibble with correct rows and columns.", {

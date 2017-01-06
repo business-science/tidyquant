@@ -18,7 +18,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
-    R (>= 3.3.2),
+    R (>= 3.3.0),
     lubridate (>= 1.6.0),
     quantmod (>= 0.4-7),
     tidyverse (>= 1.0.0),
@@ -30,6 +30,7 @@ Imports:
     dplyr (>= 0.05),
     magrittr (>= 1.5),
     purrr (>= 0.2.2),
+    readr (>= 1.0.0),
     rvest (>= 0.3.2),
     stats (>= 3.3.0),
     stringr (>= 1.1.0),
@@ -42,6 +43,7 @@ Imports:
 Suggests:
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    forcats
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr

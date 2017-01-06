@@ -227,15 +227,19 @@ tq_transform_xy_ <- function(data, x, y = NULL, transform_fun, ...) {
 #' @export
 tq_transform_fun_options <- function() {
 
+    # zoo rollapply functions
     pkg_regex_zoo <- "roll"
     funs_zoo <- ls("package:zoo")[stringr::str_detect(ls("package:zoo"), pkg_regex_zoo)]
 
+    # xts apply.period, to.period, lag and diff functions
     pkg_regex_xts <- "apply|to\\.|period|lag|diff"
     funs_xts <- ls("package:xts")[stringr::str_detect(ls("package:xts"), pkg_regex_xts)]
 
+    # quantmod periodReturns, Delt, series functions
     pkg_regex_quantmod <- "Return|Delt|Lag|Next|^Op..|^Cl..|^Hi..|^Lo..|^series"
     funs_quantmod <- ls("package:quantmod")[stringr::str_detect(ls("package:quantmod"), pkg_regex_quantmod)]
 
+    # TTR functions
     pkg_regex_ttr <- "^get*|^stock|^naCh" # NOT these
     funs_ttr <- ls("package:TTR")[!stringr::str_detect(ls("package:TTR"), pkg_regex_ttr)]
 
@@ -282,7 +286,8 @@ check_x_y_valid <- function(data, x, y) {
     }
 }
 
-coerce_to_tibble <- function(data, date_col_name, time_zone) {
+coerce_to_tibble <- function(data, date_col_name, time_zone, transform_fun) {
+
     # Coerce to tibble
     ret <- data %>%
         as_tibble(preserve_row_names = TRUE) %>%
@@ -302,6 +307,8 @@ detect_period_fun <- function(fun) {
     to_period_funs <- tq_transform_fun_options() %>%
         unlist() %>%
         stringr::str_subset("^to")
-    if (fun %in% to_period_funs) is_period_fun = TRUE
+    if (fun %in% to_period_funs) is_period_fun <- TRUE
     is_period_fun
 }
+
+

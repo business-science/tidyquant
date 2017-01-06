@@ -6,14 +6,19 @@
 #' for \code{x}. Options include:
 #' \itemize{
 #'   \item \code{"stock.index"}: Get all stocks in an index or exchange
-#'   from \href{http://www.marketvolume.com/indexes_exchanges/}{marketvolume}.
+#'   from \href{http://www.marketvolume.com/indexes_exchanges/}{marketvolume.com}.
 #'   \item \code{"stock.prices"}: Get the stock prices for a stock symbol from
-#'   \href{https://finance.yahoo.com/}{Yahoo}.
-#'   \item \code{"divs.splits"}: Get the dividends and splits for a stock symbol
-#'   from \href{https://finance.yahoo.com/}{Yahoo}.
+#'   \href{https://finance.yahoo.com/}{Yahoo Finance}.
+#'   \item \code{"dividends"}: Get the dividends for a stock symbol
+#'   from \href{https://finance.yahoo.com/}{Yahoo Finance}.
+#'   \item \code{"splits"}: Get the splits for a stock symbol
+#'   from \href{https://finance.yahoo.com/}{Yahoo Finance}.
 #'   \item \code{"financials"}: Get the income, balance sheet, and cash flow
 #'   financial statements for a stock symbol from
-#'   \href{https://www.google.com/finance}{Google}.
+#'   \href{https://www.google.com/finance}{Google Finance}.
+#'   \item \code{"key.ratios"}: Get the growth, profitablity, financial health,
+#'   and efficiency ratios for a stock symbol from
+#'   \href{https://www.morningstar.com}{morningstar.com}.
 #'   \item \code{"economic.data"}: Get economic data from
 #'   \href{https://fred.stlouisfed.org/}{FRED}.
 #'   \item \code{"metal.prices"}: Get the metal prices from
@@ -25,13 +30,13 @@
 #' function. Common optional parameters include:
 #' \itemize{
 #'   \item \code{from}: Optional. A character string representing a start date in
-#'   YYYY-MM-DD format. No effect on \code{get = "stock.index"} or
-#'   \code{get = "financials"}.
+#'   YYYY-MM-DD format. No effect on \code{get = "stock.index"},
+#'   \code{"financials"}, or \code{"key.ratios"}.
 #'   \item \code{to}: A character string representing a end date in
-#'   YYYY-MM-DD format. No effect on \code{get = "stock.index"} or
-#'   \code{get = "financials"}.
-#'   \item \code{use_fallback}: Set to \code{FALSE} by default.
-#'   Used with \code{get = "stock.index"} only. A boolean
+#'   YYYY-MM-DD format. No effect on \code{get = "stock.index"},
+#'   \code{get = "financials"}, or \code{"key.ratios"}.
+#'   \item \code{use_fallback}: Used with \code{get = "stock.index"} only.
+#'   Set to \code{FALSE} by default. A boolean
 #'   representing whether to use the fall back data set for a stock index. Useful
 #'   if the data cannot be fetched from the website. The fallback data returned is
 #'   accurate as of the date the package was last updated.
@@ -82,10 +87,13 @@
 #'
 #' # Get dividends and splits for a stock from Yahoo
 #' tq_get("AAPL", get = "dividends", from = "1990-01-01")
-#' tq_get("AAPL", get = "dividends", from = "1990-01-01")
+#' tq_get("AAPL", get = "splits", from = "1990-01-01")
 #'
 #' # Get financial statement data for a stock from Google
 #' appl_financials <- tq_get("AAPL", get = "financials")
+#'
+#' # Get key ratios for a stock from Morningstar
+#' appl_key_ratios <- tq_get("AAPL", get = "key.ratios")
 #'
 #' # Get FRED economic data for a commodity code
 #' tq_get("DCOILWTICO", get = "economic.data") # WTI crude oil spot prices
@@ -136,6 +144,7 @@ tq_get <- function(x, get = "stock.prices", ...) {
                   dividend     = tq_get_util_2(x, get, ...),
                   split        = tq_get_util_2(x, get, ...),
                   financial    = tq_get_util_2(x, get, ...),
+                  keyratio     = tq_get_util_1(x, get, ...),
                   metalprice   = tq_get_util_2(x, get, ...),
                   exchangerate = tq_get_util_2(x, get, ...),
                   economicdata = tq_get_util_2(x, get, ...),
@@ -154,6 +163,7 @@ tq_get_options <- function() {
       "dividends",
       "splits",
       "financials",
+      "key.ratios",
       "economic.data",
       "exchange.rates",
       "metal.prices"
@@ -189,96 +199,102 @@ tq_get_stock_index_options <- function() {
 
 # NOT USED: ISSUE WITH getYahooData
 # Util 1: Used for tq_get() `get` options:
-#     stock.prices -> From TTR::getYahooData()
-# tq_get_util_1 <-
-#     function(x,
-#              get,
-#              from = as.character(paste0(lubridate::year(lubridate::today()) - 10, "-01-01")),
-#              to   = as.character(lubridate::today()),
-#              adjust = TRUE,
-#              type = "price",
-#              ...) {
-#
-#     # Convert `from` and `to` to appropriate format
-#     from <- stringr::str_replace_all(from, pattern = "-", "")
-#     to   <- stringr::str_replace_all(to,   pattern = "-", "")
-#
-#     # Setup switches based on `get`
-#     vars <- switch(get,
-#                    stockprice       = list(chr_x      = "stock symbol",
-#                                            fun        = TTR::getYahooData,
-#                                            chr_fun    = "TTR::getYahooData",
-#                                            type       = "price"),
-#                    divssplit        = list(chr_x      = "stock symbol",
-#                                            fun        = TTR::getYahooData,
-#                                            chr_fun    = "TTR::getYahooData",
-#                                            type       = "split")
-#     )
-#
-#     # Check x
-#     if (!is.character(x)) {
-#         err <- paste0("Error: x must be a character string in the form of a valid ",
-#                       vars$chr_x)
-#         stop(err)
-#     }
-#
-#     # Get data; Handle errors
-#     ret <- tryCatch({
-#
-#         suppressWarnings(
-#             suppressMessages(
-#                 vars$fun(x, start = from, end = to, type = vars$type, adjust = adjust, ...)
-#             )
-#         )
-#
-#     }, error = function(e) {
-#
-#         warn <- paste0("Error at ", vars$chr_x, " ", x,
-#                        " during call to ", vars$chr_fun, ".")
-#         warning(warn)
-#         return(NA) # Return NA on error
-#
-#     })
-#
-#     # Coerce to tibble
-#     if (xts::is.xts(ret)) {
-#
-#         names(ret) <- names(ret) %>% stringr::str_to_lower()
-#
-#         ret <- ret %>%
-#             tidyquant::as_tibble(preserve_row_names = TRUE) %>%
-#             dplyr::rename(date = row.names) %>%
-#             dplyr::mutate(date = lubridate::ymd(date))
-#
-#         # For stock.prices, if `adjust` is true and no dividends/splits detected,
-#         # add columns to return same number of columns as when dividends/splits detected
-#         if (get == "stockprice") {
-#             if (adjust) {
-#                 if (ncol(ret) == 6) {
-#
-#                     add_cols <- tibble::tibble(
-#                         unadj.close = ret$close,
-#                         div         = as.double(rep(NA, nrow(ret))),
-#                         split       = as.double(rep(NA, nrow(ret))),
-#                         adj.div     = as.double(rep(NA, nrow(ret)))
-#                     )
-#
-#                     ret <- dplyr::bind_cols(ret, add_cols)
-#
-#                 }
-#             }
-#         }
-#
-#     } else if (is.data.frame(ret) && vars$type == "split") {
-#
-#         # If no splits, a zero-row data frame is returned
-#         ret <- NA
-#
-#     }
-#
-#     ret
-#
-# }
+#     key.ratios -> From www.morningstar.com
+tq_get_util_1 <- function(x, get, ...) {
+
+    # Convert x to uppercase
+    x <- stringr::str_to_upper(x) %>%
+        stringr::str_trim(side = "both") %>%
+        stringr::str_replace_all("[[:punct:]]", "")
+
+    # Check x
+    if (!is.character(x)) {
+        err <- "Error: x must be a character string in the form of a valid stock symbol."
+        stop(err)
+    }
+
+    tryCatch({
+
+        # Download file
+        tmp <- tempfile()
+        url_base_1 <- 'http://financials.morningstar.com/finan/ajax/exportKR2CSV.html?&callback=?&t=XNAS:'
+        url_base_2 <- '&region=usa&culture=en-US&cur=&order=asc'
+        url <- paste0(url_base_1, x, url_base_2)
+
+        download.file(url, destfile = tmp, quiet = TRUE)
+
+        # Setup Tibble Part 1
+        key_ratios_1 <- tibble::tibble(
+            section            = c(rep("Financials", 15),
+                                   rep("Profitability", 17),
+                                   rep("Growth", 16),
+                                   rep("Cash Flow", 5),
+                                   rep("Financial Health", 24),
+                                   rep("Efficiency Ratios", 8)),
+            sub.section        = c(rep("Financials", 15),
+                                   rep("Margin of Sales %", 9),
+                                   rep("Profitability", 8),
+                                   rep("Revenue %", 4),
+                                   rep("Operating Income %", 4),
+                                   rep("Net Income %", 4),
+                                   rep("EPS %", 4),
+                                   rep("Cash Flow Ratios", 5),
+                                   rep("Balance Sheet Items (in %)", 20),
+                                   rep("Liquidty/Financial Health", 4),
+                                   rep("Efficiency", 8))
+        )
+
+        # Setup Tibble Part 2
+
+        # Read lines
+        skip_rows <- c(1:2, 19:21, 31:32, 41:44, 49, 54, 59, 64:66, 72:74, 95:96, 101:103)
+        text <- readr::read_lines(tmp)[-skip_rows]
+
+        # Unlink tmp
+        unlink(tmp)
+
+        # Parse text
+        key_ratios_2 <-
+            suppressMessages(
+                suppressWarnings(
+                    utils::read.csv(text = text, na.strings=c("","NA")) %>%
+                        tibble::as_tibble() %>%
+                        dplyr::mutate_all(as.character)
+                )
+            )
+
+
+        # Combine tibble parts into raw data
+        key_ratios_raw <- dplyr::bind_cols(key_ratios_1, key_ratios_2)
+
+        # Cleanup raw data
+        key_ratios <- key_ratios_raw %>%
+            dplyr::select(-TTM) %>%
+            dplyr::rename(category = X) %>%
+            tibble::rownames_to_column(var = "group") %>%
+            dplyr::mutate(group = as.numeric(group)) %>%
+            tidyr::gather(key = date, value = value, -c(group, section, sub.section, category)) %>%
+            dplyr::arrange(group) %>%
+            dplyr::mutate(date = stringr::str_sub(date, start = 2, end = length(date))) %>%
+            dplyr::mutate(date = stringr::str_replace(date, "\\.", "-")) %>%
+            dplyr::mutate(date = lubridate::ymd(date, truncated = 2)) %>%
+            dplyr::mutate(value = stringr::str_replace(value, ",", "")) %>%
+            dplyr::mutate(value = as.double(value)) %>%
+            dplyr::select(section, sub.section, group, category, date, value) %>%
+            dplyr::group_by(section) %>%
+            tidyr::nest()
+
+        return(key_ratios)
+
+    }, error = function(e) {
+
+        warn <- paste0("Error at ", x, " during call to get = key.ratios")
+        warning(warn)
+        return(NA) # Return NA on error
+
+    })
+
+}
 
 
 
