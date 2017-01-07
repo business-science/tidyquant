@@ -72,7 +72,7 @@ allows us to mutate WTI crude prices from daily to monthly periodicity.
 
 \code{tq_mutate_} and \code{tq_mutate_xy_} are setup for Non-Standard
 Evaluation (NSE). This enables programatically changing column names by modifying
-the text representations. Example 4 shows the difference in implemenation.
+the text representations. Example 4 shows the difference in implementation.
 Note that character strings are being passed to the variables instead of
 unquoted variable names. See \code{vignette("nse")} for more information.
 }

@@ -60,7 +60,7 @@ Set `get = "stock.prices"` to get stock prices. Notice the output is *always* a 
 ``` r
 aapl_prices <- tq_get("AAPL", get = "stock.prices")
 aapl_prices
-#> # A tibble: 2,521 × 7
+#> # A tibble: 2,522 × 7
 #>          date  open  high   low close    volume adjusted
 #>        <date> <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl>
 #> 1  2007-01-03 86.29 86.58 81.90 83.80 309579900 10.90416
@@ -73,7 +73,7 @@ aapl_prices
 #> 8  2007-01-12 94.59 95.06 93.23 94.62 328172600 12.31207
 #> 9  2007-01-16 95.68 97.25 95.45 97.10 311019100 12.63477
 #> 10 2007-01-17 97.56 97.60 94.82 94.95 411565000 12.35501
-#> # ... with 2,511 more rows
+#> # ... with 2,512 more rows
 ```
 
 **Financial Statements**:
@@ -92,11 +92,11 @@ tq_get("AAPL", get = "financials")
 
 **Key Ratios**:
 
-Set `get = "key.ratios"` to get 10 years of key ratios (e.g. EPS, ROA, ROE, current ratio, debt/equity, inventory turnover, and many more), separated into seven primary sections.
+Set `get = "key.ratios"` to get 10 years of 89 different key ratios (e.g. P/E, P/S, EPS, ROA, ROE, current ratio, debt/equity, inventory turnover, and many more), separated into seven primary sections.
 
 ``` r
 tq_get("AAPL", get = "key.ratios")
-#> # A tibble: 6 × 2
+#> # A tibble: 7 × 2
 #>             section               data
 #>               <chr>             <list>
 #> 1        Financials <tibble [150 × 5]>
@@ -105,6 +105,7 @@ tq_get("AAPL", get = "key.ratios")
 #> 4         Cash Flow  <tibble [50 × 5]>
 #> 5  Financial Health <tibble [240 × 5]>
 #> 6 Efficiency Ratios  <tibble [80 × 5]>
+#> 7  Valuation Ratios  <tibble [40 × 5]>
 ```
 
 **Stock Indexes**:
@@ -163,16 +164,16 @@ aapl_prices %>%
 #> # A tibble: 253 × 3
 #>          date adjusted growth_pct
 #>        <date>    <dbl>      <dbl>
-#> 1  2016-01-06 98.50827  0.0000000
-#> 2  2016-01-07 94.35077 -4.2204569
-#> 3  2016-01-08 94.84967 -3.7139999
-#> 4  2016-01-11 96.38550 -2.1549135
-#> 5  2016-01-12 97.78438 -0.7348541
-#> 6  2016-01-13 95.27031 -3.2869891
-#> 7  2016-01-14 97.35395 -1.1717981
-#> 8  2016-01-15 95.01597 -3.5451836
-#> 9  2016-01-19 94.55621 -4.0119099
-#> 10 2016-01-20 94.68337 -3.8828162
+#> 1  2016-01-07 94.35077  0.0000000
+#> 2  2016-01-08 94.84967  0.5287736
+#> 3  2016-01-11 96.38550  2.1565601
+#> 4  2016-01-12 97.78438  3.6391934
+#> 5  2016-01-13 95.27031  0.9746004
+#> 6  2016-01-14 97.35395  3.1829958
+#> 7  2016-01-15 95.01597  0.7050287
+#> 8  2016-01-19 94.55621  0.2177364
+#> 9  2016-01-20 94.68337  0.3525186
+#> 10 2016-01-21 94.20404 -0.1555144
 #> # ... with 243 more rows
 ```
 
@@ -220,7 +221,7 @@ The cousin of `tq_transform()` is `tq_mutate()`. While `tq_transform()` produces
 aapl_prices %>%
     tq_mutate(ohlc_fun = Cl, mutate_fun = MACD) %>%
     tq_mutate(ohlc_fun = HLC, mutate_fun = BBands)
-#> # A tibble: 2,521 × 13
+#> # A tibble: 2,522 × 13
 #>          date  open  high   low close    volume adjusted  macd signal
 #>        <date> <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl> <dbl>  <dbl>
 #> 1  2007-01-03 86.29 86.58 81.90 83.80 309579900 10.90416    NA     NA
@@ -233,7 +234,7 @@ aapl_prices %>%
 #> 8  2007-01-12 94.59 95.06 93.23 94.62 328172600 12.31207    NA     NA
 #> 9  2007-01-16 95.68 97.25 95.45 97.10 311019100 12.63477    NA     NA
 #> 10 2007-01-17 97.56 97.60 94.82 94.95 411565000 12.35501    NA     NA
-#> # ... with 2,511 more rows, and 4 more variables: dn <dbl>, mavg <dbl>,
+#> # ... with 2,512 more rows, and 4 more variables: dn <dbl>, mavg <dbl>,
 #> #   up <dbl>, pctb <dbl>
 ```
 
@@ -246,7 +247,7 @@ The "xy" variants are useful in situations where (1) you have two inputs (hence 
 ``` r
 aapl_prices %>%
     tq_mutate_xy(x = close, y = volume, mutate_fun = EVWMA)
-#> # A tibble: 2,521 × 8
+#> # A tibble: 2,522 × 8
 #>          date  open  high   low close    volume adjusted    v1
 #>        <date> <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl> <dbl>
 #> 1  2007-01-03 86.29 86.58 81.90 83.80 309579900 10.90416    NA
@@ -259,7 +260,7 @@ aapl_prices %>%
 #> 8  2007-01-12 94.59 95.06 93.23 94.62 328172600 12.31207    NA
 #> 9  2007-01-16 95.68 97.25 95.45 97.10 311019100 12.63477    NA
 #> 10 2007-01-17 97.56 97.60 94.82 94.95 411565000 12.35501 94.95
-#> # ... with 2,511 more rows
+#> # ... with 2,512 more rows
 ```
 
 **Working with a single column of non-OHLC data**:
@@ -299,13 +300,13 @@ tibble(symbol = c("AAPL", "GOOG", "AMZN", "FB", "AVGO", "SWKS","NVDA")) %>%
 #> # A tibble: 7 × 2
 #>   symbol         stock.prices
 #>    <chr>               <list>
-#> 1   AAPL <tibble [2,521 × 7]>
-#> 2   GOOG <tibble [2,521 × 7]>
-#> 3   AMZN <tibble [2,521 × 7]>
-#> 4     FB <tibble [1,166 × 7]>
-#> 5   AVGO <tibble [1,868 × 7]>
-#> 6   SWKS <tibble [2,521 × 7]>
-#> 7   NVDA <tibble [2,521 × 7]>
+#> 1   AAPL <tibble [2,522 × 7]>
+#> 2   GOOG <tibble [2,522 × 7]>
+#> 3   AMZN <tibble [2,522 × 7]>
+#> 4     FB <tibble [1,167 × 7]>
+#> 5   AVGO <tibble [1,869 × 7]>
+#> 6   SWKS <tibble [2,522 × 7]>
+#> 7   NVDA <tibble [2,522 × 7]>
 ```
 
 Further Information

@@ -16,8 +16,8 @@
 #'   \item \code{"financials"}: Get the income, balance sheet, and cash flow
 #'   financial statements for a stock symbol from
 #'   \href{https://www.google.com/finance}{Google Finance}.
-#'   \item \code{"key.ratios"}: Get the growth, profitablity, financial health,
-#'   and efficiency ratios for a stock symbol from
+#'   \item \code{"key.ratios"}: Get historical growth, profitablity, financial health,
+#'   efficiency, and valuation ratios over 10-years for a stock symbol from
 #'   \href{https://www.morningstar.com}{morningstar.com}.
 #'   \item \code{"economic.data"}: Get economic data from
 #'   \href{https://fred.stlouisfed.org/}{FRED}.
@@ -197,7 +197,6 @@ tq_get_stock_index_options <- function() {
 
 # UTILITY FUNCTIONS ----
 
-# NOT USED: ISSUE WITH getYahooData
 # Util 1: Used for tq_get() `get` options:
 #     key.ratios -> From www.morningstar.com
 tq_get_util_1 <- function(x, get, ...) {
@@ -268,7 +267,7 @@ tq_get_util_1 <- function(x, get, ...) {
         key_ratios_raw <- dplyr::bind_cols(key_ratios_1, key_ratios_2)
 
         # Cleanup raw data
-        key_ratios <- key_ratios_raw %>%
+        key_ratios_bind <- key_ratios_raw %>%
             dplyr::select(-TTM) %>%
             dplyr::rename(category = X) %>%
             tibble::rownames_to_column(var = "group") %>%
@@ -280,7 +279,62 @@ tq_get_util_1 <- function(x, get, ...) {
             dplyr::mutate(date = lubridate::ymd(date, truncated = 2)) %>%
             dplyr::mutate(value = stringr::str_replace(value, ",", "")) %>%
             dplyr::mutate(value = as.double(value)) %>%
-            dplyr::select(section, sub.section, group, category, date, value) %>%
+            dplyr::select(section, sub.section, group, category, date, value)
+
+        # Calculate valuations
+
+        # Get stock prices
+        from = lubridate::today() - lubridate::years(12)
+        valuations_2 <- tq_get(x, get = "stock.prices", from = from) %>%
+            tq_transform_xy(adjusted, transform_fun = to.period, period = "years") %>%
+            dplyr::mutate(year = lubridate::year(date)) %>%
+            dplyr::select(year, date, adjusted)
+
+        # Get key ratios
+        valuations_1 <- key_ratios_bind %>%
+            dplyr::filter(section == "Financials") %>%
+            dplyr::filter(category %in% c("Revenue USD Mil",
+                                          "Shares Mil",
+                                          "Earnings Per Share USD",
+                                          "Book Value Per Share * USD",
+                                          "Operating Cash Flow USD Mil")) %>%
+            dplyr::mutate(year = lubridate::year(date)) %>%
+            dplyr::select(year, category, value) %>%
+            tidyr::spread(key = category, value = value) %>%
+            dplyr::mutate(`Revenue Per Share USD` = `Revenue USD Mil` / `Shares Mil`,
+                          `Cash Flow Per Share USD` = `Operating Cash Flow USD Mil` / `Shares Mil`) %>%
+            dplyr::select(year,
+                          `Earnings Per Share USD`,
+                          `Revenue Per Share USD`,
+                          `Book Value Per Share * USD`,
+                          `Cash Flow Per Share USD`)
+
+        # Merge and calculate valuations
+        valuation <- dplyr::left_join(valuations_1, valuations_2, by = "year") %>%
+            dplyr::mutate(`Price to Earnings`  = adjusted / `Earnings Per Share USD`,
+                          `Price to Sales`     = adjusted / `Revenue Per Share USD`,
+                          `Price to Book`      = adjusted / `Book Value Per Share * USD`,
+                          `Price to Cash Flow` = adjusted / `Cash Flow Per Share USD`) %>%
+            dplyr::select(date,
+                          `Price to Earnings`,
+                          `Price to Sales`,
+                          `Price to Book`,
+                          `Price to Cash Flow`) %>%
+            tidyr::gather(key = category, value = value, -date) %>%
+            dplyr::select(category, date, value) %>%
+            dplyr::mutate(date = lubridate::ymd(date))
+
+        # Get last group number
+        last_group_num <- key_ratios_bind$group %>% max()
+
+        # Create valuation tibble and bind_rows
+        valuation_bind <- dplyr::bind_cols(
+            tibble::tibble(section = rep("Valuation Ratios", nrow(valuation))),
+            tibble::tibble(sub.section = rep("Valuation Ratios", nrow(valuation))),
+            tibble::tibble(group = rep(seq(last_group_num + 1, length.out = 4), each = 10)),
+            valuation)
+
+        key_ratios <- dplyr::bind_rows(key_ratios_bind, valuation_bind) %>%
             dplyr::group_by(section) %>%
             tidyr::nest()
 
@@ -295,7 +349,6 @@ tq_get_util_1 <- function(x, get, ...) {
     })
 
 }
-
 
 
 # Util 2: Used for tq_get() `get` options:
@@ -606,3 +659,4 @@ tq_get_util_3 <-
     ret
 
 }
+

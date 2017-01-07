@@ -83,7 +83,7 @@ tq_get("AAPL", get = "financials")
 
 __Key Ratios__:
 
-Set `get = "key.ratios"` to get 10 years of key ratios (e.g. EPS, ROA, ROE, current ratio, debt/equity, inventory turnover, and many more), separated into seven primary sections. 
+Set `get = "key.ratios"` to get 10 years of 89 different key ratios (e.g. P/E, P/S, EPS, ROA, ROE, current ratio, debt/equity, inventory turnover, and many more), separated into seven primary sections. 
 
 ```{r}
 tq_get("AAPL", get = "key.ratios")

@@ -30,8 +30,8 @@ for \code{x}. Options include:
   \item \code{"financials"}: Get the income, balance sheet, and cash flow
   financial statements for a stock symbol from
   \href{https://www.google.com/finance}{Google Finance}.
-  \item \code{"key.ratios"}: Get the growth, profitablity, financial health,
-  and efficiency ratios for a stock symbol from
+  \item \code{"key.ratios"}: Get historical growth, profitablity, financial health,
+  efficiency, and valuation ratios over 10-years for a stock symbol from
   \href{https://www.morningstar.com}{morningstar.com}.
   \item \code{"economic.data"}: Get economic data from
   \href{https://fred.stlouisfed.org/}{FRED}.

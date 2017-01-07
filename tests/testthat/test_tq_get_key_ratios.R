@@ -15,9 +15,16 @@ test_that("Test returns tibble with correct rows and columns.", {
     # Tibble
     expect_is(test1, "tbl")
     # Rows
-    expect_equal(nrow(test1), 6)
+    expect_equal(nrow(test1), 7)
     # Columns
     expect_equal(ncol(test1), 2)
+})
+
+test_that("Test unnest returns correct rows.", {
+    # Rows
+    expect_equal(nrow(unnest(test1)), 890)
+    # Columns
+    expect_equal(ncol(unnest(test1)), 6)
 })
 
 test_that("Test prints warning message on invalid x input.", {

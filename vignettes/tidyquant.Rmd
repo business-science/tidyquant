@@ -156,6 +156,7 @@ For any given stock, the key ratios are available for 10 years that are classifi
 * __Cash Flow__: These ratios include operating cash flow growth % YOY, free cash flow growth % YOY, capital expenditure as a % of sales, and more.
 * __Financial Health__: These ratios include balance sheet items as a percentage of total assets and liabilities, and liquidty/financial health metrics such as current ratio, quick ratio, debt/equity, and financial leverage.
 * __Efficiency Ratios__: These ratios include days sales outstanding, days inventory, inventory turnover, asset turnover and more. 
+* __Valuation Ratios__: These ratios include price to earnings (P/E), price to sales (P/S), price to book (P/B), and price to operating cash flow. 
 
 To get the key ratios:
 
@@ -168,21 +169,20 @@ The ratios can be filtered and unnested to peel away the hierarchical nesting la
 
 ```{r}
 aapl_key_ratios %>%
-    filter(section == "Financial Health") %>%
+    filter(section == "Valuation Ratios") %>%
     unnest()
 ```
 
-Once we have a section, we can quickly access any of the sub.sections and/or categories. For example, we can easily chart the ratios in the "Liquidity/Financial Health" `sub.section` of the "Financial Health" `section`:
+Once we have a section, we can quickly visualize the ratios:
 
 ```{r}
 aapl_key_ratios %>%
-    filter(section == "Financial Health") %>%
+    filter(section == "Valuation Ratios") %>%
     unnest() %>%
-    filter(sub.section == "Liquidty/Financial Health") %>%
-    ggplot(aes(x = date, y = value, col = category)) + 
-    geom_line() +
-    labs(title = "Financial Health Ratios for AAPL", x = "", y = "") +
-    lims(y = c(0, 4))
+    ggplot(aes(x = date, y = value)) + 
+    geom_line(aes(col = forcats::fct_reorder2(category, date, value))) +
+    labs(title = "10-Year Historical Valuation Ratios for AAPL", x = "", 
+         y = "", col = "") 
 ```
 
 The data source is [Morningstar](http://www.morningstar.com/).
