@@ -216,11 +216,18 @@ tq_get_util_1 <- function(x, get, ...) {
 
         # Download file
         tmp <- tempfile()
-        url_base_1 <- 'http://financials.morningstar.com/finan/ajax/exportKR2CSV.html?&callback=?&t=XNAS:'
+        stock_exchange <- c("XNAS", "XNYS") # mornginstar gets from various exchanges
+        url_base_1 <- 'http://financials.morningstar.com/finan/ajax/exportKR2CSV.html?&callback=?&t='
         url_base_2 <- '&region=usa&culture=en-US&cur=&order=asc'
-        url <- paste0(url_base_1, x, url_base_2)
+        # Two URLs to try
+        url <- paste0(url_base_1, stock_exchange, ":", x, url_base_2)
 
-        download.file(url, destfile = tmp, quiet = TRUE)
+        # Try various stock exchanges
+        download.file(url[1], destfile = tmp, quiet = TRUE)
+        if (length(readLines(tmp)) == 0) {
+            download.file(url[2], destfile = tmp, quiet = TRUE)
+        }
+
 
         # Setup Tibble Part 1
         key_ratios_1 <- tibble::tibble(
