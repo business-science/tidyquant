@@ -312,4 +312,4 @@ tibble(symbol = c("AAPL", "GOOG", "AMZN", "FB", "AVGO", "SWKS","NVDA")) %>%
 Further Information
 -------------------
 
-This just scratches the surface of the features. See the [`tidyquant` vignette](https://cran.r-project.org/web/packages/tidyquant/vignettes/tidyquant.html) for further details on the package.
+This just scratches the surface of the features. See the [`tidyquant` vignette](https://CRAN.R-project.org/package=tidyquant) for further details on the package.
