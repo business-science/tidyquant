@@ -8,13 +8,13 @@
 \alias{tq_transform_xy_}
 \title{Transforms quantitative data (returns new variables in new tibble)}
 \usage{
-tq_transform(data, ohlc_fun = OHLCV, transform_fun, ...)
+tq_transform(data, ohlc_fun = OHLCV, transform_fun, x_fun, ...)
 
-tq_transform_(data, ohlc_fun = "OHLCV", transform_fun, ...)
+tq_transform_(data, ohlc_fun = "OHLCV", transform_fun, x_fun, ...)
 
-tq_transform_xy(data, x, y = NULL, transform_fun, ...)
+tq_transform_xy(data, x, y = NULL, transform_fun, .x, .y, ...)
 
-tq_transform_xy_(data, x, y = NULL, transform_fun, ...)
+tq_transform_xy_(data, x, y = NULL, transform_fun, .x, .y, ...)
 
 tq_transform_fun_options()
 }
@@ -29,6 +29,8 @@ HLC, OHLC, OHLCV).}
 \item{transform_fun}{The transformation function from either the \code{xts},
 \code{quantmod}, or \code{TTR} package. Execute \code{tq_transform_fun_options()}
 to see the full list of options by package.}
+
+\item{x_fun, .x, .y}{Deprecated. Use \code{ohlc_fun}, \code{x}, and \code{y} instead.}
 
 \item{...}{Additional parameters passed to the appropriate transformation
 function.}

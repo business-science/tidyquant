@@ -12,6 +12,7 @@
 #' to see the full list of options by package.
 #' @param ... Additional parameters passed to the appropriate mutatation
 #' function.
+#' @param x_fun,.x,.y Deprecated. Use \code{ohlc_fun}, \code{x}, and \code{y} instead.
 #'
 #' @return Returns data in the form of a \code{tibble} object.
 #'
@@ -84,10 +85,18 @@
 
 # PRIMARY FUNCTIONS ----
 
-tq_mutate <- function(data, ohlc_fun = OHLCV, mutate_fun, ...) {
+tq_mutate <- function(data, ohlc_fun = OHLCV, mutate_fun, x_fun, ...) {
+
+    # Deprecation
+    if (!missing(x_fun)) {
+        warning("argument x_fun is deprecated; please use ohlc_fun instead.",
+                call. = FALSE)
+        ohlc_fun <- deparse(substitute(x_fun))
+    } else {
+        ohlc_fun <- deparse(substitute(ohlc_fun))
+    }
 
     # Convert to NSE
-    ohlc_fun <- deparse(substitute(ohlc_fun))
     mutate_fun <- deparse(substitute(mutate_fun))
 
     tq_mutate_(data = data, ohlc_fun = ohlc_fun, mutate_fun = mutate_fun, ...)
@@ -96,7 +105,14 @@ tq_mutate <- function(data, ohlc_fun = OHLCV, mutate_fun, ...) {
 
 #' @rdname tq_mutate
 #' @export
-tq_mutate_ <- function(data, ohlc_fun = "OHLCV", mutate_fun, ...) {
+tq_mutate_ <- function(data, ohlc_fun = "OHLCV", mutate_fun, x_fun, ...) {
+
+    # Deprecation
+    if (!missing(x_fun)) {
+        warning("argument x_fun is deprecated; please use ohlc_fun instead.",
+                call. = FALSE)
+        ohlc_fun <- x_fun
+    }
 
     # Get transformation
     ret <- tq_transform_(data = data, ohlc_fun = ohlc_fun, transform_fun = mutate_fun, ...)
@@ -109,11 +125,26 @@ tq_mutate_ <- function(data, ohlc_fun = "OHLCV", mutate_fun, ...) {
 
 #' @rdname tq_mutate
 #' @export
-tq_mutate_xy <- function(data, x, y = NULL, mutate_fun, ...) {
+tq_mutate_xy <- function(data, x, y = NULL, mutate_fun, .x, .y, ...) {
+
+    # Deprecation
+    if (!missing(.x)) {
+        warning("argument .x is deprecated; please use x instead.",
+                call. = FALSE)
+        x <- deparse(substitute(.x))
+    } else {
+        x <- deparse(substitute(x))
+    }
+
+    if (!missing(.y)) {
+        warning("argument .y is deprecated; please use y instead.",
+                call. = FALSE)
+        y <- deparse(substitute(.y))
+    } else {
+        y <- deparse(substitute(y))
+    }
 
     # Convert to NSE
-    x <- deparse(substitute(x))
-    y <- deparse(substitute(y))
     mutate_fun <- deparse(substitute(mutate_fun))
 
     tq_mutate_xy_(data = data, x = x, y = y, mutate_fun = mutate_fun, ...)
@@ -122,7 +153,20 @@ tq_mutate_xy <- function(data, x, y = NULL, mutate_fun, ...) {
 
 #' @rdname tq_mutate
 #' @export
-tq_mutate_xy_ <- function(data, x, y = NULL, mutate_fun, ...) {
+tq_mutate_xy_ <- function(data, x, y = NULL, mutate_fun, .x, .y, ...) {
+
+    # Deprecation
+    if (!missing(.x)) {
+        warning("argument .x is deprecated; please use x instead.",
+                call. = FALSE)
+        x <- .x
+    }
+
+    if (!missing(.y)) {
+        warning("argument .y is deprecated; please use y instead.",
+                call. = FALSE)
+        y <- .y
+    }
 
     # Get transformation
     ret <- tq_transform_xy_(data = data, x = x, y = y, transform_fun = mutate_fun, ...)

@@ -12,6 +12,7 @@
 #' to see the full list of options by package.
 #' @param ... Additional parameters passed to the appropriate transformation
 #' function.
+#' @param x_fun,.x,.y Deprecated. Use \code{ohlc_fun}, \code{x}, and \code{y} instead.
 #'
 #' @return Returns data in the form of a \code{tibble} object.
 #'
@@ -86,10 +87,18 @@
 
 # PRIMARY FUNCTIONS ----
 
-tq_transform <- function(data, ohlc_fun = OHLCV, transform_fun, ...) {
+tq_transform <- function(data, ohlc_fun = OHLCV, transform_fun, x_fun, ...) {
+
+    # Deprecation
+    if (!missing(x_fun)) {
+        warning("argument x_fun is deprecated; please use ohlc_fun instead.",
+                call. = FALSE)
+        ohlc_fun <- deparse(substitute(x_fun))
+    } else {
+        ohlc_fun <- deparse(substitute(ohlc_fun))
+    }
 
     # Convert to NSE
-    ohlc_fun <- deparse(substitute(ohlc_fun))
     transform_fun <- deparse(substitute(transform_fun))
 
     tq_transform_(data, ohlc_fun, transform_fun, ...)
@@ -98,7 +107,14 @@ tq_transform <- function(data, ohlc_fun = OHLCV, transform_fun, ...) {
 
 #' @rdname tq_transform
 #' @export
-tq_transform_ <- function(data, ohlc_fun = "OHLCV", transform_fun, ...) {
+tq_transform_ <- function(data, ohlc_fun = "OHLCV", transform_fun, x_fun, ...) {
+
+    # Deprecation
+    if (!missing(x_fun)) {
+        warning("argument x_fun is deprecated; please use ohlc_fun instead.",
+                call. = FALSE)
+        ohlc_fun <- x_fun
+    }
 
     # Check transform_fun in xts, quantmod or TTR
     check_transform_fun_options(transform_fun)
@@ -147,11 +163,26 @@ tq_transform_ <- function(data, ohlc_fun = "OHLCV", transform_fun, ...) {
 
 #' @rdname tq_transform
 #' @export
-tq_transform_xy <- function(data, x, y = NULL, transform_fun, ...) {
+tq_transform_xy <- function(data, x, y = NULL, transform_fun, .x, .y, ...) {
+
+    # Deprecation
+    if (!missing(.x)) {
+        warning("argument .x is deprecated; please use x instead.",
+                call. = FALSE)
+        x <- deparse(substitute(.x))
+    } else {
+        x <- deparse(substitute(x))
+    }
+
+    if (!missing(.y)) {
+        warning("argument .y is deprecated; please use y instead.",
+                call. = FALSE)
+        y <- deparse(substitute(.y))
+    } else {
+        y <- deparse(substitute(y))
+    }
 
     # Convert to NSE
-    x <- deparse(substitute(x))
-    y <- deparse(substitute(y))
     transform_fun <- deparse(substitute(transform_fun))
 
     tq_transform_xy_(data, x, y, transform_fun, ...)
@@ -160,7 +191,20 @@ tq_transform_xy <- function(data, x, y = NULL, transform_fun, ...) {
 
 #' @rdname tq_transform
 #' @export
-tq_transform_xy_ <- function(data, x, y = NULL, transform_fun, ...) {
+tq_transform_xy_ <- function(data, x, y = NULL, transform_fun, .x, .y, ...) {
+
+    # Deprecation
+    if (!missing(.x)) {
+        warning("argument .x is deprecated; please use x instead.",
+                call. = FALSE)
+        x <- .x
+    }
+
+    if (!missing(.y)) {
+        warning("argument .y is deprecated; please use y instead.",
+                call. = FALSE)
+        y <- .y
+    }
 
     # Check transform_fun in xts, quantmod or TTR
     check_transform_fun_options(transform_fun)
@@ -269,7 +313,7 @@ check_ohlc_fun_options <- function(fun) {
     x_options <- c("Op", "Hi", "Lo", "Cl", "Vo", "Ad",
                    "HLC", "OHLC", "OHLCV")
     if (!(fun %in% x_options)) {
-        stop(paste0("ohlc_fun = ", ohlc_fun, " not a valid name."))
+        stop(paste0("ohlc_fun = ", fun, " not a valid name."))
     }
 }
 

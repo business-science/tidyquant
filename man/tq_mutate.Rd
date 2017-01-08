@@ -8,13 +8,13 @@
 \alias{tq_mutate_xy_}
 \title{Mutates quantitative data (adds new variables to existing tibble)}
 \usage{
-tq_mutate(data, ohlc_fun = OHLCV, mutate_fun, ...)
+tq_mutate(data, ohlc_fun = OHLCV, mutate_fun, x_fun, ...)
 
-tq_mutate_(data, ohlc_fun = "OHLCV", mutate_fun, ...)
+tq_mutate_(data, ohlc_fun = "OHLCV", mutate_fun, x_fun, ...)
 
-tq_mutate_xy(data, x, y = NULL, mutate_fun, ...)
+tq_mutate_xy(data, x, y = NULL, mutate_fun, .x, .y, ...)
 
-tq_mutate_xy_(data, x, y = NULL, mutate_fun, ...)
+tq_mutate_xy_(data, x, y = NULL, mutate_fun, .x, .y, ...)
 
 tq_mutate_fun_options()
 }
@@ -29,6 +29,8 @@ HLC, OHLC, OHLCV).}
 \item{mutate_fun}{The mutation function from either the \code{xts},
 \code{quantmod}, or \code{TTR} package. Execute \code{tq_mutate_fun_options()}
 to see the full list of options by package.}
+
+\item{x_fun, .x, .y}{Deprecated. Use \code{ohlc_fun}, \code{x}, and \code{y} instead.}
 
 \item{...}{Additional parameters passed to the appropriate mutatation
 function.}
