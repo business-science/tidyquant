@@ -12,7 +12,6 @@
 #' to see the full list of options by package.
 #' @param ... Additional parameters passed to the appropriate transformation
 #' function.
-#' @param x_fun,.x,.y Deprecated. Use \code{ohlc_fun}, \code{x}, and \code{y} instead.
 #'
 #' @return Returns data in the form of a \code{tibble} object.
 #'
@@ -87,34 +86,117 @@
 
 # PRIMARY FUNCTIONS ----
 
-tq_transform <- function(data, ohlc_fun = OHLCV, transform_fun, x_fun, ...) {
-
-    # Deprecation
-    if (!missing(x_fun)) {
-        warning("argument x_fun is deprecated; please use ohlc_fun instead.",
-                call. = FALSE)
-        ohlc_fun <- deparse(substitute(x_fun))
-    } else {
-        ohlc_fun <- deparse(substitute(ohlc_fun))
-    }
+#' @rdname tq_transform
+#' @export
+tq_transform <- function(data, ohlc_fun = OHLCV, transform_fun, ...) {
 
     # Convert to NSE
+    ohlc_fun <- deparse(substitute(ohlc_fun))
     transform_fun <- deparse(substitute(transform_fun))
 
-    tq_transform_(data, ohlc_fun, transform_fun, ...)
+    # Patch for grouped data frames
+    if (dplyr::is.grouped_df(data)) {
+
+        tq_transform_grouped_df_(data, ohlc_fun, transform_fun, ...)
+
+    } else {
+
+        tq_transform_base_(data, ohlc_fun, transform_fun, ...)
+
+    }
+}
+
+#' @rdname tq_transform
+#' @export
+tq_transform_ <- function(data, ohlc_fun = "OHLCV", transform_fun, ...) {
+
+    # Patch for grouped data frames
+    if (dplyr::is.grouped_df(data)) {
+
+        tq_transform_grouped_df_(data, ohlc_fun, transform_fun, ...)
+
+    } else {
+
+        tq_transform_base_(data, ohlc_fun, transform_fun, ...)
+
+    }
 
 }
 
 #' @rdname tq_transform
 #' @export
-tq_transform_ <- function(data, ohlc_fun = "OHLCV", transform_fun, x_fun, ...) {
+tq_transform_xy <- function(data, x, y = NULL, transform_fun, ...) {
 
-    # Deprecation
-    if (!missing(x_fun)) {
-        warning("argument x_fun is deprecated; please use ohlc_fun instead.",
-                call. = FALSE)
-        ohlc_fun <- x_fun
+    # Convert to NSE
+    x <- deparse(substitute(x))
+    y <- deparse(substitute(y))
+    transform_fun <- deparse(substitute(transform_fun))
+
+    # Patch for grouped data frames
+    if (dplyr::is.grouped_df(data)) {
+
+        tq_transform_xy_grouped_df_(data, x, y, transform_fun, ...)
+
+    } else {
+
+        tq_transform_xy_base_(data, x, y, transform_fun, ...)
+
     }
+}
+
+#' @rdname tq_transform
+#' @export
+tq_transform_xy_ <- function(data, x, y = NULL, transform_fun, ...) {
+
+    # Patch for grouped data frames
+    if (dplyr::is.grouped_df(data)) {
+
+        tq_transform_xy_grouped_df_(data, x, y, transform_fun, ...)
+
+    } else {
+
+        tq_transform_xy_base_(data, x, y, transform_fun, ...)
+
+    }
+}
+
+#' @rdname tq_transform
+#' @export
+tq_transform_fun_options <- function() {
+
+    # zoo rollapply functions
+    pkg_regex_zoo <- "roll"
+    funs_zoo <- ls("package:zoo")[stringr::str_detect(ls("package:zoo"), pkg_regex_zoo)]
+
+    # xts apply.period, to.period, lag and diff functions
+    pkg_regex_xts <- "apply|to\\.|period|lag|diff"
+    funs_xts <- ls("package:xts")[stringr::str_detect(ls("package:xts"), pkg_regex_xts)]
+
+    # quantmod periodReturns, Delt, series functions
+    pkg_regex_quantmod <- "Return|Delt|Lag|Next|^Op..|^Cl..|^Hi..|^Lo..|^series"
+    funs_quantmod <- ls("package:quantmod")[stringr::str_detect(ls("package:quantmod"), pkg_regex_quantmod)]
+
+    # TTR functions
+    pkg_regex_ttr <- "^get*|^stock|^naCh" # NOT these
+    funs_ttr <- ls("package:TTR")[!stringr::str_detect(ls("package:TTR"), pkg_regex_ttr)]
+
+    fun_options <- list(zoo = funs_zoo,
+                        xts = funs_xts,
+                        quantmod = funs_quantmod,
+                        TTR = funs_ttr)
+
+    fun_options
+
+}
+
+
+# UTILITY FUNCTIONS ----
+
+# See utils-date.R for date and datetime functions
+
+# Base functions ----
+
+tq_transform_base_ <- function(data, ohlc_fun = "OHLCV", transform_fun, ...) {
 
     # Check transform_fun in xts, quantmod or TTR
     check_transform_fun_options(transform_fun)
@@ -161,50 +243,7 @@ tq_transform_ <- function(data, ohlc_fun = "OHLCV", transform_fun, x_fun, ...) {
 
 }
 
-#' @rdname tq_transform
-#' @export
-tq_transform_xy <- function(data, x, y = NULL, transform_fun, .x, .y, ...) {
-
-    # Deprecation
-    if (!missing(.x)) {
-        warning("argument .x is deprecated; please use x instead.",
-                call. = FALSE)
-        x <- deparse(substitute(.x))
-    } else {
-        x <- deparse(substitute(x))
-    }
-
-    if (!missing(.y)) {
-        warning("argument .y is deprecated; please use y instead.",
-                call. = FALSE)
-        y <- deparse(substitute(.y))
-    } else {
-        y <- deparse(substitute(y))
-    }
-
-    # Convert to NSE
-    transform_fun <- deparse(substitute(transform_fun))
-
-    tq_transform_xy_(data, x, y, transform_fun, ...)
-
-}
-
-#' @rdname tq_transform
-#' @export
-tq_transform_xy_ <- function(data, x, y = NULL, transform_fun, .x, .y, ...) {
-
-    # Deprecation
-    if (!missing(.x)) {
-        warning("argument .x is deprecated; please use x instead.",
-                call. = FALSE)
-        x <- .x
-    }
-
-    if (!missing(.y)) {
-        warning("argument .y is deprecated; please use y instead.",
-                call. = FALSE)
-        y <- .y
-    }
+tq_transform_xy_base_ <- function(data, x, y = NULL, transform_fun, ...) {
 
     # Check transform_fun in xts, quantmod or TTR
     check_transform_fun_options(transform_fun)
@@ -267,39 +306,44 @@ tq_transform_xy_ <- function(data, x, y = NULL, transform_fun, .x, .y, ...) {
 
 }
 
-#' @rdname tq_transform
-#' @export
-tq_transform_fun_options <- function() {
+# Patches for grouped data frames -----
 
-    # zoo rollapply functions
-    pkg_regex_zoo <- "roll"
-    funs_zoo <- ls("package:zoo")[stringr::str_detect(ls("package:zoo"), pkg_regex_zoo)]
+tq_transform_grouped_df_ <- function(data, ohlc_fun, transform_fun, ...) {
 
-    # xts apply.period, to.period, lag and diff functions
-    pkg_regex_xts <- "apply|to\\.|period|lag|diff"
-    funs_xts <- ls("package:xts")[stringr::str_detect(ls("package:xts"), pkg_regex_xts)]
+    group_names <- dplyr::groups(data)
 
-    # quantmod periodReturns, Delt, series functions
-    pkg_regex_quantmod <- "Return|Delt|Lag|Next|^Op..|^Cl..|^Hi..|^Lo..|^series"
-    funs_quantmod <- ls("package:quantmod")[stringr::str_detect(ls("package:quantmod"), pkg_regex_quantmod)]
-
-    # TTR functions
-    pkg_regex_ttr <- "^get*|^stock|^naCh" # NOT these
-    funs_ttr <- ls("package:TTR")[!stringr::str_detect(ls("package:TTR"), pkg_regex_ttr)]
-
-    fun_options <- list(zoo = funs_zoo,
-                        xts = funs_xts,
-                        quantmod = funs_quantmod,
-                        TTR = funs_ttr)
-
-    fun_options
-
+    data %>%
+        tidyr::nest() %>%
+        dplyr::mutate(nested.col = data %>%
+                          purrr::map(~ tq_transform_base_(data = .x,
+                                                          ohlc_fun = ohlc_fun,
+                                                          transform_fun = transform_fun,
+                                                          ...))
+        ) %>%
+        dplyr::select(-data) %>%
+        tidyr::unnest() %>%
+        dplyr::group_by_(.dots = group_names)
 }
 
+tq_transform_xy_grouped_df_ <- function(data, x, y, transform_fun, ...) {
 
-# UTILITY FUNCTIONS ----
+    group_names <- dplyr::groups(data)
 
-# See utils.R for find_date_cols
+    data %>%
+        tidyr::nest() %>%
+        dplyr::mutate(nested.col = data %>%
+                          purrr::map(~ tq_transform_xy_base_(data = .x,
+                                                             x = x,
+                                                             y = y,
+                                                             transform_fun = transform_fun,
+                                                             ...))
+        ) %>%
+        dplyr::select(-data) %>%
+        tidyr::unnest() %>%
+        dplyr::group_by_(.dots = group_names)
+}
+
+# Checks -----
 
 check_transform_fun_options <- function(fun) {
     fun_options <- tq_transform_fun_options() %>%
@@ -330,6 +374,8 @@ check_x_y_valid <- function(data, x, y) {
     }
 }
 
+# Other -----
+
 coerce_to_tibble <- function(data, date_col_name, time_zone, transform_fun) {
 
     # Coerce to tibble
@@ -354,5 +400,4 @@ detect_period_fun <- function(fun) {
     if (fun %in% to_period_funs) is_period_fun <- TRUE
     is_period_fun
 }
-
 

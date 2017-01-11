@@ -8,6 +8,22 @@ AAPL <- tq_get("AAPL", get = "stock.prices", from = "2010-01-01", to = "2015-01-
 test1 <- AAPL %>%
     tq_transform(ohlc_fun = Cl, transform_fun = to.period, period = "months")
 
+# Test 1.2: Grouped_df test
+grouped_df <- tibble(symbol = c("FB", "AMZN")) %>%
+    dplyr::mutate(stock.prices = purrr::map(.x = symbol,
+                                            .f = ~ tq_get(.x,
+                                                          get  = "stock.prices",
+                                                          from = "2015-01-01",
+                                                          to   = "2016-01-01"))) %>%
+    tidyr::unnest() %>%
+    dplyr::group_by(symbol)
+
+test1.2a  <- mutate(grouped_df, V1 = runSD(adjusted)) %>%
+    select(-(open:adjusted))
+
+test1.2b <- tq_transform(grouped_df, Ad, runSD)
+
+
 # Test 2: tq_transform_xy test
 test2 <- AAPL %>%
     tq_transform_xy(x = close, transform_fun = to.period, period = "months")
@@ -38,6 +54,13 @@ test_that("Test 1 returns tibble with correct rows and columns.", {
     expect_equal(nrow(test1), 60)
     # Columns
     expect_equal(ncol(test1), 2)
+})
+
+test_that("Test 1.2 grouped data frames are same with mutate and tq_transform", {
+    # Return column
+    expect_identical(test1.2a$V1, test1.2b$V1)
+    # Groups
+    expect_identical(dplyr::groups(test1.2a), dplyr::groups(test1.2b))
 })
 
 test_that("Test 2 returns tibble with correct rows and columns.", {

@@ -1,3 +1,9 @@
+# tidyquant 0.2.0.9000 - Development Version
+
+* Integrated `dplyr::group_by()` with `tq_mutate()` and `tq_transform()`. The transform and mutate functions now work properly with grouped data frames.
+* Fixed bug with `tq_get()`, `get = "key.ratios"`, where key ratios for stocks from the NYSE returned `NA`.
+* Removed support for deprecated arguments: `x_fun`, `.x`, and `.y` in the respective transform and mutate functions.
+
 # tidyquant 0.2.0
 
 * Added `get = "key.ratios"` option for `tq_get()`, which retrieves 10-years of key performance ratios (89 total) from [www.morningstar.com](https://www.morningstar.com). These include various measures of financial performance including profitability, growth, cash flow, financial health, efficiency, and valuation ratios. Example: `tq_get("AAPL", get = "key.ratios")`.
@@ -6,6 +12,7 @@
     * `x_fun` is now `ohlc_fun` for `tq_mutate()` and `tq_transform()`
     * `.x` is now `x` and `.y` is now `y` for `tq_mutate_xy()` and `tq_transform_xy()`
 * Fixed duplication of column names during `tq_mutate`. Names are now sequentually indexed with duplicate names starting at `.1` suffix.  
+
 
 # tidyquant 0.1.0 
 
