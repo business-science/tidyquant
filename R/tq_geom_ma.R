@@ -1,7 +1,6 @@
 #' Plot moving averages
 #'
-#' Plot moving averages quickly using various \code{geom_tq_} functions.
-#' The moving average functions used are specified in \code{\link[TTR]{SMA}}
+#' The underlying moving average functions used are specified in \code{\link[TTR]{SMA}}
 #' from the TTR package. Use \code{\link{coord_x_date}} to zoom into specific plot regions.
 #' The following moving averages are available:
 #' \itemize{
@@ -53,6 +52,10 @@
 #' that define both data and aesthetics and shouldn't inherit behaviour from
 #' the default plot specification, e.g. \code{\link[ggplot2]{borders}}.
 #'
+#' @param ma_fun The function used to calculate the moving average. Seven options are
+#' available including: SMA, EMA, WMA, DEMA, ZLEMA, VWMA, and EVWMA. The default is
+#' \code{SMA}. See \code{\link[TTR]{SMA}} for underlying functions.
+#'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_line
 #' @inheritParams TTR::SMA
@@ -99,42 +102,48 @@
 #' AAPL %>%
 #'     ggplot(aes(x = date, y = adjusted)) +
 #'     geom_line() +                         # Plot stock price
-#'     geom_tq_sma(n = 50) +                 # Plot 50-day Moving Average
-#'     geom_tq_sma(n = 200, color = "red") + # Plot 200-day Moving Average
+#'     tq_geom_ma(ma_fun = SMA, n = 50) +                 # Plot 50-day SMA
+#'     tq_geom_ma(ma_fun = SMA, n = 200, color = "red") + # Plot 200-day SMA
 #'     coord_x_date(xlim = c(today() - weeks(12), today()),
-#'                ylim = c(100, 130))        # Zoom in
+#'                ylim = c(100, 130))                     # Zoom in
 #'
 #' # EVWMA
 #' AAPL %>%
 #'     ggplot(aes(x = date, y = adjusted)) +
-#'     geom_line() +                                   # Plot stock price
-#'     geom_tq_evwma(aes(volume = volume), n = 50) +   # Plot 50-day EVWMA
+#'     geom_line() +                                                   # Plot stock price
+#'     tq_geom_ma(aes(volume = volume), ma_fun = EVWMA, n = 50) +   # Plot 50-day EVWMA
 #'     coord_x_date(xlim = c(today() - weeks(12), today()),
-#'                ylim = c(100, 130))                  # Zoom in
+#'                ylim = c(100, 130))                                  # Zoom in
 
 
-
-
-
-
-
-
-
-
-# Simple moving average (SMA) -----
-
-#' @rdname geom_tq_ma
+#' @rdname tq_geom_ma
 #' @export
-geom_tq_ma <- function(mapping = NULL, data = NULL,
+tq_geom_ma <- function(mapping = NULL, data = NULL,
+                       position = "identity", na.rm = TRUE, show.legend = NA,
+                       inherit.aes = TRUE,
+                       ma_fun = SMA, n = 20,
+                       wilder = FALSE, ratio = NULL, v = 1, wts = 1:n, ...) {
+
+    ma_fun <- deparse(substitute(ma_fun))
+
+    tq_geom_ma_(mapping = mapping, data = data,
+                position = position, na.rm = na.rm, show.legend = show.legend,
+                inherit.aes = inherit.aes,
+                ma_fun = ma_fun, n = n,
+                wilder = wilder, ratio = ratio, v = v, wts = wts, ...)
+}
+
+
+#' @rdname tq_geom_ma
+#' @export
+tq_geom_ma_ <- function(mapping = NULL, data = NULL,
                      position = "identity", na.rm = TRUE, show.legend = NA,
                      inherit.aes = TRUE,
-                     maType = SMA, n = 20, sd = 2,
+                     ma_fun = "SMA", n = 20,
                      wilder = FALSE, ratio = NULL, v = 1, wts = 1:n, ...) {
 
-    maType <- deparse(substitute(maType))
-
     # Toggle if volume based
-    if (maType == "VWMA" || maType == "EVWMA") {
+    if (ma_fun == "VWMA" || ma_fun == "EVWMA") {
         stat_ma <- StatMA_vol
     } else {
         stat_ma <- StatMA
@@ -143,210 +152,52 @@ geom_tq_ma <- function(mapping = NULL, data = NULL,
     ggplot2::layer(
         stat = stat_ma, geom = GeomMA, data = data, mapping = mapping,
         position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-        params = list(n = n, maType = maType, sd = sd, na.rm = na.rm,
+        params = list(ma_fun = ma_fun, n = n, na.rm = na.rm,
                       wilder = wilder, ratio = ratio, v = 1, wts = 1:n, ...)
     )
 }
 
 
-StatSMA <- ggplot2::ggproto("StatSMA", Stat,
+StatMA <- ggplot2::ggproto("StatSMA", Stat,
                    required_aes = c("x", "y"),
 
                    compute_group = function(data, scales, params,
-                                            n = 10) {
+                                            ma_fun = "SMA", n = 10, wilder = FALSE,
+                                            ratio = ratio, v = 1, wts = 1:n) {
 
                        grid   <- tibble::tibble(x = data$x)
-                       grid$y <- TTR::SMA(data$y, n = n)
+                       grid$y <- get_ma(x = data$y,
+                                        ma_fun = ma_fun,
+                                        n = n,
+                                        wilder = wilder,
+                                        ratio = ratio,
+                                        v = v,
+                                        wts = wts)
 
                        grid
                    }
 )
 
-# Exponential moving average (EMA) -----
+StatMA_vol <- ggplot2::ggproto("StatSMA_vol", Stat,
+                           required_aes = c("x", "y", "volume"),
 
-#' @rdname geom_tq_sma
-#' @export
-geom_tq_ema <- function(mapping = NULL, data = NULL,
-                     position = "identity", na.rm = TRUE, show.legend = NA,
-                     inherit.aes = TRUE, n = 10, wilder = FALSE, ratio = NULL, ...) {
+                           compute_group = function(data, scales, params,
+                                                    ma_fun, n = 10,
+                                                    wilder = FALSE, ratio = NULL,
+                                                    v = 1, wts = 1:n) {
 
-    ggplot2::layer(
-        stat = StatEMA, geom = GeomMA, data = data, mapping = mapping,
-        position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-        params = list(n = n, wilder = wilder, ratio = ratio, na.rm = na.rm, ...)
-    )
-}
+                               grid   <- tibble::tibble(x = data$x)
 
-StatEMA <- ggproto("StatEMA", Stat,
-                   required_aes = c("x", "y"),
+                               ma_fun <- eval(parse(text = paste0("TTR::", ma_fun)))
 
-                   compute_group = function(data, scales, params,
-                                            n = 10, wilder = FALSE, ratio = NULL) {
+                               grid$y <- ma_fun(price = data$y,
+                                                volume = data$volume,
+                                                n = n)
 
-                       grid   <- tibble::tibble(x = data$x)
-                       grid$y <- TTR::EMA(data$y,
-                                          n = n,
-                                          wilder = wilder,
-                                          ratio = ratio)
-
-                       grid
-                   }
+                               grid
+                           }
 )
 
-# Weighted Moving Average (WMA) -----
-
-#' @rdname geom_tq_sma
-#' @export
-geom_tq_wma <- function(mapping = NULL, data = NULL,
-                        position = "identity", na.rm = TRUE, show.legend = NA,
-                        inherit.aes = TRUE, n = 10, wts = 1:n, ...) {
-
-    ggplot2::layer(
-        stat = StatWMA, geom = GeomMA, data = data, mapping = mapping,
-        position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-        params = list(n = n, wts = wts, na.rm = na.rm, ...)
-    )
-}
-
-StatWMA <- ggproto("StatWMA", Stat,
-                   required_aes = c("x", "y"),
-
-                   compute_group = function(data, scales, params, n = 10,
-                                            wts = 1:n) {
-
-                       grid   <- tibble::tibble(x = data$x)
-                       grid$y <- TTR::WMA(data$y,
-                                          n = n,
-                                          wts = wts)
-
-                       grid
-                   }
-)
-
-
-# Double Exponential Moving Average (DEMA) -----
-
-#' @rdname geom_tq_sma
-#' @export
-geom_tq_dema <- function(mapping = NULL, data = NULL,
-                        position = "identity", na.rm = TRUE, show.legend = NA,
-                        inherit.aes = TRUE, n = 10, v = 1, wilder = FALSE, ratio = NULL, ...) {
-
-    ggplot2::layer(
-        stat = StatDEMA, geom = GeomMA, data = data, mapping = mapping,
-        position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-        params = list(n = n, v = v, wilder = wilder, ratio = ratio, na.rm = na.rm, ...)
-    )
-}
-
-StatDEMA <- ggproto("StatDEMA", Stat,
-                   required_aes = c("x", "y"),
-
-                   compute_group = function(data, scales, params,
-                                            n = 10, v = 1, wilder = FALSE,
-                                            ratio = NULL) {
-
-                       grid   <- tibble::tibble(x = data$x)
-                       grid$y <- TTR::DEMA(data$y,
-                                           n = n,
-                                           v = v,
-                                           wilder = wilder,
-                                           ratio = ratio)
-
-                       grid
-                   }
-)
-
-
-# Zero lag exponential moving average (ZLEMA) -----
-
-#' @rdname geom_tq_sma
-#' @export
-geom_tq_zlema <- function(mapping = NULL, data = NULL,
-                          position = "identity", na.rm = TRUE, show.legend = NA,
-                          inherit.aes = TRUE, n = 10, ratio = NULL, ...) {
-
-    ggplot2::layer(
-        stat = StatZLEMA, geom = GeomMA, data = data, mapping = mapping,
-        position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-        params = list(n = n, ratio = ratio, na.rm = na.rm, ...)
-    )
-}
-
-StatZLEMA <- ggproto("StatZLEMA", Stat,
-                     required_aes = c("x", "y"),
-
-                     compute_group = function(data, scales, params,
-                                              n = 10, ratio = NULL) {
-
-                         grid   <- tibble::tibble(x = data$x)
-                         grid$y <- TTR::ZLEMA(data$y,
-                                              n = n,
-                                              ratio = ratio)
-
-                         grid
-                     }
-)
-
-# Volume-Weighted Moving Average (VWMA) -----
-
-#' @rdname geom_tq_sma
-#' @export
-geom_tq_vwma <- function(mapping = NULL, data = NULL,
-                          position = "identity", na.rm = TRUE, show.legend = NA,
-                          inherit.aes = TRUE, n = 10, ...) {
-
-    ggplot2::layer(
-        stat = StatVWMA, geom = GeomMA, data = data, mapping = mapping,
-        position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-        params = list(n = n, na.rm = na.rm, ...)
-    )
-}
-
-StatVWMA <- ggproto("StatVWMA", Stat,
-                     required_aes = c("x", "y", "volume"),
-
-                     compute_group = function(data, scales, params,
-                                              n = 10) {
-
-                         grid   <- tibble::tibble(x = data$x)
-                         grid$y <- TTR::VWMA(data$y,
-                                             data$volume,
-                                             n = n)
-
-                         grid
-                     }
-)
-
-# Elastic Volume-Weighted Moving Average (EVWMA) -----
-
-#' @rdname geom_tq_sma
-#' @export
-geom_tq_evwma <- function(mapping = NULL, data = NULL,
-                          position = "identity", na.rm = TRUE, show.legend = NA,
-                          inherit.aes = TRUE, n = 10, ...) {
-
-    ggplot2::layer(
-        stat = StatEVWMA, geom = GeomMA, data = data, mapping = mapping,
-        position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-        params = list(n = n, na.rm = na.rm, ...)
-    )
-}
-
-StatEVWMA <- ggproto("StatEVWMA", Stat,
-                     required_aes = c("x", "y", "volume"),
-
-                     compute_group = function(data, scales, params,
-                                              n = 10) {
-
-                         grid   <- tibble::tibble(x = data$x)
-                         grid$y <- TTR::EVWMA(data$y,
-                                              data$volume,
-                                              n = n)
-
-                         grid
-                     }
-)
 
 
 # Utility Functions -----
@@ -357,3 +208,37 @@ GeomMA <- ggproto("GeomMA", GeomLine,
                                     size = 0.5,
                                     alpha = NA)
 )
+
+get_ma <- function(ma_fun, x, n, wilder, ratio, v, wts) {
+
+    if (ma_fun == "SMA") {
+        ret <- TTR::SMA(x = x,
+                        n = n)
+    } else if (ma_fun == "EMA") {
+        ret <- TTR::EMA(x = x,
+                        n = n,
+                        wilder = wilder,
+                        ratio = ratio)
+    } else if (ma_fun == "DEMA") {
+        ret <- TTR::DEMA(x = x,
+                         n = n,
+                         wilder = wilder,
+                         ratio = ratio,
+                         v = v)
+    } else if (ma_fun == "WMA") {
+        ret <- TTR::WMA(x = x,
+                        n = n,
+                        wts = wts)
+    } else if (ma_fun == "ZLEMA") {
+        ret <- TTR::ZLEMA(x = x,
+                          n = n,
+                          ratio = ratio)
+    } else {
+
+        stop(paste0("Unsupported ma_fun: ", ma_fun))
+
+    }
+
+    return(ret)
+
+}

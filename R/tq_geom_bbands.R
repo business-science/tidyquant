@@ -70,7 +70,7 @@
 #' AAPL %>%
 #'     ggplot(aes(x = date, y = close)) +
 #'     geom_line() +           # Plot stock price
-#'     tq_geom_bbands(aes(high = high, low = low), maType = SMA, n = 50) +
+#'     tq_geom_bbands(aes(high = high, low = low), ma_fun = SMA, n = 50) +
 #'     coord_x_date(xlim = c(today() - years(1), today()), ylim = c(80, 130))
 #'
 #'
@@ -79,7 +79,7 @@
 #'    ggplot(aes(x = date, y = close)) +
 #'    geom_line() +           # Plot stock price
 #'    tq_geom_bbands(aes(high = high, low = low),
-#'                   maType = EMA, wilder = TRUE, ratio = NULL, n = 50) +
+#'                   ma_fun = EMA, wilder = TRUE, ratio = NULL, n = 50) +
 #'    coord_x_date(xlim = c(today() - years(1), today()), ylim = c(80, 130))
 #'
 #'
@@ -88,25 +88,40 @@
 #'     ggplot(aes(x = date, y = close)) +
 #'     geom_line() +           # Plot stock price
 #'     tq_geom_bbands(aes(high = high, low = low, volume = volume),
-#'                    maType = VWMA, n = 50) +
+#'                    ma_fun = VWMA, n = 50) +
 #'     coord_x_date(xlim = c(today() - years(1), today()), ylim = c(80, 130))
-
 
 
 #' @rdname tq_geom_bbands
 #' @export
 tq_geom_bbands <- function(mapping = NULL, data = NULL,
+                       position = "identity", na.rm = TRUE, show.legend = NA,
+                       inherit.aes = TRUE,
+                       ma_fun = SMA, n = 20, sd = 2,
+                       wilder = FALSE, ratio = NULL, v = 1, wts = 1:n, ...) {
+
+    ma_fun <- deparse(substitute(ma_fun))
+
+    tq_geom_bbands_(mapping = mapping, data = data,
+                position = position, na.rm = na.rm, show.legend = show.legend,
+                inherit.aes = inherit.aes,
+                ma_fun = ma_fun, n = n, sd = sd,
+                wilder = wilder, ratio = ratio, v = v, wts = wts, ...)
+}
+
+
+#' @rdname tq_geom_bbands
+#' @export
+tq_geom_bbands_ <- function(mapping = NULL, data = NULL,
                            position = "identity", na.rm = TRUE,
                            show.legend = NA, inherit.aes = TRUE,
-                           maType = SMA, n = 20, sd = 2,
+                           ma_fun = SMA, n = 10, sd = 2,
                            wilder = FALSE, ratio = NULL, v = 1, wts = 1:n, ...) {
 
-    maType <- deparse(substitute(maType))
-
-    # Check maType is valid
+    # Check ma_fun is valid
 
     # Toggle if volume based
-    if (maType == "VWMA" || maType == "EVWMA") {
+    if (ma_fun == "VWMA" || ma_fun == "EVWMA") {
         stat_ribbon <- StatBBandsRibbon_vol
         stat_ma <- StatBBandsMA_vol
     } else {
@@ -117,14 +132,14 @@ tq_geom_bbands <- function(mapping = NULL, data = NULL,
     ribbon <- ggplot2::layer(
         stat = stat_ribbon, geom = GeomBBandsRibbon, data = data, mapping = mapping,
         position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-        params = list(n = n, maType = maType, sd = sd, na.rm = na.rm,
+        params = list(n = n, ma_fun = ma_fun, sd = sd, na.rm = na.rm,
                       wilder = wilder, ratio = ratio, v = 1, wts = 1:n, ...)
     )
 
     ma <- ggplot2::layer(
         stat = stat_ma, geom = GeomBBandsMA, data = data, mapping = mapping,
         position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-        params = list(n = n, maType = maType, sd = sd, na.rm = na.rm, alpha = NA,
+        params = list(n = n, ma_fun = ma_fun, sd = sd, na.rm = na.rm, alpha = NA,
                       wilder = wilder, ratio = ratio, v = 1, wts = 1:n, ...)
     )
 
@@ -137,7 +152,7 @@ StatBBandsRibbon <- ggplot2::ggproto("StatBBandsRibbon", Stat,
                             required_aes = c("x", "y", "high", "low"),
 
                             compute_group = function(data, scales, params,
-                                                     n = 20, maType = SMA, sd = 2,
+                                                     n = 10, ma_fun = SMA, sd = 2,
                                                      wilder = FALSE, ratio = NULL,
                                                      v = 1, wts = 1:n) {
 
@@ -147,7 +162,7 @@ StatBBandsRibbon <- ggplot2::ggproto("StatBBandsRibbon", Stat,
                                                       low   = data$low,
                                                       close = data$y)
 
-                                bbands <- get_bbands(HLC, n, maType,
+                                bbands <- get_bbands(HLC, n, ma_fun,
                                                      sd, wilder, ratio,
                                                      v, wts)
 
@@ -163,7 +178,7 @@ StatBBandsMA <- ggplot2::ggproto("StatBBandsMA", Stat,
                                  required_aes = c("x", "y", "high", "low"),
 
                                  compute_group = function(data, scales, params,
-                                                          n = 20, maType = SMA, sd = 2,
+                                                          ma_fun = "SMA", n = 20, sd = 2,
                                                           wilder = FALSE, ratio = NULL,
                                                           v = 1, wts = 1:n) {
 
@@ -173,7 +188,7 @@ StatBBandsMA <- ggplot2::ggproto("StatBBandsMA", Stat,
                                                            low   = data$low,
                                                            close = data$y)
 
-                                     bbands <- get_bbands(HLC, n, maType,
+                                     bbands <- get_bbands(HLC, n, ma_fun,
                                                           sd, wilder, ratio,
                                                           v, wts)
 
@@ -187,7 +202,7 @@ StatBBandsRibbon_vol <- ggplot2::ggproto("StatBBandsRibbon", Stat,
                                          required_aes = c("x", "y", "high", "low", "volume"),
 
                                          compute_group = function(data, scales, params,
-                                                                  n = 20, maType = SMA, sd = 2,
+                                                                  ma_fun = "SMA", n = 10, sd = 2,
                                                                   wilder = FALSE, ratio = NULL,
                                                                   v = 1, wts = 1:n) {
 
@@ -199,7 +214,7 @@ StatBBandsRibbon_vol <- ggplot2::ggproto("StatBBandsRibbon", Stat,
 
                                              bbands <- TTR::BBands(HLC = HLC,
                                                                    n = n,
-                                                                   maType = eval(parse(text = maType)),
+                                                                   ma_fun = eval(parse(text = ma_fun)),
                                                                    volume = data$volume,
                                                                    sd = sd)
 
@@ -214,7 +229,7 @@ StatBBandsMA_vol <- ggplot2::ggproto("StatBBandsMA", Stat,
                                  required_aes = c("x", "y", "high", "low", "volume"),
 
                                  compute_group = function(data, scales, params,
-                                                          n = 20, maType = SMA, sd = 2,
+                                                          n = 20, ma_fun = SMA, sd = 2,
                                                           wilder = FALSE, ratio = NULL,
                                                           v = 1, wts = 1:n) {
 
@@ -226,7 +241,7 @@ StatBBandsMA_vol <- ggplot2::ggproto("StatBBandsMA", Stat,
 
                                      bbands <- TTR::BBands(HLC = HLC,
                                                            n = n,
-                                                           maType = eval(parse(text = maType)),
+                                                           ma_fun = eval(parse(text = ma_fun)),
                                                            volume = data$volume,
                                                            sd = sd)
 
@@ -252,43 +267,43 @@ GeomBBandsMA <- ggproto("GeomBBandsMA", GeomLine,
 )
 
 
-get_bbands <- function(HLC, n, maType, sd, wilder, ratio, v, wts) {
+get_bbands <- function(HLC, n, ma_fun, sd, wilder, ratio, v, wts) {
 
-    if (maType == "SMA") {
+    if (ma_fun == "SMA") {
         bbands <- TTR::BBands(HLC = HLC,
                               n = n,
-                              maType = eval(parse(text = maType)),
+                              ma_fun = eval(parse(text = ma_fun)),
                               sd = sd)
-    } else if (maType == "EMA") {
+    } else if (ma_fun == "EMA") {
         bbands <- TTR::BBands(HLC = HLC,
                               n = n,
-                              maType = eval(parse(text = maType)),
+                              ma_fun = eval(parse(text = ma_fun)),
                               sd = sd,
                               wilder = wilder,
                               ratio = ratio)
-    } else if (maType == "DEMA") {
+    } else if (ma_fun == "DEMA") {
         bbands <- TTR::BBands(HLC = HLC,
                               n = n,
-                              maType = eval(parse(text = maType)),
+                              ma_fun = eval(parse(text = ma_fun)),
                               sd = sd,
                               wilder = wilder,
                               ratio = ratio,
                               v = v)
-    } else if (maType == "WMA") {
+    } else if (ma_fun == "WMA") {
         bbands <- TTR::BBands(HLC = HLC,
                               n = n,
-                              maType = eval(parse(text = maType)),
+                              ma_fun = eval(parse(text = ma_fun)),
                               sd = sd,
                               wts = wts)
-    } else if (maType == "ZLEMA") {
+    } else if (ma_fun == "ZLEMA") {
         bbands <- TTR::BBands(HLC = HLC,
                               n = n,
-                              maType = eval(parse(text = maType)),
+                              ma_fun = eval(parse(text = ma_fun)),
                               sd = sd,
                               ratio = ratio)
     } else {
 
-        stop(paste0("Unsupported maType: ", maType))
+        stop(paste0("Unsupported ma_fun: ", ma_fun))
 
     }
 

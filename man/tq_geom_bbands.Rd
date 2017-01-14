@@ -2,12 +2,18 @@
 % Please edit documentation in R/tq_geom_bbands.R
 \name{tq_geom_bbands}
 \alias{tq_geom_bbands}
+\alias{tq_geom_bbands_}
 \title{Plot Bollinger Bands using Moving Averages}
 \usage{
 tq_geom_bbands(mapping = NULL, data = NULL, position = "identity",
-  na.rm = TRUE, show.legend = NA, inherit.aes = TRUE, n = 20,
-  maType = SMA, sd = 2, wilder = FALSE, ratio = NULL, v = 1,
-  wts = 1:n, ...)
+  na.rm = TRUE, show.legend = NA, inherit.aes = TRUE, ma_fun = SMA,
+  n = 20, sd = 2, wilder = FALSE, ratio = NULL, v = 1, wts = 1:n,
+  ...)
+
+tq_geom_bbands_(mapping = NULL, data = NULL, position = "identity",
+  na.rm = TRUE, show.legend = NA, inherit.aes = TRUE, ma_fun = SMA,
+  n = 10, sd = 2, wilder = FALSE, ratio = NULL, v = 1, wts = 1:n,
+  ...)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2]{aes}} or
@@ -43,9 +49,11 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2]{borders}}.}
 
-\item{n}{Number of periods to average over.}
+\item{ma_fun}{The function used to calculate the moving average. Seven options are
+available including: SMA, EMA, WMA, DEMA, ZLEMA, VWMA, and EVWMA. The default is
+\code{SMA}. See \code{\link[TTR]{SMA}} for underlying functions.}
 
-\item{maType}{A function or a string naming the function to be called.}
+\item{n}{Number of periods to average over.}
 
 \item{sd}{The number of standard deviations to use.}
 
@@ -116,7 +124,7 @@ AAPL <- tq_get("AAPL")
 AAPL \%>\%
     ggplot(aes(x = date, y = close)) +
     geom_line() +           # Plot stock price
-    tq_geom_bbands(aes(high = high, low = low), maType = SMA, n = 50) +
+    tq_geom_bbands(aes(high = high, low = low), ma_fun = SMA, n = 50) +
     coord_x_date(xlim = c(today() - years(1), today()), ylim = c(80, 130))
 
 
@@ -125,7 +133,7 @@ AAPL \%>\%
    ggplot(aes(x = date, y = close)) +
    geom_line() +           # Plot stock price
    tq_geom_bbands(aes(high = high, low = low),
-                  maType = EMA, wilder = TRUE, ratio = NULL, n = 50) +
+                  ma_fun = EMA, wilder = TRUE, ratio = NULL, n = 50) +
    coord_x_date(xlim = c(today() - years(1), today()), ylim = c(80, 130))
 
 
@@ -134,7 +142,7 @@ AAPL \%>\%
     ggplot(aes(x = date, y = close)) +
     geom_line() +           # Plot stock price
     tq_geom_bbands(aes(high = high, low = low, volume = volume),
-                   maType = VWMA, n = 50) +
+                   ma_fun = VWMA, n = 50) +
     coord_x_date(xlim = c(today() - years(1), today()), ylim = c(80, 130))
 }
 \seealso{
