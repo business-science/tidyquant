@@ -119,6 +119,70 @@
 
 tq_get <- function(x, get = "stock.prices", ...) {
 
+    # Handle x
+    if (inherits(x, "data.frame")) {
+
+        if (inherits(x, "grouped_df")) {
+            warning("Ungrouping grouped data.frame")
+            x <- dplyr::ungroup(x)
+        }
+
+        col_name <- colnames(x)[[1]]
+
+        names(x)[[1]] <- "symbol.."
+
+        x <- x %>%
+            tibble::as_tibble()
+
+        ret <- tq_get_multiple(x = x, get = get, ...)
+
+        names(ret)[[1]] <- col_name
+
+    } else if (is.character(x) && length(x) > 1) {
+
+        col_name <- names(x)
+
+        if (is.null(col_name)) col_name <- "x.symbol"
+
+        x <- tibble::tibble(symbol.. = x)
+
+        ret <- tq_get_multiple(x = x, get = get, ...)
+
+        names(ret)[[1]] <- col_name
+
+    } else if (is.character(x) && length(x) == 1) {
+
+        ret <- tq_get_base(x = x, get = get, ...)
+
+    } else {
+
+        stop("x must be a single character, list of characters, or data frame of characters with the first column being the object to pass to tq_get.")
+
+    }
+
+    ret
+
+}
+
+tq_get_multiple <- function(x, get, ...) {
+
+    # Map tq_get_base
+    ret <- x %>%
+        dplyr::mutate(data.. = purrr::map(.x = symbol..,
+                                         ~ tq_get_base(x = .x,
+                                                       get = get,
+                                                       ...)),
+                      class.. = purrr::map_chr(.x = data.., ~ class(.x)[[1]])) %>%
+        dplyr::filter(class.. != "logical") %>%
+        dplyr::select(-class..) %>%
+        tidyr::unnest()
+
+    ret
+
+}
+
+tq_get_base <- function(x, get, ...) {
+
     # Check get
     get <- stringr::str_to_lower(get) %>%
         stringr::str_trim(side = "both") %>%
