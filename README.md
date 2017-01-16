@@ -201,7 +201,7 @@ tq_get("SP500", get = "stock.index")
 #> # ... with 491 more rows
 ```
 
-Combine `tq_get` stock index and stock price options to get the prices for **every stock in an index**. *Note that this may take several minutes due to the number of stock prices being generated.*
+Combine `tq_get` stock index and stock price options to get the prices for **every stock in an index**. *Note that this may take several minutes due to the number of stock prices being generated (results not shown because of this).*
 
 ``` r
 sp_500_prices <- tq_get("SP500", get = "stock.index") %>%
@@ -468,6 +468,70 @@ c("AAPL", "GOOG", "FB") %>%
 #> 10     AAPL 2016-12-30     0.12480428
 #> # ... with 18 more rows
 ```
+
+`tq_get` also has simplified mechanisms for scaling by accepting (1) a character vector for `x` or (2) a data frame with the first column being strings to map to `x`. Two examples illustrate this:
+
+*Map character vector*
+
+``` r
+c("AAPL", "GOOG", "FB") %>%
+    tq_get(get = "stock.prices", from = "2016-01-01", to = "2017-01-01")
+#> # A tibble: 756 × 8
+#>    symbol.x       date   open   high    low  close   volume  adjusted
+#>       <chr>     <date>  <dbl>  <dbl>  <dbl>  <dbl>    <dbl>     <dbl>
+#> 1      AAPL 2016-01-04 102.61 105.37 102.00 105.35 67649400 103.05706
+#> 2      AAPL 2016-01-05 105.75 105.85 102.41 102.71 55791000 100.47452
+#> 3      AAPL 2016-01-06 100.56 102.37  99.87 100.70 68457400  98.50827
+#> 4      AAPL 2016-01-07  98.68 100.13  96.43  96.45 81094400  94.35077
+#> 5      AAPL 2016-01-08  98.55  99.11  96.76  96.96 70798000  94.84967
+#> 6      AAPL 2016-01-11  98.97  99.06  97.34  98.53 49739400  96.38550
+#> 7      AAPL 2016-01-12 100.55 100.69  98.84  99.96 49154200  97.78438
+#> 8      AAPL 2016-01-13 100.32 101.19  97.30  97.39 62439600  95.27031
+#> 9      AAPL 2016-01-14  97.96 100.48  95.74  99.52 63170100  97.35395
+#> 10     AAPL 2016-01-15  96.20  97.71  95.36  97.13 79010000  95.01597
+#> # ... with 746 more rows
+```
+
+The output is a single level tibble with all or the stock prices in one tibble.
+
+*Map tibble with stocks in first column*
+
+First, obtain a tibble of stocks.
+
+``` r
+stock_list <- tibble(symbols = c("AAPL", "JPM", "CVX"),
+                     industry = c("Technology", "Financial", "Energy"))
+stock_list
+#> # A tibble: 3 × 2
+#>   symbols   industry
+#>     <chr>      <chr>
+#> 1    AAPL Technology
+#> 2     JPM  Financial
+#> 3     CVX     Energy
+```
+
+Second, send the stocklist to `tq_get`.
+
+``` r
+stock_list %>%
+    tq_get(get = "stock.prices", from = "2016-01-01", to = "2017-01-01")
+#> # A tibble: 756 × 9
+#>    symbols   industry       date   open   high    low  close   volume
+#>      <chr>      <chr>     <date>  <dbl>  <dbl>  <dbl>  <dbl>    <dbl>
+#> 1     AAPL Technology 2016-01-04 102.61 105.37 102.00 105.35 67649400
+#> 2     AAPL Technology 2016-01-05 105.75 105.85 102.41 102.71 55791000
+#> 3     AAPL Technology 2016-01-06 100.56 102.37  99.87 100.70 68457400
+#> 4     AAPL Technology 2016-01-07  98.68 100.13  96.43  96.45 81094400
+#> 5     AAPL Technology 2016-01-08  98.55  99.11  96.76  96.96 70798000
+#> 6     AAPL Technology 2016-01-11  98.97  99.06  97.34  98.53 49739400
+#> 7     AAPL Technology 2016-01-12 100.55 100.69  98.84  99.96 49154200
+#> 8     AAPL Technology 2016-01-13 100.32 101.19  97.30  97.39 62439600
+#> 9     AAPL Technology 2016-01-14  97.96 100.48  95.74  99.52 63170100
+#> 10    AAPL Technology 2016-01-15  96.20  97.71  95.36  97.13 79010000
+#> # ... with 746 more rows, and 1 more variables: adjusted <dbl>
+```
+
+Notice how the symbol and industry columns are expanded the length of the stock prices.
 
 Further Information
 -------------------

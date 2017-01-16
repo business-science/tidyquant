@@ -252,6 +252,7 @@ tibble(symbol = c("AAPL", "GOOG", "AMZN", "FB", "AVGO", "SWKS","NVDA")) %>%
     mutate(stock.prices = map(.x = symbol, ~ tq_get(.x, get = "stock.prices")))
 ```
 
+
 #### Manipulating Financial Data for Multiple Stocks
 
 Once you get the data, you typically want to do something with it. You can easily do this at scale. Let's get the yearly returns for multiple stocks using `tq_transform`. First, get the prices. Second, use `group_by` to group by stock symbol. Third, apply the transformation. We can do this in one easy workflow:
@@ -262,6 +263,37 @@ c("AAPL", "GOOG", "FB") %>%
     group_by(symbol.x) %>%
     tq_transform(Ad, transform_fun = periodReturn, period = "yearly")
 ```
+
+
+`tq_get` also has simplified mechanisms for scaling by accepting (1) a character vector for `x` or (2) a data frame with the first column being strings to map to `x`. Two examples illustrate this:
+
+_Map character vector_
+
+```{r}
+c("AAPL", "GOOG", "FB") %>%
+    tq_get(get = "stock.prices", from = "2016-01-01", to = "2017-01-01")
+```
+
+The output is a single level tibble with all or the stock prices in one tibble.
+
+_Map tibble with stocks in first column_
+
+First, obtain a tibble of stocks.
+
+```{r}
+stock_list <- tibble(symbols = c("AAPL", "JPM", "CVX"),
+                     industry = c("Technology", "Financial", "Energy"))
+stock_list
+```
+
+Second, send the stocklist to `tq_get`.
+
+```{r}
+stock_list %>%
+    tq_get(get = "stock.prices", from = "2016-01-01", to = "2017-01-01")
+```
+
+Notice how the symbol and industry columns are expanded the length of the stock prices.
 
 
 ## Further Information
