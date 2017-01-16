@@ -96,7 +96,7 @@ tq_get_stock_index_options()
 
 # Get stock prices for a stock from Yahoo
 aapl_stock_prices <- tq_get("AAPL")
-FANG <- tq_get(c("FB", "AMZN", "GOOG", "NFLX",
+FANG <- tq_get(c("FB", "AMZN", "GOOG", "NFLX"),
                get  = "stock.prices",
                from = "2016-01-01",
                to   = "2017-01-01")
