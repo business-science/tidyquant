@@ -1,10 +1,13 @@
-# tidyquant 0.2.0.9000 - Development Version
+# tidyquant 0.2.0.9100 - Development Version
 
 * New visualizations that integrate with `ggplot`:
     * Moving Averages: Seven simple moving average `geoms` were added that wrap `TTR` functions and enable quick visualization.
     * Zooming Into Chart Sections: Two `coord_x_` functions were added to enable zooming into chart sections using dates with no out-of-bounds data loss (e.g. as with the `scale_x_` functions). 
-* Integrated `dplyr::group_by()` with `tq_mutate()` and `tq_transform()`. The transform and mutate functions now work properly with grouped data frames.
-* Fixed bug with `tq_get()`, `get = "key.ratios"`, where key ratios for stocks from the NYSE returned `NA`.
+* Fixes:
+    * Issue #5: `tq_get` can now accept character vectors and data frames for the `x` arg, in addition to a single character input. This streamlines the getting of data for multiple inputs (e.g. stock symbols, stock indexes, etc).
+    * Issue #4: Added `col_rename` arg to `tq_mutate` and `tq_transform`, which enables fast and easy renaming during the operation.
+    * Issue #3: Integrated `dplyr::group_by()` with `tq_mutate()` and `tq_transform()`. The transform and mutate functions now work properly with grouped data frames.
+    * Issue #2: Fixed bug with `tq_get()`, `get = "key.ratios"`, where key ratios for stocks from the NYSE returned `NA`.
 * Removed support for deprecated arguments: `x_fun`, `.x`, and `.y` in the respective transform and mutate functions.
 
 # tidyquant 0.2.0
