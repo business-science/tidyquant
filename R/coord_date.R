@@ -4,7 +4,7 @@
 #' The \code{coord_} functions prevent loss of data during zooming, which is
 #' necessary when zooming in on plots that calculate \code{stats} using data
 #' outside of the zoom range (e.g. when plotting moving averages
-#' with \code{\link{geom_tq_sma}}). Setting limits using \code{scale_x_date}
+#' with \code{\link{tq_geom_ma}}). Setting limits using \code{scale_x_date}
 #' changes the underlying data which causes moving averages to fail.
 #'
 #' \code{coord_x_date} is a wrapper for \code{coord_cartesian}
@@ -34,8 +34,8 @@
 #' AAPL %>%
 #'     ggplot(aes(x = date, y = adjusted)) +
 #'     geom_line() +                         # Plot stock price
-#'     geom_tq_sma(n = 50) +                 # Plot 50-day Moving Average
-#'     geom_tq_sma(n = 200, color = "red") + # Plot 200-day Moving Average
+#'     tq_geom_ma(n = 50) +                 # Plot 50-day Moving Average
+#'     tq_geom_ma(n = 200, color = "red") + # Plot 200-day Moving Average
 #'     coord_x_date(xlim = c(today() - weeks(12), today()),
 #'                ylim = c(100, 130))        # Zoom in
 #'

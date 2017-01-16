@@ -1,6 +1,6 @@
 #' Mutates quantitative data (adds new variables to existing tibble)
 #'
-#' @param data A \code{tibble} (tidy data frame) of data from \code{\link{tq_get}}.
+#' @inheritParams tq_transform
 #' @param ohlc_fun The \code{quantmod} function that identifes columns to pass to
 #' the mutatation function. OHLCV is \code{quantmod} terminology for
 #' open, high, low, close, and volume. Options include c(Op, Hi, Lo, Cl, Vo, Ad,
@@ -48,7 +48,7 @@
 #' Note that character strings are being passed to the variables instead of
 #' unquoted variable names. See \code{vignette("nse")} for more information.
 #'
-#' @seealso \code{\link{tq_transform}}
+#' @seealso \code{\link{tq_transform}}, \code{\link{tq_get}}
 #'
 #' @name tq_mutate
 #'
@@ -56,7 +56,6 @@
 #'
 #' @examples
 #' # Load libraries
-#' library(tidyverse)
 #' library(tidyquant)
 #'
 #' ##### Basic Functionality
@@ -66,11 +65,12 @@
 #' # Example 1: Return logarithmic daily returns using periodReturn()
 #' fb_stock_prices %>%
 #'     tq_mutate(ohlc_fun = Cl, mutate_fun = periodReturn,
-#'                  period = "daily", type = "log")
+#'               period = "daily", type = "log")
 #'
 #' # Example 2: Use tq_mutate_xy to use functions with two columns required
 #' fb_stock_prices %>%
-#'     tq_mutate_xy(x = close, y = volume, mutate_fun = EVWMA)
+#'     tq_mutate_xy(x = close, y = volume, mutate_fun = EVWMA,
+#'                  col_rename = "EVWMA")
 #'
 #' # Example 3: Using tq_mutate_xy to work with non-OHLC data
 #' tq_get("DCOILWTICO", get = "economic.data") %>%
@@ -84,22 +84,24 @@
 
 # PRIMARY FUNCTIONS ----
 
-tq_mutate <- function(data, ohlc_fun = OHLCV, mutate_fun, ...) {
+tq_mutate <- function(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL, ...) {
 
     # Convert to NSE
     ohlc_fun <- deparse(substitute(ohlc_fun))
     mutate_fun <- deparse(substitute(mutate_fun))
 
-    tq_mutate_(data = data, ohlc_fun = ohlc_fun, mutate_fun = mutate_fun, ...)
+    tq_mutate_(data = data, ohlc_fun = ohlc_fun,
+               mutate_fun = mutate_fun, col_rename = col_rename, ...)
 
 }
 
 #' @rdname tq_mutate
 #' @export
-tq_mutate_ <- function(data, ohlc_fun = "OHLCV", mutate_fun, ...) {
+tq_mutate_ <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...) {
 
     # Get transformation
-    ret <- tq_transform_(data = data, ohlc_fun = ohlc_fun, transform_fun = mutate_fun, ...)
+    ret <- tq_transform_(data = data, ohlc_fun = ohlc_fun,
+                         transform_fun = mutate_fun, col_rename = col_rename, ...)
 
     ret <- merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
 
@@ -109,23 +111,25 @@ tq_mutate_ <- function(data, ohlc_fun = "OHLCV", mutate_fun, ...) {
 
 #' @rdname tq_mutate
 #' @export
-tq_mutate_xy <- function(data, x, y = NULL, mutate_fun, ...) {
+tq_mutate_xy <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
 
     # Convert to NSE
     x <- deparse(substitute(x))
     y <- deparse(substitute(y))
     mutate_fun <- deparse(substitute(mutate_fun))
 
-    tq_mutate_xy_(data = data, x = x, y = y, mutate_fun = mutate_fun, ...)
+    tq_mutate_xy_(data = data, x = x, y = y,
+                  mutate_fun = mutate_fun, col_rename = col_rename, ...)
 
 }
 
 #' @rdname tq_mutate
 #' @export
-tq_mutate_xy_ <- function(data, x, y = NULL, mutate_fun, ...) {
+tq_mutate_xy_ <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
 
     # Get transformation
-    ret <- tq_transform_xy_(data = data, x = x, y = y, transform_fun = mutate_fun, ...)
+    ret <- tq_transform_xy_(data = data, x = x, y = y,
+                            transform_fun = mutate_fun, col_rename = col_rename, ...)
 
     ret <- merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
 
@@ -225,13 +229,14 @@ replace_bad_names <- function(tib, fun_name) {
 
     bad_names_regex <- "open|high|low|close|volume|adjusted|price"
 
-    name_list_tib <- stringr::str_to_lower(colnames(tib))
+    name_list_tib <- colnames(tib)
+    name_list_tib_lower <- stringr::str_to_lower(name_list_tib)
 
-    detect_bad_names <- stringr::str_detect(name_list_tib, bad_names_regex)
+    detect_bad_names <- stringr::str_detect(name_list_tib_lower, bad_names_regex)
 
     if (any(detect_bad_names)) {
 
-        len <- length(name_list_tib[detect_bad_names])
+        len <- length(name_list_tib_lower[detect_bad_names])
         name_list_tib[detect_bad_names] <- rep(fun_name, length.out = len)
 
     }

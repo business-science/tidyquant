@@ -13,7 +13,7 @@ tq_get_options()
 tq_get_stock_index_options()
 }
 \arguments{
-\item{x}{A character string representing a single stock index,
+\item{x}{A single character string, a character vector or tibble representing a single or multiple stock index,
 stock symbol, metal symbol, currency combination, FRED code, etc.}
 
 \item{get}{A character string representing the type of data to get
@@ -96,8 +96,10 @@ tq_get_stock_index_options()
 
 # Get stock prices for a stock from Yahoo
 aapl_stock_prices <- tq_get("AAPL")
-cvx_stock_prices  <- tq_get("CVX", get = "stock.prices",
-                            from = "2014-01-01", to = "2015-01-01")
+FANG <- tq_get(c("FB", "AMZN", "GOOG", "NFLX",
+               get  = "stock.prices",
+               from = "2016-01-01",
+               to   = "2017-01-01")
 
 # Get dividends and splits for a stock from Yahoo
 tq_get("AAPL", get = "dividends", from = "1990-01-01")
@@ -120,7 +122,7 @@ plat_price_usd <- tq_get("plat", get = "metal.prices")
 gold_price_eur <- tq_get("gold", get = "metal.prices",
                                  base.currency = "EUR")
 
-##### Tidyverse functionality
+##### Scaling with the tidyverse
 
 # Get a historical stock prices from multiple stocks
 FANG <- tibble(symbol = c("FB", "AMZN", "NFLX", "GOOGL")) \%>\%
@@ -128,5 +130,8 @@ FANG <- tibble(symbol = c("FB", "AMZN", "NFLX", "GOOGL")) \%>\%
                               ~ tq_get(.x, get = "stock.prices"))) \%>\%
     unnest()
 
+# Simplified scaling
+FANG <- c("FB", "AMZN", "NFLX", "GOOGL") \%>\%
+    tq_get()
 }
 

@@ -19,7 +19,7 @@ knitr::opts_chunk$set(message = FALSE,
 # devtools::load_all() # Travis CI fails on load_all()
 ```
 
-> Bringing quantitative financial analysis to the tidyverse
+> Bringing financial analysis to the tidyverse
 
 # Overview
 
@@ -246,11 +246,11 @@ Let's go through what happened. `ohlc_fun` is one of the various quantmod Open, 
 
 __Mutate Quantitative Data, `tq_mutate()`__: 
 
-Adds a column or set of columns to the tibble with the calculated attributes (hence the original tibble is returned, mutated with the additional columns). An example is getting the `MACD` from `Cl` (close price), which mutates the original input by adding MACD and Signal columns. 
+Adds a column or set of columns to the tibble with the calculated attributes (hence the original tibble is returned, mutated with the additional columns). An example is getting the `MACD` from `Cl` (close price), which mutates the original input by adding MACD and Signal columns. Note that we can quickly rename the columns using the `col_rename` argument.
 
 ```{r}
 fb_prices %>%
-    tq_mutate(ohlc_fun = Cl, mutate_fun = MACD)
+    tq_mutate(ohlc_fun = Cl, mutate_fun = MACD, col_rename = c("MACD", "Signal"))
 ```
 
 Note that a mutation can occur if, and only if, the mutation has the same structure of the original tibble. In other words, the calculation must have the same number of rows and row.names (or date fields), otherwise the mutation cannot be performed.
@@ -268,7 +268,7 @@ EVWMA (exponential volume-weighted moving average) requires two inputs, price an
 
 ```{r, message=FALSE, warning=FALSE}
 fb_prices %>%
-    tq_mutate_xy(x = close, y = volume, mutate_fun = EVWMA)
+    tq_mutate_xy(x = close, y = volume, mutate_fun = EVWMA, col_rename = "EVWMA")
 ```
 
 _Working with non-OHLC data_:
@@ -279,7 +279,7 @@ Returns from FRED, Oanda, and other sources do not have open, high, low, close, 
 wti_prices <- tq_get("DCOILWTICO", get = "economic.data") 
 wti_prices %>%    
     tq_transform_xy(x = price, transform_fun = to.period,
-                    period = "months")
+                    period = "months", col_rename = "WTI Price")
 ```
 
 <a class="anchor" id="tq-coerce"></a>
@@ -330,7 +330,7 @@ time_series_xts
 
 <a class="anchor" id="tidyverse"></a>
 
-## Working in the tidyverse
+## Work in the tidyverse
 
 You probably already know and love `tidyverse` packages like `ggplot2`, `dplyr`, `tidyr`, `purrr`, `readr`, and `tibble` along with `lubridate` for working with date and datetime. `tidyquant` works solely in tibbles, so all of the `tidyverse` functionality is intact. 
 
@@ -560,36 +560,107 @@ AAPL %>%
     select(-c(high, low, volume, adjusted))
 ```
 
-#### Example 4: Get the 5, 10, 15-Day Rolling Minimum and Maximum Values of the Adjusted Prices
+#### Example 5: Get the 5, 10, 15-Day Rolling Minimum and Maximum Values of the Adjusted Prices
 
 Rolling functions come from the `zoo` package. In reviewing the available options, we see that `rollmax` is present but no there is no `rollmin`. However, the generic `rollapply` function will work with any function, so let's use that. In reviewing the documentation, the `rollapply()` function takes three primary arguments: `data`, `width` and `FUN`. The `data` is passed using the `ohlc_fun` argument, so we don't need to worry about this. The `width` is the number of periods to apply the function, and for our situation this is 5, 10, and 15. The `FUN` is the function to apply, and for our situation this is `min` and `max`. We want the result to add columns to our data set, so we use the `tq_mutate()` function, which allows us to pipe (`%>%`) each mutation. Putting it all together:
 
 ```{r}
 AAPL %>%
-    tq_mutate(Ad, rollapply, width = 5, FUN = min) %>%
-    tq_mutate(Ad, rollapply, width = 10, FUN = min) %>%
-    tq_mutate(Ad, rollapply, width = 15, FUN = min) %>%
-    tq_mutate(Ad, rollapply, width = 5, FUN = max) %>%
-    tq_mutate(Ad, rollapply, width = 10, FUN = max) %>%
-    tq_mutate(Ad, rollapply, width = 15, FUN = max)
+    tq_mutate(Ad, rollapply, width = 5, FUN = min, col_rename = "roll.min.5") %>%
+    tq_mutate(Ad, rollapply, width = 10, FUN = min, col_rename = "roll.min.10") %>%
+    tq_mutate(Ad, rollapply, width = 15, FUN = min, col_rename = "roll.min.15") %>%
+    tq_mutate(Ad, rollapply, width = 5, FUN = max, col_rename = "roll.max.5") %>%
+    tq_mutate(Ad, rollapply, width = 10, FUN = max, col_rename = "roll.max.10") %>%
+    tq_mutate(Ad, rollapply, width = 15, FUN = max, col_rename = "roll.max.15")
 ```
 
-Note that the new column names for the rolling minimums and maximums are just the `mutate_fun` name with a sequential suffix added, which is likely not descriptive enough for our applications. These can be renamed using the `rename` function (e.g. `rename(rolling.min.5 = rollapply)` for the five period rolling minimum). 
+Note that the new column names were added using the `col_rename` argument. If this was left off, the column names are auto-generated from the `mutate_fun` name with a sequential suffix added, which is likely not descriptive enough for your needs.  
 
 <a class="anchor" id="built-for-scale"></a>
 
-## Designed to be Used and Scaled with the tidyverse
+## Designed to be Scaled with the tidyverse
 
-Each function has one primary input and one output. This allows chaining operations with the pipe (`%>%`), and mapping to extend to lists of many stocks, exchange rates, metals, economic data, financial statements, etc. The rationale behind this is simple: let the function handle the operation, let the `tidyverse` handle the iteration. 
+All functions return data sets as `tibbles`, which allows for interaction within the `tidyverse`. This means we can:
 
-Rather than explain, let's go through a simple workflow using the `tidyverse`. We setup a two step workflow:
+* Use `dplyr` and `tidyr` to select, filter, nest/unnest, group_by, etc.
+* Use the pipe (`%>%`) for chaining operations.
+* Seamlessly scale data retrieval and transformations/mutations using `purrr` to map functions or `dplyr` to combine `group_by` with `tq_mutate` or `tq_transform`.
+
+#### Getting Financial Data for Multiple Stocks
+
+A very basic example is retrieving the stock prices for multiple stocks. There are four primary ways to do this:
+
+__Method 1: Map a character vector with multiple stock symbols__
+
+```{r}
+c("AAPL", "GOOG", "FB") %>%
+    tq_get(get = "stock.prices", from = "2016-01-01", to = "2017-01-01")
+```
+
+The output is a single level tibble with all or the stock prices in one tibble. The auto-generated column name is "symbol.x", which can be pre-emptively renamed by giving the vector a name (e.g. `stocks <- c("AAPL", "GOOG", "FB")`) and then piping to `tq_get`.
+
+__Method 2: Map a tibble with stocks in first column__
+
+First, obtain a tibble of stocks. The stock symbols must be in the first column.
+
+```{r}
+stock_list <- tibble(symbols = c("AAPL", "JPM", "CVX"),
+                     industry = c("Technology", "Financial", "Energy"))
+stock_list
+```
+
+Second, send the stock list to `tq_get`. Notice how the symbol and industry columns are expanded the length of the stock prices.
+
+
+```{r}
+stock_list %>%
+    tq_get(get = "stock.prices", from = "2016-01-01", to = "2017-01-01")
+```
+
+
+__Method 3: Use purrr to map a function__
+
+This is the most flexible method. We can pipe a tibble of stock symbols to a mutation that maps the `tq_get(get = "stock.prices")` function. The result is all of the stock prices in nested format.
+
+```{r}
+tibble(symbol = c("AAPL", "GOOG", "AMZN", "FB", "AVGO", "SWKS","NVDA")) %>%
+    mutate(stock.prices = map(.x = symbol, ~ tq_get(.x, get = "stock.prices")))
+```
+
+__Method 4: Combine tq_get calls to stock index with stock prices__
+
+This is a powerful extension of Method 2 that enables us to retrieve the stock prices, financials, key ratios, etc for __every stock in an index__. First, call `tq_get` using an stock index. Second, send the stock list to `tq_get` using stock prices. The workflow looks like this. _Note this can take several minutes depending on the size of the index, which is why it is not evaluated in the vignette._
+
+```{r, eval = F}
+tq_get("SP500", get = "stock.index") %>%
+    tq_get(get = "stock.prices")
+```
+
+
+#### Manipulating Financial Data for Multiple Stocks
+
+Once you get the data, you typically want to do something with it. You can easily do this at scale. Let's get the yearly returns for multiple stocks using `tq_transform`. First, get the prices. Second, use `group_by` to group by stock symbol. Third, apply the transformation. We can do this in one easy workflow:
+
+```{r}
+c("AAPL", "GOOG", "FB") %>%
+    tq_get(get = "stock.prices") %>%
+    group_by(symbol.x) %>%
+    tq_transform(Ad, transform_fun = periodReturn, period = "yearly")
+```
+
+
+#### Mapping Functions with purrr
+
+Eventually you will want to begin modeling at scale. One of the coolest features of the `tidyverse` is the ability to map functions to nested tibbles using purrr. From "[R for Data Science](http://r4ds.had.co.nz/)", we can apply the same modeling workflow to financial analysis. Using a two step workflow:
 
 1. Analyze a single stock
 2. Scale to many stocks
 
-#### Analyze a Single Stock
+Let's go through an example to illustrate. In our hypothetical situation, we want to compare the mean monthly log returns (MMLR). 
 
-In our hypothetical situation, we want to compare the mean monthly log returns (MMLR). First, let's come up with a function to help us collect log returns. The function below performs three operations internally. It first gets the stock prices using `tq_get()`. Then, it transforms the stock prices to period returns using `tq_transform()`. We add the `type = "log"` and `period = "monthly"` arguments to ensure we retrieve a tibble of monthly log returns. Last, we take the mean of the monthly returns to get MMLR.
+##### Analyze a Single Stock
+
+First, let's come up with a function to help us collect log returns. The function below performs three operations internally. It first gets the stock prices using `tq_get()`. Then, it transforms the stock prices to period returns using `tq_transform()`. We add the `type = "log"` and `period = "monthly"` arguments to ensure we retrieve a tibble of monthly log returns. Last, we take the mean of the monthly returns to get MMLR.
 
 ```{r}
 my_stock_analysis_fun <- function(stock.symbol) {
@@ -609,7 +680,7 @@ my_stock_analysis_fun("AAPL")
 
 
 
-### Extrapolate to Many Stocks using `tidyverse`
+##### Extrapolate to Many Stocks 
 
 Now that we have one stock down, we can scale to many stocks. For brevity, we'll randomly sample ten stocks from the S&amp;P500 with a call to `dplyr::sample_n()`.
 
@@ -631,7 +702,7 @@ stocks
 
 And, we're done! We now have the MMLR for 10-years of stock data for 10 stocks. And, we can easily extend this to larger lists or stock indexes. For example, the entire S&amp;P500 could be analyzed removing the `sample_n()` following the call to `tq_get("SP500", get = "stock.index")`.
 
-### Function `tq_get()` Designed to Handle Errors Gracefully
+#### A Quick Note on Scaling with tidyquant
 
 Eventually you will run into a stock index, stock symbol, FRED data code, etc that cannot be retrieved. Possible reasons are: 
 
@@ -691,6 +762,8 @@ The operation grinds to a hault because the `BAD APPLE` tried to send its value 
 
 The rationale behind the error handling approach is that long-running scripts should not fail during minor issues. For example, if you have a list of 3000 stocks and the 3000th is bad, the program could take 20+ minutes to fail. This is disheartening. We allow `tq_get()` to continue to fetch data even if an error is encountered. Failure occurs during `tq_transform()` and `tq_mutate()` to prevent the error from getting too far downstream. 
 
+__Break Up Get Operations from Mutate / Transform Operations__:
+
 Recognizing how `tq_get()` works (and gracefully fails), we can adjust our workflow. It's a good idea to collect stock information in one independent step, review any warnings / errors, and remove "bad apples" if present before moving on to any transformations or mutations.
 
 Here's an example of a good workflow:
@@ -717,14 +790,6 @@ stock_list_with_one_bad_apple <- tibble(
 stock_list_with_one_bad_apple
 ```
 
-
-__Fall Back for Stock Indexes__:
-
-There's a fallback for the stock indexes too. Since the source, www.marketvolume.com, could change over time, an option is provided to pull stored data within the `tidyquant` package. The downside is that the data is only as accurate as the last update to `tidyquant`. Here's how to get the stock indexes locally if for some reason the website is down or has changed.
-
-```{r, warning = TRUE, message = TRUE}
-tq_get("SP500", get = "stock.index", use_fallback = TRUE)
-```
 
 
 # Recap

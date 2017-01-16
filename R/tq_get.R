@@ -1,6 +1,6 @@
 #' Get quantitative data in \code{tibble} format
 #'
-#' @param x A character string representing a single stock index,
+#' @param x A single character string, a character vector or tibble representing a single or multiple stock index,
 #' stock symbol, metal symbol, currency combination, FRED code, etc.
 #' @param get A character string representing the type of data to get
 #' for \code{x}. Options include:
@@ -82,8 +82,10 @@
 #'
 #' # Get stock prices for a stock from Yahoo
 #' aapl_stock_prices <- tq_get("AAPL")
-#' cvx_stock_prices  <- tq_get("CVX", get = "stock.prices",
-#'                             from = "2014-01-01", to = "2015-01-01")
+#' FANG <- tq_get(c("FB", "AMZN", "GOOG", "NFLX",
+#'                get  = "stock.prices",
+#'                from = "2016-01-01",
+#'                to   = "2017-01-01")
 #'
 #' # Get dividends and splits for a stock from Yahoo
 #' tq_get("AAPL", get = "dividends", from = "1990-01-01")
@@ -106,7 +108,7 @@
 #' gold_price_eur <- tq_get("gold", get = "metal.prices",
 #'                                  base.currency = "EUR")
 #'
-#' ##### Tidyverse functionality
+#' ##### Scaling with the tidyverse
 #'
 #' # Get a historical stock prices from multiple stocks
 #' FANG <- tibble(symbol = c("FB", "AMZN", "NFLX", "GOOGL")) %>%
@@ -114,10 +116,77 @@
 #'                               ~ tq_get(.x, get = "stock.prices"))) %>%
 #'     unnest()
 #'
+#' # Simplified scaling
+#' FANG <- c("FB", "AMZN", "NFLX", "GOOGL") %>%
+#'     tq_get()
 
 # PRIMARY FUNCTIONS ----
 
 tq_get <- function(x, get = "stock.prices", ...) {
+
+    # Handle x
+    if (inherits(x, "data.frame")) {
+
+        if (inherits(x, "grouped_df")) {
+            warning("Ungrouping grouped data.frame")
+            x <- dplyr::ungroup(x)
+        }
+
+        col_name <- colnames(x)[[1]]
+
+        names(x)[[1]] <- "symbol.."
+
+        x <- x %>%
+            tibble::as_tibble()
+
+        ret <- tq_get_multiple(x = x, get = get, ...)
+
+        names(ret)[[1]] <- col_name
+
+    } else if (is.character(x) && length(x) > 1) {
+
+        col_name <- names(x)
+
+        if (is.null(col_name)) col_name <- "symbol.x"
+
+        x <- tibble::tibble(symbol.. = x)
+
+        ret <- tq_get_multiple(x = x, get = get, ...)
+
+        names(ret)[[1]] <- col_name
+
+    } else if (is.character(x) && length(x) == 1) {
+
+        ret <- tq_get_base(x = x, get = get, ...)
+
+    } else {
+
+        stop("x must be a single character, list of characters, or data frame of characters with the first column being the object to pass to tq_get.")
+
+    }
+
+    ret
+
+}
+
+tq_get_multiple <- function(x, get, ...) {
+
+    # Map tq_get_base
+    ret <- x %>%
+        dplyr::mutate(data.. = purrr::map(.x = symbol..,
+                                         ~ tq_get_base(x = .x,
+                                                       get = get,
+                                                       ...)),
+                      class.. = purrr::map_chr(.x = data.., ~ class(.x)[[1]])) %>%
+        dplyr::filter(class.. != "logical") %>%
+        dplyr::select(-class..) %>%
+        tidyr::unnest()
+
+    ret
+
+}
+
+tq_get_base <- function(x, get, ...) {
 
     # Check get
     get <- stringr::str_to_lower(get) %>%

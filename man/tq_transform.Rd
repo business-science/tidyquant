@@ -8,13 +8,14 @@
 \alias{tq_transform_xy_}
 \title{Transforms quantitative data (returns new variables in new tibble)}
 \usage{
-tq_transform(data, ohlc_fun = OHLCV, transform_fun, ...)
+tq_transform(data, ohlc_fun = OHLCV, transform_fun, col_rename = NULL, ...)
 
-tq_transform_(data, ohlc_fun = "OHLCV", transform_fun, ...)
+tq_transform_(data, ohlc_fun = "OHLCV", transform_fun, col_rename = NULL,
+  ...)
 
-tq_transform_xy(data, x, y = NULL, transform_fun, ...)
+tq_transform_xy(data, x, y = NULL, transform_fun, col_rename = NULL, ...)
 
-tq_transform_xy_(data, x, y = NULL, transform_fun, ...)
+tq_transform_xy_(data, x, y = NULL, transform_fun, col_rename = NULL, ...)
 
 tq_transform_fun_options()
 }
@@ -29,6 +30,9 @@ HLC, OHLC, OHLCV).}
 \item{transform_fun}{The transformation function from either the \code{xts},
 \code{quantmod}, or \code{TTR} package. Execute \code{tq_transform_fun_options()}
 to see the full list of options by package.}
+
+\item{col_rename}{A string or character vector containing names that can be used
+to quickly rename columns.}
 
 \item{...}{Additional parameters passed to the appropriate transformation
 function.}
@@ -78,7 +82,6 @@ unquoted variable names. See \code{vignette("nse")} for more information.
 }
 \examples{
 # Load libraries
-library(tidyverse)
 library(tidyquant)
 
 ##### Basic Functionality
@@ -92,7 +95,8 @@ fb_stock_prices \%>\%
 
 # Example 2: Use tq_transform_xy to use functions with two columns required
 fb_stock_prices \%>\%
-    tq_transform_xy(x = close, y = volume, transform_fun = EVWMA)
+    tq_transform_xy(x = close, y = volume, transform_fun = EVWMA,
+                    col_rename = "EVMWA")
 
 # Example 3: Using tq_transform_xy to work with non-OHLC data
 tq_get("DCOILWTICO", get = "economic.data") \%>\%
