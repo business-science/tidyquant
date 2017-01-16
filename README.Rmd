@@ -265,36 +265,6 @@ c("AAPL", "GOOG", "FB") %>%
 ```
 
 
-`tq_get` also has simplified mechanisms for scaling by accepting (1) a character vector for `x` or (2) a data frame with the first column being strings to map to `x`. Two examples illustrate this:
-
-_Map character vector_
-
-```{r}
-c("AAPL", "GOOG", "FB") %>%
-    tq_get(get = "stock.prices", from = "2016-01-01", to = "2017-01-01")
-```
-
-The output is a single level tibble with all or the stock prices in one tibble.
-
-_Map tibble with stocks in first column_
-
-First, obtain a tibble of stocks.
-
-```{r}
-stock_list <- tibble(symbols = c("AAPL", "JPM", "CVX"),
-                     industry = c("Technology", "Financial", "Energy"))
-stock_list
-```
-
-Second, send the stocklist to `tq_get`.
-
-```{r}
-stock_list %>%
-    tq_get(get = "stock.prices", from = "2016-01-01", to = "2017-01-01")
-```
-
-Notice how the symbol and industry columns are expanded the length of the stock prices.
-
 
 ## Further Information
 
