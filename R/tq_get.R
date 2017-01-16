@@ -1,6 +1,6 @@
 #' Get quantitative data in \code{tibble} format
 #'
-#' @param x A character string representing a single stock index,
+#' @param x A single character string, a character vector or tibble representing a single or multiple stock index,
 #' stock symbol, metal symbol, currency combination, FRED code, etc.
 #' @param get A character string representing the type of data to get
 #' for \code{x}. Options include:
@@ -106,7 +106,7 @@
 #' gold_price_eur <- tq_get("gold", get = "metal.prices",
 #'                                  base.currency = "EUR")
 #'
-#' ##### Tidyverse functionality
+#' ##### Scaling with the tidyverse
 #'
 #' # Get a historical stock prices from multiple stocks
 #' FANG <- tibble(symbol = c("FB", "AMZN", "NFLX", "GOOGL")) %>%
@@ -114,6 +114,9 @@
 #'                               ~ tq_get(.x, get = "stock.prices"))) %>%
 #'     unnest()
 #'
+#' # Simplified scaling
+#' FANG <- c("FB", "AMZN", "NFLX", "GOOGL") %>%
+#'     tq_get()
 
 # PRIMARY FUNCTIONS ----
 
@@ -142,7 +145,7 @@ tq_get <- function(x, get = "stock.prices", ...) {
 
         col_name <- names(x)
 
-        if (is.null(col_name)) col_name <- "x.symbol"
+        if (is.null(col_name)) col_name <- "symbol.x"
 
         x <- tibble::tibble(symbol.. = x)
 

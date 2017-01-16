@@ -161,20 +161,20 @@ aapl_prices %>%
            growth = adjusted - baseline,
            growth_pct = growth / baseline * 100) %>%
     select(-(baseline:growth))
-#> # A tibble: 253 × 3
-#>          date adjusted  growth_pct
-#>        <date>    <dbl>       <dbl>
-#> 1  2016-01-14 97.35395  0.00000000
-#> 2  2016-01-15 95.01597 -2.40152659
-#> 3  2016-01-19 94.55621 -2.87378684
-#> 4  2016-01-20 94.68337 -2.74316245
-#> 5  2016-01-21 94.20404 -3.23552357
-#> 6  2016-01-22 99.21260  1.90916650
-#> 7  2016-01-25 97.27570 -0.08037989
-#> 8  2016-01-26 97.81372  0.47226846
-#> 9  2016-01-27 91.38672 -6.12941950
-#> 10 2016-01-28 92.04213 -5.45618950
-#> # ... with 243 more rows
+#> # A tibble: 252 × 3
+#>          date adjusted growth_pct
+#>        <date>    <dbl>      <dbl>
+#> 1  2016-01-15 95.01597  0.0000000
+#> 2  2016-01-19 94.55621 -0.4838808
+#> 3  2016-01-20 94.68337 -0.3500422
+#> 4  2016-01-21 94.20404 -0.8545185
+#> 5  2016-01-22 99.21260  4.4167628
+#> 6  2016-01-25 97.27570  2.3782613
+#> 7  2016-01-26 97.81372  2.9445082
+#> 8  2016-01-27 91.38672 -3.8196222
+#> 9  2016-01-28 92.04213 -3.1298265
+#> 10 2016-01-29 95.22140  0.2162047
+#> # ... with 242 more rows
 ```
 
 ### Transforming & Mutating Data with zoo, xts, quantmod, and TTR Functions
@@ -235,7 +235,7 @@ aapl_prices %>%
 #> 9  2007-01-16 95.68 97.25 95.45 97.10 311019100 12.63477    NA     NA
 #> 10 2007-01-17 97.56 97.60 94.82 94.95 411565000 12.35501    NA     NA
 #> # ... with 2,517 more rows, and 4 more variables: dn <dbl>, mavg <dbl>,
-#> #   up <dbl>, pctb <dbl>
+#> #   up <dbl>, pctB <dbl>
 ```
 
 #### tq\_tranform\_xy and tq\_mutate\_xy
@@ -248,7 +248,7 @@ The "xy" variants are useful in situations where (1) you have two inputs (hence 
 aapl_prices %>%
     tq_mutate_xy(x = close, y = volume, mutate_fun = EVWMA)
 #> # A tibble: 2,527 × 8
-#>          date  open  high   low close    volume adjusted    v1
+#>          date  open  high   low close    volume adjusted    V1
 #>        <date> <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl> <dbl>
 #> 1  2007-01-03 86.29 86.58 81.90 83.80 309579900 10.90416    NA
 #> 2  2007-01-04 84.05 85.95 83.82 85.66 211815100 11.14619    NA
@@ -317,7 +317,7 @@ tibble(symbol = c("AAPL", "GOOG", "AMZN", "FB", "AVGO", "SWKS","NVDA")) %>%
 c("AAPL", "GOOG", "FB") %>%
     tq_get(get = "stock.prices", from = "2016-01-01", to = "2017-01-01")
 #> # A tibble: 756 × 8
-#>    x.symbol       date   open   high    low  close   volume  adjusted
+#>    symbol.x       date   open   high    low  close   volume  adjusted
 #>       <chr>     <date>  <dbl>  <dbl>  <dbl>  <dbl>    <dbl>     <dbl>
 #> 1      AAPL 2016-01-04 102.61 105.37 102.00 105.35 67649400 103.05706
 #> 2      AAPL 2016-01-05 105.75 105.85 102.41 102.71 55791000 100.47452

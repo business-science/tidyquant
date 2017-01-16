@@ -8,13 +8,13 @@
 \alias{tq_mutate_xy_}
 \title{Mutates quantitative data (adds new variables to existing tibble)}
 \usage{
-tq_mutate(data, ohlc_fun = OHLCV, mutate_fun, ...)
+tq_mutate(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL, ...)
 
-tq_mutate_(data, ohlc_fun = "OHLCV", mutate_fun, ...)
+tq_mutate_(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...)
 
-tq_mutate_xy(data, x, y = NULL, mutate_fun, ...)
+tq_mutate_xy(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
 
-tq_mutate_xy_(data, x, y = NULL, mutate_fun, ...)
+tq_mutate_xy_(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
 
 tq_mutate_fun_options()
 }
@@ -29,6 +29,9 @@ HLC, OHLC, OHLCV).}
 \item{mutate_fun}{The mutation function from either the \code{xts},
 \code{quantmod}, or \code{TTR} package. Execute \code{tq_mutate_fun_options()}
 to see the full list of options by package.}
+
+\item{col_rename}{A string or character vector containing names that can be used
+to quickly rename columns.}
 
 \item{...}{Additional parameters passed to the appropriate mutatation
 function.}
@@ -78,7 +81,6 @@ unquoted variable names. See \code{vignette("nse")} for more information.
 }
 \examples{
 # Load libraries
-library(tidyverse)
 library(tidyquant)
 
 ##### Basic Functionality
@@ -88,7 +90,7 @@ fb_stock_prices  <- tq_get("FB", get = "stock.prices")
 # Example 1: Return logarithmic daily returns using periodReturn()
 fb_stock_prices \%>\%
     tq_mutate(ohlc_fun = Cl, mutate_fun = periodReturn,
-                 period = "daily", type = "log")
+              period = "daily", type = "log")
 
 # Example 2: Use tq_mutate_xy to use functions with two columns required
 fb_stock_prices \%>\%
@@ -105,6 +107,6 @@ mutate <- c("MACD", "SMA")
 tq_mutate_xy_(fb_stock_prices, x = col_name, mutate_fun = mutate[[1]])
 }
 \seealso{
-\code{\link{tq_transform}}
+\code{\link{tq_transform}}, \code{\link{tq_get}}
 }
 

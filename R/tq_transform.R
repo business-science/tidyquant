@@ -10,6 +10,8 @@
 #' @param transform_fun The transformation function from either the \code{xts},
 #' \code{quantmod}, or \code{TTR} package. Execute \code{tq_transform_fun_options()}
 #' to see the full list of options by package.
+#' @param col_rename A string or character vector containing names that can be used
+#' to quickly rename columns.
 #' @param ... Additional parameters passed to the appropriate transformation
 #' function.
 #'
@@ -56,7 +58,6 @@
 #'
 #' @examples
 #' # Load libraries
-#' library(tidyverse)
 #' library(tidyquant)
 #'
 #' ##### Basic Functionality
@@ -70,7 +71,8 @@
 #'
 #' # Example 2: Use tq_transform_xy to use functions with two columns required
 #' fb_stock_prices %>%
-#'     tq_transform_xy(x = close, y = volume, transform_fun = EVWMA)
+#'     tq_transform_xy(x = close, y = volume, transform_fun = EVWMA,
+#'                     col_rename = "EVMWA")
 #'
 #' # Example 3: Using tq_transform_xy to work with non-OHLC data
 #' tq_get("DCOILWTICO", get = "economic.data") %>%
@@ -88,7 +90,7 @@
 
 #' @rdname tq_transform
 #' @export
-tq_transform <- function(data, ohlc_fun = OHLCV, transform_fun, ...) {
+tq_transform <- function(data, ohlc_fun = OHLCV, transform_fun, col_rename = NULL, ...) {
 
     # Convert to NSE
     ohlc_fun <- deparse(substitute(ohlc_fun))
@@ -97,27 +99,31 @@ tq_transform <- function(data, ohlc_fun = OHLCV, transform_fun, ...) {
     # Patch for grouped data frames
     if (dplyr::is.grouped_df(data)) {
 
-        tq_transform_grouped_df_(data, ohlc_fun, transform_fun, ...)
+        tq_transform_grouped_df_(data, ohlc_fun, transform_fun,
+                                 col_rename = col_rename, ...)
 
     } else {
 
-        tq_transform_base_(data, ohlc_fun, transform_fun, ...)
+        tq_transform_base_(data, ohlc_fun, transform_fun,
+                           col_rename = col_rename, ...)
 
     }
 }
 
 #' @rdname tq_transform
 #' @export
-tq_transform_ <- function(data, ohlc_fun = "OHLCV", transform_fun, ...) {
+tq_transform_ <- function(data, ohlc_fun = "OHLCV", transform_fun, col_rename = NULL, ...) {
 
     # Patch for grouped data frames
     if (dplyr::is.grouped_df(data)) {
 
-        tq_transform_grouped_df_(data, ohlc_fun, transform_fun, ...)
+        tq_transform_grouped_df_(data, ohlc_fun, transform_fun,
+                                 col_rename = col_rename, ...)
 
     } else {
 
-        tq_transform_base_(data, ohlc_fun, transform_fun, ...)
+        tq_transform_base_(data, ohlc_fun, transform_fun,
+                           col_rename = col_rename, ...)
 
     }
 
@@ -125,7 +131,7 @@ tq_transform_ <- function(data, ohlc_fun = "OHLCV", transform_fun, ...) {
 
 #' @rdname tq_transform
 #' @export
-tq_transform_xy <- function(data, x, y = NULL, transform_fun, ...) {
+tq_transform_xy <- function(data, x, y = NULL, transform_fun, col_rename = NULL, ...) {
 
     # Convert to NSE
     x <- deparse(substitute(x))
@@ -135,27 +141,31 @@ tq_transform_xy <- function(data, x, y = NULL, transform_fun, ...) {
     # Patch for grouped data frames
     if (dplyr::is.grouped_df(data)) {
 
-        tq_transform_xy_grouped_df_(data, x, y, transform_fun, ...)
+        tq_transform_xy_grouped_df_(data, x, y, transform_fun,
+                                    col_rename = col_rename, ...)
 
     } else {
 
-        tq_transform_xy_base_(data, x, y, transform_fun, ...)
+        tq_transform_xy_base_(data, x, y, transform_fun,
+                              col_rename = col_rename, ...)
 
     }
 }
 
 #' @rdname tq_transform
 #' @export
-tq_transform_xy_ <- function(data, x, y = NULL, transform_fun, ...) {
+tq_transform_xy_ <- function(data, x, y = NULL, transform_fun, col_rename = NULL, ...) {
 
     # Patch for grouped data frames
     if (dplyr::is.grouped_df(data)) {
 
-        tq_transform_xy_grouped_df_(data, x, y, transform_fun, ...)
+        tq_transform_xy_grouped_df_(data, x, y, transform_fun,
+                                    col_rename = col_rename, ...)
 
     } else {
 
-        tq_transform_xy_base_(data, x, y, transform_fun, ...)
+        tq_transform_xy_base_(data, x, y, transform_fun,
+                              col_rename = col_rename, ...)
 
     }
 }
@@ -196,7 +206,7 @@ tq_transform_fun_options <- function() {
 
 # Base functions ----
 
-tq_transform_base_ <- function(data, ohlc_fun = "OHLCV", transform_fun, ...) {
+tq_transform_base_ <- function(data, ohlc_fun, transform_fun, col_rename, ...) {
 
     # Check transform_fun in xts, quantmod or TTR
     check_transform_fun_options(transform_fun)
@@ -237,13 +247,14 @@ tq_transform_base_ <- function(data, ohlc_fun = "OHLCV", transform_fun, ...) {
     }
 
     # Coerce to tibble and convert date / datetime
-    if (xts::is.xts(ret)) ret <- coerce_to_tibble(ret, date_col_name, time_zone)
+    if (xts::is.xts(ret)) ret <- coerce_to_tibble(ret, date_col_name,
+                                                  time_zone, col_rename)
 
     ret
 
 }
 
-tq_transform_xy_base_ <- function(data, x, y = NULL, transform_fun, ...) {
+tq_transform_xy_base_ <- function(data, x, y, transform_fun, col_rename, ...) {
 
     # Check transform_fun in xts, quantmod or TTR
     check_transform_fun_options(transform_fun)
@@ -300,7 +311,8 @@ tq_transform_xy_base_ <- function(data, x, y = NULL, transform_fun, ...) {
     }
 
     # Coerce to tibble and convert date / datetime
-    if (xts::is.xts(ret)) ret <- coerce_to_tibble(ret, date_col_name, time_zone)
+    if (xts::is.xts(ret)) ret <- coerce_to_tibble(ret, date_col_name,
+                                                  time_zone, col_rename)
 
     ret
 
@@ -308,7 +320,7 @@ tq_transform_xy_base_ <- function(data, x, y = NULL, transform_fun, ...) {
 
 # Patches for grouped data frames -----
 
-tq_transform_grouped_df_ <- function(data, ohlc_fun, transform_fun, ...) {
+tq_transform_grouped_df_ <- function(data, ohlc_fun, transform_fun, col_rename, ...) {
 
     group_names <- dplyr::groups(data)
 
@@ -318,6 +330,7 @@ tq_transform_grouped_df_ <- function(data, ohlc_fun, transform_fun, ...) {
                           purrr::map(~ tq_transform_base_(data = .x,
                                                           ohlc_fun = ohlc_fun,
                                                           transform_fun = transform_fun,
+                                                          col_rename = col_rename,
                                                           ...))
         ) %>%
         dplyr::select(-data) %>%
@@ -325,7 +338,7 @@ tq_transform_grouped_df_ <- function(data, ohlc_fun, transform_fun, ...) {
         dplyr::group_by_(.dots = group_names)
 }
 
-tq_transform_xy_grouped_df_ <- function(data, x, y, transform_fun, ...) {
+tq_transform_xy_grouped_df_ <- function(data, x, y, transform_fun, col_rename, ...) {
 
     group_names <- dplyr::groups(data)
 
@@ -336,6 +349,7 @@ tq_transform_xy_grouped_df_ <- function(data, x, y, transform_fun, ...) {
                                                              x = x,
                                                              y = y,
                                                              transform_fun = transform_fun,
+                                                             col_rename = col_rename,
                                                              ...))
         ) %>%
         dplyr::select(-data) %>%
@@ -376,7 +390,7 @@ check_x_y_valid <- function(data, x, y) {
 
 # Other -----
 
-coerce_to_tibble <- function(data, date_col_name, time_zone, transform_fun) {
+coerce_to_tibble <- function(data, date_col_name, time_zone, col_rename) {
 
     # Coerce to tibble
     ret <- data %>%
@@ -388,6 +402,15 @@ coerce_to_tibble <- function(data, date_col_name, time_zone, transform_fun) {
 
     # Rename row.names
     names(ret)[[1]] <- date_col_name
+
+    # Rename columns
+    if (!is.null(col_rename)) {
+        if (length(col_rename) == length(names(ret)) - 1) {
+            names(ret)[2:length(names(ret))] <- col_rename
+        } else {
+            warning("Could not rename columns")
+        }
+    }
 
     ret
 }
