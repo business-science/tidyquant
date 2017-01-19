@@ -112,6 +112,21 @@ tq_get(c("AAPL", "GOOG", "FB"), get = "key.ratios")
 ```
 
 
+__Key Stats__:
+
+Set `get = "key.stats"` to get 55 real-time key statistics including Ask, Bid, Day's High, Day's Low, Last Trade Price, current P/E Ratio, EPS, Market Cap, EPS Projected Current Year, EPS Projected Next Year and many more. 
+
+```{r}
+tq_get("AAPL", get = "key.stats")
+```
+
+Get key stats for multiple stocks:
+
+```{r}
+tq_get(c("AAPL", "GOOG", "FB"), get = "key.stats") %>%
+    select(symbol.x, Ask, Ask.Size, Bid, Bid.Size, Days.High, Days.Low)
+```
+
 __Stock Indexes__:
 
 There are `r tq_get_stock_index_options() %>% length()` indexes available to select from, which can be seen with a call to `tq_get_stock_index_options()`. 
@@ -268,5 +283,5 @@ c("AAPL", "GOOG", "FB") %>%
 
 ## Further Information
 
-This just scratches the surface of the features. See the [`tidyquant` vignette](https://cran.r-project.org/web/packages/tidyquant/vignettes/tidyquant.html) for further details on the package.
+This just scratches the surface of the features. See the [`tidyquant` vignette](https://cran.r-project.org/package=tidyquant) for further details on the package.
 

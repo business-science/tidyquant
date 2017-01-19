@@ -19,20 +19,25 @@ stock symbol, metal symbol, currency combination, FRED code, etc.}
 \item{get}{A character string representing the type of data to get
 for \code{x}. Options include:
 \itemize{
-  \item \code{"stock.index"}: Get all stocks in an index or exchange
+  \item \code{"stock.index"}: Get all stock symbols in any of \strong{18 stock indexes}
   from \href{http://www.marketvolume.com/indexes_exchanges/}{marketvolume.com}.
-  \item \code{"stock.prices"}: Get the stock prices for a stock symbol from
+  \item \code{"stock.prices"}: Get the open, high, low, close, volumen and adjusted
+  stock prices for a stock symbol from
+  \href{https://finance.yahoo.com/}{Yahoo Finance}.
+  \item \code{"financials"}: Get the income, balance sheet, and cash flow
+  financial statements for a stock symbol from
+  \href{https://www.google.com/finance}{Google Finance}.
+  \item \code{"key.ratios"}: These are key historical ratios. Get \strong{89 historical growth, profitablity, financial health,
+  efficiency, and valuation ratios that span 10-years} from
+  \href{https://www.morningstar.com}{morningstar.com}.
+  \item \code{"key.stats"}: These are key current statistics. Get \strong{55 current key statistics} such as
+  Ask, Bid, Day's High, Day's Low, Last Trade Price, current P/E Ratio, EPS,
+  Market Cap, EPS Projected Current Year, EPS Projected Next Year and many more from
   \href{https://finance.yahoo.com/}{Yahoo Finance}.
   \item \code{"dividends"}: Get the dividends for a stock symbol
   from \href{https://finance.yahoo.com/}{Yahoo Finance}.
   \item \code{"splits"}: Get the splits for a stock symbol
   from \href{https://finance.yahoo.com/}{Yahoo Finance}.
-  \item \code{"financials"}: Get the income, balance sheet, and cash flow
-  financial statements for a stock symbol from
-  \href{https://www.google.com/finance}{Google Finance}.
-  \item \code{"key.ratios"}: Get historical growth, profitablity, financial health,
-  efficiency, and valuation ratios over 10-years for a stock symbol from
-  \href{https://www.morningstar.com}{morningstar.com}.
   \item \code{"economic.data"}: Get economic data from
   \href{https://fred.stlouisfed.org/}{FRED}.
   \item \code{"metal.prices"}: Get the metal prices from
@@ -111,6 +116,9 @@ appl_financials <- tq_get("AAPL", get = "financials")
 # Get key ratios for a stock from Morningstar
 appl_key_ratios <- tq_get("AAPL", get = "key.ratios")
 
+# Get key statistics for a stock from Yahoo
+appl_key_stats <- tq_get("AAPL", get = "key.stats")
+
 # Get FRED economic data for a commodity code
 tq_get("DCOILWTICO", get = "economic.data") # WTI crude oil spot prices
 
@@ -124,14 +132,16 @@ gold_price_eur <- tq_get("gold", get = "metal.prices",
 
 ##### Scaling with the tidyverse
 
-# Get a historical stock prices from multiple stocks
+# Simplified scaling
+FANG <- c("FB", "AMZN", "NFLX", "GOOGL") \%>\%
+    tq_get(get = "stock.prices")
+
+# Scaling with purrr
 FANG <- tibble(symbol = c("FB", "AMZN", "NFLX", "GOOGL")) \%>\%
     mutate(stock.prices = map(.x = symbol,
                               ~ tq_get(.x, get = "stock.prices"))) \%>\%
     unnest()
 
-# Simplified scaling
-FANG <- c("FB", "AMZN", "NFLX", "GOOGL") \%>\%
-    tq_get()
+
 }
 

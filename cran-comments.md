@@ -1,5 +1,5 @@
 ## Release Summary
-This is the second release of tidyquant for CRAN review. This release adds new functionality including `get = "key.ratios"` option for `tq_get()`, and `tq_mutate` and `tq_transform` integration with the `rollapply` functions from the `zoo` package. Several function arguments were renamed to make more intuitive, and several fixes were made to the naming of columns.
+This is the third release of tidyquant for CRAN review. This release adds new functionality including `get = "key.stats"` option for `tq_get()`, and various charting functions that integrate with `ggplot2`. Several fixes were made to enable quickly getting and manipulating data.
 
 
 ## Test environments

@@ -1,7 +1,8 @@
-# Script to download latest stock indexes to R/sysdata.rda
-# Data is used as a fail-safe if cannot be retrieved from
-# www.marketvolume.com
 
+# Functions ----
+
+# Function to download latest stock indexes to R/sysdata.rda
+# Data is used as a fail-safe if cannot be retrieved from www.marketvolume.com
 re_run_fallback <- function() {
 
     index.option <- tq_get("options", get = "stock.index")
@@ -30,8 +31,6 @@ re_run_fallback <- function() {
 
         stock_indexes <- get_stock_indexes(group, index.option, date.downloaded)
 
-        devtools::use_data(stock_indexes, internal = TRUE)
-
     } else {
 
         # Update stock_indexes with new data that can be downloaded
@@ -50,9 +49,26 @@ re_run_fallback <- function() {
         stock_indexes <- stock_indexes_comp %>%
             dplyr::select(group:date.downloaded)
 
-        devtools::use_data(stock_indexes, internal = TRUE, overwrite = TRUE)
-
     }
+
+    stock_indexes
 
 }
 
+# Function to get yahoo key statistic codes
+run_yahoo_finance_tags <- function() {
+    require(xlsx)
+    yahoo_tags <- xlsx::read.xlsx("../yahoo.key.statistics.xlsx",
+                                  sheetIndex = 1,
+                                  colClasses = c("character", "character")) %>%
+        tibble::as_tibble() %>%
+        dplyr::mutate_all(as.character)
+    yahoo_tags
+}
+
+# Script ----
+
+stock_indexes <- re_run_fallback()
+yahoo_tags <- run_yahoo_finance_tags()
+
+devtools::use_data(stock_indexes, yahoo_tags, internal = TRUE, overwrite = TRUE)

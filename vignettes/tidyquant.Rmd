@@ -114,7 +114,7 @@ aapl_splits <- tq_get("AAPL", get = "splits", from = "1990-01-01")
 aapl_splits
 ```
 
-The data source is [yahoo finance](https://finance.yahoo.com/).
+The data source is [Yahoo Finance](https://finance.yahoo.com/).
 
 __Financial Statements__:
 
@@ -143,12 +143,12 @@ aapl_financials %>%
 ```
 
 
-The data source is [google finance](https://www.google.com/finance).
+The data source is [Google Finance](https://www.google.com/finance).
 
 
 __Key Ratios__:
 
-For any given stock, the key ratios are available for 10 years that are classified into the following sections:
+For any given stock, the historical key ratios are available for 10 years, and are classified into the following sections:
 
 * __Financials__: These ratios include gross margin %, operating margin %, EPS, book value per share, and more.
 * __Profitability__: These ratios include margin as a percentage of sales (gross margin, operating margin, EBT margin, etc) and profitability metrics such as tax rate %, asset turnover, ROA, financial leverage, ROE, return on invested capital, and more.
@@ -186,6 +186,42 @@ aapl_key_ratios %>%
 ```
 
 The data source is [Morningstar](http://www.morningstar.com/).
+
+__Key Stats__:
+
+For any given stock, the current key statistics are available in real time.
+
+```{r}
+aapl_key_stats <- tq_get("AAPL", get = "key.stats")
+aapl_key_stats
+```
+
+It's quite a bit of information, with 55 real-time stats available. We can easily get for mulitple stocks and pare down the list for comparisons:
+
+```{r}
+c("AAPL", "FB", "GOOG") %>%
+    tq_get(get = "key.stats") %>%
+    select(symbol.x, Ask, Ask.Size, Bid, Bid.Size, Days.High, Days.Low)
+```
+
+Finally, because the statistics are real-time, we can setup real-time monitoring by calling `tq_get` at periodic intervals. The function below is not evaluated for time considerations, but if called during active trading sessions will collect five samples at three second intervals. 
+
+```{r, eval = FALSE}
+collect_real_time_data <- function(x, interval_sec, n) {
+    data <- tibble()
+    while (n > 0) {
+        data <- bind_rows(data, tq_get(x, get = "key.stats"))
+        Sys.sleep(interval_sec)
+        n <- n - 1
+    }
+    return(data)
+}
+collect_real_time_data("AAPL", interval_sec = 3, n = 5) %>%
+    select(Ask, Ask.Size, Bid, Bid.Size, Open, Change)
+```
+
+
+The data source is [Yahoo Finance](https://finance.yahoo.com/).
 
 <a class="anchor" id="economic-data"></a>
 
