@@ -10,13 +10,13 @@
 |language |(EN)                         |
 |collate  |English_United States.1252   |
 |tz       |America/New_York             |
-|date     |2016-12-31                   |
+|date     |2017-01-19                   |
 
 ## Packages
 
-|package   |*  |version |date       |source                         |
-|:---------|:--|:-------|:----------|:------------------------------|
-|tidyquant |*  |0.1.0   |2016-12-31 |local (mdancho84/tidyquant@NA) |
+|package   |*  |version    |date       |source                         |
+|:---------|:--|:----------|:----------|:------------------------------|
+|tidyquant |*  |0.2.0.9200 |2017-01-19 |local (mdancho84/tidyquant@NA) |
 
 # Check results
 0 packages with problems
