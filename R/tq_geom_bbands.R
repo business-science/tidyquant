@@ -27,14 +27,18 @@
 #' @inheritParams ggplot2::geom_ribbon
 #' @inheritParams TTR::SMA
 #' @inheritParams TTR::BBands
+#' @param color_ma,color_bands Select the line color to be applied for the moving
+#' average line and the Bollinger band line.
+#' @param alpha Used to adjust the alpha transparency for the BBand ribbon.
+#' @param fill Used to adjust the fill color for the BBand ribbon.
 #'
 #' @section Aesthetics:
 #' The following aesthetics are understood (required are in bold):
 #' \itemize{
 #'    \item \strong{\code{x}}, Typically a date
-#'    \item \strong{\code{y}}, Required to be the close price
 #'    \item \strong{\code{high}}, Required to be the high price
 #'    \item \strong{\code{low}}, Required to be the low price
+#'    \item \strong{\code{close}}, Required to be the close price
 #'    \item \code{volume}, Required for VWMA and EVWMA
 #'    \item \code{colour}, Affects line colors
 #'    \item \code{fill}, Affects ribbon fill color
@@ -70,7 +74,7 @@
 #' AAPL %>%
 #'     ggplot(aes(x = date, y = close)) +
 #'     geom_line() +           # Plot stock price
-#'     tq_geom_bbands(aes(high = high, low = low), ma_fun = SMA, n = 50) +
+#'     tq_geom_bbands(aes(high = high, low = low, close = close), ma_fun = SMA, n = 50) +
 #'     coord_x_date(xlim = c(today() - years(1), today()), ylim = c(80, 130))
 #'
 #'
@@ -78,7 +82,7 @@
 #' AAPL %>%
 #'    ggplot(aes(x = date, y = close)) +
 #'    geom_line() +           # Plot stock price
-#'    tq_geom_bbands(aes(high = high, low = low),
+#'    tq_geom_bbands(aes(high = high, low = low, close = close),
 #'                   ma_fun = EMA, wilder = TRUE, ratio = NULL, n = 50) +
 #'    coord_x_date(xlim = c(today() - years(1), today()), ylim = c(80, 130))
 #'
@@ -87,7 +91,7 @@
 #' AAPL %>%
 #'     ggplot(aes(x = date, y = close)) +
 #'     geom_line() +           # Plot stock price
-#'     tq_geom_bbands(aes(high = high, low = low, volume = volume),
+#'     tq_geom_bbands(aes(high = high, low = low, close = close, volume = volume),
 #'                    ma_fun = VWMA, n = 50) +
 #'     coord_x_date(xlim = c(today() - years(1), today()), ylim = c(80, 130))
 
@@ -98,7 +102,9 @@ tq_geom_bbands <- function(mapping = NULL, data = NULL,
                        position = "identity", na.rm = TRUE, show.legend = NA,
                        inherit.aes = TRUE,
                        ma_fun = SMA, n = 20, sd = 2,
-                       wilder = FALSE, ratio = NULL, v = 1, wts = 1:n, ...) {
+                       wilder = FALSE, ratio = NULL, v = 1, wts = 1:n,
+                       color_ma = "darkblue", color_bands = "red",
+                       alpha = 0.15, fill = "grey20", ...) {
 
     ma_fun <- deparse(substitute(ma_fun))
 
@@ -106,7 +112,9 @@ tq_geom_bbands <- function(mapping = NULL, data = NULL,
                 position = position, na.rm = na.rm, show.legend = show.legend,
                 inherit.aes = inherit.aes,
                 ma_fun = ma_fun, n = n, sd = sd,
-                wilder = wilder, ratio = ratio, v = v, wts = wts, ...)
+                wilder = wilder, ratio = ratio, v = v, wts = wts,
+                color_ma = color_ma, color_bands = color_bands,
+                alpha = alpha, fill = fill, ...)
 }
 
 
@@ -115,8 +123,10 @@ tq_geom_bbands <- function(mapping = NULL, data = NULL,
 tq_geom_bbands_ <- function(mapping = NULL, data = NULL,
                            position = "identity", na.rm = TRUE,
                            show.legend = NA, inherit.aes = TRUE,
-                           ma_fun = SMA, n = 10, sd = 2,
-                           wilder = FALSE, ratio = NULL, v = 1, wts = 1:n, ...) {
+                           ma_fun = "SMA", n = 10, sd = 2,
+                           wilder = FALSE, ratio = NULL, v = 1, wts = 1:n,
+                           color_ma = "darkblue", color_bands = "red",
+                           alpha = 0.15, fill = "grey20", ...) {
 
     # Check ma_fun is valid
 
@@ -133,14 +143,16 @@ tq_geom_bbands_ <- function(mapping = NULL, data = NULL,
         stat = stat_ribbon, geom = GeomBBandsRibbon, data = data, mapping = mapping,
         position = position, show.legend = show.legend, inherit.aes = inherit.aes,
         params = list(n = n, ma_fun = ma_fun, sd = sd, na.rm = na.rm,
-                      wilder = wilder, ratio = ratio, v = 1, wts = 1:n, ...)
+                      wilder = wilder, ratio = ratio, v = v, wts = wts,
+                      color = color_bands, alpha = alpha, fill = fill, ...)
     )
 
     ma <- ggplot2::layer(
         stat = stat_ma, geom = GeomBBandsMA, data = data, mapping = mapping,
         position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-        params = list(n = n, ma_fun = ma_fun, sd = sd, na.rm = na.rm, alpha = NA,
-                      wilder = wilder, ratio = ratio, v = 1, wts = 1:n, ...)
+        params = list(n = n, ma_fun = ma_fun, sd = sd, na.rm = na.rm,
+                      wilder = wilder, ratio = ratio, v = v, wts = wts,
+                      color = color_ma, alpha = NA, fill = fill, ...)
     )
 
     list(ribbon, ma)
@@ -149,7 +161,7 @@ tq_geom_bbands_ <- function(mapping = NULL, data = NULL,
 
 
 StatBBandsRibbon <- ggplot2::ggproto("StatBBandsRibbon", Stat,
-                            required_aes = c("x", "y", "high", "low"),
+                            required_aes = c("x", "high", "low", "close"),
 
                             compute_group = function(data, scales, params,
                                                      n = 10, ma_fun = SMA, sd = 2,
@@ -160,7 +172,7 @@ StatBBandsRibbon <- ggplot2::ggproto("StatBBandsRibbon", Stat,
 
                                 HLC <- tibble::tibble(high  = data$high,
                                                       low   = data$low,
-                                                      close = data$y)
+                                                      close = data$close)
 
                                 bbands <- get_bbands(HLC, n, ma_fun,
                                                      sd, wilder, ratio,
@@ -175,18 +187,19 @@ StatBBandsRibbon <- ggplot2::ggproto("StatBBandsRibbon", Stat,
 
 
 StatBBandsMA <- ggplot2::ggproto("StatBBandsMA", Stat,
-                                 required_aes = c("x", "y", "high", "low"),
+                                 required_aes = c("x", "high", "low", "close"),
 
                                  compute_group = function(data, scales, params,
                                                           ma_fun = "SMA", n = 20, sd = 2,
                                                           wilder = FALSE, ratio = NULL,
-                                                          v = 1, wts = 1:n) {
+                                                          v = 1, wts = 1:n,
+                                                          fill = "grey20") {
 
                                      grid   <- tibble::tibble(x = data$x)
 
                                      HLC <- tibble::tibble(high  = data$high,
                                                            low   = data$low,
-                                                           close = data$y)
+                                                           close = data$close)
 
                                      bbands <- get_bbands(HLC, n, ma_fun,
                                                           sd, wilder, ratio,
@@ -199,7 +212,7 @@ StatBBandsMA <- ggplot2::ggproto("StatBBandsMA", Stat,
 )
 
 StatBBandsRibbon_vol <- ggplot2::ggproto("StatBBandsRibbon", Stat,
-                                         required_aes = c("x", "y", "high", "low", "volume"),
+                                         required_aes = c("x", "high", "low", "close", "volume"),
 
                                          compute_group = function(data, scales, params,
                                                                   ma_fun = "SMA", n = 10, sd = 2,
@@ -210,7 +223,7 @@ StatBBandsRibbon_vol <- ggplot2::ggproto("StatBBandsRibbon", Stat,
 
                                              HLC <- tibble::tibble(high  = data$high,
                                                                    low   = data$low,
-                                                                   close = data$y)
+                                                                   close = data$close)
 
                                              bbands <- TTR::BBands(HLC = HLC,
                                                                    n = n,
@@ -226,18 +239,19 @@ StatBBandsRibbon_vol <- ggplot2::ggproto("StatBBandsRibbon", Stat,
 )
 
 StatBBandsMA_vol <- ggplot2::ggproto("StatBBandsMA", Stat,
-                                 required_aes = c("x", "y", "high", "low", "volume"),
+                                 required_aes = c("x", "high", "low", "close", "volume"),
 
                                  compute_group = function(data, scales, params,
                                                           n = 20, ma_fun = SMA, sd = 2,
                                                           wilder = FALSE, ratio = NULL,
-                                                          v = 1, wts = 1:n) {
+                                                          v = 1, wts = 1:n,
+                                                          fill = "grey20") {
 
                                      grid   <- tibble::tibble(x = data$x)
 
                                      HLC <- tibble::tibble(high  = data$high,
                                                            low   = data$low,
-                                                           close = data$y)
+                                                           close = data$close)
 
                                      bbands <- TTR::BBands(HLC = HLC,
                                                            n = n,
@@ -251,12 +265,14 @@ StatBBandsMA_vol <- ggplot2::ggproto("StatBBandsMA", Stat,
                                  }
 )
 
+# Geoms ----
+
 GeomBBandsRibbon <- ggproto("GeomBBandsRibbon", GeomRibbon,
                             default_aes = aes(colour = "red",
                                               fill = "grey20",
                                               size = 0.5,
                                               linetype = 2,
-                                              alpha = 0.25)
+                                              alpha = 0.15)
 )
 
 GeomBBandsMA <- ggproto("GeomBBandsMA", GeomLine,
@@ -266,6 +282,7 @@ GeomBBandsMA <- ggproto("GeomBBandsMA", GeomLine,
                                           alpha = NA)
 )
 
+# Get BBands  -----
 
 get_bbands <- function(HLC, n, ma_fun, sd, wilder, ratio, v, wts) {
 

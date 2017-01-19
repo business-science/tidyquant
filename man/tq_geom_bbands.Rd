@@ -8,12 +8,14 @@
 tq_geom_bbands(mapping = NULL, data = NULL, position = "identity",
   na.rm = TRUE, show.legend = NA, inherit.aes = TRUE, ma_fun = SMA,
   n = 20, sd = 2, wilder = FALSE, ratio = NULL, v = 1, wts = 1:n,
-  ...)
+  color_ma = "darkblue", color_bands = "red", alpha = 0.15,
+  fill = "grey20", ...)
 
 tq_geom_bbands_(mapping = NULL, data = NULL, position = "identity",
-  na.rm = TRUE, show.legend = NA, inherit.aes = TRUE, ma_fun = SMA,
+  na.rm = TRUE, show.legend = NA, inherit.aes = TRUE, ma_fun = "SMA",
   n = 10, sd = 2, wilder = FALSE, ratio = NULL, v = 1, wts = 1:n,
-  ...)
+  color_ma = "darkblue", color_bands = "red", alpha = 0.15,
+  fill = "grey20", ...)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2]{aes}} or
@@ -68,6 +70,13 @@ in \code{EMA}, and provides additional smoothing in \code{VMA}.}
 \item{wts}{Vector of weights.  Length of \code{wts} vector must equal the
 length of \code{x}, or \code{n} (the default).}
 
+\item{color_ma, color_bands}{Select the line color to be applied for the moving
+average line and the Bollinger band line.}
+
+\item{alpha}{Used to adjust the alpha transparency for the BBand ribbon.}
+
+\item{fill}{Used to adjust the fill color for the BBand ribbon.}
+
 \item{...}{Other arguments passed on to \code{\link[ggplot2]{layer}}. These are
 often aesthetics, used to set an aesthetic to a fixed value, like
 \code{color = "red"} or \code{size = 3}. They may also be parameters
@@ -102,9 +111,9 @@ The following moving averages are available:
 The following aesthetics are understood (required are in bold):
 \itemize{
    \item \strong{\code{x}}, Typically a date
-   \item \strong{\code{y}}, Required to be the close price
    \item \strong{\code{high}}, Required to be the high price
    \item \strong{\code{low}}, Required to be the low price
+   \item \strong{\code{close}}, Required to be the close price
    \item \code{volume}, Required for VWMA and EVWMA
    \item \code{colour}, Affects line colors
    \item \code{fill}, Affects ribbon fill color
@@ -124,7 +133,7 @@ AAPL <- tq_get("AAPL")
 AAPL \%>\%
     ggplot(aes(x = date, y = close)) +
     geom_line() +           # Plot stock price
-    tq_geom_bbands(aes(high = high, low = low), ma_fun = SMA, n = 50) +
+    tq_geom_bbands(aes(high = high, low = low, close = close), ma_fun = SMA, n = 50) +
     coord_x_date(xlim = c(today() - years(1), today()), ylim = c(80, 130))
 
 
@@ -132,7 +141,7 @@ AAPL \%>\%
 AAPL \%>\%
    ggplot(aes(x = date, y = close)) +
    geom_line() +           # Plot stock price
-   tq_geom_bbands(aes(high = high, low = low),
+   tq_geom_bbands(aes(high = high, low = low, close = close),
                   ma_fun = EMA, wilder = TRUE, ratio = NULL, n = 50) +
    coord_x_date(xlim = c(today() - years(1), today()), ylim = c(80, 130))
 
@@ -141,7 +150,7 @@ AAPL \%>\%
 AAPL \%>\%
     ggplot(aes(x = date, y = close)) +
     geom_line() +           # Plot stock price
-    tq_geom_bbands(aes(high = high, low = low, volume = volume),
+    tq_geom_bbands(aes(high = high, low = low, close = close, volume = volume),
                    ma_fun = VWMA, n = 50) +
     coord_x_date(xlim = c(today() - years(1), today()), ylim = c(80, 130))
 }
