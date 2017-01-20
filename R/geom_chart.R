@@ -8,7 +8,7 @@
 #'    \item \strong{\href{http://www.investopedia.com/terms/c/candlestick.asp}{Candlestick Chart}}
 #' }
 #'
-#' @inheritParams tq_geom_ma
+#' @inheritParams geom_ma
 #' @inheritParams ggplot2::geom_linerange
 #' @param color_up,color_down Select colors to be applied based on price movement
 #' from open to close. If close >= open, \code{color_up} is used. Otherwise,
@@ -16,7 +16,7 @@
 #' @param fill_up,fill_down Select fills to be applied based on price movement
 #' from open to close. If close >= open, \code{fill_up} is used. Otherwise,
 #' \code{fill_down} is used. The default is "darkblue" and "red", respectively.
-#' Only affects \code{tq_geom_candlestick}.
+#' Only affects \code{geom_candlestick}.
 #'
 #' @section Aesthetics:
 #' The following aesthetics are understood (required are in bold):
@@ -34,12 +34,12 @@
 #'
 #' @seealso See individual modeling functions for underlying parameters:
 #' \itemize{
-#'    \item \code{\link{tq_geom_ma}} for adding moving averages to ggplots
-#'    \item \code{\link{tq_geom_bbands}} for adding Bollinger Bands to ggplots
+#'    \item \code{\link{geom_ma}} for adding moving averages to ggplots
+#'    \item \code{\link{geom_bbands}} for adding Bollinger Bands to ggplots
 #'    \item \code{\link{coord_x_date}} for zooming into specific regions of a plot
 #' }
 #'
-#' @name tq_geom_chart
+#' @name geom_chart
 #'
 #' @export
 #'
@@ -52,24 +52,24 @@
 #' # Bar Chart
 #' AAPL %>%
 #'     ggplot(aes(x = date, y = close)) +
-#'     tq_geom_barchart(aes(open = open, high = high, low = low, close = close)) +
-#'     tq_geom_ma(color = "darkgreen") +
+#'     geom_barchart(aes(open = open, high = high, low = low, close = close)) +
+#'     geom_ma(color = "darkgreen") +
 #'     coord_x_date(xlim = c(today() - weeks(6), today()),
 #'                  ylim = c(100, 130))
 #'
 #' # Candlestick Chart
 #' AAPL %>%
 #'     ggplot(aes(x = date, y = close)) +
-#'     tq_geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
-#'     tq_geom_ma(color = "darkgreen") +
+#'     geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
+#'     geom_ma(color = "darkgreen") +
 #'     coord_x_date(xlim = c(today() - weeks(6), today()),
 #'                  ylim = c(100, 130))
 
 # Bar Chart -----
 
-#' @rdname tq_geom_chart
+#' @rdname geom_chart
 #' @export
-tq_geom_barchart <- function(mapping = NULL, data = NULL, stat = "identity",
+geom_barchart <- function(mapping = NULL, data = NULL, stat = "identity",
                              position = "identity", na.rm = TRUE, show.legend = NA,
                              inherit.aes = TRUE,
                              color_up = "darkblue", color_down = "red",
@@ -171,9 +171,9 @@ GeomSegmentBC <- ggproto("GeomSegmentBC", GeomSegment,
 
 # Candlestick Chart -----
 
-#' @rdname tq_geom_chart
+#' @rdname geom_chart
 #' @export
-tq_geom_candlestick <- function(mapping = NULL, data = NULL, stat = "identity",
+geom_candlestick <- function(mapping = NULL, data = NULL, stat = "identity",
                                 position = "identity", na.rm = TRUE, show.legend = NA,
                                 inherit.aes = TRUE,
                                 color_up = "darkblue", color_down = "red",

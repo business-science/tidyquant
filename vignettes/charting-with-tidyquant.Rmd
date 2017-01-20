@@ -25,9 +25,9 @@ knitr::opts_chunk$set(message = FALSE,
 
 The `tidyquant` package has added charting tools to assist its users in developing quick visualizations without data manipulation and formatting by integrating with `ggplot2` using the grammar of graphics format and workflow. There are currently three primary geometry (geom) categories and one coordinate manipulation (coord) category within `tidyquant`:
 
-* __Chart Types__: Two chart type visualizations are available using `tq_geom_barchart` and `tq_geom_candlestick`.
-* __Moving Averages__: Seven moving average visualizations are available using `tq_geom_ma`.
-* __Bollinger Bands__: Bollinger bands can be visualized using `tq_geom_bbands`. The BBand moving average can be one of the seven available in Moving Averages.
+* __Chart Types__: Two chart type visualizations are available using `geom_barchart` and `geom_candlestick`.
+* __Moving Averages__: Seven moving average visualizations are available using `geom_ma`.
+* __Bollinger Bands__: Bollinger bands can be visualized using `geom_bbands`. The BBand moving average can be one of the seven available in Moving Averages.
 * __Zooming in on Date Ranges__: Two `coord` functions are available (`coord_x_date` and `coord_x_datetime`), which prevent data loss when zooming in on specific regions of a chart. This is important when using the moving average and Bollinger band geoms. 
 
 
@@ -60,8 +60,8 @@ end <- as_date("2017-01-01")
 
 Financial charts provide visual cues to open, high, low, and close prices. The following chart geoms are available:
 
-* [Bar Chart](http://www.investopedia.com/terms/b/barchart.asp): Use `tq_geom_barchart`
-* [Candlestick Chart](http://www.investopedia.com/terms/c/candlestick.asp): Use `tq_geom_candlestick`
+* [Bar Chart](http://www.investopedia.com/terms/b/barchart.asp): Use `geom_barchart`
+* [Candlestick Chart](http://www.investopedia.com/terms/c/candlestick.asp): Use `geom_candlestick`
 
 ## Line Chart
 
@@ -80,12 +80,12 @@ AAPL %>%
 
 ## Bar Chart
 
-Visualizing the bar chart is as simple as replacing `geom_line` with `tq_geom_barchart` in the ggplot workflow. Because the bar chart uses open, high, low, and close prices in the visualization, we need to specify these as part of the aesthetic arguments, `aes()`. We can do so internal to the geom or in the `ggplot()` function. 
+Visualizing the bar chart is as simple as replacing `geom_line` with `geom_barchart` in the ggplot workflow. Because the bar chart uses open, high, low, and close prices in the visualization, we need to specify these as part of the aesthetic arguments, `aes()`. We can do so internal to the geom or in the `ggplot()` function. 
 
 ```{r}
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
-    tq_geom_barchart(aes(open = open, high = high, low = low, close = close)) +
+    geom_barchart(aes(open = open, high = high, low = low, close = close)) +
     labs(title = "AAPL Bar Chart", y = "Closing Price", x = "")
 ```
 
@@ -94,7 +94,7 @@ We zoom into specific sections using `coord_x_date`, which has `xlim` and `ylim`
 ```{r}
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
-    tq_geom_barchart(aes(open = open, high = high, low = low, close = close)) +
+    geom_barchart(aes(open = open, high = high, low = low, close = close)) +
     labs(title = "AAPL Bar Chart", 
          subtitle = "Zoomed in using coord_x_date",
          y = "Closing Price", x = "") + 
@@ -107,7 +107,7 @@ The colors can be modified using `color_up` and `color_down` arguments, and para
 ```{r}
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
-    tq_geom_barchart(aes(open = open, high = high, low = low, close = close),
+    geom_barchart(aes(open = open, high = high, low = low, close = close),
                      color_up = "darkgreen", color_down = "darkred", size = 1) +
     labs(title = "AAPL Bar Chart", 
          subtitle = "Zoomed in, Experimenting with Formatting",
@@ -118,12 +118,12 @@ AAPL %>%
 
 ## Candlestick Chart
 
-Creating a candlestick chart is very similar to the process with the bar chart. Using `tq_geom_candlestick`, we can insert into the `ggplot` workflow.
+Creating a candlestick chart is very similar to the process with the bar chart. Using `geom_candlestick`, we can insert into the `ggplot` workflow.
 
 ```{r}
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
-    tq_geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
+    geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
     labs(title = "AAPL Candlestick Chart", y = "Closing Price", x = "")
 ```
 
@@ -132,7 +132,7 @@ We zoom into specific sections using `coord_x_date`.
 ```{r}
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
-    tq_geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
+    geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
     labs(title = "AAPL Candlestick Chart", 
          subtitle = "Zoomed in using coord_x_date",
          y = "Closing Price", x = "") + 
@@ -145,7 +145,7 @@ The colors can be modified using `color_up` and `color_down`, which control the 
 ```{r}
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
-    tq_geom_candlestick(aes(open = open, high = high, low = low, close = close),
+    geom_candlestick(aes(open = open, high = high, low = low, close = close),
                         color_up = "darkgreen", color_down = "darkred", 
                         fill_up  = "darkgreen", fill_down  = "darkred") +
     labs(title = "AAPL Candlestick Chart", 
@@ -162,7 +162,7 @@ Because the geoms are applied as layers, we can combine multiple chart types. Th
 ```{r}
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
-    tq_geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
+    geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
     geom_line(color = "pink", size = 1.5) +
     geom_point(color = "purple", size = 3) +
     labs(title = "AAPL Candlestick Chart", 
@@ -179,7 +179,7 @@ We can use `facet_wrap` to visualize multiple stocks at the same time. By adding
 ```{r}
 FANG %>%
     ggplot(aes(x = date, y = close, group = symbol.x)) +
-    tq_geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
+    geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
     labs(title = "FANG Candlestick Chart", 
          subtitle = "Experimenting with Mulitple Stocks",
          y = "Closing Price", x = "") + 
@@ -204,7 +204,7 @@ The following moving averages are available:
 * __[Volume-weighted moving averages (VWMA)](http://www.investopedia.com/articles/trading/11/trading-with-vwap-mvwap.asp)__ (also known as VWAP)
 * __[Elastic, volume-weighted moving averages (EVWMA)](http://www.investopedia.com/articles/trading/11/trading-with-vwap-mvwap.asp)__ (also known as MVWAP)
 
-Moving averages are applied as an added layer to a chart with the `tq_geom_ma` function. The geom is a wrapper for the underlying moving average functions from the `TTR` package: `SMA`, `EMA`, `WMA`, `DEMA`, `ZLEMA`, `VWMA`, and `EVWMA`. Here's how to use the geom:
+Moving averages are applied as an added layer to a chart with the `geom_ma` function. The geom is a wrapper for the underlying moving average functions from the `TTR` package: `SMA`, `EMA`, `WMA`, `DEMA`, `ZLEMA`, `VWMA`, and `EVWMA`. Here's how to use the geom:
 
 1. Select a moving average function, `ma_fun`, that you want to apply.
 2. Determine the function arguments that need to be passed to the `ma_fun`. You can investigate the underlying function by searching `?TTR::SMA`.
@@ -220,9 +220,9 @@ We want to apply a `SMA`, so we research the TTR function and we see that it acc
 ```{r}
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
-    tq_geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
-    tq_geom_ma(ma_fun = SMA, n = 50, linetype = 5) +
-    tq_geom_ma(ma_fun = SMA, n = 200, color = "red") + 
+    geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
+    geom_ma(ma_fun = SMA, n = 50, linetype = 5) +
+    geom_ma(ma_fun = SMA, n = 200, color = "red") + 
     labs(title = "AAPL Candlestick Chart", 
          subtitle = "50 and 200-Day SMA", 
          y = "Closing Price", x = "") + 
@@ -236,9 +236,9 @@ We want an `EMA`, so we research the TTR function and we see that it accepts, `n
 ```{r}
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
-    tq_geom_barchart(aes(open = open, high = high, low = low, close = close)) +
-    tq_geom_ma(ma_fun = EMA, n = 50, wilder = TRUE, linetype = 5) +
-    tq_geom_ma(ma_fun = EMA, n = 200, wilder = TRUE, color = "red") + 
+    geom_barchart(aes(open = open, high = high, low = low, close = close)) +
+    geom_ma(ma_fun = EMA, n = 50, wilder = TRUE, linetype = 5) +
+    geom_ma(ma_fun = EMA, n = 200, wilder = TRUE, color = "red") + 
     labs(title = "AAPL Bar Chart", 
          subtitle = "50 and 200-Day EMA", 
          y = "Closing Price", x = "") + 
@@ -254,9 +254,9 @@ We'll double up using a volume-weighted average (`VWMA`) and apply it to the FAN
 ```{r}
 FANG %>%
     ggplot(aes(x = date, y = close, volume = volume, group = symbol.x)) +
-    tq_geom_barchart(aes(open = open, high = high, low = low, close = close)) +
-    tq_geom_ma(ma_fun = VWMA, n = 50, wilder = TRUE, linetype = 5) +
-    tq_geom_ma(ma_fun = VWMA, n = 200, wilder = TRUE, color = "red") + 
+    geom_barchart(aes(open = open, high = high, low = low, close = close)) +
+    geom_ma(ma_fun = VWMA, n = 50, wilder = TRUE, linetype = 5) +
+    geom_ma(ma_fun = VWMA, n = 200, wilder = TRUE, color = "red") + 
     labs(title = "FANG Bar Chart", 
          subtitle = "50 and 200-Day EMA, Experimenting with Multiple Stocks", 
          y = "Closing Price", x = "") + 
@@ -266,7 +266,7 @@ FANG %>%
 
 ## Bollinger Bands
 
-Bollinger Bands plot a range around a moving average typically two standard deviations up and down. Because they use a moving average, the `tq_geom_bbands` function works almost identically to `tq_geom_ma`. The same seven moving averages are compatible. The main difference is the addition of the standard deviation, `sd`, argument which is 2 by default, and the `high`, `low` and `close` aesthetics which are required to calculate the bands. 
+Bollinger Bands plot a range around a moving average typically two standard deviations up and down. Because they use a moving average, the `geom_bbands` function works almost identically to `geom_ma`. The same seven moving averages are compatible. The main difference is the addition of the standard deviation, `sd`, argument which is 2 by default, and the `high`, `low` and `close` aesthetics which are required to calculate the bands. 
 
 ### Example 1: Applying BBands using a SMA
 
@@ -276,8 +276,8 @@ Let's do a basic example to add Bollinger Bands using a simple moving average. B
 AAPL %>%
     ggplot(aes(x = date, y = close, open = open,
                high = high, low = low, close = close)) +
-    tq_geom_candlestick() +
-    tq_geom_bbands(ma_fun = SMA, sd = 2, n = 50) +
+    geom_candlestick() +
+    geom_bbands(ma_fun = SMA, sd = 2, n = 50) +
     labs(title = "AAPL Candlestick Chart", 
          subtitle = "BBands with SMA Applied", 
          y = "Closing Price", x = "") + 
@@ -293,8 +293,8 @@ The appearance can be modified using `color_ma`, `color_bands`, `alpha`, and `fi
 AAPL %>%
     ggplot(aes(x = date, y = close, open = open,
                high = high, low = low, close = close)) +
-    tq_geom_candlestick() +
-    tq_geom_bbands(ma_fun = SMA, sd = 2, n = 50, 
+    geom_candlestick() +
+    geom_bbands(ma_fun = SMA, sd = 2, n = 50, 
                    linetype = 1, alpha = 0.4, fill = "bisque", 
                    color_bands = "aquamarine4", color_ma = "steelblue4") +
     labs(title = "AAPL Candlestick Chart", 
@@ -314,8 +314,8 @@ FANG %>%
     ggplot(aes(x = date, y = close, 
                open = open, high = high, low = low, close = close, 
                group = symbol.x)) +
-    tq_geom_barchart() +
-    tq_geom_bbands(ma_fun = SMA, sd = 2, n = 50, linetype = 5) +
+    geom_barchart() +
+    geom_bbands(ma_fun = SMA, sd = 2, n = 50, linetype = 5) +
     labs(title = "FANG Bar Chart", 
          subtitle = "BBands with SMA Applied, Experimenting with Multiple Stocks", 
          y = "Closing Price", x = "") + 

@@ -88,7 +88,7 @@
 #' }
 #'
 #'
-#' @name tq_geom_ma
+#' @name geom_ma
 #'
 #' @export
 #'
@@ -102,8 +102,8 @@
 #' AAPL %>%
 #'     ggplot(aes(x = date, y = adjusted)) +
 #'     geom_line() +                         # Plot stock price
-#'     tq_geom_ma(ma_fun = SMA, n = 50) +                 # Plot 50-day SMA
-#'     tq_geom_ma(ma_fun = SMA, n = 200, color = "red") + # Plot 200-day SMA
+#'     geom_ma(ma_fun = SMA, n = 50) +                 # Plot 50-day SMA
+#'     geom_ma(ma_fun = SMA, n = 200, color = "red") + # Plot 200-day SMA
 #'     coord_x_date(xlim = c(today() - weeks(12), today()),
 #'                ylim = c(100, 130))                     # Zoom in
 #'
@@ -111,14 +111,14 @@
 #' AAPL %>%
 #'     ggplot(aes(x = date, y = adjusted)) +
 #'     geom_line() +                                                   # Plot stock price
-#'     tq_geom_ma(aes(volume = volume), ma_fun = EVWMA, n = 50) +   # Plot 50-day EVWMA
+#'     geom_ma(aes(volume = volume), ma_fun = EVWMA, n = 50) +   # Plot 50-day EVWMA
 #'     coord_x_date(xlim = c(today() - weeks(12), today()),
 #'                ylim = c(100, 130))                                  # Zoom in
 
 
-#' @rdname tq_geom_ma
+#' @rdname geom_ma
 #' @export
-tq_geom_ma <- function(mapping = NULL, data = NULL,
+geom_ma <- function(mapping = NULL, data = NULL,
                        position = "identity", na.rm = TRUE, show.legend = NA,
                        inherit.aes = TRUE,
                        ma_fun = SMA, n = 20,
@@ -126,7 +126,7 @@ tq_geom_ma <- function(mapping = NULL, data = NULL,
 
     ma_fun <- deparse(substitute(ma_fun))
 
-    tq_geom_ma_(mapping = mapping, data = data,
+    geom_ma_(mapping = mapping, data = data,
                 position = position, na.rm = na.rm, show.legend = show.legend,
                 inherit.aes = inherit.aes,
                 ma_fun = ma_fun, n = n,
@@ -134,9 +134,9 @@ tq_geom_ma <- function(mapping = NULL, data = NULL,
 }
 
 
-#' @rdname tq_geom_ma
+#' @rdname geom_ma
 #' @export
-tq_geom_ma_ <- function(mapping = NULL, data = NULL,
+geom_ma_ <- function(mapping = NULL, data = NULL,
                      position = "identity", na.rm = TRUE, show.legend = NA,
                      inherit.aes = TRUE,
                      ma_fun = "SMA", n = 20,

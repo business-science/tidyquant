@@ -3,9 +3,9 @@
 * New data:
     * New `tq_get` option `get = "key.stats"`, which retrieves the current key statistics (55 total) from [www.finance.yahoo.com/](http://finance.yahoo.com/). These include various current data such as Ask, Bid, Day's High, Day's Low, Last Trade Price, current P/E Ratio, EPS, Current Market Cap, EPS Projected Current Year, EPS Projected Next Year and many more. Example: `tq_get("AAPL", get = "key.stats")`.
 * New visualizations that integrate with `ggplot2`:
-    * Chart geoms: Bar charts (`tq_geom_barchart`) and candlestick charts (`tq_geom_candlestick`) can be quickly created with the new geoms.
-    * Moving Averages: Seven moving averages can be quickly visualized / prototyped using `tq_geom_ma`. The geom wraps the `TTR::SMA` functions.
-    * Bollinger bands can be visualized with `tq_geom_bbands`. The same seven moving averages are compatible with the geom.
+    * Chart geoms: Bar charts (`geom_barchart`) and candlestick charts (`geom_candlestick`) can be quickly created with the new geoms.
+    * Moving Averages: Seven moving averages can be quickly visualized / prototyped using `geom_ma`. The geom wraps the `TTR::SMA` functions.
+    * Bollinger bands can be visualized with `geom_bbands`. The same seven moving averages are compatible with the geom.
     * Zooming Into Chart Sections: Two functions (`coord_x_date` and `coord_x_datetime`) were added to enable zooming into chart sections using dates with no out-of-bounds data loss (e.g. out-of-bounds data loss with the `scale_x_` functions). 
 * Fixes:
     * Issue #5: `tq_get` can now accept character vectors and data frames for the `x` arg, in addition to a single character input. This streamlines the getting of data for multiple inputs (e.g. stock symbols, stock indexes, etc).

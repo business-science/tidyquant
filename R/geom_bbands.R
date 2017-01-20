@@ -1,7 +1,7 @@
 #' Plot Bollinger Bands using Moving Averages
 #'
 #' Bollinger Bands plot a range around a moving average typically two standard deviations up and down.
-#' The \code{tq_geom_bbands} function enables plotting Bollinger Bands quickly using various moving average functions.
+#' The \code{geom_bbands} function enables plotting Bollinger Bands quickly using various moving average functions.
 #' The moving average functions used are specified in \code{\link[TTR]{SMA}}
 #' from the TTR package. Use \code{\link{coord_x_date}} to zoom into specific plot regions.
 #' The following moving averages are available:
@@ -23,7 +23,7 @@
 #'    Requires \code{volume} aesthetic.
 #' }
 #'
-#' @inheritParams tq_geom_ma
+#' @inheritParams geom_ma
 #' @inheritParams ggplot2::geom_ribbon
 #' @inheritParams TTR::SMA
 #' @inheritParams TTR::BBands
@@ -60,7 +60,7 @@
 #'    \item \code{\link{coord_x_date}} for zooming into specific regions of a plot
 #' }
 #'
-#' @name tq_geom_bbands
+#' @name geom_bbands
 #'
 #' @export
 #'
@@ -74,7 +74,7 @@
 #' AAPL %>%
 #'     ggplot(aes(x = date, y = close)) +
 #'     geom_line() +           # Plot stock price
-#'     tq_geom_bbands(aes(high = high, low = low, close = close), ma_fun = SMA, n = 50) +
+#'     geom_bbands(aes(high = high, low = low, close = close), ma_fun = SMA, n = 50) +
 #'     coord_x_date(xlim = c(today() - years(1), today()), ylim = c(80, 130))
 #'
 #'
@@ -82,7 +82,7 @@
 #' AAPL %>%
 #'    ggplot(aes(x = date, y = close)) +
 #'    geom_line() +           # Plot stock price
-#'    tq_geom_bbands(aes(high = high, low = low, close = close),
+#'    geom_bbands(aes(high = high, low = low, close = close),
 #'                   ma_fun = EMA, wilder = TRUE, ratio = NULL, n = 50) +
 #'    coord_x_date(xlim = c(today() - years(1), today()), ylim = c(80, 130))
 #'
@@ -91,14 +91,14 @@
 #' AAPL %>%
 #'     ggplot(aes(x = date, y = close)) +
 #'     geom_line() +           # Plot stock price
-#'     tq_geom_bbands(aes(high = high, low = low, close = close, volume = volume),
+#'     geom_bbands(aes(high = high, low = low, close = close, volume = volume),
 #'                    ma_fun = VWMA, n = 50) +
 #'     coord_x_date(xlim = c(today() - years(1), today()), ylim = c(80, 130))
 
 
-#' @rdname tq_geom_bbands
+#' @rdname geom_bbands
 #' @export
-tq_geom_bbands <- function(mapping = NULL, data = NULL,
+geom_bbands <- function(mapping = NULL, data = NULL,
                        position = "identity", na.rm = TRUE, show.legend = NA,
                        inherit.aes = TRUE,
                        ma_fun = SMA, n = 20, sd = 2,
@@ -108,7 +108,7 @@ tq_geom_bbands <- function(mapping = NULL, data = NULL,
 
     ma_fun <- deparse(substitute(ma_fun))
 
-    tq_geom_bbands_(mapping = mapping, data = data,
+    geom_bbands_(mapping = mapping, data = data,
                 position = position, na.rm = na.rm, show.legend = show.legend,
                 inherit.aes = inherit.aes,
                 ma_fun = ma_fun, n = n, sd = sd,
@@ -118,9 +118,9 @@ tq_geom_bbands <- function(mapping = NULL, data = NULL,
 }
 
 
-#' @rdname tq_geom_bbands
+#' @rdname geom_bbands
 #' @export
-tq_geom_bbands_ <- function(mapping = NULL, data = NULL,
+geom_bbands_ <- function(mapping = NULL, data = NULL,
                            position = "identity", na.rm = TRUE,
                            show.legend = NA, inherit.aes = TRUE,
                            ma_fun = "SMA", n = 10, sd = 2,
