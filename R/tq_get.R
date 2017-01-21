@@ -71,7 +71,6 @@
 #'
 #' @examples
 #' # Load libraries
-#' library(tidyverse)
 #' library(tidyquant)
 #'
 #' ##### Basic Functionality
@@ -80,55 +79,20 @@
 #' tq_get_options()
 #'
 #' # Get all stocks in a stock index from www.marketvolume.com
+#' tq_get_stock_index_options() # Get stock index options
 #' tq_get("SP500", get = "stock.index")
-#'
-#' # Get the list of stock index options that can be used with tq_get(get = "stock.index")
-#' tq_get_stock_index_options()
 #'
 #' # Get stock prices for a stock from Yahoo
 #' aapl_stock_prices <- tq_get("AAPL")
-#' FANG <- tq_get(c("FB", "AMZN", "GOOG", "NFLX"),
-#'                get  = "stock.prices",
-#'                from = "2016-01-01",
-#'                to   = "2017-01-01")
 #'
-#' # Get dividends and splits for a stock from Yahoo
-#' tq_get("AAPL", get = "dividends", from = "1990-01-01")
-#' tq_get("AAPL", get = "splits", from = "1990-01-01")
-#'
-#' # Get financial statement data for a stock from Google
-#' appl_financials <- tq_get("AAPL", get = "financials")
-#'
-#' # Get key ratios for a stock from Morningstar
-#' appl_key_ratios <- tq_get("AAPL", get = "key.ratios")
-#'
-#' # Get key statistics for a stock from Yahoo
-#' appl_key_stats <- tq_get("AAPL", get = "key.stats")
-#'
-#' # Get FRED economic data for a commodity code
-#' tq_get("DCOILWTICO", get = "economic.data") # WTI crude oil spot prices
-#'
-#' # Get exchange rate data from Oanda
-#' eur_usd <- tq_get("EUR/USD", get = "exchange.rates")
-#'
-#' # Get metal prices from Oanda
-#' plat_price_usd <- tq_get("plat", get = "metal.prices")
-#' gold_price_eur <- tq_get("gold", get = "metal.prices",
-#'                                  base.currency = "EUR")
-#'
-#' ##### Scaling with the tidyverse
-#'
-#' # Simplified scaling
-#' FANG <- c("FB", "AMZN", "NFLX", "GOOGL") %>%
-#'     tq_get(get = "stock.prices")
-#'
-#' # Scaling with purrr
-#' FANG <- tibble(symbol = c("FB", "AMZN", "NFLX", "GOOGL")) %>%
-#'     mutate(stock.prices = map(.x = symbol,
-#'                               ~ tq_get(.x, get = "stock.prices"))) %>%
-#'     unnest()
-#'
-#'
+#' # Get stock prices for multiple stocks
+#' mult_stocks <- tq_get(c("FB", "AMZN"),
+#'                       get  = "stock.prices",
+#'                       from = "2016-01-01",
+#'                       to   = "2017-01-01")
+
+
+
 
 # PRIMARY FUNCTIONS ----
 
