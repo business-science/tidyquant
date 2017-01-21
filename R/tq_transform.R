@@ -223,6 +223,12 @@ tq_transform_base_ <- function(data, ohlc_fun, transform_fun, col_rename, ...) {
     # Get timezone
     time_zone <- get_time_zone(data, date_col_name)
 
+    # Drop any non-numeric columns except for date
+    date_col <- dplyr::select_(data, date_col_name)
+    numeric_cols <- data %>%
+        dplyr::select_if(is.numeric)
+    data <- dplyr::bind_cols(date_col, numeric_cols)
+
     # Convert inputs to functions
     ohlc_fun <- paste0("quantmod::", ohlc_fun)
     fun_x <- eval(parse(text = ohlc_fun))
@@ -270,6 +276,12 @@ tq_transform_xy_base_ <- function(data, x, y, transform_fun, col_rename, ...) {
 
     # Get timezone
     time_zone <- get_time_zone(data, date_col_name)
+
+    # Drop any non-numeric columns except for date
+    date_col <- dplyr::select_(data, date_col_name)
+    numeric_cols <- data %>%
+        dplyr::select_if(is.numeric)
+    data <- dplyr::bind_cols(date_col, numeric_cols)
 
     # Convert inputs to functions
     fun_transform <- eval(parse(text = transform_fun))
