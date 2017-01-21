@@ -1,5 +1,5 @@
 ## Release Summary
-This is the third release of tidyquant for CRAN review. This release adds new functionality including `get = "key.stats"` option for `tq_get()`, and various charting functions that integrate with `ggplot2`. Several fixes were made to enable quickly getting and manipulating data.
+This is the third release of tidyquant for CRAN review. This release adds new functionality including `get = "key.stats"` option for `tq_get()`, and various charting functions that integrate with `ggplot2`. Several fixes were made to enable quickly getting, scaling, and manipulating data.
 
 
 ## Test environments

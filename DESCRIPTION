@@ -1,8 +1,8 @@
 Package: tidyquant
 Type: Package
 Title: Tidy Quantitative Financial Analysis
-Version: 0.2.0.9400
-Date: 2016-12-31
+Version: 0.3.0
+Date: 2017-01-20
 Authors@R: person("Matt", "Dancho", email = "mdancho@gmail.com", 
     role = c("aut", "cre"))
 Maintainer: Matt Dancho <mdancho@gmail.com>
@@ -18,30 +18,30 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
-    R (>= 3.3.0),
+    R (>= 3.3.2),
     lubridate (>= 1.6.0),
     quantmod (>= 0.4-7),
-    tidyverse (>= 1.0.0),
+    tidyverse (>= 1.1.0),
     TTR (>= 0.23-1),
     xts (>= 0.9-7)
 Imports:
     curl (>= 2.3),
     devtools (>= 1.12.0),
-    dplyr (>= 0.05),
+    dplyr (>= 0.5.0),
     ggplot2 (>= 2.2.1),
     magrittr (>= 1.5),
     purrr (>= 0.2.2),
     readr (>= 1.0.0),
     rvest (>= 0.3.2),
     scales (>= 0.4.1),
-    stats (>= 3.3.0),
+    stats (>= 3.3.2),
     stringr (>= 1.1.0),
     tibble (>= 1.2),
-    tidyr (>= 0.6.0),
+    tidyr (>= 0.6.1),
     timeSeries (>= 3022.101.2),
-    tseries (>= 0.10-36),
-    xml2 (>= 1.0.0),
-    zoo (>= 1.7-13)
+    tseries (>= 0.10-37),
+    xml2 (>= 1.1.0),
+    zoo (>= 1.7-14)
 Suggests:
     knitr,
     rmarkdown,

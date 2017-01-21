@@ -14,9 +14,9 @@
 
 ## Packages
 
-|package   |*  |version    |date       |source                         |
-|:---------|:--|:----------|:----------|:------------------------------|
-|tidyquant |*  |0.2.0.9400 |2017-01-21 |local (mdancho84/tidyquant@NA) |
+|package   |*  |version |date       |source                         |
+|:---------|:--|:-------|:----------|:------------------------------|
+|tidyquant |   |0.3.0   |2017-01-21 |local (mdancho84/tidyquant@NA) |
 
 # Check results
 0 packages with problems
