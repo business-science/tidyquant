@@ -175,9 +175,9 @@ Set `get = "key.stats"` to get 55 real-time key statistics including Ask, Bid, D
 ``` r
 tq_get("AAPL", get = "key.stats")
 #> # A tibble: 1 × 55
-#>      Ask Ask.Size Average.Daily.Volume    Bid Bid.Size Book.Value Change
-#>    <dbl>    <int>                <int>  <dbl>    <int>      <dbl>  <dbl>
-#> 1 120.06      900             31411400 120.05      400     24.034 0.0543
+#>     Ask Ask.Size Average.Daily.Volume    Bid Bid.Size Book.Value Change
+#>   <dbl>    <int>                <int>  <dbl>    <int>      <dbl>  <dbl>
+#> 1 120.1     1800             31411400 120.09      800      24.03   0.09
 #> # ... with 48 more variables: Change.From.200.day.Moving.Average <dbl>,
 #> #   Change.From.50.day.Moving.Average <dbl>,
 #> #   Change.From.52.week.High <dbl>, Change.From.52.week.Low <dbl>,
@@ -210,9 +210,9 @@ tq_get(c("AAPL", "GOOG", "FB"), get = "key.stats") %>%
 #> # A tibble: 3 × 7
 #>   symbol.x    Ask Ask.Size    Bid Bid.Size Days.High Days.Low
 #>      <chr>  <dbl>    <int>  <dbl>    <int>     <dbl>    <dbl>
-#> 1     AAPL 120.06      900 120.05      400    120.81   119.77
-#> 2     GOOG 815.20      300 814.83      100    815.86   803.74
-#> 3       FB 128.68      700 128.67      800    128.85   126.95
+#> 1     AAPL 120.10     1800 120.09      800    120.81   119.77
+#> 2     GOOG 815.00      200 814.70      100    815.86   803.74
+#> 3       FB 128.73      500 128.72      600    128.85   126.95
 ```
 
 **Stock Indexes**:
