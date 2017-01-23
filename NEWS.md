@@ -1,3 +1,5 @@
+# tidyquant 0.3.0.9000 - Development Version
+
 # tidyquant 0.3.0
 
 * New data:
