@@ -3,7 +3,7 @@
 tidyquant
 =========
 
-[![Travis-CI Build Status](https://travis-ci.org/mdancho84/tidyquant.svg?branch=master)](https://travis-ci.org/mdancho84/tidyquant) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/tidyquant)](https://cran.r-project.org/package=tidyquant) <!-- ![](http://cranlogs.r-pkg.org/badges/tidyquant?color=brightgreen)  --> <!-- ![](http://cranlogs.r-pkg.org/badges/grand-total/tidyquant?color=brightgreen) -->
+[![Travis-CI Build Status](https://travis-ci.org/mdancho84/tidyquant.svg?branch=master)](https://travis-ci.org/mdancho84/tidyquant) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/tidyquant)](https://cran.r-project.org/package=tidyquant) ![](http://cranlogs.r-pkg.org/badges/tidyquant?color=brightgreen) ![](http://cranlogs.r-pkg.org/badges/grand-total/tidyquant?color=brightgreen)
 
 > Bringing financial analysis to the tidyverse
 
@@ -177,7 +177,7 @@ tq_get("AAPL", get = "key.stats")
 #> # A tibble: 1 × 55
 #>      Ask Ask.Size Average.Daily.Volume    Bid Bid.Size Book.Value Change
 #>    <dbl>    <int>                <int>  <dbl>    <int>      <dbl>  <dbl>
-#> 1 120.06      200             31411400 120.02      400      24.03   0.22
+#> 1 120.06      900             31411400 120.05      400     24.034 0.0543
 #> # ... with 48 more variables: Change.From.200.day.Moving.Average <dbl>,
 #> #   Change.From.50.day.Moving.Average <dbl>,
 #> #   Change.From.52.week.High <dbl>, Change.From.52.week.Low <dbl>,
@@ -210,9 +210,9 @@ tq_get(c("AAPL", "GOOG", "FB"), get = "key.stats") %>%
 #> # A tibble: 3 × 7
 #>   symbol.x    Ask Ask.Size    Bid Bid.Size Days.High Days.Low
 #>      <chr>  <dbl>    <int>  <dbl>    <int>     <dbl>    <dbl>
-#> 1     AAPL 120.06      200 120.02      400    120.45   119.73
-#> 2     GOOG 814.00      100 800.00      100    806.91   801.69
-#> 3       FB 127.07      100 127.00      300    128.48   126.78
+#> 1     AAPL 120.06      900 120.05      400    120.81   119.77
+#> 2     GOOG 815.20      300 814.83      100    815.86   803.74
+#> 3       FB 128.68      700 128.67      800    128.85   126.95
 ```
 
 **Stock Indexes**:
@@ -275,20 +275,20 @@ aapl_prices %>%
            growth = adjusted - baseline,
            growth_pct = growth / baseline * 100) %>%
     select(-(baseline:growth))
-#> # A tibble: 253 × 3
-#>          date adjusted  growth_pct
-#>        <date>    <dbl>       <dbl>
-#> 1  2016-01-21 94.20404  0.00000000
-#> 2  2016-01-22 99.21260  5.31671359
-#> 3  2016-01-25 97.27570  3.26064254
-#> 4  2016-01-26 97.81372  3.83176985
-#> 5  2016-01-27 91.38672 -2.99065942
-#> 6  2016-01-28 92.04213 -2.29491856
-#> 7  2016-01-29 95.22140  1.07995156
-#> 8  2016-02-01 94.33121  0.13499209
-#> 9  2016-02-02 92.42365 -1.88992744
-#> 10 2016-02-03 94.25295  0.05191603
-#> # ... with 243 more rows
+#> # A tibble: 251 × 3
+#>          date adjusted growth_pct
+#>        <date>    <dbl>      <dbl>
+#> 1  2016-01-25 97.27570  0.0000000
+#> 2  2016-01-26 97.81372  0.5530929
+#> 3  2016-01-27 91.38672 -6.0539057
+#> 4  2016-01-28 92.04213 -5.3801342
+#> 5  2016-01-29 95.22140 -2.1118317
+#> 6  2016-02-01 94.33121 -3.0269524
+#> 7  2016-02-02 92.42365 -4.9879314
+#> 8  2016-02-03 94.25295 -3.1074051
+#> 9  2016-02-04 95.01028 -2.3288633
+#> 10 2016-02-05 92.47274 -4.9374727
+#> # ... with 241 more rows
 ```
 
 ### Transforming & Mutating Data with zoo, xts, quantmod, and TTR Functions
