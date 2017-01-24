@@ -55,7 +55,9 @@ __The `tidyquant` philosophy__:
 
 ## A Few Core Functions with A Lot of Power
 
-Minimizing the number of functions reduces the learning curve. Functions are grouped into verbs for efficient collection and manipulation of quantitative data: 
+Minimizing the number of functions reduces the learning curve: 
+
+* __Get a Stock Index, `tq_index()`__: Returns the stock symbol and company name for every stock in an index. Eighteen indexes are avalable.
 
 * __Get Quantitative Data, `tq_get()`__: A one-stop shop to get data from various web-sources.  
 
@@ -65,6 +67,23 @@ Minimizing the number of functions reduces the learning curve. Functions are gro
 
 <a class="anchor" id="tq-get"></a>
 
+### Get a Stock Index
+
+A wide range of stock index / exchange lists can be retrieved using `tq_index()`. To get a full list of the options, use `tq_index_options()`. 
+
+```{r}
+tq_index_options()
+```
+
+Set `x` as one of the options in the list of options above to get the desired stock index / exchange.
+
+```{r}
+tq_index("SP500")
+```
+
+The data source is [www.marketvolume.com](http://www.marketvolume.com/indexes_exchanges/).
+
+
 ### Get Quantitative Data
 
 The `tq_get()` function is used to collect all data by changing the `get` argument. The options include stock lists for 18 stock indexes from marketvolume.com, stock prices, dividends and splits from Yahoo Finance, financial statements from Google Finance, metal prices and exchange rates from Oanda, and economic data from the FRED database. To see the full list, execute `tq_get_options()`.
@@ -72,23 +91,6 @@ The `tq_get()` function is used to collect all data by changing the `get` argume
 ```{r}
 tq_get_options()
 ```
-
-
-__Stock Index__:
-
-A wide range of stock index / exchange lists can be retrieved using `get = "stock.index"`. To get a full list of the options, use `tq_get_stock_index_options()`. 
-
-```{r}
-tq_get_stock_index_options()
-```
-
-Set `x` as one of the options in the list of options above, and `get = "stock.index"` to get the desired stock index / exchange.
-
-```{r}
-tq_get("sp500", get = "stock.index")
-```
-
-The data source is [www.marketvolume.com](http://www.marketvolume.com/indexes_exchanges/).
 
 __Stock Prices, Dividends and Splits__:
 
@@ -668,7 +670,7 @@ __Method 4: Combine tq_get calls to stock index with stock prices__
 This is a powerful extension of Method 2 that enables us to retrieve the stock prices, financials, key ratios, etc for __every stock in an index__. First, call `tq_get` using an stock index. Second, send the stock list to `tq_get` using stock prices. The workflow looks like this. _Note this can take several minutes depending on the size of the index, which is why it is not evaluated in the vignette._
 
 ```{r, eval = F}
-tq_get("SP500", get = "stock.index") %>%
+tq_index("SP500") %>%
     tq_get(get = "stock.prices")
 ```
 
@@ -722,7 +724,7 @@ Now that we have one stock down, we can scale to many stocks. For brevity, we'll
 
 ```{r}
 set.seed(100)
-stocks <- tq_get("SP500", get = "stock.index") %>%
+stocks <- tq_index("SP500") %>%
     sample_n(10)
 stocks
 ```
@@ -736,7 +738,7 @@ stocks <- stocks %>%
 stocks
 ```
 
-And, we're done! We now have the MMLR for 10-years of stock data for 10 stocks. And, we can easily extend this to larger lists or stock indexes. For example, the entire S&amp;P500 could be analyzed removing the `sample_n()` following the call to `tq_get("SP500", get = "stock.index")`.
+And, we're done! We now have the MMLR for 10-years of stock data for 10 stocks. And, we can easily extend this to larger lists or stock indexes. For example, the entire S&amp;P500 could be analyzed removing the `sample_n()` following the call to `tq_index("SP500")`.
 
 #### A Quick Note on Scaling with tidyquant
 

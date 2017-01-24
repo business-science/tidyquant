@@ -13,14 +13,12 @@ tq_get_options()
 tq_get_stock_index_options()
 }
 \arguments{
-\item{x}{A single character string, a character vector or tibble representing a single or multiple stock index,
+\item{x}{A single character string, a character vector or tibble representing a single (or multiple)
 stock symbol, metal symbol, currency combination, FRED code, etc.}
 
 \item{get}{A character string representing the type of data to get
 for \code{x}. Options include:
 \itemize{
-  \item \code{"stock.index"}: Get all stock symbols in any of \strong{18 stock indexes}
-  from \href{http://www.marketvolume.com/indexes_exchanges/}{marketvolume.com}.
   \item \code{"stock.prices"}: Get the open, high, low, close, volume and adjusted
   stock prices for a stock symbol from
   \href{https://finance.yahoo.com/}{Yahoo Finance}.
@@ -50,16 +48,11 @@ for \code{x}. Options include:
 function. Common optional parameters include:
 \itemize{
   \item \code{from}: Optional. A character string representing a start date in
-  YYYY-MM-DD format. No effect on \code{get = "stock.index"},
-  \code{"financials"}, or \code{"key.ratios"}.
+  YYYY-MM-DD format. No effect on
+  \code{"financials"}, \code{"key.ratios"}, or \code{"key.stats"}.
   \item \code{to}: A character string representing a end date in
-  YYYY-MM-DD format. No effect on \code{get = "stock.index"},
-  \code{get = "financials"}, or \code{"key.ratios"}.
-  \item \code{use_fallback}: Used with \code{get = "stock.index"} only.
-  Set to \code{FALSE} by default. A boolean
-  representing whether to use the fall back data set for a stock index. Useful
-  if the data cannot be fetched from the website. The fallback data returned is
-  accurate as of the date the package was last updated.
+  YYYY-MM-DD format. No effect on
+  \code{get = "financials"},  \code{"key.ratios"}, or \code{"key.stats"}.
 }}
 }
 \value{
@@ -79,9 +72,8 @@ can be seemlessly used with the tidyverse: \code{purrr}, \code{tidyr}, and
 \code{tq_get_options()} returns a list of valid `get` options you can
 choose from.
 
-\code{tq_get_stock_index_options()} returns a list of stock indexes you can
-choose from. Alternatively \code{tq_get("options", get = "stock.index")}
-can be used.
+\code{tq_get_stock_index_options()} Is deprecated and will be removed in the
+next version. Please use \code{tq_index_options()} instead.
 }
 \examples{
 # Load libraries
@@ -92,10 +84,6 @@ library(tidyquant)
 # Get the list of `get` options
 tq_get_options()
 
-# Get all stocks in a stock index from www.marketvolume.com
-tq_get_stock_index_options() # Get stock index options
-tq_get("SP500", get = "stock.index")
-
 # Get stock prices for a stock from Yahoo
 aapl_stock_prices <- tq_get("AAPL")
 
@@ -104,5 +92,8 @@ mult_stocks <- tq_get(c("FB", "AMZN"),
                       get  = "stock.prices",
                       from = "2016-01-01",
                       to   = "2017-01-01")
+}
+\seealso{
+\code{\link{tq_index}} to get a ful list of stocks in an index.
 }
 

@@ -1,10 +1,9 @@
 library(tidyquant)
 
 #### Setup
-get <- "stock.index"
-context(paste0("Testing tq_get(get = '", get, "')"))
+context("Testing tq_index)")
 
-options <- tq_get("options", get = get)
+options <- tq_index_options()
 
 #### Tests
 
@@ -20,7 +19,7 @@ test_that("Test all stock.index options to ensure no issues during fetch.", {
 
     skip_on_cran()
     for (i in seq_along(options)) {
-        tq_get(options[[i]], get = get) %>%
+        tq_index(options[[i]]) %>%
             expect_is("tbl") %>%
             nrow() %>%
             expect_gt(3)
@@ -29,20 +28,20 @@ test_that("Test all stock.index options to ensure no issues during fetch.", {
 })
 
 test_that("Test returns error on invalid x input.", {
-    expect_error(tq_get("XYZ", get = get))
+    expect_error(tq_index("XYZ"))
 })
 
 test_that("Test returns error on invalid x input.", {
-    expect_error(tq_get("XYZ", get = get, use_fallback = TRUE))
+    expect_error(tq_index("XYZ", use_fallback = TRUE))
 })
 
 test_that("Test returns message on use_fallback = TRUE.", {
-    expect_message(tq_get("SP500", get = get, use_fallback = TRUE))
+    expect_message(tq_index("SP500", use_fallback = TRUE))
 })
 
 test_that("Test returns tibble on use_fallback = TRUE.", {
     for (i in seq_along(options)) {
-        tq_get(options[[i]], get = get, use_fallback = TRUE) %>%
+        tq_index(options[[i]], use_fallback = TRUE) %>%
             expect_is("tbl") %>%
             nrow() %>%
             expect_gt(3)

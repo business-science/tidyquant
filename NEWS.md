@@ -1,6 +1,7 @@
-# tidyquant 0.3.0.9010 - Development Version
+# tidyquant 0.3.0.9020 - Development Version
 
 * Fixes:
+    * Issue #8, Part 1: Create `tq_index()` function to return a stock index. `tq_get(get = "stock.index")` is deprecated and will be removed during the next version after 0.4.0.
     * Issue #7: Fixed issue with date column inadvertently being coerced to `dttm`. 
 
 # tidyquant 0.3.0
