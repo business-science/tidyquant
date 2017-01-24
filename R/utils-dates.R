@@ -116,9 +116,9 @@ convert_date_cols <- function(data, time_zone = NULL) {
 
     # Convert date column to date
     if (length(date_cols) > 0) {
-        ret <- dplyr::mutate(data, date = lubridate::ymd(date, tz = time_zone))
+        ret <- dplyr::mutate(data, date = lubridate::as_date(date, tz = time_zone))
     } else if (length(date_time_cols) > 0) {
-        ret <- dplyr::mutate(data, date = lubridate::ymd_hms(date, tz = time_zone))
+        ret <- dplyr::mutate(data, date = lubridate::as_datetime(date, tz = time_zone))
     } else {
         ret <- data
     }

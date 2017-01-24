@@ -7,7 +7,7 @@
 #' \itemize{
 #'   \item \code{"stock.index"}: Get all stock symbols in any of \strong{18 stock indexes}
 #'   from \href{http://www.marketvolume.com/indexes_exchanges/}{marketvolume.com}.
-#'   \item \code{"stock.prices"}: Get the open, high, low, close, volumen and adjusted
+#'   \item \code{"stock.prices"}: Get the open, high, low, close, volume and adjusted
 #'   stock prices for a stock symbol from
 #'   \href{https://finance.yahoo.com/}{Yahoo Finance}.
 #'   \item \code{"financials"}: Get the income, balance sheet, and cash flow

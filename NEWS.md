@@ -1,4 +1,7 @@
-# tidyquant 0.3.0.9000 - Development Version
+# tidyquant 0.3.0.9010 - Development Version
+
+* Fixes:
+    * Issue #7: Fixed issue with date column inadvertently being coerced to `dttm`. 
 
 # tidyquant 0.3.0
 
