@@ -57,8 +57,28 @@ Start by loading `tidyquant`.
 library(tidyquant) 
 ```
 
+### Getting Stock Indexes
 
-### Getting Data
+There are `r tq_index_options() %>% length()` indexes available to select from, which can be seen with a call to `tq_index_options()`. 
+
+```{r}
+tq_index_options()
+```
+
+Set `x` to one of the options to get the full list of stocks within the specified index. 
+
+```{r}
+tq_index("SP500")
+```
+
+Combine `tq_get` stock index and one of the applicable get options to get the stock prices, financials, etc for __every stock in an index__. _Note that this may take several minutes due to the number of stock prices being generated (results not shown because of this)._
+
+```{r, eval = F}
+sp_500_prices <- tq_index("SP500") %>%
+    tq_get(get = "stock.prices")
+```
+
+### Getting Quantitative Data
 
 `tq_get()` is the one-stop shop for retrieving data. The full list of get options are:
 
@@ -125,26 +145,6 @@ Get key stats for multiple stocks:
 ```{r}
 tq_get(c("AAPL", "GOOG", "FB"), get = "key.stats") %>%
     select(symbol.x, Ask, Ask.Size, Bid, Bid.Size, Days.High, Days.Low)
-```
-
-__Stock Indexes__:
-
-There are `r tq_get_stock_index_options() %>% length()` indexes available to select from, which can be seen with a call to `tq_get_stock_index_options()`. 
-
-```{r}
-tq_get_stock_index_options()
-```
-
-Set `x` to one of the options and `get = "stock.index"` to get a full list of stocks within the specified index. 
-```{r}
-tq_get("SP500", get = "stock.index")
-```
-
-Combine `tq_get` stock index and stock price options to get the prices for __every stock in an index__. _Note that this may take several minutes due to the number of stock prices being generated (results not shown because of this)._
-
-```{r, eval = F}
-sp_500_prices <- tq_get("SP500", get = "stock.index") %>%
-    tq_get(get = "stock.prices")
 ```
 
 
