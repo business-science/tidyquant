@@ -29,6 +29,8 @@
 #'   \item \code{"exchange.rates"}: Get exchange rates from
 #'   \href{https://www.oanda.com/currency/converter/}{Oanda}.
 #' }
+#' @param complete_cases Removes symbols that return an error so user does not need to
+#' add an extra step to remove. Generates a warning message. \code{TRUE} by default.
 #' @param ... Additional parameters passed to the appropriate \code{quantmod}
 #' function. Common optional parameters include:
 #' \itemize{
@@ -84,19 +86,39 @@
 
 # PRIMARY FUNCTIONS ----
 
-tq_get <- function(x, get = "stock.prices", ...) {
+tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
 
     # Deprecated, remove next version
     if ("stock.index" %in% get) {
         warning("The 'stock.index' option is deprecated and will be removed in the next version. Please use tq_index() instead.")
     }
 
-    # Handle x
-    if (inherits(x, "data.frame")) {
+    # Validate compound gets
+    if (length(get) > 1) validate_compound_gets(get)
+
+    # Distribute operations based on x
+    if (is.character(x) && length(x) == 1 && length(get) == 1) {
+
+        # Expedite get and return
+        return(tq_get_base(x, get, complete_cases = complete_cases, map = FALSE, ...))
+
+    } else if (is.character(x)) {
+
+        col_name <- names(x)
+
+        if (is.null(col_name)) col_name <- ".symbol"
+
+        x_tib <- tibble::tibble(symbol.. = x)
+
+        ret <- tq_get_map(x = x_tib, get = get, complete_cases, ...)
+
+        names(ret)[[1]] <- col_name[[1]]
+
+    } else if (inherits(x, "data.frame")) {
 
         # Prevent issues with grouped_df's
         if (inherits(x, "grouped_df")) {
-            warning("Ungrouping grouped data.frame")
+            warning("Ungrouping grouped data frame")
             x <- dplyr::ungroup(x)
         }
 
@@ -104,28 +126,12 @@ tq_get <- function(x, get = "stock.prices", ...) {
 
         names(x)[[1]] <- "symbol.."
 
-        x <- x %>%
+        x_tib <- x %>%
             tibble::as_tibble()
 
-        ret <- tq_get_multiple(x = x, get = get, ...)
+        ret <- tq_get_map(x = x_tib, get = get, complete_cases, ...)
 
-        names(ret)[[1]] <- col_name
-
-    } else if (is.character(x) && length(x) > 1) {
-
-        col_name <- names(x)
-
-        if (is.null(col_name)) col_name <- "symbol.x"
-
-        x <- tibble::tibble(symbol.. = x)
-
-        ret <- tq_get_multiple(x = x, get = get, ...)
-
-        names(ret)[[1]] <- col_name
-
-    } else if (is.character(x) && length(x) == 1) {
-
-        ret <- tq_get_base(x = x, get = get, ...)
+        names(ret)[[1]] <- col_name[[1]]
 
     } else {
 
@@ -133,22 +139,60 @@ tq_get <- function(x, get = "stock.prices", ...) {
 
     }
 
-    ret
+    # Unnest if only 1 get option
+    if (length(get) == 1) {
+
+        ret <- tryCatch({
+            ret %>%
+                tidyr::unnest()
+        }, error = function(e) {
+            warning("NA's in output. Returning as nested data frame.")
+            ret
+        })
+
+    }
+
+    return(ret)
 
 }
 
-tq_get_multiple <- function(x, get, ...) {
+tq_get_map <- function(x, get, complete_cases, ...) {
 
-    # Map tq_get_base
-    ret <- x %>%
-        dplyr::mutate(data.. = purrr::map(.x = symbol..,
-                                         ~ tq_get_base(x = .x,
-                                                       get = get,
-                                                       ...)),
-                      class.. = purrr::map_chr(.x = data.., ~ class(.x)[[1]])) %>%
-        dplyr::filter(class.. != "logical") %>%
-        dplyr::select(-class..) %>%
-        tidyr::unnest()
+    ret <- x
+
+    # Loop through each get option, mapping tq_get_base
+    for (i in seq_along(get)) {
+
+        if (complete_cases) {
+
+            ret <- ret %>%
+                dplyr::mutate(data.. = purrr::map(.x = symbol..,
+                                                  ~ tq_get_base(x = .x,
+                                                                get = get[[i]],
+                                                                complete_cases = complete_cases,
+                                                                map = TRUE,
+                                                                ...)),
+                              class.. = purrr::map_chr(.x = data..,
+                                                       ~ class(.x)[[1]])
+                              ) %>%
+                dplyr::filter(class.. != "logical") %>%
+                dplyr::select(-class..)
+
+        } else {
+
+            ret <- ret %>%
+                dplyr::mutate(data.. = purrr::map(.x = symbol..,
+                                                  ~ tq_get_base(x = .x,
+                                                                get = get[[i]],
+                                                                complete_cases = complete_cases,
+                                                                map = TRUE,
+                                                                ...)))
+
+        }
+
+        colnames(ret)[length(colnames(ret))] <- get[[i]]
+
+    }
 
     ret
 
@@ -156,24 +200,11 @@ tq_get_multiple <- function(x, get, ...) {
 
 tq_get_base <- function(x, get, ...) {
 
-    # Check get
-    get <- stringr::str_to_lower(get) %>%
-        stringr::str_trim(side = "both") %>%
-        stringr::str_replace_all("[[:punct:]]", "") %>%
-        stringr::str_replace_all("s$", "")
+    # Clean get
+    get <- clean_get(get)
 
-    get_list <- tq_get_options() %>%
-        stringr::str_replace_all("[[:punct:]]", "") %>%
-        stringr::str_replace_all("s$", "")
-    if (!(get %in% c(get_list, "stockindex"))) {
-        stop("Error: `get` must be a valid entry")
-    }
-
-    # Check x
-    if (length(x) != 1) {
-        stop("Error: Enter one value of x per request.
-             Use purrr::map() to iterate a tibble.")
-    }
+    # Validate get
+    validate_get(get)
 
     # Setup switches based on get
     ret <- switch(get,
@@ -186,7 +217,7 @@ tq_get_base <- function(x, get, ...) {
                   metalprice   = tq_get_util_1(x, get, ...),
                   exchangerate = tq_get_util_1(x, get, ...),
                   economicdata = tq_get_util_1(x, get, ...),
-                  stockindex   = tq_index(x, ...) # Deprecated, remove next version
+                  stockindex   = tq_index(x) # Deprecated, remove next version
                   )
 
     ret
@@ -223,54 +254,54 @@ tq_get_stock_index_options <- function() {
 tq_get_util_1 <-
     function(x,
              get,
+             complete_cases,
+             map,
              from = as.character(paste0(lubridate::year(lubridate::today()) - 10, "-01-01")),
              to   = as.character(lubridate::today()),
              ...) {
 
+    # Check x
+    if (!is.character(x)) {
+        stop("x must be a character string in the form of a valid symbol.")
+    }
+
     # Setup switches based on get
     vars <- switch(get,
-                   stockprice   = list(chr_x      = "stock symbol",
+                   stockprice   = list(chr_get    = "stock.prices",
                                        fun        = quantmod::getSymbols,
                                        chr_fun    = "quantmod::getSymbols",
                                        list_names = c("open", "high", "low", "close", "volume", "adjusted"),
                                        source     = "yahoo"),
-                   dividend     = list(chr_x      = "stock symbol",
+                   dividend     = list(chr_get    = "dividends",
                                        fun        = quantmod::getDividends,
                                        chr_fun    = "quantmod::getDividends",
                                        list_names = "dividends",
                                        source     = "yahoo"),
-                   split        = list(chr_x      = "stock symbol",
+                   split        = list(chr_get    = "splits",
                                        fun        = quantmod::getSplits,
                                        chr_fun    = "quantmod::getSplits",
                                        list_names = "splits",
                                        source     = "yahoo"),
-                   financial    = list(chr_x      = "stock symbol",
+                   financial    = list(chr_get    = "financials",
                                        fun        = quantmod::getFinancials,
                                        chr_fun    = "quantmod::getFinancials",
                                        source     = "google"),
-                   metalprice   = list(chr_x      = "metal symbol",
+                   metalprice   = list(chr_get    = "metal.prices",
                                        fun        = quantmod::getMetals,
                                        chr_fun    = "quantmod::getMetals",
                                        list_names = "price",
                                        source     = "oanda"),
-                   exchangerate = list(chr_x      = "exchange rate combination",
+                   exchangerate = list(chr_get    = "exchange.rates",
                                        fun        = quantmod::getFX,
                                        chr_fun    = "quantmod::getFX",
                                        list_names = "exchange.rate",
                                        source     = "oanda"),
-                   economicdata = list(chr_x      = "economic symbol",
+                   economicdata = list(chr_get    = "economic.data",
                                        fun        = quantmod::getSymbols,
                                        chr_fun    = "quantmod::getSymbols.FRED",
                                        list_names = "price",
                                        source     = "FRED")
     )
-
-    # Check x
-    if (!is.character(x)) {
-        err <- paste0("Error: x must be a character string in the form of a valid ",
-                      vars$chr_x)
-        stop(err)
-    }
 
     # Get data; Handle errors
     ret <- tryCatch({
@@ -283,8 +314,8 @@ tq_get_util_1 <-
 
     }, error = function(e) {
 
-        warn <- paste0("Error at ", vars$chr_x, " ", x,
-                       " during call to ", vars$chr_fun, ".")
+        warn <- paste0("Error at ", x, " during call to get = '", vars$chr_get, "'.")
+        if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
         warning(warn)
         return(NA) # Return NA on error
 
@@ -342,18 +373,17 @@ tq_get_util_1 <-
 }
 
 # Util 2: key.ratios -----
-tq_get_util_2 <- function(x, get, ...) {
+tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
+
+    # Check x
+    if (!is.character(x)) {
+        stop("x must be a character string in the form of a valid symbol.")
+    }
 
     # Convert x to uppercase
     x <- stringr::str_to_upper(x) %>%
         stringr::str_trim(side = "both") %>%
         stringr::str_replace_all("[[:punct:]]", "")
-
-    # Check x
-    if (!is.character(x)) {
-        err <- "Error: x must be a character string in the form of a valid stock symbol."
-        stop(err)
-    }
 
     tryCatch({
 
@@ -492,7 +522,8 @@ tq_get_util_2 <- function(x, get, ...) {
 
     }, error = function(e) {
 
-        warn <- paste0("Error at ", x, " during call to get = key.ratios")
+        warn <- paste0("Error at ", x, " during call to get = 'key.ratios'.")
+        if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
         warning(warn)
         return(NA) # Return NA on error
 
@@ -501,18 +532,17 @@ tq_get_util_2 <- function(x, get, ...) {
 }
 
 # Util 3: key.stats -----
-tq_get_util_3 <- function(x, get, ...) {
+tq_get_util_3 <- function(x, get, complete_cases, map, ...) {
+
+    # Check x
+    if (!is.character(x)) {
+        stop("x must be a character string in the form of a valid symbol.")
+    }
 
     # Convert x to uppercase
     x <- stringr::str_to_upper(x) %>%
         stringr::str_trim(side = "both") %>%
         stringr::str_replace_all("[[:punct:]]", "")
-
-    # Check x
-    if (!is.character(x)) {
-        err <- "Error: x must be a character string in the form of a valid stock symbol."
-        stop(err)
-    }
 
     tryCatch({
 
@@ -604,10 +634,50 @@ tq_get_util_3 <- function(x, get, ...) {
 
     }, error = function(e) {
 
-        warn <- paste0("Error at ", x, " during call to get = key.stats")
+        warn <- paste0("Error at ", x, " during call to get = 'key.stats'.")
+        if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
         warning(warn)
         return(NA) # Return NA on error
 
     })
 
+}
+
+# Clean Get ----
+clean_get <- function(get) {
+    stringr::str_to_lower(get) %>%
+        stringr::str_trim(side = "both") %>%
+        stringr::str_replace_all("[[:punct:]]", "") %>%
+        stringr::str_replace_all("s$", "")
+}
+
+# Validate Gets -----
+validate_get <- function(get) {
+
+    get_options <- tq_get_options() %>%
+        stringr::str_replace_all("[[:punct:]]", "") %>%
+        stringr::str_replace_all("s$", "")
+
+    # Deprecated, remove "stockindex" in next version
+    if (!all(get %in% c(get_options, "stockindex"))) {
+        stop("Get must be a valid entry. Use tq_get_options() to see valid options.")
+    }
+
+    return(get)
+}
+
+validate_compound_gets <- function(get) {
+
+    get <- stringr::str_to_lower(get) %>%
+        stringr::str_trim(side = "both") %>%
+        stringr::str_replace_all("[[:punct:]]", "") %>%
+        stringr::str_replace_all("s$", "")
+
+    compound_get_options <- tq_get_options()[1:6] %>%
+        stringr::str_replace_all("[[:punct:]]", "") %>%
+        stringr::str_replace_all("s$", "")
+
+    if (!all(get %in% compound_get_options)) {
+        stop("Get options for compound get are not valid.")
+    }
 }

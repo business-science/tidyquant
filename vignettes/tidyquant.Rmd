@@ -202,8 +202,7 @@ It's quite a bit of information, with 55 real-time stats available. We can easil
 
 ```{r}
 c("AAPL", "FB", "GOOG") %>%
-    tq_get(get = "key.stats") %>%
-    select(symbol.x, Ask, Ask.Size, Bid, Bid.Size, Days.High, Days.Low)
+    tq_get(get = "key.stats") 
 ```
 
 Finally, because the statistics are real-time, we can setup real-time monitoring by calling `tq_get` at periodic intervals. The function below is not evaluated for time considerations, but if called during active trading sessions will collect five samples at three second intervals. 
@@ -635,14 +634,14 @@ c("AAPL", "GOOG", "FB") %>%
     tq_get(get = "stock.prices", from = "2016-01-01", to = "2017-01-01")
 ```
 
-The output is a single level tibble with all or the stock prices in one tibble. The auto-generated column name is "symbol.x", which can be pre-emptively renamed by giving the vector a name (e.g. `stocks <- c("AAPL", "GOOG", "FB")`) and then piping to `tq_get`.
+The output is a single level tibble with all or the stock prices in one tibble. The auto-generated column name is ".symbol", which can be pre-emptively renamed by giving the vector a name (e.g. `stocks <- c("AAPL", "GOOG", "FB")`) and then piping to `tq_get`.
 
 __Method 2: Map a tibble with stocks in first column__
 
 First, obtain a tibble of stocks. The stock symbols must be in the first column.
 
 ```{r}
-stock_list <- tibble(symbols = c("AAPL", "JPM", "CVX"),
+stock_list <- tibble(stocks = c("AAPL", "JPM", "CVX"),
                      industry = c("Technology", "Financial", "Energy"))
 stock_list
 ```
@@ -682,7 +681,7 @@ Once you get the data, you typically want to do something with it. You can easil
 ```{r}
 c("AAPL", "GOOG", "FB") %>%
     tq_get(get = "stock.prices") %>%
-    group_by(symbol.x) %>%
+    group_by(.symbol) %>%
     tq_transform(Ad, transform_fun = periodReturn, period = "yearly")
 ```
 

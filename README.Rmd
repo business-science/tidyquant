@@ -29,7 +29,7 @@ devtools::load_all()
 __The `tidyquant` philosophy:__
 
 * __A few core functions with a lot of power, that__
-* __leverage the quantitative analysis power of `zoo`, `xts`, `quantmod` and `TTR`, and are__
+* __leverage the quantitative analysis functionality of `zoo`, `xts`, `quantmod` and `TTR`, and are__
 * __designed to be used and scaled with the `tidyverse`.__
 
 ## Installation
@@ -134,17 +134,17 @@ tq_get(c("AAPL", "GOOG", "FB"), get = "key.ratios")
 
 __Key Stats__:
 
-Set `get = "key.stats"` to get 55 real-time key statistics including Ask, Bid, Day's High, Day's Low, Last Trade Price, current P/E Ratio, EPS, Market Cap, EPS Projected Current Year, EPS Projected Next Year and many more. 
+Set `get = "key.stats"` to get 55 real-time key statistics including Ask, Bid, Day's High, Day's Low, Last Trade Price, current P/E Ratio, EPS, Market Cap, EPS Projected Current Year, EPS Projected Next Year and many more. First seven columns shown only.
 
 ```{r}
-tq_get("AAPL", get = "key.stats")
+tq_get("AAPL", get = "key.stats")[1:7]
 ```
 
 Get key stats for multiple stocks:
 
 ```{r}
 tq_get(c("AAPL", "GOOG", "FB"), get = "key.stats") %>%
-    select(symbol.x, Ask, Ask.Size, Bid, Bid.Size, Days.High, Days.Low)
+    select(.symbol, Ask, Ask.Size, Bid, Bid.Size, Days.High, Days.Low)
 ```
 
 
@@ -275,7 +275,7 @@ Once you get the data, you typically want to do something with it. You can easil
 ```{r}
 c("AAPL", "GOOG", "FB") %>%
     tq_get(get = "stock.prices") %>%
-    group_by(symbol.x) %>%
+    group_by(.symbol) %>%
     tq_transform(Ad, transform_fun = periodReturn, period = "yearly")
 ```
 

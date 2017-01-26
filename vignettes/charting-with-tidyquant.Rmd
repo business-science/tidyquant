@@ -178,13 +178,13 @@ We can use `facet_wrap` to visualize multiple stocks at the same time. By adding
 
 ```{r}
 FANG %>%
-    ggplot(aes(x = date, y = close, group = symbol.x)) +
+    ggplot(aes(x = date, y = close, group = .symbol)) +
     geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
     labs(title = "FANG Candlestick Chart", 
          subtitle = "Experimenting with Mulitple Stocks",
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(end - weeks(6), end)) +
-    facet_wrap(~ symbol.x, ncol = 2, scale = "free_y")
+    facet_wrap(~ .symbol, ncol = 2, scale = "free_y")
 ```
 
 
@@ -248,12 +248,12 @@ AAPL %>%
 
 ### Example 3: Charting moving averages for multiple stocks at once
 
-We'll double up using a volume-weighted average (`VWMA`) and apply it to the FANG stocks at once. Since VWMA is a volume-weighted function, we need to add volume as an aesthetic. Because we are viewing multiple stocks, we add a group aesthetic setting it to the symbol.x column which contains the FANG stock symbols. The facet wrap is added at the end to create four charts instead of one overlayed chart. 
+We'll double up using a volume-weighted average (`VWMA`) and apply it to the FANG stocks at once. Since VWMA is a volume-weighted function, we need to add volume as an aesthetic. Because we are viewing multiple stocks, we add a group aesthetic setting it to the .symbol column which contains the FANG stock symbols. The facet wrap is added at the end to create four charts instead of one overlayed chart. 
 
 
 ```{r}
 FANG %>%
-    ggplot(aes(x = date, y = close, volume = volume, group = symbol.x)) +
+    ggplot(aes(x = date, y = close, volume = volume, group = .symbol)) +
     geom_barchart(aes(open = open, high = high, low = low, close = close)) +
     geom_ma(ma_fun = VWMA, n = 50, wilder = TRUE, linetype = 5) +
     geom_ma(ma_fun = VWMA, n = 200, wilder = TRUE, color = "red") + 
@@ -261,7 +261,7 @@ FANG %>%
          subtitle = "50 and 200-Day EMA, Experimenting with Multiple Stocks", 
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(end - weeks(24), end)) +
-    facet_wrap(~ symbol.x, ncol = 2, scales = "free_y")
+    facet_wrap(~ .symbol, ncol = 2, scales = "free_y")
 ```
 
 ## Bollinger Bands
@@ -313,14 +313,14 @@ The process is very similar to charting moving averages for multiple stocks.
 FANG %>%
     ggplot(aes(x = date, y = close, 
                open = open, high = high, low = low, close = close, 
-               group = symbol.x)) +
+               group = .symbol)) +
     geom_barchart() +
     geom_bbands(ma_fun = SMA, sd = 2, n = 50, linetype = 5) +
     labs(title = "FANG Bar Chart", 
          subtitle = "BBands with SMA Applied, Experimenting with Multiple Stocks", 
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(end - weeks(24), end)) +
-    facet_wrap(~ symbol.x, ncol = 2, scales = "free_y")
+    facet_wrap(~ .symbol, ncol = 2, scales = "free_y")
 ```
 
 
