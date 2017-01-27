@@ -594,7 +594,7 @@ tq_get_util_3 <- function(x, get, complete_cases, map, ...) {
                 value <- as.numeric(value)
             )
 
-            value
+            return(value)
         }
 
         convert_to_percent <- function(x) {
@@ -608,22 +608,67 @@ tq_get_util_3 <- function(x, get, complete_cases, map, ...) {
                 value <- value * 1 / 100
             }
 
-            value
+            return(value)
         }
 
         # Main formatting script
         suppressWarnings(
             key_stats <- key_stats_raw %>%
-                dplyr::mutate(Last.Trade.Date = lubridate::mdy(Last.Trade.Date),
-                              Market.Capitalization = convert_to_numeric(Market.Capitalization),
-                              EBITDA = convert_to_numeric(EBITDA),
-                              Percent.Change.From.52.week.Low = convert_to_percent(Percent.Change.From.52.week.Low),
-                              Percent.Change.From.50.day.Moving.Average = convert_to_percent(Percent.Change.From.50.day.Moving.Average),
-                              Percent.Change.From.200.day.Moving.Average = convert_to_percent(Percent.Change.From.200.day.Moving.Average),
+                dplyr::mutate(Ask = as.numeric(Ask),
+                              Ask.Size = as.numeric(Ask.Size),
+                              Average.Daily.Volume = as.numeric(Average.Daily.Volume),
+                              Bid = as.numeric(Bid),
+                              Bid.Size = as.numeric(Bid.Size),
+                              Book.Value = as.numeric(Book.Value),
+                              Change = as.numeric(Change),
+                              Change.From.200.day.Moving.Average = as.numeric(Change.From.200.day.Moving.Average),
+                              Change.From.50.day.Moving.Average = as.numeric(Change.From.50.day.Moving.Average),
+                              Change.From.52.week.High = as.numeric(Change.From.52.week.High),
+                              Change.From.52.week.Low = as.numeric(Change.From.52.week.Low),
                               Change.in.Percent = convert_to_percent(Change.in.Percent),
-                              Ex.Dividend.Date = lubridate::mdy(Ex.Dividend.Date),
+                              Currency = as.character(Currency),
+                              Days.High = as.numeric(Days.High),
+                              Days.Low = as.numeric(Days.Low),
+                              Days.Range = as.character(Days.Range),
                               Dividend.Pay.Date = lubridate::mdy(Dividend.Pay.Date),
-                              Revenue = convert_to_numeric(Revenue)
+                              Dividend.per.Share = as.numeric(Dividend.per.Share),
+                              Dividend.Yield = as.numeric(Dividend.Yield),
+                              EBITDA = convert_to_numeric(EBITDA),
+                              EPS = as.numeric(EPS),
+                              EPS.Estimate.Current.Year = as.numeric(EPS.Estimate.Current.Year),
+                              EPS.Estimate.Next.Quarter = as.numeric(EPS.Estimate.Next.Quarter),
+                              EPS.Estimate.Next.Year = as.numeric(EPS.Estimate.Next.Year),
+                              Ex.Dividend.Date = lubridate::mdy(Ex.Dividend.Date),
+                              Float.Shares = as.numeric(Float.Shares),
+                              High.52.week = as.numeric(High.52.week),
+                              Last.Trade.Date = lubridate::mdy(Last.Trade.Date),
+                              Last.Trade.Price.Only = as.numeric(Last.Trade.Price.Only),
+                              Last.Trade.Size = as.numeric(Last.Trade.Size),
+                              Last.Trade.With.Time = as.character(Last.Trade.With.Time),
+                              Low.52.week = as.numeric(Low.52.week),
+                              Market.Capitalization = convert_to_numeric(Market.Capitalization),
+                              Moving.Average.200.day = as.numeric(Moving.Average.200.day),
+                              Moving.Average.50.day = as.numeric(Moving.Average.50.day),
+                              Name = as.character(Name),
+                              Open = as.numeric(Open),
+                              PE.Ratio = as.numeric(PE.Ratio),
+                              PEG.Ratio = as.numeric(PEG.Ratio),
+                              Percent.Change.From.200.day.Moving.Average = convert_to_percent(Percent.Change.From.200.day.Moving.Average),
+                              Percent.Change.From.50.day.Moving.Average = convert_to_percent(Percent.Change.From.50.day.Moving.Average),
+                              Percent.Change.From.52.week.High = convert_to_percent(Percent.Change.From.52.week.High),
+                              Percent.Change.From.52.week.Low = convert_to_percent(Percent.Change.From.52.week.Low),
+                              Previous.Close = as.numeric(Previous.Close),
+                              Price.to.Book = as.numeric(Price.to.Book),
+                              Price.to.EPS.Estimate.Current.Year = as.numeric(Price.to.EPS.Estimate.Current.Year),
+                              Price.to.EPS.Estimate.Next.Year = as.numeric(Price.to.EPS.Estimate.Next.Year),
+                              Price.to.Sales = as.numeric(Price.to.Sales),
+                              Range.52.week = as.character(Range.52.week),
+                              Revenue = convert_to_numeric(Revenue),
+                              Shares.Outstanding = as.numeric(Shares.Outstanding),
+                              Short.Ratio = as.numeric(Short.Ratio),
+                              Stock.Exchange = as.character(Stock.Exchange),
+                              Target.Price.1.yr. = as.numeric(Target.Price.1.yr.),
+                              Volume = as.numeric(Volume)
                 )
         )
 
