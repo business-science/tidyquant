@@ -1,4 +1,4 @@
-# GENERAL UTILITY FUNCTIONS
+# GENERAL UTILITY FUNCTIONS FOR DATES
 
 find_date_cols <- function(x) {
 

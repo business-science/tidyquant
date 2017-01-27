@@ -96,6 +96,12 @@ mult_stocks <- tq_get(c("FB", "AMZN"),
                       get  = "stock.prices",
                       from = "2016-01-01",
                       to   = "2017-01-01")
+
+# Multiple gets
+mult_gets <- tq_get("AAPL",
+                    get = c("stock.prices", "financials"),
+                    from = "2016-01-01",
+                    to   = "2017-01-01")
 }
 \seealso{
 \code{\link{tq_index}} to get a ful list of stocks in an index.

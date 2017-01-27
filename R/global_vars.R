@@ -86,5 +86,17 @@ globalVariables(c("A",
                   "Short.Ratio",
                   "Stock.Exchange",
                   "Target.Price.1.yr.",
-                  "Volume"
+                  "Volume",
+                  "IPOyear",
+                  "LastSale",
+                  "MarketCap",
+                  "Sector",
+                  "Symbol",
+                  "company",
+                  "industry",
+                  "ipo.year",
+                  "last.sale.price",
+                  "market.cap",
+                  "sector",
+                  "symbol"
                   ))
