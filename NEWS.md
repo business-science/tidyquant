@@ -1,9 +1,12 @@
-# tidyquant 0.3.0.9030 - Development Version
+# tidyquant 0.3.0.9040 - Development Version
 
+* New data:
+    * `tq_exchange()` gets the stock list for NASDAQ, NYSE, and AMEX exchanges. Use `tq_exchange_options()` to exchange options.
 * Fixes:
+    * Fixed issue with `get = "key.ratios"` where stocks listed on AMEX exchange were not able to return key ratios.
     * Issue #9: Fix problem with `get = "key.stats"` where NA's in multiple `x` (e.g. `c("AAPL", "GOOG")`) cause call to fail during coercion. 
     * Issue #8, Part 2: Enable compound gets (e.g. `tq_get("AAPL", get = c("stock.prices", "financials"))`).
-    * Issue #8, Part 1: Create `tq_index()` function to return a stock index. `tq_get(get = "stock.index")` is deprecated and will be removed during the next version after 0.4.0.
+    * Issue #8, Part 1: Create `tq_index()` function to return a stock index. `tq_get(get = "stock.index")` is deprecated and will be removed during the next version after 0.4.0. Use `tq_index_options()` for index options. 
     * Issue #7: Fixed issue with date column inadvertently being coerced to `dttm`. 
 
 # tidyquant 0.3.0

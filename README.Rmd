@@ -57,7 +57,9 @@ Start by loading `tidyquant`.
 library(tidyquant) 
 ```
 
-### Getting Stock Indexes
+### Getting Stock Lists from Stock Indexes & Stock Exchanges
+
+#### Stock Indexes
 
 There are `r tq_index_options() %>% length()` indexes available to select from, which can be seen with a call to `tq_index_options()`. 
 
@@ -77,6 +79,16 @@ Combine `tq_get` stock index and one of the applicable get options to get the st
 sp_500_prices <- tq_index("SP500") %>%
     tq_get(get = "stock.prices")
 ```
+
+#### Stock Exchanges
+
+Stock lists for three stock exchanges are avaiable: NASDAQ, NYSE, and AMEX.
+
+```{r}
+tq_exchange("NASDAQ")
+```
+
+
 
 ### Getting Quantitative Data
 

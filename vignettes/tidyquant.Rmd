@@ -67,7 +67,9 @@ Minimizing the number of functions reduces the learning curve:
 
 <a class="anchor" id="tq-get"></a>
 
-### Get a Stock Index
+### Get a Stock List from a Stock Index or Stock Exchange
+
+#### Stock Indexes
 
 A wide range of stock index / exchange lists can be retrieved using `tq_index()`. To get a full list of the options, use `tq_index_options()`. 
 
@@ -83,6 +85,15 @@ tq_index("SP500")
 
 The data source is [www.marketvolume.com](http://www.marketvolume.com/indexes_exchanges/).
 
+#### Stock Exchanges
+
+Stock lists for three stock exchanges are avaiable: NASDAQ, NYSE, and AMEX. To get a full list of the options, use `tq_exchange_options()`. Here we get the full list of stocks on the NASDAQ exchange.
+
+```{r}
+tq_exchange("NASDAQ")
+```
+
+The data source is the [NASDAQ](http://www.nasdaq.com/).
 
 ### Get Quantitative Data
 
