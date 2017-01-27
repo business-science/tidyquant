@@ -6,7 +6,7 @@
 \alias{tq_get_stock_index_options}
 \title{Get quantitative data in \code{tibble} format}
 \usage{
-tq_get(x, get = "stock.prices", ...)
+tq_get(x, get = "stock.prices", complete_cases = TRUE, ...)
 
 tq_get_options()
 
@@ -27,7 +27,7 @@ for \code{x}. Options include:
   \href{https://www.google.com/finance}{Google Finance}.
   \item \code{"key.ratios"}: These are key historical ratios. Get \strong{89 historical growth, profitablity, financial health,
   efficiency, and valuation ratios that span 10-years} from
-  \href{https://www.morningstar.com}{morningstar.com}.
+  \href{https://www.morningstar.com}{Morningstar}.
   \item \code{"key.stats"}: These are key current statistics. Get \strong{55 current key statistics} such as
   Ask, Bid, Day's High, Day's Low, Last Trade Price, current P/E Ratio, EPS,
   Market Cap, EPS Projected Current Year, EPS Projected Next Year and many more from
@@ -43,6 +43,12 @@ for \code{x}. Options include:
   \item \code{"exchange.rates"}: Get exchange rates from
   \href{https://www.oanda.com/currency/converter/}{Oanda}.
 }}
+
+\item{complete_cases}{Removes symbols that return an NA value due to an error with the get
+call such as sending an incorrect symbol "XYZ" to get = "stock.prices". This is useful in
+scaling so user does not need to
+add an extra step to remove these rows. \code{TRUE} by default, and a warning
+message is generated for any rows removed.}
 
 \item{...}{Additional parameters passed to the appropriate \code{quantmod}
 function. Common optional parameters include:
@@ -78,8 +84,6 @@ next version. Please use \code{tq_index_options()} instead.
 \examples{
 # Load libraries
 library(tidyquant)
-
-##### Basic Functionality
 
 # Get the list of `get` options
 tq_get_options()

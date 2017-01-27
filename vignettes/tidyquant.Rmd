@@ -623,6 +623,17 @@ All functions return data sets as `tibbles`, which allows for interaction within
 * Use the pipe (`%>%`) for chaining operations.
 * Seamlessly scale data retrieval and transformations/mutations using `purrr` to map functions or `dplyr` to combine `group_by` with `tq_mutate` or `tq_transform`.
 
+#### Multiple Stocks with Compound Gets
+
+As of development version 0.3.0.9030, multiple `get` options can be used to return a "compound get". A quick example:
+
+```{r}
+c("AAPL", "GOOG") %>%
+    tq_get(get = c("stock.prices", "financials"))
+```
+
+This returns the stock prices and financials for each stock as one nested data frame! Any of the `get` options that accept stock symbols can be used in this manner: `"stock.prices"`, `"financials"`, `"key.ratios"`, `"key.stats"`, `"dividends"`, and `"splits"`. 
+
 #### Getting Financial Data for Multiple Stocks
 
 A very basic example is retrieving the stock prices for multiple stocks. There are four primary ways to do this:

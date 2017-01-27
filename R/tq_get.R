@@ -29,8 +29,11 @@
 #'   \item \code{"exchange.rates"}: Get exchange rates from
 #'   \href{https://www.oanda.com/currency/converter/}{Oanda}.
 #' }
-#' @param complete_cases Removes symbols that return an error so user does not need to
-#' add an extra step to remove. Generates a warning message. \code{TRUE} by default.
+#' @param complete_cases Removes symbols that return an NA value due to an error with the get
+#' call such as sending an incorrect symbol "XYZ" to get = "stock.prices". This is useful in
+#' scaling so user does not need to
+#' add an extra step to remove these rows. \code{TRUE} by default, and a warning
+#' message is generated for any rows removed.
 #' @param ... Additional parameters passed to the appropriate \code{quantmod}
 #' function. Common optional parameters include:
 #' \itemize{
@@ -80,6 +83,12 @@
 #'                       get  = "stock.prices",
 #'                       from = "2016-01-01",
 #'                       to   = "2017-01-01")
+#'
+#' # Multiple gets
+#' mult_gets <- tq_get("AAPL",
+#'                     get = c("stock.prices", "financials"),
+#'                     from = "2016-01-01",
+#'                     to   = "2017-01-01")
 
 
 

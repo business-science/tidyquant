@@ -11,7 +11,7 @@ tq_index_options()
 }
 \arguments{
 \item{x}{A single character string, a character vector or tibble representing a
-single stock index or multiple stock indexes from www.marketvolume.com.}
+single stock index or multiple stock indexes.}
 
 \item{use_fallback}{A boolean that can be used to return a fallback data set
 last downloaded when the package was updated. Useful if the website is down.
@@ -25,7 +25,7 @@ Get all stocks in a stock index in \code{tibble} format
 }
 \details{
 \code{tq_index()} returns the stock symbol and company name of every stock
-in an index. Eighteen stock indexes are available from
+in an index. Eighteen stock indexes are available. The source is
 \href{http://www.marketvolume.com/indexes_exchanges/}{www.marketvolume.com}.
 
 \code{tq_index_options()} returns a list of stock indexes you can
@@ -35,15 +35,13 @@ choose from.
 # Load libraries
 library(tidyquant)
 
-##### Basic Functionality
-
-# Get the list of `get` options
+# Get the list of stock index options
 tq_index_options()
 
-# Get all stocks in a stock index from www.marketvolume.com
+# Get all stock symbols in a stock index
 tq_index("SP500")
 }
 \seealso{
-\code{\link{tq_get}} to get stock prices, financials, key stats, etc.
+\code{\link{tq_get}} to get stock prices, financials, key stats, etc using the stock symbols.
 }
 

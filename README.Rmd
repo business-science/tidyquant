@@ -86,6 +86,15 @@ sp_500_prices <- tq_index("SP500") %>%
 tq_get_options()
 ```
 
+As of development version 0.3.0.9030, multiple `get` options can be used to return a "compound get". A quick example:
+
+```{r}
+c("AAPL", "GOOG") %>%
+    tq_get(get = c("stock.prices", "financials"))
+```
+
+This returns the stock prices and financials for each stock as one nested data frame! Any of the `get` options that accept stock symbols can be used in this manner: `"stock.prices"`, `"financials"`, `"key.ratios"`, `"key.stats"`, `"dividends"`, and `"splits"`.  
+
 __Stock Prices__:
 
 Set `get = "stock.prices"` to get stock prices. Notice the output is _always_ a `tibble`.
