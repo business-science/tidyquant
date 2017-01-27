@@ -1,7 +1,7 @@
 library(tidyquant)
 
 #### Setup
-context("Testing tq_index)")
+context("Testing tq_index")
 
 options <- tq_index_options()
 

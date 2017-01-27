@@ -398,7 +398,7 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
 
         # Download file
         tmp <- tempfile()
-        stock_exchange <- c("XNAS", "XNYS") # mornginstar gets from various exchanges
+        stock_exchange <- c("XNAS", "XNYS", "XASE") # mornginstar gets from various exchanges
         url_base_1 <- 'http://financials.morningstar.com/finan/ajax/exportKR2CSV.html?&callback=?&t='
         url_base_2 <- '&region=usa&culture=en-US&cur=&order=asc'
         # Two URLs to try
@@ -408,8 +408,10 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
         download.file(url[1], destfile = tmp, quiet = TRUE)
         if (length(readLines(tmp)) == 0) {
             download.file(url[2], destfile = tmp, quiet = TRUE)
+            if (length(readLines(tmp)) == 0) {
+                download.file(url[3], destfile = tmp, quiet = TRUE)
+            }
         }
-
 
         # Setup Tibble Part 1
         key_ratios_1 <- tibble::tibble(
@@ -582,43 +584,6 @@ tq_get_util_3 <- function(x, get, complete_cases, map, ...) {
         key_stat_names <- yahoo_tags$yahoo.tag.desc %>%
             make.names()
         names(key_stats_raw) <- key_stat_names
-
-        # Formatting Functions
-        convert_to_numeric <- function(x) {
-            # x = character such as "23.4B"
-            units <- stringr::str_sub(x, -1, -1)
-
-            if (units %in% c("T", "B", "M")) {
-                value <- stringr::str_sub(x, 1, -2) %>%
-                    as.numeric()
-
-                if (units == "T") {
-                    value <- value * 1e12
-                } else if (units == "B") {
-                    value <- value * 1e9
-                } else if (units == "M") {
-                    value <- value * 1e6
-                }
-            } else (
-                value <- as.numeric(value)
-            )
-
-            return(value)
-        }
-
-        convert_to_percent <- function(x) {
-            # x = character such as "-0.6104%"
-            units <- stringr::str_sub(x, -1, -1)
-
-            if (units %in% c("%")) {
-                value <- stringr::str_sub(x, 1, -2) %>%
-                    as.numeric()
-
-                value <- value * 1 / 100
-            }
-
-            return(value)
-        }
 
         # Main formatting script
         suppressWarnings(
