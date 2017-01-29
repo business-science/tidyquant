@@ -23,7 +23,7 @@ knitr::opts_chunk$set(message = FALSE,
 
 # Overview
 
-The `tidyquant` package has added charting tools to assist its users in developing quick visualizations without data manipulation and formatting by integrating with `ggplot2` using the grammar of graphics format and workflow. There are currently three primary geometry (geom) categories and one coordinate manipulation (coord) category within `tidyquant`:
+The `tidyquant` package includes charting tools to assist users in developing quick visualizations in `ggplot2` using the grammar of graphics format and workflow. There are currently three primary geometry (geom) categories and one coordinate manipulation (coord) category within `tidyquant`:
 
 * __Chart Types__: Two chart type visualizations are available using `geom_barchart` and `geom_candlestick`.
 * __Moving Averages__: Seven moving average visualizations are available using `geom_ma`.
@@ -67,7 +67,7 @@ Financial charts provide visual cues to open, high, low, and close prices. The f
 
 Before we visualize bar charts and candlestick charts using the `tidyquant` geoms, let's visualize stock prices with a simple line chart to get a sense of the "grammar of graphics" workflow. This is done using the `geom_line` from the `ggplot2` package. The workflow begins with the stock data, and uses the pipe operator (`%>%`) to send to the `ggplot()` function. 
 
-The primary features controlling the chart are the aesthetic arguments: these are used to add data to the chart by way of the `aes()` function. When added inside the `ggplot()` function, the aesthetic arguments are available to all underlying layers. Alternatively, the aesthetic arguments can be applied to each geom individually, but typically this is minimized in practice because it duplicates code. We set aesthetic arguments, `x = date` and `y = close`, to chart the closing price versus date. The `geom_line()` function steals the aesthetic arguments from the `ggplot()` function and produces a line on the chart. Labels are added separately using the `labs()` function. Thus, the chart is built from the ground up by starting with data and progressively adding geoms, labels, coordinates / scales and other attributes to create a the final chart. This is enables maximum flexibility wherein the analyst can create very complex charts using the "grammar of graphics".
+The primary features controlling the chart are the aesthetic arguments: these are used to add data to the chart by way of the `aes()` function. When added inside the `ggplot()` function, the aesthetic arguments are available to all underlying layers. Alternatively, the aesthetic arguments can be applied to each geom individually, but typically this is minimized in practice because it duplicates code. We set aesthetic arguments, `x = date` and `y = close`, to chart the closing price versus date. The `geom_line()` function inherits the aesthetic arguments from the `ggplot()` function and produces a line on the chart. Labels are added separately using the `labs()` function. Thus, the chart is built from the ground up by starting with data and progressively adding geoms, labels, coordinates / scales and other attributes to create a the final chart. This is enables maximum flexibility wherein the analyst can create very complex charts using the "grammar of graphics".
 
 ```{r}
 AAPL %>%
@@ -172,25 +172,51 @@ AAPL %>%
                  ylim = c(100, 120))
 ```
 
+<a class="anchor" id="mult-chart"></a>
+
 ## Charting Multiple Securities
 
-We can use `facet_wrap` to visualize multiple stocks at the same time. By adding a `group` aesthetic in the main `ggplot()` function and combining with a `facet_wrap()` function at the end of the `ggplot` workflow, all four "FANG" stocks can be viewed simultaneously. 
+We can use `facet_wrap` to visualize multiple stocks at the same time. By adding a `group` aesthetic in the main `ggplot()` function and combining with a `facet_wrap()` function at the end of the `ggplot` workflow, all four "FANG" stocks can be viewed simultaneously. You may notice an odd `filter()` call before the call to `ggplot()`. I'll discuss this next.
 
-```{r}
+
+
+```{r, fig.height=5}
+start <- end - weeks(6)
 FANG %>%
+    filter(date >= start - days(2 * 15)) %>%
     ggplot(aes(x = date, y = close, group = .symbol)) +
     geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
     labs(title = "FANG Candlestick Chart", 
          subtitle = "Experimenting with Mulitple Stocks",
          y = "Closing Price", x = "") + 
-    coord_x_date(xlim = c(end - weeks(6), end)) +
+    coord_x_date(xlim = c(start, end)) +
     facet_wrap(~ .symbol, ncol = 2, scale = "free_y")
 ```
 
+_A note about out-of-bounds data (or "clipping"), which is particularly important with faceting and charting moving averages_: 
+
+The `coord_x_date` coordinate function is designed to zoom into specific sections of a chart without "clipping" data that is outside of the view. This is in constrast to `scale_x_date`, which removes out-of-bounds data from the charting. Under normal circumstances clipping is not a big deal (and is actually helpful for scaling the y-axis), but with financial applications users want to chart rolling/moving averages, lags, etc that depend on data outside of the view port. Because of this need for out-of-bounds data, there is a tradeoff when charting: __Too much out-of-bounds data distorts the scale of the y-axis, and too little and we cannot get a moving average__. The optimal method is to include "just enough" out-of-bounds data to get the chart we want. This is why below the FANG data is filtered by date from double the number of moving-average days (`2 * n`) previous to the start date. This yields a nice y-axis scale and still allows us to create a moving average line using `geom_ma`.
+
+```{r, fig.height=5}
+start <- end - weeks(6)
+FANG %>%
+    filter(date >= start - days(2 * 15)) %>%
+    ggplot(aes(x = date, y = close, group = .symbol)) +
+    geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
+    geom_ma(ma_fun = SMA, n = 15, color = "cadetblue3", size = 1) +
+    labs(title = "FANG Candlestick Chart", 
+         subtitle = "Experimenting with Mulitple Stocks",
+         y = "Closing Price", x = "") + 
+    coord_x_date(xlim = c(start, end)) +
+    facet_wrap(~ .symbol, ncol = 2, scale = "free_y")
+```
 
 # Visualizing Trends
 
-Moving averages are critical to determining when a stock or security trend. `tidyquant` includes geoms to enable "rapid prototyping" to quickly visualize signals using moving averages and Bollinger bands.
+[Moving averages](http://www.investopedia.com/terms/m/movingaverage.asp) are critical to evaluating time-series trends. `tidyquant` includes geoms to enable "rapid prototyping" to quickly visualize signals using moving averages and Bollinger bands.
+
+
+<a class="anchor" id="mavg"></a>
 
 ## Moving Averages
 
@@ -208,10 +234,10 @@ Moving averages are applied as an added layer to a chart with the `geom_ma` func
 
 1. Select a moving average function, `ma_fun`, that you want to apply.
 2. Determine the function arguments that need to be passed to the `ma_fun`. You can investigate the underlying function by searching `?TTR::SMA`.
-3. Determine the aesthetic arguments to pass. These will typically be `aes(x = date, y = close)`. The volume-weighted functions will require `volume = volume` in the `aes`. 
+3. Determine the aesthetic arguments to pass. These will typically be `aes(x = date, y = close)`. The volume-weighted functions will require the `volume` argument in the `aes()` function. 
 4. Apply the moving average geom in your `ggplot` workflow.
 
-__Important Note__: When zooming in on a section, use `coord_x_date` or `coord_x_datetime` to prevent out-of-bounds data loss. Do not use `scale_x_date`, which will affect the moving average calculation. 
+__Important Note__: When zooming in on a section, use `coord_x_date` or `coord_x_datetime` to prevent out-of-bounds data loss. Do not use `scale_x_date`, which will affect the moving average calculation. Refer to [Charting Multiple Securities](#mult-chart).
 
 ### Example 1: Charting the 50-day and 200-day simple moving average
 
@@ -251,22 +277,26 @@ AAPL %>%
 We'll double up using a volume-weighted average (`VWMA`) and apply it to the FANG stocks at once. Since VWMA is a volume-weighted function, we need to add volume as an aesthetic. Because we are viewing multiple stocks, we add a group aesthetic setting it to the .symbol column which contains the FANG stock symbols. The facet wrap is added at the end to create four charts instead of one overlayed chart. 
 
 
-```{r}
+```{r, fig.height=5}
+start <- end - weeks(6)
 FANG %>%
+    filter(date >= start - days(2 * 50)) %>%
     ggplot(aes(x = date, y = close, volume = volume, group = .symbol)) +
-    geom_barchart(aes(open = open, high = high, low = low, close = close)) +
-    geom_ma(ma_fun = VWMA, n = 50, wilder = TRUE, linetype = 5) +
-    geom_ma(ma_fun = VWMA, n = 200, wilder = TRUE, color = "red") + 
+    geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
+    geom_ma(ma_fun = VWMA, n = 15, wilder = TRUE, linetype = 5) +
+    geom_ma(ma_fun = VWMA, n = 50, wilder = TRUE, color = "red") + 
     labs(title = "FANG Bar Chart", 
          subtitle = "50 and 200-Day EMA, Experimenting with Multiple Stocks", 
          y = "Closing Price", x = "") + 
-    coord_x_date(xlim = c(end - weeks(24), end)) +
+    coord_x_date(xlim = c(start, end)) +
     facet_wrap(~ .symbol, ncol = 2, scales = "free_y")
 ```
 
 ## Bollinger Bands
 
-Bollinger Bands plot a range around a moving average typically two standard deviations up and down. Because they use a moving average, the `geom_bbands` function works almost identically to `geom_ma`. The same seven moving averages are compatible. The main difference is the addition of the standard deviation, `sd`, argument which is 2 by default, and the `high`, `low` and `close` aesthetics which are required to calculate the bands. 
+[Bollinger Bands](https://en.wikipedia.org/wiki/Bollinger_Bands) are used to visualize volatility by plotting a range around a moving average typically two standard deviations up and down. Because they use a moving average, the `geom_bbands` function works almost identically to `geom_ma`. The same seven moving averages are compatible. The main difference is the addition of the standard deviation, `sd`, argument which is 2 by default, and the `high`, `low` and `close` aesthetics which are required to calculate the bands. Refer to [Moving Averages](#mavg) for a detailed discussion on what moving averages are available.
+
+__Important Note__: When zooming in on a section, use `coord_x_date` or `coord_x_datetime` to prevent out-of-bounds data loss. Do not use `scale_x_date`, which will affect the moving average calculation. Refer to [Charting Multiple Securities](#mult-chart).
 
 ### Example 1: Applying BBands using a SMA
 
@@ -277,7 +307,7 @@ AAPL %>%
     ggplot(aes(x = date, y = close, open = open,
                high = high, low = low, close = close)) +
     geom_candlestick() +
-    geom_bbands(ma_fun = SMA, sd = 2, n = 50) +
+    geom_bbands(ma_fun = SMA, sd = 2, n = 20) +
     labs(title = "AAPL Candlestick Chart", 
          subtitle = "BBands with SMA Applied", 
          y = "Closing Price", x = "") + 
@@ -294,9 +324,10 @@ AAPL %>%
     ggplot(aes(x = date, y = close, open = open,
                high = high, low = low, close = close)) +
     geom_candlestick() +
-    geom_bbands(ma_fun = SMA, sd = 2, n = 50, 
-                   linetype = 1, alpha = 0.4, fill = "bisque", 
-                   color_bands = "aquamarine4", color_ma = "steelblue4") +
+    geom_bbands(ma_fun = SMA, sd = 2, n = 20, 
+                linetype = 4, size = 1,
+                alpha = 0.3, fill = "slategrey", 
+                color_bands = "aquamarine4", color_ma = "steelblue4") +
     labs(title = "AAPL Candlestick Chart", 
          subtitle = "BBands with SMA Applied, Experimenting with Formatting", 
          y = "Closing Price", x = "") + 
@@ -309,17 +340,19 @@ AAPL %>%
 
 The process is very similar to charting moving averages for multiple stocks.
 
-```{r}
+```{r, fig.height=5}
+start <- end - weeks(24)
 FANG %>%
+    filter(date >= start - days(2 * 20)) %>%
     ggplot(aes(x = date, y = close, 
                open = open, high = high, low = low, close = close, 
                group = .symbol)) +
     geom_barchart() +
-    geom_bbands(ma_fun = SMA, sd = 2, n = 50, linetype = 5) +
+    geom_bbands(ma_fun = SMA, sd = 2, n = 20, linetype = 5) +
     labs(title = "FANG Bar Chart", 
          subtitle = "BBands with SMA Applied, Experimenting with Multiple Stocks", 
          y = "Closing Price", x = "") + 
-    coord_x_date(xlim = c(end - weeks(24), end)) +
+    coord_x_date(xlim = c(start, end)) +
     facet_wrap(~ .symbol, ncol = 2, scales = "free_y")
 ```
 
@@ -390,36 +423,36 @@ AMZN %>%
 ```
 
 
-## Example 3: Charting volume with geom_bar
+## Example 3: Charting volume with geom_segment
 
 We can use the `geom_bar()` function to chart daily volume. The default `stat = ..density..` so we need to change this to `"identity"`, which uses the actual values instead of the transformed (summarized) density values. 
 
 ```{r}
 AMZN %>%
     ggplot(aes(x = date, y = volume)) +
-    geom_bar(stat = "identity") + 
+    geom_segment(aes(xend = date, yend = 0, color = volume)) + 
     geom_smooth(method = "loess", se = FALSE) +
-    labs(title = "AMZN Bar Chart", 
+    labs(title = "AMZN Volume Chart", 
          subtitle = "Charting Daily Volume", 
          y = "Volume", x = "")  
 ```
 
-And, we can zoom in on a specific region. We use `scale_X_date` to remove the out-of-bounds data, which allows the `fill` aesthetic to be controlled by `volume`. 
+And, we can zoom in on a specific region. Using `scale_color_gradient` we can quickly visualize the high and low points, and using `geom_smooth` we can see the trend.
 
 ```{r}
+start <- end - weeks(24)
 AMZN %>%
-    ggplot(aes(x = date, y = volume, fill = volume)) +
-    geom_bar(stat = "identity") + 
+    filter(date >= start - days(50)) %>%
+    ggplot(aes(x = date, y = volume)) +
+    geom_segment(aes(xend = date, yend = 0, color = volume)) +
     geom_smooth(method = "loess", se = FALSE) +
     labs(title = "AMZN Bar Chart", 
          subtitle = "Charting Daily Volume, Zooming In", 
          y = "Volume", x = "") + 
-    scale_x_date(limits = c(end - weeks(24), end)) +
-    scale_fill_gradient(low = "red", high = "darkblue") +
+    coord_x_date(xlim = c(start, end)) +
+    scale_color_gradient(low = "red", high = "darkblue") +
     theme(legend.position = "none")
 ```
 
 
-# Recap
 
-The `tidyquant` package has added charting tools to assist the users in developing quick visualizations without data manipulation and formatting. Several `ggplot2` geoms and coords are available to assist in the rapid visualization process. 
