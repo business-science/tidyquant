@@ -1,8 +1,8 @@
 Package: tidyquant
 Type: Package
 Title: Tidy Quantitative Financial Analysis
-Version: 0.3.0.9040
-Date: 2017-01-20
+Version: 0.3.0.9050
+Date: 2017-01-28
 Authors@R: person("Matt", "Dancho", email = "mdancho@gmail.com", 
     role = c("aut", "cre"))
 Maintainer: Matt Dancho <mdancho@gmail.com>

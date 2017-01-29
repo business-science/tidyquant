@@ -1,0 +1,358 @@
+---
+title: "Core Functions in tidyquant"
+author: "Matt Dancho"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 2
+vignette: >
+  %\VignetteIndexEntry{Core Functions in tidyquant}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(message = FALSE,
+                      warning = FALSE,
+                      fig.width = 6)
+# devtools::load_all() # Travis CI fails on load_all()
+```
+
+> A few core functions with a lot of power
+
+# Overview
+
+The `tidyquant` package has a __core functions with a lot of power__. Few functions means less of a learning curve for the user, which is why there are only a handful of functions the user needs to learn to perform the vast majority of financial analysis tasks. The main functions are:
+
+* __Get a Stock Index, `tq_index()`, or a Stock Exchange, `tq_exchange()`__: Returns the stock symbols and various attributes for every stock in an index or exchange. Eighteen indexes and three exchanges are available.
+
+* __Get Quantitative Data, `tq_get()`__: A one-stop shop to get data from various web-sources. 
+
+* __Transform, `tq_transform()`, and Mutate, `tq_mutate()`, Quantitative Data__: Perform and scale financial calculations completely within the `tidyverse`. These workhorse functions integrate the `xts`, `zoo`, `quantmod`, and `TTR` packages. 
+
+* __Coerce Quantitative Data Between tibble and xts formats, `as_tibble()` and `as_xts()`__: Coercing the various _R_ time-based objects to and from `tibble` (tidy data frame) objects _was_ a pain. These functions enable __easily going back and forth__.
+
+# Prerequisites
+
+Load the `tidyquant` package to get started.
+
+```{r}
+# Loads tidyquant, tidyverse, lubridate, xts, quantmod, TTR 
+library(tidyquant)
+```
+
+
+# Get a Stock List from a Stock Index or Stock Exchange
+
+## Stock Indexes
+
+A wide range of stock index / exchange lists can be retrieved using `tq_index()`. To get a full list of the options, use `tq_index_options()`. 
+
+```{r}
+tq_index_options()
+```
+
+Set `x` as one of the options in the list of options above to get the desired stock index / exchange.
+
+```{r}
+tq_index("SP500")
+```
+
+The data source is [www.marketvolume.com](http://www.marketvolume.com/indexes_exchanges/).
+
+## Stock Exchanges
+
+Stock lists for three stock exchanges are available: NASDAQ, NYSE, and AMEX. If you forget, just use `tq_exchange_options()`. We can easily get the full list of stocks on the NASDAQ exchange.
+
+```{r}
+tq_exchange("NASDAQ")
+```
+
+The data source is the [NASDAQ](http://www.nasdaq.com/).
+
+# Get Quantitative Data
+
+The `tq_get()` function is used to collect data by changing the `get` argument. The options include stock prices, key statistics, dividends and splits from Yahoo Finance, key ratios from Morningstar, financial statements from Google Finance, metal prices and exchange rates from Oanda, and economic data from the FRED database. Use `tq_get_options()` to see the full list.
+
+```{r}
+tq_get_options()
+```
+
+## Stock Prices, Dividends and Splits
+
+The stock prices can be retrieved succinctly using `get = "stock.prices"`.  
+
+```{r}
+aapl_prices  <- tq_get("AAPL", get = "stock.prices", from = " 1990-01-01")
+aapl_prices 
+```
+
+
+Dividends are obtained using `get = "dividends"`. 
+
+```{r}
+aapl_divs <- tq_get("AAPL", get = "dividends", from = "1990-01-01")
+aapl_divs
+```
+
+Stock splits are obtained using `get = "splits"`. 
+
+```{r}
+aapl_splits <- tq_get("AAPL", get = "splits", from = "1990-01-01")
+aapl_splits
+```
+
+The data source is [Yahoo Finance](https://finance.yahoo.com/).
+
+## Financial Statements
+
+For any given stock, a total of six financials statements are retrieved as nested tibbles, one for each combination of statement type (Income Statement, Balance Sheet, and Cash Flow) and period (by annual and quarter). 
+
+```{r}
+aapl_financials <- tq_get("AAPL", get = "financials")
+aapl_financials
+```
+
+The statement information can be extracted by selecting (`dplyr::select()`) and filtering (`dplyr::filter()`) to the desired statement and unnesting (`tidyr::unnest()`) the results.
+
+```{r}
+aapl_financials %>%
+    filter(type == "IS") %>%
+    select(annual) %>%
+    unnest()
+```
+
+A slightly more powerful example is looking at all quarterly statements together. This is easy to do with `unnest` and `spread` from the `tidyr` package.
+
+```{r}
+aapl_financials %>%
+    unnest(quarter) %>% 
+    spread(key = date, value = value)
+```
+
+
+The data source is [Google Finance](https://www.google.com/finance).
+
+
+## Key Ratios & Key Stats
+
+The next two getters, key ratios and key stats, work in tandem. Key ratios provide the _historical_ annual metrics on the stock / company for the last 10 years. Key stats provide the _real-time_ metrics on the stock / company.
+
+### Key Ratios
+
+For any given stock, the historical key ratios are available for 10 years, and are classified into the following sections:
+
+* __Financials__: These ratios include gross margin %, operating margin %, EPS, book value per share, and more.
+* __Profitability__: These ratios include margin as a percentage of sales (gross margin, operating margin, EBT margin, etc) and profitability metrics such as tax rate %, asset turnover, ROA, financial leverage, ROE, return on invested capital, and more.
+* __Growth__: These ratios include year over year, 3-year average, 5-year average, and 10-year average growth rates for revenue, operating income, net income, and EPS.
+* __Cash Flow__: These ratios include operating cash flow growth % YOY, free cash flow growth % YOY, capital expenditure as a % of sales, and more.
+* __Financial Health__: These ratios include balance sheet items as a percentage of total assets and liabilities, and liquidity/financial health metrics such as current ratio, quick ratio, debt/equity, and financial leverage.
+* __Efficiency Ratios__: These ratios include days sales outstanding, days inventory, inventory turnover, asset turnover and more. 
+* __Valuation Ratios__: These ratios include price to earnings (P/E), price to sales (P/S), price to book (P/B), and price to operating cash flow. 
+
+To get the key ratios:
+
+```{r}
+aapl_key_ratios <- tq_get("AAPL", get = "key.ratios")
+aapl_key_ratios
+```
+
+The ratios can be filtered and unnested to peel away the hierarchical nesting layers and access the underlying data:
+
+```{r}
+aapl_key_ratios %>%
+    filter(section == "Valuation Ratios") %>%
+    unnest()
+```
+
+Once we have a section, we can quickly visualize the ratios:
+
+```{r}
+aapl_key_ratios %>%
+    filter(section == "Valuation Ratios") %>%
+    unnest() %>%
+    ggplot(aes(x = date, y = value)) + 
+    geom_line(aes(col = forcats::fct_reorder2(category, date, value))) +
+    labs(title = "10-Year Historical Valuation Ratios for AAPL", x = "", 
+         y = "", col = "") 
+```
+
+The data source is [Morningstar](http://www.morningstar.com/).
+
+### Key Stats
+
+For any given stock, the current key statistics are available in real time. It's quite a bit of information, with 55 real-time stats available, so we'll just take a look at the column names. 
+
+```{r}
+aapl_key_stats <- tq_get("AAPL", get = "key.stats")
+aapl_key_stats %>%
+    colnames() %>%
+    cat() # Print in condensed format
+```
+
+The data is returned in wide format (as opposed to long format) because we can easily get the key stats for multiple stocks and pare down the list for comparisons. Here I use `select` to select several columns to compare.
+
+```{r}
+c("AAPL", "FB", "GOOG") %>%
+    tq_get(get = "key.stats") %>%
+    select(.symbol, Ask, Ask.Size, Bid, Bid.Size, Change, Days.High, Days.Low)
+```
+
+Finally, because the statistics are real-time, we can setup real-time monitoring by calling `tq_get` at periodic intervals. The function below is not evaluated for time considerations, but if called during active trading sessions will collect five samples at three second intervals. 
+
+```{r, eval = FALSE}
+collect_real_time_data <- function(x, interval_sec, n) {
+    data <- tibble()
+    while (n > 0) {
+        data <- bind_rows(data, tq_get(x, get = "key.stats"))
+        Sys.sleep(interval_sec)
+        n <- n - 1
+    }
+    return(data)
+}
+collect_real_time_data("AAPL", interval_sec = 3, n = 5) %>%
+    select(Ask, Ask.Size, Bid, Bid.Size, Open, Change)
+```
+
+
+The data source is [Yahoo Finance](https://finance.yahoo.com/).
+
+<a class="anchor" id="economic-data"></a>
+
+## Economic Data 
+
+A wealth of economic data can be extracted from the Federal Reserve Economic Data (FRED) database. The [WTI Crude Oil Prices](https://fred.stlouisfed.org/series/DCOILWTICO) are shown below.
+
+```{r,}
+wti_price_usd <- tq_get("DCOILWTICO", get = "economic.data")
+wti_price_usd 
+```
+
+
+The FRED contains literally over 10K data sets that are free to use. See the [FRED categories](https://fred.stlouisfed.org/categories) to narrow down the data base and to get data codes. 
+
+
+## Exchange Rates
+
+Exchange rates are entered as currency pairs using "/" notation (e.g `"EUR/USD"`), and by setting `get = "exchange.rates"`. 
+
+```{r}
+eur_usd <- tq_get("EUR/USD", get = "exchange.rates", from = "2000-01-01")
+eur_usd 
+```
+
+The data source is [Oanda](https://www.oanda.com/), and list of currencies to compare can be found on [Oanda's currency converter](https://www.oanda.com/currency/converter/). It may make more sense to get this data from the FRED (See [Economic Data](#economic-data)) since the max period for Oanda is 5-years.
+
+## Metal Prices
+
+Metal prices are very similar to stock prices. Set `get = "metal.prices"` along with the appropriate commodity symbol (e.g. XAU (gold) , XAG (silver), XPD (palladium), or XPT (platinum)). 
+
+```{r}
+plat_price_eur <- tq_get("plat", get = "metal.prices", 
+                         from = "2000-01-01", base.currency = "EUR")
+plat_price_eur 
+```
+
+The data source is [Oanda](https://www.oanda.com/). It may make more sense to get this data from the FRED (See [Economic Data](#economic-data)) since the max period for Oanda is 5-years.
+
+<a class="anchor" id="tq-transform"></a>
+
+# Transform and Mutate Quantitative Data
+
+Transform and mutate functions enable the `xts`/`zoo`, `quantmod` and `TTR` functions to shine. We'll touch on the transformation and mutation functions briefly. See the next vignette in the series, [R Quantitative Analysis Package Integrations in tidyquant](TQ02-quant-integrations-in-tidyquant.html), which goes into the integrations in greater detail.
+
+## Transform Quantitative Data, tq_transform 
+
+Transforms the results of `tq_get()`. The result is typically a different shape than the input (hence "transformed"), although this is not a requirement. An example is periodicity aggregation from daily to monthly.
+
+```{r}
+fb_prices <- tq_get("FB") 
+fb_prices %>%
+    tq_transform(ohlc_fun = OHLCV, transform_fun = to.monthly)
+```
+
+Let's go through what happened. `ohlc_fun` is one of the various quantmod Open, High, Low, Close (OHLC) functions (see `?quantmod::OHLC`). The function returns a column or set of columns from data that are passed to the `transform_fun`. In example above, `OHLCV` selects the full list of prices and volumes from `data`, and sends this to the transform function, `to.monthly`, which transforms the periodicity from daily to monthly. Additional arguments can be passed to the `transform_fun` by way of `...`. 
+
+
+## Mutate Quantitative Data, tq_mutate 
+
+Adds a column or set of columns to the tibble with the calculated attributes (hence the original tibble is returned, mutated with the additional columns). An example is getting the `MACD` from `Cl` (close price), which mutates the original input by adding MACD and Signal columns. Note that we can quickly rename the columns using the `col_rename` argument.
+
+```{r}
+fb_prices %>%
+    tq_mutate(ohlc_fun = Cl, mutate_fun = MACD, col_rename = c("MACD", "Signal"))
+```
+
+Note that a mutation can occur if, and only if, the mutation has the same structure of the original tibble. In other words, the calculation must have the same number of rows and row.names (or date fields), otherwise the mutation cannot be performed.
+
+## xy Variants, tq_transform_xy and tq_mutate_xy 
+
+Enables working with:
+
+1. Transformation functions that require two primary inputs (e.g. EVWMA, VWAP, etc) 
+2. Data that is not in OHLC format. 
+
+### Transformation with two primary inputs
+
+EVWMA (exponential volume-weighted moving average) requires two inputs, price and volume, that are not in OHLC code format. To work with these columns, we can switch to the xy variants, `tq_transform_xy()` and `tq_mutate_xy()`. The only difference is instead of an `ohlc_fun` argument, you use `x` and `y` arguments to pass the columns needed based on the `transform_fun` or `mutate_fun` documentation.
+
+```{r, message=FALSE, warning=FALSE}
+fb_prices %>%
+    tq_mutate_xy(x = close, y = volume, mutate_fun = EVWMA, col_rename = "EVWMA")
+```
+
+### Working with non-OHLC data
+
+Returns from FRED, Oanda, and other sources do not have open, high, low, close (OHLC) format. The following example shows how to transform WTI Crude daily prices to monthly prices. Since we only have a single column to pass, set the `x = price` and leave the `y = NULL`. This sends the price column to the `to.period` transformation function. 
+
+```{r, message=FALSE, warning=FALSE}
+wti_prices <- tq_get("DCOILWTICO", get = "economic.data") 
+wti_prices %>%    
+    tq_transform_xy(x = price, transform_fun = to.period,
+                    period = "months", col_rename = "WTI Price")
+```
+
+
+# Coercing Time Series Objects To and From Tibble
+
+Sometimes you want to work using a `tibble` and other times you want to work using a `xts` object. The `as_tibble()` and `as_xts()` functions are the key to switching back and forth.
+
+## Coerce from time-series to tibble, as_tibble
+
+The `tidyquant::as_tibble()` function is used to coerce from a time-series object (e.g. `xts`, `zoo`, `timeSeries`, `ts`) or `matrix` object to a tidy data frame. The `preserve_row_names` argument keeps the time-series objects row names (typically dates). 
+
+Let's start with an `xts` object.
+
+```{r}
+AAPL_xts <- quantmod::getSymbols("AAPL", auto.assign = FALSE) 
+AAPL_xts %>% head()
+```
+
+We can easily coerce to `tibble` by setting `preserve_row_names = TRUE`. Note the return column is `row.names` with class of `character`.
+
+```{r}
+AAPL_tbl <- as_tibble(AAPL_xts, preserve_row_names = TRUE)
+AAPL_tbl
+```
+
+Converting to date is one extra step with `lubridate`.
+
+```{r}
+AAPL_tbl <- AAPL_tbl %>%
+    mutate(row.names = lubridate::ymd(row.names))
+AAPL_tbl
+```
+
+## Coerce from tibble to xts, as_xts()
+
+We can convert back to `xts` with the tidyquant `as_xts()` function. Make sure to set the date column (`date_col`) argument to the column name containing the date (`date_col = row.names`). The date column must be in a date format (inherits either `Date` or `POSIXct` classes).
+
+```{r}
+AAPL_xts_2 <- AAPL_tbl %>%
+    as_xts(date_col = row.names)
+AAPL_xts_2 %>% head()
+```
+
+
+

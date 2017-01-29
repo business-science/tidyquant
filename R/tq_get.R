@@ -155,7 +155,7 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
             ret %>%
                 tidyr::unnest()
         }, error = function(e) {
-            warning("NA's in output. Returning as nested data frame.")
+            warning("Returning as nested data frame.")
             ret
         })
 
