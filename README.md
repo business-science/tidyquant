@@ -25,7 +25,7 @@ Development Version with Latest Features:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("mdancho84/tidyquant")
+devtools::install_github("mdancho84/tidyquant", build_vignettes = TRUE)
 ```
 
 CRAN Approved Version:
@@ -93,20 +93,20 @@ Stock lists for three stock exchanges are avaiable: NASDAQ, NYSE, and AMEX.
 ``` r
 tq_exchange("NASDAQ")
 #> Getting data...
-#> # A tibble: 3,184 × 7
+#> # A tibble: 3,183 × 7
 #>    symbol                                company last.sale.price
 #>     <chr>                                  <chr>           <dbl>
-#> 1     PIH 1347 Property Insurance Holdings, Inc.           7.049
-#> 2    FLWS                1-800 FLOWERS.COM, Inc.           9.950
-#> 3    FCCY          1st Constitution Bancorp (NJ)          16.600
-#> 4    SRCE                 1st Source Corporation          46.620
-#> 5    VNET                   21Vianet Group, Inc.           7.290
-#> 6    TWOU                               2U, Inc.          35.070
-#> 7    JOBS                            51job, Inc.          35.020
-#> 8    CAFD             8point3 Energy Partners LP          14.750
-#> 9    EGHT                                8x8 Inc          16.200
-#> 10   AVHI                        A V Homes, Inc.          18.900
-#> # ... with 3,174 more rows, and 4 more variables: market.cap <chr>,
+#> 1     PIH 1347 Property Insurance Holdings, Inc.          6.8926
+#> 2    FLWS                1-800 FLOWERS.COM, Inc.          9.8500
+#> 3    FCCY          1st Constitution Bancorp (NJ)         16.8500
+#> 4    SRCE                 1st Source Corporation         46.3600
+#> 5    VNET                   21Vianet Group, Inc.          7.2400
+#> 6    TWOU                               2U, Inc.         35.0300
+#> 7    JOBS                            51job, Inc.         35.1300
+#> 8    CAFD             8point3 Energy Partners LP         13.6600
+#> 9    EGHT                                8x8 Inc         16.0500
+#> 10   AVHI                        A V Homes, Inc.         18.0000
+#> # ... with 3,173 more rows, and 4 more variables: market.cap <chr>,
 #> #   ipo.year <dbl>, sector <chr>, industry <chr>
 ```
 
@@ -129,8 +129,8 @@ c("AAPL", "GOOG") %>%
 #> # A tibble: 2 × 3
 #>   .symbol         stock.prices       financials
 #>     <chr>               <list>           <list>
-#> 1    AAPL <tibble [2,535 × 7]> <tibble [3 × 3]>
-#> 2    GOOG <tibble [2,535 × 7]> <tibble [3 × 3]>
+#> 1    AAPL <tibble [2,536 × 7]> <tibble [3 × 3]>
+#> 2    GOOG <tibble [2,536 × 7]> <tibble [3 × 3]>
 ```
 
 This returns the stock prices and financials for each stock as one nested data frame! Any of the `get` options that accept stock symbols can be used in this manner: `"stock.prices"`, `"financials"`, `"key.ratios"`, `"key.stats"`, `"dividends"`, and `"splits"`.
@@ -142,7 +142,7 @@ Set `get = "stock.prices"` to get stock prices. Notice the output is *always* a 
 ``` r
 aapl_prices <- tq_get("AAPL", get = "stock.prices")
 aapl_prices
-#> # A tibble: 2,535 × 7
+#> # A tibble: 2,536 × 7
 #>          date  open  high   low close    volume adjusted
 #>        <date> <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl>
 #> 1  2007-01-03 86.29 86.58 81.90 83.80 309579900 10.90416
@@ -155,14 +155,14 @@ aapl_prices
 #> 8  2007-01-12 94.59 95.06 93.23 94.62 328172600 12.31207
 #> 9  2007-01-16 95.68 97.25 95.45 97.10 311019100 12.63477
 #> 10 2007-01-17 97.56 97.60 94.82 94.95 411565000 12.35501
-#> # ... with 2,525 more rows
+#> # ... with 2,526 more rows
 ```
 
 Get data for multiple stocks:
 
 ``` r
 tq_get(c("AAPL", "GOOG", "FB"), get = "stock.prices")
-#> # A tibble: 6,250 × 8
+#> # A tibble: 6,253 × 8
 #>    .symbol       date  open  high   low close    volume adjusted
 #>      <chr>     <date> <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl>
 #> 1     AAPL 2007-01-03 86.29 86.58 81.90 83.80 309579900 10.90416
@@ -175,7 +175,7 @@ tq_get(c("AAPL", "GOOG", "FB"), get = "stock.prices")
 #> 8     AAPL 2007-01-12 94.59 95.06 93.23 94.62 328172600 12.31207
 #> 9     AAPL 2007-01-16 95.68 97.25 95.45 97.10 311019100 12.63477
 #> 10    AAPL 2007-01-17 97.56 97.60 94.82 94.95 411565000 12.35501
-#> # ... with 6,240 more rows
+#> # ... with 6,243 more rows
 ```
 
 **Financial Statements**:
@@ -202,9 +202,9 @@ tq_get(c("AAPL", "GOOG", "FB"), get = "financials")
 #> 1    AAPL    BS <tibble [168 × 4]> <tibble [210 × 4]>
 #> 2    AAPL    CF  <tibble [76 × 4]>  <tibble [76 × 4]>
 #> 3    AAPL    IS <tibble [196 × 4]> <tibble [245 × 4]>
-#> 4    GOOG    BS <tibble [168 × 4]> <tibble [168 × 4]>
-#> 5    GOOG    CF  <tibble [76 × 4]>  <tibble [57 × 4]>
-#> 6    GOOG    IS <tibble [196 × 4]> <tibble [196 × 4]>
+#> 4    GOOG    BS <tibble [168 × 4]> <tibble [210 × 4]>
+#> 5    GOOG    CF  <tibble [76 × 4]>  <tibble [76 × 4]>
+#> 6    GOOG    IS <tibble [196 × 4]> <tibble [245 × 4]>
 #> 7      FB    BS <tibble [168 × 4]> <tibble [210 × 4]>
 #> 8      FB    CF  <tibble [76 × 4]>  <tibble [76 × 4]>
 #> 9      FB    IS <tibble [196 × 4]> <tibble [245 × 4]>
@@ -257,7 +257,7 @@ tq_get("AAPL", get = "key.stats")[1:7]
 #> # A tibble: 1 × 7
 #>      Ask Ask.Size Average.Daily.Volume    Bid Bid.Size Book.Value Change
 #>    <dbl>    <dbl>                <dbl>  <dbl>    <dbl>      <dbl>  <dbl>
-#> 1 121.97      700             31154400 121.95     1200      24.03   0.01
+#> 1 121.06     7100             31154400 121.05      400      24.03   -0.9
 ```
 
 Get key stats for multiple stocks:
@@ -268,9 +268,9 @@ tq_get(c("AAPL", "GOOG", "FB"), get = "key.stats") %>%
 #> # A tibble: 3 × 7
 #>   .symbol    Ask Ask.Size    Bid Bid.Size Days.High Days.Low
 #>     <chr>  <dbl>    <dbl>  <dbl>    <dbl>     <dbl>    <dbl>
-#> 1    AAPL 121.97      700 121.95     1200    122.35   121.60
-#> 2    GOOG 823.30      100 822.10      100    841.95   820.44
-#> 3      FB 132.09     1600 132.05     1100    132.95   131.08
+#> 1    AAPL 121.06     7100 121.05      400    121.36   120.66
+#> 2    GOOG 803.88      100 803.52      100    815.84   801.21
+#> 3      FB 130.01      200 130.00      200    131.58   129.60
 ```
 
 **Other Options**:
@@ -293,20 +293,20 @@ aapl_prices %>%
            growth = adjusted - baseline,
            growth_pct = growth / baseline * 100) %>%
     select(-(baseline:growth))
-#> # A tibble: 253 × 3
-#>          date adjusted growth_pct
-#>        <date>    <dbl>      <dbl>
-#> 1  2016-01-27 91.38672  0.0000000
-#> 2  2016-01-28 92.04213  0.7171896
-#> 3  2016-01-29 95.22140  4.1961021
-#> 4  2016-02-01 94.33121  3.2220109
-#> 5  2016-02-02 92.42365  1.1346660
-#> 6  2016-02-03 94.25295  3.1363737
-#> 7  2016-02-04 95.01028  3.9650849
-#> 8  2016-02-05 92.47274  1.1883762
-#> 9  2016-02-08 93.44645  2.2538625
-#> 10 2016-02-09 93.42677  2.2323331
-#> # ... with 243 more rows
+#> # A tibble: 251 × 3
+#>          date adjusted  growth_pct
+#>        <date>    <dbl>       <dbl>
+#> 1  2016-02-01 94.33121  0.00000000
+#> 2  2016-02-02 92.42365 -2.02218973
+#> 3  2016-02-03 94.25295 -0.08296406
+#> 4  2016-02-04 95.01028  0.71987947
+#> 5  2016-02-05 92.47274 -1.97015605
+#> 6  2016-02-08 93.44645 -0.93792820
+#> 7  2016-02-09 93.42677 -0.95878556
+#> 8  2016-02-10 92.71862 -1.70949470
+#> 9  2016-02-11 92.15800 -2.30380385
+#> 10 2016-02-12 92.44323 -2.00143520
+#> # ... with 241 more rows
 ```
 
 ### Transforming & Mutating Data with zoo, xts, quantmod, and TTR Functions
@@ -353,7 +353,7 @@ The cousin of `tq_transform()` is `tq_mutate()`. While `tq_transform()` produces
 aapl_prices %>%
     tq_mutate(ohlc_fun = Cl, mutate_fun = MACD) %>%
     tq_mutate(ohlc_fun = HLC, mutate_fun = BBands)
-#> # A tibble: 2,535 × 13
+#> # A tibble: 2,536 × 13
 #>          date  open  high   low close    volume adjusted  macd signal
 #>        <date> <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl> <dbl>  <dbl>
 #> 1  2007-01-03 86.29 86.58 81.90 83.80 309579900 10.90416    NA     NA
@@ -366,7 +366,7 @@ aapl_prices %>%
 #> 8  2007-01-12 94.59 95.06 93.23 94.62 328172600 12.31207    NA     NA
 #> 9  2007-01-16 95.68 97.25 95.45 97.10 311019100 12.63477    NA     NA
 #> 10 2007-01-17 97.56 97.60 94.82 94.95 411565000 12.35501    NA     NA
-#> # ... with 2,525 more rows, and 4 more variables: dn <dbl>, mavg <dbl>,
+#> # ... with 2,526 more rows, and 4 more variables: dn <dbl>, mavg <dbl>,
 #> #   up <dbl>, pctB <dbl>
 ```
 
@@ -379,7 +379,7 @@ The "xy" variants are useful in situations where (1) you have two inputs (hence 
 ``` r
 aapl_prices %>%
     tq_mutate_xy(x = close, y = volume, mutate_fun = EVWMA, col_rename = "EVWMA")
-#> # A tibble: 2,535 × 8
+#> # A tibble: 2,536 × 8
 #>          date  open  high   low close    volume adjusted EVWMA
 #>        <date> <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl> <dbl>
 #> 1  2007-01-03 86.29 86.58 81.90 83.80 309579900 10.90416    NA
@@ -392,7 +392,7 @@ aapl_prices %>%
 #> 8  2007-01-12 94.59 95.06 93.23 94.62 328172600 12.31207    NA
 #> 9  2007-01-16 95.68 97.25 95.45 97.10 311019100 12.63477    NA
 #> 10 2007-01-17 97.56 97.60 94.82 94.95 411565000 12.35501 94.95
-#> # ... with 2,525 more rows
+#> # ... with 2,526 more rows
 ```
 
 **Working with a single column of non-OHLC data**:
@@ -498,13 +498,13 @@ tibble(symbol = c("AAPL", "GOOG", "AMZN", "FB", "AVGO", "SWKS","NVDA")) %>%
 #> # A tibble: 7 × 2
 #>   symbol         stock.prices
 #>    <chr>               <list>
-#> 1   AAPL <tibble [2,535 × 7]>
-#> 2   GOOG <tibble [2,535 × 7]>
-#> 3   AMZN <tibble [2,535 × 7]>
-#> 4     FB <tibble [1,180 × 7]>
-#> 5   AVGO <tibble [1,882 × 7]>
-#> 6   SWKS <tibble [2,535 × 7]>
-#> 7   NVDA <tibble [2,535 × 7]>
+#> 1   AAPL <tibble [2,536 × 7]>
+#> 2   GOOG <tibble [2,536 × 7]>
+#> 3   AMZN <tibble [2,536 × 7]>
+#> 4     FB <tibble [1,181 × 7]>
+#> 5   AVGO <tibble [1,883 × 7]>
+#> 6   SWKS <tibble [2,536 × 7]>
+#> 7   NVDA <tibble [2,536 × 7]>
 ```
 
 #### Manipulating Financial Data for Multiple Stocks

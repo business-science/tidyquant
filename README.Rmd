@@ -38,7 +38,7 @@ Development Version with Latest Features:
 
 ``` {r, eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("mdancho84/tidyquant")
+devtools::install_github("mdancho84/tidyquant", build_vignettes = TRUE)
 ```
 
 CRAN Approved Version: 
