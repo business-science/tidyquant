@@ -405,13 +405,15 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
         url <- paste0(url_base_1, stock_exchange, ":", x, url_base_2)
 
         # Try various stock exchanges
-        download.file(url[1], destfile = tmp, quiet = TRUE)
-        if (length(readLines(tmp)) == 0) {
-            download.file(url[2], destfile = tmp, quiet = TRUE)
+        try_backoff({
+            download.file(url[1], destfile = tmp, quiet = TRUE)
             if (length(readLines(tmp)) == 0) {
-                download.file(url[3], destfile = tmp, quiet = TRUE)
+                download.file(url[2], destfile = tmp, quiet = TRUE)
+                if (length(readLines(tmp)) == 0) {
+                    download.file(url[3], destfile = tmp, quiet = TRUE)
+                }
             }
-        }
+        })
 
         # Setup Tibble Part 1
         key_ratios_1 <- tibble::tibble(
@@ -699,4 +701,24 @@ validate_compound_gets <- function(get) {
     if (!all(get %in% compound_get_options)) {
         stop("Get options for compound get are not valid.")
     }
+}
+             
+# Ensure 500 HTTP error avoided -----
+try_backoff <- function(expr, silent = FALSE, max_attempts = 10, verbose = FALSE) {
+    for (attempt_i in seq_len(max_attempts)) {
+        results <- try(expr = expr, silent = silent)
+        if (inherits(results, "try-error")) {
+            backoff <- runif(n = 1, min = 0, max = 2^attempt_i - 1)
+            if (verbose) {
+                message("Backing off for ", backoff, " seconds.")
+            }
+            Sys.sleep(backoff)
+        } else {
+            if (verbose) {
+                message("Succeeded after ", attempt_i, " attempts.")
+            }
+            break
+        }
+    }
+    results
 }
