@@ -397,19 +397,19 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
     tryCatch({
 
         # Download file
-        tmp <- tempfile()
         stock_exchange <- c("XNAS", "XNYS", "XASE") # mornginstar gets from various exchanges
         url_base_1 <- 'http://financials.morningstar.com/finan/ajax/exportKR2CSV.html?&callback=?&t='
         url_base_2 <- '&region=usa&culture=en-US&cur=&order=asc'
-        # Two URLs to try
+        # Three URLs to try
         url <- paste0(url_base_1, stock_exchange, ":", x, url_base_2)
 
         # Try various stock exchanges
-        download.file(url[1], destfile = tmp, quiet = TRUE)
-        if (length(readLines(tmp)) == 0) {
-            download.file(url[2], destfile = tmp, quiet = TRUE)
-            if (length(readLines(tmp)) == 0) {
-                download.file(url[3], destfile = tmp, quiet = TRUE)
+        for(i in 1:3) {
+            text <- httr::RETRY("GET", url[i], times = 5) %>%
+                httr::content()
+
+            if(!is.null(text)) {
+                break
             }
         }
 
@@ -438,11 +438,13 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
 
         # Read lines
         skip_rows <- c(1:2, 19:21, 31:32, 41:44, 49, 54, 59, 64:66, 72:74, 95:96, 101:103)
-        text <- readr::read_lines(tmp)[-skip_rows]
-
-        # Unlink tmp
-        unlink(tmp)
-
+        
+        text <- text %>%
+            xml2::as_list() %>%
+            unlist() %>%
+            readr::read_lines() %>%
+            .[-skip_rows]
+        
         # Parse text
         key_ratios_2 <-
             suppressMessages(

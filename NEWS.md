@@ -1,10 +1,11 @@
-# tidyquant 0.3.0.9050 - Development Version
+# tidyquant 0.3.0.9060 - Development Version
 
 * Documentation:
     * Split introduction into four separate vignettes, which improves flow and enables readers to more easily get to needed documentation. Now five docs total covering the primary needs of `tidyquant` users!
 * New data:
     * `tq_exchange()` gets the stock list for NASDAQ, NYSE, and AMEX exchanges. Use `tq_exchange_options()` to exchange options.
 * Fixes:
+    * Issue #11: Part 1. Fix instability with `get = key.ratios` failing with HTTP 500 error on download. Use httr RETRY in case of failure.
     * Fixed issue with `get = "key.ratios"` where stocks listed on AMEX exchange were not able to return key ratios.
     * Issue #9: Fix problem with `get = "key.stats"` where NA's in multiple `x` (e.g. `c("AAPL", "GOOG")`) cause call to fail during coercion. 
     * Issue #8, Part 2: Enable compound gets (e.g. `tq_get("AAPL", get = c("stock.prices", "financials"))`).
