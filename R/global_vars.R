@@ -98,5 +98,6 @@ globalVariables(c("A",
                   "last.sale.price",
                   "market.cap",
                   "sector",
-                  "symbol"
+                  "symbol",
+                  "."
                   ))

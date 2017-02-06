@@ -66,4 +66,3 @@ hourly_data \%>\%
 \seealso{
 \code{\link[ggplot2]{coord_cartesian}}
 }
-

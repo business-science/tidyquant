@@ -87,14 +87,14 @@ FANG %>%
     filter(date >= start - days(2 * 20)) %>%
     ggplot(aes(x = date, y = close, 
                open = open, high = high, low = low, close = close, 
-               group = .symbol)) +
+               group = symbol)) +
     geom_barchart() +
     geom_bbands(ma_fun = SMA, sd = 2, n = 20, linetype = 5) +
     labs(title = "FANG Bar Chart", 
          subtitle = "BBands with SMA Applied, Multiple Stocks", 
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(start, end)) +
-    facet_wrap(~ .symbol, ncol = 2, scales = "free_y")
+    facet_wrap(~ symbol, ncol = 2, scales = "free_y")
 ```
 
 

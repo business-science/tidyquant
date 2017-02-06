@@ -20,6 +20,7 @@ LazyData: true
 Depends:
     R (>= 3.3.2),
     lubridate (>= 1.6.0),
+    PerformanceAnalytics (>= 1.4.3541),
     quantmod (>= 0.4-7),
     tidyverse (>= 1.1.0),
     TTR (>= 0.23-1),
@@ -48,5 +49,5 @@ Suggests:
     rmarkdown,
     testthat,
     forcats
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.0
 VignetteBuilder: knitr

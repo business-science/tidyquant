@@ -1,7 +1,7 @@
 #' Mutates quantitative data (adds new variables to existing tibble)
 #'
 #' @inheritParams tq_transform
-#' @param ohlc_fun The \code{quantmod} function that identifes columns to pass to
+#' @param ohlc_fun The \code{quantmod} function that identifies columns to pass to
 #' the mutatation function. OHLCV is \code{quantmod} terminology for
 #' open, high, low, close, and volume. Options include c(Op, Hi, Lo, Cl, Vo, Ad,
 #' HLC, OHLC, OHLCV).

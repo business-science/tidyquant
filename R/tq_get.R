@@ -115,7 +115,7 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
 
         col_name <- names(x)
 
-        if (is.null(col_name)) col_name <- ".symbol"
+        if (is.null(col_name)) col_name <- "symbol"
 
         x_tib <- tibble::tibble(symbol.. = x)
 
@@ -438,13 +438,13 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
 
         # Read lines
         skip_rows <- c(1:2, 19:21, 31:32, 41:44, 49, 54, 59, 64:66, 72:74, 95:96, 101:103)
-        
+
         text <- text %>%
             xml2::as_list() %>%
             unlist() %>%
             readr::read_lines() %>%
             .[-skip_rows]
-        
+
         # Parse text
         key_ratios_2 <-
             suppressMessages(

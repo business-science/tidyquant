@@ -57,7 +57,7 @@ c("AAPL", "GOOG", "FB") %>%
     tq_get(get = "stock.prices", from = "2016-01-01", to = "2017-01-01")
 ```
 
-The output is a single level tibble with all or the stock prices in one tibble. The auto-generated column name is ".symbol", which can be pre-emptively renamed by giving the vector a name (e.g. `stocks <- c("AAPL", "GOOG", "FB")`) and then piping to `tq_get`.
+The output is a single level tibble with all or the stock prices in one tibble. The auto-generated column name is "symbol", which can be pre-emptively renamed by giving the vector a name (e.g. `stocks <- c("AAPL", "GOOG", "FB")`) and then piping to `tq_get`.
 
 
 ## Method 2: Map a tibble with stocks in first column
@@ -137,10 +137,10 @@ Once you get the data, you typically want to do something with it. You can easil
 ```{r}
 c("AAPL", "GOOG", "FB") %>%
     tq_get(get = "stock.prices", from = "2012-01-01", to = "2017-01-01") %>%
-    group_by(.symbol) %>%
+    group_by(symbol) %>%
     tq_transform(Ad, transform_fun = periodReturn, period = "yearly", 
                  col_rename = "yearly.returns") %>%
-    ggplot(aes(x = year(date), y = yearly.returns, fill = .symbol)) +
+    ggplot(aes(x = year(date), y = yearly.returns, fill = symbol)) +
     geom_bar(position = "dodge", stat = "identity") +
     scale_y_continuous(labels = scales::percent) +
     scale_x_continuous(breaks = seq(2008, 2017, by = 1)) +

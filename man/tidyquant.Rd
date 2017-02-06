@@ -27,7 +27,6 @@ Users will probably be interested in the following:
   and \code{\link{as_xts}}
 }
 
-To learn more about tidytext, start with the vignettes:
+To learn more about tidyquant, start with the vignettes:
  \code{browseVignettes(package = "tidyquant")}
 }
-
