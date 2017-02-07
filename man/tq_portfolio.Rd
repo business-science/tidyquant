@@ -12,8 +12,7 @@ tq_portfolio_(data, assets_col, returns_col, weights = NULL,
   col_rename = NULL, ...)
 }
 \arguments{
-\item{data}{A \code{tibble} (tidy data frame) of returns in tidy format (i.e long format).
-The data can be grouped for scaling purposes.}
+\item{data}{A \code{tibble} (tidy data frame) of returns in tidy format (i.e long format).}
 
 \item{assets_col}{The column with assets (securities)}
 
@@ -26,8 +25,7 @@ and weights in second column.}
 \item{col_rename}{A string or character vector containing names that can be used
 to quickly rename columns.}
 
-\item{...}{Additional parameters passed to the appropriate transformation
-function.}
+\item{...}{Additional parameters passed to \code{PerformanceAnalytics::Returns.portfolio}}
 }
 \value{
 Returns data in the form of a \code{tibble} object.
@@ -69,7 +67,6 @@ stock_prices <- c("AAPL", "GOOG", "NFLX") \%>\%
 portfolio_monthly_returns <- stock_prices \%>\%
     group_by(symbol) \%>\%
     tq_transform(Ad, periodReturn, period = "monthly")
-portfolio_monthly_returns
 
 # Method 1: Use tq_portfolio with numeric vector of weights
 weights = c(0.5, 0, 0.5)
@@ -93,5 +90,9 @@ tq_portfolio(data = portfolio_monthly_returns,
              wealth.index = FALSE)
 }
 \seealso{
-\code{\link{tq_transform}} which can be used to get period returns
+\itemize{
+  \item \code{\link{tq_transform}} which can be used to get period returns.
+  \item \code{\link[PerformancAnalytics]{Returns.portfolio}} which is the underlying function
+  that specifies which parameters can be passed via \code{...}
+}
 }

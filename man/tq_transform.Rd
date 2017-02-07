@@ -20,7 +20,7 @@ tq_transform_xy_(data, x, y = NULL, transform_fun, col_rename = NULL, ...)
 tq_transform_fun_options()
 }
 \arguments{
-\item{data}{A \code{tibble} (tidy data frame) of data from \code{\link{tq_get}}.}
+\item{data}{A \code{tibble} (tidy data frame) of data typically from \code{\link{tq_get}}.}
 
 \item{ohlc_fun}{The \code{quantmod} function that identifies columns to pass to
 the transformation function. OHLCV is \code{quantmod} terminology for
