@@ -92,7 +92,7 @@ tq_portfolio(data = portfolio_monthly_returns,
 \seealso{
 \itemize{
   \item \code{\link{tq_transform}} which can be used to get period returns.
-  \item \code{\link[PerformancAnalytics]{Returns.portfolio}} which is the underlying function
+  \item \code{\link[PerformanceAnalytics]{Return.portfolio}} which is the underlying function
   that specifies which parameters can be passed via \code{...}
 }
 }
