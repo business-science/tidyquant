@@ -123,6 +123,7 @@ The following aesthetics are understood (required are in bold):
    \item \code{size}
 }
 }
+
 \examples{
 # Load libraries
 library(tidyquant)
@@ -167,4 +168,3 @@ See individual modeling functions for underlying parameters:
    \item \code{\link{coord_x_date}} for zooming into specific regions of a plot
 }
 }
-

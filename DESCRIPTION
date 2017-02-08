@@ -1,7 +1,7 @@
 Package: tidyquant
 Type: Package
 Title: Tidy Quantitative Financial Analysis
-Version: 0.3.0.9060
+Version: 0.3.0.9070
 Date: 2017-01-28
 Authors@R: person("Matt", "Dancho", email = "mdancho@gmail.com", 
     role = c("aut", "cre"))
@@ -48,5 +48,5 @@ Suggests:
     rmarkdown,
     testthat,
     forcats
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 VignetteBuilder: knitr

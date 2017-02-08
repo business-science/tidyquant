@@ -50,4 +50,3 @@ quantmod::getSymbols("AAPL", auto.assign = FALSE) \%>\%
 \seealso{
 \code{\link{as_xts}}
 }
-

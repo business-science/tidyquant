@@ -54,4 +54,3 @@ tq_get("AAPL", get = "stock.prices") \%>\%
 \seealso{
 \code{\link{as_tibble}}
 }
-

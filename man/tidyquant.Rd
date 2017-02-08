@@ -30,4 +30,3 @@ Users will probably be interested in the following:
 To learn more about tidytext, start with the vignettes:
  \code{browseVignettes(package = "tidyquant")}
 }
-
