@@ -3,9 +3,9 @@
 \name{tq_mutate}
 \alias{tq_mutate}
 \alias{tq_mutate_}
-\alias{tq_mutate_fun_options}
 \alias{tq_mutate_xy}
 \alias{tq_mutate_xy_}
+\alias{tq_mutate_fun_options}
 \title{Mutates quantitative data (adds new variables to existing tibble)}
 \usage{
 tq_mutate(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL, ...)
@@ -110,4 +110,3 @@ tq_mutate_xy_(fb_stock_prices, x = col_name, mutate_fun = mutate[[1]])
 \seealso{
 \code{\link{tq_transform}}, \code{\link{tq_get}}
 }
-

@@ -106,4 +106,3 @@ mult_gets <- tq_get("AAPL",
 \seealso{
 \code{\link{tq_index}} to get a ful list of stocks in an index.
 }
-
