@@ -1,13 +1,15 @@
-#' Aggregates a group of returns by security into portfolio returns
+#' Aggregates a group of returns by asset into portfolio returns
 #'
 #' @param data A \code{tibble} (tidy data frame) of returns in tidy format (i.e long format).
 #' @param assets_col The column with assets (securities)
 #' @param returns_col The column with returns
-#' @param weights Optional parameter for the security weights, which can be passed as a numeric vector the length of
-#' the number of securities or a two column tibble with security names in first column
+#' @param weights Optional parameter for the asset weights, which can be passed as a numeric vector the length of
+#' the number of assets or a two column tibble with asset names in first column
 #' and weights in second column.
 #' @param col_rename A string or character vector containing names that can be used
 #' to quickly rename columns.
+#' @param n Number of times to repeat a data frame row-wise.
+#' @param index_col_name A renaming function for the "index" column, used when repeating data frames.
 #' @param ... Additional parameters passed to \code{PerformanceAnalytics::Returns.portfolio}
 #'
 #' @return Returns data in the form of a \code{tibble} object.
@@ -18,18 +20,25 @@
 #'
 #' \code{assets_col} and \code{returns_col} are columns within \code{data} that are used
 #' to compute returns for a portfolio. The columns should be in "long" format (or "tidy" format)
-#' meaning there is only one column containing all of the securities (i.e. not in "wide" format
-#' with returns spread by security).
+#' meaning there is only one column containing all of the assets and one column containing
+#' all of the return values (i.e. not in "wide" format with returns spread by asset).
 #'
-#' \code{weights} are the weights to be applied to the security returns.
-#' Weights can be input in one of two options:
+#' \code{weights} are the weights to be applied to the asset returns.
+#' Weights can be input in one of three options:
 #' \itemize{
-#'   \item A numeric vector of weights that is the same length as unique number of securities.
-#'   The weights are applied in the order of the securities.
-#'   \item A two column tibble with securities in the first column and weights in the second column.
-#'   The advantage to this method is the weights are mapped to the securities and any unlisted
-#'   securities default to a weight of zero.
+#'   \item Single Portfolio: A numeric vector of weights that is the same length as unique number of assets.
+#'   The weights are applied in the order of the assets.
+#'   \item Single Portfolio: A two column tibble with assets in the first column and weights in the second column.
+#'   The advantage to this method is the weights are mapped to the assets and any unlisted
+#'   assets default to a weight of zero.
+#'   \item Multiple Portfolios: A three column tibble with portfolio index in the first
+#'   column, assets in the second column, and weights in the third column. The tibble
+#'   must be grouped by portfolio index.
 #' }
+#'
+#' \code{tq_repeat_df} is used to assist in Multiple Portfolio analyses, and
+#' is a useful precursor to \code{tq_portfolio}. The function repeats
+#' a data frame \code{n} times row-wise (long-wise), and adds a new column for an index.
 #'
 #' @seealso
 #' \itemize{
@@ -54,13 +63,14 @@
 #'            to   = "2015-12-31")
 #'
 #' # Get returns for individual stock components
-#' portfolio_monthly_returns <- stock_prices %>%
+#' monthly_returns_stocks <- stock_prices %>%
 #'     group_by(symbol) %>%
 #'     tq_transform(Ad, periodReturn, period = "monthly")
 #'
 #' # Method 1: Use tq_portfolio with numeric vector of weights
-#' weights = c(0.5, 0, 0.5)
-#' tq_portfolio(data = portfolio_monthly_returns,
+#'
+#' weights <- c(0.5, 0, 0.5)
+#' tq_portfolio(data = monthly_returns_stocks,
 #'              assets_col = symbol,
 #'              returns_col = monthly.returns,
 #'              weights = weights,
@@ -68,14 +78,43 @@
 #'              wealth.index = FALSE)
 #'
 #' # Method 2: Use tq_portfolio with two column tibble and map weights
+#'
 #' # Note that GOOG's weighting is zero in Method 1. In Method 2,
 #' # GOOG is not added and same result is achieved.
 #' weights_df <- tibble(symbol = c("AAPL", "NFLX"),
 #'                      weights = c(0.5, 0.5))
-#' tq_portfolio(data = portfolio_monthly_returns,
+#' tq_portfolio(data = monthly_returns_stocks,
 #'              assets_col = symbol,
 #'              returns_col = monthly.returns,
 #'              weights = weights_df,
+#'              col_rename = NULL,
+#'              wealth.index = FALSE)
+#'
+#' # Method 3: Working with multiple portfolios
+#'
+#' # 3A: Duplicate monthly_returns_stocks multiple times
+#' mult_monthly_returns_stocks <- tq_repeat_df(monthly_returns_stocks, n = 3)
+#'
+#' # 3B: Create weights table grouped by portfolio id
+#' weights_table <- tribble(
+#'     ~portfolio, ~stocks, ~weights,
+#'     1,          "AAPL",  0.50,
+#'     1,          "GOOG",  0.25,
+#'     1,          "NFLX",  0.25,
+#'     2,          "AAPL",  0.25,
+#'     2,          "GOOG",  0.50,
+#'     2,          "NFLX",  0.25,
+#'     3,          "AAPL",  0.25,
+#'     3,          "GOOG",  0.25,
+#'     3,          "NFLX",  0.50
+#'     ) %>%
+#'     group_by(portfolio)
+#'
+#' # 3C: Scale to multiple portfolios
+#' tq_portfolio(data = mult_monthly_returns_stocks,
+#'              assets_col = symbol,
+#'              returns_col = monthly.returns,
+#'              weights = weights_table,
 #'              col_rename = NULL,
 #'              wealth.index = FALSE)
 
@@ -92,8 +131,18 @@ tq_portfolio <- function(data, assets_col, returns_col, weights = NULL, col_rena
     assets_col <- deparse(substitute(assets_col))
     returns_col <- deparse(substitute(returns_col))
 
-    tq_portfolio_base_(data = data, assets_col = assets_col, returns_col = returns_col,
-                       weights = weights, col_rename = col_rename, ...)
+    # Patch for grouped data frames
+    if (dplyr::is.grouped_df(data) && colnames(data)[[1]] == "portfolio") {
+
+        tq_portfolio_grouped_df_(data = data, assets_col = assets_col, returns_col = returns_col,
+                                 weights = weights, col_rename = col_rename, ...)
+
+    } else {
+
+        tq_portfolio_base_(data = data, assets_col = assets_col, returns_col = returns_col,
+                           weights = weights, col_rename = col_rename, ...)
+
+    }
 
 }
 
@@ -101,9 +150,55 @@ tq_portfolio <- function(data, assets_col, returns_col, weights = NULL, col_rena
 #' @export
 tq_portfolio_ <- function(data, assets_col, returns_col, weights = NULL, col_rename = NULL, ...) {
 
-    tq_portfolio_base_(data = data, assets_col = assets_col, returns_col = returns_col,
-                       weights = weights, col_rename = col_rename, ...)
+    # Patch for grouped data frames
+    if (dplyr::is.grouped_df(data) && colnames(data)[[1]] == "portfolio") {
 
+        tq_portfolio_grouped_df_(data = data, assets_col = assets_col, returns_col = returns_col,
+                                 weights = weights, col_rename = col_rename, ...)
+
+    } else {
+
+        tq_portfolio_base_(data = data, assets_col = assets_col, returns_col = returns_col,
+                           weights = weights, col_rename = col_rename, ...)
+
+    }
+
+}
+
+tq_portfolio_grouped_df_ <- function(data, assets_col, returns_col, weights, col_rename, ...) {
+
+    # Check weights and data compatibility
+    check_data_weights_compatibility(data, weights)
+
+    # Get groups
+    group_names_data <- dplyr::groups(data)
+
+    # Format data
+    data_nested <- data %>%
+        tidyr::nest() %>%
+        dplyr::rename(returns.. = data)
+
+    weights_nested <- weights %>%
+        tidyr::nest() %>%
+        dplyr::rename(weights.. = data)
+
+    # Join data
+    y <- names(data_nested)[[1]]
+    x <- names(weights_nested)[[1]]
+    data_weights <- left_join(data_nested, weights_nested, by = setNames(x, y))
+
+    # Map data and weights to tq_portfolio_base_
+    data_weights %>%
+        dplyr::mutate(new.col = purrr::map2(.x = returns.., .y = weights..,
+              ~tq_portfolio_base_(data = .x,
+                                  assets_col = assets_col,
+                                  returns_col = returns_col,
+                                  weights = .y,
+                                  col_rename = col_rename,
+                                  ...))) %>%
+        dplyr::select(-c(returns.., weights..)) %>%
+        tidyr::unnest() %>%
+        dplyr::group_by_(.dots = group_names_data)
 }
 
 tq_portfolio_base_ <- function(data, assets_col, returns_col, weights, col_rename, ...) {
@@ -146,6 +241,30 @@ tq_portfolio_base_ <- function(data, assets_col, returns_col, weights, col_renam
 
     ret
 
+}
+
+#' @rdname tq_portfolio
+#' @export
+tq_repeat_df <- function(data, n, index_col_name = "portfolio") {
+
+    if (!is.data.frame(data)) stop("data must be a tibble or data frame.")
+
+    if (is.grouped_df(data)) {
+        message(paste("Ungrouping data frame groups:", dplyr::groups(data)))
+        data <- ungroup(data)
+    }
+
+    data_mult <- data[rep(seq_len(nrow(data)), n),]
+    index     <- rep(1:n, each = nrow(data))
+
+    ret <- dplyr::bind_cols(tibble(index), data_mult)
+
+    colnames(ret)[[1]] <- index_col_name
+
+    ret <- ret %>%
+        group_by_(index_col_name)
+
+    ret
 }
 
 # UTILITY FUNCTIONS -----
@@ -217,5 +336,30 @@ check_weights <- function(weights, assets_col) {
 
     }
 
+}
+
+check_data_weights_compatibility <- function(data, weights) {
+
+    # Weights has one group
+    if (length(dplyr::groups(weights)) != 1) {
+        stop("weights must be grouped by portfolio index.")
+    }
+
+    # Weights has 3 columns
+    if (ncol(weights) != 3) {
+        stop("weights table must have three columns: portfolio index, assets, and weights to map.")
+    }
+
+    # Data has one group
+    if (length(dplyr::groups(data)) != 1) {
+        stop("data must be grouped by portfolio index.")
+    }
+
+    # Groups for data and weights match
+    if (colnames(data)[[1]] != colnames(weights)[[1]]) {
+        stop("First column (portfolio index) of data must match first column (portfolio index) of weights.")
+    }
 
 }
+
+

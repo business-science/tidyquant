@@ -99,5 +99,13 @@ globalVariables(c("A",
                   "market.cap",
                   "sector",
                   "symbol",
-                  "."
+                  ".",
+                  "df_mult",
+                  "group_by_",
+                  "is.grouped_df",
+                  "left_join",
+                  "returns..",
+                  "tibble",
+                  "ungroup",
+                  "weights.."
                   ))

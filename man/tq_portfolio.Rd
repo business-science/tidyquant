@@ -3,13 +3,16 @@
 \name{tq_portfolio}
 \alias{tq_portfolio}
 \alias{tq_portfolio_}
-\title{Aggregates a group of returns by security into portfolio returns}
+\alias{tq_repeat_df}
+\title{Aggregates a group of returns by asset into portfolio returns}
 \usage{
 tq_portfolio(data, assets_col, returns_col, weights = NULL,
   col_rename = NULL, ...)
 
 tq_portfolio_(data, assets_col, returns_col, weights = NULL,
   col_rename = NULL, ...)
+
+tq_repeat_df(data, n, index_col_name = "portfolio")
 }
 \arguments{
 \item{data}{A \code{tibble} (tidy data frame) of returns in tidy format (i.e long format).}
@@ -18,20 +21,24 @@ tq_portfolio_(data, assets_col, returns_col, weights = NULL,
 
 \item{returns_col}{The column with returns}
 
-\item{weights}{Optional parameter for the security weights, which can be passed as a numeric vector the length of
-the number of securities or a two column tibble with security names in first column
+\item{weights}{Optional parameter for the asset weights, which can be passed as a numeric vector the length of
+the number of assets or a two column tibble with asset names in first column
 and weights in second column.}
 
 \item{col_rename}{A string or character vector containing names that can be used
 to quickly rename columns.}
 
 \item{...}{Additional parameters passed to \code{PerformanceAnalytics::Returns.portfolio}}
+
+\item{n}{Number of times to repeat a data frame row-wise.}
+
+\item{index_col_name}{A renaming function for the "index" column, used when repeating data frames.}
 }
 \value{
 Returns data in the form of a \code{tibble} object.
 }
 \description{
-Aggregates a group of returns by security into portfolio returns
+Aggregates a group of returns by asset into portfolio returns
 }
 \details{
 \code{tq_portfolio} is a wrapper for \code{PerformanceAnalytics::Returns.portfolio},
@@ -40,18 +47,25 @@ function can be used with the \code{tidyverse}.
 
 \code{assets_col} and \code{returns_col} are columns within \code{data} that are used
 to compute returns for a portfolio. The columns should be in "long" format (or "tidy" format)
-meaning there is only one column containing all of the securities (i.e. not in "wide" format
-with returns spread by security).
+meaning there is only one column containing all of the assets and one column containing
+all of the return values (i.e. not in "wide" format with returns spread by asset).
 
-\code{weights} are the weights to be applied to the security returns.
-Weights can be input in one of two options:
+\code{weights} are the weights to be applied to the asset returns.
+Weights can be input in one of three options:
 \itemize{
-  \item A numeric vector of weights that is the same length as unique number of securities.
-  The weights are applied in the order of the securities.
-  \item A two column tibble with securities in the first column and weights in the second column.
-  The advantage to this method is the weights are mapped to the securities and any unlisted
-  securities default to a weight of zero.
+  \item Single Portfolio: A numeric vector of weights that is the same length as unique number of assets.
+  The weights are applied in the order of the assets.
+  \item Single Portfolio: A two column tibble with assets in the first column and weights in the second column.
+  The advantage to this method is the weights are mapped to the assets and any unlisted
+  assets default to a weight of zero.
+  \item Multiple Portfolios: A three column tibble with portfolio index in the first
+  column, assets in the second column, and weights in the third column. The tibble
+  must be grouped by portfolio index.
 }
+
+\code{tq_repeat_df} is used to assist in Multiple Portfolio analyses, and
+is a useful precursor to \code{tq_portfolio}. The function repeats
+a data frame \code{n} times row-wise (long-wise), and adds a new column for an index.
 }
 \examples{
 # Load libraries
@@ -64,13 +78,14 @@ stock_prices <- c("AAPL", "GOOG", "NFLX") \%>\%
            to   = "2015-12-31")
 
 # Get returns for individual stock components
-portfolio_monthly_returns <- stock_prices \%>\%
+monthly_returns_stocks <- stock_prices \%>\%
     group_by(symbol) \%>\%
     tq_transform(Ad, periodReturn, period = "monthly")
 
 # Method 1: Use tq_portfolio with numeric vector of weights
-weights = c(0.5, 0, 0.5)
-tq_portfolio(data = portfolio_monthly_returns,
+
+weights <- c(0.5, 0, 0.5)
+tq_portfolio(data = monthly_returns_stocks,
              assets_col = symbol,
              returns_col = monthly.returns,
              weights = weights,
@@ -78,14 +93,43 @@ tq_portfolio(data = portfolio_monthly_returns,
              wealth.index = FALSE)
 
 # Method 2: Use tq_portfolio with two column tibble and map weights
+
 # Note that GOOG's weighting is zero in Method 1. In Method 2,
 # GOOG is not added and same result is achieved.
 weights_df <- tibble(symbol = c("AAPL", "NFLX"),
                      weights = c(0.5, 0.5))
-tq_portfolio(data = portfolio_monthly_returns,
+tq_portfolio(data = monthly_returns_stocks,
              assets_col = symbol,
              returns_col = monthly.returns,
              weights = weights_df,
+             col_rename = NULL,
+             wealth.index = FALSE)
+
+# Method 3: Working with multiple portfolios
+
+# 3A: Duplicate monthly_returns_stocks multiple times
+mult_monthly_returns_stocks <- tq_repeat_df(monthly_returns_stocks, n = 3)
+
+# 3B: Create weights table grouped by portfolio id
+weights_table <- tribble(
+    ~portfolio, ~stocks, ~weights,
+    1,          "AAPL",  0.50,
+    1,          "GOOG",  0.25,
+    1,          "NFLX",  0.25,
+    2,          "AAPL",  0.25,
+    2,          "GOOG",  0.50,
+    2,          "NFLX",  0.25,
+    3,          "AAPL",  0.25,
+    3,          "GOOG",  0.25,
+    3,          "NFLX",  0.50
+    ) \%>\%
+    group_by(portfolio)
+
+# 3C: Scale to multiple portfolios
+tq_portfolio(data = mult_monthly_returns_stocks,
+             assets_col = symbol,
+             returns_col = monthly.returns,
+             weights = weights_table,
              col_rename = NULL,
              wealth.index = FALSE)
 }
