@@ -107,5 +107,7 @@ globalVariables(c("A",
                   "returns..",
                   "tibble",
                   "ungroup",
-                  "weights.."
+                  "weights..",
+                  "portfolio",
+                  "portfolio.."
                   ))

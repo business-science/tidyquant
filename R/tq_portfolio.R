@@ -188,17 +188,20 @@ tq_portfolio_grouped_df_ <- function(data, assets_col, returns_col, weights, col
     data_weights <- left_join(data_nested, weights_nested, by = setNames(x, y))
 
     # Map data and weights to tq_portfolio_base_
+    custom_function <- function(x, y, z) {
+        tq_portfolio_base_(data = x,
+                           weights = y,
+                           x = z,
+                           assets_col = assets_col,
+                           returns_col = returns_col,
+                           col_rename = col_rename,
+                           map = TRUE,
+                           ...)
+    }
+
     data_weights %>%
         dplyr::mutate(
-            portfolio.. = purrr::map2(.x = returns.., .y = weights..,
-              ~tq_portfolio_base_(data = .x,
-                                  weights = .y,
-                                  # x = .z,
-                                  assets_col = assets_col,
-                                  returns_col = returns_col,
-                                  col_rename = col_rename,
-                                  # map = TRUE,
-                                  ...)),
+            portfolio.. = purrr::pmap(list(returns.., weights.., portfolio), custom_function),
             class.. = purrr::map_chr(.x = portfolio.., ~ class(.x)[[1]])
             ) %>%
         dplyr::filter(class.. != "logical") %>%
@@ -207,7 +210,7 @@ tq_portfolio_grouped_df_ <- function(data, assets_col, returns_col, weights, col
         dplyr::group_by_(.dots = group_names_data)
 }
 
-tq_portfolio_base_ <- function(data, assets_col, returns_col, weights, col_rename, ...) {
+tq_portfolio_base_ <- function(data, assets_col, returns_col, weights, col_rename, map = FALSE, x = NULL, ...) {
 
     # Check data
     check_data_is_data_frame(data)
@@ -234,7 +237,7 @@ tq_portfolio_base_ <- function(data, assets_col, returns_col, weights, col_renam
     # Apply function
     ret <- tryCatch({
         # Handle weights
-        check_weights(weights, assets_col)
+        check_weights(weights, assets_col, map, x)
         if (is.data.frame(weights)) weights <- map_weights(weights, assets_col)
 
         data %>%
@@ -302,7 +305,7 @@ map_weights <- function(weights, assets_col) {
 
 }
 
-check_weights <- function(weights, assets_col) {
+check_weights <- function(weights, assets_col, map, x) {
 
     if (inherits(weights, "data.frame")) {
 
@@ -317,7 +320,7 @@ check_weights <- function(weights, assets_col) {
                     return()
                 } else {
                     warn <- ""
-                    # if (map == TRUE) warn <- paste0("Portfolio ", x, ": ")
+                    if (map == TRUE) warn <- paste0("Portfolio ", x, ": ")
                     warning(paste0(warn, "Sum of weights does not equal 1."))
                 }
 
