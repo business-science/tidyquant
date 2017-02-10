@@ -189,14 +189,20 @@ tq_portfolio_grouped_df_ <- function(data, assets_col, returns_col, weights, col
 
     # Map data and weights to tq_portfolio_base_
     data_weights %>%
-        dplyr::mutate(new.col = purrr::map2(.x = returns.., .y = weights..,
+        dplyr::mutate(
+            portfolio.. = purrr::map2(.x = returns.., .y = weights..,
               ~tq_portfolio_base_(data = .x,
+                                  weights = .y,
+                                  # x = .z,
                                   assets_col = assets_col,
                                   returns_col = returns_col,
-                                  weights = .y,
                                   col_rename = col_rename,
-                                  ...))) %>%
-        dplyr::select(-c(returns.., weights..)) %>%
+                                  # map = TRUE,
+                                  ...)),
+            class.. = purrr::map_chr(.x = portfolio.., ~ class(.x)[[1]])
+            ) %>%
+        dplyr::filter(class.. != "logical") %>%
+        dplyr::select(-c(returns.., weights.., class..)) %>%
         tidyr::unnest() %>%
         dplyr::group_by_(.dots = group_names_data)
 }
@@ -225,15 +231,25 @@ tq_portfolio_base_ <- function(data, assets_col, returns_col, weights, col_renam
     assets_col <- dplyr::select_(data, assets_col)
 
 
-    # Handle weights
-    check_weights(weights, assets_col)
-    if (is.data.frame(weights)) weights <- map_weights(weights, assets_col)
-
     # Apply function
-    ret <- data %>%
-        tidyr::spread_(key_col = assets_col_name, value_col = returns_col_name) %>%
-        as_xts_(date_col = date_col_name) %>%
-        PerformanceAnalytics::Return.portfolio(weights = weights, verbose = FALSE, ...)
+    ret <- tryCatch({
+        # Handle weights
+        check_weights(weights, assets_col)
+        if (is.data.frame(weights)) weights <- map_weights(weights, assets_col)
+
+        data %>%
+            tidyr::spread_(key_col = assets_col_name, value_col = returns_col_name) %>%
+            as_xts_(date_col = date_col_name) %>%
+            PerformanceAnalytics::Return.portfolio(weights = weights, verbose = FALSE, ...)
+
+    }, error = function(e) {
+
+        warn <- e
+        # if (map == TRUE) warn <- paste0(x, " had the following error: ", e, ". Removing portfolio ", x, ".")
+        warning(warn)
+        return(NA) # Return NA on error
+
+    })
 
     # Coerce to tibble and convert date / datetime
     if (xts::is.xts(ret)) ret <- coerce_to_tibble(ret, date_col_name,
@@ -300,16 +316,18 @@ check_weights <- function(weights, assets_col) {
                 if (sum(weights[,2]) == 1) {
                     return()
                 } else {
-                    stop("Sum of weights must be 1.")
+                    warn <- ""
+                    # if (map == TRUE) warn <- paste0("Portfolio ", x, ": ")
+                    warning(paste0(warn, "Sum of weights does not equal 1."))
                 }
 
             } else {
-                stop("Incorrect number of columns. Only two allowed.")
+                warning("Incorrect number of columns. Only two allowed.")
             }
 
         } else {
 
-            stop("The assets in weights does not match the assets in data.")
+            warning("The assets in weights does not match the assets in data.")
 
         }
 
@@ -320,10 +338,10 @@ check_weights <- function(weights, assets_col) {
             if (sum(weights) == 1) {
                 return()
             } else {
-                stop("Sum of weights must be 1.")
+                warning("Sum of weights must be 1.")
             }
         } else {
-            stop("The number of weights does not match the number of unique assets.")
+            warning("The number of weights does not match the number of unique assets.")
         }
 
     } else if (is.null(weights)) {
@@ -332,7 +350,7 @@ check_weights <- function(weights, assets_col) {
 
     } else {
 
-        stop("Incorrect data type for weights. Valid options are data frame, numeric vector, or NULL.")
+        warning("Incorrect data type for weights. Valid options are data frame, numeric vector, or NULL.")
 
     }
 
