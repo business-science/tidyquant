@@ -3,8 +3,12 @@
 \name{tq_mutate}
 \alias{tq_mutate}
 \alias{tq_mutate_}
+\alias{tq_mutate_.tbl_df}
+\alias{tq_mutate_.data.frame}
 \alias{tq_mutate_xy}
 \alias{tq_mutate_xy_}
+\alias{tq_mutate_xy_.tbl_df}
+\alias{tq_mutate_xy_.data.frame}
 \alias{tq_mutate_fun_options}
 \title{Mutates quantitative data (adds new variables to existing tibble)}
 \usage{
@@ -12,9 +16,21 @@ tq_mutate(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL, ...)
 
 tq_mutate_(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...)
 
+\method{tq_mutate_}{tbl_df}(data, ohlc_fun = "OHLCV", mutate_fun,
+  col_rename = NULL, ...)
+
+\method{tq_mutate_}{data.frame}(data, ohlc_fun = "OHLCV", mutate_fun,
+  col_rename = NULL, ...)
+
 tq_mutate_xy(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
 
 tq_mutate_xy_(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
+
+\method{tq_mutate_xy_}{tbl_df}(data, x, y = NULL, mutate_fun,
+  col_rename = NULL, ...)
+
+\method{tq_mutate_xy_}{data.frame}(data, x, y = NULL, mutate_fun,
+  col_rename = NULL, ...)
 
 tq_mutate_fun_options()
 }
@@ -44,6 +60,10 @@ Returns data in the form of a \code{tibble} object.
 }
 \description{
 Mutates quantitative data (adds new variables to existing tibble)
+
+# Get transformation
+    ret <- tq_transform_(data = data, ohlc_fun = ohlc_fun,
+                         transform_fun = mutate_fun, col_rename = col_rename, ...)
 }
 \details{
 \code{tq_mutate} is a very flexible wrapper for various \code{xts},

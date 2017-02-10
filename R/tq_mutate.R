@@ -86,55 +86,83 @@
 
 tq_mutate <- function(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL, ...) {
 
-    # Convert to NSE
-    ohlc_fun <- deparse(substitute(ohlc_fun))
-    mutate_fun <- deparse(substitute(mutate_fun))
-
-    tq_mutate_(data = data, ohlc_fun = ohlc_fun,
-               mutate_fun = mutate_fun, col_rename = col_rename, ...)
-
+    tq_mutate_(data = data,
+               ohlc_fun = lazyeval::expr_text(ohlc_fun),
+               mutate_fun = lazyeval::expr_text(mutate_fun),
+               col_rename = col_rename, ...)
 }
 
 #' @rdname tq_mutate
 #' @export
 tq_mutate_ <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...) {
+    UseMethod("tq_mutate_", data)
+}
+
+#' @rdname tq_mutate
+#' @export
+tq_mutate_.tbl_df <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...) {
 
     # Get transformation
     ret <- tq_transform_(data = data, ohlc_fun = ohlc_fun,
                          transform_fun = mutate_fun, col_rename = col_rename, ...)
 
-    ret <- merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
+    merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
+}
 
-    ret
+#' @rdname tq_mutate
+#' @export
+tq_mutate_.data.frame <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...) {
 
+    # Convert data.frame to tibble
+    data <- as_tibble(data)
+
+    # Get transformation
+    ret <- tq_transform_(data = data, ohlc_fun = ohlc_fun,
+                         transform_fun = mutate_fun, col_rename = col_rename, ...)
+
+    merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
 }
 
 #' @rdname tq_mutate
 #' @export
 tq_mutate_xy <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
 
-    # Convert to NSE
-    x <- deparse(substitute(x))
-    y <- deparse(substitute(y))
-    mutate_fun <- deparse(substitute(mutate_fun))
-
-    tq_mutate_xy_(data = data, x = x, y = y,
-                  mutate_fun = mutate_fun, col_rename = col_rename, ...)
-
+    tq_mutate_xy_(data = data,
+                  x = lazyeval::expr_text(x),
+                  y = lazyeval::expr_text(y),
+                  mutate_fun = lazyeval::expr_text(mutate_fun),
+                  col_rename = col_rename, ...)
 }
 
 #' @rdname tq_mutate
 #' @export
 tq_mutate_xy_ <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
+    UseMethod("tq_mutate_xy_", data)
+}
+
+#' @rdname tq_mutate
+#' @export
+tq_mutate_xy_.tbl_df <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
 
     # Get transformation
     ret <- tq_transform_xy_(data = data, x = x, y = y,
                             transform_fun = mutate_fun, col_rename = col_rename, ...)
 
-    ret <- merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
+    merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
+}
 
-    ret
+#' @rdname tq_mutate
+#' @export
+tq_mutate_xy_.data.frame <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
 
+    # Convert data.frame to tibble
+    data <- as_tibble(data)
+
+    # Get transformation
+    ret <- tq_transform_xy_(data = data, x = x, y = y,
+                            transform_fun = mutate_fun, col_rename = col_rename, ...)
+
+    merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
 }
 
 #' @rdname tq_mutate
