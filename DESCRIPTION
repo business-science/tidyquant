@@ -42,7 +42,8 @@ Imports:
     tseries (>= 0.10-37),
     xml2 (>= 1.1.0),
     zoo (>= 1.7-14),
-    httr (>= 1.2.1)
+    httr (>= 1.2.1),
+    lazyeval (>= 0.2.0)
 Suggests:
     knitr,
     rmarkdown,
