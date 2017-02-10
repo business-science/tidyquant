@@ -60,10 +60,6 @@ Returns data in the form of a \code{tibble} object.
 }
 \description{
 Mutates quantitative data (adds new variables to existing tibble)
-
-# Get transformation
-    ret <- tq_transform_(data = data, ohlc_fun = ohlc_fun,
-                         transform_fun = mutate_fun, col_rename = col_rename, ...)
 }
 \details{
 \code{tq_mutate} is a very flexible wrapper for various \code{xts},
