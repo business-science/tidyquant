@@ -24,7 +24,7 @@
 #' \itemize{
 #'   \item \code{\link{tq_portfolio}} which can be used to aggregate period returns from
 #'   multiple stocks to period returns for a portfolio.
-#'   \item The \code{PerformanceAnalytics} package, which is contains the underlying functions
+#'   \item The \code{PerformanceAnalytics} package, which contains the underlying functions
 #'   for the \code{performance_fun} argument. Additional parameters can be passed via \code{...}.
 #' }
 #'
@@ -54,8 +54,18 @@ tq_performance <- function(data, Ra, Rb = NULL, performance_fun, ...) {
     Rb <- deparse(substitute(Rb))
     performance_fun <- deparse(substitute(performance_fun))
 
-    tq_performance_base_(data = data, Ra = Ra, Rb = Rb,
-                         performance_fun = performance_fun, ...)
+    # Patch for grouped data frames
+    if (dplyr::is.grouped_df(data)) {
+
+        tq_performance_grouped_df_(data = data, Ra = Ra, Rb = Rb,
+                                   performance_fun = performance_fun, ...)
+
+    } else {
+
+        tq_performance_base_(data = data, Ra = Ra, Rb = Rb,
+                             performance_fun = performance_fun, ...)
+
+    }
 
 }
 
@@ -63,9 +73,37 @@ tq_performance <- function(data, Ra, Rb = NULL, performance_fun, ...) {
 #' @export
 tq_performance_ <- function(data, Ra, Rb = NULL, performance_fun, ...) {
 
-    tq_performance_base_(data = data, Ra = Ra, Rb = Rb,
-                         performance_fun = performance_fun, ...)
+    # Patch for grouped data frames
+    if (dplyr::is.grouped_df(data)) {
 
+        tq_performance_grouped_df_(data = data, Ra = Ra, Rb = Rb,
+                                   performance_fun = performance_fun, ...)
+
+    } else {
+
+        tq_performance_base_(data = data, Ra = Ra, Rb = Rb,
+                             performance_fun = performance_fun, ...)
+
+    }
+
+}
+
+tq_performance_grouped_df_ <- function(data, Ra, Rb, performance_fun, ...) {
+
+    group_names <- dplyr::groups(data)
+
+    data %>%
+        tidyr::nest() %>%
+        dplyr::mutate(nested.col = data %>%
+              purrr::map(~ tq_performance_base_(data = .x,
+                                                Ra = Ra,
+                                                Rb = Rb,
+                                                performance_fun = performance_fun,
+                                                ...))
+        ) %>%
+        dplyr::select(-data) %>%
+        tidyr::unnest() %>%
+        dplyr::group_by_(.dots = group_names)
 }
 
 
@@ -80,37 +118,78 @@ tq_performance_base_ <- function(data, Ra, Rb, performance_fun, ...) {
     # Check Ra and Rb
     check_x_y_valid(data, Ra, Rb)
 
+    # Handle reserved names ("Ra" and "Rb")
+    if (Ra == "Ra") {
+        data <- data %>%
+            dplyr::rename(.Ra = Ra)
+        Ra <- ".Ra"
+    }
+    if (Rb == "Rb") {
+        data <- data %>%
+            dplyr::rename(.Rb = Rb)
+        Rb <- ".Rb"
+    }
+
     # Find date or date-time col
     date_col_name <- get_col_name_date_or_date_time(data)
 
-    # Get timezone
-    time_zone <- get_time_zone(data, date_col_name)
-
     # Drop any non-numeric columns except for date
     date_col <- dplyr::select_(data, date_col_name)
-    numeric_cols <- data %>%
-        dplyr::select_if(is.numeric)
-    data <- dplyr::bind_cols(date_col, numeric_cols)
+    Ra_col <- dplyr::select_(data, Ra)
+    if (is.null(Rb) || Rb == "NULL")  {
+        data <- dplyr::bind_cols(date_col, Ra_col)
+    } else {
+        Rb_col <- dplyr::select_(data, Rb)
+        data <- dplyr::bind_cols(date_col, Ra_col, Rb_col)
+    }
 
     # Convert inputs to functions
     fun_performance <- eval(parse(text = performance_fun))
 
     # Apply functions
-    if (Rb == "NULL" || is.null(Rb)) {
-        ret <- data %>%
-            as_xts_(date_col = date_col_name) %$%
-            fun_performance(eval(parse(text = Ra)), ...)
-    } else {
-        ret <- data %>%
-            as_xts_(date_col = date_col_name) %$%
-            fun_performance(eval(parse(text = Ra)),
-                            eval(parse(text = Rb)),
-                            ...)
-    }
+    tryCatch({
+        if (Rb == "NULL" || is.null(Rb)) {
+            ret <- data %>%
+                as_xts_(date_col = date_col_name) %$%
+                fun_performance(eval(parse(text = Ra)), ...)
+        } else {
+            ret <- data %>%
+                as_xts_(date_col = date_col_name) %$%
+                fun_performance(eval(parse(text = Ra)),
+                                eval(parse(text = Rb)),
+                                ...)
+        }
 
-    # Coerce to tibble and convert date / datetime
-    # if (xts::is.xts(ret)) ret <- coerce_to_tibble(ret, date_col_name,
-    #                                               time_zone, col_rename)
+        ret <- as.matrix(ret)
+
+        if (tibble::has_rownames(as.data.frame(ret)) == FALSE) {
+            row_names <- paste0(performance_fun, ".", seq_along(nrow(ret)))
+            rownames(ret) <- row_names
+        }
+
+        col_name <- "X1"
+        colnames(ret)[[1]] <- col_name
+
+        ret <- ret %>%
+            as.data.frame() %>%
+            tibble::rownames_to_column() %>%
+            dplyr::mutate(rowname = stringr::str_replace_all(rowname, pattern = " ", replacement = ""),
+                          rowname = stringr::str_replace_all(rowname, pattern = ":", replacement = "")) %>%
+            tidyr::spread(key = "rowname", value = "X1") %>%
+            tibble::as_tibble()
+
+        if (colnames(ret)[[1]] == Ra) colnames(ret)[[1]] <- performance_fun
+
+        colnames(ret) <- colnames(ret) %>%
+            stringr::str_replace_all(pattern = Ra, replacement = "") %>%
+            stringr::str_replace_all(pattern = Rb, replacement = "")
+
+    }, error = function(e) {
+
+        warning(e)
+        ret <- NA
+
+    })
 
     ret
 
@@ -127,41 +206,54 @@ tq_performance_fun_options <- function() {
 
     pkg_regex_capm <- "^CAPM"
     funs_capm <- stringr::str_detect(ls("package:PerformanceAnalytics"), pkg_regex_capm)
-    funs_capm <- c(ls("package:PerformanceAnalytics")[funs_capm], "TimingRatio")
+    funs_capm <- c(ls("package:PerformanceAnalytics")[funs_capm], "TimingRatio", "MarketTiming")
 
-    funs_VaR <- c("VaR", "ES")
+    pkg_regex_sfm <- "^SFM"
+    funs_sfm <- stringr::str_detect(ls("package:PerformanceAnalytics"), pkg_regex_sfm)
+    funs_sfm <- ls("package:PerformanceAnalytics")[funs_sfm]
 
-    funs_moments <- c("var", "cov", "skewness", "kurtosis", "CoVariance", "CoSkewness", "CoKurtosis",
-                      "BetaCoVariance", "BetaCoSkewness", "BetaCoKurtosis")
+    funs_VaR <- c("VaR", "ES", "ETL", "CDD", "CVaR")
 
-    funs_drawdown <- c("AverageDrawdown", "DrawdownDeviation", "DrawdownPeak", "maxDrawdown")
+    funs_descriptive <- c("mean", "sd", "min", "max", "cor", "mean.stderr", "mean.LCL", "mean.UCL")
 
-    funs_risk <- c("MeanAbsoluteDeviation", "Frequency", "SharpeRatio", "MSquared", "MSquaredExcess")
+    funs_annualized <- c("Return.annualized", "Return.annualized.excess", "sd.annualized", "SharpeRatio.annualized")
+
+    funs_moments <- c("var", "cov", "skewness", "kurtosis", "CoVariance", "CoSkewness", "CoSkewnessMatrix",
+                      "CoKurtosis", "CoKurtosisMatrix", "M3.MM", "M4.MM", "BetaCoVariance", "BetaCoSkewness", "BetaCoKurtosis")
+
+    funs_drawdown <- c("AverageDrawdown", "AverageLength", "AverageRecovery", "DrawdownDeviation", "DrawdownPeak", "maxDrawdown")
+
+    funs_risk <- c("MeanAbsoluteDeviation", "Frequency", "SharpeRatio", "MSquared", "MSquaredExcess", "HurstIndex", "UlcerIndex")
 
     funs_regression <- c("CAPM.alpha", "CAPM.beta", "CAPM.epsilon", "CAPM.jensenAlpha", "SystematicRisk",
                          "SpecificRisk", "TotalRisk", "TreynorRatio", "AppraisalRatio", "FamaBeta",
                          "Selectivity", "NetSelectivity")
 
-    funs_rel_risk <- c("ActivePremium", "TrackingError", "InformationRatio")
+    funs_rel_risk <- c("ActivePremium", "ActiveReturn", "TrackingError", "InformationRatio")
 
     funs_drw_dn <- c("PainIndex", "CalmarRatio", "SterlingRatio", "BurkeRatio", "MartinRatio", "PainRatio")
 
-    funs_dside_risk <- c("DownsideDeviation", "DownsidePotential", "DownsideFrequency",
+    funs_dside_risk <- c("DownsideDeviation", "DownsidePotential", "DownsideFrequency", "SemiDeviation", "SemiVariance",
                          "UpsideRisk", "UpsidePotentialRatio", "UpsideFrequency",
-                         "BernardoLedoitRatio", "DRatio", "OmegaSharpeRatio", "SortinoRatio", "Kappa",
+                         "BernardoLedoitRatio", "DRatio", "Omega", "OmegaSharpeRatio", "OmegaExcessReturn", "SortinoRatio", "M2Sortino", "Kappa",
                          "VolatilitySkewness", "AdjustedSharpeRatio", "SkewnessKurtosisRatio", "ProspectRatio")
+
+    funs_misc <- c("KellyRatio", "Modigliani", "UpDownRatios")
 
     fun_options <- list(table.funs                     = funs_table,
                         CAPM.funs                      = funs_capm,
+                        SFM.funs                       = funs_sfm,
+                        descriptive.funs               = funs_descriptive,
+                        annualized.funs                = funs_annualized,
                         VaR.funs                       = funs_VaR,
                         moment.funs                    = funs_moments,
                         drawdown.funs                  = funs_drawdown,
                         Bacon.risk.funs                = funs_risk,
                         Bacon.regression.funs          = funs_regression,
                         Bacon.relative.risk.funs       = funs_rel_risk,
-                        # Bacon.return.distribution.funs = funs_ret_dist,
                         Bacon.drawdown.funs            = funs_drw_dn,
-                        Bacon.downside.risk.funs       = funs_dside_risk)
+                        Bacon.downside.risk.funs       = funs_dside_risk,
+                        misc.funs                      = funs_misc)
 
     fun_options
 
