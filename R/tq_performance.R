@@ -249,6 +249,7 @@ tq_performance_fun_options <- function() {
     pkg_regex_table <- "^table"
     funs_table <- stringr::str_detect(ls("package:PerformanceAnalytics"), pkg_regex_table)
     funs_table <- ls("package:PerformanceAnalytics")[funs_table]
+    funs_table <- funs_table[!stringr::str_detect(funs_table, "(Drawdowns$|CalendarReturns$|ProbOutPerformance$)")] # remove table.Drawdowns
 
     pkg_regex_capm <- "^CAPM"
     funs_capm <- stringr::str_detect(ls("package:PerformanceAnalytics"), pkg_regex_capm)
@@ -260,7 +261,7 @@ tq_performance_fun_options <- function() {
 
     funs_VaR <- c("VaR", "ES", "ETL", "CDD", "CVaR")
 
-    funs_descriptive <- c("mean", "sd", "min", "max", "cor", "mean.stderr", "mean.LCL", "mean.UCL")
+    funs_descriptive <- c("mean", "sd", "min", "max", "cor", "mean.geometric", "mean.stderr", "mean.LCL", "mean.UCL")
 
     funs_annualized <- c("Return.annualized", "Return.annualized.excess", "sd.annualized", "SharpeRatio.annualized")
 
@@ -269,7 +270,7 @@ tq_performance_fun_options <- function() {
 
     funs_drawdown <- c("AverageDrawdown", "AverageLength", "AverageRecovery", "DrawdownDeviation", "DrawdownPeak", "maxDrawdown")
 
-    funs_risk <- c("MeanAbsoluteDeviation", "Frequency", "SharpeRatio", "MSquared", "MSquaredExcess", "HurstIndex", "UlcerIndex")
+    funs_risk <- c("MeanAbsoluteDeviation", "Frequency", "SharpeRatio", "MSquared", "MSquaredExcess", "HurstIndex")
 
     funs_regression <- c("CAPM.alpha", "CAPM.beta", "CAPM.epsilon", "CAPM.jensenAlpha", "SystematicRisk",
                          "SpecificRisk", "TotalRisk", "TreynorRatio", "AppraisalRatio", "FamaBeta",
@@ -277,7 +278,7 @@ tq_performance_fun_options <- function() {
 
     funs_rel_risk <- c("ActivePremium", "ActiveReturn", "TrackingError", "InformationRatio")
 
-    funs_drw_dn <- c("PainIndex", "CalmarRatio", "SterlingRatio", "BurkeRatio", "MartinRatio", "PainRatio")
+    funs_drw_dn <- c("PainIndex", "PainRatio", "CalmarRatio", "SterlingRatio", "BurkeRatio", "MartinRatio", "UlcerIndex")
 
     funs_dside_risk <- c("DownsideDeviation", "DownsidePotential", "DownsideFrequency", "SemiDeviation", "SemiVariance",
                          "UpsideRisk", "UpsidePotentialRatio", "UpsideFrequency",
