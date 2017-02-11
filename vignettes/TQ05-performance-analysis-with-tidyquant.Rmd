@@ -234,7 +234,7 @@ The `tidyquant` function, `tq_portfolio()` aggregates a group of individual asse
 
 Suppose we want to split our portfolio evenly between AAPL and NFLX. We'll show this using both methods.
 
-##### Aggregating a Portfolio using Method 1, Vector of Weights
+##### Method 1: Aggregating a Portfolio using Vector of Weights
 
 We'll use the weight vector, `c(0.5, 0, 0.5)`. Two important aspects to supplying a numeric vector of weights: First, notice that the length (3) is equal to the number of assets (3). This is a requirement. Second, notice that the sum of the weighting vector is equal to 1. This is not "required", but is best practice. If the sum is not 1, the weights will be distributed accordingly by scaling the vector to 1, and a warning message will appear.
 
@@ -250,7 +250,7 @@ We now have an aggregated portfolio that is a 50/50 blend of AAPL and NFLX.
 
 You may be asking why didn't we use GOOG? __The important thing to understand is that all of the assets from the asset returns don't need to be used when creating the portfolio!__ This enables us to scale individual stock returns and then vary weights to optimize the portfolio (this will be a further subject that we address in the future!)
 
-##### Aggregating a Portfolio using Method 1, Two Column Tibble with Symbols and Weights
+##### Method 2: Aggregating a Portfolio using Two Column Tibble with Symbols and Weights
 
 A possibly more useful method of aggregating returns is using a tibble of symbols and weights that are mapped to the portfolio. We'll recreate the previous portfolio example using mapped weights.
 
@@ -318,7 +318,7 @@ stock_returns_monthly <- c("AAPL", "GOOG", "NFLX") %>%
     tq_transform(Ad, periodReturn, period = "monthly", col_rename = "Ra")
 ```
 
-Second, get baseline asset ruturns, which is the exact same as Steps 1B and 2B from the Single Portfolio example.
+Second, get baseline asset returns, which is the exact same as Steps 1B and 2B from the Single Portfolio example.
 
 ```{r, eval = F}
 baseline_returns_monthly <- "XLF" %>%
@@ -342,7 +342,7 @@ stock_returns_monthly_multi
 
 Examining the results, we can see that a few things happened:
 
-1. The length (number of rows) has trippled. This is the essence of `tq_repeat_df`: it grows the data frame length-wise, repeating the data frame `n` times. In our case, `n = 3`.
+1. The length (number of rows) has tripled. This is the essence of `tq_repeat_df`: it grows the data frame length-wise, repeating the data frame `n` times. In our case, `n = 3`.
 2. Our data frame, which was grouped by symbol, was ungrouped. This is needed to prevent `tq_portfolio` from blending on the individual stocks. `tq_portfolio` only works on groups of stocks.
 3. We have a new column, named "portfolio". The "portfolio" column name is a key that tells `tq_portfolio` that multiple groups exist to analyze. Just note that for multiple portfolio analysis, the "portfolio" column name is required.
 4. We have three groups of portfolios. This is what `tq_portfolio` will split, apply (aggregate), then combine on. 
@@ -468,7 +468,7 @@ RaRb_multiple_portfolio %>%
 
 ## table.DownsideRiskRatio
 
-Table of Monthly downside risk, Annualised downside risk, Downside potential, Omega, Sortino ratio, Upside potential, Upside potential ratio and Omega-Sharpe ratio.
+Table of Monthly downside risk, Annualized downside risk, Downside potential, Omega, Sortino ratio, Upside potential, Upside potential ratio and Omega-Sharpe ratio.
 
 ```{r}
 RaRb_multiple_portfolio %>%
@@ -477,7 +477,7 @@ RaRb_multiple_portfolio %>%
 
 ## table.HigherMoments
 
-Summary of the higher moements and Co-Moments of the return distribution. Used to determine diversification potential. Also called "systematic" moments by several papers.
+Summary of the higher moments and Co-Moments of the return distribution. Used to determine diversification potential. Also called "systematic" moments by several papers.
 
 ```{r}
 RaRb_multiple_portfolio %>%
@@ -486,7 +486,7 @@ RaRb_multiple_portfolio %>%
 
 ## table.InformationRatio
 
-Table of Tracking error, Annualised tracking error and Information ratio.
+Table of Tracking error, Annualized tracking error and Information ratio.
 
 ```{r}
 RaRb_multiple_portfolio %>%
@@ -495,7 +495,7 @@ RaRb_multiple_portfolio %>%
 
 ## table.Variability
 
-Table of Mean absolute difference, Monthly standard deviation and annualised standard deviation.
+Table of Mean absolute difference, Monthly standard deviation and annualized standard deviation.
 
 ```{r}
 RaRb_multiple_portfolio %>%
