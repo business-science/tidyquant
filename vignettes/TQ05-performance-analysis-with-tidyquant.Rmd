@@ -16,8 +16,8 @@ vignette: >
 knitr::opts_chunk$set(message = FALSE,
                       warning = FALSE,
                       fig.width = 6)
-#library(tidyquant)
-devtools::load_all() # Travis CI fails on load_all()
+library(tidyquant)
+# devtools::load_all() # Travis CI fails on load_all()
 ```
 
 > Tidy analysis of stock and portfolio return performance with `PerformanceAnalytics`

@@ -22,8 +22,13 @@ theme_tq_green(base_size = 11, base_family = "")
 The \code{theme_tq()} function creates a custom theme using tidyquant colors.
 }
 \examples{
+# Load libraries
+library(tidyquant)
+
+# Get stock prices
 AAPL <- tq_get("AAPL")
 
+# Plot using ggplot with theme_tq
 AAPL \%>\% ggplot(aes(x = date, y = close)) +
        geom_line() +
        geom_bbands(aes(high = high, low = low, close = close),

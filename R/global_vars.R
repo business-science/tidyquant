@@ -110,5 +110,17 @@ globalVariables(c("A",
                   "weights..",
                   "portfolio",
                   "portfolio..",
-                  "rowname"
+                  "rowname",
+                  'scale_color_manual',
+                  'scale_fill_manual',
+                  '%+replace%',
+                  'theme_grey',
+                  'theme',
+                  'element_line',
+                  "element_rect",
+                  'rel',
+                  "element_blank",
+                  "element_text",
+                  "margin",
+                  "unit"
                   ))

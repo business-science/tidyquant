@@ -7,8 +7,13 @@
 #' @seealso \code{\link{scale_manual}}
 #'
 #' @examples
+#' # Load libraries
+#' library(tidyquant)
+#'
+#' # Get stock prices
 #' AAPL <- tq_get("AAPL")
 #'
+#' # Plot using ggplot with theme_tq
 #' AAPL %>% ggplot(aes(x = date, y = close)) +
 #'        geom_line() +
 #'        geom_bbands(aes(high = high, low = low, close = close),
