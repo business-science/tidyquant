@@ -4,7 +4,7 @@
 \alias{tq_performance}
 \alias{tq_performance_}
 \alias{tq_performance_fun_options}
-\title{Aggregates a group of returns by security into performance returns}
+\title{Computes a wide variety of summary performance metrics from stock or portfolio returns}
 \usage{
 tq_performance(data, Ra, Rb = NULL, performance_fun, ...)
 
@@ -28,31 +28,76 @@ tq_performance_fun_options()
 Returns data in the form of a \code{tibble} object.
 }
 \description{
-Aggregates a group of returns by security into performance returns
+Asset and portfolio performance analysis is a deep field with a wide range of theories and
+methods for analyzing risk versus reward. The \code{PerformanceAnalytics} package
+consolidates many of the most widely used performance metrics as functions that can
+be applied to stock or portfolio returns. \code{tq_performance}
+implements these performance analysis functions in a tidy way, enabling scaling
+analysis using the split, apply, combine framework.
 }
 \details{
+\strong{Important concept}: Performance is based on the statistical properties of returns,
+and as a result this function uses stock or portfolio returns as opposed
+to stock prices.
+
 \code{tq_performance} is a wrapper for various \code{PerformanceAnalytics} functions
 that return portfolio statistics.
 The main advantage is the ability to scale with the \code{tidyverse}.
 
 \code{Ra} and \code{Rb} are the columns containing asset and baseline returns, respectively.
-These columns are mapped to the \code{PerformanceAnalytics} functions.
+These columns are mapped to the \code{PerformanceAnalytics} functions. Note that \code{Rb}
+is not always required, and in these instances the argument defaults to \code{Rb = NULL}.
+The user can tell if \code{Rb} is required by researching the underlying performance function.
 
-\code{tq_performance_fun_options} returns a list of \code{PerformanceAnalytics} functions
+\code{...} are additional arguments that are passed to the \code{PerformanceAnalytics}
+function. Search the underlying function to see what arguments can be passed through.
+
+\code{tq_performance_fun_options} returns a list of compatible \code{PerformanceAnalytics} functions
 that can be supplied to the \code{performance_fun} argument.
 }
 \examples{
 # Load libraries
 library(tidyquant)
 
-# TBD
+# Get returns for individual stock components grouped by symbol
+Ra <- c("AAPL", "GOOG", "NFLX") \%>\%
+    tq_get(get  = "stock.prices",
+           from = "2010-01-01",
+           to   = "2015-12-31") \%>\%
+    group_by(symbol) \%>\%
+    tq_transform(Ad, periodReturn, period = "monthly", col_rename = "Ra")
+
+# Get returns for SP500 as baseline
+Rb <- "^GSPC" \%>\%
+    tq_get(get  = "stock.prices",
+           from = "2010-01-01",
+           to   = "2015-12-31") \%>\%
+    tq_transform(Ad, periodReturn, period = "monthly", col_rename = "Rb")
+
+# Merge stock returns with baseline
+RaRb <- left_join(Ra, Rb, by = c("date" = "date"))
+
+##### Performance Metrics #####
+
+# View options
+tq_performance_fun_options()
+
+# Get performance metrics
+RaRb \%>\%
+    tq_performance(Ra = Ra, performance_fun = SharpeRatio, p = 0.95)
+
+RaRb \%>\%
+    tq_performance(Ra = Ra, Rb = Rb, performance_fun = table.CAPM)
 
 }
 \seealso{
 \itemize{
+  \item \code{\link{tq_transform}} which can be used to calculate period returns from a
+  set of stock prices. Use \code{transform_fun = periodReturn} with the appropriate periodicity
+  such as \code{period = "monthly"}.
   \item \code{\link{tq_portfolio}} which can be used to aggregate period returns from
   multiple stocks to period returns for a portfolio.
-  \item The \code{PerformanceAnalytics} package, which is contains the underlying functions
+  \item The \code{PerformanceAnalytics} package, which contains the underlying functions
   for the \code{performance_fun} argument. Additional parameters can be passed via \code{...}.
 }
 }

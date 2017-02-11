@@ -14,7 +14,7 @@
 #'
 #' @return Returns data in the form of a \code{tibble} object.
 #'
-#' @details \code{tq_portfolio} is a wrapper for \code{PerformanceAnalytics::Returns.portfolio},
+#' @details \code{tq_portfolio} is a wrapper for \code{PerformanceAnalytics::Returns.portfolio}.
 #' The main advantage is the results are returned as a \code{tibble} and the
 #' function can be used with the \code{tidyverse}.
 #'
@@ -36,9 +36,10 @@
 #'   must be grouped by portfolio index.
 #' }
 #'
-#' \code{tq_repeat_df} is used to assist in Multiple Portfolio analyses, and
-#' is a useful precursor to \code{tq_portfolio}. The function repeats
-#' a data frame \code{n} times row-wise (long-wise), and adds a new column for an index.
+#' \code{tq_repeat_df} is a simple function that repeats
+#' a data frame \code{n} times row-wise (long-wise), and adds a new column for a portfolio index.
+#' The function is used to assist in Multiple Portfolio analyses, and
+#' is a useful precursor to \code{tq_portfolio}.
 #'
 #' @seealso
 #' \itemize{
@@ -66,6 +67,8 @@
 #' monthly_returns_stocks <- stock_prices %>%
 #'     group_by(symbol) %>%
 #'     tq_transform(Ad, periodReturn, period = "monthly")
+#'
+#' ##### Portfolio Aggregation Methods #####
 #'
 #' # Method 1: Use tq_portfolio with numeric vector of weights
 #'

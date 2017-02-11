@@ -109,5 +109,6 @@ globalVariables(c("A",
                   "ungroup",
                   "weights..",
                   "portfolio",
-                  "portfolio.."
+                  "portfolio..",
+                  "rowname"
                   ))
