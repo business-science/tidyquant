@@ -9,7 +9,7 @@
 #'
 #' @param data A \code{tibble} (tidy data frame) of returns in tidy format (i.e long format).
 #' @param Ra The column of asset returns
-#' @param Rb The column of baseline returns (for functions that require comarison to a baseline)
+#' @param Rb The column of baseline returns (for functions that require comparison to a baseline)
 #' @param performance_fun The performance function from \code{PerformanceAnalytics}. See
 #' \code{tq_performance_fun_options()} for a complete list of integrated functions.
 #' @param ... Additional parameters passed to the \code{PerformanceAnalytics} function.
@@ -176,6 +176,8 @@ tq_performance_base_ <- function(data, Ra, Rb, performance_fun, ...) {
         Rb <- ".Rb"
     }
 
+    # Override weights TBD
+
     # Find date or date-time col
     date_col_name <- get_col_name_date_or_date_time(data)
 
@@ -227,8 +229,8 @@ tq_performance_base_ <- function(data, Ra, Rb, performance_fun, ...) {
         if (colnames(ret)[[1]] == Ra) colnames(ret)[[1]] <- performance_fun
 
         colnames(ret) <- colnames(ret) %>%
-            stringr::str_replace_all(pattern = Ra, replacement = "") %>%
-            stringr::str_replace_all(pattern = Rb, replacement = "")
+            stringr::str_replace_all(pattern = paste0("^", Ra), replacement = "") %>%
+            stringr::str_replace_all(pattern = paste0("^", Rb), replacement = "")
 
     }, error = function(e) {
 

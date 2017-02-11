@@ -99,3 +99,15 @@ FANG %>%
 
 
 For more information, refer to the fourth topic-specific vignette, [Charting with tidyquant](TQ04-charting-with-tidyquant.html).
+
+
+# Performance Analysis with tidyquant
+
+Asset and portfolio performance analysis is a deep field with a wide range of theories and methods for analyzing risk versus reward. The `PerformanceAnalytics` package consolidates many of the most widely used performance metrics as functions that can be applied to stock or portfolio returns. `tidquant` implements the functionality with two primary functions:
+
+* `tq_performance` implements the performance analysis functions in a tidy way, enabling scaling analysis using the split, apply, combine framework.
+* `tq_portfolio` provides a useful toolset for aggregating a group of individual asset returns into one or many portfolios. 
+
+Performance is based on the statistical properties of returns, and as a result both functions use __returns as opposed to stock prices__.
+
+For more information, refer to the fifth topic-specific vignette, [Performance Analysis with tidyquant](TQ05-performance-analysis-with-tidyquant.html).

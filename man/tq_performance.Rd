@@ -17,7 +17,7 @@ tq_performance_fun_options()
 
 \item{Ra}{The column of asset returns}
 
-\item{Rb}{The column of baseline returns (for functions that require comarison to a baseline)}
+\item{Rb}{The column of baseline returns (for functions that require comparison to a baseline)}
 
 \item{performance_fun}{The performance function from \code{PerformanceAnalytics}. See
 \code{tq_performance_fun_options()} for a complete list of integrated functions.}
