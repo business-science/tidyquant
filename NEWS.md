@@ -1,5 +1,10 @@
-# tidyquant 0.3.0.9070 - Development Version
 
+# tidyquant 0.3.0.9080 - Development Version
+
+* New Features:
+    * `tq_performance()` which integrates the performance analysis functions of `PerformanceAnalytics`.
+    * `tq_portfolio()` which enables aggregating portfolios from individual stock returns.
+    * `tq_tranform()`: Added the NA-handling functions from `zoo` to the list of compatible, which provide a number of useful methods for handling `NA` values in data sets. Added `Return.calculate` and `Return.excess` for calculating returns and returns in excess of the risk-free rate, respectively.
 * Documentation:
     * Split introduction into four separate vignettes, which improves flow and enables readers to more easily get to needed documentation. Now five docs total covering the primary needs of `tidyquant` users!
 * New data:
@@ -7,7 +12,7 @@
 * New visualizations that integrate with `ggplot2`:
     * `theme_tq()` creates light, dark, and green themes for tidyquant visualizations.
     * `scale_color_tq()` and `scale_fill_tq()` add color/fill scales for the data used in tidyquant visualizations.
-* Fixes:
+* Improvements and Fixes:
     * Issue #11: Part 1. Fix instability with `get = key.ratios` failing with HTTP 500 error on download. Use httr RETRY in case of failure.
     * Fixed issue with `get = "key.ratios"` where stocks listed on AMEX exchange were not able to return key ratios.
     * Issue #9: Fix problem with `get = "key.stats"` where NA's in multiple `x` (e.g. `c("AAPL", "GOOG")`) cause call to fail during coercion. 

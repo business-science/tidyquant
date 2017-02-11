@@ -1,7 +1,7 @@
 #' Transforms quantitative data (returns new variables in new tibble)
 #'
-#' @param data A \code{tibble} (tidy data frame) of data from \code{\link{tq_get}}.
-#' @param ohlc_fun The \code{quantmod} function that identifes columns to pass to
+#' @param data A \code{tibble} (tidy data frame) of data typically from \code{\link{tq_get}}.
+#' @param ohlc_fun The \code{quantmod} function that identifies columns to pass to
 #' the transformation function. OHLCV is \code{quantmod} terminology for
 #' open, high, low, close, and volume. Options include c(Op, Hi, Lo, Cl, Vo, Ad,
 #' HLC, OHLC, OHLCV).
@@ -175,8 +175,11 @@ tq_transform_xy_ <- function(data, x, y = NULL, transform_fun, col_rename = NULL
 tq_transform_fun_options <- function() {
 
     # zoo rollapply functions
-    pkg_regex_zoo <- "roll"
-    funs_zoo <- ls("package:zoo")[stringr::str_detect(ls("package:zoo"), pkg_regex_zoo)]
+    na_funs <- c("na.aggregate", "na.approx", "na.fill", "na.spline", "na.trim")
+    pkg_regex_zoo <- "^roll"
+    roll_funs <- ls("package:zoo")[stringr::str_detect(ls("package:zoo"), pkg_regex_zoo)]
+    roll_funs <- roll_funs[!stringr::str_detect(roll_funs, "default")] # remove .default funs
+    funs_zoo <- c(na_funs, roll_funs)
 
     # xts apply.period, to.period, lag and diff functions
     pkg_regex_xts <- "apply|to\\.|period|lag|diff"
@@ -193,7 +196,9 @@ tq_transform_fun_options <- function() {
     fun_options <- list(zoo = funs_zoo,
                         xts = funs_xts,
                         quantmod = funs_quantmod,
-                        TTR = funs_ttr)
+                        TTR = funs_ttr,
+                        PerformanceAnalytics = c("Return.calculate", "Return.excess",
+                                                 "zerofill"))
 
     fun_options
 

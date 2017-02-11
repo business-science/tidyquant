@@ -98,5 +98,17 @@ globalVariables(c("A",
                   "last.sale.price",
                   "market.cap",
                   "sector",
-                  "symbol"
+                  "symbol",
+                  ".",
+                  "df_mult",
+                  "group_by_",
+                  "is.grouped_df",
+                  "left_join",
+                  "returns..",
+                  "tibble",
+                  "ungroup",
+                  "weights..",
+                  "portfolio",
+                  "portfolio..",
+                  "rowname"
                   ))

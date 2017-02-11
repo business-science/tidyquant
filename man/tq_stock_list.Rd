@@ -54,7 +54,7 @@ library(tidyquant)
 tq_index_options()
 
 # Get all stock symbols in a stock index
-tq_index("SP500")
+tq_index("DOWJONES")
 
 # Get the list of stock exchange options
 tq_exchange_options()

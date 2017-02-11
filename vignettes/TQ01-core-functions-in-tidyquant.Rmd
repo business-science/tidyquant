@@ -196,7 +196,7 @@ The data is returned in wide format (as opposed to long format) because we can e
 ```{r}
 c("AAPL", "FB", "GOOG") %>%
     tq_get(get = "key.stats") %>%
-    select(.symbol, Ask, Ask.Size, Bid, Bid.Size, Change, Days.High, Days.Low)
+    select(symbol, Ask, Ask.Size, Bid, Bid.Size, Change, Days.High, Days.Low)
 ```
 
 Finally, because the statistics are real-time, we can setup real-time monitoring by calling `tq_get` at periodic intervals. The function below is not evaluated for time considerations, but if called during active trading sessions will collect five samples at three second intervals. 
