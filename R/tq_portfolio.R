@@ -306,19 +306,20 @@ map_weights <- function(weights, assets_col) {
                                 by = setNames(x, y)) %>%
             dplyr::rename_(weights = names(weights)[[2]]) %>%
             tidyr::replace_na(list(weights = 0)) %>%
-            arrange_(y) %>%
+            dplyr::arrange_(y) %>%
             dplyr::select(weights) %>%
             unlist() %>%
             as.numeric()
 
     } else {
         # must be numeric
-        ret <- bind_cols(assets_col, tibble(weights))
+
+        ret <- dplyr::bind_cols(unique(assets_col), tibble::tibble(weights))
 
         colnames(ret) <- c("assets", "weights")
 
         ret <- ret %>%
-            arrange(assets) %>%
+            dplyr::arrange(assets) %>%
             dplyr::select(weights) %>%
             unlist() %>%
             as.numeric()
