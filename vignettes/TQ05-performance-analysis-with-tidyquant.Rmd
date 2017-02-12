@@ -54,14 +54,12 @@ We'll use the `PerformanceAnalytics` function, `table.CAPM`, to evaluate the ret
 First, load the `tidyquant` package.
 
 ```{r, eval = F}
-# Load libraries
 library(tidyquant)
 ```
 
 Second, get the stock returns for the stocks we wish to evaluate. We use `tq_get` to get stock prices from Yahoo Finance, `group_by` to group the stock prices related to each symbol, and `tq_transform` to retrieve period returns in a monthly periodicity using the "adjusted" stock prices (adjusted for stock splits, which can throw off returns, affecting the performance analysis). Review the output and see that there are three groups of symbols indicating the data has been grouped appropriately.
 
 ```{r}
-# Get returns for individual stock components grouped by symbol
 Ra <- c("AAPL", "GOOG", "NFLX") %>%
     tq_get(get  = "stock.prices",
            from = "2010-01-01",
@@ -74,7 +72,6 @@ Ra
 Next, we get the baseline prices. We'll use the XLF. Note that there is no need to group because we are just getting one data set.
 
 ```{r}
-# Get returns for SP500 as baseline
 Rb <- "XLF" %>%
     tq_get(get  = "stock.prices",
            from = "2010-01-01",
@@ -83,10 +80,9 @@ Rb <- "XLF" %>%
 Rb
 ```
 
-Now, we combine the two data sets using the "data" field using `left_join` from the `dplyr` package. Review the results and see that we still have three groups of returns, and columns "Ra" and "Rb" are side-by-side.
+Now, we combine the two data sets using the "date" field using `left_join` from the `dplyr` package. Review the results and see that we still have three groups of returns, and columns "Ra" and "Rb" are side-by-side.
 
 ```{r}
-# Merge stock returns with baseline
 RaRb <- left_join(Ra, Rb, by = c("date" = "date"))
 RaRb
 ```
