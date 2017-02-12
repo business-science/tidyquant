@@ -122,9 +122,8 @@ Individual assets are the simplest form of analysis because there is no portfoli
 
 Before we get started let's find the performance function we want to use from `PerformanceAnalytics`. Searching `tq_performance_fun_options`, we can see that `SharpeRatio` is available. Type `?SharpeRatio`, and we can see that the arguments are:
 
-``` {r, eval = F}
-SharpeRatio(R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR", "ES"), 
-            weights = NULL, annualize = FALSE, ...)
+``` {r}
+args(SharpeRatio)
 ```
 
 We can actually skip the baseline path because the function does not require `Rb`. The function takes `R`, which is passed using `Ra` in `tq_performance(Ra, Rb, performance_fun, ...)`. A little bit of foresight saves us some work. 
@@ -574,7 +573,7 @@ portfolio_growth_monthly <- stock_returns_monthly %>%
 ```{r}
 portfolio_growth_monthly %>%
     ggplot(aes(x = date, y = investment.growth)) +
-    geom_line() +
+    geom_line(size = 2) +
     labs(title = "Portfolio Growth",
          subtitle = "50% AAPL, 0% GOOG, and 50% NFLX",
          caption = "Now we can really visualize performance!",
@@ -603,7 +602,7 @@ portfolio_growth_monthly_multi <- stock_returns_monthly_multi %>%
 ```{r}
 portfolio_growth_monthly_multi %>%
     ggplot(aes(x = date, y = investment.growth, color = factor(portfolio))) +
-    geom_line() +
+    geom_line(size = 2) +
     labs(title = "Portfolio Growth",
          subtitle = "Comparing Multiple Portfolios",
          caption = "Portfolio 3 is a Standout!",

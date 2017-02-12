@@ -122,5 +122,6 @@ globalVariables(c("A",
                   "element_blank",
                   "element_text",
                   "margin",
-                  "unit"
+                  "unit",
+                  "assets"
                   ))
