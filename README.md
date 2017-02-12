@@ -15,7 +15,7 @@ Benefits
 -   **A few core functions with a lot of power**
 -   **Integrates the quantitative analysis functionality of `zoo`, `xts`, `quantmod`, `TTR`, and *now* `PerformanceAnalytics`**
 -   **Designed for scaling using the *split, apply, combine* framework of the `tidyverse`**
--   **Implements `ggplot2` functionality for *beautiful and meaningful financial visualizations* **
+-   **Implements `ggplot2` functionality for beautiful and meaningful financial visualizations**
 -   **User-friendly documentation to get you up to speed quickly!**
 
 One-Stop Shop for Serious Financial Analysis
