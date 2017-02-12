@@ -241,7 +241,9 @@ tq_portfolio_base_ <- function(data, assets_col, returns_col, weights, col_renam
     ret <- tryCatch({
         # Handle weights
         check_weights(weights, assets_col, map, x)
-        if (is.data.frame(weights)) weights <- map_weights(weights, assets_col)
+        # Solve issue with spread re-ordering column names alphabetically
+        # if (is.data.frame(weights)) weights <- map_weights(weights, assets_col)
+        weights <- map_weights(weights, assets_col) # Note that weights are resorted to match spread reorder to alphabetical
 
         data %>%
             tidyr::spread_(key_col = assets_col_name, value_col = returns_col_name) %>%
@@ -293,16 +295,35 @@ tq_repeat_df <- function(data, n, index_col_name = "portfolio") {
 
 map_weights <- function(weights, assets_col) {
 
-    y <- names(assets_col)[[1]]
-    x <- names(weights)[[1]]
+    if (is.data.frame(weights)) {
 
-    ret <- dplyr::left_join(unique(assets_col), weights,
-                            by = setNames(x, y)) %>%
-        dplyr::rename_(weights = names(weights)[[2]]) %>%
-        tidyr::replace_na(list(weights = 0)) %>%
-        dplyr::select(weights) %>%
-        unlist() %>%
-        as.numeric()
+        # Get names
+        y <- names(assets_col)[[1]]
+        x <- names(weights)[[1]]
+
+        # arrange added to sort in alphabetic order, which matches spread order
+        ret <- dplyr::left_join(unique(assets_col), weights,
+                                by = setNames(x, y)) %>%
+            dplyr::rename_(weights = names(weights)[[2]]) %>%
+            tidyr::replace_na(list(weights = 0)) %>%
+            arrange_(y) %>%
+            dplyr::select(weights) %>%
+            unlist() %>%
+            as.numeric()
+
+    } else {
+        # must be numeric
+        ret <- bind_cols(assets_col, tibble(weights))
+
+        colnames(ret) <- c("assets", "weights")
+
+        ret <- ret %>%
+            arrange(assets) %>%
+            dplyr::select(weights) %>%
+            unlist() %>%
+            as.numeric()
+
+    }
 
     ret
 
