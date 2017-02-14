@@ -100,6 +100,14 @@ tq_mutate_ <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, 
 
 #' @rdname tq_mutate
 #' @export
+tq_mutate_.default <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...) {
+
+    # Error message
+    stop("data must be a tibble or data.frame object")
+}
+
+#' @rdname tq_mutate
+#' @export
 tq_mutate_.tbl_df <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...) {
 
     # Get transformation
@@ -127,6 +135,7 @@ tq_mutate_.data.frame <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rena
 #' @export
 tq_mutate_xy <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
 
+    # NSE Evaluation
     tq_mutate_xy_(data = data,
                   x = lazyeval::expr_text(x),
                   y = lazyeval::expr_text(y),
@@ -138,6 +147,14 @@ tq_mutate_xy <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) 
 #' @export
 tq_mutate_xy_ <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
     UseMethod("tq_mutate_xy_", data)
+}
+
+#' @rdname tq_mutate
+#' @export
+tq_mutate_xy_.default <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
+
+    # Error message
+    stop("data must be a tibble or data.frame object")
 }
 
 #' @rdname tq_mutate
