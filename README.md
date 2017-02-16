@@ -27,7 +27,7 @@ With `tidyquant` all the benefits add up to one thing: *a one-stop shop for seri
 
 Visualizing the stock price volatility of four stocks side-by-side is quick and easy...
 
-![Volatility of Multiple Stocks](img/sample_img_1_volatility.png)
+![Volatility of Multiple Stocks](img/sample_img_1_volatility_highres.png)
 
 ### Evaluating Stock Performance
 
