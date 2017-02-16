@@ -1,7 +1,7 @@
 Package: tidyquant
 Type: Package
 Title: Tidy Quantitative Financial Analysis
-Version: 0.3.0.9070
+Version: 0.3.0.9080
 Date: 2017-01-28
 Authors@R: person("Matt", "Dancho", email = "mdancho@gmail.com", 
     role = c("aut", "cre"))
@@ -20,6 +20,7 @@ LazyData: true
 Depends:
     R (>= 3.3.2),
     lubridate (>= 1.6.0),
+    PerformanceAnalytics (>= 1.4.3541),
     quantmod (>= 0.4-7),
     tidyverse (>= 1.1.0),
     TTR (>= 0.23-1),

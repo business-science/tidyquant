@@ -1,7 +1,7 @@
 #' Transforms quantitative data (returns new variables in new tibble)
 #'
-#' @param data A \code{tibble} (tidy data frame) of data from \code{\link{tq_get}}.
-#' @param ohlc_fun The \code{quantmod} function that identifes columns to pass to
+#' @param data A \code{tibble} (tidy data frame) of data typically from \code{\link{tq_get}}.
+#' @param ohlc_fun The \code{quantmod} function that identifies columns to pass to
 #' the transformation function. OHLCV is \code{quantmod} terminology for
 #' open, high, low, close, and volume. Options include c(Op, Hi, Lo, Cl, Vo, Ad,
 #' HLC, OHLC, OHLCV).

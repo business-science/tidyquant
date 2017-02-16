@@ -21,24 +21,27 @@
 #' @param ... common discrete scale parameters: \code{name}, \code{breaks}, \code{labels}, \code{na.value}, \code{limits} and \code{guide}. See \code{\link{discrete_scale}} for more details
 #'
 #' @examples
-#' stocks <- tq_index("SP500") %>%
-#' slice(1:12) %>%
-#'     tq_get()
+#' # Load libraries
+#' library(tidyquant)
 #'
-#' a<-stocks %>%
+#' # Get stock prices
+#' stocks <- c("AAPL", "FB", "NFLX") %>%
+#'     tq_get(from = "2013-01-01",
+#'            to   = "2017-01-01")
+#'
+#' # Plot for stocks
+#' a <- stocks %>%
 #'     ggplot(aes(date, adjusted, color = symbol)) +
 #'     geom_line() +
 #'     labs(title = "Multi stock example",
 #'          xlab = "Date",
 #'          ylab = "Adjusted Close")
 #'
+#' # Plot with tidyquant theme and colors
 #' a +
 #'     theme_tq() +
 #'     scale_color_tq()
 #'
-#' a +
-#'     theme_tq_dark() +
-#'     scale_color_tq(theme = "dark")
 #'
 #' @name scale_manual
 NULL

@@ -43,9 +43,9 @@ tq_mutate_xy_(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
 tq_mutate_fun_options()
 }
 \arguments{
-\item{data}{A \code{tibble} (tidy data frame) of data from \code{\link{tq_get}}.}
+\item{data}{A \code{tibble} (tidy data frame) of data typically from \code{\link{tq_get}}.}
 
-\item{ohlc_fun}{The \code{quantmod} function that identifes columns to pass to
+\item{ohlc_fun}{The \code{quantmod} function that identifies columns to pass to
 the mutatation function. OHLCV is \code{quantmod} terminology for
 open, high, low, close, and volume. Options include c(Op, Hi, Lo, Cl, Vo, Ad,
 HLC, OHLC, OHLCV).}
