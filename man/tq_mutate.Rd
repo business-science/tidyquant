@@ -3,10 +3,12 @@
 \name{tq_mutate}
 \alias{tq_mutate}
 \alias{tq_mutate_}
+\alias{tq_mutate_.default}
 \alias{tq_mutate_.tbl_df}
 \alias{tq_mutate_.data.frame}
 \alias{tq_mutate_xy}
 \alias{tq_mutate_xy_}
+\alias{tq_mutate_xy_.default}
 \alias{tq_mutate_xy_.tbl_df}
 \alias{tq_mutate_xy_.data.frame}
 \alias{tq_mutate_fun_options}
@@ -15,6 +17,9 @@
 tq_mutate(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL, ...)
 
 tq_mutate_(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...)
+
+\method{tq_mutate_}{default}(data, ohlc_fun = "OHLCV", mutate_fun,
+  col_rename = NULL, ...)
 
 \method{tq_mutate_}{tbl_df}(data, ohlc_fun = "OHLCV", mutate_fun,
   col_rename = NULL, ...)
@@ -25,6 +30,9 @@ tq_mutate_(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...)
 tq_mutate_xy(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
 
 tq_mutate_xy_(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
+
+\method{tq_mutate_xy_}{default}(data, x, y = NULL, mutate_fun,
+  col_rename = NULL, ...)
 
 \method{tq_mutate_xy_}{tbl_df}(data, x, y = NULL, mutate_fun,
   col_rename = NULL, ...)
