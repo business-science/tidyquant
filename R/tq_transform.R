@@ -126,9 +126,6 @@ tq_transform_.tbl_df <- function(data, ohlc_fun = "OHLCV", transform_fun, col_re
     # Check for x: either x, HLC, or price arguments
     check_ohlc_fun_options(ohlc_fun)
 
-    # Check data
-    check_data_is_data_frame(data)
-
     # Find date or date-time col
     date_col_name <- get_col_name_date_or_date_time(data)
 
@@ -238,9 +235,6 @@ tq_transform_xy_.tbl_df <- function(data, x, y = NULL, transform_fun, col_rename
 
     # Check transform_fun in xts, quantmod or TTR
     check_transform_fun_options(transform_fun)
-
-    # Check data
-    check_data_is_data_frame(data)
 
     # Check x and y
     check_x_y_valid(data, x, y)
@@ -382,12 +376,6 @@ check_ohlc_fun_options <- function(fun) {
                    "HLC", "OHLC", "OHLCV")
     if (!(fun %in% x_options)) {
         stop(paste0("ohlc_fun = ", fun, " not a valid name."))
-    }
-}
-
-check_data_is_data_frame <- function(data) {
-    if (!inherits(data, "data.frame")) {
-        stop("`data` must be a tibble or data.frame.")
     }
 }
 
