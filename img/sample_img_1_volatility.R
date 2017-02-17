@@ -21,7 +21,7 @@ FANG %>%
          x = "", y = "Closing Price") +
     coord_x_date(xlim = c(start, end)) +
     facet_wrap(~ symbol, scales = "free_y") +
-    theme_tq_green() +
+    theme_tq() +
     scale_y_continuous(labels = scales::dollar)
 
 ggsave("img/sample_img_1_volatility.png")
