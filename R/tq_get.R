@@ -409,7 +409,17 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
                 httr::content()
 
             if(!is.null(text)) {
-                break
+
+                # Test to see if file returned is just a message containing "We're sorry"
+                text_test <- text %>%
+                    xml2::as_list() %>%
+                    unlist() %>%
+                    stringr::str_detect("^We.re sorry")
+
+                # If text does not contain "We're sorry" message, break
+                if (!text_test) {
+                    break
+                }
             }
         }
 
