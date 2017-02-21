@@ -5,7 +5,7 @@ tidyquant
 
 [![Travis-CI Build Status](https://travis-ci.org/mdancho84/tidyquant.svg?branch=master)](https://travis-ci.org/mdancho84/tidyquant) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/tidyquant)](https://cran.r-project.org/package=tidyquant) ![](http://cranlogs.r-pkg.org/badges/tidyquant?color=brightgreen) ![](http://cranlogs.r-pkg.org/badges/grand-total/tidyquant?color=brightgreen)
 
-<img src="img/tidyquant-logo.png" width="150" height="170" align="right" />
+<img src="img/tidyquant-logo.png" width="147" height="170" align="right" />
 
 > Bringing financial analysis to the tidyverse
 
@@ -16,7 +16,7 @@ Benefits
 
 -   **A few core functions with a lot of power**
 -   **Integrates the quantitative analysis functionality of `zoo`, `xts`, `quantmod`, `TTR`, and *now* `PerformanceAnalytics`**
--   **Designed for scaling using the *split, apply, combine* framework of the `tidyverse`**
+-   **Designed for scaling using the *split-apply-combine* framework of the `tidyverse`**
 -   **Implements `ggplot2` functionality for beautiful and meaningful financial visualizations**
 -   **User-friendly documentation to get you up to speed quickly!**
 
@@ -69,7 +69,7 @@ install.packages("tidyquant")
 Further Information
 -------------------
 
-The `tidyquant` package includes several vignettes to help the users get up to speed quickly:
+The `tidyquant` package includes several vignettes to help users get up to speed quickly:
 
 -   TQ00 - Introduction to `tidyquant`
 -   TQ01 - Core Functions in `tidyquant`
