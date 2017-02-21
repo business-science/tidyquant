@@ -5,6 +5,7 @@ tidyquant
 
 [![Travis-CI Build Status](https://travis-ci.org/mdancho84/tidyquant.svg?branch=master)](https://travis-ci.org/mdancho84/tidyquant) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/tidyquant)](https://cran.r-project.org/package=tidyquant) ![](http://cranlogs.r-pkg.org/badges/tidyquant?color=brightgreen) ![](http://cranlogs.r-pkg.org/badges/grand-total/tidyquant?color=brightgreen)
 
+
 > Bringing financial analysis to the tidyverse
 
 `tidyquant` integrates the best resources for collecting and analyzing financial data, `zoo`, `xts`, `quantmod`, `TTR`, and `PerformanceAnalytics`, with the tidy data infrastructure of the `tidyverse` allowing for seamless interaction between each. You can now perform complete financial analyses in the `tidyverse`.
