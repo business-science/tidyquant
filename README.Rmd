@@ -15,7 +15,7 @@ devtools::load_all()
 
 # tidyquant
 
-<img src="img/tidyquant-logo.png" style="height:120px;width:105px;" align="right" />
+<img src="img/tidyquant-logo.png" width="105" height="120" align="right" />
 
 [![Travis-CI Build Status](https://travis-ci.org/mdancho84/tidyquant.svg?branch=master)](https://travis-ci.org/mdancho84/tidyquant)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/tidyquant)](https://cran.r-project.org/package=tidyquant)
