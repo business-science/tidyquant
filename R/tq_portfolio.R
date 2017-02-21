@@ -121,10 +121,7 @@
 #'              col_rename = NULL,
 #'              wealth.index = FALSE)
 
-
-
-
-# PRIMARY FUNCTIONS ----
+# tq_portfolio ------------------------------------------------------------------------------------------------
 
 #' @rdname tq_portfolio
 #' @export
@@ -133,10 +130,11 @@ tq_portfolio <- function(data, assets_col, returns_col, weights = NULL, col_rena
     # NSE
     tq_portfolio_(
         data = data,
-        assets_col = lazyeval::lazy_eval(assets_col),
-        returns_col = lazyeval::lazy_eval(returns_col),
+        assets_col = lazyeval::expr_text(assets_col),
+        returns_col = lazyeval::expr_text(returns_col),
         weights = weights,
-        col_rename = col_rename
+        col_rename = col_rename,
+        ...
     )
 }
 
@@ -146,56 +144,18 @@ tq_portfolio_ <- function(data, assets_col, returns_col, weights = NULL, col_ren
     UseMethod("tq_portfolio_", data)
 }
 
+# tq_portfolio method dispatch --------------------------------------------------------------------------------
 
-tq_portfolio_.grouped_df <- function(data, assets_col, returns_col, weights, col_rename, ...) {
-
-    # Check weights and data compatibility
-    check_data_weights_compatibility(data, weights)
-
-    # Get groups
-    group_names_data <- dplyr::groups(data)
-
-    # Format data
-    data_nested <- data %>%
-        tidyr::nest() %>%
-        dplyr::rename(returns.. = data)
-
-    weights_nested <- weights %>%
-        tidyr::nest() %>%
-        dplyr::rename(weights.. = data)
-
-    # Join data
-    y <- names(data_nested)[[1]]
-    x <- names(weights_nested)[[1]]
-    data_weights <- left_join(data_nested, weights_nested, by = setNames(x, y))
-
-    # Map data and weights to tq_portfolio_base_
-    custom_function <- function(x, y, z) {
-        tq_portfolio_(data = x,
-                           weights = y,
-                           x = z,
-                           assets_col = assets_col,
-                           returns_col = returns_col,
-                           col_rename = col_rename,
-                           map = TRUE,
-                           ...)
-    }
-
-    data_weights %>%
-        dplyr::mutate(
-            portfolio.. = purrr::pmap(list(returns.., weights.., portfolio), custom_function),
-            class.. = purrr::map_chr(.x = portfolio.., ~ class(.x)[[1]])
-            ) %>%
-        dplyr::filter(class.. != "logical") %>%
-        dplyr::select(-c(returns.., weights.., class..)) %>%
-        tidyr::unnest() %>%
-        dplyr::group_by_(.dots = group_names_data)
+#' @rdname tq_portfolio
+#' @export
+tq_portfolio_.default <- function(data, assets_col, returns_col, weights = NULL, col_rename = NULL, ...) {
+    # Error message
+    stop("data must be a tibble or data.frame object")
 }
 
+#' @rdname tq_portfolio
+#' @export
 tq_portfolio_.tbl_df <- function(data, assets_col, returns_col, weights, col_rename, map = FALSE, x = NULL, ...) {
-
-    # Ungroup grouped data frames
-    if (dplyr::is.grouped_df(data)) data <- dplyr::ungroup(data)
 
     # Find date or date-time col
     date_col_name <- get_col_name_date_or_date_time(data)
@@ -212,15 +172,17 @@ tq_portfolio_.tbl_df <- function(data, assets_col, returns_col, weights, col_ren
     returns_col <- dplyr::select_(data, returns_col)
     assets_col <- dplyr::select_(data, assets_col)
 
-
     # Apply function
     ret <- tryCatch({
         # Handle weights
         check_weights(weights, assets_col, map, x)
+
         # Solve issue with spread re-ordering column names alphabetically
         # if (is.data.frame(weights)) weights <- map_weights(weights, assets_col)
-        weights <- map_weights(weights, assets_col) # Note that weights are resorted to match spread reorder to alphabetical
+        # Note that weights are resorted to match spread reorder to alphabetical
+        weights <- map_weights(weights, assets_col)
 
+        # Spread for xts form and apply Return.portfolio()
         data %>%
             tidyr::spread_(key_col = assets_col_name, value_col = returns_col_name) %>%
             as_xts_(date_col = date_col_name) %>%
@@ -231,7 +193,8 @@ tq_portfolio_.tbl_df <- function(data, assets_col, returns_col, weights, col_ren
         warn <- e
         # if (map == TRUE) warn <- paste0(x, " had the following error: ", e, ". Removing portfolio ", x, ".")
         warning(warn)
-        return(NA) # Return NA on error
+        # Return NA on error
+        return(NA)
 
     })
 
@@ -240,8 +203,90 @@ tq_portfolio_.tbl_df <- function(data, assets_col, returns_col, weights, col_ren
                                                   time_zone, col_rename)
 
     ret
-
 }
+
+#' @rdname tq_portfolio
+#' @export
+tq_portfolio_.data.frame <- function(data, assets_col, returns_col, weights = NULL, col_rename = NULL, ...) {
+
+    # Convert data.frame to tibble
+    data <- as_tibble(data)
+
+    # Call tq_portfolio_ for a tibble
+    tq_portfolio_(data, assets_col, returns_col, weights, col_rename, ...)
+}
+
+#' @rdname tq_portfolio
+#' @export
+tq_portfolio_.grouped_df <- function(data, assets_col, returns_col, weights, col_rename, ...) {
+
+    # Single portfolio. Ungroup and use tq_portfolio_.tbl_df()
+    if(colnames(data)[[1]] != "portfolio") {
+
+        # Ungroup tibble
+        data <- dplyr::ungroup(data)
+
+        # Run for 1 portfolio
+        ret <- tq_portfolio_(
+            data = data,
+            assets_col = assets_col,
+            returns_col = returns_col,
+            weights = weights,
+            col_rename = col_rename
+            )
+
+        # Return results
+        return(ret)
+    }
+
+    # Otherwise, multiple portfolios
+
+    # Check weights and data compatibility
+    check_data_weights_compatibility(data, weights)
+
+    # Get groups
+    group_names_data <- dplyr::groups(data)
+
+    # Format data
+    data_nested <- data %>%
+        tidyr::nest() %>%
+        dplyr::rename(returns.. = data)
+
+    # Format weights
+    weights_nested <- weights %>%
+        tidyr::nest() %>%
+        dplyr::rename(weights.. = data)
+
+    # Join data and weights
+    y <- names(data_nested)[[1]]
+    x <- names(weights_nested)[[1]]
+    data_weights <- left_join(data_nested, weights_nested, by = setNames(x, y))
+
+    # Custom function for mapping
+    custom_function <- function(x, y, z) {
+        tq_portfolio_(data = x,
+                           weights = y,
+                           x = z,
+                           assets_col = assets_col,
+                           returns_col = returns_col,
+                           col_rename = col_rename,
+                           map = TRUE,
+                           ...)
+    }
+
+    # Map data and weights to tq_portfolio_.tbl_df()
+    data_weights %>%
+        dplyr::mutate(
+            portfolio.. = purrr::pmap(list(returns.., weights.., portfolio), custom_function),
+            class.. = purrr::map_chr(.x = portfolio.., ~ class(.x)[[1]])
+            ) %>%
+        dplyr::filter(class.. != "logical") %>%
+        dplyr::select(-c(returns.., weights.., class..)) %>%
+        tidyr::unnest() %>%
+        dplyr::group_by_(.dots = group_names_data)
+}
+
+# Utility ---------------------------------------------------------------------------------------------------
 
 #' @rdname tq_portfolio
 #' @export
@@ -266,8 +311,6 @@ tq_repeat_df <- function(data, n, index_col_name = "portfolio") {
 
     ret
 }
-
-# UTILITY FUNCTIONS -----
 
 map_weights <- function(weights, assets_col) {
 
@@ -303,7 +346,6 @@ map_weights <- function(weights, assets_col) {
     }
 
     ret
-
 }
 
 check_weights <- function(weights, assets_col, map, x) {
