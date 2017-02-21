@@ -1,13 +1,16 @@
 Package: tidyquant
 Type: Package
 Title: Tidy Quantitative Financial Analysis
-Version: 0.3.0.9080
-Date: 2017-01-28
-Authors@R: person("Matt", "Dancho", email = "mdancho@gmail.com", 
-    role = c("aut", "cre"))
-Maintainer: Matt Dancho <mdancho@gmail.com>
+Version: 0.3.0.9090
+Date: 2017-02-21
+Authors@R: c(
+    person("Matt", "Dancho", email = "mdancho@business-science.io", role = c("aut", "cre")),
+    person("Davis", "Vaughan", email = "dvaughan@business-science.io", role = c("aut"))
+  )
+Maintainer: Matt Dancho <mdancho@business-science.io>
 Description: Bringing financial analysis to the 'tidyverse'. The 'tidyquant' 
-    package provides a convenient wrapper to various 'xts', 'zoo', 'quantmod' and 'TTR' package 
+    package provides a convenient wrapper to various 'xts', 'zoo', 'quantmod', 'TTR' 
+    and 'PerformanceAnalytics' package 
     functions and returns the objects in the tidy 'tibble' format. The main 
     advantage is being able to use quantitative functions with the 'tidyverse'
     functions including 'purrr', 'dplyr', 'tidyr', 'ggplot2', 'lubridate', etc. See 
@@ -18,7 +21,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
-    R (>= 3.3.2),
+    R (>= 3.3.0),
     lubridate (>= 1.6.0),
     PerformanceAnalytics (>= 1.4.3541),
     quantmod (>= 0.4-7),
