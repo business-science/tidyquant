@@ -92,7 +92,7 @@
 #' @export
 tq_transform <- function(data, ohlc_fun = OHLCV, transform_fun, col_rename = NULL, ...) {
 
-    # NSE Evaluation
+    # NSE
     tq_transform_(data = data,
                   ohlc_fun = lazyeval::expr_text(ohlc_fun),
                   transform_fun = lazyeval::expr_text(transform_fun),

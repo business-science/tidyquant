@@ -130,45 +130,24 @@
 #' @export
 tq_portfolio <- function(data, assets_col, returns_col, weights = NULL, col_rename = NULL, ...) {
 
-    # Convert to NSE
-    assets_col <- deparse(substitute(assets_col))
-    returns_col <- deparse(substitute(returns_col))
-
-    # Patch for grouped data frames
-    if (dplyr::is.grouped_df(data) && colnames(data)[[1]] == "portfolio") {
-
-        tq_portfolio_grouped_df_(data = data, assets_col = assets_col, returns_col = returns_col,
-                                 weights = weights, col_rename = col_rename, ...)
-
-    } else {
-
-        tq_portfolio_base_(data = data, assets_col = assets_col, returns_col = returns_col,
-                           weights = weights, col_rename = col_rename, ...)
-
-    }
-
+    # NSE
+    tq_portfolio_(
+        data = data,
+        assets_col = lazyeval::lazy_eval(assets_col),
+        returns_col = lazyeval::lazy_eval(returns_col),
+        weights = weights,
+        col_rename = col_rename
+    )
 }
 
 #' @rdname tq_portfolio
 #' @export
 tq_portfolio_ <- function(data, assets_col, returns_col, weights = NULL, col_rename = NULL, ...) {
-
-    # Patch for grouped data frames
-    if (dplyr::is.grouped_df(data) && colnames(data)[[1]] == "portfolio") {
-
-        tq_portfolio_grouped_df_(data = data, assets_col = assets_col, returns_col = returns_col,
-                                 weights = weights, col_rename = col_rename, ...)
-
-    } else {
-
-        tq_portfolio_base_(data = data, assets_col = assets_col, returns_col = returns_col,
-                           weights = weights, col_rename = col_rename, ...)
-
-    }
-
+    UseMethod("tq_portfolio_", data)
 }
 
-tq_portfolio_grouped_df_ <- function(data, assets_col, returns_col, weights, col_rename, ...) {
+
+tq_portfolio_.grouped_df <- function(data, assets_col, returns_col, weights, col_rename, ...) {
 
     # Check weights and data compatibility
     check_data_weights_compatibility(data, weights)
@@ -192,7 +171,7 @@ tq_portfolio_grouped_df_ <- function(data, assets_col, returns_col, weights, col
 
     # Map data and weights to tq_portfolio_base_
     custom_function <- function(x, y, z) {
-        tq_portfolio_base_(data = x,
+        tq_portfolio_(data = x,
                            weights = y,
                            x = z,
                            assets_col = assets_col,
@@ -213,10 +192,7 @@ tq_portfolio_grouped_df_ <- function(data, assets_col, returns_col, weights, col
         dplyr::group_by_(.dots = group_names_data)
 }
 
-tq_portfolio_base_ <- function(data, assets_col, returns_col, weights, col_rename, map = FALSE, x = NULL, ...) {
-
-    # Check data
-    check_data_is_data_frame(data)
+tq_portfolio_.tbl_df <- function(data, assets_col, returns_col, weights, col_rename, map = FALSE, x = NULL, ...) {
 
     # Ungroup grouped data frames
     if (dplyr::is.grouped_df(data)) data <- dplyr::ungroup(data)
