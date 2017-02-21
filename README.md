@@ -3,9 +3,9 @@
 tidyquant
 =========
 
-<img src="img/tidyquant-logo.png" width="105" height="120" align="right" />
-
 [![Travis-CI Build Status](https://travis-ci.org/mdancho84/tidyquant.svg?branch=master)](https://travis-ci.org/mdancho84/tidyquant) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/tidyquant)](https://cran.r-project.org/package=tidyquant) ![](http://cranlogs.r-pkg.org/badges/tidyquant?color=brightgreen) ![](http://cranlogs.r-pkg.org/badges/grand-total/tidyquant?color=brightgreen)
+
+<img src="img/tidyquant-logo.png" width="150" height="170" align="right" />
 
 > Bringing financial analysis to the tidyverse
 
