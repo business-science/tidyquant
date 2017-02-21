@@ -93,11 +93,11 @@
 tq_transform <- function(data, ohlc_fun = OHLCV, transform_fun, col_rename = NULL, ...) {
 
     # NSE
-    tq_transform_(data = data,
-                  ohlc_fun = lazyeval::expr_text(ohlc_fun),
+    tq_transform_(data          = data,
+                  ohlc_fun      = lazyeval::expr_text(ohlc_fun),
                   transform_fun = lazyeval::expr_text(transform_fun),
-                  col_rename = col_rename, ...)
-
+                  col_rename    = col_rename,
+                  ...           = ...)
 }
 
 #' @rdname tq_transform
@@ -176,7 +176,11 @@ tq_transform_.data.frame <- function(data, ohlc_fun = "OHLCV", transform_fun, co
     data <- as_tibble(data)
 
     # Call tq_transform_ for a tibble
-    tq_transform_(data, ohlc_fun, transform_fun, col_rename, ...)
+    tq_transform_(data          = data,
+                  ohlc_fun      = ohlc_fun,
+                  transform_fun = transform_fun,
+                  col_rename    = col_rename,
+                  ...           = ...)
 }
 
 #' @rdname tq_transform
@@ -188,11 +192,11 @@ tq_transform_.grouped_df <- function(data, ohlc_fun = "OHLCV", transform_fun, co
     data %>%
         tidyr::nest() %>%
         dplyr::mutate(nested.col = data %>%
-                          purrr::map(~ tq_transform_(data = .x,
-                                                     ohlc_fun = ohlc_fun,
+                          purrr::map(~ tq_transform_(data          = .x,
+                                                     ohlc_fun      = ohlc_fun,
                                                      transform_fun = transform_fun,
-                                                     col_rename = col_rename,
-                                                     ...))
+                                                     col_rename    = col_rename,
+                                                     ...           = ...))
         ) %>%
         dplyr::select(-data) %>%
         tidyr::unnest() %>%
@@ -205,12 +209,13 @@ tq_transform_.grouped_df <- function(data, ohlc_fun = "OHLCV", transform_fun, co
 #' @export
 tq_transform_xy <- function(data, x, y = NULL, transform_fun, col_rename = NULL, ...) {
 
-    # NSE Evaluation
-    tq_transform_xy_(data = data,
-                     x = lazyeval::expr_text(x),
-                     y = lazyeval::expr_text(y),
+    # NSE
+    tq_transform_xy_(data          = data,
+                     x             = lazyeval::expr_text(x),
+                     y             = lazyeval::expr_text(y),
                      transform_fun = lazyeval::expr_text(transform_fun),
-                     col_rename = NULL, ...)
+                     col_rename    = NULL,
+                     ...           = ...)
 }
 
 #' @rdname tq_transform
@@ -305,7 +310,12 @@ tq_transform_xy_.data.frame <- function(data, x, y = NULL, transform_fun, col_re
     data <- as_tibble(data)
 
     # Call tq_transform_xy_ for a tibble
-    tq_transform_xy_(data, x, y, transform_fun, col_rename, ...)
+    tq_transform_xy_(data          = data,
+                     x             = x,
+                     y             = y,
+                     transform_fun = transform_fun,
+                     col_rename    = col_rename,
+                     ...           = ...)
 }
 
 #' @rdname tq_transform
@@ -317,12 +327,12 @@ tq_transform_xy_.grouped_df <- function(data, x, y = NULL, transform_fun, col_re
     data %>%
         tidyr::nest() %>%
         dplyr::mutate(nested.col = data %>%
-                          purrr::map(~ tq_transform_xy_(data = .x,
-                                                             x = x,
-                                                             y = y,
-                                                             transform_fun = transform_fun,
-                                                             col_rename = col_rename,
-                                                             ...))
+                          purrr::map(~ tq_transform_xy_(data          = .x,
+                                                        x             = x,
+                                                        y             = y,
+                                                        transform_fun = transform_fun,
+                                                        col_rename    = col_rename,
+                                                        ...           = ...))
         ) %>%
         dplyr::select(-data) %>%
         tidyr::unnest() %>%
@@ -357,9 +367,7 @@ tq_transform_fun_options <- function() {
                         TTR = funs_ttr)
 
     fun_options
-
 }
-
 
 # Checks ----------------------------------------------------------------------------------------------------
 

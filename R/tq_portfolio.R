@@ -128,14 +128,12 @@
 tq_portfolio <- function(data, assets_col, returns_col, weights = NULL, col_rename = NULL, ...) {
 
     # NSE
-    tq_portfolio_(
-        data = data,
-        assets_col = lazyeval::expr_text(assets_col),
-        returns_col = lazyeval::expr_text(returns_col),
-        weights = weights,
-        col_rename = col_rename,
-        ...
-    )
+    tq_portfolio_(data        = data,
+                  assets_col  = lazyeval::expr_text(assets_col),
+                  returns_col = lazyeval::expr_text(returns_col),
+                  weights     = weights,
+                  col_rename  = col_rename,
+                  ...         = ...)
 }
 
 #' @rdname tq_portfolio
@@ -149,6 +147,7 @@ tq_portfolio_ <- function(data, assets_col, returns_col, weights = NULL, col_ren
 #' @rdname tq_portfolio
 #' @export
 tq_portfolio_.default <- function(data, assets_col, returns_col, weights = NULL, col_rename = NULL, ...) {
+
     # Error message
     stop("data must be a tibble or data.frame object")
 }
@@ -213,7 +212,12 @@ tq_portfolio_.data.frame <- function(data, assets_col, returns_col, weights = NU
     data <- as_tibble(data)
 
     # Call tq_portfolio_ for a tibble
-    tq_portfolio_(data, assets_col, returns_col, weights, col_rename, ...)
+    tq_portfolio_(data        = data,
+                  assets_col  = assets_col,
+                  returns_col = returns_col,
+                  weights     = weights,
+                  col_rename  = col_rename,
+                  ...         = ...)
 }
 
 #' @rdname tq_portfolio
@@ -227,13 +231,12 @@ tq_portfolio_.grouped_df <- function(data, assets_col, returns_col, weights, col
         data <- dplyr::ungroup(data)
 
         # Run for 1 portfolio
-        ret <- tq_portfolio_(
-            data = data,
-            assets_col = assets_col,
-            returns_col = returns_col,
-            weights = weights,
-            col_rename = col_rename
-            )
+        ret <- tq_portfolio_(data        = data,
+                             assets_col  = assets_col,
+                             returns_col = returns_col,
+                             weights     = weights,
+                             col_rename  = col_rename,
+                             ...         = ...)
 
         # Return results
         return(ret)
@@ -264,14 +267,14 @@ tq_portfolio_.grouped_df <- function(data, assets_col, returns_col, weights, col
 
     # Custom function for mapping
     custom_function <- function(x, y, z) {
-        tq_portfolio_(data = x,
-                           weights = y,
-                           x = z,
-                           assets_col = assets_col,
-                           returns_col = returns_col,
-                           col_rename = col_rename,
-                           map = TRUE,
-                           ...)
+        tq_portfolio_(data        = x,
+                      weights     = y,
+                      x           = z,
+                      assets_col  = assets_col,
+                      returns_col = returns_col,
+                      col_rename  = col_rename,
+                      map         = TRUE,
+                      ...         = ...)
     }
 
     # Map data and weights to tq_portfolio_.tbl_df()
