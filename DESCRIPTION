@@ -38,7 +38,7 @@ Imports:
     readr (>= 1.0.0),
     rvest (>= 0.3.2),
     scales (>= 0.4.1),
-    stats (>= 3.3.2),
+    stats (>= 3.3.0),
     stringr (>= 1.1.0),
     tibble (>= 1.2),
     tidyr (>= 0.6.1),

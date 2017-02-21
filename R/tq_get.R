@@ -413,43 +413,72 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
             }
         }
 
-        # Setup Tibble Part 1
-        key_ratios_1 <- tibble::tibble(
-            section            = c(rep("Financials", 15),
-                                   rep("Profitability", 17),
-                                   rep("Growth", 16),
-                                   rep("Cash Flow", 5),
-                                   rep("Financial Health", 24),
-                                   rep("Efficiency Ratios", 8)),
-            sub.section        = c(rep("Financials", 15),
-                                   rep("Margin of Sales %", 9),
-                                   rep("Profitability", 8),
-                                   rep("Revenue %", 4),
-                                   rep("Operating Income %", 4),
-                                   rep("Net Income %", 4),
-                                   rep("EPS %", 4),
-                                   rep("Cash Flow Ratios", 5),
-                                   rep("Balance Sheet Items (in %)", 20),
-                                   rep("Liquidty/Financial Health", 4),
-                                   rep("Efficiency", 8))
-        )
-
-        # Setup Tibble Part 2
-
         # Read lines
-        skip_rows <- c(1:2, 19:21, 31:32, 41:44, 49, 54, 59, 64:66, 72:74, 95:96, 101:103)
-
         text <- text %>%
             xml2::as_list() %>%
             unlist() %>%
-            readr::read_lines() %>%
-            .[-skip_rows]
+            readr::read_lines()
+
+        # Skip rows & setup key ratio categories
+
+        # Patch for stocks with only 110 lines, missing Free Cash Flow/Net Income (line 71)
+        if (length(text) == 111)  {
+            # 111 Lines is normal
+            skip_rows <- c(1:2, 19:21, 31:32, 41:44, 49, 54, 59, 64:66, 72:74, 95:96, 101:103)
+
+            key_ratios_1 <- tibble::tibble(
+                section            = c(rep("Financials", 15),
+                                       rep("Profitability", 17),
+                                       rep("Growth", 16),
+                                       rep("Cash Flow", 5),
+                                       rep("Financial Health", 24),
+                                       rep("Efficiency Ratios", 8)),
+                sub.section        = c(rep("Financials", 15),
+                                       rep("Margin of Sales %", 9),
+                                       rep("Profitability", 8),
+                                       rep("Revenue %", 4),
+                                       rep("Operating Income %", 4),
+                                       rep("Net Income %", 4),
+                                       rep("EPS %", 4),
+                                       rep("Cash Flow Ratios", 5),
+                                       rep("Balance Sheet Items (in %)", 20),
+                                       rep("Liquidty/Financial Health", 4),
+                                       rep("Efficiency", 8)),
+                group               = 1:85
+            )
+        } else {
+            # Patch for stocks with 110 lines
+            skip_rows <- c(1:2, 19:21, 31:32, 41:44, 49, 54, 59, 64:66, 71:73, 94:95, 100:102)
+
+            key_ratios_1 <- tibble::tibble(
+                section            = c(rep("Financials", 15),
+                                       rep("Profitability", 17),
+                                       rep("Growth", 16),
+                                       rep("Cash Flow", 4), # One less
+                                       rep("Financial Health", 24),
+                                       rep("Efficiency Ratios", 8)),
+                sub.section        = c(rep("Financials", 15),
+                                       rep("Margin of Sales %", 9),
+                                       rep("Profitability", 8),
+                                       rep("Revenue %", 4),
+                                       rep("Operating Income %", 4),
+                                       rep("Net Income %", 4),
+                                       rep("EPS %", 4),
+                                       rep("Cash Flow Ratios", 4), # One less
+                                       rep("Balance Sheet Items (in %)", 20),
+                                       rep("Liquidty/Financial Health", 4),
+                                       rep("Efficiency", 8)),
+                group              = c(1:52, 54:85)
+            )
+        }
+
+        text <- text[-skip_rows]
 
         # Parse text
         key_ratios_2 <-
             suppressMessages(
                 suppressWarnings(
-                    utils::read.csv(text = text, na.strings=c("","NA")) %>%
+                    utils::read.csv(text = text, na.strings=c("", "NA")) %>%
                         tibble::as_tibble() %>%
                         dplyr::mutate_all(as.character)
                 )
@@ -463,7 +492,6 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
         key_ratios_bind <- key_ratios_raw %>%
             dplyr::select(-TTM) %>%
             dplyr::rename(category = X) %>%
-            tibble::rownames_to_column(var = "group") %>%
             dplyr::mutate(group = as.numeric(group)) %>%
             tidyr::gather(key = date, value = value, -c(group, section, sub.section, category)) %>%
             dplyr::arrange(group) %>%
