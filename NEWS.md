@@ -15,7 +15,7 @@
     * `scale_color_tq()` and `scale_fill_tq()` add color/fill scales for the data used in tidyquant visualizations.
 * Improvements and Fixes:
     * Core functions are now generics to allow for extendability.
-    * Issue #11: Part 2. Fix multiple stocks that only return 110 lines.
+    * Issue #11: Part 2. Fix multiple stocks that only return 110 lines. Handle stocks that return csv with "We're sorry" message.
     * Issue #11: Part 1. Fix instability with `get = key.ratios` failing with HTTP 500 error on download. Use httr RETRY in case of failure.
     * Fixed issue with `get = "key.ratios"` where stocks listed on AMEX exchange were not able to return key ratios.
     * Issue #9: Fix problem with `get = "key.stats"` where NA's in multiple `x` (e.g. `c("AAPL", "GOOG")`) cause call to fail during coercion. 
