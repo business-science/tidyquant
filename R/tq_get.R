@@ -342,7 +342,7 @@ tq_get_util_1 <-
                                    tidyquant::as_tibble(x, preserve_row_names = TRUE)) %>%
                 dplyr::rename(category = row.names) %>%
                 tidyr::gather(date, value, -c(category, group)) %>%
-                dplyr::mutate(date = lubridate::ymd(date)) %>%
+                dplyr::mutate(date = lubridate::as_date(date)) %>%
                 dplyr::arrange(group)
 
             df
@@ -368,12 +368,12 @@ tq_get_util_1 <-
         ret <- ret %>%
             tidyquant::as_tibble(preserve_row_names = TRUE) %>%
             dplyr::rename(date = row.names) %>%
-            dplyr::mutate(date = lubridate::ymd(date))
+            dplyr::mutate(date = lubridate::as_date(date))
 
         # Filter economic data by date
         if (identical(get, "economicdata")) {
             ret <- ret %>%
-                dplyr::filter(date >= lubridate::ymd(from) & date <= lubridate::ymd(to))
+                dplyr::filter(date >= lubridate::as_date(from) & date <= lubridate::as_date(to))
         }
     }
 
@@ -553,7 +553,7 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
                           `Price to Cash Flow`) %>%
             tidyr::gather(key = category, value = value, -date) %>%
             dplyr::select(category, date, value) %>%
-            dplyr::mutate(date = lubridate::ymd(date))
+            dplyr::mutate(date = lubridate::as_date(date))
 
         # Get last group number
         last_group_num <- key_ratios_bind$group %>% max()
@@ -569,6 +569,13 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
             dplyr::group_by(section) %>%
             tidyr::nest()
 
+        return(key_ratios)
+
+    }, warning = function(w) {
+
+        warn <- w
+        if (map == TRUE) warn <- paste0(x, ": ", w)
+        warning(warn)
         return(key_ratios)
 
     }, error = function(e) {
