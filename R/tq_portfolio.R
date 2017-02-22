@@ -229,11 +229,12 @@ tq_portfolio_.grouped_df <- function(data, assets_col, returns_col, weights, col
     custom_function <- function(x, y, z) {
         tq_portfolio_(data        = x,
                       weights     = y,
-                      x           = z,
                       assets_col  = assets_col,
                       returns_col = returns_col,
                       col_rename  = col_rename,
+                      # check_weights() arguments
                       map         = TRUE,
+                      x           = z,
                       ...         = ...)
     }
 
@@ -249,6 +250,7 @@ tq_portfolio_.grouped_df <- function(data, assets_col, returns_col, weights, col
         dplyr::group_by_(.dots = group_names_data)
 }
 
+# tq_portfolio core function --------------------------------------------------------------------------------
 
 tq_portfolio_base_ <- function(data, assets_col, returns_col, weights, col_rename, map = FALSE, x = NULL, ...) {
 
