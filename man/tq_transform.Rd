@@ -3,8 +3,16 @@
 \name{tq_transform}
 \alias{tq_transform}
 \alias{tq_transform_}
+\alias{tq_transform_.default}
+\alias{tq_transform_.tbl_df}
+\alias{tq_transform_.data.frame}
+\alias{tq_transform_.grouped_df}
 \alias{tq_transform_xy}
 \alias{tq_transform_xy_}
+\alias{tq_transform_xy_.default}
+\alias{tq_transform_xy_.tbl_df}
+\alias{tq_transform_xy_.data.frame}
+\alias{tq_transform_xy_.grouped_df}
 \alias{tq_transform_fun_options}
 \title{Transforms quantitative data (returns new variables in new tibble)}
 \usage{
@@ -13,9 +21,33 @@ tq_transform(data, ohlc_fun = OHLCV, transform_fun, col_rename = NULL, ...)
 tq_transform_(data, ohlc_fun = "OHLCV", transform_fun, col_rename = NULL,
   ...)
 
+\method{tq_transform_}{default}(data, ohlc_fun = "OHLCV", transform_fun,
+  col_rename = NULL, ...)
+
+\method{tq_transform_}{tbl_df}(data, ohlc_fun = "OHLCV", transform_fun,
+  col_rename = NULL, ...)
+
+\method{tq_transform_}{data.frame}(data, ohlc_fun = "OHLCV", transform_fun,
+  col_rename = NULL, ...)
+
+\method{tq_transform_}{grouped_df}(data, ohlc_fun = "OHLCV", transform_fun,
+  col_rename = NULL, ...)
+
 tq_transform_xy(data, x, y = NULL, transform_fun, col_rename = NULL, ...)
 
 tq_transform_xy_(data, x, y = NULL, transform_fun, col_rename = NULL, ...)
+
+\method{tq_transform_xy_}{default}(data, x, y = NULL, transform_fun,
+  col_rename = NULL, ...)
+
+\method{tq_transform_xy_}{tbl_df}(data, x, y = NULL, transform_fun,
+  col_rename = NULL, ...)
+
+\method{tq_transform_xy_}{data.frame}(data, x, y = NULL, transform_fun,
+  col_rename = NULL, ...)
+
+\method{tq_transform_xy_}{grouped_df}(data, x, y = NULL, transform_fun,
+  col_rename = NULL, ...)
 
 tq_transform_fun_options()
 }

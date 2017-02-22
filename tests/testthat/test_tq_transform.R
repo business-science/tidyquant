@@ -124,13 +124,13 @@ test_that("Test error on invalid ohlc_fun, x and y inputs.", {
         {x <-  "err"
         AAPL %>%
             tq_mutate_xy_(x = x, y = "close", mutate_fun = "Delt", k = 1)},
-        paste0("x = ", x, " not a valid name.")
+        paste0("x = err not a valid name.")
     )
     expect_error(
         {y <-  "err"
         AAPL %>%
             tq_mutate_xy_(x = "open", y = y, mutate_fun = "Delt", k = 1)},
-        paste0("y = ", y, " not a valid name.")
+        paste0("y = err not a valid name.")
     )
 
 })
@@ -142,7 +142,7 @@ test_that("Test error on invalid ohlc_fun, x and y inputs.", {
         {mutate_fun <- "err"
         AAPL %>%
             tq_mutate_(ohlc_fun = "close", mutate_fun = mutate_fun)},
-        paste0("fun = ", mutate_fun, " not a valid option.")
+        paste0("fun = err not a valid option.")
     )
 
 })

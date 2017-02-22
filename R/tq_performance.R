@@ -88,78 +88,41 @@
 #'     tq_performance(Ra = Ra, Rb = Rb, performance_fun = table.CAPM)
 #'
 
-
-# PRIMARY FUNCTIONS ----
+# tq_performance ------------------------------------------------------------------------------------------------
 
 #' @rdname tq_performance
 #' @export
 tq_performance <- function(data, Ra, Rb = NULL, performance_fun, ...) {
 
-    # Convert to NSE
-    Ra <- deparse(substitute(Ra))
-    Rb <- deparse(substitute(Rb))
-    performance_fun <- deparse(substitute(performance_fun))
-
-    # Patch for grouped data frames
-    if (dplyr::is.grouped_df(data)) {
-
-        tq_performance_grouped_df_(data = data, Ra = Ra, Rb = Rb,
-                                   performance_fun = performance_fun, ...)
-
-    } else {
-
-        tq_performance_base_(data = data, Ra = Ra, Rb = Rb,
-                             performance_fun = performance_fun, ...)
-
-    }
-
+    tq_performance_(data            = data,
+                    Ra              = lazyeval::expr_text(Ra),
+                    Rb              = lazyeval::expr_text(Rb),
+                    performance_fun = lazyeval::expr_text(performance_fun),
+                    ...             = ...)
 }
 
 #' @rdname tq_performance
 #' @export
 tq_performance_ <- function(data, Ra, Rb = NULL, performance_fun, ...) {
-
-    # Patch for grouped data frames
-    if (dplyr::is.grouped_df(data)) {
-
-        tq_performance_grouped_df_(data = data, Ra = Ra, Rb = Rb,
-                                   performance_fun = performance_fun, ...)
-
-    } else {
-
-        tq_performance_base_(data = data, Ra = Ra, Rb = Rb,
-                             performance_fun = performance_fun, ...)
-
-    }
-
+    UseMethod("tq_performance_", data)
 }
 
-tq_performance_grouped_df_ <- function(data, Ra, Rb, performance_fun, ...) {
+# tq_performance method dispatch --------------------------------------------------------------------------------
 
-    group_names <- dplyr::groups(data)
+#' @rdname tq_performance
+#' @export
+tq_performance_.default <- function(data, Ra, Rb = NULL, performance_fun, ...) {
 
-    data %>%
-        tidyr::nest() %>%
-        dplyr::mutate(nested.col = data %>%
-              purrr::map(~ tq_performance_base_(data = .x,
-                                                Ra = Ra,
-                                                Rb = Rb,
-                                                performance_fun = performance_fun,
-                                                ...))
-        ) %>%
-        dplyr::select(-data) %>%
-        tidyr::unnest() %>%
-        dplyr::group_by_(.dots = group_names)
+    # Error message
+    stop("data must be a tibble or data.frame object")
 }
 
-
-tq_performance_base_ <- function(data, Ra, Rb, performance_fun, ...) {
+#' @rdname tq_performance
+#' @export
+tq_performance_.tbl_df <- function(data, Ra, Rb = NULL, performance_fun, ...) {
 
     # Check transform_fun in xts, quantmod or TTR
     check_performance_fun_options(performance_fun)
-
-    # Check data
-    check_data_is_data_frame(data)
 
     # Check Ra and Rb
     check_x_y_valid(data, Ra, Rb)
@@ -240,8 +203,46 @@ tq_performance_base_ <- function(data, Ra, Rb, performance_fun, ...) {
     })
 
     ret
-
 }
+
+#' @rdname tq_performance
+#' @export
+tq_performance_.data.frame <- function(data, Ra, Rb = NULL, performance_fun, ...) {
+
+    # Convert data.frame to tibble
+    data <- as_tibble(data)
+
+    # tq_performance_ tbl_df version
+    tq_performance_(data            = data,
+                    Ra              = Ra,
+                    Rb              = Rb,
+                    performance_fun = performance_fun,
+                    ...             = ...)
+}
+
+#' @rdname tq_performance
+#' @export
+tq_performance_.grouped_df <- function(data, Ra, Rb = NULL, performance_fun, ...) {
+
+    # Get groups
+    group_names <- dplyr::groups(data)
+
+    # Apply tq_performance_ to each group
+    data %>%
+        tidyr::nest() %>%
+        dplyr::mutate(nested.col = data %>%
+              purrr::map(~ tq_performance_.tbl_df(data = .x,
+                                                  Ra = Ra,
+                                                  Rb = Rb,
+                                                  performance_fun = performance_fun,
+                                                  ...))
+        ) %>%
+        dplyr::select(-data) %>%
+        tidyr::unnest() %>%
+        dplyr::group_by_(.dots = group_names)
+}
+
+# Function options ---------------------------------------------------------------------------------------------
 
 #' @rdname tq_performance
 #' @export
@@ -305,10 +306,9 @@ tq_performance_fun_options <- function() {
                         misc.funs                      = funs_misc)
 
     fun_options
-
 }
 
-# UTILITY FUNCTIONS -----
+# Utility ---------------------------------------------------------------------------------------------------
 
 check_performance_fun_options <- function(fun) {
     fun_options <- tq_performance_fun_options() %>%

@@ -82,67 +82,138 @@
 #' mutate <- c("MACD", "SMA")
 #' tq_mutate_xy_(fb_stock_prices, x = col_name, mutate_fun = mutate[[1]])
 
-# PRIMARY FUNCTIONS ----
+# tq_mutate ------------------------------------------------------------------------------------------------
 
 tq_mutate <- function(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL, ...) {
 
-    # Convert to NSE
-    ohlc_fun <- deparse(substitute(ohlc_fun))
-    mutate_fun <- deparse(substitute(mutate_fun))
-
-    tq_mutate_(data = data, ohlc_fun = ohlc_fun,
-               mutate_fun = mutate_fun, col_rename = col_rename, ...)
-
+    # NSE
+    tq_mutate_(data       = data,
+               ohlc_fun   = lazyeval::expr_text(ohlc_fun),
+               mutate_fun = lazyeval::expr_text(mutate_fun),
+               col_rename = col_rename,
+               ...        = ...)
 }
 
 #' @rdname tq_mutate
 #' @export
 tq_mutate_ <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...) {
+    UseMethod("tq_mutate_", data)
+}
+
+# tq_mutate method dispatch --------------------------------------------------------------------------------
+
+#' @rdname tq_mutate
+#' @export
+tq_mutate_.default <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...) {
+
+    # Error message
+    stop("data must be a tibble or data.frame object")
+}
+
+#' @rdname tq_mutate
+#' @export
+tq_mutate_.tbl_df <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...) {
 
     # Get transformation
-    ret <- tq_transform_(data = data, ohlc_fun = ohlc_fun,
-                         transform_fun = mutate_fun, col_rename = col_rename, ...)
+    ret <- tq_transform_(data          = data,
+                         ohlc_fun      = ohlc_fun,
+                         transform_fun = mutate_fun,
+                         col_rename    = col_rename,
+                         ...           = ...)
 
-    ret <- merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
-
-    ret
-
+    merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
 }
+
+#' @rdname tq_mutate
+#' @export
+tq_mutate_.data.frame <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...) {
+
+    # Convert data.frame to tibble
+    data <- as_tibble(data)
+
+    # Get transformation
+    ret <- tq_transform_(data          = data,
+                         ohlc_fun      = ohlc_fun,
+                         transform_fun = mutate_fun,
+                         col_rename    = col_rename,
+                         ...           = ...)
+
+    merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
+}
+
+# tq_mutate_xy ------------------------------------------------------------------------------------------------
 
 #' @rdname tq_mutate
 #' @export
 tq_mutate_xy <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
 
-    # Convert to NSE
-    x <- deparse(substitute(x))
-    y <- deparse(substitute(y))
-    mutate_fun <- deparse(substitute(mutate_fun))
-
-    tq_mutate_xy_(data = data, x = x, y = y,
-                  mutate_fun = mutate_fun, col_rename = col_rename, ...)
-
+    # NSE
+    tq_mutate_xy_(data       = data,
+                  x          = lazyeval::expr_text(x),
+                  y          = lazyeval::expr_text(y),
+                  mutate_fun = lazyeval::expr_text(mutate_fun),
+                  col_rename = col_rename,
+                  ...        = ...)
 }
 
 #' @rdname tq_mutate
 #' @export
 tq_mutate_xy_ <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
+    UseMethod("tq_mutate_xy_", data)
+}
 
-    # Get transformation
-    ret <- tq_transform_xy_(data = data, x = x, y = y,
-                            transform_fun = mutate_fun, col_rename = col_rename, ...)
+# tq_mutate_xy method dispatch --------------------------------------------------------------------------------
 
-    ret <- merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
+#' @rdname tq_mutate
+#' @export
+tq_mutate_xy_.default <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
 
-    ret
-
+    # Error message
+    stop("data must be a tibble or data.frame object")
 }
 
 #' @rdname tq_mutate
 #' @export
-tq_mutate_fun_options <- function() tq_transform_fun_options()
+tq_mutate_xy_.tbl_df <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
 
+    # Get transformation
+    ret <- tq_transform_xy_(data          = data,
+                            x             = x,
+                            y             = y,
+                            transform_fun = mutate_fun,
+                            col_rename    = col_rename,
+                            ...           = ...)
 
-# UTILITY FUNCTIONS ----
+    merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
+}
+
+#' @rdname tq_mutate
+#' @export
+tq_mutate_xy_.data.frame <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
+
+    # Convert data.frame to tibble
+    data <- as_tibble(data)
+
+    # Get transformation
+    ret <- tq_transform_xy_(data          = data,
+                            x             = x,
+                            y             = y,
+                            transform_fun = mutate_fun,
+                            col_rename    = col_rename,
+                            ...           = ...)
+
+    merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
+}
+
+# Function options -------------------------------------------------------------------------------------------
+
+#' @rdname tq_mutate
+#' @export
+tq_mutate_fun_options <- function() {
+    tq_transform_fun_options()
+}
+
+# Utility ----------------------------------------------------------------------------------------------------
 
 merge_two_tibbles <- function(tib1, tib2, mutate_fun) {
 
@@ -163,17 +234,13 @@ merge_two_tibbles <- function(tib1, tib2, mutate_fun) {
 
         ret <- dplyr::bind_cols(tib1, tib2)
 
-
     } else {
 
         stop("Could not join. Incompatible structures.")
-
     }
 
     ret
-
 }
-
 
 replace_duplicate_colnames <- function(tib1, tib2) {
 
@@ -209,11 +276,9 @@ replace_duplicate_colnames <- function(tib1, tib2) {
         name_list_tib2 <- name_list[(ncol(tib1) + 1):length(name_list)]
 
         colnames(tib2) <- name_list_tib2
-
     }
 
     tib2
-
 }
 
 detect_duplicates <- function(name_list) {
@@ -221,7 +286,6 @@ detect_duplicates <- function(name_list) {
     name_list %>%
         duplicated() %>%
         any()
-
 }
 
 # bad / restricted names are names that get selected unintetionally by OHLC functions
@@ -244,7 +308,6 @@ replace_bad_names <- function(tib, fun_name) {
     colnames(tib) <- name_list_tib
 
     tib
-
 }
 
 arrange_by_date <- function(tib) {
@@ -277,7 +340,6 @@ arrange_by_date <- function(tib) {
     }
 
     tib
-
 }
 
 drop_date_and_group_cols <- function(tib) {
@@ -293,5 +355,4 @@ drop_date_and_group_cols <- function(tib) {
     tib <- tib %>%
         dplyr::ungroup() %>%
         dplyr::select_(.dots = as.list(tib_names_without_date_or_group))
-
 }
