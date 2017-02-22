@@ -73,7 +73,8 @@ The primary features controlling the chart are the aesthetic arguments: these ar
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
     geom_line() +
-    labs(title = "AAPL Line Chart", y = "Closing Price", x = "")
+    labs(title = "AAPL Line Chart", y = "Closing Price", x = "") + 
+    theme_tq()
 ```
 
    
@@ -86,7 +87,8 @@ Visualizing the bar chart is as simple as replacing `geom_line` with `geom_barch
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
     geom_barchart(aes(open = open, high = high, low = low, close = close)) +
-    labs(title = "AAPL Bar Chart", y = "Closing Price", x = "")
+    labs(title = "AAPL Bar Chart", y = "Closing Price", x = "") + 
+    theme_tq()
 ```
 
 We zoom into specific sections using `coord_x_date`, which has `xlim` and `ylim` arguments specified as `c(start, end)` to focus on a specific region of the chart. For `xlim`, we'll use `lubridate` to convert a character date to date class, and then subtract six weeks using the `weeks()` function. For `ylim` we zoom in on prices in the range from 100 to 120. 
@@ -99,7 +101,8 @@ AAPL %>%
          subtitle = "Zoomed in using coord_x_date",
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(end - weeks(6), end),
-                 ylim = c(100, 120))
+                 ylim = c(100, 120)) + 
+    theme_tq()
 ```
 
 The colors can be modified using `color_up` and `color_down` arguments, and parameters such as `size` can be used to control the appearance. 
@@ -113,7 +116,8 @@ AAPL %>%
          subtitle = "Zoomed in, Experimenting with Formatting",
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(end - weeks(6), end),
-                 ylim = c(100, 120))
+                 ylim = c(100, 120)) + 
+    theme_tq()
 ```
 
 ## Candlestick Chart
@@ -124,7 +128,8 @@ Creating a candlestick chart is very similar to the process with the bar chart. 
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
     geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
-    labs(title = "AAPL Candlestick Chart", y = "Closing Price", x = "")
+    labs(title = "AAPL Candlestick Chart", y = "Closing Price", x = "") +
+    theme_tq()
 ```
 
 We zoom into specific sections using `coord_x_date`.
@@ -137,7 +142,8 @@ AAPL %>%
          subtitle = "Zoomed in using coord_x_date",
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(end - weeks(6), end),
-                 ylim = c(100, 120))
+                 ylim = c(100, 120)) + 
+    theme_tq()
 ```
 
 The colors can be modified using `color_up` and `color_down`, which control the line color, and `fill_up` and `fill_down`, which control the rectangle fills.
@@ -152,7 +158,8 @@ AAPL %>%
          subtitle = "Zoomed in, Experimenting with Formatting",
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(end - weeks(6), end),
-                 ylim = c(100, 120))
+                 ylim = c(100, 120)) + 
+    theme_tq()
 ```
 
 ## Combining Chart Geoms
@@ -169,7 +176,8 @@ AAPL %>%
          subtitle = "Combining Chart Geoms",
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(end - weeks(6), end),
-                 ylim = c(100, 120))
+                 ylim = c(100, 120)) + 
+    theme_tq()
 ```
 
 <a class="anchor" id="mult-chart"></a>
@@ -190,7 +198,8 @@ FANG %>%
          subtitle = "Experimenting with Mulitple Stocks",
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(start, end)) +
-    facet_wrap(~ symbol, ncol = 2, scale = "free_y")
+    facet_wrap(~ symbol, ncol = 2, scale = "free_y") + 
+    theme_tq()
 ```
 
 _A note about out-of-bounds data (or "clipping"), which is particularly important with faceting and charting moving averages_: 
@@ -203,12 +212,13 @@ FANG %>%
     filter(date >= start - days(2 * 15)) %>%
     ggplot(aes(x = date, y = close, group = symbol)) +
     geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
-    geom_ma(ma_fun = SMA, n = 15, color = "cadetblue3", size = 1) +
+    geom_ma(ma_fun = SMA, n = 15, color = "cadetblue4", size = 1) +
     labs(title = "FANG Candlestick Chart", 
          subtitle = "Experimenting with Mulitple Stocks",
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(start, end)) +
-    facet_wrap(~ symbol, ncol = 2, scale = "free_y")
+    facet_wrap(~ symbol, ncol = 2, scale = "free_y") +
+    theme_tq()
 ```
 
 # Visualizing Trends
@@ -247,13 +257,14 @@ We want to apply a `SMA`, so we research the TTR function and we see that it acc
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
     geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
-    geom_ma(ma_fun = SMA, n = 50, linetype = 5) +
-    geom_ma(ma_fun = SMA, n = 200, color = "red") + 
+    geom_ma(ma_fun = SMA, n = 50, linetype = 5, size = 1.25) +
+    geom_ma(ma_fun = SMA, n = 200, color = "red", size = 1.25) + 
     labs(title = "AAPL Candlestick Chart", 
          subtitle = "50 and 200-Day SMA", 
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(end - weeks(24), end),
-                 ylim = c(100, 120))
+                 ylim = c(100, 120)) + 
+    theme_tq()
 ```
 
 ### Example 2: Charting exponential moving averages
@@ -263,13 +274,14 @@ We want an `EMA`, so we research the TTR function and we see that it accepts, `n
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
     geom_barchart(aes(open = open, high = high, low = low, close = close)) +
-    geom_ma(ma_fun = EMA, n = 50, wilder = TRUE, linetype = 5) +
-    geom_ma(ma_fun = EMA, n = 200, wilder = TRUE, color = "red") + 
+    geom_ma(ma_fun = EMA, n = 50, wilder = TRUE, linetype = 5, size = 1.25) +
+    geom_ma(ma_fun = EMA, n = 200, wilder = TRUE, color = "red", size = 1.25) + 
     labs(title = "AAPL Bar Chart", 
          subtitle = "50 and 200-Day EMA", 
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(end - weeks(24), end),
-                 ylim = c(100, 120))
+                 ylim = c(100, 120)) +
+    theme_tq()
 ```
 
 ### Example 3: Charting moving averages for multiple stocks at once
@@ -289,7 +301,8 @@ FANG %>%
          subtitle = "50 and 200-Day EMA, Experimenting with Multiple Stocks", 
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(start, end)) +
-    facet_wrap(~ symbol, ncol = 2, scales = "free_y")
+    facet_wrap(~ symbol, ncol = 2, scales = "free_y") + 
+    theme_tq()
 ```
 
 ## Bollinger Bands
@@ -312,7 +325,8 @@ AAPL %>%
          subtitle = "BBands with SMA Applied", 
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(end - weeks(24), end),
-                 ylim = c(100, 120))
+                 ylim = c(100, 120)) + 
+    theme_tq()
 ```
 
 ### Example 2: Modifying the appearance of Bollinger Bands
@@ -332,7 +346,8 @@ AAPL %>%
          subtitle = "BBands with SMA Applied, Experimenting with Formatting", 
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(end - weeks(24), end),
-                 ylim = c(100, 120))
+                 ylim = c(100, 120)) + 
+    theme_tq()
 ```
 
 
@@ -353,7 +368,8 @@ FANG %>%
          subtitle = "BBands with SMA Applied, Experimenting with Multiple Stocks", 
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(start, end)) +
-    facet_wrap(~ symbol, ncol = 2, scales = "free_y")
+    facet_wrap(~ symbol, ncol = 2, scales = "free_y") + 
+    theme_tq()
 ```
 
 
@@ -375,7 +391,8 @@ AMZN %>%
     scale_y_continuous() +
     labs(title = "AMZN Line Chart", 
          subtitle = "Continuous Scale", 
-         y = "Closing Price", x = "")
+         y = "Closing Price", x = "") + 
+    theme_tq()
 ```
 
 __Log Scale__:
@@ -387,7 +404,8 @@ AMZN %>%
     scale_y_log10() +
     labs(title = "AMZN Line Chart", 
          subtitle = "Log Scale", 
-         y = "Closing Price", x = "")
+         y = "Closing Price", x = "") + 
+    theme_tq()
 ```
 
 
@@ -406,7 +424,8 @@ AMZN %>%
     geom_smooth(method = "lm") +
     labs(title = "AMZN Line Chart", 
          subtitle = "Log Scale, Applying Linear Trendline", 
-         y = "Adjusted Closing Price", x = "")
+         y = "Adjusted Closing Price", x = "") + 
+    theme_tq()
 ```
 
 __Loess__:
@@ -419,7 +438,8 @@ AMZN %>%
     geom_smooth(method = "loess") +
     labs(title = "AMZN Line Chart", 
          subtitle = "Log Scale, Applying Loess Trendline", 
-         y = "Adjusted Closing Price", x = "")
+         y = "Adjusted Closing Price", x = "") + 
+    theme_tq()
 ```
 
 
@@ -434,7 +454,9 @@ AMZN %>%
     geom_smooth(method = "loess", se = FALSE) +
     labs(title = "AMZN Volume Chart", 
          subtitle = "Charting Daily Volume", 
-         y = "Volume", x = "")  
+         y = "Volume", x = "") +
+    theme_tq() +
+    theme(legend.position = "none") 
 ```
 
 And, we can zoom in on a specific region. Using `scale_color_gradient` we can quickly visualize the high and low points, and using `geom_smooth` we can see the trend.
@@ -451,8 +473,73 @@ AMZN %>%
          y = "Volume", x = "") + 
     coord_x_date(xlim = c(start, end)) +
     scale_color_gradient(low = "red", high = "darkblue") +
-    theme(legend.position = "none")
+    theme_tq() + 
+    theme(legend.position = "none") 
 ```
 
 
+# Themes
+
+The `tidyquant` package comes with three themes to help quickly customize financial charts:
+
+* __Light__: `theme_tq()` + `scale_color_tq()` + `scale_fill_tq()`
+* __Dark__: `theme_tq_dark()` + `scale_color_tq(theme = "dark")` + `scale_fill_tq(theme = "dark")`
+* __Green__: `theme_tq_green()` + `scale_color_tq(theme = "green")` + `scale_fill_tq(theme = "green")`
+
+## Light
+
+```{r, fig.height = 6}
+n_mavg <- 50 # Number of periods (days) for moving average
+FANG %>%
+    filter(date >= start - days(2 * n_mavg)) %>%
+    ggplot(aes(x = date, y = close, color = symbol)) +
+    geom_line(size = 1.5) +
+    geom_ma(n = 15, color = "darkblue", size = 1) + 
+    geom_ma(n = n_mavg, color = "red", size = 1) +
+    labs(title = "Light Theme",
+         x = "", y = "Closing Price") +
+    coord_x_date(xlim = c(start, end)) +
+    facet_wrap(~ symbol, scales = "free_y") +
+    theme_tq() +
+    scale_color_tq() +
+    scale_y_continuous(labels = scales::dollar)
+```
+
+## Dark
+
+```{r, fig.height = 6}
+n_mavg <- 50 # Number of periods (days) for moving average
+FANG %>%
+    filter(date >= start - days(2 * n_mavg)) %>%
+    ggplot(aes(x = date, y = close, color = symbol)) +
+    geom_line(size = 1.5) +
+    geom_ma(n = 15, color = "darkblue", size = 1) + 
+    geom_ma(n = n_mavg, color = "red", size = 1) +
+    labs(title = "Dark Theme",
+         x = "", y = "Closing Price") +
+    coord_x_date(xlim = c(start, end)) +
+    facet_wrap(~ symbol, scales = "free_y") +
+    theme_tq_dark() +
+    scale_color_tq(theme = "dark") +
+    scale_y_continuous(labels = scales::dollar)
+```
+
+## Green
+
+```{r, fig.height = 6}
+n_mavg <- 50 # Number of periods (days) for moving average
+FANG %>%
+    filter(date >= start - days(2 * n_mavg)) %>%
+    ggplot(aes(x = date, y = close, color = symbol)) +
+    geom_line(size = 1.5) +
+    geom_ma(n = 15, color = "darkblue", size = 1) + 
+    geom_ma(n = n_mavg, color = "red", size = 1) +
+    labs(title = "Green Theme",
+         x = "", y = "Closing Price") +
+    coord_x_date(xlim = c(start, end)) +
+    facet_wrap(~ symbol, scales = "free_y") +
+    theme_tq_green() +
+    scale_color_tq(theme = "green") +
+    scale_y_continuous(labels = scales::dollar)
+```
 
