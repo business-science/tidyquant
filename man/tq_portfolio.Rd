@@ -3,6 +3,10 @@
 \name{tq_portfolio}
 \alias{tq_portfolio}
 \alias{tq_portfolio_}
+\alias{tq_portfolio_.default}
+\alias{tq_portfolio_.tbl_df}
+\alias{tq_portfolio_.data.frame}
+\alias{tq_portfolio_.grouped_df}
 \alias{tq_repeat_df}
 \title{Aggregates a group of returns by asset into portfolio returns}
 \usage{
@@ -11,6 +15,18 @@ tq_portfolio(data, assets_col, returns_col, weights = NULL,
 
 tq_portfolio_(data, assets_col, returns_col, weights = NULL,
   col_rename = NULL, ...)
+
+\method{tq_portfolio_}{default}(data, assets_col, returns_col, weights = NULL,
+  col_rename = NULL, ...)
+
+\method{tq_portfolio_}{tbl_df}(data, assets_col, returns_col, weights,
+  col_rename, ...)
+
+\method{tq_portfolio_}{data.frame}(data, assets_col, returns_col,
+  weights = NULL, col_rename = NULL, ...)
+
+\method{tq_portfolio_}{grouped_df}(data, assets_col, returns_col, weights,
+  col_rename, ...)
 
 tq_repeat_df(data, n, index_col_name = "portfolio")
 }

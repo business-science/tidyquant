@@ -1,7 +1,7 @@
 Package: tidyquant
 Type: Package
 Title: Tidy Quantitative Financial Analysis
-Version: 0.3.0.9090
+Version: 0.3.0.9100
 Date: 2017-02-21
 Authors@R: c(
     person("Matt", "Dancho", email = "mdancho@business-science.io", role = c("aut", "cre")),
@@ -46,7 +46,8 @@ Imports:
     tseries (>= 0.10-37),
     xml2 (>= 1.1.0),
     zoo (>= 1.7-14),
-    httr (>= 1.2.1)
+    httr (>= 1.2.1),
+    lazyeval (>= 0.2.0)
 Suggests:
     knitr,
     rmarkdown,

@@ -52,9 +52,9 @@ NULL
 scale_color_tq <- function(..., theme = "light") {
 
   pal <- switch(theme,
-         "light" = light_palette(),
-         "dark"  = dark_palette(),
-         "green" = green_palette()
+         "light" = palette_light(),
+         "dark"  = palette_dark(),
+         "green" = palette_green()
          )
 
   scale_color_manual(values = pal)
@@ -65,14 +65,28 @@ scale_color_tq <- function(..., theme = "light") {
 scale_fill_tq <- function(..., theme = "light") {
 
   pal <- switch(theme,
-                "light" = light_palette(),
-                "dark"  = dark_palette()
+                "light" = palette_light(),
+                "dark"  = palette_dark(),
+                "green" = palette_green()
   )
 
   scale_fill_manual(values = pal)
 }
 
-light_palette <- function() {
+#' tidyquant palettes for use with scales
+#'
+#' These palettes are mainly called internally by tidyquant \code{scale_*_tq()} functions.
+#'
+#' @examples
+#' library(scales)
+#' scales::show_col(palette_light())
+#'
+#' @name palette_tq
+NULL
+
+#' @rdname palette_tq
+#' @export
+palette_light <- function() {
   c(
     "#2c3e50", # blue
     "#e31a1c", # red
@@ -89,8 +103,10 @@ light_palette <- function() {
   )
 }
 
-dark_palette <- function() {
-  # Brighter version of light_palette
+#' @rdname palette_tq
+#' @export
+palette_dark <- function() {
+  # Brighter version of palette_light
   c(
     "#0055AA", # blue
     "#C40003", # red
@@ -107,8 +123,10 @@ dark_palette <- function() {
   )
 }
 
-green_palette <- function() {
-  # Green compatible version of light_palette
+#' @rdname palette_tq
+#' @export
+palette_green <- function() {
+  # Green compatible version of palette_light
   c(
     "#0055AA", # blue
     "#C40003", # red
