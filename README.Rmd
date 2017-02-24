@@ -30,7 +30,7 @@ devtools::load_all()
 
 * __A few core functions with a lot of power__
 * __Integrates the quantitative analysis functionality of `zoo`, `xts`, `quantmod`, `TTR`, and _now_ `PerformanceAnalytics`__
-* __Designed for scaling using the _split-apply-combine_ framework of the `tidyverse`__
+* __Designed for modeling and scaling analyses using the the `tidyverse` tools in *[R for Data Science](http://r4ds.had.co.nz/)*__
 * __Implements `ggplot2` functionality for beautiful and meaningful financial visualizations__
 * __User-friendly documentation to get you up to speed quickly!__
 
