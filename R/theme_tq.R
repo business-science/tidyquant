@@ -58,14 +58,13 @@ theme_tq <- function(base_size = 11, base_family = "") {
             # Axes
             axis.line          = element_blank(),
             axis.text          = element_text(size = rel(0.8)),
-            axis.ticks         = element_line(size = rel(1/3)),
+            axis.ticks         = element_blank(),
             axis.title         = element_text(size = rel(1.0)),
 
             # Panel
             panel.background   = element_rect(fill = white, color = NA),
-            panel.border       = element_rect(fill = NA, size = rel(1/3), color = blue),
+            panel.border       = element_rect(fill = NA, size = rel(1/2), color = blue),
             panel.grid.major   = element_line(color = grey, size = rel(1/3)),
-            panel.grid.major.x = element_blank(),
             panel.grid.minor   = element_line(color = grey, size = rel(1/3)),
             panel.grid.minor.x = element_blank(),
             panel.spacing      = unit(.75, "cm"),
@@ -75,7 +74,7 @@ theme_tq <- function(base_size = 11, base_family = "") {
             legend.position    = "bottom",
 
             # Strip (Used with multiple panels)
-            strip.background   = element_rect(fill = blue, color = green),
+            strip.background   = element_rect(fill = blue, color = blue),
             strip.text         = element_text(color = white, size = rel(0.8)),
 
             # Plot
@@ -105,7 +104,6 @@ theme_tq_dark <- function(base_size = 11, base_family = "") {
 
             # Panel
             panel.background   = element_rect(fill = grey, color = NA),
-            panel.border       = element_rect(fill = NA, size = rel(0.5), color = green),
             panel.grid.major   = element_line(color = white, size = rel(1/3)),
             panel.grid.minor   = element_line(color = white, size = rel(1/3)),
 
@@ -130,7 +128,6 @@ theme_tq_green <- function(base_size = 11, base_family = "") {
 
             # Panel
             panel.background   = element_rect(fill = green, color = NA),
-            panel.border       = element_rect(fill = NA, size = rel(0.5), color = blue),
             panel.grid.major   = element_line(color = white, size = rel(1/3)),
             panel.grid.minor   = element_line(color = white, size = rel(1/3)),
 
