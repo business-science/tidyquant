@@ -517,7 +517,7 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
         # Get stock prices
         from = lubridate::today() - lubridate::years(12)
         valuations_2 <- tq_get(x, get = "stock.prices", from = from) %>%
-            tq_transform_xy(adjusted, transform_fun = to.period, period = "years") %>%
+            tq_transmute_xy(adjusted, transform_fun = to.period, period = "years") %>%
             dplyr::mutate(year = lubridate::year(date)) %>%
             dplyr::select(year, date, adjusted)
 

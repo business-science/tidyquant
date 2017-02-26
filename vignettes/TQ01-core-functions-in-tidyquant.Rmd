@@ -29,7 +29,7 @@ The `tidyquant` package has a __core functions with a lot of power__. Few functi
 
 * __Get Quantitative Data, `tq_get()`__: A one-stop shop to get data from various web-sources. 
 
-* __Transform, `tq_transform()`, and Mutate, `tq_mutate()`, Quantitative Data__: Perform and scale financial calculations completely within the `tidyverse`. These workhorse functions integrate the `xts`, `zoo`, `quantmod`, and `TTR` packages. 
+* __Transform, `tq_transmute()`, and Mutate, `tq_mutate()`, Quantitative Data__: Perform and scale financial calculations completely within the `tidyverse`. These workhorse functions integrate the `xts`, `zoo`, `quantmod`, and `TTR` packages. 
 
 * __Coerce Quantitative Data Between tibble and xts formats, `as_tibble()` and `as_xts()`__: Coercing the various _R_ time-based objects to and from `tibble` (tidy data frame) objects _was_ a pain. These functions enable __easily going back and forth__.
 
@@ -262,14 +262,14 @@ The data source is [Oanda](https://www.oanda.com/). It may make more sense to ge
 
 Transform and mutate functions enable the `xts`/`zoo`, `quantmod` and `TTR` functions to shine. We'll touch on the transformation and mutation functions briefly. See the next vignette in the series, [R Quantitative Analysis Package Integrations in tidyquant](TQ02-quant-integrations-in-tidyquant.html), which goes into the integrations in greater detail.
 
-## Transform Quantitative Data, tq_transform 
+## Transform Quantitative Data, tq_transmute 
 
 Transforms the results of `tq_get()`. The result is typically a different shape than the input (hence "transformed"), although this is not a requirement. An example is periodicity aggregation from daily to monthly.
 
 ```{r}
 fb_prices <- tq_get("FB") 
 fb_prices %>%
-    tq_transform(ohlc_fun = OHLCV, transform_fun = to.monthly)
+    tq_transmute(ohlc_fun = OHLCV, transform_fun = to.monthly)
 ```
 
 Let's go through what happened. `ohlc_fun` is one of the various quantmod Open, High, Low, Close (OHLC) functions (see `?quantmod::OHLC`). The function returns a column or set of columns from data that are passed to the `transform_fun`. In example above, `OHLCV` selects the full list of prices and volumes from `data`, and sends this to the transform function, `to.monthly`, which transforms the periodicity from daily to monthly. Additional arguments can be passed to the `transform_fun` by way of `...`. 
@@ -286,7 +286,7 @@ fb_prices %>%
 
 Note that a mutation can occur if, and only if, the mutation has the same structure of the original tibble. In other words, the calculation must have the same number of rows and row.names (or date fields), otherwise the mutation cannot be performed.
 
-## xy Variants, tq_transform_xy and tq_mutate_xy 
+## xy Variants, tq_transmute_xy and tq_mutate_xy 
 
 Enables working with:
 
@@ -295,7 +295,7 @@ Enables working with:
 
 ### Transformation with two primary inputs
 
-EVWMA (exponential volume-weighted moving average) requires two inputs, price and volume, that are not in OHLC code format. To work with these columns, we can switch to the xy variants, `tq_transform_xy()` and `tq_mutate_xy()`. The only difference is instead of an `ohlc_fun` argument, you use `x` and `y` arguments to pass the columns needed based on the `transform_fun` or `mutate_fun` documentation.
+EVWMA (exponential volume-weighted moving average) requires two inputs, price and volume, that are not in OHLC code format. To work with these columns, we can switch to the xy variants, `tq_transmute_xy()` and `tq_mutate_xy()`. The only difference is instead of an `ohlc_fun` argument, you use `x` and `y` arguments to pass the columns needed based on the `transform_fun` or `mutate_fun` documentation.
 
 ```{r, message=FALSE, warning=FALSE}
 fb_prices %>%
@@ -309,7 +309,7 @@ Returns from FRED, Oanda, and other sources do not have open, high, low, close (
 ```{r, message=FALSE, warning=FALSE}
 wti_prices <- tq_get("DCOILWTICO", get = "economic.data") 
 wti_prices %>%    
-    tq_transform_xy(x = price, transform_fun = to.period,
+    tq_transmute_xy(x = price, transform_fun = to.period,
                     period = "months", col_rename = "WTI Price")
 ```
 

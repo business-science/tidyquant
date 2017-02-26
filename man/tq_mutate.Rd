@@ -132,5 +132,5 @@ mutate <- c("MACD", "SMA")
 tq_mutate_xy_(fb_stock_prices, x = col_name, mutate_fun = mutate[[1]])
 }
 \seealso{
-\code{\link{tq_transform}}, \code{\link{tq_get}}
+\code{\link{tq_transmute}}, \code{\link{tq_get}}
 }

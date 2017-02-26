@@ -22,7 +22,7 @@ and examples.
 Users will probably be interested in the following:
 \itemize{
   \item \strong{Getting Data from the Web:} \code{\link{tq_get}}
-  \item \strong{Manipulating Data:} \code{\link{tq_transform}} and \code{\link{tq_mutate}}
+  \item \strong{Manipulating Data:} \code{\link{tq_transmute}} and \code{\link{tq_mutate}}
   \item \strong{Coercing Data To and From xts and tibble:} \code{\link{as_tibble}}
   and \code{\link{as_xts}}
 }

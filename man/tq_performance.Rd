@@ -79,14 +79,14 @@ Ra <- c("AAPL", "GOOG", "NFLX") \%>\%
            from = "2010-01-01",
            to   = "2015-12-31") \%>\%
     group_by(symbol) \%>\%
-    tq_transform(Ad, periodReturn, period = "monthly", col_rename = "Ra")
+    tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "Ra")
 
 # Get returns for SP500 as baseline
 Rb <- "^GSPC" \%>\%
     tq_get(get  = "stock.prices",
            from = "2010-01-01",
            to   = "2015-12-31") \%>\%
-    tq_transform(Ad, periodReturn, period = "monthly", col_rename = "Rb")
+    tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "Rb")
 
 # Merge stock returns with baseline
 RaRb <- left_join(Ra, Rb, by = c("date" = "date"))
@@ -106,7 +106,7 @@ RaRb \%>\%
 }
 \seealso{
 \itemize{
-  \item \code{\link{tq_transform}} which can be used to calculate period returns from a
+  \item \code{\link{tq_transmute}} which can be used to calculate period returns from a
   set of stock prices. Use \code{transform_fun = periodReturn} with the appropriate periodicity
   such as \code{period = "monthly"}.
   \item \code{\link{tq_portfolio}} which can be used to aggregate period returns from

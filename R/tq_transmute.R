@@ -8,7 +8,7 @@
 #' @param x,y Column names of variables to be passed to the transformation
 #' function (instead of OHLC functions).
 #' @param transform_fun The transformation function from either the \code{xts},
-#' \code{quantmod}, or \code{TTR} package. Execute \code{tq_transform_fun_options()}
+#' \code{quantmod}, or \code{TTR} package. Execute \code{tq_transmute_fun_options()}
 #' to see the full list of options by package.
 #' @param col_rename A string or character vector containing names that can be used
 #' to quickly rename columns.
@@ -17,7 +17,7 @@
 #'
 #' @return Returns data in the form of a \code{tibble} object.
 #'
-#' @details \code{tq_transform} is a very flexible wrapper for various \code{xts},
+#' @details \code{tq_transmute} is a very flexible wrapper for various \code{xts},
 #' \code{quantmod} and \code{TTR} functions. The main advantage is the
 #' results are returned as a \code{tibble} and the
 #' function can be used with the \code{tidyverse}.
@@ -35,7 +35,7 @@
 #' with additional arguments defining how to perform the period return, which
 #' includes \code{period = "daily"} and \code{type = "log"}.
 #'
-#' \code{tq_transform_xy} is designed to enable working with (1) transformation
+#' \code{tq_transmute_xy} is designed to enable working with (1) transformation
 #' functions that require two primary inputs (e.g. EVWMA, VWAP, etc) and (2) data
 #' that is not in OHLC format. Example 2 shows the first benefit in action:
 #' using the EVWMA function that uses volume to defind the moving average period.
@@ -44,7 +44,7 @@
 #' in action: Some functions are useful to non-OHLC data, and defining x = price
 #' allows us to transform WTI crude prices from daily to monthly periodicity.
 #'
-#' \code{tq_tranform_} and \code{tq_transform_xy_} are setup for Non-Standard
+#' \code{tq_tranform_} and \code{tq_transmute_xy_} are setup for Non-Standard
 #' Evaluation (NSE). This enables programatically changing column names by modifying
 #' the text representations. Example 4 shows the difference in implementation.
 #' Note that character strings are being passed to the variables instead of
@@ -52,7 +52,7 @@
 #'
 #' @seealso \code{\link{tq_mutate}}
 #'
-#' @name tq_transform
+#' @name tq_transmute
 #'
 #' @export
 #'
@@ -66,59 +66,59 @@
 #'
 #' # Example 1: Return logarithmic daily returns using periodReturn()
 #' fb_stock_prices %>%
-#'     tq_transform(ohlc_fun = Cl, transform_fun = periodReturn,
+#'     tq_transmute(ohlc_fun = Cl, transform_fun = periodReturn,
 #'                  period = "daily", type = "log")
 #'
-#' # Example 2: Use tq_transform_xy to use functions with two columns required
+#' # Example 2: Use tq_transmute_xy to use functions with two columns required
 #' fb_stock_prices %>%
-#'     tq_transform_xy(x = close, y = volume, transform_fun = EVWMA,
+#'     tq_transmute_xy(x = close, y = volume, transform_fun = EVWMA,
 #'                     col_rename = "EVMWA")
 #'
-#' # Example 3: Using tq_transform_xy to work with non-OHLC data
+#' # Example 3: Using tq_transmute_xy to work with non-OHLC data
 #' tq_get("DCOILWTICO", get = "economic.data") %>%
-#'     tq_transform_xy(x = price, transform_fun = to.period, period = "months")
+#'     tq_transmute_xy(x = price, transform_fun = to.period, period = "months")
 #'
 #' # Example 4: Non-standard evaluation:
-#' # Programming with tq_tranform_() and tq_transform_xy_()
+#' # Programming with tq_tranform_() and tq_transmute_xy_()
 #' col_name <- "adjusted"
 #' transform <- "periodReturn"
 #' period <- c("daily", "weekly", "monthly")
-#' tq_transform_xy_(fb_stock_prices, x = col_name, transform_fun = transform,
+#' tq_transmute_xy_(fb_stock_prices, x = col_name, transform_fun = transform,
 #'                  period = period[[1]])
 
-# tq_transform ------------------------------------------------------------------------------------------------
+# tq_transmute ------------------------------------------------------------------------------------------------
 
-#' @rdname tq_transform
+#' @rdname tq_transmute
 #' @export
-tq_transform <- function(data, ohlc_fun = OHLCV, transform_fun, col_rename = NULL, ...) {
+tq_transmute <- function(data, ohlc_fun = OHLCV, transform_fun, col_rename = NULL, ...) {
 
     # NSE
-    tq_transform_(data          = data,
+    tq_transmute_(data          = data,
                   ohlc_fun      = lazyeval::expr_text(ohlc_fun),
                   transform_fun = lazyeval::expr_text(transform_fun),
                   col_rename    = col_rename,
                   ...           = ...)
 }
 
-#' @rdname tq_transform
+#' @rdname tq_transmute
 #' @export
-tq_transform_ <- function(data, ohlc_fun = "OHLCV", transform_fun, col_rename = NULL, ...) {
-    UseMethod("tq_transform_", data)
+tq_transmute_ <- function(data, ohlc_fun = "OHLCV", transform_fun, col_rename = NULL, ...) {
+    UseMethod("tq_transmute_", data)
 }
 
-# tq_transform method dispatch --------------------------------------------------------------------------------
+# tq_transmute method dispatch --------------------------------------------------------------------------------
 
-#' @rdname tq_transform
+#' @rdname tq_transmute
 #' @export
-tq_transform_.default <- function(data, ohlc_fun = "OHLCV", transform_fun, col_rename = NULL, ...) {
+tq_transmute_.default <- function(data, ohlc_fun = "OHLCV", transform_fun, col_rename = NULL, ...) {
 
     # Error message
     stop("data must be a tibble or data.frame object")
 }
 
-#' @rdname tq_transform
+#' @rdname tq_transmute
 #' @export
-tq_transform_.tbl_df <- function(data, ohlc_fun = "OHLCV", transform_fun, col_rename = NULL, ...) {
+tq_transmute_.tbl_df <- function(data, ohlc_fun = "OHLCV", transform_fun, col_rename = NULL, ...) {
 
     # Check transform_fun in xts, quantmod or TTR
     check_transform_fun_options(transform_fun)
@@ -168,31 +168,31 @@ tq_transform_.tbl_df <- function(data, ohlc_fun = "OHLCV", transform_fun, col_re
     ret
 }
 
-#' @rdname tq_transform
+#' @rdname tq_transmute
 #' @export
-tq_transform_.data.frame <- function(data, ohlc_fun = "OHLCV", transform_fun, col_rename = NULL, ...) {
+tq_transmute_.data.frame <- function(data, ohlc_fun = "OHLCV", transform_fun, col_rename = NULL, ...) {
 
     # Convert data.frame to tibble
     data <- as_tibble(data)
 
-    # Call tq_transform_ for a tibble
-    tq_transform_(data          = data,
+    # Call tq_transmute_ for a tibble
+    tq_transmute_(data          = data,
                   ohlc_fun      = ohlc_fun,
                   transform_fun = transform_fun,
                   col_rename    = col_rename,
                   ...           = ...)
 }
 
-#' @rdname tq_transform
+#' @rdname tq_transmute
 #' @export
-tq_transform_.grouped_df <- function(data, ohlc_fun = "OHLCV", transform_fun, col_rename = NULL, ...) {
+tq_transmute_.grouped_df <- function(data, ohlc_fun = "OHLCV", transform_fun, col_rename = NULL, ...) {
 
     group_names <- dplyr::groups(data)
 
     data %>%
         tidyr::nest() %>%
         dplyr::mutate(nested.col = data %>%
-                          purrr::map(~ tq_transform_(data          = .x,
+                          purrr::map(~ tq_transmute_(data          = .x,
                                                      ohlc_fun      = ohlc_fun,
                                                      transform_fun = transform_fun,
                                                      col_rename    = col_rename,
@@ -203,14 +203,14 @@ tq_transform_.grouped_df <- function(data, ohlc_fun = "OHLCV", transform_fun, co
         dplyr::group_by_(.dots = group_names)
 }
 
-# tq_transform_xy ------------------------------------------------------------------------------------------------
+# tq_transmute_xy ------------------------------------------------------------------------------------------------
 
-#' @rdname tq_transform
+#' @rdname tq_transmute
 #' @export
-tq_transform_xy <- function(data, x, y = NULL, transform_fun, col_rename = NULL, ...) {
+tq_transmute_xy <- function(data, x, y = NULL, transform_fun, col_rename = NULL, ...) {
 
     # NSE
-    tq_transform_xy_(data          = data,
+    tq_transmute_xy_(data          = data,
                      x             = lazyeval::expr_text(x),
                      y             = lazyeval::expr_text(y),
                      transform_fun = lazyeval::expr_text(transform_fun),
@@ -218,25 +218,25 @@ tq_transform_xy <- function(data, x, y = NULL, transform_fun, col_rename = NULL,
                      ...           = ...)
 }
 
-#' @rdname tq_transform
+#' @rdname tq_transmute
 #' @export
-tq_transform_xy_ <- function(data, x, y = NULL, transform_fun, col_rename = NULL, ...) {
-    UseMethod("tq_transform_xy_", data)
+tq_transmute_xy_ <- function(data, x, y = NULL, transform_fun, col_rename = NULL, ...) {
+    UseMethod("tq_transmute_xy_", data)
 }
 
-# tq_transform_xy method dispatch --------------------------------------------------------------------------------
+# tq_transmute_xy method dispatch --------------------------------------------------------------------------------
 
-#' @rdname tq_transform
+#' @rdname tq_transmute
 #' @export
-tq_transform_xy_.default <- function(data, x, y = NULL, transform_fun, col_rename = NULL, ...) {
+tq_transmute_xy_.default <- function(data, x, y = NULL, transform_fun, col_rename = NULL, ...) {
 
     # Error message
     stop("data must be a tibble or data.frame object")
 }
 
-#' @rdname tq_transform
+#' @rdname tq_transmute
 #' @export
-tq_transform_xy_.tbl_df <- function(data, x, y = NULL, transform_fun, col_rename = NULL, ...) {
+tq_transmute_xy_.tbl_df <- function(data, x, y = NULL, transform_fun, col_rename = NULL, ...) {
 
     # Check transform_fun in xts, quantmod or TTR
     check_transform_fun_options(transform_fun)
@@ -302,15 +302,15 @@ tq_transform_xy_.tbl_df <- function(data, x, y = NULL, transform_fun, col_rename
     ret
 }
 
-#' @rdname tq_transform
+#' @rdname tq_transmute
 #' @export
-tq_transform_xy_.data.frame <- function(data, x, y = NULL, transform_fun, col_rename = NULL, ...) {
+tq_transmute_xy_.data.frame <- function(data, x, y = NULL, transform_fun, col_rename = NULL, ...) {
 
     # Convert data.frame to tibble
     data <- as_tibble(data)
 
-    # Call tq_transform_xy_ for a tibble
-    tq_transform_xy_(data          = data,
+    # Call tq_transmute_xy_ for a tibble
+    tq_transmute_xy_(data          = data,
                      x             = x,
                      y             = y,
                      transform_fun = transform_fun,
@@ -318,16 +318,16 @@ tq_transform_xy_.data.frame <- function(data, x, y = NULL, transform_fun, col_re
                      ...           = ...)
 }
 
-#' @rdname tq_transform
+#' @rdname tq_transmute
 #' @export
-tq_transform_xy_.grouped_df <- function(data, x, y = NULL, transform_fun, col_rename = NULL, ...) {
+tq_transmute_xy_.grouped_df <- function(data, x, y = NULL, transform_fun, col_rename = NULL, ...) {
 
     group_names <- dplyr::groups(data)
 
     data %>%
         tidyr::nest() %>%
         dplyr::mutate(nested.col = data %>%
-                          purrr::map(~ tq_transform_xy_(data          = .x,
+                          purrr::map(~ tq_transmute_xy_(data          = .x,
                                                         x             = x,
                                                         y             = y,
                                                         transform_fun = transform_fun,
@@ -339,11 +339,44 @@ tq_transform_xy_.grouped_df <- function(data, x, y = NULL, transform_fun, col_re
         dplyr::group_by_(.dots = group_names)
 }
 
+# tq_transform and tq_transform_xy for backwards compatability -----------------------------------------------
+
+#' @export
+tq_transform <- function(data, ohlc_fun = OHLCV, transform_fun, col_rename = NULL, ...) {
+
+    # Pass to tq_transmute_ but warn the user
+    .Deprecated("tq_transmute",
+                msg = "`tq_transform` is deprecated and will be removed in 0.5.0 \nPlease use `tq_transmute` instead.")
+
+    # NSE
+    tq_transmute_(data          = data,
+                  ohlc_fun      = lazyeval::expr_text(ohlc_fun),
+                  transform_fun = lazyeval::expr_text(transform_fun),
+                  col_rename    = col_rename,
+                  ...           = ...)
+}
+
+#' @export
+tq_transform_xy <- function(data, x, y = NULL, transform_fun, col_rename = NULL, ...) {
+
+    # Pass to tq_transmute_xy but warn the user
+    .Deprecated("tq_transmute_xy",
+                msg = "`tq_transform_xy` is deprecated and will be removed in 0.5.0 \nPlease use `tq_transmute_xy` instead.")
+
+    # NSE
+    tq_transmute_xy_(data          = data,
+                     x             = lazyeval::expr_text(x),
+                     y             = lazyeval::expr_text(y),
+                     transform_fun = lazyeval::expr_text(transform_fun),
+                     col_rename    = NULL,
+                     ...           = ...)
+}
+
 # Function options -------------------------------------------------------------------------------------------
 
-#' @rdname tq_transform
+#' @rdname tq_transmute
 #' @export
-tq_transform_fun_options <- function() {
+tq_transmute_fun_options <- function() {
 
     # zoo rollapply functions
     pkg_regex_zoo <- "roll"
@@ -372,7 +405,7 @@ tq_transform_fun_options <- function() {
 # Checks ----------------------------------------------------------------------------------------------------
 
 check_transform_fun_options <- function(fun) {
-    fun_options <- tq_transform_fun_options() %>%
+    fun_options <- tq_transmute_fun_options() %>%
         unlist()
     if (!(fun %in% fun_options)) {
         stop(paste0("fun = ", fun, " not a valid option."))
@@ -423,7 +456,7 @@ coerce_to_tibble <- function(data, date_col_name, time_zone, col_rename) {
 
 detect_period_fun <- function(fun) {
     is_period_fun <- FALSE
-    to_period_funs <- tq_transform_fun_options() %>%
+    to_period_funs <- tq_transmute_fun_options() %>%
         unlist() %>%
         stringr::str_subset("^to")
     if (fun %in% to_period_funs) is_period_fun <- TRUE

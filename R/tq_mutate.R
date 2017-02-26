@@ -1,6 +1,6 @@
 #' Mutates quantitative data (adds new variables to existing tibble)
 #'
-#' @inheritParams tq_transform
+#' @inheritParams tq_transmute
 #' @param ohlc_fun The \code{quantmod} function that identifies columns to pass to
 #' the mutatation function. OHLCV is \code{quantmod} terminology for
 #' open, high, low, close, and volume. Options include c(Op, Hi, Lo, Cl, Vo, Ad,
@@ -48,7 +48,7 @@
 #' Note that character strings are being passed to the variables instead of
 #' unquoted variable names. See \code{vignette("nse")} for more information.
 #'
-#' @seealso \code{\link{tq_transform}}, \code{\link{tq_get}}
+#' @seealso \code{\link{tq_transmute}}, \code{\link{tq_get}}
 #'
 #' @name tq_mutate
 #'
@@ -115,7 +115,7 @@ tq_mutate_.default <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename 
 tq_mutate_.tbl_df <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...) {
 
     # Get transformation
-    ret <- tq_transform_(data          = data,
+    ret <- tq_transmute_(data          = data,
                          ohlc_fun      = ohlc_fun,
                          transform_fun = mutate_fun,
                          col_rename    = col_rename,
@@ -132,7 +132,7 @@ tq_mutate_.data.frame <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rena
     data <- as_tibble(data)
 
     # Get transformation
-    ret <- tq_transform_(data          = data,
+    ret <- tq_transmute_(data          = data,
                          ohlc_fun      = ohlc_fun,
                          transform_fun = mutate_fun,
                          col_rename    = col_rename,
@@ -177,7 +177,7 @@ tq_mutate_xy_.default <- function(data, x, y = NULL, mutate_fun, col_rename = NU
 tq_mutate_xy_.tbl_df <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
 
     # Get transformation
-    ret <- tq_transform_xy_(data          = data,
+    ret <- tq_transmute_xy_(data          = data,
                             x             = x,
                             y             = y,
                             transform_fun = mutate_fun,
@@ -195,7 +195,7 @@ tq_mutate_xy_.data.frame <- function(data, x, y = NULL, mutate_fun, col_rename =
     data <- as_tibble(data)
 
     # Get transformation
-    ret <- tq_transform_xy_(data          = data,
+    ret <- tq_transmute_xy_(data          = data,
                             x             = x,
                             y             = y,
                             transform_fun = mutate_fun,
@@ -210,7 +210,7 @@ tq_mutate_xy_.data.frame <- function(data, x, y = NULL, mutate_fun, col_rename =
 #' @rdname tq_mutate
 #' @export
 tq_mutate_fun_options <- function() {
-    tq_transform_fun_options()
+    tq_transmute_fun_options()
 }
 
 # Utility ----------------------------------------------------------------------------------------------------

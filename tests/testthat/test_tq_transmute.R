@@ -1,12 +1,12 @@
 library(tidyquant)
-context("Testing tq_transform")
+context("Testing tq_transmute")
 
 #### Setup ----
 AAPL <- tq_get("AAPL", get = "stock.prices", from = "2010-01-01", to = "2015-01-01")
 
-# Test 1: tq_transform to.period
+# Test 1: tq_transmute to.period
 test1 <- AAPL %>%
-    tq_transform(ohlc_fun = Cl, transform_fun = to.period, period = "months")
+    tq_transmute(ohlc_fun = Cl, transform_fun = to.period, period = "months")
 
 # Test 1.2: Grouped_df test
 grouped_df <- tibble(symbol = c("FB", "AMZN")) %>%
@@ -21,12 +21,12 @@ grouped_df <- tibble(symbol = c("FB", "AMZN")) %>%
 test1.2a  <- mutate(grouped_df, V1 = runSD(adjusted)) %>%
     select(-(open:adjusted))
 
-test1.2b <- tq_transform(grouped_df, Ad, runSD)
+test1.2b <- tq_transmute(grouped_df, Ad, runSD)
 
 
-# Test 2: tq_transform_xy test
+# Test 2: tq_transmute_xy test
 test2 <- AAPL %>%
-    tq_transform_xy(x = close, transform_fun = to.period, period = "months")
+    tq_transmute_xy(x = close, transform_fun = to.period, period = "months")
 
 
 # Test 3: Test transform hourly data / Test transform timezone data
@@ -38,11 +38,11 @@ value <- rnorm(n = length(time_index))
 tz <- "Zulu"
 test3 <- tibble(time_index, value) %>%
     dplyr::mutate(time_index = lubridate::ymd_hms(time_index, tz = tz)) %>%
-    tq_transform_xy(x = value, transform_fun = MACD)
+    tq_transmute_xy(x = value, transform_fun = MACD)
 
 # Test 4: transform to.monthly which returns character dates
 test4 <- AAPL %>%
-    tq_transform(ohlc_fun = OHLCV, transform_fun = to.monthly)
+    tq_transmute(ohlc_fun = OHLCV, transform_fun = to.monthly)
 
 
 #### Tests ----
@@ -56,7 +56,7 @@ test_that("Test 1 returns tibble with correct rows and columns.", {
     expect_equal(ncol(test1), 2)
 })
 
-test_that("Test 1.2 grouped data frames are same with mutate and tq_transform", {
+test_that("Test 1.2 grouped data frames are same with mutate and tq_transmute", {
     # Return column
     expect_identical(test1.2a$V1, test1.2b$V1)
     # Groups
@@ -92,7 +92,7 @@ test_that("Test error on invalid data inputs.", {
     # Non-data.frame objects
     expect_error(
         a = seq(1:100) %>%
-            tq_transform(ohlc_fun = OHLCV, transform_fun = to.monthly)
+            tq_transmute(ohlc_fun = OHLCV, transform_fun = to.monthly)
     )
     expect_error(
         a = seq(1:100) %>%

@@ -43,7 +43,7 @@
 #'
 #' @seealso
 #' \itemize{
-#'   \item \code{\link{tq_transform}} which can be used to get period returns.
+#'   \item \code{\link{tq_transmute}} which can be used to get period returns.
 #'   \item \code{\link[PerformanceAnalytics]{Return.portfolio}} which is the underlying function
 #'   that specifies which parameters can be passed via \code{...}
 #' }
@@ -66,7 +66,7 @@
 #' # Get returns for individual stock components
 #' monthly_returns_stocks <- stock_prices %>%
 #'     group_by(symbol) %>%
-#'     tq_transform(Ad, periodReturn, period = "monthly")
+#'     tq_transmute(Ad, periodReturn, period = "monthly")
 #'
 #' ##### Portfolio Aggregation Methods #####
 #'
