@@ -58,7 +58,7 @@ theme_tq <- function(base_size = 11, base_family = "") {
             # Axes
             axis.line          = element_blank(),
             axis.text          = element_text(size = rel(0.8)),
-            axis.ticks         = element_blank(),
+            axis.ticks         = element_line(color = grey, size = rel(1/3)),
             axis.title         = element_text(size = rel(1.0)),
 
             # Panel
@@ -102,6 +102,9 @@ theme_tq_dark <- function(base_size = 11, base_family = "") {
     theme_tq(base_size = base_size, base_family = base_family) %+replace%
         theme(
 
+            # Axes
+            axis.ticks         = element_line(color = blue, size = rel(1/3)),
+
             # Panel
             panel.background   = element_rect(fill = grey, color = NA),
             panel.grid.major   = element_line(color = white, size = rel(1/3)),
@@ -125,6 +128,9 @@ theme_tq_green <- function(base_size = 11, base_family = "") {
     # Starts with theme_tq and then invert some colors
     theme_tq(base_size = base_size, base_family = base_family) %+replace%
         theme(
+
+            # Axes
+            axis.ticks         = element_line(color = blue, size = rel(1/3)),
 
             # Panel
             panel.background   = element_rect(fill = green, color = NA),
