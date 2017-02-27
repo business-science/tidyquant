@@ -1,7 +1,8 @@
 #' Mutates quantitative data
 #'
 #' `tq_mutate()` adds new variables to an existing tibble;
-#' `tq_transmute()` returns only newly created columns
+#' `tq_transmute()` returns only newly created columns and is typically
+#' used when periodicity changes
 #'
 #' @name tq_mutate
 #'
@@ -23,10 +24,15 @@
 #'
 #' @return Returns mutated data in the form of a `tibble` object.
 #'
-#' @details `tq_mutate` is a very flexible wrapper for various `xts`,
+#' @details
+#' `tq_mutate` and `tq_transmute` are very flexible wrappers for various `xts`,
 #' `quantmod` and `TTR` functions. The main advantage is the
 #' results are returned as a `tibble` and the
-#' function can be used with the `tidyverse`.
+#' function can be used with the `tidyverse`. `tq_mutate` is used when additional
+#' columns are added to the return data frame. `tq_transmute` works exactly like `tq_mutate`
+#' except it only returns the newly created columns. This is helpful when
+#' changing periodicity where the new columns would not have the same number of rows
+#' as the original tibble.
 #'
 #' `ohlc_fun` is one of the various `quantmod` Open, High, Low, Close (OHLC) functions.
 #' The function returns a column or set of columns from `data` that are passed to the
@@ -41,7 +47,7 @@
 #' with additional arguments defining how to perform the period return, which
 #' includes `period = "daily"` and `type = "log"`.
 #'
-#' `tq_mutate_xy` is designed to enable working with (1) mutatation
+#' `tq_mutate_xy` and `tq_transmute_xy` are designed to enable working with (1) mutatation
 #' functions that require two primary inputs (e.g. EVWMA, VWAP, etc) and (2) data
 #' that is not in OHLC format. Example 2 shows the first benefit in action:
 #' using the EVWMA function that uses volume to defind the moving average period.
@@ -50,16 +56,16 @@
 #' in action: Some functions are useful to non-OHLC data, and defining x = price
 #' allows us to mutate WTI crude prices from daily to monthly periodicity.
 #'
-#' `tq_mutate_` and `tq_mutate_xy_` are setup for Non-Standard
+#' `tq_mutate_`, `tq_mutate_xy_`, `tq_transmute_`, and `tq_transmute_xy_`
+#' are setup for Non-Standard
 #' Evaluation (NSE). This enables programatically changing column names by modifying
 #' the text representations. Example 4 shows the difference in implementation.
 #' Note that character strings are being passed to the variables instead of
 #' unquoted variable names. See `vignette("nse")` for more information.
 #'
-#' `tq_transmute` and `tq_transmute_xy` work exactly like `tq_mutate`
-#' except they only return the newly created columns. These are helpful when
-#' changing periodicity where the new columns would not have the same number of rows
-#' as the original tibble.
+#' `tq_mutate_fun_options` and `tq_transmute_fun_options` return a list of various
+#' financial functions that are compatible with `tq_mutate` and `tq_transmute`,
+#' respectively.
 #'
 #' @seealso [tq_get()]
 #'

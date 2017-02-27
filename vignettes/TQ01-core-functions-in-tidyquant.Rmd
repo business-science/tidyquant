@@ -33,6 +33,8 @@ The `tidyquant` package has a __core functions with a lot of power__. Few functi
 
 * __Coerce Quantitative Data Between tibble and xts formats, `as_tibble()` and `as_xts()`__: Coercing the various _R_ time-based objects to and from `tibble` (tidy data frame) objects _was_ a pain. These functions enable __easily going back and forth__.
 
+* __Performance analysis, `tq_performance()`, and portfolio aggregation, `tq_portfolio()`__: The `PerformanceAnalytics` integration enables analyzing performance of assets and portfolios. Because of the breadth of this topic, refer to [Performance Analysis with tidyquant](TQ05-performance-analysis-with-tidyquant.html) for a tutorial on these functions.
+
 # Prerequisites
 
 Load the `tidyquant` package to get started.

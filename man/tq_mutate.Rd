@@ -64,13 +64,18 @@ Returns mutated data in the form of a \code{tibble} object.
 }
 \description{
 \code{tq_mutate()} adds new variables to an existing tibble;
-\code{tq_transmute()} returns only newly created columns
+\code{tq_transmute()} returns only newly created columns and is typically
+used when periodicity changes
 }
 \details{
-\code{tq_mutate} is a very flexible wrapper for various \code{xts},
+\code{tq_mutate} and \code{tq_transmute} are very flexible wrappers for various \code{xts},
 \code{quantmod} and \code{TTR} functions. The main advantage is the
 results are returned as a \code{tibble} and the
-function can be used with the \code{tidyverse}.
+function can be used with the \code{tidyverse}. \code{tq_mutate} is used when additional
+columns are added to the return data frame. \code{tq_transmute} works exactly like \code{tq_mutate}
+except it only returns the newly created columns. This is helpful when
+changing periodicity where the new columns would not have the same number of rows
+as the original tibble.
 
 \code{ohlc_fun} is one of the various \code{quantmod} Open, High, Low, Close (OHLC) functions.
 The function returns a column or set of columns from \code{data} that are passed to the
@@ -85,7 +90,7 @@ is being sent to the \code{periodReturn} function along
 with additional arguments defining how to perform the period return, which
 includes \code{period = "daily"} and \code{type = "log"}.
 
-\code{tq_mutate_xy} is designed to enable working with (1) mutatation
+\code{tq_mutate_xy} and \code{tq_transmute_xy} are designed to enable working with (1) mutatation
 functions that require two primary inputs (e.g. EVWMA, VWAP, etc) and (2) data
 that is not in OHLC format. Example 2 shows the first benefit in action:
 using the EVWMA function that uses volume to defind the moving average period.
@@ -94,16 +99,16 @@ The xy form gets us out of this problem. Example 3 shows the second benefit
 in action: Some functions are useful to non-OHLC data, and defining x = price
 allows us to mutate WTI crude prices from daily to monthly periodicity.
 
-\code{tq_mutate_} and \code{tq_mutate_xy_} are setup for Non-Standard
+\code{tq_mutate_}, \code{tq_mutate_xy_}, \code{tq_transmute_}, and \code{tq_transmute_xy_}
+are setup for Non-Standard
 Evaluation (NSE). This enables programatically changing column names by modifying
 the text representations. Example 4 shows the difference in implementation.
 Note that character strings are being passed to the variables instead of
 unquoted variable names. See \code{vignette("nse")} for more information.
 
-\code{tq_transmute} and \code{tq_transmute_xy} work exactly like \code{tq_mutate}
-except they only return the newly created columns. These are helpful when
-changing periodicity where the new columns would not have the same number of rows
-as the original tibble.
+\code{tq_mutate_fun_options} and \code{tq_transmute_fun_options} return a list of various
+financial functions that are compatible with \code{tq_mutate} and \code{tq_transmute},
+respectively.
 }
 \examples{
 # Load libraries
