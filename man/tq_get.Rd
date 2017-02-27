@@ -19,29 +19,29 @@ stock symbol, metal symbol, currency combination, FRED code, etc.}
 \item{get}{A character string representing the type of data to get
 for \code{x}. Options include:
 \itemize{
-  \item \code{"stock.prices"}: Get the open, high, low, close, volume and adjusted
-  stock prices for a stock symbol from
-  \href{https://finance.yahoo.com/}{Yahoo Finance}.
-  \item \code{"financials"}: Get the income, balance sheet, and cash flow
-  financial statements for a stock symbol from
-  \href{https://www.google.com/finance}{Google Finance}.
-  \item \code{"key.ratios"}: These are key historical ratios. Get \strong{89 historical growth, profitablity, financial health,
-  efficiency, and valuation ratios that span 10-years} from
-  \href{https://www.morningstar.com}{Morningstar}.
-  \item \code{"key.stats"}: These are key current statistics. Get \strong{55 current key statistics} such as
-  Ask, Bid, Day's High, Day's Low, Last Trade Price, current P/E Ratio, EPS,
-  Market Cap, EPS Projected Current Year, EPS Projected Next Year and many more from
-  \href{https://finance.yahoo.com/}{Yahoo Finance}.
-  \item \code{"dividends"}: Get the dividends for a stock symbol
-  from \href{https://finance.yahoo.com/}{Yahoo Finance}.
-  \item \code{"splits"}: Get the splits for a stock symbol
-  from \href{https://finance.yahoo.com/}{Yahoo Finance}.
-  \item \code{"economic.data"}: Get economic data from
-  \href{https://fred.stlouisfed.org/}{FRED}.
-  \item \code{"metal.prices"}: Get the metal prices from
-  \href{https://www.oanda.com/}{Oanda}.
-  \item \code{"exchange.rates"}: Get exchange rates from
-  \href{https://www.oanda.com/currency/converter/}{Oanda}.
+\item \code{"stock.prices"}: Get the open, high, low, close, volume and adjusted
+stock prices for a stock symbol from
+\href{https://finance.yahoo.com/}{Yahoo Finance}.
+\item \code{"financials"}: Get the income, balance sheet, and cash flow
+financial statements for a stock symbol from
+\href{https://www.google.com/finance}{Google Finance}.
+\item \code{"key.ratios"}: These are key historical ratios. Get \strong{89 historical growth, profitablity, financial health,
+efficiency, and valuation ratios that span 10-years} from
+\href{https://www.morningstar.com}{Morningstar}.
+\item \code{"key.stats"}: These are key current statistics. Get \strong{55 current key statistics} such as
+Ask, Bid, Day's High, Day's Low, Last Trade Price, current P/E Ratio, EPS,
+Market Cap, EPS Projected Current Year, EPS Projected Next Year and many more from
+\href{https://finance.yahoo.com/}{Yahoo Finance}.
+\item \code{"dividends"}: Get the dividends for a stock symbol
+from \href{https://finance.yahoo.com/}{Yahoo Finance}.
+\item \code{"splits"}: Get the splits for a stock symbol
+from \href{https://finance.yahoo.com/}{Yahoo Finance}.
+\item \code{"economic.data"}: Get economic data from
+\href{https://fred.stlouisfed.org/}{FRED}.
+\item \code{"metal.prices"}: Get the metal prices from
+\href{https://www.oanda.com/}{Oanda}.
+\item \code{"exchange.rates"}: Get exchange rates from
+\href{https://www.oanda.com/currency/converter/}{Oanda}.
 }}
 
 \item{complete_cases}{Removes symbols that return an NA value due to an error with the get
@@ -53,12 +53,12 @@ message is generated for any rows removed.}
 \item{...}{Additional parameters passed to the appropriate \code{quantmod}
 function. Common optional parameters include:
 \itemize{
-  \item \code{from}: Optional. A character string representing a start date in
-  YYYY-MM-DD format. No effect on
-  \code{"financials"}, \code{"key.ratios"}, or \code{"key.stats"}.
-  \item \code{to}: A character string representing a end date in
-  YYYY-MM-DD format. No effect on
-  \code{get = "financials"},  \code{"key.ratios"}, or \code{"key.stats"}.
+\item \code{from}: Optional. A character string representing a start date in
+YYYY-MM-DD format. No effect on
+\code{"financials"}, \code{"key.ratios"}, or \code{"key.stats"}.
+\item \code{to}: A character string representing a end date in
+YYYY-MM-DD format. No effect on
+\code{get = "financials"},  \code{"key.ratios"}, or \code{"key.stats"}.
 }}
 }
 \value{
@@ -75,7 +75,7 @@ are (1) only one function is needed for all data sources and (2) the function
 can be seemlessly used with the tidyverse: \code{purrr}, \code{tidyr}, and
 \code{dplyr} verbs.
 
-\code{tq_get_options()} returns a list of valid `get` options you can
+\code{tq_get_options()} returns a list of valid \code{get} options you can
 choose from.
 
 \code{tq_get_stock_index_options()} Is deprecated and will be removed in the
@@ -104,5 +104,5 @@ mult_gets <- tq_get("AAPL",
                     to   = "2017-01-01")
 }
 \seealso{
-\code{\link{tq_index}} to get a ful list of stocks in an index.
+\code{\link[=tq_index]{tq_index()}} to get a ful list of stocks in an index.
 }

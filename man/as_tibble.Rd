@@ -15,7 +15,7 @@ timeSeries, etc objects that have row names. When \code{TRUE}, creates
 a \code{row.names} column with names of rows as character class.}
 
 \item{...}{Additional parameters passed to the appropriate
-\code{\link[tibble]{as_tibble}} function.}
+\code{\link[tibble:as_tibble]{tibble::as_tibble()}} function.}
 }
 \value{
 Returns a \code{tibble} object.
@@ -46,7 +46,8 @@ m_tbl <- as_tibble(m, preserve_row_names = TRUE)
 # xts coercion to tibble
 quantmod::getSymbols("AAPL", auto.assign = FALSE) \%>\%
     as_tibble(preserve_row_names = TRUE)
+
 }
 \seealso{
-\code{\link{as_xts}}
+\code{\link[=as_xts]{as_xts()}}
 }

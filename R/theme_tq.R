@@ -1,10 +1,10 @@
 #' tidyquant themes for ggplot2.
 #'
-#' The \code{theme_tq()} function creates a custom theme using tidyquant colors.
+#' The `theme_tq()` function creates a custom theme using tidyquant colors.
 #'
 #' @inheritParams ggplot2::theme_grey
 #'
-#' @seealso \code{\link{scale_manual}}
+#' @seealso [scale_manual()]
 #'
 #' @examples
 #' # Load libraries

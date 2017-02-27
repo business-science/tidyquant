@@ -1,26 +1,26 @@
 #' Coerce objects to xts, designed to work with tibble and data.frame objects
 #'
 #' @param x A data.frame (with date column), matrix, xts, zoo, timeSeries, etc object.
-#' @param date_col Required for objects that inherit the \code{data.frame} class.
-#' Must specify a date column that is of the \code{date} class. Unused for
+#' @param date_col Required for objects that inherit the `data.frame` class.
+#' Must specify a date column that is of the `date` class. Unused for
 #' non-data.frame objects.
-#' @param ... Additional parameters passed to \code{xts::as.xts}.
+#' @param ... Additional parameters passed to `xts::as.xts`.
 #'
-#' @return Returns a \code{xts} object.
+#' @return Returns a `xts` object.
 #'
-#' @details \code{as_xts} is a wrapper for \code{xts::as.xts}
-#' that includes a \code{date_col} argument. When \code{date_col} is specified,
-#' the date column is used as row names during coercion to \code{xts} class. The
-#' date column must be in a date format (i.e. \code{date} class).
+#' @details `as_xts` is a wrapper for `xts::as.xts`
+#' that includes a `date_col` argument. When `date_col` is specified,
+#' the date column is used as row names during coercion to `xts` class. The
+#' date column must be in a date format (i.e. `date` class).
 #'
-#' \code{as_xts_} evaluates the \code{date_col} using Non-Standard Evaluation
-#' (NSE). See \code{vignette("nse")} for details.
+#' `as_xts_` evaluates the `date_col` using Non-Standard Evaluation
+#' (NSE). See `vignette("nse")` for details.
 #'
 #' It is possible to coerce non-data.frame-like objects including
-#' \code{zoo}, \code{timeSeries}, \code{ts}, and \code{irts} objects.
-#' There is no need to specify the \code{date_col} argument.
+#' `zoo`, `timeSeries`, `ts`, and `irts` objects.
+#' There is no need to specify the `date_col` argument.
 #'
-#' @seealso \code{\link{as_tibble}}
+#' @seealso [as_tibble()]
 #'
 #' @name as_xts
 #'

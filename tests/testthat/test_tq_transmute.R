@@ -6,7 +6,7 @@ AAPL <- tq_get("AAPL", get = "stock.prices", from = "2010-01-01", to = "2015-01-
 
 # Test 1: tq_transmute to.period
 test1 <- AAPL %>%
-    tq_transmute(ohlc_fun = Cl, transform_fun = to.period, period = "months")
+    tq_transmute(ohlc_fun = Cl, mutate_fun = to.period, period = "months")
 
 # Test 1.2: Grouped_df test
 grouped_df <- tibble(symbol = c("FB", "AMZN")) %>%
@@ -26,10 +26,10 @@ test1.2b <- tq_transmute(grouped_df, Ad, runSD)
 
 # Test 2: tq_transmute_xy test
 test2 <- AAPL %>%
-    tq_transmute_xy(x = close, transform_fun = to.period, period = "months")
+    tq_transmute_xy(x = close, mutate_fun = to.period, period = "months")
 
 
-# Test 3: Test transform hourly data / Test transform timezone data
+# Test 3: Test transmute hourly data / Test transmute timezone data
 time_index <- seq(from = as.POSIXct("2012-05-15 07:00"),
                   to = as.POSIXct("2012-05-17 18:00"),
                   by = "hour")
@@ -38,11 +38,11 @@ value <- rnorm(n = length(time_index))
 tz <- "Zulu"
 test3 <- tibble(time_index, value) %>%
     dplyr::mutate(time_index = lubridate::ymd_hms(time_index, tz = tz)) %>%
-    tq_transmute_xy(x = value, transform_fun = MACD)
+    tq_transmute_xy(x = value, mutate_fun = MACD)
 
-# Test 4: transform to.monthly which returns character dates
+# Test 4: transmute to.monthly which returns character dates
 test4 <- AAPL %>%
-    tq_transmute(ohlc_fun = OHLCV, transform_fun = to.monthly)
+    tq_transmute(ohlc_fun = OHLCV, mutate_fun = to.monthly)
 
 
 #### Tests ----
@@ -92,7 +92,7 @@ test_that("Test error on invalid data inputs.", {
     # Non-data.frame objects
     expect_error(
         a = seq(1:100) %>%
-            tq_transmute(ohlc_fun = OHLCV, transform_fun = to.monthly)
+            tq_transmute(ohlc_fun = OHLCV, mutate_fun = to.monthly)
     )
     expect_error(
         a = seq(1:100) %>%

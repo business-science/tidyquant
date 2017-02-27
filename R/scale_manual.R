@@ -1,24 +1,24 @@
 #' tidyquant colors and fills for ggplot2.
 #'
-#' The tidyquant scales add colors that work nicely with \code{theme_tq()}.
+#' The tidyquant scales add colors that work nicely with `theme_tq()`.
 #'
 #' @details
 #' \describe{
 #'
-#' \item{\code{scale_color_tq}}{
-#' For use when \code{color} is specified as an \code{aes()} in a ggplot.}
+#' \item{`scale_color_tq`}{
+#' For use when `color` is specified as an `aes()` in a ggplot.}
 #'
-#' \item{\code{scale_fill_tq}}{
-#' For use when \code{fill} is specified as an \code{aes()} in a ggplot.}
+#' \item{`scale_fill_tq`}{
+#' For use when `fill` is specified as an `aes()` in a ggplot.}
 #' }
 #'
 #'
 #' @inheritParams ggplot2::scale_color_manual
 #'
-#' @seealso \code{\link{theme_tq}}
+#' @seealso [theme_tq()]
 #'
-#' @param theme one of "light", "dark", or "green". This should match the \code{theme_tq()} that is used with it.
-#' @param ... common discrete scale parameters: \code{name}, \code{breaks}, \code{labels}, \code{na.value}, \code{limits} and \code{guide}. See \code{\link{discrete_scale}} for more details
+#' @param theme one of "light", "dark", or "green". This should match the `theme_tq()` that is used with it.
+#' @param ... common discrete scale parameters: `name`, `breaks`, `labels`, `na.value`, `limits` and `guide`. See [discrete_scale()] for more details
 #'
 #' @examples
 #' # Load libraries
@@ -75,7 +75,7 @@ scale_fill_tq <- function(..., theme = "light") {
 
 #' tidyquant palettes for use with scales
 #'
-#' These palettes are mainly called internally by tidyquant \code{scale_*_tq()} functions.
+#' These palettes are mainly called internally by tidyquant `scale_*_tq()` functions.
 #'
 #' @examples
 #' library(scales)

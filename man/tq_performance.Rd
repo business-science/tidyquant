@@ -106,12 +106,12 @@ RaRb \%>\%
 }
 \seealso{
 \itemize{
-  \item \code{\link{tq_transmute}} which can be used to calculate period returns from a
-  set of stock prices. Use \code{transform_fun = periodReturn} with the appropriate periodicity
-  such as \code{period = "monthly"}.
-  \item \code{\link{tq_portfolio}} which can be used to aggregate period returns from
-  multiple stocks to period returns for a portfolio.
-  \item The \code{PerformanceAnalytics} package, which contains the underlying functions
-  for the \code{performance_fun} argument. Additional parameters can be passed via \code{...}.
+\item \code{\link[=tq_transmute]{tq_transmute()}} which can be used to calculate period returns from a
+set of stock prices. Use \code{mutate_fun = periodReturn} with the appropriate periodicity
+such as \code{period = "monthly"}.
+\item \code{\link[=tq_portfolio]{tq_portfolio()}} which can be used to aggregate period returns from
+multiple stocks to period returns for a portfolio.
+\item The \code{PerformanceAnalytics} package, which contains the underlying functions
+for the \code{performance_fun} argument. Additional parameters can be passed via \code{...}.
 }
 }

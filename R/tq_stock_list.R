@@ -1,32 +1,32 @@
-#' Get all stocks in a stock index or stock exchange in \code{tibble} format
+#' Get all stocks in a stock index or stock exchange in `tibble` format
 #'
 #' @param x A single character string, a character vector or tibble representing a
 #' single stock index or multiple stock indexes.
 #' @param use_fallback A boolean that can be used to return a fallback data set
 #' last downloaded when the package was updated. Useful if the website is down.
-#' Set to \code{FALSE} by default.
+#' Set to `FALSE` by default.
 #'
-#' @return Returns data in the form of a \code{tibble} object.
+#' @return Returns data in the form of a `tibble` object.
 #'
 #' @details
-#' \code{tq_index()} returns the stock symbol and company name of every stock
+#' `tq_index()` returns the stock symbol and company name of every stock
 #' in an index. Eighteen stock indexes are available. The source is
 #' \href{http://www.marketvolume.com/indexes_exchanges/}{www.marketvolume.com}.
 #'
-#' \code{tq_index_options()} returns a list of stock indexes you can
+#' `tq_index_options()` returns a list of stock indexes you can
 #' choose from.
 #'
-#' \code{tq_exchange()} returns the stock symbol, company, last sale price,
+#' `tq_exchange()` returns the stock symbol, company, last sale price,
 #' market capitalization, sector and industry of every stock
 #' in an exchange. Three stock exchanges are available (AMEX, NASDAQ, and NYSE).
 #' The source is
 #' \href{http://www.nasdaq.com/}{NASDAQ}.
 #'
-#' \code{tq_exchange_options()} returns a list of stock exchanges you can
+#' `tq_exchange_options()` returns a list of stock exchanges you can
 #' choose from. The options are AMEX, NASDAQ and NYSE.
 #'
 #' @seealso
-#' \code{\link{tq_get}} to get stock prices, financials, key stats, etc using the stock symbols.
+#' [tq_get()] to get stock prices, financials, key stats, etc using the stock symbols.
 #'
 #' @rdname tq_stock_list
 #'

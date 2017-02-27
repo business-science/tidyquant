@@ -1,39 +1,47 @@
-#' Mutates quantitative data (adds new variables to existing tibble)
+#' Mutates quantitative data
 #'
-#' @inheritParams tq_transmute
-#' @param ohlc_fun The \code{quantmod} function that identifies columns to pass to
-#' the mutatation function. OHLCV is \code{quantmod} terminology for
+#' `tq_mutate()` adds new variables to an existing tibble;
+#' `tq_transmute()` returns only newly created columns
+#'
+#' @name tq_mutate
+#'
+#' @param data A `tibble` (tidy data frame) of data typically from [tq_get()].
+#' @param ohlc_fun The `quantmod` function that identifies columns to pass to
+#' the mutatation function. OHLCV is `quantmod` terminology for
 #' open, high, low, close, and volume. Options include c(Op, Hi, Lo, Cl, Vo, Ad,
 #' HLC, OHLC, OHLCV).
 #' @param x,y Column names of variables to be passed to the mutatation
 #' function (instead of OHLC functions).
-#' @param mutate_fun The mutation function from either the \code{xts},
-#' \code{quantmod}, or \code{TTR} package. Execute \code{tq_mutate_fun_options()}
+#' @param mutate_fun The mutation function from either the `xts`,
+#' `quantmod`, or `TTR` package. Execute `tq_mutate_fun_options()`
 #' to see the full list of options by package.
+#' @param col_rename A string or character vector containing names that can be used
+#' to quickly rename columns.
+#' @param transform_fun Deprecated. Use `mutate_fun`.
 #' @param ... Additional parameters passed to the appropriate mutatation
 #' function.
 #'
-#' @return Returns data in the form of a \code{tibble} object.
+#' @return Returns mutated data in the form of a `tibble` object.
 #'
-#' @details \code{tq_mutate} is a very flexible wrapper for various \code{xts},
-#' \code{quantmod} and \code{TTR} functions. The main advantage is the
-#' results are returned as a \code{tibble} and the
-#' function can be used with the \code{tidyverse}.
+#' @details `tq_mutate` is a very flexible wrapper for various `xts`,
+#' `quantmod` and `TTR` functions. The main advantage is the
+#' results are returned as a `tibble` and the
+#' function can be used with the `tidyverse`.
 #'
-#' \code{ohlc_fun} is one of the various \code{quantmod} Open, High, Low, Close (OHLC) functions.
-#' The function returns a column or set of columns from \code{data} that are passed to the
-#' \code{mutate_fun}. In Example 1 below, \code{Cl} returns the "close" price and sends
-#' this to the mutate function, \code{periodReturn}.
+#' `ohlc_fun` is one of the various `quantmod` Open, High, Low, Close (OHLC) functions.
+#' The function returns a column or set of columns from `data` that are passed to the
+#' `mutate_fun`. In Example 1 below, `Cl` returns the "close" price and sends
+#' this to the mutate function, `periodReturn`.
 #'
-#' \code{mutate_fun} is the function that performs the work. In Example 1, this
-#' is \code{periodReturn}, which calculates the period returns. The \code{...}
-#' functions are additional arguments passed to the \code{mutate_fun}. Think of
-#' the whole operation in Example 1 as the close price, obtained by \code{ohlc_fun = Cl},
-#' is being sent to the \code{periodReturn} function along
+#' `mutate_fun` is the function that performs the work. In Example 1, this
+#' is `periodReturn`, which calculates the period returns. The `...`
+#' functions are additional arguments passed to the `mutate_fun`. Think of
+#' the whole operation in Example 1 as the close price, obtained by `ohlc_fun = Cl`,
+#' is being sent to the `periodReturn` function along
 #' with additional arguments defining how to perform the period return, which
-#' includes \code{period = "daily"} and \code{type = "log"}.
+#' includes `period = "daily"` and `type = "log"`.
 #'
-#' \code{tq_mutate_xy} is designed to enable working with (1) mutatation
+#' `tq_mutate_xy` is designed to enable working with (1) mutatation
 #' functions that require two primary inputs (e.g. EVWMA, VWAP, etc) and (2) data
 #' that is not in OHLC format. Example 2 shows the first benefit in action:
 #' using the EVWMA function that uses volume to defind the moving average period.
@@ -42,17 +50,18 @@
 #' in action: Some functions are useful to non-OHLC data, and defining x = price
 #' allows us to mutate WTI crude prices from daily to monthly periodicity.
 #'
-#' \code{tq_mutate_} and \code{tq_mutate_xy_} are setup for Non-Standard
+#' `tq_mutate_` and `tq_mutate_xy_` are setup for Non-Standard
 #' Evaluation (NSE). This enables programatically changing column names by modifying
 #' the text representations. Example 4 shows the difference in implementation.
 #' Note that character strings are being passed to the variables instead of
-#' unquoted variable names. See \code{vignette("nse")} for more information.
+#' unquoted variable names. See `vignette("nse")` for more information.
 #'
-#' @seealso \code{\link{tq_transmute}}, \code{\link{tq_get}}
+#' `tq_transmute` and `tq_transmute_xy` work exactly like `tq_mutate`
+#' except they only return the newly created columns. These are helpful when
+#' changing periodicity where the new columns would not have the same number of rows
+#' as the original tibble.
 #'
-#' @name tq_mutate
-#'
-#' @export
+#' @seealso [tq_get()]
 #'
 #' @examples
 #' # Load libraries
@@ -81,9 +90,12 @@
 #' col_name <- "adjusted"
 #' mutate <- c("MACD", "SMA")
 #' tq_mutate_xy_(fb_stock_prices, x = col_name, mutate_fun = mutate[[1]])
+NULL
 
 # tq_mutate ------------------------------------------------------------------------------------------------
 
+#' @rdname tq_mutate
+#' @export
 tq_mutate <- function(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL, ...) {
 
     # NSE
@@ -102,7 +114,6 @@ tq_mutate_ <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, 
 
 # tq_mutate method dispatch --------------------------------------------------------------------------------
 
-#' @rdname tq_mutate
 #' @export
 tq_mutate_.default <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...) {
 
@@ -110,21 +121,19 @@ tq_mutate_.default <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename 
     stop("data must be a tibble or data.frame object")
 }
 
-#' @rdname tq_mutate
 #' @export
 tq_mutate_.tbl_df <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...) {
 
     # Get transformation
     ret <- tq_transmute_(data          = data,
                          ohlc_fun      = ohlc_fun,
-                         transform_fun = mutate_fun,
+                         mutate_fun    = mutate_fun,
                          col_rename    = col_rename,
                          ...           = ...)
 
     merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
 }
 
-#' @rdname tq_mutate
 #' @export
 tq_mutate_.data.frame <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...) {
 
@@ -134,7 +143,7 @@ tq_mutate_.data.frame <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rena
     # Get transformation
     ret <- tq_transmute_(data          = data,
                          ohlc_fun      = ohlc_fun,
-                         transform_fun = mutate_fun,
+                         mutate_fun    = mutate_fun,
                          col_rename    = col_rename,
                          ...           = ...)
 
@@ -164,7 +173,6 @@ tq_mutate_xy_ <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
 
 # tq_mutate_xy method dispatch --------------------------------------------------------------------------------
 
-#' @rdname tq_mutate
 #' @export
 tq_mutate_xy_.default <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
 
@@ -172,7 +180,6 @@ tq_mutate_xy_.default <- function(data, x, y = NULL, mutate_fun, col_rename = NU
     stop("data must be a tibble or data.frame object")
 }
 
-#' @rdname tq_mutate
 #' @export
 tq_mutate_xy_.tbl_df <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
 
@@ -180,14 +187,13 @@ tq_mutate_xy_.tbl_df <- function(data, x, y = NULL, mutate_fun, col_rename = NUL
     ret <- tq_transmute_xy_(data          = data,
                             x             = x,
                             y             = y,
-                            transform_fun = mutate_fun,
+                            mutate_fun    = mutate_fun,
                             col_rename    = col_rename,
                             ...           = ...)
 
     merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
 }
 
-#' @rdname tq_mutate
 #' @export
 tq_mutate_xy_.data.frame <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
 
@@ -198,7 +204,7 @@ tq_mutate_xy_.data.frame <- function(data, x, y = NULL, mutate_fun, col_rename =
     ret <- tq_transmute_xy_(data          = data,
                             x             = x,
                             y             = y,
-                            transform_fun = mutate_fun,
+                            mutate_fun    = mutate_fun,
                             col_rename    = col_rename,
                             ...           = ...)
 

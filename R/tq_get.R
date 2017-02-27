@@ -1,68 +1,68 @@
-#' Get quantitative data in \code{tibble} format
+#' Get quantitative data in `tibble` format
 #'
 #' @param x A single character string, a character vector or tibble representing a single (or multiple)
 #' stock symbol, metal symbol, currency combination, FRED code, etc.
 #' @param get A character string representing the type of data to get
-#' for \code{x}. Options include:
+#' for `x`. Options include:
 #' \itemize{
-#'   \item \code{"stock.prices"}: Get the open, high, low, close, volume and adjusted
+#'   \item `"stock.prices"`: Get the open, high, low, close, volume and adjusted
 #'   stock prices for a stock symbol from
 #'   \href{https://finance.yahoo.com/}{Yahoo Finance}.
-#'   \item \code{"financials"}: Get the income, balance sheet, and cash flow
+#'   \item `"financials"`: Get the income, balance sheet, and cash flow
 #'   financial statements for a stock symbol from
 #'   \href{https://www.google.com/finance}{Google Finance}.
-#'   \item \code{"key.ratios"}: These are key historical ratios. Get \strong{89 historical growth, profitablity, financial health,
+#'   \item `"key.ratios"`: These are key historical ratios. Get \strong{89 historical growth, profitablity, financial health,
 #'   efficiency, and valuation ratios that span 10-years} from
 #'   \href{https://www.morningstar.com}{Morningstar}.
-#'   \item \code{"key.stats"}: These are key current statistics. Get \strong{55 current key statistics} such as
+#'   \item `"key.stats"`: These are key current statistics. Get \strong{55 current key statistics} such as
 #'   Ask, Bid, Day's High, Day's Low, Last Trade Price, current P/E Ratio, EPS,
 #'   Market Cap, EPS Projected Current Year, EPS Projected Next Year and many more from
 #'   \href{https://finance.yahoo.com/}{Yahoo Finance}.
-#'   \item \code{"dividends"}: Get the dividends for a stock symbol
+#'   \item `"dividends"`: Get the dividends for a stock symbol
 #'   from \href{https://finance.yahoo.com/}{Yahoo Finance}.
-#'   \item \code{"splits"}: Get the splits for a stock symbol
+#'   \item `"splits"`: Get the splits for a stock symbol
 #'   from \href{https://finance.yahoo.com/}{Yahoo Finance}.
-#'   \item \code{"economic.data"}: Get economic data from
+#'   \item `"economic.data"`: Get economic data from
 #'   \href{https://fred.stlouisfed.org/}{FRED}.
-#'   \item \code{"metal.prices"}: Get the metal prices from
+#'   \item `"metal.prices"`: Get the metal prices from
 #'   \href{https://www.oanda.com/}{Oanda}.
-#'   \item \code{"exchange.rates"}: Get exchange rates from
+#'   \item `"exchange.rates"`: Get exchange rates from
 #'   \href{https://www.oanda.com/currency/converter/}{Oanda}.
 #' }
 #' @param complete_cases Removes symbols that return an NA value due to an error with the get
 #' call such as sending an incorrect symbol "XYZ" to get = "stock.prices". This is useful in
 #' scaling so user does not need to
-#' add an extra step to remove these rows. \code{TRUE} by default, and a warning
+#' add an extra step to remove these rows. `TRUE` by default, and a warning
 #' message is generated for any rows removed.
-#' @param ... Additional parameters passed to the appropriate \code{quantmod}
+#' @param ... Additional parameters passed to the appropriate `quantmod`
 #' function. Common optional parameters include:
 #' \itemize{
-#'   \item \code{from}: Optional. A character string representing a start date in
+#'   \item `from`: Optional. A character string representing a start date in
 #'   YYYY-MM-DD format. No effect on
-#'   \code{"financials"}, \code{"key.ratios"}, or \code{"key.stats"}.
-#'   \item \code{to}: A character string representing a end date in
+#'   `"financials"`, `"key.ratios"`, or `"key.stats"`.
+#'   \item `to`: A character string representing a end date in
 #'   YYYY-MM-DD format. No effect on
-#'   \code{get = "financials"},  \code{"key.ratios"}, or \code{"key.stats"}.
+#'   `get = "financials"`,  `"key.ratios"`, or `"key.stats"`.
 #' }
 #'
 #'
-#' @return Returns data in the form of a \code{tibble} object.
+#' @return Returns data in the form of a `tibble` object.
 #'
 #' @details
-#' \code{tq_get()} is a consolidated function that gets data from various
-#' web sources. The function is a wrapper for several \code{quantmod}
-#' functions. The results are always returned as a \code{tibble}. The advantages
+#' `tq_get()` is a consolidated function that gets data from various
+#' web sources. The function is a wrapper for several `quantmod`
+#' functions. The results are always returned as a `tibble`. The advantages
 #' are (1) only one function is needed for all data sources and (2) the function
-#' can be seemlessly used with the tidyverse: \code{purrr}, \code{tidyr}, and
-#' \code{dplyr} verbs.
+#' can be seemlessly used with the tidyverse: `purrr`, `tidyr`, and
+#' `dplyr` verbs.
 #'
-#' \code{tq_get_options()} returns a list of valid `get` options you can
+#' `tq_get_options()` returns a list of valid `get` options you can
 #' choose from.
 #'
-#' \code{tq_get_stock_index_options()} Is deprecated and will be removed in the
-#' next version. Please use \code{tq_index_options()} instead.
+#' `tq_get_stock_index_options()` Is deprecated and will be removed in the
+#' next version. Please use `tq_index_options()` instead.
 #'
-#' @seealso \code{\link{tq_index}} to get a ful list of stocks in an index.
+#' @seealso [tq_index()] to get a ful list of stocks in an index.
 #'
 #' @rdname tq_get
 #'
@@ -517,7 +517,7 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
         # Get stock prices
         from = lubridate::today() - lubridate::years(12)
         valuations_2 <- tq_get(x, get = "stock.prices", from = from) %>%
-            tq_transmute_xy(adjusted, transform_fun = to.period, period = "years") %>%
+            tq_transmute_xy(adjusted, mutate_fun = to.period, period = "years") %>%
             dplyr::mutate(year = lubridate::year(date)) %>%
             dplyr::select(year, date, adjusted)
 

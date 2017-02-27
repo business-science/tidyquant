@@ -72,7 +72,7 @@ The greatest benefit to `tidyquant` is the ability to easily scale your financia
 
 All `tidyquant` functions return data in the `tibble` (tidy data frame) format, which allows for interaction within the `tidyverse`. This means we can:
 
-* Seamlessly scale data retrieval and transformations/mutations
+* Seamlessly scale data retrieval and mutations
 * Use the pipe (`%>%`) for chaining operations
 * Use `dplyr` and `tidyr`: `select`, `filter`, `group_by`, `nest`/`unnest`, `spread`/`gather`, etc
 * Use `purrr`: mapping functions with `map`

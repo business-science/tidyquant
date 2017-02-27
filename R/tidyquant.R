@@ -1,12 +1,12 @@
 #' tidyquant: Integrating quantitative financial analysis tools with the tidyverse
 #'
-#' The main advantage of \code{tidyquant} is to
+#' The main advantage of `tidyquant` is to
 #' bridge the gap between the best quantitative resources for collecting and
-#' manipulating quantitative data, \code{xts}, \code{quantmod} and \code{TTR},
-#' and the data modeling workflow and infrastructure of the \code{tidyverse}.
+#' manipulating quantitative data, `xts`, `quantmod` and `TTR`,
+#' and the data modeling workflow and infrastructure of the `tidyverse`.
 #'
 #' @details
-#' In this package, \code{tidyquant} functions and supporting data sets are
+#' In this package, `tidyquant` functions and supporting data sets are
 #' provided to seamlessly combine tidy tools with existing quantitative
 #' analytics packages. The main advantage is being able to use tidy
 #' functions with purrr for mapping and tidyr for nesting to extend modeling to
@@ -15,14 +15,14 @@
 #'
 #' Users will probably be interested in the following:
 #' \itemize{
-#'   \item \strong{Getting Data from the Web:} \code{\link{tq_get}}
-#'   \item \strong{Manipulating Data:} \code{\link{tq_transmute}} and \code{\link{tq_mutate}}
-#'   \item \strong{Coercing Data To and From xts and tibble:} \code{\link{as_tibble}}
-#'   and \code{\link{as_xts}}
+#'   \item \strong{Getting Data from the Web:} [tq_get()]
+#'   \item \strong{Manipulating Data:} [tq_transmute()] and [tq_mutate()]
+#'   \item \strong{Coercing Data To and From xts and tibble:} [as_tibble()]
+#'   and [as_xts()]
 #' }
 #'
 #' To learn more about tidyquant, start with the vignettes:
-#'  \code{browseVignettes(package = "tidyquant")}
+#'  `browseVignettes(package = "tidyquant")`
 #'
 #' @docType package
 #' @name tidyquant

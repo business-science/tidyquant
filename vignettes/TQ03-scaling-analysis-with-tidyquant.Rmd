@@ -27,7 +27,7 @@ The greatest benefit to `tidyquant` is the ability to easily scale your financia
 
 All `tidyquant` functions return data in the `tibble` (tidy data frame) format, which allows for interaction within the `tidyverse`. This means we can:
 
-* Seamlessly scale data retrieval and transformations/mutations
+* Seamlessly scale data retrieval and mutations
 * Use the pipe (`%>%`) for chaining operations
 * Use `dplyr` and `tidyr`: `select`, `filter`, `group_by`, `nest`/`unnest`, `spread`/`gather`, etc
 * Use `purrr`: mapping functions with `map`
@@ -132,20 +132,20 @@ This capability becomes incredibly useful when combined with `purrr` function ma
 
 # Manipulating Financial Data using Groups
 
-Once you get the data, you typically want to do something with it. You can easily do this at scale. Let's get the yearly returns for multiple stocks using `tq_transmute`. First, get the prices. Second, use `group_by` to group by stock symbol. Third, apply the transformation. We can do this in one easy workflow:
+Once you get the data, you typically want to do something with it. You can easily do this at scale. Let's get the yearly returns for multiple stocks using `tq_transmute`. First, get the prices. Second, use `group_by` to group by stock symbol. Third, apply the mutation. We can do this in one easy workflow:
 
 ```{r}
 c("AAPL", "GOOG", "FB") %>%
     tq_get(get = "stock.prices", from = "2012-01-01", to = "2017-01-01") %>%
     group_by(symbol) %>%
-    tq_transmute(Ad, transform_fun = periodReturn, period = "yearly", 
+    tq_transmute(Ad, mutate_fun = periodReturn, period = "yearly", 
                  col_rename = "yearly.returns") %>%
     ggplot(aes(x = year(date), y = yearly.returns, fill = symbol)) +
     geom_bar(position = "dodge", stat = "identity") +
     scale_y_continuous(labels = scales::percent) +
     scale_x_continuous(breaks = seq(2008, 2017, by = 1)) +
     labs(title = "AAPL, GOOG, FB: Annual Returns", 
-         subtitle = "Transforming using quantmod functions is easy!", 
+         subtitle = "Mutating using quantmod functions is easy!", 
          x = "") +
     theme(legend.position = "bottom")
 ```
@@ -163,13 +163,13 @@ Let's go through an example to illustrate. In our hypothetical situation, we wan
 
 ## Analyze a Single Stock
 
-First, let's come up with a function to help us collect log returns. The function below performs three operations internally. It first gets the stock prices using `tq_get()`. Then, it transforms the stock prices to period returns using `tq_transmute()`. We add the `type = "log"` and `period = "monthly"` arguments to ensure we retrieve a tibble of monthly log returns. Last, we take the mean of the monthly returns to get MMLR.
+First, let's come up with a function to help us collect log returns. The function below performs three operations internally. It first gets the stock prices using `tq_get()`. Then, it mutates the stock prices to period returns using `tq_transmute()`. We add the `type = "log"` and `period = "monthly"` arguments to ensure we retrieve a tibble of monthly log returns. Last, we take the mean of the monthly returns to get MMLR.
 
 ```{r}
 my_stock_analysis_fun <- function(stock.symbol) {
     period.returns <- stock.symbol %>%
         tq_get(get = "stock.prices") %>%
-        tq_transmute(ohlc_fun = Ad, transform_fun = periodReturn, 
+        tq_transmute(ohlc_fun = Ad, mutate_fun = periodReturn, 
                      type = "log", period = "monthly")
     mean(period.returns$monthly.returns)
 }
