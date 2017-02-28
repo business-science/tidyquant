@@ -17,19 +17,19 @@ geom_candlestick(mapping = NULL, data = NULL, stat = "identity",
   fill_up = "darkblue", fill_down = "red", ...)
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2]{aes}} or
-\code{\link[ggplot2]{aes_}}. If specified and \code{inherit.aes = TRUE} (the
+\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{ggplot2::aes()}} or
+\code{\link[ggplot2:aes_]{ggplot2::aes_()}}. If specified and \code{inherit.aes = TRUE} (the
 default), it is combined with the default mapping at the top level of the
 plot. You must supply \code{mapping} if there is no plot mapping.}
 
 \item{data}{The data to be displayed in this layer. There are three options:
 
 If \code{NULL}, the default, the data is inherited from the plot
-data as specified in the call to \code{\link[ggplot2]{ggplot}}.
+data as specified in the call to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 
 A \code{data.frame}, or other object, will override the plot
 data. All objects will be fortified to produce a data frame. See
-\code{\link[ggplot2]{fortify}} for which variables will be created.
+\code{\link[ggplot2:fortify]{ggplot2::fortify()}} for which variables will be created.
 
 A \code{function} will be called with a single argument,
 the plot data. The return value must be a \code{data.frame.}, and
@@ -51,7 +51,7 @@ typically desired for moving averages.}
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. \code{\link[ggplot2]{borders}}.}
+the default plot specification, e.g. \code{\link[ggplot2:borders]{ggplot2::borders()}}.}
 
 \item{color_up, color_down}{Select colors to be applied based on price movement
 from open to close. If close >= open, \code{color_up} is used. Otherwise,
@@ -62,33 +62,33 @@ from open to close. If close >= open, \code{fill_up} is used. Otherwise,
 \code{fill_down} is used. The default is "darkblue" and "red", respectively.
 Only affects \code{geom_candlestick}.}
 
-\item{...}{Other arguments passed on to \code{\link[ggplot2]{layer}}. These are
+\item{...}{Other arguments passed on to \code{\link[ggplot2:layer]{ggplot2::layer()}}. These are
 often aesthetics, used to set an aesthetic to a fixed value, like
 \code{color = "red"} or \code{size = 3}. They may also be parameters
 to the paired geom/stat.}
 }
 \description{
 Financial charts provide visual cues to open, high, low, and close prices.
-Use \code{\link{coord_x_date}} to zoom into specific plot regions.
+Use \code{\link[=coord_x_date]{coord_x_date()}} to zoom into specific plot regions.
 The following financial chart geoms are available:
 \itemize{
-   \item \strong{\href{http://www.investopedia.com/terms/b/barchart.asp}{Bar Chart}}
-   \item \strong{\href{http://www.investopedia.com/terms/c/candlestick.asp}{Candlestick Chart}}
+\item \strong{\href{http://www.investopedia.com/terms/b/barchart.asp}{Bar Chart}}
+\item \strong{\href{http://www.investopedia.com/terms/c/candlestick.asp}{Candlestick Chart}}
 }
 }
 \section{Aesthetics}{
 
 The following aesthetics are understood (required are in bold):
 \itemize{
-   \item \strong{\code{x}}, Typically a date
-   \item \strong{\code{open}}, Required to be the open price
-   \item \strong{\code{high}}, Required to be the high price
-   \item \strong{\code{low}}, Required to be the low price
-   \item \strong{\code{close}}, Required to be the close price
-   \item \code{alpha}
-   \item \code{group}
-   \item \code{linetype}
-   \item \code{size}
+\item \strong{\code{x}}, Typically a date
+\item \strong{\code{open}}, Required to be the open price
+\item \strong{\code{high}}, Required to be the high price
+\item \strong{\code{low}}, Required to be the low price
+\item \strong{\code{close}}, Required to be the close price
+\item \code{alpha}
+\item \code{group}
+\item \code{linetype}
+\item \code{size}
 }
 }
 
@@ -117,8 +117,8 @@ AAPL \%>\%
 \seealso{
 See individual modeling functions for underlying parameters:
 \itemize{
-   \item \code{\link{geom_ma}} for adding moving averages to ggplots
-   \item \code{\link{geom_bbands}} for adding Bollinger Bands to ggplots
-   \item \code{\link{coord_x_date}} for zooming into specific regions of a plot
+\item \code{\link[=geom_ma]{geom_ma()}} for adding moving averages to ggplots
+\item \code{\link[=geom_bbands]{geom_bbands()}} for adding Bollinger Bands to ggplots
+\item \code{\link[=coord_x_date]{coord_x_date()}} for zooming into specific regions of a plot
 }
 }

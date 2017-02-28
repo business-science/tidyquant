@@ -24,7 +24,7 @@ library(tidyquant)
 
 # Overview
 
-`tidyquant` integrates the best resources for collecting and analyzing financial data, `xts` and `zoo`, `quantmod` and `TTR`, with the tidy data infrastructure of the `tidyverse` allowing for seamless interaction between each. 
+`tidyquant` integrates the best resources for collecting and analyzing financial data, `xts` and `zoo`, `quantmod`, `TTR`, and `PerformanceAnalytics` with the tidy data infrastructure of the `tidyverse` allowing for seamless interaction between each. 
 
 The four primary quantitative packages that are the backbone for financial analysis in _R programming_ are: 
 
@@ -40,8 +40,8 @@ The [tidy data principles](https://www.jstatsoft.org/article/view/v059i10) are a
 
 * __A few core functions with a lot of power__
 * __Integrates the quantitative analysis functionality of `zoo`, `xts`, `quantmod`, `TTR`, and _now_ `PerformanceAnalytics`__
-* __Designed for scaling using the _split, apply, combine_ framework of the `tidyverse`__
-* __Implements `ggplot2` functionality for _beautiful and meaningful financial visualizations_ __
+* __Designed for modeling and scaling analyses using the the `tidyverse` tools in [_R for Data Science_](http://r4ds.had.co.nz/)__
+* __Implements `ggplot2` functionality for beautiful and meaningful financial visualizations__
 * __User-friendly documentation to get you up to speed quickly!__
 
 ## A Few Core Functions with A Lot of Power
@@ -52,9 +52,11 @@ Minimizing the number of functions reduces the learning curve. What we've done i
 
   2. __Get Quantitative Data, `tq_get()`__: A one-stop shop to get data from various web-sources. 
 
-  3. __Transform, `tq_transform()`, and Mutate, `tq_mutate()`, Quantitative Data__: Perform and scale financial calculations completely within the `tidyverse`. These workhorse functions integrate the `xts`, `zoo`, `quantmod`, and `TTR` packages. 
+  3. __Transmute, `tq_transmute()`, and Mutate, `tq_mutate()`, Quantitative Data__: Perform and scale financial calculations completely within the `tidyverse`. These workhorse functions integrate the `xts`, `zoo`, `quantmod`, and `TTR` packages. 
 
   4. __Coerce Quantitative Data Between tibble and xts formats, `as_tibble()` and `as_xts()`__: Coercing the various _R_ time-based objects to and from `tibble` (tidy data frame) objects _was_ a pain. These functions enable __easily going back and forth__.
+  
+  5. __Performance analysis, `tq_performance()`, and portfolio aggregation, `tq_portfolio()`__: The `PerformanceAnalytics` integration enables analyzing performance of assets and portfolios. Refer to [Performance Analysis with tidyquant](TQ05-performance-analysis-with-tidyquant.html).
 
 For more information, refer to the first topic-specific vignette, [Core Functions in tidyquant](TQ01-core-functions-in-tidyquant.html).
 
@@ -72,7 +74,7 @@ The greatest benefit to `tidyquant` is the ability to easily scale your financia
 
 All `tidyquant` functions return data in the `tibble` (tidy data frame) format, which allows for interaction within the `tidyverse`. This means we can:
 
-* Seamlessly scale data retrieval and transformations/mutations
+* Seamlessly scale data retrieval and mutations
 * Use the pipe (`%>%`) for chaining operations
 * Use `dplyr` and `tidyr`: `select`, `filter`, `group_by`, `nest`/`unnest`, `spread`/`gather`, etc
 * Use `purrr`: mapping functions with `map`

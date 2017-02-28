@@ -69,14 +69,14 @@ all of the return values (i.e. not in "wide" format with returns spread by asset
 \code{weights} are the weights to be applied to the asset returns.
 Weights can be input in one of three options:
 \itemize{
-  \item Single Portfolio: A numeric vector of weights that is the same length as unique number of assets.
-  The weights are applied in the order of the assets.
-  \item Single Portfolio: A two column tibble with assets in the first column and weights in the second column.
-  The advantage to this method is the weights are mapped to the assets and any unlisted
-  assets default to a weight of zero.
-  \item Multiple Portfolios: A three column tibble with portfolio index in the first
-  column, assets in the second column, and weights in the third column. The tibble
-  must be grouped by portfolio index.
+\item Single Portfolio: A numeric vector of weights that is the same length as unique number of assets.
+The weights are applied in the order of the assets.
+\item Single Portfolio: A two column tibble with assets in the first column and weights in the second column.
+The advantage to this method is the weights are mapped to the assets and any unlisted
+assets default to a weight of zero.
+\item Multiple Portfolios: A three column tibble with portfolio index in the first
+column, assets in the second column, and weights in the third column. The tibble
+must be grouped by portfolio index.
 }
 
 \code{tq_repeat_df} is a simple function that repeats
@@ -97,7 +97,7 @@ stock_prices <- c("AAPL", "GOOG", "NFLX") \%>\%
 # Get returns for individual stock components
 monthly_returns_stocks <- stock_prices \%>\%
     group_by(symbol) \%>\%
-    tq_transform(Ad, periodReturn, period = "monthly")
+    tq_transmute(Ad, periodReturn, period = "monthly")
 
 ##### Portfolio Aggregation Methods #####
 
@@ -154,8 +154,8 @@ tq_portfolio(data = mult_monthly_returns_stocks,
 }
 \seealso{
 \itemize{
-  \item \code{\link{tq_transform}} which can be used to get period returns.
-  \item \code{\link[PerformanceAnalytics]{Return.portfolio}} which is the underlying function
-  that specifies which parameters can be passed via \code{...}
+\item \code{\link[=tq_transmute]{tq_transmute()}} which can be used to get period returns.
+\item \code{\link[PerformanceAnalytics:Return.portfolio]{PerformanceAnalytics::Return.portfolio()}} which is the underlying function
+that specifies which parameters can be passed via \code{...}
 }
 }

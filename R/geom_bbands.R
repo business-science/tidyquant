@@ -1,26 +1,26 @@
 #' Plot Bollinger Bands using Moving Averages
 #'
 #' Bollinger Bands plot a range around a moving average typically two standard deviations up and down.
-#' The \code{geom_bbands} function enables plotting Bollinger Bands quickly using various moving average functions.
-#' The moving average functions used are specified in \code{\link[TTR]{SMA}}
-#' from the TTR package. Use \code{\link{coord_x_date}} to zoom into specific plot regions.
+#' The `geom_bbands()` function enables plotting Bollinger Bands quickly using various moving average functions.
+#' The moving average functions used are specified in [TTR::SMA()]
+#' from the TTR package. Use [coord_x_date()] to zoom into specific plot regions.
 #' The following moving averages are available:
 #' \itemize{
 #'    \item \strong{\href{http://www.investopedia.com/terms/s/sma.asp}{Simple moving averages (SMA)}}:
-#'    Rolling mean over a period defined by \code{n}.
+#'    Rolling mean over a period defined by `n`.
 #'    \item \strong{\href{http://www.investopedia.com/terms/e/ema.asp}{Exponential moving averages (EMA)}}: Includes
 #'    exponentially-weighted mean that gives more weight to recent observations.
-#'    Uses \code{wilder} and \code{ratio} args.
+#'    Uses `wilder` and `ratio` args.
 #'    \item \strong{\href{http://www.investopedia.com/ask/answers/071414/whats-difference-between-moving-average-and-weighted-moving-average.asp}{Weighted moving averages (WMA)}}:
-#'    Uses a set of weights, \code{wts}, to weight observations in the moving average.
+#'    Uses a set of weights, `wts`, to weight observations in the moving average.
 #'    \item \strong{\href{http://www.investopedia.com/articles/trading/10/double-exponential-moving-average.asp}{Double exponential moving averages (DEMA)}}:
-#'    Uses \code{v} volume factor, \code{wilder} and \code{ratio} args.
+#'    Uses `v` volume factor, `wilder` and `ratio` args.
 #'    \item \strong{\href{https://en.wikipedia.org/wiki/Zero_lag_exponential_moving_average}{Zero-lag exponential moving averages (ZLEMA)}}:
-#'    Uses \code{wilder} and \code{ratio} args.
+#'    Uses `wilder` and `ratio` args.
 #'    \item \strong{\href{http://www.investopedia.com/articles/trading/11/trading-with-vwap-mvwap.asp}{Volume-weighted moving averages (VWMA)}}:
-#'    Requires \code{volume} aesthetic.
+#'    Requires `volume` aesthetic.
 #'    \item \strong{\href{http://www.motivewave.com/studies/elastic_volume_weighted_moving_average.htm}{Elastic, volume-weighted moving averages (EVWMA)}}:
-#'    Requires \code{volume} aesthetic.
+#'    Requires `volume` aesthetic.
 #' }
 #'
 #' @inheritParams geom_ma
@@ -35,29 +35,29 @@
 #' @section Aesthetics:
 #' The following aesthetics are understood (required are in bold):
 #' \itemize{
-#'    \item \strong{\code{x}}, Typically a date
-#'    \item \strong{\code{high}}, Required to be the high price
-#'    \item \strong{\code{low}}, Required to be the low price
-#'    \item \strong{\code{close}}, Required to be the close price
-#'    \item \code{volume}, Required for VWMA and EVWMA
-#'    \item \code{colour}, Affects line colors
-#'    \item \code{fill}, Affects ribbon fill color
-#'    \item \code{alpha}, Affects ribbon alpha value
-#'    \item \code{group}
-#'    \item \code{linetype}
-#'    \item \code{size}
+#'    \item \strong{`x`}, Typically a date
+#'    \item \strong{`high`}, Required to be the high price
+#'    \item \strong{`low`}, Required to be the low price
+#'    \item \strong{`close`}, Required to be the close price
+#'    \item `volume`, Required for VWMA and EVWMA
+#'    \item `colour`, Affects line colors
+#'    \item `fill`, Affects ribbon fill color
+#'    \item `alpha`, Affects ribbon alpha value
+#'    \item `group`
+#'    \item `linetype`
+#'    \item `size`
 #' }
 #'
 #' @seealso See individual modeling functions for underlying parameters:
 #' \itemize{
-#'    \item \code{\link[TTR]{SMA}} for simple moving averages
-#'    \item \code{\link[TTR]{EMA}} for exponential moving averages
-#'    \item \code{\link[TTR]{WMA}} for weighted moving averages
-#'    \item \code{\link[TTR]{DEMA}} for double exponential moving averages
-#'    \item \code{\link[TTR]{ZLEMA}} for zero-lag exponential moving averages
-#'    \item \code{\link[TTR]{VWMA}} for volume-weighted moving averages
-#'    \item \code{\link[TTR]{EVWMA}} for elastic, volume-weighted moving averages
-#'    \item \code{\link{coord_x_date}} for zooming into specific regions of a plot
+#'    \item [TTR::SMA()] for simple moving averages
+#'    \item [TTR::EMA()] for exponential moving averages
+#'    \item [TTR::WMA()] for weighted moving averages
+#'    \item [TTR::DEMA()] for double exponential moving averages
+#'    \item [TTR::ZLEMA()] for zero-lag exponential moving averages
+#'    \item [TTR::VWMA()] for volume-weighted moving averages
+#'    \item [TTR::EVWMA()] for elastic, volume-weighted moving averages
+#'    \item [coord_x_date()] for zooming into specific regions of a plot
 #' }
 #'
 #' @name geom_bbands

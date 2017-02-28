@@ -60,7 +60,7 @@ First, load the `tidyquant` package.
 library(tidyquant)
 ```
 
-Second, get the stock returns for the stocks we wish to evaluate. We use `tq_get` to get stock prices from Yahoo Finance, `group_by` to group the stock prices related to each symbol, and `tq_transform` to retrieve period returns in a monthly periodicity using the "adjusted" stock prices (adjusted for stock splits, which can throw off returns, affecting the performance analysis). Review the output and see that there are three groups of symbols indicating the data has been grouped appropriately.
+Second, get the stock returns for the stocks we wish to evaluate. We use `tq_get` to get stock prices from Yahoo Finance, `group_by` to group the stock prices related to each symbol, and `tq_transmute` to retrieve period returns in a monthly periodicity using the "adjusted" stock prices (adjusted for stock splits, which can throw off returns, affecting the performance analysis). Review the output and see that there are three groups of symbols indicating the data has been grouped appropriately.
 
 ```{r}
 Ra <- c("AAPL", "GOOG", "NFLX") %>%
@@ -68,7 +68,7 @@ Ra <- c("AAPL", "GOOG", "NFLX") %>%
            from = "2010-01-01",
            to   = "2015-12-31") %>%
     group_by(symbol) %>%
-    tq_transform(Ad, periodReturn, period = "monthly", col_rename = "Ra")
+    tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "Ra")
 Ra
 ```
 
@@ -79,7 +79,7 @@ Rb <- "XLF" %>%
     tq_get(get  = "stock.prices",
            from = "2010-01-01",
            to   = "2015-12-31") %>%
-    tq_transform(Ad, periodReturn, period = "monthly", col_rename = "Rb")
+    tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "Rb")
 Rb
 ```
 
@@ -140,14 +140,14 @@ stock_prices <- c("AAPL", "GOOG", "NFLX") %>%
 stock_prices
 ```
 
-### Step 2A: Transform to returns
+### Step 2A: Mutate to returns
 
-Using the `tidyverse` split, apply, combine framework, we can transform groups of stocks by first "grouping" with `group_by` and then applying a transformation function using `tq_transform`. We use the `quantmod` function `periodReturn` as the transformation function. We pass along the arguments `period = "monthly"` to return the results in monthly periodicity. Last, we use the `col_rename` argument to rename the output column. 
+Using the `tidyverse` split, apply, combine framework, we can mutate groups of stocks by first "grouping" with `group_by` and then applying a mutating function using `tq_transmute`. We use the `quantmod` function `periodReturn` as the mutating function. We pass along the arguments `period = "monthly"` to return the results in monthly periodicity. Last, we use the `col_rename` argument to rename the output column. 
 
 ```{r}
 stock_returns_monthly <- stock_prices %>%
     group_by(symbol) %>%
-    tq_transform(ohlc_fun = Ad, transform_fun = periodReturn, 
+    tq_transmute(ohlc_fun = Ad, mutate_fun = periodReturn, 
                  period = "monthly", col_rename = "Ra")
 stock_returns_monthly
 ```
@@ -186,7 +186,7 @@ Let's recreate the CAPM analysis in the "Quick Example" this time comparing a po
 
 #### Steps 1A and 2A: Asset Period Returns
 
-This is the same as what we did previously to get the monthly returns for groups of individual stock prices. We use the split, apply, combine framework using the workflow of `tq_get`, `group_by`, and `tq_transform`.
+This is the same as what we did previously to get the monthly returns for groups of individual stock prices. We use the split, apply, combine framework using the workflow of `tq_get`, `group_by`, and `tq_transmute`.
 
 ```{r, eval = F}
 stock_returns_monthly <- c("AAPL", "GOOG", "NFLX") %>%
@@ -194,7 +194,7 @@ stock_returns_monthly <- c("AAPL", "GOOG", "NFLX") %>%
            from = "2010-01-01",
            to   = "2015-12-31") %>%
     group_by(symbol) %>%
-    tq_transform(Ad, periodReturn, period = "monthly", col_rename = "Ra")
+    tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "Ra")
 stock_returns_monthly
 ```
 
@@ -213,7 +213,7 @@ baseline_returns_monthly <- "XLF" %>%
     tq_get(get  = "stock.prices",
            from = "2010-01-01",
            to   = "2015-12-31") %>%
-    tq_transform(Ad, periodReturn, period = "monthly", col_rename = "Rb")
+    tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "Rb")
 baseline_returns_monthly
 ```
 
@@ -313,7 +313,7 @@ stock_returns_monthly <- c("AAPL", "GOOG", "NFLX") %>%
            from = "2010-01-01",
            to   = "2015-12-31") %>%
     group_by(symbol) %>%
-    tq_transform(Ad, periodReturn, period = "monthly", col_rename = "Ra")
+    tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "Ra")
 ```
 
 Second, get baseline asset returns, which is the exact same as Steps 1B and 2B from the Single Portfolio example.
@@ -323,7 +323,7 @@ baseline_returns_monthly <- "XLF" %>%
     tq_get(get  = "stock.prices",
            from = "2010-01-01",
            to   = "2015-12-31") %>%
-    tq_transform(Ad, periodReturn, period = "monthly", col_rename = "Rb")
+    tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "Rb")
 ```
 
 #### Step 3A: Aggregate Portfolio Returns for Multiple Portfolios
@@ -617,7 +617,7 @@ portfolio_growth_monthly_multi %>%
 
 ## Customizing the Sharpe Ratio
 
-Finally, the same concept of passing arguments works with all the `tidyquant` functions that are wrappers including `tq_transform`, `tq_mutate`, `tq_performance`, etc. Let's use a final example with the `SharpeRatio`, which has the following arguments.
+Finally, the same concept of passing arguments works with all the `tidyquant` functions that are wrappers including `tq_transmute`, `tq_mutate`, `tq_performance`, etc. Let's use a final example with the `SharpeRatio`, which has the following arguments.
 
 ```{r}
 args(SharpeRatio)

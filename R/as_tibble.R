@@ -3,21 +3,21 @@
 #'
 #' @param x A list, matrix, xts, zoo, timeSeries, etc object.
 #' @param preserve_row_names Used during coercion from matrix, xts, zoo,
-#' timeSeries, etc objects that have row names. When \code{TRUE}, creates
-#' a \code{row.names} column with names of rows as character class.
+#' timeSeries, etc objects that have row names. When `TRUE`, creates
+#' a `row.names` column with names of rows as character class.
 #' @param ... Additional parameters passed to the appropriate
-#' \code{\link[tibble]{as_tibble}} function.
+#' [tibble::as_tibble()] function.
 #'
-#' @return Returns a \code{tibble} object.
+#' @return Returns a `tibble` object.
 #'
-#' @details \code{as_tibble} is a wrapper for \code{tibble::as_tibble}
-#' that includes a \code{preserve_row_names} argument. The function is designed
-#' to coerce \code{xts}, \code{zoo}, \code{timeSeries}, \code{ts}, and \code{irts}
+#' @details `as_tibble` is a wrapper for `tibble::as_tibble`
+#' that includes a `preserve_row_names` argument. The function is designed
+#' to coerce `xts`, `zoo`, `timeSeries`, `ts`, and `irts`
 #' objects that are used frequently in quantitative financial analysis.
-#' When \code{preserve_row_names = TRUE} is specified, a new column,
-#' \code{row.names}, is created during object coercion as a character class.
+#' When `preserve_row_names = TRUE` is specified, a new column,
+#' `row.names`, is created during object coercion as a character class.
 #'
-#' @seealso \code{\link{as_xts}}
+#' @seealso [as_xts()]
 #'
 #' @export
 #'
@@ -35,9 +35,7 @@
 #' # xts coercion to tibble
 #' quantmod::getSymbols("AAPL", auto.assign = FALSE) %>%
 #'     as_tibble(preserve_row_names = TRUE)
-
-# PRIMARY FUNCTIONS ----
-
+#'
 as_tibble <- function(x, preserve_row_names = FALSE, ...) {
 
     warn <- FALSE

@@ -45,5 +45,5 @@ AAPL \%>\% ggplot(aes(x = date, y = close)) +
 
 }
 \seealso{
-\code{\link{scale_manual}}
+\code{\link[=scale_manual]{scale_manual()}}
 }

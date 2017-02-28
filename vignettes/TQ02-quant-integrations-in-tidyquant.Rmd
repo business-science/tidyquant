@@ -25,7 +25,7 @@ knitr::opts_chunk$set(message = FALSE,
 
 There's a wide range of useful quantitative analysis functions that work with time-series objects. The problem is that many of these _wonderful_ functions don't work data frames. That is until now! The `tidyquant` package integrates the most useful functions from the `xts`, `zoo`, `quantmod` and `TTR` packages. This vignette focuses on the following _core functions_ to demonstrate how the integratation works with the quantitative finance packages:
 
-* Transform, `tq_transform()`: Returns a new tidy data frame typically in a different periodicity than the input.
+* Transmute, `tq_transmute()`: Returns a new tidy data frame typically in a different periodicity than the input.
 * Mutate, `tq_mutate()`: Adds columns to the existing tidy data frame.
 
 
@@ -40,17 +40,17 @@ library(tidyquant)
 
 # Function Compatibility
 
-`tq_transform_fun_options()` returns a list the __compatible transform functions__ by each package. We'll discuss these options by package briefly.
+`tq_transmute_fun_options()` returns a list the __compatible mutate functions__ by each package. We'll discuss these options by package briefly.
 
 ```{r}
-tq_transform_fun_options() %>% str()
+tq_transmute_fun_options() %>% str()
 ```
 
 ## zoo Functionality
 
 ```{r}
-# Get zoo functions that work with tq_transform and tq_mutate
-tq_transform_fun_options()$zoo
+# Get zoo functions that work with tq_transmute and tq_mutate
+tq_transmute_fun_options()$zoo
 ```
 
 The `zoo` functions that are compatible are listed above. Generally speaking, these are the:
@@ -65,8 +65,8 @@ The `zoo` functions that are compatible are listed above. Generally speaking, th
 
 
 ```{r}
-# Get xts functions that work with tq_transform and tq_mutate
-tq_transform_fun_options()$xts
+# Get xts functions that work with tq_transmute and tq_mutate
+tq_transmute_fun_options()$xts
 ```
 
 The `xts` functions that are compatible are listed above. Generally speaking, these are the:
@@ -85,8 +85,8 @@ The `xts` functions that are compatible are listed above. Generally speaking, th
 ## quantmod Functionality
 
 ```{r}
-# Get quantmod functions that work with tq_transform and tq_mutate
-tq_transform_fun_options()$quantmod
+# Get quantmod functions that work with tq_transmute and tq_mutate
+tq_transmute_fun_options()$quantmod
 ```
 
 The `quantmod` functions that are compatible are listed above. Generally speaking, these are the:
@@ -109,8 +109,8 @@ The `quantmod` functions that are compatible are listed above. Generally speakin
 ## TTR Functionality
 
 ```{r}
-# Get TTR functions that work with tq_transform and tq_mutate
-tq_transform_fun_options()$TTR
+# Get TTR functions that work with tq_transmute and tq_mutate
+tq_transmute_fun_options()$TTR
 ```
 
 
@@ -165,29 +165,29 @@ AAPL <- tq_get("AAPL")
 
 ## Example 1: Changing the Periodicity from Daily to Weekly
 
-The `xts::to.period` function is used for periodicity aggregation (converting from a lower level periodicity to a higher level such as minutes to hours or months to years). Because we are seeking a return structure that is on a different time scale than the input (daily versus Weekly), we need to use a transform function. We select `tq_transform` and pass the open, high, low, close and volume using OHLC format via `ohlc_fun = OHLCV`. Looking at the documentation for `to.period`, we see that it accepts a `period` argument that we can set to `"weeks"`. The result is the OHLCV data returned with the dates changed to one day per week.
+The `xts::to.period` function is used for periodicity aggregation (converting from a lower level periodicity to a higher level such as minutes to hours or months to years). Because we are seeking a return structure that is on a different time scale than the input (daily versus weekly), we need to use a transmute function. We select `tq_transmute` and pass the open, high, low, close and volume using OHLC format via `ohlc_fun = OHLCV`. Looking at the documentation for `to.period`, we see that it accepts a `period` argument that we can set to `"weeks"`. The result is the OHLCV data returned with the dates changed to one day per week.
 
 ```{r}
 AAPL %>%
-    tq_transform(ohlc_fun = OHLCV, transform_fun = to.period, period = "weeks")
+    tq_transmute(ohlc_fun = OHLCV, mutate_fun = to.period, period = "weeks")
 ```
 
-As a side note, we could also do columns individually using the `tq_transform_xy` form. This is really useful for columns that don't fit the OHLC notation such as "adjusted" prices. Here's how to implement to get the adjusted prices on a weekly periodicity.
+As a side note, we could also do columns individually using the `tq_transmute_xy` form. This is really useful for columns that don't fit the OHLC notation such as "adjusted" prices. Here's how to implement to get the adjusted prices on a weekly periodicity.
 
 ```{r}
 AAPL %>%
-    tq_transform_xy(x = adjusted, transform_fun = to.period, period = "weeks")
+    tq_transmute_xy(x = adjusted, mutate_fun = to.period, period = "weeks")
 ```
 
 
 
 ## Example 2: Getting the Max Close Price for Each Quarter.
 
-The `xts::apply.quarterly()` function that is part of the period apply group can be used to apply functions by quarterly time segments. Because we are seeking a return structure that is on a different time scale than the input (quarterly versus daily), we need to use a transform function. We select `tq_transform` and pass the close price using OHLC format via `ohlc_fun = Cl`, and we send this subset of the data to the `apply.quarterly` function via the `transform_fun` argument. Looking at the documentation for `apply.quarterly`, we see that we can pass a function to the argument, `FUN`. We want the maximum values, so we set `FUN = max`. The result is the quarters returned as a date and the maximum closing price during the quarter returned as a double. 
+The `xts::apply.quarterly()` function that is part of the period apply group can be used to apply functions by quarterly time segments. Because we are seeking a return structure that is on a different time scale than the input (quarterly versus daily), we need to use a transmute function. We select `tq_transmute` and pass the close price using OHLC format via `ohlc_fun = Cl`, and we send this subset of the data to the `apply.quarterly` function via the `mutate_fun` argument. Looking at the documentation for `apply.quarterly`, we see that we can pass a function to the argument, `FUN`. We want the maximum values, so we set `FUN = max`. The result is the quarters returned as a date and the maximum closing price during the quarter returned as a double. 
 
 ```{r}
 AAPL %>%
-    tq_transform(ohlc_fun = Cl, transform_fun = apply.quarterly, FUN = max)
+    tq_transmute(ohlc_fun = Cl, mutate_fun = apply.quarterly, FUN = max)
 ```
 
 Note that as an alternative you could use the xy form, replacing `ohlc_fun = Cl` with `x = close`.
@@ -202,7 +202,7 @@ We want to use the adjusted closing prices column (adjusted for stock splits, wh
 
 ```{r}
 AAPL_annual_returns <- AAPL %>%
-    tq_transform(ohlc_fun = Ad, transform_fun = periodReturn, 
+    tq_transmute(ohlc_fun = Ad, mutate_fun = periodReturn, 
                  period = "yearly", type = "arithmetic")
 AAPL_annual_returns
 ```
@@ -219,7 +219,7 @@ AAPL_annual_returns %>%
     scale_color_gradient(low = "red", high = "darkblue") +
     scale_y_continuous(limits = c(-2, 2), labels = scales::percent) +
     labs(title = "AAPL: Annual Returns",
-         subtitle = "Get annual returns quickly with tq_transform!",
+         subtitle = "Get annual returns quickly with tq_transmute!",
          y = "Annual Returns", x = "")
 ```
 
@@ -227,12 +227,12 @@ AAPL_annual_returns %>%
 
 ### Example 3B: Getting Daily Log Returns
 
-Daily log returns follows a similar approach. Normally I go with a transform function, `tq_transform`, because the `periodReturn` function accepts different periodicity options, and anything other than daily will blow up a mutation. But, in our situation the period returns periodicity is the same as the stock prices periodicity (both daily), so we can use either. We want to use the adjusted closing prices column (adjusted for stock splits, which can make it appear that a stock is performing poorly if a split is included), so we set `ohlc_fun = Ad`. We researched the `periodReturn` function, and we found that it accepts `type = "log"` and `period = "daily"`, which returns the daily log returns. 
+Daily log returns follows a similar approach. Normally I go with a transmute function, `tq_transmute`, because the `periodReturn` function accepts different periodicity options, and anything other than daily will blow up a mutation. But, in our situation the period returns periodicity is the same as the stock prices periodicity (both daily), so we can use either. We want to use the adjusted closing prices column (adjusted for stock splits, which can make it appear that a stock is performing poorly if a split is included), so we set `ohlc_fun = Ad`. We researched the `periodReturn` function, and we found that it accepts `type = "log"` and `period = "daily"`, which returns the daily log returns. 
 
 
 ```{r}
 AAPL %>%
-    tq_transform(ohlc_fun = Ad, transform_fun = periodReturn, 
+    tq_transmute(ohlc_fun = Ad, mutate_fun = periodReturn, 
                  type = "log", period = "daily")
 ```
 

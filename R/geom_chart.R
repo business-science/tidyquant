@@ -1,7 +1,7 @@
 #' Plot Financial Charts in ggplot2
 #'
 #' Financial charts provide visual cues to open, high, low, and close prices.
-#' Use \code{\link{coord_x_date}} to zoom into specific plot regions.
+#' Use [coord_x_date()] to zoom into specific plot regions.
 #' The following financial chart geoms are available:
 #' \itemize{
 #'    \item \strong{\href{http://www.investopedia.com/terms/b/barchart.asp}{Bar Chart}}
@@ -11,32 +11,32 @@
 #' @inheritParams geom_ma
 #' @inheritParams ggplot2::geom_linerange
 #' @param color_up,color_down Select colors to be applied based on price movement
-#' from open to close. If close >= open, \code{color_up} is used. Otherwise,
-#' \code{color_down} is used. The default is "darkblue" and "red", respectively.
+#' from open to close. If close >= open, `color_up` is used. Otherwise,
+#' `color_down` is used. The default is "darkblue" and "red", respectively.
 #' @param fill_up,fill_down Select fills to be applied based on price movement
-#' from open to close. If close >= open, \code{fill_up} is used. Otherwise,
-#' \code{fill_down} is used. The default is "darkblue" and "red", respectively.
-#' Only affects \code{geom_candlestick}.
+#' from open to close. If close >= open, `fill_up` is used. Otherwise,
+#' `fill_down` is used. The default is "darkblue" and "red", respectively.
+#' Only affects `geom_candlestick`.
 #'
 #' @section Aesthetics:
 #' The following aesthetics are understood (required are in bold):
 #' \itemize{
-#'    \item \strong{\code{x}}, Typically a date
-#'    \item \strong{\code{open}}, Required to be the open price
-#'    \item \strong{\code{high}}, Required to be the high price
-#'    \item \strong{\code{low}}, Required to be the low price
-#'    \item \strong{\code{close}}, Required to be the close price
-#'    \item \code{alpha}
-#'    \item \code{group}
-#'    \item \code{linetype}
-#'    \item \code{size}
+#'    \item \strong{`x`}, Typically a date
+#'    \item \strong{`open`}, Required to be the open price
+#'    \item \strong{`high`}, Required to be the high price
+#'    \item \strong{`low`}, Required to be the low price
+#'    \item \strong{`close`}, Required to be the close price
+#'    \item `alpha`
+#'    \item `group`
+#'    \item `linetype`
+#'    \item `size`
 #' }
 #'
 #' @seealso See individual modeling functions for underlying parameters:
 #' \itemize{
-#'    \item \code{\link{geom_ma}} for adding moving averages to ggplots
-#'    \item \code{\link{geom_bbands}} for adding Bollinger Bands to ggplots
-#'    \item \code{\link{coord_x_date}} for zooming into specific regions of a plot
+#'    \item [geom_ma()] for adding moving averages to ggplots
+#'    \item [geom_bbands()] for adding Bollinger Bands to ggplots
+#'    \item [coord_x_date()] for zooming into specific regions of a plot
 #' }
 #'
 #' @name geom_chart

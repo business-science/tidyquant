@@ -1,60 +1,60 @@
 #' Plot moving averages
 #'
-#' The underlying moving average functions used are specified in \code{\link[TTR]{SMA}}
-#' from the TTR package. Use \code{\link{coord_x_date}} to zoom into specific plot regions.
+#' The underlying moving average functions used are specified in [TTR::SMA()]
+#' from the TTR package. Use [coord_x_date()] to zoom into specific plot regions.
 #' The following moving averages are available:
 #' \itemize{
 #'    \item \strong{\href{http://www.investopedia.com/terms/s/sma.asp}{Simple moving averages (SMA)}}:
-#'    Rolling mean over a period defined by \code{n}.
+#'    Rolling mean over a period defined by `n`.
 #'    \item \strong{\href{http://www.investopedia.com/terms/e/ema.asp}{Exponential moving averages (EMA)}}: Includes
 #'    exponentially-weighted mean that gives more weight to recent observations.
-#'    Uses \code{wilder} and \code{ratio} args.
+#'    Uses `wilder` and `ratio` args.
 #'    \item \strong{\href{http://www.investopedia.com/ask/answers/071414/whats-difference-between-moving-average-and-weighted-moving-average.asp}{Weighted moving averages (WMA)}}:
-#'    Uses a set of weights, \code{wts}, to weight observations in the moving average.
+#'    Uses a set of weights, `wts`, to weight observations in the moving average.
 #'    \item \strong{\href{http://www.investopedia.com/articles/trading/10/double-exponential-moving-average.asp}{Double exponential moving averages (DEMA)}}:
-#'    Uses \code{v} volume factor, \code{wilder} and \code{ratio} args.
+#'    Uses `v` volume factor, `wilder` and `ratio` args.
 #'    \item \strong{\href{https://en.wikipedia.org/wiki/Zero_lag_exponential_moving_average}{Zero-lag exponential moving averages (ZLEMA)}}:
-#'    Uses \code{wilder} and \code{ratio} args.
+#'    Uses `wilder` and `ratio` args.
 #'    \item \strong{\href{http://www.investopedia.com/articles/trading/11/trading-with-vwap-mvwap.asp}{Volume-weighted moving averages (VWMA)}}:
-#'    Requires \code{volume} aesthetic.
+#'    Requires `volume` aesthetic.
 #'    \item \strong{\href{http://www.motivewave.com/studies/elastic_volume_weighted_moving_average.htm}{Elastic, volume-weighted moving averages (EVWMA)}}:
-#'    Requires \code{volume} aesthetic.
+#'    Requires `volume` aesthetic.
 #' }
 #'
 #'
-#' @param mapping Set of aesthetic mappings created by \code{\link[ggplot2]{aes}} or
-#' \code{\link[ggplot2]{aes_}}. If specified and \code{inherit.aes = TRUE} (the
+#' @param mapping Set of aesthetic mappings created by [ggplot2::aes()] or
+#' [ggplot2::aes_()]. If specified and `inherit.aes = TRUE` (the
 #' default), it is combined with the default mapping at the top level of the
-#' plot. You must supply \code{mapping} if there is no plot mapping.
+#' plot. You must supply `mapping` if there is no plot mapping.
 #' @param data The data to be displayed in this layer. There are three options:
 #'
-#' If \code{NULL}, the default, the data is inherited from the plot
-#' data as specified in the call to \code{\link[ggplot2]{ggplot}}.
+#' If `NULL`, the default, the data is inherited from the plot
+#' data as specified in the call to [ggplot2::ggplot()].
 #'
-#' A \code{data.frame}, or other object, will override the plot
+#' A `data.frame`, or other object, will override the plot
 #' data. All objects will be fortified to produce a data frame. See
-#' \code{\link[ggplot2]{fortify}} for which variables will be created.
+#' [ggplot2::fortify()] for which variables will be created.
 #'
-#' A \code{function} will be called with a single argument,
-#' the plot data. The return value must be a \code{data.frame.}, and
+#' A `function` will be called with a single argument,
+#' the plot data. The return value must be a `data.frame.`, and
 #' will be used as the layer data.
 #'
-#' @param na.rm If \code{TRUE}, silently removes \code{NA} values, which
+#' @param na.rm If `TRUE`, silently removes `NA` values, which
 #' typically desired for moving averages.
 #'
-#' @param ... Other arguments passed on to \code{\link[ggplot2]{layer}}. These are
+#' @param ... Other arguments passed on to [ggplot2::layer()]. These are
 #' often aesthetics, used to set an aesthetic to a fixed value, like
-#' \code{color = "red"} or \code{size = 3}. They may also be parameters
+#' `color = "red"` or `size = 3`. They may also be parameters
 #' to the paired geom/stat.
 #'
-#' @param inherit.aes If \code{FALSE}, overrides the default aesthetics,
+#' @param inherit.aes If `FALSE`, overrides the default aesthetics,
 #' rather than combining with them. This is most useful for helper functions
 #' that define both data and aesthetics and shouldn't inherit behaviour from
-#' the default plot specification, e.g. \code{\link[ggplot2]{borders}}.
+#' the default plot specification, e.g. [ggplot2::borders()].
 #'
 #' @param ma_fun The function used to calculate the moving average. Seven options are
 #' available including: SMA, EMA, WMA, DEMA, ZLEMA, VWMA, and EVWMA. The default is
-#' \code{SMA}. See \code{\link[TTR]{SMA}} for underlying functions.
+#' `SMA`. See [TTR::SMA()] for underlying functions.
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_line
@@ -64,27 +64,27 @@
 #' @section Aesthetics:
 #' The following aesthetics are understood (required are in bold):
 #' \itemize{
-#'    \item \strong{\code{x}}
-#'    \item \strong{\code{y}}
-#'    \item \code{volume}, Required for VWMA and EVWMA
-#'    \item \code{alpha}
-#'    \item \code{colour}
-#'    \item \code{group}
-#'    \item \code{linetype}
-#'    \item \code{size}
+#'    \item \strong{`x`}
+#'    \item \strong{`y`}
+#'    \item `volume`, Required for VWMA and EVWMA
+#'    \item `alpha`
+#'    \item `colour`
+#'    \item `group`
+#'    \item `linetype`
+#'    \item `size`
 #' }
 #'
 #'
 #' @seealso See individual modeling functions for underlying parameters:
 #' \itemize{
-#'    \item \code{\link[TTR]{SMA}} for simple moving averages
-#'    \item \code{\link[TTR]{EMA}} for exponential moving averages
-#'    \item \code{\link[TTR]{WMA}} for weighted moving averages
-#'    \item \code{\link[TTR]{DEMA}} for double exponential moving averages
-#'    \item \code{\link[TTR]{ZLEMA}} for zero-lag exponential moving averages
-#'    \item \code{\link[TTR]{VWMA}} for volume-weighted moving averages
-#'    \item \code{\link[TTR]{EVWMA}} for elastic, volume-weighted moving averages
-#'    \item \code{\link{coord_x_date}} for zooming into specific regions of a plot
+#'    \item [TTR::SMA()] for simple moving averages
+#'    \item [TTR::EMA()] for exponential moving averages
+#'    \item [TTR::WMA()] for weighted moving averages
+#'    \item [TTR::DEMA()] for double exponential moving averages
+#'    \item [TTR::ZLEMA()] for zero-lag exponential moving averages
+#'    \item [TTR::VWMA()] for volume-weighted moving averages
+#'    \item [TTR::EVWMA()] for elastic, volume-weighted moving averages
+#'    \item [coord_x_date()] for zooming into specific regions of a plot
 #' }
 #'
 #'
