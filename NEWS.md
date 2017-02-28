@@ -1,5 +1,5 @@
 
-# tidyquant 0.3.0.9200 - Development Version
+# tidyquant 0.3.0.9110 - Development Version
 
 * New Features:
     * `tq_transmute()` replaces `tq_transform()` for consistency with `dplyr`.
