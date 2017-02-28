@@ -29,9 +29,11 @@ The `tidyquant` package has a __core functions with a lot of power__. Few functi
 
 * __Get Quantitative Data, `tq_get()`__: A one-stop shop to get data from various web-sources. 
 
-* __Transform, `tq_transform()`, and Mutate, `tq_mutate()`, Quantitative Data__: Perform and scale financial calculations completely within the `tidyverse`. These workhorse functions integrate the `xts`, `zoo`, `quantmod`, and `TTR` packages. 
+* __Transmute, `tq_transmute()`, and Mutate, `tq_mutate()`, Quantitative Data__: Perform and scale financial calculations completely within the `tidyverse`. These workhorse functions integrate the `xts`, `zoo`, `quantmod`, and `TTR` packages. 
 
 * __Coerce Quantitative Data Between tibble and xts formats, `as_tibble()` and `as_xts()`__: Coercing the various _R_ time-based objects to and from `tibble` (tidy data frame) objects _was_ a pain. These functions enable __easily going back and forth__.
+
+* __Performance analysis, `tq_performance()`, and portfolio aggregation, `tq_portfolio()`__: The `PerformanceAnalytics` integration enables analyzing performance of assets and portfolios. Because of the breadth of this topic, refer to [Performance Analysis with tidyquant](TQ05-performance-analysis-with-tidyquant.html) for a tutorial on these functions.
 
 # Prerequisites
 
@@ -256,23 +258,23 @@ plat_price_eur
 
 The data source is [Oanda](https://www.oanda.com/). It may make more sense to get this data from the FRED (See [Economic Data](#economic-data)) since the max period for Oanda is 5-years.
 
-<a class="anchor" id="tq-transform"></a>
+<a class="anchor" id="tq-transmute"></a>
 
-# Transform and Mutate Quantitative Data
+# Mutate Quantitative Data
 
-Transform and mutate functions enable the `xts`/`zoo`, `quantmod` and `TTR` functions to shine. We'll touch on the transformation and mutation functions briefly. See the next vignette in the series, [R Quantitative Analysis Package Integrations in tidyquant](TQ02-quant-integrations-in-tidyquant.html), which goes into the integrations in greater detail.
+Mutating functions enable the `xts`/`zoo`, `quantmod` and `TTR` functions to shine. We'll touch on the mutation functions briefly. See the next vignette in the series, [R Quantitative Analysis Package Integrations in tidyquant](TQ02-quant-integrations-in-tidyquant.html), which goes into the integrations in greater detail.
 
-## Transform Quantitative Data, tq_transform 
+## Transmute Quantitative Data, tq_transmute 
 
-Transforms the results of `tq_get()`. The result is typically a different shape than the input (hence "transformed"), although this is not a requirement. An example is periodicity aggregation from daily to monthly.
+Transmute the results of `tq_get()`. Transmute here holds the same meaning as in `dplyr`, only the newly created columns will be returned. The result is typically a different shape than the input, although this is not a requirement. An example is periodicity aggregation from daily to monthly.
 
 ```{r}
 fb_prices <- tq_get("FB") 
 fb_prices %>%
-    tq_transform(ohlc_fun = OHLCV, transform_fun = to.monthly)
+    tq_transmute(ohlc_fun = OHLCV, mutate_fun = to.monthly)
 ```
 
-Let's go through what happened. `ohlc_fun` is one of the various quantmod Open, High, Low, Close (OHLC) functions (see `?quantmod::OHLC`). The function returns a column or set of columns from data that are passed to the `transform_fun`. In example above, `OHLCV` selects the full list of prices and volumes from `data`, and sends this to the transform function, `to.monthly`, which transforms the periodicity from daily to monthly. Additional arguments can be passed to the `transform_fun` by way of `...`. 
+Let's go through what happened. `ohlc_fun` is one of the various quantmod Open, High, Low, Close (OHLC) functions (see `?quantmod::OHLC`). The function returns a column or set of columns from data that are passed to the `mutate_fun`. In example above, `OHLCV` selects the full list of prices and volumes from `data`, and sends this to the mutate function, `to.monthly`, which mutates the periodicity from daily to monthly. Additional arguments can be passed to the `mutate_fun` by way of `...`. 
 
 
 ## Mutate Quantitative Data, tq_mutate 
@@ -286,16 +288,16 @@ fb_prices %>%
 
 Note that a mutation can occur if, and only if, the mutation has the same structure of the original tibble. In other words, the calculation must have the same number of rows and row.names (or date fields), otherwise the mutation cannot be performed.
 
-## xy Variants, tq_transform_xy and tq_mutate_xy 
+## xy Variants, tq_mutate_xy and tq_transmute_xy
 
 Enables working with:
 
-1. Transformation functions that require two primary inputs (e.g. EVWMA, VWAP, etc) 
+1. Mutation functions that require two primary inputs (e.g. EVWMA, VWAP, etc) 
 2. Data that is not in OHLC format. 
 
-### Transformation with two primary inputs
+### Mutate with two primary inputs
 
-EVWMA (exponential volume-weighted moving average) requires two inputs, price and volume, that are not in OHLC code format. To work with these columns, we can switch to the xy variants, `tq_transform_xy()` and `tq_mutate_xy()`. The only difference is instead of an `ohlc_fun` argument, you use `x` and `y` arguments to pass the columns needed based on the `transform_fun` or `mutate_fun` documentation.
+EVWMA (exponential volume-weighted moving average) requires two inputs, price and volume, that are not in OHLC code format. To work with these columns, we can switch to the xy variants, `tq_transmute_xy()` and `tq_mutate_xy()`. The only difference is instead of an `ohlc_fun` argument, you use `x` and `y` arguments to pass the columns needed based on the `mutate_fun` documentation.
 
 ```{r, message=FALSE, warning=FALSE}
 fb_prices %>%
@@ -304,12 +306,12 @@ fb_prices %>%
 
 ### Working with non-OHLC data
 
-Returns from FRED, Oanda, and other sources do not have open, high, low, close (OHLC) format. The following example shows how to transform WTI Crude daily prices to monthly prices. Since we only have a single column to pass, set the `x = price` and leave the `y = NULL`. This sends the price column to the `to.period` transformation function. 
+Returns from FRED, Oanda, and other sources do not have open, high, low, close (OHLC) format. The following example shows how to mutate WTI Crude daily prices to monthly prices. Since we only have a single column to pass, set the `x = price` and leave the `y = NULL`. This sends the price column to the `to.period` mutate function. 
 
 ```{r, message=FALSE, warning=FALSE}
 wti_prices <- tq_get("DCOILWTICO", get = "economic.data") 
 wti_prices %>%    
-    tq_transform_xy(x = price, transform_fun = to.period,
+    tq_transmute_xy(x = price, mutate_fun = to.period,
                     period = "months", col_rename = "WTI Price")
 ```
 

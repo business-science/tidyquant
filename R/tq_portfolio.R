@@ -1,6 +1,6 @@
 #' Aggregates a group of returns by asset into portfolio returns
 #'
-#' @param data A \code{tibble} (tidy data frame) of returns in tidy format (i.e long format).
+#' @param data A `tibble` (tidy data frame) of returns in tidy format (i.e long format).
 #' @param assets_col The column with assets (securities)
 #' @param returns_col The column with returns
 #' @param weights Optional parameter for the asset weights, which can be passed as a numeric vector the length of
@@ -10,20 +10,20 @@
 #' to quickly rename columns.
 #' @param n Number of times to repeat a data frame row-wise.
 #' @param index_col_name A renaming function for the "index" column, used when repeating data frames.
-#' @param ... Additional parameters passed to \code{PerformanceAnalytics::Returns.portfolio}
+#' @param ... Additional parameters passed to `PerformanceAnalytics::Returns.portfolio`
 #'
-#' @return Returns data in the form of a \code{tibble} object.
+#' @return Returns data in the form of a `tibble` object.
 #'
-#' @details \code{tq_portfolio} is a wrapper for \code{PerformanceAnalytics::Returns.portfolio}.
-#' The main advantage is the results are returned as a \code{tibble} and the
-#' function can be used with the \code{tidyverse}.
+#' @details `tq_portfolio` is a wrapper for `PerformanceAnalytics::Returns.portfolio`.
+#' The main advantage is the results are returned as a `tibble` and the
+#' function can be used with the `tidyverse`.
 #'
-#' \code{assets_col} and \code{returns_col} are columns within \code{data} that are used
+#' `assets_col` and `returns_col` are columns within `data` that are used
 #' to compute returns for a portfolio. The columns should be in "long" format (or "tidy" format)
 #' meaning there is only one column containing all of the assets and one column containing
 #' all of the return values (i.e. not in "wide" format with returns spread by asset).
 #'
-#' \code{weights} are the weights to be applied to the asset returns.
+#' `weights` are the weights to be applied to the asset returns.
 #' Weights can be input in one of three options:
 #' \itemize{
 #'   \item Single Portfolio: A numeric vector of weights that is the same length as unique number of assets.
@@ -36,16 +36,16 @@
 #'   must be grouped by portfolio index.
 #' }
 #'
-#' \code{tq_repeat_df} is a simple function that repeats
-#' a data frame \code{n} times row-wise (long-wise), and adds a new column for a portfolio index.
+#' `tq_repeat_df` is a simple function that repeats
+#' a data frame `n` times row-wise (long-wise), and adds a new column for a portfolio index.
 #' The function is used to assist in Multiple Portfolio analyses, and
-#' is a useful precursor to \code{tq_portfolio}.
+#' is a useful precursor to `tq_portfolio`.
 #'
 #' @seealso
 #' \itemize{
-#'   \item \code{\link{tq_transform}} which can be used to get period returns.
-#'   \item \code{\link[PerformanceAnalytics]{Return.portfolio}} which is the underlying function
-#'   that specifies which parameters can be passed via \code{...}
+#'   \item [tq_transmute()] which can be used to get period returns.
+#'   \item [PerformanceAnalytics::Return.portfolio()] which is the underlying function
+#'   that specifies which parameters can be passed via `...`
 #' }
 #'
 #'
@@ -66,7 +66,7 @@
 #' # Get returns for individual stock components
 #' monthly_returns_stocks <- stock_prices %>%
 #'     group_by(symbol) %>%
-#'     tq_transform(Ad, periodReturn, period = "monthly")
+#'     tq_transmute(Ad, periodReturn, period = "monthly")
 #'
 #' ##### Portfolio Aggregation Methods #####
 #'

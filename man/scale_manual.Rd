@@ -11,7 +11,7 @@ scale_color_tq(..., theme = "light")
 scale_fill_tq(..., theme = "light")
 }
 \arguments{
-\item{...}{common discrete scale parameters: \code{name}, \code{breaks}, \code{labels}, \code{na.value}, \code{limits} and \code{guide}. See \code{\link{discrete_scale}} for more details}
+\item{...}{common discrete scale parameters: \code{name}, \code{breaks}, \code{labels}, \code{na.value}, \code{limits} and \code{guide}. See \code{\link[=discrete_scale]{discrete_scale()}} for more details}
 
 \item{theme}{one of "light", "dark", or "green". This should match the \code{theme_tq()} that is used with it.}
 }
@@ -53,5 +53,5 @@ a +
 
 }
 \seealso{
-\code{\link{theme_tq}}
+\code{\link[=theme_tq]{theme_tq()}}
 }

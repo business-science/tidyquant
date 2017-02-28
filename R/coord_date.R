@@ -1,16 +1,16 @@
 #' Zoom in on plot regions using date ranges or date-time ranges
 #'
 #' @details
-#' The \code{coord_} functions prevent loss of data during zooming, which is
-#' necessary when zooming in on plots that calculate \code{stats} using data
+#' The `coord_` functions prevent loss of data during zooming, which is
+#' necessary when zooming in on plots that calculate `stats` using data
 #' outside of the zoom range (e.g. when plotting moving averages
-#' with \code{\link{geom_ma}}). Setting limits using \code{scale_x_date}
+#' with [geom_ma()]). Setting limits using `scale_x_date`
 #' changes the underlying data which causes moving averages to fail.
 #'
-#' \code{coord_x_date} is a wrapper for \code{coord_cartesian}
+#' `coord_x_date` is a wrapper for `coord_cartesian`
 #' that enables quickly zooming in on plot regions using a date range.
 #'
-#' \code{coord_x_datetime} is a wrapper for \code{coord_cartesian}
+#' `coord_x_datetime` is a wrapper for `coord_cartesian`
 #' that enables quickly zooming in on plot regions using a date-time range.
 #'
 #' @param xlim Limits for the x axis, entered as character dates in "YYYY-MM-DD"
@@ -19,7 +19,7 @@
 #' @inheritParams ggplot2::coord_cartesian
 #'
 #' @seealso
-#' \code{\link[ggplot2]{coord_cartesian}}
+#' [ggplot2::coord_cartesian()]
 #'
 #' @name coord_x_date
 #'
