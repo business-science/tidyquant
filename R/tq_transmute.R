@@ -137,7 +137,7 @@ tq_transmute_xy <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, tr
                      x             = lazyeval::expr_text(x),
                      y             = lazyeval::expr_text(y),
                      mutate_fun    = lazyeval::expr_text(mutate_fun),
-                     col_rename    = NULL,
+                     col_rename    = col_rename,
                      ...           = ...)
 }
 
@@ -289,7 +289,7 @@ tq_transform_xy <- function(data, x, y = NULL, transform_fun, col_rename = NULL,
                      x             = lazyeval::expr_text(x),
                      y             = lazyeval::expr_text(y),
                      mutate_fun    = lazyeval::expr_text(transform_fun),
-                     col_rename    = NULL,
+                     col_rename    = col_rename,
                      ...           = ...)
 }
 
