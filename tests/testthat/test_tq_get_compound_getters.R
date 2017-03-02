@@ -10,7 +10,7 @@ test1 <- tq_get("AAPL", get = get,
 test2 <- c("AAPL", "FB") %>%
     tq_get(get = get, from = "2016-01-01", to = "2016-06-01")
 
-test3 <- tibble(symbol = c("GOOG", "FB", "CVX"), industry = c("Tech", "Tech", "Oil & Gas")) %>%
+test3 <- tibble(symbol = c("GOOG", "FB", "SBUX"), industry = c("Tech", "Tech", "Food & Bev")) %>%
     tq_get(get = get, from = "2016-01-01", to = "2016-06-01")
 
 
