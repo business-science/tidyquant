@@ -68,9 +68,9 @@ Refer below for `PerformanceAnalytics` integration.
 
 For more information, refer to the second topic-specific vignette, [R Quantitative Analysis Package Integrations in tidyquant](TQ02-quant-integrations-in-tidyquant.html).
 
-## Designed for Scaling using the tidyverse
+## Designed for the data science workflow of the tidyverse
 
-The greatest benefit to `tidyquant` is the ability to easily scale your financial analysis. Scaling is the process of creating an analysis for one security and then extending it to multiple groups. This idea of scaling is incredibly useful to financial analysts because typically one wants to compare many securities to make informed decisions. Fortunately, the `tidyquant` package integrates with the `tidyverse` making scaling super simple!
+The greatest benefit to `tidyquant` is the ability to easily model and scale your financial analysis. Scaling is the process of creating an analysis for one security and then extending it to multiple groups. This idea of scaling is incredibly useful to financial analysts because typically one wants to compare many securities to make informed decisions. Fortunately, the `tidyquant` package integrates with the `tidyverse` making scaling super simple!
 
 All `tidyquant` functions return data in the `tibble` (tidy data frame) format, which allows for interaction within the `tidyverse`. This means we can:
 
@@ -79,13 +79,13 @@ All `tidyquant` functions return data in the `tibble` (tidy data frame) format, 
 * Use `dplyr` and `tidyr`: `select`, `filter`, `group_by`, `nest`/`unnest`, `spread`/`gather`, etc
 * Use `purrr`: mapping functions with `map`
 
-For more information, refer to the third topic-specific vignette, [Scaling Your Analysis with tidyquant](TQ03-scaling-and-modeling-with-tidyquant.html).
+For more information, refer to the third topic-specific vignette, [Scaling and Modeling with tidyquant](TQ03-scaling-and-modeling-with-tidyquant.html).
 
-# Implements ggplot2 Functionality for Financial Visualizations
+## Implements ggplot2 Functionality for Financial Visualizations
 
 The `tidyquant` package includes charting tools to assist users in developing quick visualizations in `ggplot2` using the grammar of graphics format and workflow. 
 
-```{r, echo = T, fig.height = 4.5}
+```{r, echo = F, fig.height = 4.5}
 library(tidyquant)
 data("FANG")
 end <- as_date("2017-01-01")
@@ -109,7 +109,7 @@ FANG %>%
 For more information, refer to the fourth topic-specific vignette, [Charting with tidyquant](TQ04-charting-with-tidyquant.html).
 
 
-# Performance Analysis of Asset and Portfolio Returns
+## Performance Analysis of Asset and Portfolio Returns
 
 Asset and portfolio performance analysis is a deep field with a wide range of theories and methods for analyzing risk versus reward. The `PerformanceAnalytics` package consolidates many of the most widely used performance metrics as functions that can be applied to stock or portfolio returns. `tidquant` implements the functionality with two primary functions:
 
