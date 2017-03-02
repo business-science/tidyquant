@@ -25,9 +25,7 @@ Depends:
     lubridate (>= 1.6.0),
     PerformanceAnalytics (>= 1.4.3541),
     quantmod (>= 0.4-7),
-    tidyverse (>= 1.1.0),
-    TTR (>= 0.23-1),
-    xts (>= 0.9-7)
+    tidyverse (>= 1.1.0)
 Imports:
     broom (>= 0.4.2),
     curl (>= 2.3),
@@ -47,7 +45,9 @@ Imports:
     tidyr (>= 0.6.1),
     timeSeries (>= 3022.101.2),
     tseries (>= 0.10-37),
+    TTR (>= 0.23-1),
     xml2 (>= 1.1.0),
+    xts (>= 0.9-7),
     zoo (>= 1.7-14)
 Suggests:
     knitr,

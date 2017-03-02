@@ -27,16 +27,16 @@
 #' @docType package
 #' @name tidyquant
 #'
-#' @importFrom magrittr "%>%"
-#' @importFrom magrittr "%$%"
 #' @import quantmod
-#' @import TTR
-#' @import xts
-#' @importFrom utils "data" "download.file" "read.csv"
 #' @import scales
 #' @import tidyverse
 #' @import lubridate
 #' @import PerformanceAnalytics
+#' @importFrom magrittr "%>%"
+#' @importFrom magrittr "%$%"
 #' @importFrom stats "setNames"
+#' @importFrom utils "data" "download.file" "read.csv"
+#' @importFrom TTR "SMA"
+#' @importFrom xts "to.period"
 
 NULL

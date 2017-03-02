@@ -9,19 +9,12 @@ This is the fourth release of tidyquant for CRAN review. This release adds new f
 
 
 ## R CMD check results
-There were no ERRORs or WARNINGs. There is one NOTE.
+There were no ERRORs, WARNINGs or NOTEs.
 
     R CMD check results
-    0 errors | 0 warnings | 1 note 
+    0 errors | 0 warnings | 0 note 
 
     R CMD check succeeded
-
-## Note and Justification:
-Depends: includes the non-default packages:
-  'lubridate' 'PerformanceAnalytics' 'quantmod' 'tidyverse' 'TTR' 'xts'
-Adding so many packages to the search path is excessive and importing selectively is preferable.
-
-Because `tidyquant` utilizes these packages as wrappers, the function auto-complete and documentation is needed to run effectively. Therefore, the package will not work effectively by selectively importing functions. The only option is to load the underlying packages, which loads the functions.
 
 ## Downstream dependencies
 I have also run R CMD check on downstream dependencies. Zero problems were detected.
