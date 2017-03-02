@@ -206,7 +206,7 @@ FANG %>%
 
 _A note about out-of-bounds data (or "clipping"), which is particularly important with faceting and charting moving averages_: 
 
-The `coord_x_date` coordinate function is designed to zoom into specific sections of a chart without "clipping" data that is outside of the view. This is in constrast to `scale_x_date`, which removes out-of-bounds data from the charting. Under normal circumstances clipping is not a big deal (and is actually helpful for scaling the y-axis), but with financial applications users want to chart rolling/moving averages, lags, etc that depend on data outside of the view port. Because of this need for out-of-bounds data, there is a tradeoff when charting: __Too much out-of-bounds data distorts the scale of the y-axis, and too little and we cannot get a moving average__. The optimal method is to include "just enough" out-of-bounds data to get the chart we want. This is why below the FANG data is filtered by date from double the number of moving-average days (`2 * n`) previous to the start date. This yields a nice y-axis scale and still allows us to create a moving average line using `geom_ma`.
+The `coord_x_date` coordinate function is designed to zoom into specific sections of a chart without "clipping" data that is outside of the view. This is in contrast to `scale_x_date`, which removes out-of-bounds data from the charting. Under normal circumstances clipping is not a big deal (and is actually helpful for scaling the y-axis), but with financial applications users want to chart rolling/moving averages, lags, etc that depend on data outside of the view port. Because of this need for out-of-bounds data, there is a trade-off when charting: __Too much out-of-bounds data distorts the scale of the y-axis, and too little and we cannot get a moving average__. The optimal method is to include "just enough" out-of-bounds data to get the chart we want. This is why below the FANG data is filtered by date from double the number of moving-average days (`2 * n`) previous to the start date. This yields a nice y-axis scale and still allows us to create a moving average line using `geom_ma`.
 
 ```{r, fig.height=5}
 start <- end - weeks(6)
@@ -415,7 +415,7 @@ AMZN %>%
 
 ## Example 2: Regression trendlines with geom_smooth
 
-We can apply a trendline quickly adding the `geom_smooth()` function to our workflow. The function has several prediction methods including linear (`"lm"`) and loess (`"loess"`) to name a few. 
+We can apply a trend line quickly adding the `geom_smooth()` function to our workflow. The function has several prediction methods including linear (`"lm"`) and loess (`"loess"`) to name a few. 
 
 __Linear__:
 
@@ -448,7 +448,7 @@ AMZN %>%
 
 ## Example 3: Charting volume with geom_segment
 
-We can use the `geom_bar()` function to chart daily volume. The default `stat = ..density..` so we need to change this to `"identity"`, which uses the actual values instead of the transformed (summarized) density values. 
+We can use the `geom_segment()` function to chart daily volume, which uses xy points for the beginning and end of the line. Using the aesthetic color argument, we color based on the value of volume to make these data stick out. 
 
 ```{r}
 AMZN %>%

@@ -24,7 +24,7 @@ knitr::opts_chunk$set(message = FALSE,
 
 # Overview
 
-There's a wide range of useful quantitative analysis functions that work with time-series objects. The problem is that many of these _wonderful_ functions don't work data frames. That is until now! The `tidyquant` package integrates the most useful functions from the `xts`, `zoo`, `quantmod` and `TTR` packages. This vignette focuses on the following _core functions_ to demonstrate how the integratation works with the quantitative finance packages:
+There's a wide range of useful quantitative analysis functions that work with time-series objects. The problem is that many of these _wonderful_ functions don't work with data frames or the `tidyverse` workflow. That is until now! The `tidyquant` package integrates the most useful functions from the `xts`, `zoo`, `quantmod` and `TTR` packages. This vignette focuses on the following _core functions_ to demonstrate how the integratation works with the quantitative finance packages:
 
 * Transmute, `tq_transmute()`: Returns a new tidy data frame typically in a different periodicity than the input.
 * Mutate, `tq_mutate()`: Adds columns to the existing tidy data frame.

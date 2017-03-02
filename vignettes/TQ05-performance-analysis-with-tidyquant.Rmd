@@ -441,7 +441,7 @@ RaRb_multiple_portfolio %>%
 
 # Available Functions
 
-We've only scratched the surface of the analysis functions available through `PerformanceAnalytics`. The list below includes all of the compatible functions grouped by funtion type. The table functions are the most useful to get a cross section of metrics. We'll touch on a few. We'll also go over `VaR` and `SharpeRatio` as these are very commonly used as performance measures.
+We've only scratched the surface of the analysis functions available through `PerformanceAnalytics`. The list below includes all of the compatible functions grouped by function type. The table functions are the most useful to get a cross section of metrics. We'll touch on a few. We'll also go over `VaR` and `SharpeRatio` as these are very commonly used as performance measures.
 
 ```{r}
 tq_performance_fun_options()
@@ -531,7 +531,7 @@ RaRb_multiple_portfolio %>%
 
 ## VaR
 
-Calculates Value-at-Risk(VaR) for univariate, component, and marginal cases using a variety of analytical methods.
+Calculates Value-at-Risk (VaR) for univariate, component, and marginal cases using a variety of analytical methods.
 
 ```{r}
 RaRb_multiple_portfolio %>%
@@ -553,7 +553,7 @@ RaRb_multiple_portfolio %>%
 One of the best features of `tq_portfolio` and `tq_performance` is to be able to pass features through to the underlying functions. After all, these are just wrappers for `PerformanceAnalytics`, so you probably want to be able __to make full use of the underlying functions__. Passing through parameters using the `...` can be incredibly useful, so let's see how.
 
 
-## Customizing the Portfolio Aggregation
+## Customizing tq_portfolio
 
 The `tq_portfolio` function is a wrapper for `Return.portfolio`. This means that during the portfolio aggregation process, we can make use of most of the `Return.portfolio` arguments such as `wealth.index`, `contribution`, `geometric`, `rebalance_on`, and `value`. Here's the arguments of the underlying function:
 
@@ -568,7 +568,7 @@ Method 3A, Aggregating Portfolio Returns, showed us two methods to aggregate for
 Here's the original output, without adjusting parameters.
 
 ```{r, eval=F}
-wts <- c(0.5, 0, 0.5)
+wts <- c(0.5, 0.0, 0.5)
 portfolio_returns_monthly <- stock_returns_monthly %>%
     tq_portfolio(assets_col  = symbol, 
                  returns_col = Ra, 
@@ -590,7 +590,7 @@ portfolio_returns_monthly %>%
     scale_y_continuous(labels = scales::percent)
 ```
 
-This is good, but we want to see how our $10,000 initial investment is growing. This is simple with a few changes to the underlying `Return.portfolio` arguments. All we need to do is add these as additional parameters to `tq_portfolio`!
+This is good, but we want to see how our $10,000 initial investment is growing. This is simple with the underlying `Return.portfolio` argument, `wealth.index = TRUE`. All we need to do is add these as additional parameters to `tq_portfolio`!
 
 ```{r}
 wts <- c(0.5, 0, 0.5)
@@ -626,8 +626,10 @@ Finally, taking this one step further, we apply the same process to the "Multipl
 
 ```{r}
 portfolio_growth_monthly_multi <- stock_returns_monthly_multi %>%
-    tq_portfolio(assets_col = symbol, returns_col = Ra, 
-                 weights = weights_table, col_rename = "investment.growth",
+    tq_portfolio(assets_col   = symbol, 
+                 returns_col  = Ra, 
+                 weights      = weights_table, 
+                 col_rename   = "investment.growth",
                  wealth.index = TRUE) %>%
     mutate(investment.growth = investment.growth * 10000)
 ```
@@ -648,7 +650,7 @@ portfolio_growth_monthly_multi %>%
 ```
 
 
-## Customizing the Sharpe Ratio
+## Customizing tq_performance
 
 Finally, the same concept of passing arguments works with all the `tidyquant` functions that are wrappers including `tq_transmute`, `tq_mutate`, `tq_performance`, etc. Let's use a final example with the `SharpeRatio`, which has the following arguments.
 
@@ -662,23 +664,26 @@ Default:
 
 ```{r}
 RaRb_multiple_portfolio %>%
-    tq_performance(Ra = Ra, performance_fun = SharpeRatio)
+    tq_performance(Ra              = Ra, 
+                   performance_fun = SharpeRatio)
 ```
 
 With `Rf = 0.03 / 12` (adjusted for monthly periodicity):
 
 ```{r}
 RaRb_multiple_portfolio %>%
-    tq_performance(Ra = Ra, performance_fun = SharpeRatio,
-                   Rf = 0.03 / 12)
+    tq_performance(Ra              = Ra, 
+                   performance_fun = SharpeRatio,
+                   Rf              = 0.03 / 12)
 ```
 
 And, with both `Rf = 0.03 / 12` (adjusted for monthly periodicity) and `p = 0.99`:
 
 ```{r}
 RaRb_multiple_portfolio %>%
-    tq_performance(Ra = Ra, performance_fun = SharpeRatio,
-                   Rf = 0.03 / 12, p = 0.99)
+    tq_performance(Ra              = Ra, 
+                   performance_fun = SharpeRatio,
+                   Rf              = 0.03 / 12, 
+                   p               = 0.99)
 ```
 
-As expected, the Sharpe Ratio goes down (indicating higher risk) as the confidence interval increases. 

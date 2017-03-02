@@ -175,7 +175,8 @@ aapl_key_ratios %>%
     filter(section == "Valuation Ratios") %>%
     unnest() %>%
     ggplot(aes(x = date, y = value)) + 
-    geom_line(aes(col = forcats::fct_reorder2(category, date, value))) +
+    geom_line(aes(col = forcats::fct_reorder2(category, date, value)),
+              size = 1) +
     labs(title = "10-Year Historical Valuation Ratios for AAPL", x = "", 
          y = "", col = "") +
     theme_tq() +
@@ -358,7 +359,7 @@ AAPL_tbl <- AAPL_tbl %>%
 AAPL_tbl
 ```
 
-## Coerce from tibble to xts, as_xts()
+## Coerce from tibble to xts, as_xts
 
 We can convert back to `xts` with the tidyquant `as_xts()` function. Make sure to set the date column (`date_col`) argument to the column name containing the date (`date_col = row.names`). The date column must be in a date format (inherits either `Date` or `POSIXct` classes).
 

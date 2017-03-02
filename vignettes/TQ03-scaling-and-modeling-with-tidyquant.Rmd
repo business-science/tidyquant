@@ -23,7 +23,7 @@ knitr::opts_chunk$set(message = FALSE,
 
 # Overview
 
-The greatest benefit to `tidyquant` is the ability to easily scale your financial analysis. Scaling is the process of creating an analysis for one asset and then extending it to multiple groups. This is idea of scaling is incredibly useful to financial analysts because typically one wants to compare many assets to make informed decisions. Fortunately, the `tidyquant` package integrates with the `tidyverse` making scaling super simple!
+The greatest benefit to `tidyquant` is the ability to apply the data science workflow to easily model and scale your financial analysis as described in [_R for Data Science_](http://r4ds.had.co.nz/). Scaling is the process of creating an analysis for one asset and then extending it to multiple groups. This idea of scaling is incredibly useful to financial analysts because typically one wants to compare many assets to make informed decisions. Fortunately, the `tidyquant` package integrates with the `tidyverse` making scaling super simple!
 
 All `tidyquant` functions return data in the `tibble` (tidy data frame) format, which allows for interaction within the `tidyverse`. This means we can:
 
@@ -31,8 +31,9 @@ All `tidyquant` functions return data in the `tibble` (tidy data frame) format, 
 * Use the pipe (`%>%`) for chaining operations
 * Use `dplyr` and `tidyr`: `select`, `filter`, `group_by`, `nest`/`unnest`, `spread`/`gather`, etc
 * Use `purrr`: mapping functions with `map`
+* Model financial analysis using the data science workflow in [_R for Data Science_](http://r4ds.had.co.nz/)
 
-We'll go through some useful scaling techniques for getting and manipulating groups of data.
+We'll go through some useful techniques for getting and manipulating groups of data.
 
 # Prerequisites
 
@@ -126,8 +127,6 @@ c("AAPL", "GOOG") %>%
 ```
 
 This returns the stock prices and financials for each stock as one nested data frame! Any of the `get` options that accept stock symbols can be used in this manner: `"stock.prices"`, `"financials"`, `"key.ratios"`, `"key.stats"`, `"dividends"`, and `"splits"`. 
-
-This capability becomes incredibly useful when combined with `purrr` function mapping, which is discussed in [Manipulating Financial Data with purrr](#purrr-function-mapping).
 
 
 # Scaling the Mutation of Financial Data
@@ -248,7 +247,7 @@ get_model <- function(stock.symbol) {
 }
 ```
 
-Testing it out on a single stock. We can see that the "term" that contains the direction of the trend is "year(date)". The interpetation is that as year increases one unit, the annual returns decrease by 3%. 
+Testing it out on a single stock. We can see that the "term" that contains the direction of the trend (the slope) is "year(date)". The interpetation is that as year increases one unit, the annual returns decrease by 3%. 
 
 ```{r}
 get_model("AAPL")

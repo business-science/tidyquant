@@ -1,8 +1,8 @@
 Package: tidyquant
 Type: Package
 Title: Tidy Quantitative Financial Analysis
-Version: 0.3.0.9110
-Date: 2017-02-28
+Version: 0.4.0
+Date: 2017-03-02
 Authors@R: c(
     person("Matt", "Dancho", email = "mdancho@business-science.io", role = c("aut", "cre")),
     person("Davis", "Vaughan", email = "dvaughan@business-science.io", role = c("aut"))
@@ -29,10 +29,13 @@ Depends:
     TTR (>= 0.23-1),
     xts (>= 0.9-7)
 Imports:
+    broom (>= 0.4.2),
     curl (>= 2.3),
     devtools (>= 1.12.0),
     dplyr (>= 0.5.0),
     ggplot2 (>= 2.2.1),
+    httr (>= 1.2.1),
+    lazyeval (>= 0.2.0),
     magrittr (>= 1.5),
     purrr (>= 0.2.2),
     readr (>= 1.0.0),
@@ -45,9 +48,7 @@ Imports:
     timeSeries (>= 3022.101.2),
     tseries (>= 0.10-37),
     xml2 (>= 1.1.0),
-    zoo (>= 1.7-14),
-    httr (>= 1.2.1),
-    lazyeval (>= 0.2.0)
+    zoo (>= 1.7-14)
 Suggests:
     knitr,
     rmarkdown,
