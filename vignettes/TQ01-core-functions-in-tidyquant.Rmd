@@ -177,7 +177,9 @@ aapl_key_ratios %>%
     ggplot(aes(x = date, y = value)) + 
     geom_line(aes(col = forcats::fct_reorder2(category, date, value))) +
     labs(title = "10-Year Historical Valuation Ratios for AAPL", x = "", 
-         y = "", col = "") 
+         y = "", col = "") +
+    theme_tq() +
+    scale_color_tq()
 ```
 
 The data source is [Morningstar](http://www.morningstar.com/).
@@ -204,6 +206,7 @@ c("AAPL", "FB", "GOOG") %>%
 Finally, because the statistics are real-time, we can setup real-time monitoring by calling `tq_get` at periodic intervals. The function below is not evaluated for time considerations, but if called during active trading sessions will collect five samples at three second intervals. 
 
 ```{r, eval = FALSE}
+# Not evaluated; When run during active trading, will return real-time values
 collect_real_time_data <- function(x, interval_sec, n) {
     data <- tibble()
     while (n > 0) {
@@ -262,19 +265,26 @@ The data source is [Oanda](https://www.oanda.com/). It may make more sense to ge
 
 # Mutate Quantitative Data
 
-Mutating functions enable the `xts`/`zoo`, `quantmod` and `TTR` functions to shine. We'll touch on the mutation functions briefly. See the next vignette in the series, [R Quantitative Analysis Package Integrations in tidyquant](TQ02-quant-integrations-in-tidyquant.html), which goes into the integrations in greater detail.
+Mutating functions enable the `xts`/`zoo`, `quantmod` and `TTR` functions to shine. We'll touch on the mutation functions briefly using the `FANG` data set, which consists of daily prices for FB, AMZN, GOOG, and NFLX from the beginning of 2013 to the end of 2016. We'll apply the functions to grouped data sets to get a feel for how each works
+
+```{r}
+data(FANG)
+FANG
+```
+
+For a detailed walkthrough of the compatible functions, see the next vignette in the series, [R Quantitative Analysis Package Integrations in tidyquant](TQ02-quant-integrations-in-tidyquant.html).
 
 ## Transmute Quantitative Data, tq_transmute 
 
 Transmute the results of `tq_get()`. Transmute here holds the same meaning as in `dplyr`, only the newly created columns will be returned. The result is typically a different shape than the input, although this is not a requirement. An example is periodicity aggregation from daily to monthly.
 
 ```{r}
-fb_prices <- tq_get("FB") 
-fb_prices %>%
-    tq_transmute(ohlc_fun = OHLCV, mutate_fun = to.monthly)
+FANG %>%
+    group_by(symbol) %>%
+    tq_transmute(ohlc_fun = Ad, mutate_fun = to.monthly)
 ```
 
-Let's go through what happened. `ohlc_fun` is one of the various quantmod Open, High, Low, Close (OHLC) functions (see `?quantmod::OHLC`). The function returns a column or set of columns from data that are passed to the `mutate_fun`. In example above, `OHLCV` selects the full list of prices and volumes from `data`, and sends this to the mutate function, `to.monthly`, which mutates the periodicity from daily to monthly. Additional arguments can be passed to the `mutate_fun` by way of `...`. 
+Let's go through what happened. `ohlc_fun` is one of the various quantmod Open, High, Low, Close (OHLC) functions (see `?quantmod::OHLC`). The function returns a column or set of columns from data that are passed to the `mutate_fun`. In example above, `Ad` selects the "adjusted" column from `data`, and sends it to the mutate function, `to.monthly`, which mutates the periodicity from daily to monthly. Additional arguments can be passed to the `mutate_fun` by way of `...`. 
 
 
 ## Mutate Quantitative Data, tq_mutate 
@@ -282,7 +292,8 @@ Let's go through what happened. `ohlc_fun` is one of the various quantmod Open, 
 Adds a column or set of columns to the tibble with the calculated attributes (hence the original tibble is returned, mutated with the additional columns). An example is getting the `MACD` from `Cl` (close price), which mutates the original input by adding MACD and Signal columns. Note that we can quickly rename the columns using the `col_rename` argument.
 
 ```{r}
-fb_prices %>%
+FANG %>%
+    group_by(symbol) %>%
     tq_mutate(ohlc_fun = Cl, mutate_fun = MACD, col_rename = c("MACD", "Signal"))
 ```
 
@@ -300,7 +311,8 @@ Enables working with:
 EVWMA (exponential volume-weighted moving average) requires two inputs, price and volume, that are not in OHLC code format. To work with these columns, we can switch to the xy variants, `tq_transmute_xy()` and `tq_mutate_xy()`. The only difference is instead of an `ohlc_fun` argument, you use `x` and `y` arguments to pass the columns needed based on the `mutate_fun` documentation.
 
 ```{r, message=FALSE, warning=FALSE}
-fb_prices %>%
+FANG %>%
+    group_by(symbol) %>%
     tq_mutate_xy(x = close, y = volume, mutate_fun = EVWMA, col_rename = "EVWMA")
 ```
 

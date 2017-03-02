@@ -15,7 +15,8 @@ vignette: >
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
 knitr::opts_chunk$set(message = FALSE,
                       warning = FALSE,
-                      fig.width = 6)
+                      fig.width  = 6,
+                      fig.height = 4.5)
 # devtools::load_all() # Travis CI fails on load_all()
 ```
 
@@ -27,7 +28,6 @@ There's a wide range of useful quantitative analysis functions that work with ti
 
 * Transmute, `tq_transmute()`: Returns a new tidy data frame typically in a different periodicity than the input.
 * Mutate, `tq_mutate()`: Adds columns to the existing tidy data frame.
-
 
 # Prerequisites
 
@@ -157,128 +157,272 @@ Here' a brief description of the most popular functions from `TTR`:
 
 # Quantitative Power In Action
 
-We'll go through some examples, but first let's get some data. The default for `tq_get()` is `get = "stock.prices"`, so all we need is to give `x` a stock symbol.
+We'll go through some examples, but first let's get some data. The `FANG` data set will be used which consists of stock prices for FB, AMZN, NFLX, and GOOG from the beginning of 2013 to the end of 2016.
 
 ```{r}
-AAPL <- tq_get("AAPL")
+data(FANG)
+FANG
 ```
 
-## Example 1: Changing the Periodicity from Daily to Weekly
-
-The `xts::to.period` function is used for periodicity aggregation (converting from a lower level periodicity to a higher level such as minutes to hours or months to years). Because we are seeking a return structure that is on a different time scale than the input (daily versus weekly), we need to use a transmute function. We select `tq_transmute` and pass the open, high, low, close and volume using OHLC format via `ohlc_fun = OHLCV`. Looking at the documentation for `to.period`, we see that it accepts a `period` argument that we can set to `"weeks"`. The result is the OHLCV data returned with the dates changed to one day per week.
-
-```{r}
-AAPL %>%
-    tq_transmute(ohlc_fun = OHLCV, mutate_fun = to.period, period = "weeks")
-```
-
-As a side note, we could also do columns individually using the `tq_transmute_xy` form. This is really useful for columns that don't fit the OHLC notation such as "adjusted" prices. Here's how to implement to get the adjusted prices on a weekly periodicity.
-
-```{r}
-AAPL %>%
-    tq_transmute_xy(x = adjusted, mutate_fun = to.period, period = "weeks")
-```
-
-
-
-## Example 2: Getting the Max Close Price for Each Quarter.
-
-The `xts::apply.quarterly()` function that is part of the period apply group can be used to apply functions by quarterly time segments. Because we are seeking a return structure that is on a different time scale than the input (quarterly versus daily), we need to use a transmute function. We select `tq_transmute` and pass the close price using OHLC format via `ohlc_fun = Cl`, and we send this subset of the data to the `apply.quarterly` function via the `mutate_fun` argument. Looking at the documentation for `apply.quarterly`, we see that we can pass a function to the argument, `FUN`. We want the maximum values, so we set `FUN = max`. The result is the quarters returned as a date and the maximum closing price during the quarter returned as a double. 
-
-```{r}
-AAPL %>%
-    tq_transmute(ohlc_fun = Cl, mutate_fun = apply.quarterly, FUN = max)
-```
-
-Note that as an alternative you could use the xy form, replacing `ohlc_fun = Cl` with `x = close`.
-
-## Example 3: Getting Returns 
+## Example 1: Use quantmod periodReturn to Convert Prices to Returns 
 
 The `quantmod::periodReturn()` function generates returns by periodicity. We'll go through a couple usage cases.  
 
-### Example 3A: Getting and Charting Annual Returns
+### Example 1A: Getting and Charting Annual Returns
 
 We want to use the adjusted closing prices column (adjusted for stock splits, which can make it appear that a stock is performing poorly if a split is included). We set `ohlc_fun = Ad`. We research the `periodReturn` function, and we found that it accepts `type = "arithmetic"` and `period = "yearly"`, which returns the annual returns. 
 
 ```{r}
-AAPL_annual_returns <- AAPL %>%
-    tq_transmute(ohlc_fun = Ad, mutate_fun = periodReturn, 
-                 period = "yearly", type = "arithmetic")
-AAPL_annual_returns
+FANG_annual_returns <- FANG %>%
+    group_by(symbol) %>%
+    tq_transmute(ohlc_fun   = Ad, 
+                 mutate_fun = periodReturn, 
+                 period     = "yearly", 
+                 type       = "arithmetic")
+FANG_annual_returns
 ```
 
-Charting annual returns is just a quick use of the `ggplot2` package. We filter out the 2017 date since this year is not currently complete. 
+Charting annual returns is just a quick use of the `ggplot2` package.  
 
-```{r}
-AAPL_annual_returns %>%
-    filter(year(date) < 2017) %>%
-    ggplot(aes(x = date, y = yearly.returns, col = yearly.returns)) +
-    geom_hline(yintercept = 0, color = "darkblue") +
-    geom_segment(aes(xend = date, yend = 0)) +
-    geom_point(size = 5) +
-    scale_color_gradient(low = "red", high = "darkblue") +
-    scale_y_continuous(limits = c(-2, 2), labels = scales::percent) +
-    labs(title = "AAPL: Annual Returns",
+```{r, fig.height = 4.5}
+FANG_annual_returns %>%
+    ggplot(aes(x = date, y = yearly.returns, fill = symbol)) +
+    geom_bar(stat = "identity") +
+    geom_hline(yintercept = 0, color = palette_light()[[1]]) +
+    scale_y_continuous(labels = scales::percent) +
+    labs(title = "FANG: Annual Returns",
          subtitle = "Get annual returns quickly with tq_transmute!",
-         y = "Annual Returns", x = "")
+         y = "Annual Returns", x = "") + 
+    facet_wrap(~ symbol, ncol = 2) +
+    theme_tq() + 
+    scale_fill_tq()
 ```
 
 
 
-### Example 3B: Getting Daily Log Returns
+### Example 1B: Getting Daily Log Returns
 
 Daily log returns follows a similar approach. Normally I go with a transmute function, `tq_transmute`, because the `periodReturn` function accepts different periodicity options, and anything other than daily will blow up a mutation. But, in our situation the period returns periodicity is the same as the stock prices periodicity (both daily), so we can use either. We want to use the adjusted closing prices column (adjusted for stock splits, which can make it appear that a stock is performing poorly if a split is included), so we set `ohlc_fun = Ad`. We researched the `periodReturn` function, and we found that it accepts `type = "log"` and `period = "daily"`, which returns the daily log returns. 
 
 
 ```{r}
-AAPL %>%
-    tq_transmute(ohlc_fun = Ad, mutate_fun = periodReturn, 
-                 type = "log", period = "daily")
+FANG_daily_log_returns <- FANG %>%
+    group_by(symbol) %>%
+    tq_transmute(ohlc_fun   = Ad, 
+                 mutate_fun = periodReturn, 
+                 period     = "daily", 
+                 type       = "log",
+                 col_rename = "monthly.returns")
 ```
 
-## Example 4: Adding MACD and Bollinger Bands to a OHLC data set
+```{r, fig.height = 4.5}
+FANG_daily_log_returns %>%
+    ggplot(aes(x = monthly.returns, fill = symbol)) +
+    geom_density(alpha = 0.5) +
+    labs(title = "FANG: Charting the Daily Log Returns",
+         x = "Monthly Returns", y = "Density") +
+    theme_tq() +
+    scale_fill_tq() + 
+    facet_wrap(~ symbol, ncol = 2)
+```
 
-In reviewing the available options in the `TTR` package, we see that `MACD` and `BBands` functions will get us where we need to be. In researching the documentation, the return is in the same periodicity as the input and the functions work with OHLC functions, so we can use `tq_mutate()`. MACD requires a price, so we select close using `Cl`, BBands requires high, low, and close, prices so we use `HLC`. We can chain the inputs together using the pipe (`%>%`) since mutate just adds columns. The result is a tibble containing the MACD and Bollinger Band results. 
+
+## Example 2: Use xts to.period to Change the Periodicity from Daily to Monthly
+
+The `xts::to.period` function is used for periodicity aggregation (converting from a lower level periodicity to a higher level such as minutes to hours or months to years). Because we are seeking a return structure that is on a different time scale than the input (daily versus weekly), we need to use a transmute function. We select `tq_transmute` and pass the open, high, low, close and volume using OHLC format via `ohlc_fun = OHLCV`. Looking at the documentation for `to.period`, we see that it accepts a `period` argument that we can set to `"weeks"`. The result is the OHLCV data returned with the dates changed to one day per week.
 
 ```{r}
-AAPL %>%
-    tq_mutate(Cl, MACD) %>%
-    tq_mutate(HLC, BBands)
+FANG %>%
+    group_by(symbol) %>%
+    tq_transmute(ohlc_fun = OHLCV, mutate_fun = to.period, period = "months")
 ```
 
-Note that for the MACD, we could have used `tq_mutate_xy()`, setting `x = close`. However, for the BBands, we are forced to use `tq_mutate()` because of the HLC input.
+A common usage case is to reduce the number of points to smooth time series plots. Let's check out difference between daily and monthly plots. 
 
-## Example 5: Getting the Percentage Difference Between Open and Close from Zero to Five Periods 
-
-We can't use the `OpCl` function for this task since it only returns the percentage difference for a period lag of zero. We keep digging and we find the base `Delt` function from quantmod. In researching the function, we see that `Delt` takes one or two inputs, `k` a series of lags, and the type of difference, either arithmetic or log. We will set `x = open` and `y = close` and `k = 0:5` to get zero through five periods. The default `type = "arithmetic"` is acceptable, so there is no need to specify. The result is the percentage difference between the open and close prices for periods zero to five.
+### Without Periodicity Aggregation
 
 ```{r}
-AAPL %>%
-    tq_mutate_xy(x = open, y = close, mutate_fun = Delt, k = 0:5) %>%
-    select(-c(high, low, volume, adjusted))
+FANG_daily <- FANG %>%
+    group_by(symbol)
+
+FANG_daily %>%
+    ggplot(aes(x = date, y = adjusted, color = symbol)) +
+    geom_line(size = 1) +
+    labs(title = "Daily Stock Prices",
+         x = "", y = "Adjusted Prices", color = "") +
+    facet_wrap(~ symbol, ncol = 2, scales = "free_y") +
+    scale_y_continuous(labels = scales::dollar) +
+    theme_tq() + 
+    scale_color_tq()
 ```
 
-For comparison we'll inspect the output from the `OpCl()` function using `tq_mutate()`. We send OHLC prices to the OpCl function. As expected the column returned is the same as `Delt.0.arithmetic` from above. Note that we can use the `col_rename` argument to quickly rename the returned column to be the same as the `Delt` function return. 
+### With Periodicity Aggregation
 
 ```{r}
-AAPL %>%
-    tq_mutate(OHLC, OpCl, col_rename = "Delt.0.arithmetic") %>%
-    select(-c(high, low, volume, adjusted))
+FANG_monthly <- FANG %>%
+    group_by(symbol) %>%
+    tq_transmute(ohlc_fun = Ad, mutate_fun = to.period, period = "months")
+
+FANG_monthly %>%
+    ggplot(aes(x = date, y = adjusted, color = symbol)) +
+    geom_line(size = 1) +
+    labs(title = "Monthly Stock Prices",
+         x = "", y = "Adjusted Prices", color = "") +
+    facet_wrap(~ symbol, ncol = 2, scales = "free_y") +
+    scale_y_continuous(labels = scales::dollar) +
+    theme_tq() + 
+    scale_color_tq()
 ```
 
-## Example 6: Get the 5, 10, 15-Day Rolling Minimum and Maximum Values of the Adjusted Prices
 
-Rolling functions come from the `zoo` package. In reviewing the available options, we see that `rollmax` is present but no there is no `rollmin`. However, the generic `rollapply` function will work with any function, so let's use that. In reviewing the documentation, the `rollapply()` function takes three primary arguments: `data`, `width` and `FUN`. The `data` is passed using the `ohlc_fun` argument, so we don't need to worry about this. The `width` is the number of periods to apply the function, and for our situation this is 5, 10, and 15. The `FUN` is the function to apply, and for our situation this is `min` and `max`. We want the result to add columns to our data set, so we use the `tq_mutate()` function, which allows us to pipe (`%>%`) each mutation. Putting it all together:
+
+## Example 3: Use TTR runCor to Visualize Rolling Correlations of Returns
+
+Return correlations are a common way to analyze how closely an asset or portfolio mimics a baseline index or fund. We will need a set of returns for both the stocks and baseline. The stock will be the `FANG` data set and the baseline will be the Spdr XLK technology sector. We have the prices for the "FANG" stocks, so we use `tq_get` to retrieve the "XLK" prices. The returns can be calculated from the "adjusted" prices using the process in Example 1.
 
 ```{r}
-AAPL %>%
-    tq_mutate(Ad, rollapply, width = 5, FUN = min, col_rename = "roll.min.5") %>%
-    tq_mutate(Ad, rollapply, width = 10, FUN = min, col_rename = "roll.min.10") %>%
-    tq_mutate(Ad, rollapply, width = 15, FUN = min, col_rename = "roll.min.15") %>%
-    tq_mutate(Ad, rollapply, width = 5, FUN = max, col_rename = "roll.max.5") %>%
-    tq_mutate(Ad, rollapply, width = 10, FUN = max, col_rename = "roll.max.10") %>%
-    tq_mutate(Ad, rollapply, width = 15, FUN = max, col_rename = "roll.max.15")
+# Asset Returns
+FANG_returns_monthly <- FANG %>%
+    group_by(symbol) %>%
+    tq_transmute(ohlc_fun   = Ad, 
+                 mutate_fun = periodReturn,
+                 period = "monthly")
+
+# Baseline Returns
+baseline_returns_monthly <- "XLK" %>%
+    tq_get(get  = "stock.prices",
+           from = "2013-01-01", 
+           to   = "2016-12-31") %>%
+    tq_transmute(ohlc_fun   = Ad, 
+                 mutate_fun = periodReturn,
+                 period = "monthly")
 ```
 
-Note that the new column names were added using the `col_rename` argument. If this was left off, the column names are auto-generated from the `mutate_fun` name with a sequential suffix added, which is likely not descriptive enough for your needs.  
+Next, join the asset returns with the baseline returns by date.
+
+```{r}
+returns_joined <- left_join(FANG_returns_monthly, 
+                            baseline_returns_monthly,
+                            by = "date")
+returns_joined
+```
+
+The `TTR::runCor` function can be used to evaluate rolling correlations using the xy pattern. Looking at the documentation (`?runCor`), we can see that the arguments include `x` and `y` along with a few additional arguments including `n` for the width of the rolling correlation. Because the scale is monthly, we'll go with `n = 6` for a 6-month rolling correlation. The `col_rename` argument enables easy renaming of the output column(s).
+
+```{r}
+FANG_rolling_corr <- returns_joined %>%
+    tq_transmute_xy(x = monthly.returns.x, 
+                    y = monthly.returns.y,
+                    mutate_fun = runCor,
+                    n = 6,
+                    col_rename = "rolling.corr.6")
+```
+
+And, we can plot the rolling correlations for the FANG stocks.
+
+```{r}
+FANG_rolling_corr %>%
+    ggplot(aes(x = date, y = rolling.corr.6, color = symbol)) +
+    geom_hline(yintercept = 0, color = palette_light()[[1]]) +
+    geom_line(size = 1) +
+    labs(title = "FANG: Six Month Rolling Correlation to XLK",
+         x = "", y = "Correlation", color = "") +
+    facet_wrap(~ symbol, ncol = 2) +
+    theme_tq() + 
+    scale_color_tq()
+```
+
+
+
+## Example 4: Use TTR MACD to Visualize Moving Average Convergence Divergence
+
+In reviewing the available options in the `TTR` package, we see that `MACD` will get us the Moving Average Convergence Divergence (MACD). In researching the documentation, the return is in the same periodicity as the input and the functions work with OHLC functions, so we can use `tq_mutate()`. MACD requires a price, so we select close using `Cl`. 
+
+```{r}
+FANG_macd <- FANG %>%
+    group_by(symbol) %>%
+    tq_mutate(ohlc_fun   = Cl, 
+              mutate_fun = MACD, 
+              nFast      = 12, 
+              nSlow      = 26, 
+              nSig       = 9, 
+              maType     = SMA) %>%
+    mutate(diff = macd - signal) %>%
+    select(-(open:volume))
+FANG_macd
+```
+
+And, we can visualize the data like so.
+
+```{r}
+FANG_macd %>%
+    filter(date >= as_date("2016-10-01")) %>%
+    ggplot(aes(x = date)) + 
+    geom_hline(yintercept = 0, color = palette_light()[[1]]) +
+    geom_line(aes(y = macd, col = symbol)) +
+    geom_line(aes(y = signal), color = "blue", linetype = 2) +
+    geom_bar(aes(y = diff), stat = "identity", color = palette_light()[[1]]) +
+    facet_wrap(~ symbol, ncol = 2, scale = "free_y") +
+    labs(title = "FANG: Moving Average Convergence Divergence",
+         y = "MACD", x = "", color = "") +
+    theme_tq() +
+    scale_color_tq()
+```
+
+
+## Example 5: Use xts apply.quarterly to Get the Max and Min Price for Each Quarter
+
+The `xts::apply.quarterly()` function that is part of the period apply group can be used to apply functions by quarterly time segments. Because we are seeking a return structure that is on a different time scale than the input (quarterly versus daily), we need to use a transmute function. We select `tq_transmute` and pass the close price using OHLC format via `ohlc_fun = Cl`, and we send this subset of the data to the `apply.quarterly` function via the `mutate_fun` argument. Looking at the documentation for `apply.quarterly`, we see that we can pass a function to the argument, `FUN`. We want the maximum values, so we set `FUN = max`. The result is the quarters returned as a date and the maximum closing price during the quarter returned as a double. 
+
+```{r}
+FANG_max_by_qtr <- FANG %>%
+    group_by(symbol) %>%
+    tq_transmute(ohlc_fun   = Ad, 
+                 mutate_fun = apply.quarterly, 
+                 FUN        = max, 
+                 col_rename = "max.close") %>%
+    mutate(year.qtr = paste0(year(date), "-Q", quarter(date))) %>%
+    select(-date)
+FANG_max_by_qtr
+```
+
+The minimum each quarter can be retrieved in much the same way. The data frames can be joined using `left_join` to get the max and min by quarter.
+
+```{r}
+FANG_min_by_qtr <- FANG %>%
+    group_by(symbol) %>%
+    tq_transmute(ohlc_fun   = Ad, 
+                 mutate_fun = apply.quarterly, 
+                 FUN        = min, 
+                 col_rename = "min.close") %>%
+    mutate(year.qtr = paste0(year(date), "-Q", quarter(date))) %>%
+    select(-date)
+
+FANG_by_qtr <- left_join(FANG_max_by_qtr, FANG_min_by_qtr,
+                         by = c("symbol"   = "symbol",
+                                "year.qtr" = "year.qtr"))
+FANG_by_qtr
+```
+
+
+And, we can visualize the data like so.
+
+```{r}
+FANG_by_qtr %>%
+    ggplot(aes(x = year.qtr, color = symbol)) +
+    geom_segment(aes(xend = year.qtr, y = min.close, yend = max.close),
+                 size = 1) +
+    geom_point(aes(y = max.close), size = 2) +
+    geom_point(aes(y = min.close), size = 2) +
+    facet_wrap(~ symbol, ncol = 2, scale = "free_y") +
+    labs(title = "FANG: Min/Max Price By Quarter",
+         y = "Stock Price", color = "") +
+    theme_tq() +
+    scale_color_tq() +
+    scale_y_continuous(labels = scales::dollar) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1),
+          axis.title.x = element_blank())
+```
+
+
 

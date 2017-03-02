@@ -43,16 +43,18 @@ library(tidyquant)
 The following stock data will be used for the examples. Use `tq_get` to get the stock prices.
 
 ```{r}
-AAPL <- tq_get("AAPL", get = "stock.prices", from = "2015-09-01", to = "2017-01-01")
-AMZN <- tq_get("AMZN", get = "stock.prices", from = "2000-01-01", to = "2017-01-01")
-FANG <- c("FB", "AMZN", "NFLX", "GOOG") %>%
-    tq_get(get = "stock.prices", from = "2015-09-01", to = "2017-01-01") 
+# Use FANG data set
+data("FANG") 
+
+# Get AAPL and AMZN Stock Prices
+AAPL <- tq_get("AAPL", get = "stock.prices", from = "2015-09-01", to = "2016-12-31")
+AMZN <- tq_get("AMZN", get = "stock.prices", from = "2000-01-01", to = "2016-12-31")
 ```
 
 The `end` date parameter will be used when setting date limits throughout the examples.
 
 ```{r}
-end <- as_date("2017-01-01")
+end <- as_date("2016-12-31")
 ```
 
 
@@ -170,8 +172,8 @@ Because the geoms are applied as layers, we can combine multiple chart types. Th
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
     geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
-    geom_line(color = "pink", size = 1.5) +
-    geom_point(color = "purple", size = 3) +
+    geom_line(color = "steelblue", size = 1) +
+    geom_point(color = "steelblue", size = 3) +
     labs(title = "AAPL Candlestick Chart", 
          subtitle = "Combining Chart Geoms",
          y = "Closing Price", x = "") + 
@@ -212,7 +214,7 @@ FANG %>%
     filter(date >= start - days(2 * 15)) %>%
     ggplot(aes(x = date, y = close, group = symbol)) +
     geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
-    geom_ma(ma_fun = SMA, n = 15, color = "cadetblue4", size = 1) +
+    geom_ma(ma_fun = SMA, n = 15, color = "darkblue", size = 1) +
     labs(title = "FANG Candlestick Chart", 
          subtitle = "Experimenting with Mulitple Stocks",
          y = "Closing Price", x = "") + 
@@ -339,9 +341,10 @@ AAPL %>%
                high = high, low = low, close = close)) +
     geom_candlestick() +
     geom_bbands(ma_fun = SMA, sd = 2, n = 20, 
-                linetype = 4, size = 1,
-                alpha = 0.3, fill = "slategrey", 
-                color_bands = "aquamarine4", color_ma = "steelblue4") +
+                linetype = 4, size = 1, alpha = 0.2, 
+                fill        = palette_light()[[1]], 
+                color_bands = palette_light()[[1]], 
+                color_ma    = palette_light()[[2]]) +
     labs(title = "AAPL Candlestick Chart", 
          subtitle = "BBands with SMA Applied, Experimenting with Formatting", 
          y = "Closing Price", x = "") + 
@@ -387,7 +390,7 @@ __Continuous Scale__:
 ```{r}
 AMZN %>%
     ggplot(aes(x = date, y = adjusted)) +
-    geom_line() + 
+    geom_line(color = palette_light()[[1]]) + 
     scale_y_continuous() +
     labs(title = "AMZN Line Chart", 
          subtitle = "Continuous Scale", 
@@ -400,7 +403,7 @@ __Log Scale__:
 ```{r}
 AMZN %>%
     ggplot(aes(x = date, y = adjusted)) +
-    geom_line() + 
+    geom_line(color = palette_light()[[1]]) + 
     scale_y_log10() +
     labs(title = "AMZN Line Chart", 
          subtitle = "Log Scale", 
@@ -419,7 +422,7 @@ __Linear__:
 ```{r}
 AMZN %>%
     ggplot(aes(x = date, y = adjusted)) +
-    geom_line() + 
+    geom_line(color = palette_light()[[1]]) + 
     scale_y_log10() +
     geom_smooth(method = "lm") +
     labs(title = "AMZN Line Chart", 
@@ -433,7 +436,7 @@ __Loess__:
 ```{r}
 AMZN %>%
     ggplot(aes(x = date, y = adjusted)) +
-    geom_line() + 
+    geom_line(color = palette_light()[[1]]) + 
     scale_y_log10() +
     geom_smooth(method = "loess") +
     labs(title = "AMZN Line Chart", 
@@ -493,7 +496,7 @@ n_mavg <- 50 # Number of periods (days) for moving average
 FANG %>%
     filter(date >= start - days(2 * n_mavg)) %>%
     ggplot(aes(x = date, y = close, color = symbol)) +
-    geom_line(size = 1.5) +
+    geom_line(size = 1) +
     geom_ma(n = 15, color = "darkblue", size = 1) + 
     geom_ma(n = n_mavg, color = "red", size = 1) +
     labs(title = "Light Theme",
@@ -512,7 +515,7 @@ n_mavg <- 50 # Number of periods (days) for moving average
 FANG %>%
     filter(date >= start - days(2 * n_mavg)) %>%
     ggplot(aes(x = date, y = close, color = symbol)) +
-    geom_line(size = 1.5) +
+    geom_line(size = 1) +
     geom_ma(n = 15, color = "darkblue", size = 1) + 
     geom_ma(n = n_mavg, color = "red", size = 1) +
     labs(title = "Dark Theme",
@@ -531,7 +534,7 @@ n_mavg <- 50 # Number of periods (days) for moving average
 FANG %>%
     filter(date >= start - days(2 * n_mavg)) %>%
     ggplot(aes(x = date, y = close, color = symbol)) +
-    geom_line(size = 1.5) +
+    geom_line(size = 1) +
     geom_ma(n = 15, color = "darkblue", size = 1) + 
     geom_ma(n = n_mavg, color = "red", size = 1) +
     labs(title = "Green Theme",

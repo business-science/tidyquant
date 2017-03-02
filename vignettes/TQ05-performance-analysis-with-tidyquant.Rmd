@@ -52,7 +52,7 @@ One of the most widely used risk to return metrics is the [Capital Asset Pricing
 
 >The capital asset pricing model (CAPM) is a model that describes the relationship between systematic risk and expected return for assets, particularly stocks. CAPM is widely used throughout finance for the pricing of risky securities, generating expected returns for assets given the risk of those assets and calculating costs of capital.
 
-We'll use the `PerformanceAnalytics` function, `table.CAPM`, to evaluate the returns of several technology stocks against the SPDR Technology ETF (XLF). 
+We'll use the `PerformanceAnalytics` function, `table.CAPM`, to evaluate the returns of several technology stocks against the SPDR Technology ETF (XLK). 
 
 First, load the `tidyquant` package.
 
@@ -68,18 +68,24 @@ Ra <- c("AAPL", "GOOG", "NFLX") %>%
            from = "2010-01-01",
            to   = "2015-12-31") %>%
     group_by(symbol) %>%
-    tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "Ra")
+    tq_transmute(ohlc_fun   = Ad, 
+                 mutate_fun = periodReturn, 
+                 period     = "monthly", 
+                 col_rename = "Ra")
 Ra
 ```
 
-Next, we get the baseline prices. We'll use the XLF. Note that there is no need to group because we are just getting one data set.
+Next, we get the baseline prices. We'll use the XLK. Note that there is no need to group because we are just getting one data set.
 
 ```{r}
-Rb <- "XLF" %>%
+Rb <- "XLK" %>%
     tq_get(get  = "stock.prices",
            from = "2010-01-01",
            to   = "2015-12-31") %>%
-    tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "Rb")
+    tq_transmute(ohlc_fun   = Ad, 
+                 mutate_fun = periodReturn, 
+                 period     = "monthly", 
+                 col_rename = "Rb")
 Rb
 ```
 
@@ -147,12 +153,16 @@ Using the `tidyverse` split, apply, combine framework, we can mutate groups of s
 ```{r}
 stock_returns_monthly <- stock_prices %>%
     group_by(symbol) %>%
-    tq_transmute(ohlc_fun = Ad, mutate_fun = periodReturn, 
-                 period = "monthly", col_rename = "Ra")
+    tq_transmute(ohlc_fun   = Ad, 
+                 mutate_fun = periodReturn, 
+                 period     = "monthly", 
+                 col_rename = "Ra")
 stock_returns_monthly
 ```
 
-Step 3A can be skipped because we are only interested in the Sharpe Ratio for individual stocks.
+### Step 3A: Aggregate to Portfolio Returns (Skipped)
+
+Step 3A can be skipped because we are only interested in the Sharpe Ratio for _individual stocks_ (not a portfolio).
 
 Step 3B can also be skipped because the `SharpeRatio` function from `PerformanceAnalytics` does not require a baseline.
 
@@ -162,7 +172,9 @@ The last step is to apply the `SharpeRatio` function to our groups of stock retu
 
 ```{r}
 stock_returns_monthly %>%
-    tq_performance(Ra = Ra, Rb = NULL, performance_fun = SharpeRatio)
+    tq_performance(Ra = Ra, 
+                   Rb = NULL, 
+                   performance_fun = SharpeRatio)
 ```
 
 Now we have the Sharpe Ratio for each of the three stocks. What if we want to adjust the parameters of the function? We can just add on the arguments of the underlying function.
@@ -170,8 +182,11 @@ Now we have the Sharpe Ratio for each of the three stocks. What if we want to ad
 
 ```{r}
 stock_returns_monthly %>%
-    tq_performance(Ra = Ra, Rb = NULL, performance_fun = SharpeRatio, 
-                   Rf = 0.03 / 12, p = 0.99)
+    tq_performance(Ra = Ra, 
+                   Rb = NULL, 
+                   performance_fun = SharpeRatio, 
+                   Rf = 0.03 / 12, 
+                   p = 0.99)
 ```
 
 
@@ -182,7 +197,7 @@ Portfolios are slightly more complicated because we are now dealing with groups 
 
 ### Single Portfolio
 
-Let's recreate the CAPM analysis in the "Quick Example" this time comparing a portfolio of technology stocks to the SPDR Technology ETF (XLR).
+Let's recreate the CAPM analysis in the "Quick Example" this time comparing a portfolio of technology stocks to the SPDR Technology ETF (XLK).
 
 #### Steps 1A and 2A: Asset Period Returns
 
@@ -194,7 +209,10 @@ stock_returns_monthly <- c("AAPL", "GOOG", "NFLX") %>%
            from = "2010-01-01",
            to   = "2015-12-31") %>%
     group_by(symbol) %>%
-    tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "Ra")
+    tq_transmute(ohlc_fun   = Ad, 
+                 mutate_fun = periodReturn, 
+                 period     = "monthly", 
+                 col_rename = "Ra")
 stock_returns_monthly
 ```
 
@@ -209,11 +227,14 @@ stock_returns_monthly
 This was also done previously. 
 
 ```{r, eval = F}
-baseline_returns_monthly <- "XLF" %>%
+baseline_returns_monthly <- "XLK" %>%
     tq_get(get  = "stock.prices",
            from = "2010-01-01",
            to   = "2015-12-31") %>%
-    tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "Rb")
+    tq_transmute(ohlc_fun   = Ad, 
+                 mutate_fun = periodReturn, 
+                 period     = "monthly", 
+                 col_rename = "Rb")
 baseline_returns_monthly
 ```
 
@@ -237,10 +258,12 @@ Suppose we want to split our portfolio evenly between AAPL and NFLX. We'll show 
 We'll use the weight vector, `c(0.5, 0, 0.5)`. Two important aspects to supplying a numeric vector of weights: First, notice that the length (3) is equal to the number of assets (3). This is a requirement. Second, notice that the sum of the weighting vector is equal to 1. This is not "required", but is best practice. If the sum is not 1, the weights will be distributed accordingly by scaling the vector to 1, and a warning message will appear.
 
 ```{r}
-wts <- c(0.5, 0, 0.5)
+wts <- c(0.5, 0.0, 0.5)
 portfolio_returns_monthly <- stock_returns_monthly %>%
-    tq_portfolio(assets_col = symbol, returns_col = Ra, 
-                 weights = wts, col_rename = "Ra")
+    tq_portfolio(assets_col  = symbol, 
+                 returns_col = Ra, 
+                 weights     = wts, 
+                 col_rename  = "Ra")
 portfolio_returns_monthly
 ```
 
@@ -264,8 +287,10 @@ Next, supply this two column tibble, with symbols in the first column and weight
 
 ```{r}
 stock_returns_monthly %>%
-    tq_portfolio(assets_col = symbol, returns_col = Ra, 
-                 weights = wts_map, col_rename = "Ra_using_wts_map")
+    tq_portfolio(assets_col  = symbol, 
+                 returns_col = Ra, 
+                 weights     = wts_map, 
+                 col_rename  = "Ra_using_wts_map")
 ```
 
 The aggregated returns are exactly the same. The advantage with this method is that not all symbols need to be specified. Any symbol not specified by default gets a weight of zero. 
@@ -313,22 +338,28 @@ stock_returns_monthly <- c("AAPL", "GOOG", "NFLX") %>%
            from = "2010-01-01",
            to   = "2015-12-31") %>%
     group_by(symbol) %>%
-    tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "Ra")
+    tq_transmute(ohlc_fun   = Ad, 
+                 mutate_fun = periodReturn, 
+                 period     = "monthly", 
+                 col_rename = "Ra")
 ```
 
 Second, get baseline asset returns, which is the exact same as Steps 1B and 2B from the Single Portfolio example.
 
 ```{r, eval = F}
-baseline_returns_monthly <- "XLF" %>%
+baseline_returns_monthly <- "XLK" %>%
     tq_get(get  = "stock.prices",
            from = "2010-01-01",
            to   = "2015-12-31") %>%
-    tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "Rb")
+    tq_transmute(ohlc_fun   = Ad, 
+                 mutate_fun = periodReturn, 
+                 period     = "monthly", 
+                 col_rename = "Rb")
 ```
 
 #### Step 3A: Aggregate Portfolio Returns for Multiple Portfolios
 
-This is where it gets fun. If you picked up on Step3A, Method 2 (mapping weights), this is just an extension for multiple portfolios.
+This is where it gets fun. If you picked up on Single Portfolio, Step3A, Method 2 (mapping weights), this is just an extension for multiple portfolios.
 
 First, we need to grow our portfolios. `tidyquant` has a handy, albeit simple, function, `tq_repeat_df()`, for scaling a single portfolio to many. It takes a data frame, and the number of repeats, `n`, and the `index_col_name`, which adds a sequential index. Let's see how it works for our example. We need three portfolios:
 
@@ -354,18 +385,15 @@ Now the tricky part: We need a new table of weights to map on. There's a few req
 Here's what the weights table should look like for our example:
 
 ```{r}
-weights_table <- tribble(
-    ~portfolio, ~stocks, ~weights,
-    1,          "AAPL",  0.50,
-    1,          "GOOG",  0.25,
-    1,          "NFLX",  0.25,
-    2,          "AAPL",  0.25,
-    2,          "GOOG",  0.50,
-    2,          "NFLX",  0.25,
-    3,          "AAPL",  0.25,
-    3,          "GOOG",  0.25,
-    3,          "NFLX",  0.50
-    ) %>%
+weights <- c(
+    0.50, 0.25, 0.25,
+    0.25, 0.50, 0.25,
+    0.25, 0.25, 0.50
+)
+stocks <- c("AAPL", "GOOG", "NFLX")
+weights_table <-  tibble(stocks) %>%
+    tq_repeat_df(n = 3) %>%
+    bind_cols(tibble(weights)) %>%
     group_by(portfolio)
 weights_table
 ```
@@ -374,8 +402,10 @@ Now just pass the the expanded `stock_returns_monthly_multi` and the `weights_ta
 
 ```{r}
 portfolio_returns_monthly_multi <- stock_returns_monthly_multi %>%
-    tq_portfolio(assets_col = symbol, returns_col = Ra, 
-                 weights = weights_table, col_rename = "Ra")
+    tq_portfolio(assets_col  = symbol, 
+                 returns_col = Ra, 
+                 weights     = weights_table, 
+                 col_rename  = "Ra")
 portfolio_returns_monthly_multi
 ```
 
@@ -411,13 +441,12 @@ RaRb_multiple_portfolio %>%
 
 # Available Functions
 
-We've only scratched the surface of the analysis functions available through `PerformanceAnalytics`. The list below includes all of the compatible functions.
+We've only scratched the surface of the analysis functions available through `PerformanceAnalytics`. The list below includes all of the compatible functions grouped by funtion type. The table functions are the most useful to get a cross section of metrics. We'll touch on a few. We'll also go over `VaR` and `SharpeRatio` as these are very commonly used as performance measures.
 
 ```{r}
 tq_performance_fun_options()
 ```
-
-The table functions are the most useful to get a cross section of metrics. We'll touch on a few. We'll also go over `VaR` and `SharpeRatio` as these are very commonly used as performance measures. 
+ 
 
 ## table.Stats
 
@@ -519,7 +548,7 @@ RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = NULL, performance_fun = SharpeRatio)
 ```
 
-# Customizing tq_portfolio and tq_performance using the ...
+# Customizing using the ...
 
 One of the best features of `tq_portfolio` and `tq_performance` is to be able to pass features through to the underlying functions. After all, these are just wrappers for `PerformanceAnalytics`, so you probably want to be able __to make full use of the underlying functions__. Passing through parameters using the `...` can be incredibly useful, so let's see how.
 
@@ -528,7 +557,7 @@ One of the best features of `tq_portfolio` and `tq_performance` is to be able to
 
 The `tq_portfolio` function is a wrapper for `Return.portfolio`. This means that during the portfolio aggregation process, we can make use of most of the `Return.portfolio` arguments such as `wealth.index`, `contribution`, `geometric`, `rebalance_on`, and `value`. Here's the arguments of the underlying function:
 
-```{r, eval = F}
+```{r}
 args(Return.portfolio)
 ```
 
@@ -541,14 +570,16 @@ Here's the original output, without adjusting parameters.
 ```{r, eval=F}
 wts <- c(0.5, 0, 0.5)
 portfolio_returns_monthly <- stock_returns_monthly %>%
-    tq_portfolio(assets_col = symbol, returns_col = Ra, 
-                 weights = wts, col_rename = "Ra")
+    tq_portfolio(assets_col  = symbol, 
+                 returns_col = Ra, 
+                 weights     = wts, 
+                 col_rename  = "Ra")
 ```
 
 ```{r}
 portfolio_returns_monthly %>%
     ggplot(aes(x = date, y = Ra)) +
-    geom_line() +
+    geom_bar(stat = "identity", fill = palette_light()[[1]]) +
     labs(title = "Portfolio Returns",
          subtitle = "50% AAPL, 0% GOOG, and 50% NFLX",
          caption = "Shows an above-zero trend meaning positive returns",
@@ -564,8 +595,10 @@ This is good, but we want to see how our $10,000 initial investment is growing. 
 ```{r}
 wts <- c(0.5, 0, 0.5)
 portfolio_growth_monthly <- stock_returns_monthly %>%
-    tq_portfolio(assets_col = symbol, returns_col = Ra, 
-                 weights = wts, col_rename = "investment.growth",
+    tq_portfolio(assets_col   = symbol, 
+                 returns_col  = Ra, 
+                 weights      = wts, 
+                 col_rename   = "investment.growth",
                  wealth.index = TRUE) %>%
     mutate(investment.growth = investment.growth * 10000)
 ```
@@ -573,7 +606,7 @@ portfolio_growth_monthly <- stock_returns_monthly %>%
 ```{r}
 portfolio_growth_monthly %>%
     ggplot(aes(x = date, y = investment.growth)) +
-    geom_line(size = 2) +
+    geom_line(size = 2, color = palette_light()[[1]]) +
     labs(title = "Portfolio Growth",
          subtitle = "50% AAPL, 0% GOOG, and 50% NFLX",
          caption = "Now we can really visualize performance!",
