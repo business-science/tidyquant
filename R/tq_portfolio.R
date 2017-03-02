@@ -137,7 +137,6 @@ tq_portfolio_ <- function(data, assets_col, returns_col, weights = NULL, col_ren
 
 # tq_portfolio method dispatch --------------------------------------------------------------------------------
 
-#' @rdname tq_portfolio
 #' @export
 tq_portfolio_.default <- function(data, assets_col, returns_col, weights = NULL, col_rename = NULL, ...) {
 
@@ -145,7 +144,6 @@ tq_portfolio_.default <- function(data, assets_col, returns_col, weights = NULL,
     stop("data must be a tibble or data.frame object")
 }
 
-#' @rdname tq_portfolio
 #' @export
 tq_portfolio_.tbl_df <- function(data, assets_col, returns_col, weights, col_rename, ...) {
 
@@ -157,7 +155,6 @@ tq_portfolio_.tbl_df <- function(data, assets_col, returns_col, weights, col_ren
                        ...)
 }
 
-#' @rdname tq_portfolio
 #' @export
 tq_portfolio_.data.frame <- function(data, assets_col, returns_col, weights = NULL, col_rename = NULL, ...) {
 
@@ -173,7 +170,6 @@ tq_portfolio_.data.frame <- function(data, assets_col, returns_col, weights = NU
                   ...         = ...)
 }
 
-#' @rdname tq_portfolio
 #' @export
 tq_portfolio_.grouped_df <- function(data, assets_col, returns_col, weights, col_rename, ...) {
 

@@ -3,26 +3,12 @@
 \name{tq_performance}
 \alias{tq_performance}
 \alias{tq_performance_}
-\alias{tq_performance_.default}
-\alias{tq_performance_.tbl_df}
-\alias{tq_performance_.data.frame}
-\alias{tq_performance_.grouped_df}
 \alias{tq_performance_fun_options}
 \title{Computes a wide variety of summary performance metrics from stock or portfolio returns}
 \usage{
 tq_performance(data, Ra, Rb = NULL, performance_fun, ...)
 
 tq_performance_(data, Ra, Rb = NULL, performance_fun, ...)
-
-\method{tq_performance_}{default}(data, Ra, Rb = NULL, performance_fun, ...)
-
-\method{tq_performance_}{tbl_df}(data, Ra, Rb = NULL, performance_fun, ...)
-
-\method{tq_performance_}{data.frame}(data, Ra, Rb = NULL, performance_fun,
-  ...)
-
-\method{tq_performance_}{grouped_df}(data, Ra, Rb = NULL, performance_fun,
-  ...)
 
 tq_performance_fun_options()
 }

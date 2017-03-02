@@ -109,7 +109,6 @@ tq_performance_ <- function(data, Ra, Rb = NULL, performance_fun, ...) {
 
 # tq_performance method dispatch --------------------------------------------------------------------------------
 
-#' @rdname tq_performance
 #' @export
 tq_performance_.default <- function(data, Ra, Rb = NULL, performance_fun, ...) {
 
@@ -117,7 +116,6 @@ tq_performance_.default <- function(data, Ra, Rb = NULL, performance_fun, ...) {
     stop("data must be a tibble or data.frame object")
 }
 
-#' @rdname tq_performance
 #' @export
 tq_performance_.tbl_df <- function(data, Ra, Rb = NULL, performance_fun, ...) {
 
@@ -205,7 +203,6 @@ tq_performance_.tbl_df <- function(data, Ra, Rb = NULL, performance_fun, ...) {
     ret
 }
 
-#' @rdname tq_performance
 #' @export
 tq_performance_.data.frame <- function(data, Ra, Rb = NULL, performance_fun, ...) {
 
@@ -220,7 +217,6 @@ tq_performance_.data.frame <- function(data, Ra, Rb = NULL, performance_fun, ...
                     ...             = ...)
 }
 
-#' @rdname tq_performance
 #' @export
 tq_performance_.grouped_df <- function(data, Ra, Rb = NULL, performance_fun, ...) {
 
