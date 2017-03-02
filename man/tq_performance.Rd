@@ -73,11 +73,11 @@ that can be supplied to the \code{performance_fun} argument.
 # Load libraries
 library(tidyquant)
 
+# Use FANG data set
+data(FANG)
+
 # Get returns for individual stock components grouped by symbol
-Ra <- c("AAPL", "GOOG", "NFLX") \%>\%
-    tq_get(get  = "stock.prices",
-           from = "2010-01-01",
-           to   = "2015-12-31") \%>\%
+Ra <- FANG \%>\%
     group_by(symbol) \%>\%
     tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "Ra")
 
