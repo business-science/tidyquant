@@ -74,7 +74,7 @@ The `tidyquant` package includes several vignettes to help users get up to speed
 -   TQ00 - Introduction to `tidyquant`
 -   TQ01 - Core Functions in `tidyquant`
 -   TQ02 - R Quantitative Analysis Package Integrations in `tidyquant`
--   TQ03 - Scaling Your Analysis with `tidyquant`
+-   TQ03 - Scaling and Modeling with `tidyquant`
 -   TQ04 - Charting with `tidyquant`
 -   TQ05 - Performance Analysis with `tidyquant`
 
