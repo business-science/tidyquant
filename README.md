@@ -25,6 +25,16 @@ One-Stop Shop for Serious Financial Analysis
 
 With `tidyquant` all the benefits add up to one thing: *a one-stop shop for serious financial analysis!*
 
+### Core Functions
+
+-   **Getting Financial Data from the web: `tq_get()`**. This is a one-stop shop for getting web-based financial data in a "tidy" data frame format. Get data for daily stock prices (historical), key statistics (real-time), key ratios (historical), financial statements, dividends, splits, economic data from the FRED, FOREX rates from Oanda.
+
+-   **Manipulating Financial Data: `tq_transmute()` and `tq_mutate()`**. Integration for many financial functions from `xts`, `zoo`, `quantmod` and `TTR` packages. `tq_mutate()` is used to add a column to the data frame, and `tq_transmute()` is used to return a new data frame which is necessary for periodicity changes.
+
+-   **Coercing Data To and From xts and tibble: `as_tibble()`and `as_xts()`**. There are a ton of [Stack Overflow articles](http://stackoverflow.com/search?q=xts+data+frame) on converting data frames to and from xts. These two functions can be used to answer 99% of these questions.
+
+-   **Performance Analysis and Portfolio Analysis: `tq_performance()` and `tq_portfolio()`**. The newest additions to the `tidyquant` family integrate `PerformanceAnalytics` functions. `tq_performance()` converts investment returns into performance metrics. `tq_portfolio()` aggregates a group (or multiple groups) of asset returns into one or more portfolios.
+
 ### Comparing Stock Prices
 
 Visualizing the stock price volatility of four stocks side-by-side is quick and easy...
