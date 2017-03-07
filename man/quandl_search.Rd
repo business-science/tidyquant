@@ -17,7 +17,7 @@ quandl_search(query, silent = FALSE, per_page = 10, ...)
 \item{...}{Additional named values that are interpretted as Quandl API parameters.}
 }
 \value{
-Returns a data frame with search results.
+Returns a tibble with search results.
 }
 \description{
 Search the Quandl database

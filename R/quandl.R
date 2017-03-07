@@ -35,7 +35,7 @@ quandl_api_key <- function(api_key) {
 #'
 #' @inheritParams Quandl::Quandl.search
 #'
-#' @return Returns a data frame with search results.
+#' @return Returns a tibble with search results.
 #'
 #' @details A wrapper for `Quandl::Quandl.search()`
 #'

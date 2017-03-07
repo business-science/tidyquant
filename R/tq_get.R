@@ -171,6 +171,10 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
 
     }
 
+    if (get == "quandl") {
+        colnames(ret) <- make.names(colnames(ret))
+    }
+
     return(ret)
 
 }
