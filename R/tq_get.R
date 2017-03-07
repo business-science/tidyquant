@@ -28,6 +28,9 @@
 #'   \href{https://www.oanda.com/}{Oanda}.
 #'   \item `"exchange.rates"`: Get exchange rates from
 #'   \href{https://www.oanda.com/currency/converter/}{Oanda}.
+#'   \item `"quandl"`: Get data from
+#'   \href{https://www.quandl.com/}{Quandl}. Wrapper for `Quandl()`.
+#'   See also [quandl_api_key()].
 #' }
 #' @param complete_cases Removes symbols that return an NA value due to an error with the get
 #' call such as sending an incorrect symbol "XYZ" to get = "stock.prices". This is useful in
@@ -62,7 +65,14 @@
 #' `tq_get_stock_index_options()` Is deprecated and will be removed in the
 #' next version. Please use `tq_index_options()` instead.
 #'
-#' @seealso [tq_index()] to get a ful list of stocks in an index.
+#' @seealso
+#' \itemize{
+#'   \item [tq_index()] to get a ful list of stocks in an index.
+#'   \item [tq_exchange()] to get a ful list of stocks in an exchange.
+#'   \item [quandl_api_key()] to set the api key for collecting data via the `"quandl"`
+#'   get option.
+#' }
+#'
 #'
 #' @rdname tq_get
 #'
@@ -226,7 +236,8 @@ tq_get_base <- function(x, get, ...) {
                   metalprice   = tq_get_util_1(x, get, ...),
                   exchangerate = tq_get_util_1(x, get, ...),
                   economicdata = tq_get_util_1(x, get, ...),
-                  stockindex   = tq_index(x) # Deprecated, remove next version
+                  stockindex   = tq_index(x), # Deprecated, remove next version
+                  quandl       = tq_get_util_4(x, get, ...)
                   )
 
     ret
@@ -244,7 +255,8 @@ tq_get_options <- function() {
       "splits",
       "economic.data",
       "exchange.rates",
-      "metal.prices"
+      "metal.prices",
+      "quandl"
       )
 }
 
@@ -701,6 +713,47 @@ tq_get_util_3 <- function(x, get, complete_cases, map, ...) {
     }, error = function(e) {
 
         warn <- paste0("Error at ", x, " during call to get = 'key.stats'.")
+        if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
+        warning(warn)
+        return(NA) # Return NA on error
+
+    })
+
+}
+
+# Util 4: Quandl -----
+tq_get_util_4 <- function(x, get, type = "raw",  meta = FALSE, complete_cases, map, ...) {
+
+    # Check x
+    if (!is.character(x)) {
+        stop("x must be a character string in the form of a valid symbol.")
+    }
+
+    # Convert x to uppercase
+    x <- stringr::str_to_upper(x) %>%
+        stringr::str_trim(side = "both")
+
+    # Check type
+    if (type != "raw") {
+        type = "raw"
+    }
+
+    # Check meta
+    if (meta == TRUE) {
+        meta = FALSE
+    }
+
+
+    tryCatch({
+
+        ret <- Quandl(code = x, type = type, meta = meta, ...) %>%
+            as_tibble()
+
+        return(ret)
+
+    }, error = function(e) {
+
+        warn <- paste0("Error at ", x, " during call to get = 'quandl'.")
         if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
         warning(warn)
         return(NA) # Return NA on error

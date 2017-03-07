@@ -42,6 +42,9 @@ from \href{https://finance.yahoo.com/}{Yahoo Finance}.
 \href{https://www.oanda.com/}{Oanda}.
 \item \code{"exchange.rates"}: Get exchange rates from
 \href{https://www.oanda.com/currency/converter/}{Oanda}.
+\item \code{"quandl"}: Get data from
+\href{https://www.quandl.com/}{Quandl}. Wrapper for \code{Quandl()}.
+See also \code{\link[=quandl_api_key]{quandl_api_key()}}.
 }}
 
 \item{complete_cases}{Removes symbols that return an NA value due to an error with the get
@@ -104,5 +107,10 @@ mult_gets <- tq_get("AAPL",
                     to   = "2017-01-01")
 }
 \seealso{
-\code{\link[=tq_index]{tq_index()}} to get a ful list of stocks in an index.
+\itemize{
+\item \code{\link[=tq_index]{tq_index()}} to get a ful list of stocks in an index.
+\item \code{\link[=tq_exchange]{tq_exchange()}} to get a ful list of stocks in an exchange.
+\item \code{\link[=quandl_api_key]{quandl_api_key()}} to set the api key for collecting data via the \code{"quandl"}
+get option.
+}
 }
