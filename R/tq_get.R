@@ -118,8 +118,8 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
     # Distribute operations based on x
     if (is.character(x) && length(x) == 1 && length(get) == 1) {
 
-        # Expedite get and return
-        return(tq_get_base(x, get, complete_cases = complete_cases, map = FALSE, ...))
+        # Expedite get
+        ret <- tq_get_base(x, get, complete_cases = complete_cases, map = FALSE, ...)
 
     } else if (is.character(x)) {
 
@@ -159,7 +159,7 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
     }
 
     # Unnest if only 1 get option
-    if (length(get) == 1) {
+    if (length(get) == 1 && length(x) > 1 ) {
 
         ret <- tryCatch({
             ret %>%
@@ -171,8 +171,11 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
 
     }
 
+    # Clean quandl column names to make easier
     if (get == "quandl") {
-        colnames(ret) <- make.names(colnames(ret))
+        colnames(ret) <- make.names(colnames(ret)) %>%
+            stringr::str_replace_all(pattern = "\\.+", ".") %>%
+            stringr::str_to_lower()
     }
 
     return(ret)
