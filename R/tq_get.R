@@ -115,6 +115,12 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
     # Validate compound gets
     if (length(get) > 1) validate_compound_gets(get)
 
+    # Validate quandl api key
+    if(get == "quandl") {
+        if (is.null(quandl_api_key())) warning("No Quandl API key detected. Limited to 50 anonymous calls per day. Set key with 'quandl_api_key()'.",
+                                               call. = FALSE)
+    }
+
     # Distribute operations based on x
     if (is.character(x) && length(x) == 1 && length(get) == 1) {
 
@@ -735,10 +741,6 @@ tq_get_util_4 <- function(x, get, type = "raw",  meta = FALSE, complete_cases, m
     if (!is.character(x)) {
         stop("x must be a character string in the form of a valid symbol.")
     }
-
-    # Validate quandl api key
-    if (is.null(quandl_api_key())) warning("No Quandl API key detected. Limited to 50 anonymous calls per day. Set key with 'quandl_api_key()'.",
-                                           call. = FALSE)
 
     # Convert x to uppercase
     x <- stringr::str_to_upper(x) %>%
