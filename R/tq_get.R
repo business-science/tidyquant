@@ -115,6 +115,12 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
     # Validate compound gets
     if (length(get) > 1) validate_compound_gets(get)
 
+    # Validate quandl api key
+    if (get == "quandl") {
+        no_api_key_detected <- quandl_api_key() %>% is.null()
+        if (no_api_key_detected) warning("No Quandl API key detected. 50 call per day limit. Set key with 'quanld_api_key()'.")
+    }
+
     # Distribute operations based on x
     if (is.character(x) && length(x) == 1 && length(get) == 1) {
 
