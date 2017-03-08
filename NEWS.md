@@ -1,3 +1,8 @@
+# Development version
+
+* New Data:
+    * Quandl Integration: `tq_get(get = "quandl")` is a wrapper for `Quandl::Quandl()` that pulls multiple Quandl Codes in a "tidy" fashion. 
+
 
 # tidyquant 0.4.0
 
