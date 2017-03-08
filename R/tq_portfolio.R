@@ -147,11 +147,11 @@ tq_portfolio_.default <- function(data, assets_col, returns_col, weights = NULL,
 #' @export
 tq_portfolio_.tbl_df <- function(data, assets_col, returns_col, weights, col_rename, ...) {
 
-    tq_portfolio_base_(data = data,
-                       assets_col = assets_col,
+    tq_portfolio_base_(data        = data,
+                       assets_col  = assets_col,
                        returns_col = returns_col,
-                       weights = weights,
-                       col_rename = col_rename,
+                       weights     = weights,
+                       col_rename  = col_rename,
                        ...)
 }
 
@@ -270,6 +270,7 @@ tq_portfolio_base_ <- function(data, assets_col, returns_col, weights, col_renam
 
         # Spread for xts form and apply Return.portfolio()
         data %>%
+            select_(date_col_name, assets_col_name, returns_col_name) %>%
             tidyr::spread_(key_col = assets_col_name, value_col = returns_col_name) %>%
             as_xts_(date_col = date_col_name) %>%
             PerformanceAnalytics::Return.portfolio(weights = weights, verbose = FALSE, ...)
