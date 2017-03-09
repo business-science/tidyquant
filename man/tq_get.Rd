@@ -21,29 +21,32 @@ for \code{x}. Options include:
 \itemize{
 \item \code{"stock.prices"}: Get the open, high, low, close, volume and adjusted
 stock prices for a stock symbol from
-\href{https://finance.yahoo.com/}{Yahoo Finance}.
+\href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for \code{quantmod::getSymbols()}.
 \item \code{"financials"}: Get the income, balance sheet, and cash flow
 financial statements for a stock symbol from
-\href{https://www.google.com/finance}{Google Finance}.
-\item \code{"key.ratios"}: These are key historical ratios. Get \strong{89 historical growth, profitablity, financial health,
-efficiency, and valuation ratios that span 10-years} from
+\href{https://www.google.com/finance}{Google Finance}. Wrapper for \code{quantmod::getFinancials()}.
+\item \code{"key.ratios"}: Get 89 historical growth, profitablity, financial health,
+efficiency, and valuation ratios that span 10-years from
 \href{https://www.morningstar.com}{Morningstar}.
-\item \code{"key.stats"}: These are key current statistics. Get \strong{55 current key statistics} such as
+\item \code{"key.stats"}: Get 55 real-time key statistics such as
 Ask, Bid, Day's High, Day's Low, Last Trade Price, current P/E Ratio, EPS,
 Market Cap, EPS Projected Current Year, EPS Projected Next Year and many more from
 \href{https://finance.yahoo.com/}{Yahoo Finance}.
 \item \code{"dividends"}: Get the dividends for a stock symbol
-from \href{https://finance.yahoo.com/}{Yahoo Finance}.
+from \href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for \code{quantmod::getDividends()}.
 \item \code{"splits"}: Get the splits for a stock symbol
-from \href{https://finance.yahoo.com/}{Yahoo Finance}.
+from \href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for \code{quantmod::getSplits()}.
 \item \code{"economic.data"}: Get economic data from
-\href{https://fred.stlouisfed.org/}{FRED}.
+\href{https://fred.stlouisfed.org/}{FRED}. rapper for \code{quantmod::getSymbols.FRED()}.
 \item \code{"metal.prices"}: Get the metal prices from
-\href{https://www.oanda.com/}{Oanda}.
+\href{https://www.oanda.com/}{Oanda}. Wrapper for \code{quantmod::getMetals()}.
 \item \code{"exchange.rates"}: Get exchange rates from
-\href{https://www.oanda.com/currency/converter/}{Oanda}.
-\item \code{"quandl"}: Get data from
+\href{https://www.oanda.com/currency/converter/}{Oanda}. Wrapper for \code{quantmod::getFX()}.
+\item \code{"quandl"}: Get data sets from
 \href{https://www.quandl.com/}{Quandl}. Wrapper for \code{Quandl()}.
+See also \code{\link[=quandl_api_key]{quandl_api_key()}}.
+\item \code{"quandl.datatable"}: Get data tables from
+\href{https://www.quandl.com/}{Quandl}. Wrapper for \code{Quandl.datatable()}.
 See also \code{\link[=quandl_api_key]{quandl_api_key()}}.
 }}
 
@@ -56,12 +59,19 @@ message is generated for any rows removed.}
 \item{...}{Additional parameters passed to the appropriate \code{quantmod}
 function. Common optional parameters include:
 \itemize{
-\item \code{from}: Optional. A character string representing a start date in
+\item \code{from}: Optional quantmod argument. A character string representing a start date in
 YYYY-MM-DD format. No effect on
 \code{"financials"}, \code{"key.ratios"}, or \code{"key.stats"}.
-\item \code{to}: A character string representing a end date in
+\item \code{to}: Optional quantmod argument. A character string representing a end date in
 YYYY-MM-DD format. No effect on
 \code{get = "financials"},  \code{"key.ratios"}, or \code{"key.stats"}.
+\item \code{start_date}: Optional Quandl argument. A character string representing a start date in
+YYYY-MM-DD format.
+\item \code{end_date}: Optional Quandl argument. A character string representing a end date in
+YYYY-MM-DD format. No effect on
+\code{get = "financials"},  \code{"key.ratios"}, or \code{"key.stats"}.
+\item Investigate the underlying wrapper functions to understand the full list
+of optional arguments.
 }}
 }
 \value{
@@ -73,7 +83,9 @@ Get quantitative data in \code{tibble} format
 \details{
 \code{tq_get()} is a consolidated function that gets data from various
 web sources. The function is a wrapper for several \code{quantmod}
-functions. The results are always returned as a \code{tibble}. The advantages
+functions, \code{Quandl} functions, and also gets data from websources unavailable
+in other packages.
+The results are always returned as a \code{tibble}. The advantages
 are (1) only one function is needed for all data sources and (2) the function
 can be seemlessly used with the tidyverse: \code{purrr}, \code{tidyr}, and
 \code{dplyr} verbs.
