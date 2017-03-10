@@ -20,8 +20,8 @@ before_install: |
   CXX1XSTD=-std=c++11
   CXX=gcc-4.9
 
-r_github_packages:
-  - mdancho84/tidyquant
+r_packages:
+  - covr
 
 after_success:
-  - Rscript -e 'covr::codecov()'
+  - Rscript -e 'library(covr); codecov()'
