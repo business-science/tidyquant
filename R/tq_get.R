@@ -40,22 +40,18 @@
 #' scaling so user does not need to
 #' add an extra step to remove these rows. `TRUE` by default, and a warning
 #' message is generated for any rows removed.
-#' @param ... Additional parameters passed to the appropriate `quantmod`
-#' function. Common optional parameters include:
+#' @param ... Additional parameters passed to the "wrapped"
+#' function. Investigate underlying functions to see full list of arguments.
+#' Common optional parameters include:
 #' \itemize{
-#'   \item `from`: Optional quantmod argument. A character string representing a start date in
+#'   \item `from`: Optional for various time series functions in quantmod / quandl packages.
+#'   A character string representing a start date in
 #'   YYYY-MM-DD format. No effect on
 #'   `"financials"`, `"key.ratios"`, or `"key.stats"`.
-#'   \item `to`: Optional quantmod argument. A character string representing a end date in
+#'   \item `to`: Optional for various time series functions in quantmod / quandl packages.
+#'   A character string representing a end date in
 #'   YYYY-MM-DD format. No effect on
 #'   `get = "financials"`,  `"key.ratios"`, or `"key.stats"`.
-#'   \item `start_date`: Optional Quandl argument. A character string representing a start date in
-#'   YYYY-MM-DD format.
-#'   \item `end_date`: Optional Quandl argument. A character string representing a end date in
-#'   YYYY-MM-DD format. No effect on
-#'   `get = "financials"`,  `"key.ratios"`, or `"key.stats"`.
-#'   \item Investigate the underlying wrapper functions to understand the full list
-#'   of optional arguments.
 #' }
 #'
 #'
@@ -766,9 +762,17 @@ tq_get_util_4 <- function(x, get, type = "raw",  meta = FALSE, complete_cases, m
     # Check meta
     if (meta == TRUE) meta = FALSE
 
+    # Repurpose from and to as start_date and end_date
+    args <- list(code = x,
+                 type = type,
+                 meta = meta)
+    args <- append(args, list(...))
+    if (!is.null(args$from)) args$start_date <- args$from
+    if (!is.null(args$t)) args$end_date <- args$to
+
     tryCatch({
 
-        ret <- Quandl(code = x, type = type, meta = meta, ...) %>%
+        ret <- do.call("Quandl", args) %>%
             as_tibble()
 
         return(ret)

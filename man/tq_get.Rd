@@ -56,22 +56,18 @@ scaling so user does not need to
 add an extra step to remove these rows. \code{TRUE} by default, and a warning
 message is generated for any rows removed.}
 
-\item{...}{Additional parameters passed to the appropriate \code{quantmod}
-function. Common optional parameters include:
+\item{...}{Additional parameters passed to the "wrapped"
+function. Investigate underlying functions to see full list of arguments.
+Common optional parameters include:
 \itemize{
-\item \code{from}: Optional quantmod argument. A character string representing a start date in
+\item \code{from}: Optional for various time series functions in quantmod / quandl packages.
+A character string representing a start date in
 YYYY-MM-DD format. No effect on
 \code{"financials"}, \code{"key.ratios"}, or \code{"key.stats"}.
-\item \code{to}: Optional quantmod argument. A character string representing a end date in
+\item \code{to}: Optional for various time series functions in quantmod / quandl packages.
+A character string representing a end date in
 YYYY-MM-DD format. No effect on
 \code{get = "financials"},  \code{"key.ratios"}, or \code{"key.stats"}.
-\item \code{start_date}: Optional Quandl argument. A character string representing a start date in
-YYYY-MM-DD format.
-\item \code{end_date}: Optional Quandl argument. A character string representing a end date in
-YYYY-MM-DD format. No effect on
-\code{get = "financials"},  \code{"key.ratios"}, or \code{"key.stats"}.
-\item Investigate the underlying wrapper functions to understand the full list
-of optional arguments.
 }}
 }
 \value{
