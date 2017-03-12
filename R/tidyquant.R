@@ -40,5 +40,6 @@
 #' @importFrom utils "data" "download.file" "read.csv"
 #' @importFrom TTR "SMA"
 #' @importFrom xts "to.period"
+#' @importFrom Quandl "Quandl" "Quandl.datatable" "Quandl.api_key" "Quandl.search"
 
 NULL
