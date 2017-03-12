@@ -224,8 +224,82 @@ collect_real_time_data("AAPL", interval_sec = 3, n = 5) %>%
 
 The data source is [Yahoo Finance](https://finance.yahoo.com/).
 
-<a class="anchor" id="economic-data"></a>
+## Quandl
 
+[Quandl](https://www.quandl.com/) provides access to a vast number of financial and economic databases. The `Quandl` package has been integrated into `tidyquant` as follows.
+
+### Authentication
+
+To make full use of the integration we recommend you set your api key. To do this create or sign into your Quandl account and go to your account api key page.
+
+```{r, eval = F}
+quandl_api_key("enter-your-api-key-here")
+```
+
+### Search
+
+Searching Quandl from within the R console is possible with `quandl_search()`, a wrapper for `Quandl::Quandl.search()`. An example search is shown below. The only required argument is `query`. You can also visit the [Quandl Search](https://www.quandl.com/search) webpage to search for available database codes. 
+
+```{r, eval = F}
+quandl_search(query = "Oil", database_code = "NSE", per_page = 3)
+```
+
+### Getting Quandl Data
+
+Getting data is integrated into `tq_get()`. Two get options exist to retrieve Quandl data:
+
+1. `get = "quandl"`: Get's Quandl time series data. A wrapper for `Quandl()`.
+2. `get = "quandl.datatable"`: Gets Quandl datatables (larger data sets that may not be time series). A wrapper for `Quandl.datatable()`.
+
+Getting data from Quandl can be achieved in much the same way as the other "get" options. Just pass the "codes" for the data along with desired arguments for the underlying function. 
+
+The following uses `get = "quandl"` the "WIKI" database to download daily stock prices for FB and AAPL in 2016. The output is a tidy data frame. 
+
+```{r, eval = F}
+c("WIKI/FB", "WIKI/AAPL") %>%
+    tq_get(get  = "quandl",
+           from = "2016-01-01",
+           to   = "2016-12-31")
+```
+
+The following time series options are available to be passed to the underlying `Quandl()` function:
+
+* `order` = "asc", "desc"
+* `start_date` = "yyyy-mm-dd" (`from`) | `end_date` (`to`) = "yyyy-mm-dd"
+* `column_index` = numeric column number (e.g. 1)
+* `rows` = numeric row number indicating first n rows (e.g. 100)
+* `collapse` = "none", "daily", "weekly", "monthly", "quarterly", "annual"
+* `transform` = "none", "diff", "rdiff", "cumul", "normalize"
+
+Here's an example to get period returns of the adj.close (column index 11) using the `column_index`, `collapse` and `transform` arguments. 
+
+```{r, eval = F}
+c("WIKI/FB", "WIKI/AAPL") %>%
+    tq_get(get          = "quandl",
+           from         = "2007-01-01",
+           to           = "2016-12-31",
+           column_index = 11, 
+           collapse     = "annual",      
+           transform    = "rdiff")       
+```
+
+Datatables are larger data sets. These can be downloaded using `get = "quandl.datatable"`. Note that the time series arguments do not work with data tables. 
+
+Here's several examples of [Zacks Fundamentals Collection B](https://www.quandl.com/databases/ZFB/documentation/about)
+
+```{r, eval = F}
+# Zacks Fundamentals Collection B (DOW 30 Available to non subscribers)
+tq_get("ZACKS/FC", get = "quandl.datatable")   # Zacks Fundamentals Condensed
+tq_get("ZACKS/FR", get = "quandl.datatable")   # Zacks Fundamental Ratios
+tq_get("ZACKS/MT", get = "quandl.datatable")   # Zacks Master Table
+tq_get("ZACKS/MKTV", get = "quandl.datatable") # Zacks Market Value Supplement
+tq_get("ZACKS/SHRS", get = "quandl.datatable") # Zacks Shares Out Supplement
+```
+
+
+
+
+<a class="anchor" id="economic-data"></a>
 ## Economic Data 
 
 A wealth of economic data can be extracted from the Federal Reserve Economic Data (FRED) database. The [WTI Crude Oil Prices](https://fred.stlouisfed.org/series/DCOILWTICO) are shown below.

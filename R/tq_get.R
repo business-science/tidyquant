@@ -768,7 +768,7 @@ tq_get_util_4 <- function(x, get, type = "raw",  meta = FALSE, complete_cases, m
                  meta = meta)
     args <- append(args, list(...))
     if (!is.null(args$from)) args$start_date <- args$from
-    if (!is.null(args$t)) args$end_date <- args$to
+    if (!is.null(args$to)) args$end_date <- args$to
 
     tryCatch({
 
