@@ -90,6 +90,12 @@ aapl_prices  <- tq_get("AAPL", get = "stock.prices", from = " 1990-01-01")
 aapl_prices 
 ```
 
+Yahoo Japan stock prices can be retrieved using a similar call, `get = "stock.prices.japan"`.
+
+```{r, eval = F}
+x8411T <- tq_get("8411.T", get = "stock.prices.japan", from = "2016-01-01", to  = "2016-12-31")
+```
+
 
 Dividends are obtained using `get = "dividends"`. 
 
@@ -105,7 +111,7 @@ aapl_splits <- tq_get("AAPL", get = "splits", from = "1990-01-01")
 aapl_splits
 ```
 
-The data source is [Yahoo Finance](https://finance.yahoo.com/).
+The data source is [Yahoo Finance](https://finance.yahoo.com/) and [Yahoo Finance Japan](http://finance.yahoo.co.jp/).
 
 ## Financial Statements
 

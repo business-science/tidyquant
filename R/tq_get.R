@@ -8,6 +8,9 @@
 #'   \item `"stock.prices"`: Get the open, high, low, close, volume and adjusted
 #'   stock prices for a stock symbol from
 #'   \href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for `quantmod::getSymbols()`.
+#'   \item `"stock.prices.japan"`: Get the open, high, low, close, volume and adjusted
+#'   stock prices for a stock symbol from
+#'   \href{http://finance.yahoo.co.jp/}{Yahoo Finance Japan}. Wrapper for `quantmod::getSymbols.yahooj()`.
 #'   \item `"financials"`: Get the income, balance sheet, and cash flow
 #'   financial statements for a stock symbol from
 #'   \href{https://www.google.com/finance}{Google Finance}. Wrapper for `quantmod::getFinancials()`.
@@ -248,18 +251,19 @@ tq_get_base <- function(x, get, ...) {
 
     # Setup switches based on get
     ret <- switch(get,
-                  stockprice      = tq_get_util_1(x, get, ...),
-                  dividend        = tq_get_util_1(x, get, ...),
-                  split           = tq_get_util_1(x, get, ...),
-                  financial       = tq_get_util_1(x, get, ...),
-                  keystat         = tq_get_util_3(x, get, ...),
-                  keyratio        = tq_get_util_2(x, get, ...),
-                  metalprice      = tq_get_util_1(x, get, ...),
-                  exchangerate    = tq_get_util_1(x, get, ...),
-                  economicdata    = tq_get_util_1(x, get, ...),
-                  stockindex      = tq_index(x), # Deprecated, remove next version
-                  quandl          = tq_get_util_4(x, get, ...),
-                  quandldatatable = tq_get_util_5(x, get, ...)
+                  stockprice       = tq_get_util_1(x, get, ...),
+                  stockpricesjapan = tq_get_util_1(x, get, ...),
+                  dividend         = tq_get_util_1(x, get, ...),
+                  split            = tq_get_util_1(x, get, ...),
+                  financial        = tq_get_util_1(x, get, ...),
+                  keystat          = tq_get_util_3(x, get, ...),
+                  keyratio         = tq_get_util_2(x, get, ...),
+                  metalprice       = tq_get_util_1(x, get, ...),
+                  exchangerate     = tq_get_util_1(x, get, ...),
+                  economicdata     = tq_get_util_1(x, get, ...),
+                  stockindex       = tq_index(x), # Deprecated, remove next version
+                  quandl           = tq_get_util_4(x, get, ...),
+                  quandldatatable  = tq_get_util_5(x, get, ...)
                   )
 
     ret
@@ -270,6 +274,7 @@ tq_get_base <- function(x, get, ...) {
 #' @export
 tq_get_options <- function() {
     c("stock.prices",
+      "stock.prices.japan",
       "financials",
       "key.stats",
       "key.ratios",
@@ -311,40 +316,45 @@ tq_get_util_1 <-
 
     # Setup switches based on get
     vars <- switch(get,
-                   stockprice   = list(chr_get    = "stock.prices",
-                                       fun        = quantmod::getSymbols,
-                                       chr_fun    = "quantmod::getSymbols",
-                                       list_names = c("open", "high", "low", "close", "volume", "adjusted"),
-                                       source     = "yahoo"),
-                   dividend     = list(chr_get    = "dividends",
-                                       fun        = quantmod::getDividends,
-                                       chr_fun    = "quantmod::getDividends",
-                                       list_names = "dividends",
-                                       source     = "yahoo"),
-                   split        = list(chr_get    = "splits",
-                                       fun        = quantmod::getSplits,
-                                       chr_fun    = "quantmod::getSplits",
-                                       list_names = "splits",
-                                       source     = "yahoo"),
-                   financial    = list(chr_get    = "financials",
-                                       fun        = quantmod::getFinancials,
-                                       chr_fun    = "quantmod::getFinancials",
-                                       source     = "google"),
-                   metalprice   = list(chr_get    = "metal.prices",
-                                       fun        = quantmod::getMetals,
-                                       chr_fun    = "quantmod::getMetals",
-                                       list_names = "price",
+                   stockprice            = list(chr_get    = "stock.prices",
+                                                fun        = quantmod::getSymbols,
+                                                chr_fun    = "quantmod::getSymbols",
+                                                list_names = c("open", "high", "low", "close", "volume", "adjusted"),
+                                                source     = "yahoo"),
+                   stockpricesjapan      = list(chr_get    = "stock.prices",
+                                                fun        = quantmod::getSymbols,
+                                                chr_fun    = "quantmod::getSymbols.yahooj",
+                                                list_names = c("open", "high", "low", "close", "volume", "adjusted"),
+                                                source     = "yahooj"),
+                   dividend              = list(chr_get    = "dividends",
+                                                fun        = quantmod::getDividends,
+                                                chr_fun    = "quantmod::getDividends",
+                                                list_names = "dividends",
+                                                source     = "yahoo"),
+                   split                 = list(chr_get    = "splits",
+                                                fun        = quantmod::getSplits,
+                                                chr_fun    = "quantmod::getSplits",
+                                                list_names = "splits",
+                                                source     = "yahoo"),
+                   financial             = list(chr_get    = "financials",
+                                                fun        = quantmod::getFinancials,
+                                                chr_fun    = "quantmod::getFinancials",
+                                                source     = "google"),
+                   metalprice            = list(chr_get    = "metal.prices",
+                                                fun        = quantmod::getMetals,
+                                                chr_fun    = "quantmod::getMetals",
+                                                list_names = "price",
                                        source     = "oanda"),
-                   exchangerate = list(chr_get    = "exchange.rates",
-                                       fun        = quantmod::getFX,
-                                       chr_fun    = "quantmod::getFX",
-                                       list_names = "exchange.rate",
+                   exchangerate          = list(chr_get    = "exchange.rates",
+                                                fun        = quantmod::getFX,
+                                                chr_fun    = "quantmod::getFX",
+                                                list_names = "exchange.rate",
                                        source     = "oanda"),
-                   economicdata = list(chr_get    = "economic.data",
-                                       fun        = quantmod::getSymbols,
-                                       chr_fun    = "quantmod::getSymbols.FRED",
-                                       list_names = "price",
-                                       source     = "FRED")
+                   economicdata          = list(chr_get    = "economic.data",
+                                                fun        = quantmod::getSymbols,
+                                                chr_fun    = "quantmod::getSymbols.FRED",
+                                                list_names = "price",
+                                                source     = "FRED")
     )
 
     # Get data; Handle errors
@@ -849,7 +859,8 @@ validate_compound_gets <- function(get) {
         stringr::str_replace_all("s$", "")
 
     # Only allowed to use first six options for compound gets because these use traditional stock symbols
-    compound_get_options <- tq_get_options()[1:6] %>%
+    # Update for "stock.prices.japan". Now subset is c(1, 3:7)
+    compound_get_options <- tq_get_options()[c(1, 3:7)] %>%
         stringr::str_replace_all("[[:punct:]]", "") %>%
         stringr::str_replace_all("s$", "")
 
