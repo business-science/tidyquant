@@ -1,7 +1,12 @@
 # Development version
 
 * New Data:
-    * Quandl Integration: `tq_get(get = "quandl")` is a wrapper for `Quandl::Quandl()` that pulls multiple Quandl Codes in a "tidy" fashion. `tq_get(get = "quandl.datatable")` is a wrapper for `Quandl::Quandl.datable()` that pulls Quandl datatables as well.
+    * Quandl Integration: 
+        * `tq_get(get = "quandl")` is a wrapper for `Quandl::Quandl()` that pulls multiple Quandl Codes in a "tidy" fashion. 
+        * `tq_get(get = "quandl.datatable")` is a wrapper for `Quandl::Quandl.datable()` that pulls Quandl datatables. 
+        * `quandl_api_key()` is a wrapper for `Quandl::Quandl.api_key()`. 
+        * `quandl_search` is a wrapper for `Quandl::Quandl.search()`.
+    * Yahoo Japan Integration: `tq_get(get = "stock.prices.japan")` is a wrapper for `quantmod::getSymbols(src = "yahooj")` that enables getting stocks from Yahoo Finance Japan.
 
 
 # tidyquant 0.4.0

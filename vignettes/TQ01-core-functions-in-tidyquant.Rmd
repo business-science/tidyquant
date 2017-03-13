@@ -271,7 +271,7 @@ c("WIKI/FB", "WIKI/AAPL") %>%
 The following time series options are available to be passed to the underlying `Quandl()` function:
 
 * `order` = "asc", "desc"
-* `start_date` = "yyyy-mm-dd" (`from`) | `end_date` (`to`) = "yyyy-mm-dd"
+* `start_date` (`from`) = "yyyy-mm-dd" | `end_date` (`to`) = "yyyy-mm-dd"
 * `column_index` = numeric column number (e.g. 1)
 * `rows` = numeric row number indicating first n rows (e.g. 100)
 * `collapse` = "none", "daily", "weekly", "monthly", "quarterly", "annual"
