@@ -56,10 +56,17 @@
 #' in action: Some functions are useful to non-OHLC data, and defining x = price
 #' allows us to mutate WTI crude prices from daily to monthly periodicity.
 #'
+#' `tq_mutate_data` and `tq_tranmute_data` are designed to enable working with
+#' functions that require "data" as the input (i.e. `rollapply`). This allows
+#' working with the `FUN` argument and apply `by.column = FALSE`, which is
+#' specifically designed for handling complex functions that require multiple
+#' column inputs into the `FUN` function (e.g. rolling regressions using `lm`).
+#' Example 4 shows how to apply a rolling regression.
+#'
 #' `tq_mutate_`, `tq_mutate_xy_`, `tq_transmute_`, and `tq_transmute_xy_`
 #' are setup for Non-Standard
 #' Evaluation (NSE). This enables programatically changing column names by modifying
-#' the text representations. Example 4 shows the difference in implementation.
+#' the text representations. Example 5 shows the difference in implementation.
 #' Note that character strings are being passed to the variables instead of
 #' unquoted variable names. See `vignette("nse")` for more information.
 #'
@@ -75,7 +82,10 @@
 #'
 #' ##### Basic Functionality
 #'
-#' fb_stock_prices  <- tq_get("FB", get = "stock.prices")
+#' fb_stock_prices  <- tq_get("FB",
+#'                            get  = "stock.prices",
+#'                            from = "2016-01-01",
+#'                            to   = "2016-12-31")
 #'
 #' # Example 1: Return logarithmic daily returns using periodReturn()
 #' fb_stock_prices %>%
@@ -91,7 +101,23 @@
 #' tq_get("DCOILWTICO", get = "economic.data") %>%
 #'     tq_mutate_xy(x = price, mutate_fun = lag.xts, k = 1, na.pad = TRUE)
 #'
-#' # Example 4: Non-standard evaluation:
+#' # Example 4: Using tq_mutate_data to apply a rolling regression
+#' fb_returns <- fb_stock_prices %>%
+#'     tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "fb.returns")
+#' xlk_returns <- tq_get("XLK", from = "2016-01-01", to = "2016-12-31") %>%
+#'     tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "xlk.returns")
+#' returns_combined <- left_join(fb_returns, xlk_returns, by = "date")
+#' regr_fun <- function(data) {
+#'     coef(lm(fb.returns ~ xlk.returns, data = as_data_frame(data)))
+#' }
+#' returns_combined %>%
+#'     tq_mutate_data(mutate_fun = rollapply,
+#'                    width      = 6,
+#'                    FUN        = regr_fun,
+#'                    by.column  = FALSE,
+#'                    col_rename = c("coef.0", "coef.1"))
+#'
+#' # Example 5: Non-standard evaluation:
 #' # Programming with tq_mutate_() and tq_mutate_xy_()
 #' col_name <- "adjusted"
 #' mutate <- c("MACD", "SMA")
@@ -213,6 +239,61 @@ tq_mutate_xy_.data.frame <- function(data, x, y = NULL, mutate_fun, col_rename =
                             mutate_fun    = mutate_fun,
                             col_rename    = col_rename,
                             ...           = ...)
+
+    merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
+}
+
+# tq_mutate_data ------------------------------------------------------------------------------------------------
+
+#' @rdname tq_mutate
+#' @export
+tq_mutate_data <- function(data, mutate_fun, col_rename = NULL, ...) {
+
+    # NSE
+    tq_mutate_data_(data       = data,
+                    mutate_fun = lazyeval::expr_text(mutate_fun),
+                    col_rename = col_rename,
+                    ...        = ...)
+}
+
+#' @rdname tq_mutate
+#' @export
+tq_mutate_data_ <- function(data, mutate_fun, col_rename = NULL, ...) {
+    UseMethod("tq_mutate_data_", data)
+}
+
+# tq_mutate_data method dispatch --------------------------------------------------------------------------------
+
+#' @export
+tq_mutate_data_.default <- function(data, mutate_fun, col_rename = NULL, ...) {
+
+    # Error message
+    stop("data must be a tibble or data.frame object")
+}
+
+#' @export
+tq_mutate_data_.tbl_df <- function(data, mutate_fun, col_rename = NULL, ...) {
+
+    # Get transformation
+    ret <- tq_transmute_data_(data          = data,
+                              mutate_fun    = mutate_fun,
+                              col_rename    = col_rename,
+                              ...           = ...)
+
+    merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
+}
+
+#' @export
+tq_mutate_data_.data.frame <- function(data, mutate_fun, col_rename = NULL, ...) {
+
+    # Convert data.frame to tibble
+    data <- as_tibble(data)
+
+    # Get transformation
+    ret <- tq_transmute_data_(data          = data,
+                              mutate_fun    = mutate_fun,
+                              col_rename    = col_rename,
+                              ...           = ...)
 
     merge_two_tibbles(tib1 = data, tib2 = ret, mutate_fun)
 }

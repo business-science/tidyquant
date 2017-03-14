@@ -258,6 +258,102 @@ tq_transmute_xy_.grouped_df <- function(data, x, y = NULL, mutate_fun, col_renam
         dplyr::group_by_(.dots = group_names)
 }
 
+
+# tq_transmute_data ------------------------------------------------------------------------------------------------
+
+#' @rdname tq_mutate
+#' @export
+tq_transmute_data <- function(data, mutate_fun, col_rename = NULL, ...) {
+
+    # NSE
+    tq_transmute_data_(data          = data,
+                       mutate_fun    = lazyeval::expr_text(mutate_fun),
+                       col_rename    = col_rename,
+                       ...           = ...)
+}
+
+#' @rdname tq_mutate
+#' @export
+tq_transmute_data_ <- function(data, mutate_fun, col_rename = NULL, ...) {
+    UseMethod("tq_transmute_data_", data)
+}
+
+# tq_transmute_data method dispatch --------------------------------------------------------------------------------
+
+#' @export
+tq_transmute_data_.default <- function(data, mutate_fun, col_rename = NULL, ...) {
+
+    # Error message
+    stop("data must be a tibble or data.frame object")
+}
+
+#' @export
+tq_transmute_data_.tbl_df <- function(data, mutate_fun, col_rename = NULL, ...) {
+
+    # Check mutate_fun in xts, quantmod or TTR
+    check_transmute_fun_options(mutate_fun)
+
+    # Find date or date-time col
+    date_col_name <- get_col_name_date_or_date_time(data)
+
+    # Get timezone
+    time_zone <- get_time_zone(data, date_col_name)
+
+    # Drop any non-numeric columns except for date
+    date_col <- dplyr::select_(data, date_col_name)
+    numeric_cols <- data %>%
+        dplyr::select_if(is.numeric)
+    data <- dplyr::bind_cols(date_col, numeric_cols)
+
+    # Convert inputs to functions
+    fun_transmute <- eval(parse(text = mutate_fun))
+
+    # Patch for to.period functions
+    is_period_fun <- detect_period_fun(mutate_fun)
+
+    # Apply function
+    ret <- data %>%
+        as_xts(date_col = date) %>%
+        fun_transmute(...)
+
+    # Coerce to tibble and convert date / datetime
+    if (xts::is.xts(ret)) ret <- coerce_to_tibble(ret, date_col_name,
+                                                  time_zone, col_rename)
+
+    ret
+}
+
+#' @export
+tq_transmute_data_.data.frame <- function(data, mutate_fun, col_rename = NULL, ...) {
+
+    # Convert data.frame to tibble
+    data <- as_tibble(data)
+
+    # Call tq_transmute_xy_ for a tibble
+    tq_transmute_data_(data          = data,
+                       mutate_fun    = mutate_fun,
+                       col_rename    = col_rename,
+                       ...           = ...)
+}
+
+#' @export
+tq_transmute_data_.grouped_df <- function(data, mutate_fun, col_rename = NULL, ...) {
+
+    group_names <- dplyr::groups(data)
+
+    data %>%
+        tidyr::nest() %>%
+        dplyr::mutate(nested.col = data %>%
+                          purrr::map(~ tq_transmute_data_(data          = .,
+                                                          mutate_fun    = mutate_fun,
+                                                          col_rename    = col_rename,
+                                                          ...           = ...))
+        ) %>%
+        dplyr::select(-data) %>%
+        tidyr::unnest() %>%
+        dplyr::group_by_(.dots = group_names)
+}
+
 # tq_transform and tq_transform_xy for backwards compatability -----------------------------------------------
 
 #' @rdname deprecated

@@ -6,11 +6,15 @@
 \alias{tq_mutate_}
 \alias{tq_mutate_xy}
 \alias{tq_mutate_xy_}
+\alias{tq_mutate_data}
+\alias{tq_mutate_data_}
 \alias{tq_mutate_fun_options}
 \alias{tq_transmute}
 \alias{tq_transmute_}
 \alias{tq_transmute_xy}
 \alias{tq_transmute_xy_}
+\alias{tq_transmute_data}
+\alias{tq_transmute_data_}
 \alias{tq_transmute_fun_options}
 \title{Mutates quantitative data}
 \usage{
@@ -21,6 +25,10 @@ tq_mutate_(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...)
 tq_mutate_xy(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
 
 tq_mutate_xy_(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
+
+tq_mutate_data(data, mutate_fun, col_rename = NULL, ...)
+
+tq_mutate_data_(data, mutate_fun, col_rename = NULL, ...)
 
 tq_mutate_fun_options()
 
@@ -33,6 +41,10 @@ tq_transmute_xy(data, x, y = NULL, mutate_fun, col_rename = NULL,
   transform_fun, ...)
 
 tq_transmute_xy_(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
+
+tq_transmute_data(data, mutate_fun, col_rename = NULL, ...)
+
+tq_transmute_data_(data, mutate_fun, col_rename = NULL, ...)
 
 tq_transmute_fun_options()
 }
@@ -99,10 +111,17 @@ The xy form gets us out of this problem. Example 3 shows the second benefit
 in action: Some functions are useful to non-OHLC data, and defining x = price
 allows us to mutate WTI crude prices from daily to monthly periodicity.
 
+\code{tq_mutate_data} and \code{tq_tranmute_data} are designed to enable working with
+functions that require "data" as the input (i.e. \code{rollapply}). This allows
+working with the \code{FUN} argument and apply \code{by.column = FALSE}, which is
+specifically designed for handling complex functions that require multiple
+column inputs into the \code{FUN} function (e.g. rolling regressions using \code{lm}).
+Example 4 shows how to apply a rolling regression.
+
 \code{tq_mutate_}, \code{tq_mutate_xy_}, \code{tq_transmute_}, and \code{tq_transmute_xy_}
 are setup for Non-Standard
 Evaluation (NSE). This enables programatically changing column names by modifying
-the text representations. Example 4 shows the difference in implementation.
+the text representations. Example 5 shows the difference in implementation.
 Note that character strings are being passed to the variables instead of
 unquoted variable names. See \code{vignette("nse")} for more information.
 
@@ -116,7 +135,10 @@ library(tidyquant)
 
 ##### Basic Functionality
 
-fb_stock_prices  <- tq_get("FB", get = "stock.prices")
+fb_stock_prices  <- tq_get("FB",
+                           get  = "stock.prices",
+                           from = "2016-01-01",
+                           to   = "2016-12-31")
 
 # Example 1: Return logarithmic daily returns using periodReturn()
 fb_stock_prices \%>\%
@@ -132,7 +154,23 @@ fb_stock_prices \%>\%
 tq_get("DCOILWTICO", get = "economic.data") \%>\%
     tq_mutate_xy(x = price, mutate_fun = lag.xts, k = 1, na.pad = TRUE)
 
-# Example 4: Non-standard evaluation:
+# Example 4: Using tq_mutate_data to apply a rolling regression
+fb_returns <- fb_stock_prices \%>\%
+    tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "fb.returns")
+xlk_returns <- tq_get("XLK", from = "2016-01-01", to = "2016-12-31") \%>\%
+    tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "xlk.returns")
+returns_combined <- left_join(fb_returns, xlk_returns, by = "date")
+regr_fun <- function(data) {
+    coef(lm(fb.returns ~ xlk.returns, data = as_data_frame(data)))
+}
+returns_combined \%>\%
+    tq_mutate_data(mutate_fun = rollapply,
+                   width      = 6,
+                   FUN        = regr_fun,
+                   by.column  = FALSE,
+                   col_rename = c("coef.0", "coef.1"))
+
+# Example 5: Non-standard evaluation:
 # Programming with tq_mutate_() and tq_mutate_xy_()
 col_name <- "adjusted"
 mutate <- c("MACD", "SMA")
