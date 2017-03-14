@@ -45,7 +45,7 @@ library(tidyquant)
 ```
 
 
-# Get a Stock List from a Stock Index or Stock Exchange
+# Retrieve Consolidated Symbol Data
 
 ## Stock Indexes
 
@@ -380,7 +380,7 @@ FANG %>%
 
 Note that a mutation can occur if, and only if, the mutation has the same structure of the original tibble. In other words, the calculation must have the same number of rows and row.names (or date fields), otherwise the mutation cannot be performed.
 
-## xy Variants, tq_mutate_xy and tq_transmute_xy
+## _xy Variants, tq_mutate_xy and tq_transmute_xy
 
 Enables working with:
 
@@ -408,6 +408,55 @@ wti_prices %>%
                     period = "months", col_rename = "WTI Price")
 ```
 
+
+## _data Variants, tq_mutate_data and tq_transmute_data
+
+Enables working with an less frequent but extremely useful financial functions that take `data` as the input argument. A very powerful case is applying __custom functions__ accross a rolling window using `rollapply`. A specific example is using the `rollapply` function to compute a rolling regression. This example is slightly more complicated so it will be broken down into three steps:
+
+1. Get returns
+2. Create a custom function
+3. Apply the custom function accross a rolling window using `tq_mutate_data(mutate_fun = rollapply)`
+
+_Step 1: Get Returns_
+
+First, get combined returns. The asset and baseline returns should be in wide format, which is needed for the `lm` function in the next step.
+
+```{r}
+fb_returns <- tq_get("FB", get  = "stock.prices", from = "2016-01-01", to   = "2016-12-31") %>%
+    tq_transmute(Ad, periodReturn, period = "weekly", col_rename = "fb.returns")
+
+xlk_returns <- tq_get("XLK", from = "2016-01-01", to = "2016-12-31") %>%
+    tq_transmute(Ad, periodReturn, period = "weekly", col_rename = "xlk.returns")
+
+returns_combined <- left_join(fb_returns, xlk_returns, by = "date")
+returns_combined
+```
+
+_Step 2: Create a custom function_
+
+Next, create a custom regression function, which will be used to apply over the rolling window in Step 3. An important point is that the "data" will be passed to the regression function as an `xts` object. The `as_tibble` function takes care of converting to a data frame for the `lm` function to work properly with the columns "fb.returns" and "xlk.returns".
+
+```{r}
+regr_fun <- function(data) {
+    coef(lm(fb.returns ~ xlk.returns, data = as_tibble(data)))
+}
+```
+
+_Step 3: Apply the custom function_
+
+Now we can use the `tq_mutate_data()` function to apply the custom regression function over a rolling window using `rollapply` from the `zoo` package. Internally, the `returns_combined` data frame is being passed automatically to the `data` argument of the `rollapply` function. All you need to specify is the `mutate_fun = rollapply` and any additional arguments necessary to apply the `rollapply` function. We'll specify a 12 week window via `width = 12`. The `FUN` argument is our custom regression function, `regr_fun`. It's extremely important to specify `by.column = FALSE`, which tells `rollapply` to perform the computation using the data as a whole rather than apply the function to each column independently. The `col_rename` argument is used to rename the added columns.
+
+```{r}
+returns_combined %>%
+    tq_mutate_data(mutate_fun = rollapply,
+                   width      = 12,
+                   FUN        = regr_fun,
+                   by.column  = FALSE,
+                   col_rename = c("coef.0", "coef.1"))
+returns_combined
+```
+
+As shown above, the rolling regression coefficients were added to the data frame.
 
 # Coercing Time Series Objects To and From Tibble
 

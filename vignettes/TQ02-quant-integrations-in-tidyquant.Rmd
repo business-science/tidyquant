@@ -425,4 +425,78 @@ FANG_by_qtr %>%
 ```
 
 
+## Example 6: Use zoo rollapply to visualize a rolling regression
+
+A good way to analyze relationships over time is using rolling calculations that compare two assets. Pairs trading is a common mechanism for similar assets. While we will not go into a pairs trade analysis, we will analyze the relationship between two similar assets as a precursor to a pairs trade. In this example we will analyze two similar assets, Mastercard (MA) and Visa (V) to show the relationship via regression. 
+
+Before we analyze a rolling regression, it's helpful to view the overall trend in returns. To do this, we use `tq_get()` to get stock prices for the assets and `tq_transmute()` to transform the daily prices to daily returns. We'll collect the data and visualize via a scatter plot.
+
+```{r}
+# Get stock pairs
+stock_pairs <- c("MA", "V") %>%
+    tq_get(get  = "stock.prices",
+           from = "2015-01-01",
+           to   = "2016-12-31") %>%
+    group_by(symbol) %>%
+    tq_transmute(ohlc_fun   = Ad,
+                 mutate_fun = periodReturn,
+                 period     = "daily",
+                 type       = "log",
+                 col_rename = "returns") %>%
+    spread(key = symbol, value = returns)
+```
+
+We can visualize the relationship between the returns of the stock pairs like so.
+
+```{r}
+stock_pairs %>%
+    ggplot(aes(x = V, y = MA)) +
+    geom_point(color = palette_light()[[1]], alpha = 0.5) +
+    geom_smooth(method = "lm") +
+    labs(title = "Visualizing Returns Relationship of Stock Pairs") +
+    theme_tq()
+```
+
+We can get statistcs on the relationship from the `lm` function. The model is highly correlated with a p-value of essential zero. The coefficient estimate for V (Coefficient 1) is 0.8134 indicating a positive relationship, meaning as V increases MA also tends to increase. 
+
+```{r}
+lm(MA ~ V, data = stock_pairs) %>%
+    summary()
+```
+
+While this characterizes the overall relationship, it's missing the time aspect. Fortunately, we can use the `rollapply` function from the `zoo` package to plot a rolling regression, showing how the model coefficent varies on a rolling basis over time. We calculate rolling regressions with `tq_mutate_data` in two additional steps:
+
+1. Create a custom function
+2. Apply the function with `tq_mutate_data(mutate_fun = rollapply)`
+
+First, create a custom regression function. An important point is that the "data" will be passed to the regression function as an `xts` object. The `as_tibble` function takes care of converting to a data frame.
+
+```{r}
+regr_fun <- function(data) {
+    coef(lm(MA ~ V, data = as_tibble(data)))
+}
+```
+
+Now we can use the `tq_mutate_data()` function to apply the custom regression function over a rolling window using `rollapply` from the `zoo` package. Internally, the `returns_combined` data frame is being passed automatically to the `data` argument of the `rollapply` function. All you need to specify is the `mutate_fun = rollapply` and any additional arguments necessary to apply the `rollapply` function. We'll specify a 90 day window via `width = 90`. The `FUN` argument is our custom regression function, `regr_fun`. It's extremely important to specify `by.column = FALSE`, which tells `rollapply` to perform the computation using the data as a whole rather than apply the function to each column independently. The `col_rename` argument is used to rename the added columns.
+
+```{r}
+stock_pairs <- stock_pairs %>%
+    tq_mutate_data(mutate_fun = rollapply,
+                   width      = 90,
+                   FUN        = regr_fun,
+                   by.column  = FALSE,
+                   col_rename = c("coef.0", "coef.1"))
+stock_pairs
+```
+
+Finally, we can visualize the first coefficient like so. A horizontal line is added using the full data set model. This gives us insight as to points in time where the relationship deviates significantly from the long run trend which can be explored for potential pair trade opportunities. 
+
+```{r}
+stock_pairs %>%
+    ggplot(aes(x = date, y = coef.1)) +
+    geom_line(size = 1, color = palette_light()[[1]]) +
+    geom_hline(yintercept = 0.8134, size = 1, color = palette_light()[[2]]) +
+    labs(title = "MA ~ V: Visualizing Rolling Regression Coefficient", x = "") +
+    theme_tq()
+```
 
