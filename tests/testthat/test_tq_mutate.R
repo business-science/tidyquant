@@ -59,7 +59,20 @@ test3 <- hourly_data %>%
 test4 <- tibble(time_index, value) %>%
     tq_mutate_xy(x = value, mutate_fun = MACD)
 
-
+# Test 5:
+test5 <- c("AAPL", "FB") %>%
+    tq_get(from = "2016-01-01",
+           to   = "2017-01-01") %>%
+    group_by(symbol)
+my_lm_fun <- function(data) {
+    coef(lm(close ~ open, data = as_data_frame(data)))
+}
+test5 <- test5 %>%
+    tq_mutate_data(mutate_fun = rollapply,
+                      width      = 90,
+                      FUN        = my_lm_fun,
+                      by.column  = FALSE,
+                      col_rename = c("coef.0", "coef.1"))
 
 #### Tests ----
 
@@ -97,6 +110,15 @@ test_that("Test 3 returns tibble with correct rows and columns.", {
     expect_equal(nrow(test3), 60)
     # Columns
     expect_equal(ncol(test3), 4)
+})
+
+test_that("Test 5 returns tibble with correct rows and columns.", {
+    # Tibble
+    expect_is(test5, "tbl")
+    # Rows
+    expect_equal(nrow(test5), 504)
+    # Columns
+    expect_equal(ncol(test5), 10)
 })
 
 # Incompatible structure: trying to mutate different periodicities.

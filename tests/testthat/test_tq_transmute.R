@@ -44,6 +44,21 @@ test3 <- tibble(time_index, value) %>%
 test4 <- AAPL %>%
     tq_transmute(ohlc_fun = OHLCV, mutate_fun = to.monthly)
 
+# Test 5: Check tq_transmute_data
+fb_returns <- tq_get("FB", get  = "stock.prices", from = "2016-01-01", to   = "2016-12-31") %>%
+    tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "fb.returns")
+xlk_returns <- tq_get("XLK", from = "2016-01-01", to = "2016-12-31") %>%
+    tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "xlk.returns")
+test5 <- left_join(fb_returns, xlk_returns, by = "date")
+regr_fun <- function(data) {
+    coef(lm(fb.returns ~ xlk.returns, data = as_data_frame(data)))
+}
+test5 <- test5 %>%
+    tq_transmute_data(mutate_fun = rollapply,
+                   width      = 6,
+                   FUN        = regr_fun,
+                   by.column  = FALSE,
+                   col_rename = c("coef.0", "coef.1"))
 
 #### Tests ----
 
@@ -85,6 +100,16 @@ test_that("Test 3 returns correct timezone.", {
     expect_equal({test3$time_index %>% lubridate::tz()}, tz)
 })
 
+test_that("Test 5 returns tibble with correct rows and columns.", {
+    # Tibble
+    expect_is(test5, "tbl")
+    # Rows
+    expect_equal(nrow(test5), 12)
+    # Columns
+    expect_equal(ncol(test5), 3)
+    # Check colnames
+    expect_equal(colnames(test5), c("date", "coef.0", "coef.1"))
+})
 
 # Invalid data inputs
 test_that("Test error on invalid data inputs.", {
