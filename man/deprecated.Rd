@@ -26,11 +26,11 @@ to quickly rename columns.}
 \item{...}{Additional parameters passed to the appropriate mutatation
 function.}
 
-\item{x}{Column names of variables to be passed to the mutatation
-function (instead of OHLC functions).}
+\item{x}{Parameters used with \code{_xy} that consist of column names of variables
+to be passed to the mutatation function (instead of OHLC functions).}
 
-\item{y}{Column names of variables to be passed to the mutatation
-function (instead of OHLC functions).}
+\item{y}{Parameters used with \code{_xy} that consist of column names of variables
+to be passed to the mutatation function (instead of OHLC functions).}
 }
 \description{
 A record of functions that have been deprecated.

@@ -189,12 +189,10 @@ tq_transmute_xy_.tbl_df <- function(data, x, y = NULL, mutate_fun, col_rename = 
         if (y == "NULL" || is.null(y)) {
             ret <- data %>%
                 as_xts_(date_col = date_col_name) %$%
-                # OHLCV() %$%
                 fun_transmute(eval(parse(text = x)), OHLC = FALSE, ...)
         } else {
             ret <- data %>%
                 as_xts_(date_col = date_col_name) %$%
-                # OHLCV() %$%
                 fun_transmute(eval(parse(text = x)),
                               eval(parse(text = y)),
                               OHLC = FALSE,
@@ -263,10 +261,11 @@ tq_transmute_xy_.grouped_df <- function(data, x, y = NULL, mutate_fun, col_renam
 
 #' @rdname tq_mutate
 #' @export
-tq_transmute_data <- function(data, mutate_fun, col_rename = NULL, ...) {
+tq_transmute_data <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
 
     # NSE
     tq_transmute_data_(data          = data,
+                       select        = lazyeval::expr_text(select),
                        mutate_fun    = lazyeval::expr_text(mutate_fun),
                        col_rename    = col_rename,
                        ...           = ...)
@@ -274,21 +273,21 @@ tq_transmute_data <- function(data, mutate_fun, col_rename = NULL, ...) {
 
 #' @rdname tq_mutate
 #' @export
-tq_transmute_data_ <- function(data, mutate_fun, col_rename = NULL, ...) {
+tq_transmute_data_ <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
     UseMethod("tq_transmute_data_", data)
 }
 
 # tq_transmute_data method dispatch --------------------------------------------------------------------------------
 
 #' @export
-tq_transmute_data_.default <- function(data, mutate_fun, col_rename = NULL, ...) {
+tq_transmute_data_.default <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
 
     # Error message
     stop("data must be a tibble or data.frame object")
 }
 
 #' @export
-tq_transmute_data_.tbl_df <- function(data, mutate_fun, col_rename = NULL, ...) {
+tq_transmute_data_.tbl_df <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
 
     # Check mutate_fun in xts, quantmod or TTR
     check_transmute_fun_options(mutate_fun)
@@ -300,9 +299,14 @@ tq_transmute_data_.tbl_df <- function(data, mutate_fun, col_rename = NULL, ...) 
     time_zone <- get_time_zone(data, date_col_name)
 
     # Drop any non-numeric columns except for date
+    # Grab date column
     date_col <- dplyr::select_(data, date_col_name)
+    # Implement select
+    if (!(select == "NULL" || is.null(select))) data <- dplyr::select_(data, select)
+    # Only grab numeric columns
     numeric_cols <- data %>%
         dplyr::select_if(is.numeric)
+    # Bind date with numeric columns that are within select
     data <- dplyr::bind_cols(date_col, numeric_cols)
 
     # Convert inputs to functions
@@ -311,10 +315,18 @@ tq_transmute_data_.tbl_df <- function(data, mutate_fun, col_rename = NULL, ...) 
     # Patch for to.period functions
     is_period_fun <- detect_period_fun(mutate_fun)
 
-    # Apply function
-    ret <- data %>%
-        as_xts(date_col = date) %>%
-        fun_transmute(...)
+    # Apply functions
+    if (is_period_fun) {
+        # Add arg: OHLC = FALSE
+        ret <- data %>%
+            as_xts_(date_col = date_col_name) %>%
+            fun_transmute(OHLC = FALSE, ...)
+
+    } else {
+        ret <- data %>%
+            as_xts_(date_col = date_col_name) %>%
+            fun_transmute(...)
+    }
 
     # Coerce to tibble and convert date / datetime
     if (xts::is.xts(ret)) ret <- coerce_to_tibble(ret, date_col_name,
@@ -324,27 +336,29 @@ tq_transmute_data_.tbl_df <- function(data, mutate_fun, col_rename = NULL, ...) 
 }
 
 #' @export
-tq_transmute_data_.data.frame <- function(data, mutate_fun, col_rename = NULL, ...) {
+tq_transmute_data_.data.frame <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
 
     # Convert data.frame to tibble
     data <- as_tibble(data)
 
     # Call tq_transmute_xy_ for a tibble
     tq_transmute_data_(data          = data,
+                       select        = select,
                        mutate_fun    = mutate_fun,
                        col_rename    = col_rename,
                        ...           = ...)
 }
 
 #' @export
-tq_transmute_data_.grouped_df <- function(data, mutate_fun, col_rename = NULL, ...) {
+tq_transmute_data_.grouped_df <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
 
     group_names <- dplyr::groups(data)
 
     data %>%
         tidyr::nest() %>%
         dplyr::mutate(nested.col = data %>%
-                          purrr::map(~ tq_transmute_data_(data          = .,
+                          purrr::map(~ tq_transmute_data_(data          = .x,
+                                                          select        = select,
                                                           mutate_fun    = mutate_fun,
                                                           col_rename    = col_rename,
                                                           ...           = ...))

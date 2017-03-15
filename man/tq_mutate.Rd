@@ -26,9 +26,9 @@ tq_mutate_xy(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
 
 tq_mutate_xy_(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
 
-tq_mutate_data(data, mutate_fun, col_rename = NULL, ...)
+tq_mutate_data(data, select = NULL, mutate_fun, col_rename = NULL, ...)
 
-tq_mutate_data_(data, mutate_fun, col_rename = NULL, ...)
+tq_mutate_data_(data, select = NULL, mutate_fun, col_rename = NULL, ...)
 
 tq_mutate_fun_options()
 
@@ -42,9 +42,9 @@ tq_transmute_xy(data, x, y = NULL, mutate_fun, col_rename = NULL,
 
 tq_transmute_xy_(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
 
-tq_transmute_data(data, mutate_fun, col_rename = NULL, ...)
+tq_transmute_data(data, select = NULL, mutate_fun, col_rename = NULL, ...)
 
-tq_transmute_data_(data, mutate_fun, col_rename = NULL, ...)
+tq_transmute_data_(data, select = NULL, mutate_fun, col_rename = NULL, ...)
 
 tq_transmute_fun_options()
 }
@@ -66,8 +66,11 @@ to quickly rename columns.}
 \item{...}{Additional parameters passed to the appropriate mutatation
 function.}
 
-\item{x, y}{Column names of variables to be passed to the mutatation
-function (instead of OHLC functions).}
+\item{x, y}{Parameters used with \code{_xy} that consist of column names of variables
+to be passed to the mutatation function (instead of OHLC functions).}
+
+\item{select}{Optional parameter used with \code{_data} to select specific columns
+to send to the mutation function}
 
 \item{transform_fun}{Deprecated. Use \code{mutate_fun}.}
 }
@@ -111,7 +114,7 @@ The xy form gets us out of this problem. Example 3 shows the second benefit
 in action: Some functions are useful to non-OHLC data, and defining x = price
 allows us to mutate WTI crude prices from daily to monthly periodicity.
 
-\code{tq_mutate_data} and \code{tq_tranmute_data} are designed to enable working with
+\code{tq_mutate_data} and \code{tq_transmute_data} are designed to enable working with
 functions that require "data" as the input (i.e. \code{rollapply}). This allows
 working with the \code{FUN} argument and apply \code{by.column = FALSE}, which is
 specifically designed for handling complex functions that require multiple

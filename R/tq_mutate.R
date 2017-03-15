@@ -11,8 +11,10 @@
 #' the mutatation function. OHLCV is `quantmod` terminology for
 #' open, high, low, close, and volume. Options include c(Op, Hi, Lo, Cl, Vo, Ad,
 #' HLC, OHLC, OHLCV).
-#' @param x,y Column names of variables to be passed to the mutatation
-#' function (instead of OHLC functions).
+#' @param x,y Parameters used with `_xy` that consist of column names of variables
+#' to be passed to the mutatation function (instead of OHLC functions).
+#' @param select Optional parameter used with `_data` to select specific columns
+#' to send to the mutation function
 #' @param mutate_fun The mutation function from either the `xts`,
 #' `quantmod`, or `TTR` package. Execute `tq_mutate_fun_options()`
 #' to see the full list of options by package.
@@ -56,7 +58,7 @@
 #' in action: Some functions are useful to non-OHLC data, and defining x = price
 #' allows us to mutate WTI crude prices from daily to monthly periodicity.
 #'
-#' `tq_mutate_data` and `tq_tranmute_data` are designed to enable working with
+#' `tq_mutate_data` and `tq_transmute_data` are designed to enable working with
 #' functions that require "data" as the input (i.e. `rollapply`). This allows
 #' working with the `FUN` argument and apply `by.column = FALSE`, which is
 #' specifically designed for handling complex functions that require multiple
@@ -247,10 +249,11 @@ tq_mutate_xy_.data.frame <- function(data, x, y = NULL, mutate_fun, col_rename =
 
 #' @rdname tq_mutate
 #' @export
-tq_mutate_data <- function(data, mutate_fun, col_rename = NULL, ...) {
+tq_mutate_data <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
 
     # NSE
     tq_mutate_data_(data       = data,
+                    select     = lazyeval::expr_text(select),
                     mutate_fun = lazyeval::expr_text(mutate_fun),
                     col_rename = col_rename,
                     ...        = ...)
@@ -258,24 +261,25 @@ tq_mutate_data <- function(data, mutate_fun, col_rename = NULL, ...) {
 
 #' @rdname tq_mutate
 #' @export
-tq_mutate_data_ <- function(data, mutate_fun, col_rename = NULL, ...) {
+tq_mutate_data_ <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
     UseMethod("tq_mutate_data_", data)
 }
 
 # tq_mutate_data method dispatch --------------------------------------------------------------------------------
 
 #' @export
-tq_mutate_data_.default <- function(data, mutate_fun, col_rename = NULL, ...) {
+tq_mutate_data_.default <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
 
     # Error message
     stop("data must be a tibble or data.frame object")
 }
 
 #' @export
-tq_mutate_data_.tbl_df <- function(data, mutate_fun, col_rename = NULL, ...) {
+tq_mutate_data_.tbl_df <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
 
     # Get transformation
     ret <- tq_transmute_data_(data          = data,
+                              select        = select,
                               mutate_fun    = mutate_fun,
                               col_rename    = col_rename,
                               ...           = ...)
@@ -284,13 +288,14 @@ tq_mutate_data_.tbl_df <- function(data, mutate_fun, col_rename = NULL, ...) {
 }
 
 #' @export
-tq_mutate_data_.data.frame <- function(data, mutate_fun, col_rename = NULL, ...) {
+tq_mutate_data_.data.frame <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
 
     # Convert data.frame to tibble
     data <- as_tibble(data)
 
     # Get transformation
     ret <- tq_transmute_data_(data          = data,
+                              select        = select,
                               mutate_fun    = mutate_fun,
                               col_rename    = col_rename,
                               ...           = ...)

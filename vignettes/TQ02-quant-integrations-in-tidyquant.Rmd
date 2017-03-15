@@ -433,11 +433,13 @@ Before we analyze a rolling regression, it's helpful to view the overall trend i
 
 ```{r}
 # Get stock pairs
-stock_pairs <- c("MA", "V") %>%
+stock_prices <- c("MA", "V") %>%
     tq_get(get  = "stock.prices",
            from = "2015-01-01",
            to   = "2016-12-31") %>%
-    group_by(symbol) %>%
+    group_by(symbol) 
+
+stock_pairs <- stock_prices %>%
     tq_transmute(ohlc_fun   = Ad,
                  mutate_fun = periodReturn,
                  period     = "daily",
@@ -498,5 +500,22 @@ stock_pairs %>%
     geom_hline(yintercept = 0.8134, size = 1, color = palette_light()[[2]]) +
     labs(title = "MA ~ V: Visualizing Rolling Regression Coefficient", x = "") +
     theme_tq()
+```
+
+Stock returns during this time period.
+
+```{r}
+stock_prices %>%
+    tq_transmute(Ad, 
+                 periodReturn, 
+                 period = "daily", 
+                 type = "log", 
+                 col_rename = "returns") %>%
+    mutate(wealth.index = 100 * cumprod(1 + returns)) %>%
+    ggplot(aes(x = date, y = wealth.index, color = symbol)) +
+    geom_line(size = 1) +
+    labs(title = "MA and V: Stock Prices") +
+    theme_tq() + 
+    scale_color_tq()
 ```
 
