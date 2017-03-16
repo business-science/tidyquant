@@ -420,7 +420,7 @@ arrange_by_date <- function(tib) {
                 dplyr::arrange_(date_col)
         }
 
-        tib %>%
+        tib <- tib %>%
             tidyr::nest() %>%
             dplyr::mutate(nested.col =
                               purrr::map(data, arrange_date)
