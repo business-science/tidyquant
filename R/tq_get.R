@@ -176,7 +176,7 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
     }
 
     # Unnest if only 1 get option
-    if (length(get) == 1 && length(x) > 1 ) {
+    if (length(get) == 1 && (length(x) > 1 || is.data.frame(x))) {
 
         ret <- tryCatch({
             ret %>%
