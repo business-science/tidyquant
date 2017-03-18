@@ -67,7 +67,7 @@ Development Version with Latest Features:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("mdancho84/tidyquant", build_vignettes = TRUE)
+devtools::install_github("business-science/tidyquant")
 ```
 
 CRAN Approved Version:
