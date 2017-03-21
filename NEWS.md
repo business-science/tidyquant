@@ -8,7 +8,9 @@
         * `quandl_search` is a wrapper for `Quandl::Quandl.search()`.
     * Yahoo Japan Integration: `tq_get(get = "stock.prices.japan")` is a wrapper for `quantmod::getSymbols(src = "yahooj")` that enables getting stocks from Yahoo Finance Japan.
     
-* Fixes:
+* Improvements and Fixes:
+    * `.Deprecated` -> `.Defunct` for `tq_transform()` and `tq_transform_xy()`. Move the sign post functions to deprecated.R
+    * Remove the previously deprecated argument, `transform_fun` from `tq_transmute()`. Use `mutate_fun` instead.
     * Fix issue with `tq_mutate` returning rows incorrectly sorted
     * Fix issue with `tq_get` returning data frames as nested
 

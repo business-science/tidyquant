@@ -13,3 +13,24 @@
 #' }
 #'
 NULL
+
+# tq_transform and tq_transform_xy - ----------------------------------------------------------------
+# tq_transmute and tq_transmute_xy are now used.
+
+#' @rdname deprecated
+#' @export
+tq_transform <- function(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL, ...) {
+
+    # Throw error
+    .Defunct("tq_transmute",
+             msg = "`tq_transform` is deprecated, please use `tq_transmute` instead.")
+}
+
+#' @rdname deprecated
+#' @export
+tq_transform_xy <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
+
+    # Throw error
+    .Defunct("tq_transmute_xy",
+             msg = "`tq_transform_xy` is deprecated, please use `tq_transmute_xy` instead.")
+}

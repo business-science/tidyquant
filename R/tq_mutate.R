@@ -20,7 +20,6 @@
 #' to see the full list of options by package.
 #' @param col_rename A string or character vector containing names that can be used
 #' to quickly rename columns.
-#' @param transform_fun Deprecated. Use `mutate_fun`.
 #' @param ... Additional parameters passed to the appropriate mutatation
 #' function.
 #'

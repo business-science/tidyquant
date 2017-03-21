@@ -3,14 +3,7 @@
 
 #' @rdname tq_mutate
 #' @export
-tq_transmute <- function(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL, transform_fun, ...) {
-
-    # Deprecate transform_fun in favor of mutate_fun
-    if (!missing(transform_fun)) {
-        warning("argument transform_fun is deprecated; please use mutate_fun instead.",
-                call. = FALSE)
-        delayedAssign(x = "mutate_fun", value = transform_fun)
-    }
+tq_transmute <- function(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL, ...) {
 
     # NSE
     tq_transmute_(data          = data,
@@ -123,14 +116,7 @@ tq_transmute_.grouped_df <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_r
 
 #' @rdname tq_mutate
 #' @export
-tq_transmute_xy <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, transform_fun, ...) {
-
-    # Deprecate transform_fun in favor of mutate_fun
-    if (!missing(transform_fun)) {
-        warning("argument transform_fun is deprecated; please use mutate_fun instead.",
-                call. = FALSE)
-        delayedAssign(x = "mutate_fun", value = transform_fun)
-    }
+tq_transmute_xy <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
 
     # NSE
     tq_transmute_xy_(data          = data,
@@ -366,41 +352,6 @@ tq_transmute_data_.grouped_df <- function(data, select = NULL, mutate_fun, col_r
         dplyr::select(-data) %>%
         tidyr::unnest() %>%
         dplyr::group_by_(.dots = group_names)
-}
-
-# tq_transform and tq_transform_xy for backwards compatability -----------------------------------------------
-
-#' @rdname deprecated
-#' @export
-tq_transform <- function(data, ohlc_fun = OHLCV, transform_fun, col_rename = NULL, ...) {
-
-    # Pass to tq_transmute_ but warn the user
-    .Deprecated("tq_transmute",
-                msg = "`tq_transform` is deprecated and will be removed in 0.5.0 \nPlease use `tq_transmute` instead.")
-
-    # NSE
-    tq_transmute_(data          = data,
-                  ohlc_fun      = lazyeval::expr_text(ohlc_fun),
-                  mutate_fun    = lazyeval::expr_text(transform_fun),
-                  col_rename    = col_rename,
-                  ...           = ...)
-}
-
-#' @rdname deprecated
-#' @export
-tq_transform_xy <- function(data, x, y = NULL, transform_fun, col_rename = NULL, ...) {
-
-    # Pass to tq_transmute_xy but warn the user
-    .Deprecated("tq_transmute_xy",
-                msg = "`tq_transform_xy` is deprecated and will be removed in 0.5.0 \nPlease use `tq_transmute_xy` instead.")
-
-    # NSE
-    tq_transmute_xy_(data          = data,
-                     x             = lazyeval::expr_text(x),
-                     y             = lazyeval::expr_text(y),
-                     mutate_fun    = lazyeval::expr_text(transform_fun),
-                     col_rename    = col_rename,
-                     ...           = ...)
 }
 
 # Function options -------------------------------------------------------------------------------------------

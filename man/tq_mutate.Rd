@@ -32,13 +32,11 @@ tq_mutate_data_(data, select = NULL, mutate_fun, col_rename = NULL, ...)
 
 tq_mutate_fun_options()
 
-tq_transmute(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL,
-  transform_fun, ...)
+tq_transmute(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL, ...)
 
 tq_transmute_(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...)
 
-tq_transmute_xy(data, x, y = NULL, mutate_fun, col_rename = NULL,
-  transform_fun, ...)
+tq_transmute_xy(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
 
 tq_transmute_xy_(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
 
@@ -71,8 +69,6 @@ to be passed to the mutatation function (instead of OHLC functions).}
 
 \item{select}{Optional parameter used with \code{_data} to select specific columns
 to send to the mutation function}
-
-\item{transform_fun}{Deprecated. Use \code{mutate_fun}.}
 }
 \value{
 Returns mutated data in the form of a \code{tibble} object.
