@@ -13,10 +13,7 @@ tq_transform_xy(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
 \arguments{
 \item{data}{A \code{tibble} (tidy data frame) of data typically from \code{\link[=tq_get]{tq_get()}}.}
 
-\item{ohlc_fun}{The \code{quantmod} function that identifies columns to pass to
-the mutatation function. OHLCV is \code{quantmod} terminology for
-open, high, low, close, and volume. Options include c(Op, Hi, Lo, Cl, Vo, Ad,
-HLC, OHLC, OHLCV).}
+\item{ohlc_fun}{Deprecated. Use \code{select}.}
 
 \item{mutate_fun}{The mutation function from either the \code{xts},
 \code{quantmod}, or \code{TTR} package. Execute \code{tq_mutate_fun_options()}

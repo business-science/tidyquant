@@ -78,7 +78,7 @@ data(FANG)
 # Get returns for individual stock components
 monthly_returns_stocks <- FANG \%>\%
     group_by(symbol) \%>\%
-    tq_transmute(Ad, periodReturn, period = "monthly")
+    tq_transmute(adjusted, periodReturn, period = "monthly")
 
 ##### Portfolio Aggregation Methods #####
 

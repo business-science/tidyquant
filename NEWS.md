@@ -9,7 +9,9 @@
     * Yahoo Japan Integration: `tq_get(get = "stock.prices.japan")` is a wrapper for `quantmod::getSymbols(src = "yahooj")` that enables getting stocks from Yahoo Finance Japan.
     
 * Improvements and Fixes:
-    * `.Deprecated` -> `.Defunct` for `tq_transform()` and `tq_transform_xy()`. Move the sign post functions to deprecated.R
+    * `tq_mutate()` and `tq_transmute()` now accept non-OHLC data through the `select` argument. They also now work with `rollapply`.
+    * Deprecated the `ohlc_fun` argument to instead use `select` in `tq_mutate()` and `tq_transmute`
+    * `.Deprecated` -> `.Defunct` for `tq_transform()` and `tq_transform_xy()`. Use `tq_transmute()` and `tq_transmute_xy()`. Move the sign post functions to deprecated.R
     * Remove the previously deprecated argument, `transform_fun` from `tq_transmute()`. Use `mutate_fun` instead.
     * Fix issue with `tq_mutate` returning rows incorrectly sorted
     * Fix issue with `tq_get` returning data frames as nested

@@ -63,14 +63,14 @@
 #' # Get returns for individual stock components grouped by symbol
 #' Ra <- FANG %>%
 #'     group_by(symbol) %>%
-#'     tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "Ra")
+#'     tq_transmute(adjusted, periodReturn, period = "monthly", col_rename = "Ra")
 #'
 #' # Get returns for SP500 as baseline
 #' Rb <- "^GSPC" %>%
 #'     tq_get(get  = "stock.prices",
 #'            from = "2010-01-01",
 #'            to   = "2015-12-31") %>%
-#'     tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "Rb")
+#'     tq_transmute(adjusted, periodReturn, period = "monthly", col_rename = "Rb")
 #'
 #' # Merge stock returns with baseline
 #' RaRb <- left_join(Ra, Rb, by = c("date" = "date"))

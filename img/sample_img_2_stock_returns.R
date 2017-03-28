@@ -8,8 +8,8 @@ FANG <- c("FB", "AMZN", "NFLX", "GOOG") %>%
 # tq_transform can be passed the quantmod::periodReturn function to get returns
 FANG_returns <- FANG %>%
     group_by(symbol) %>%
-    tq_transmute(ohlc_fun = Ad,
-                 transform_fun = periodReturn,
+    tq_transmute(select = adjusted,
+                 mutate_fun = periodReturn,
                  period = "monthly",
                  col_rename = "returns")
 
