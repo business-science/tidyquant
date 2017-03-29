@@ -6,18 +6,18 @@ AAPL <- tq_get("AAPL", get = "stock.prices", from = "2010-01-01", to = "2015-01-
 
 # Test 1: tq_mutate piping test
 test1 <- AAPL %>%
-    tq_mutate(Cl, MACD) %>%
-    tq_mutate(HLC, BBands) %>%
-    tq_mutate(OHLC, OpCl)
+    tq_mutate(close, MACD) %>%
+    tq_mutate(high:close, BBands) %>%
+    tq_mutate(open:close, OpCl)
 
 # Test 1.1: tq_mutate piping test; test renaming of column names on mutate
 test1.1 <- AAPL %>%
-    tq_mutate(Cl, rollapply, width = 7, FUN = mean) %>%
-    tq_mutate(Op, SMA, n = 3) %>%
-    tq_mutate(Cl, rollapply, width = 9, FUN = mean) %>%
-    tq_mutate(Op, SMA, n = 5) %>%
-    tq_mutate(HLC, BBands, n = 20) %>%
-    tq_mutate(HLC, BBands, n = 50)
+    tq_mutate(close, rollapply, width = 7, FUN = mean) %>%
+    tq_mutate(open, SMA, n = 3) %>%
+    tq_mutate(close, rollapply, width = 9, FUN = mean) %>%
+    tq_mutate(open, SMA, n = 5) %>%
+    tq_mutate(high:close, BBands, n = 20) %>%
+    tq_mutate(high:close, BBands, n = 50)
 
 test1.1_names <- c("date", "open", "high", "low", "close", "volume", "adjusted",
                    "rollapply", "SMA", "rollapply.1", "SMA.1", "dn", "mavg",
@@ -35,7 +35,7 @@ grouped_df <- tibble(symbol = c("FB", "AMZN")) %>%
 
 test1.2a  <- mutate(grouped_df, V1 = runSD(adjusted))
 
-test1.2b <- tq_mutate(grouped_df, Ad, runSD)
+test1.2b <- tq_mutate(grouped_df, adjusted, runSD)
 
 # Test 2: tq_mutate_xy piping test
 test2 <- AAPL %>%
@@ -68,11 +68,11 @@ my_lm_fun <- function(data) {
     coef(lm(close ~ open, data = as_data_frame(data)))
 }
 test5 <- test5 %>%
-    tq_mutate_data(mutate_fun = rollapply,
-                      width      = 90,
-                      FUN        = my_lm_fun,
-                      by.column  = FALSE,
-                      col_rename = c("coef.0", "coef.1"))
+    tq_mutate(mutate_fun = rollapply,
+              width      = 90,
+              FUN        = my_lm_fun,
+              by.column  = FALSE,
+              col_rename = c("coef.0", "coef.1"))
 
 #### Tests ----
 
@@ -125,7 +125,7 @@ test_that("Test 5 returns tibble with correct rows and columns.", {
 test_that("Test error on incompatible structures.", {
     expect_error(
         AAPL %>%
-            tq_mutate(ohlc_fun = OHLCV, mutate_fun = to.period, period = "months"),
+            tq_mutate(select = NULL, mutate_fun = to.period, period = "months"),
         "Could not join. Incompatible structures."
     )
     expect_error(
@@ -142,7 +142,7 @@ test_that("Test error on invalid data inputs.", {
     # Non-data.frame objects
     expect_error(
         a = seq(1:100) %>%
-            tq_mutate(ohlc_fun = OHLCV, mutate_fun = to.monthly)
+            tq_mutate(select = NULL, mutate_fun = to.monthly)
     )
     expect_error(
         a = seq(1:100) %>%
@@ -152,7 +152,7 @@ test_that("Test error on invalid data inputs.", {
     # No date columns
     expect_error(
         tibble(a = seq(1:100)) %>%
-            tq_mutate(ohlc_fun = OHLCV, mutate_fun = to.monthly),
+            tq_mutate(select = NULL, mutate_fun = to.monthly),
         "No date or POSIXct column found in `data`."
     )
     expect_error(
@@ -162,13 +162,13 @@ test_that("Test error on invalid data inputs.", {
     )
 })
 
-# Invalid ohlc_fun, x and y inputs
-test_that("Test error on invalid ohlc_fun, x and y inputs.", {
+# Invalid select, x and y inputs
+test_that("Test error on invalid select, x and y inputs.", {
 
     expect_error(
-        {ohlc_fun <- "err"
+        {select <- "err"
         AAPL %>%
-            tq_mutate_(ohlc_fun = ohlc_fun, mutate_fun = "to.monthly")}
+            tq_mutate_(select = select, mutate_fun = "to.monthly")}
     )
     expect_error(
         {x <-  "err"
@@ -186,12 +186,12 @@ test_that("Test error on invalid ohlc_fun, x and y inputs.", {
 })
 
 # Invalid mutate_fun, x and y inputs
-test_that("Test error on invalid ohlc_fun, x and y inputs.", {
+test_that("Test error on invalid mutate_fun, x and y inputs.", {
 
     expect_error(
         {mutate_fun <- "err"
         AAPL %>%
-            tq_mutate_(ohlc_fun = "close", mutate_fun = mutate_fun)},
+            tq_mutate_(select = "close", mutate_fun = mutate_fun)},
         paste0("fun = err not a valid option.")
     )
 

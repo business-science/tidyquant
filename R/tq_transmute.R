@@ -3,18 +3,32 @@
 
 #' @rdname tq_mutate
 #' @export
-tq_transmute <- function(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL, transform_fun, ...) {
+tq_transmute <- function(data, select = NULL, mutate_fun, col_rename = NULL, ohlc_fun = NULL, ...) {
 
-    # Deprecate transform_fun in favor of mutate_fun
-    if (!missing(transform_fun)) {
-        warning("argument transform_fun is deprecated; please use mutate_fun instead.",
+    # Deprecate ohlc_fun in favor of select
+    if (!missing(ohlc_fun)) {
+        warning("Argument `ohlc_fun` is deprecated; please use `select` instead.",
                 call. = FALSE)
-        delayedAssign(x = "mutate_fun", value = transform_fun)
+
+        # As text
+        ohlc_string <- lazyeval::expr_text(ohlc_fun)
+
+        # Find select equivalent or die trying
+        select <- map_ohlc_to_select(ohlc_string)
+
+        # NSE and return
+        return(
+            tq_transmute_(data      = data,
+                      select        = select,
+                      mutate_fun    = lazyeval::expr_text(mutate_fun),
+                      col_rename    = col_rename,
+                      ...           = ...)
+            )
     }
 
     # NSE
     tq_transmute_(data          = data,
-                  ohlc_fun      = lazyeval::expr_text(ohlc_fun),
+                  select        = lazyeval::expr_text(select),
                   mutate_fun    = lazyeval::expr_text(mutate_fun),
                   col_rename    = col_rename,
                   ...           = ...)
@@ -22,27 +36,24 @@ tq_transmute <- function(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL, 
 
 #' @rdname tq_mutate
 #' @export
-tq_transmute_ <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...) {
+tq_transmute_ <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
     UseMethod("tq_transmute_", data)
 }
 
 # tq_transmute method dispatch --------------------------------------------------------------------------------
 
 #' @export
-tq_transmute_.default <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...) {
+tq_transmute_.default <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
 
     # Error message
     stop("data must be a tibble or data.frame object")
 }
 
 #' @export
-tq_transmute_.tbl_df <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...) {
+tq_transmute_.tbl_df <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
 
     # Check mutate_fun in xts, quantmod or TTR
     check_transmute_fun_options(mutate_fun)
-
-    # Check for x: either x, HLC, or price arguments
-    check_ohlc_fun_options(ohlc_fun)
 
     # Find date or date-time col
     date_col_name <- get_col_name_date_or_date_time(data)
@@ -50,15 +61,20 @@ tq_transmute_.tbl_df <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_renam
     # Get timezone
     time_zone <- get_time_zone(data, date_col_name)
 
-    # Drop any non-numeric columns except for date
+    # Get date column
     date_col <- dplyr::select_(data, date_col_name)
+
+    # Implement select
+    if (!(select == "NULL" || is.null(select))) data <- dplyr::select_(data, select)
+
+    # Only grab numeric columns
     numeric_cols <- data %>%
         dplyr::select_if(is.numeric)
+
+    # Bind date with numeric columns that are within select
     data <- dplyr::bind_cols(date_col, numeric_cols)
 
     # Convert inputs to functions
-    ohlc_fun <- paste0("quantmod::", ohlc_fun)
-    fun_x <- eval(parse(text = ohlc_fun))
     fun_transmute <- eval(parse(text = mutate_fun))
 
     # Patch for to.period functions
@@ -69,13 +85,11 @@ tq_transmute_.tbl_df <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_renam
         # Add arg: OHLC = FALSE
         ret <- data %>%
             as_xts_(date_col = date_col_name) %>%
-            fun_x() %>%
             fun_transmute(OHLC = FALSE, ...)
 
     } else {
         ret <- data %>%
             as_xts_(date_col = date_col_name) %>%
-            fun_x() %>%
             fun_transmute(...)
     }
 
@@ -87,21 +101,21 @@ tq_transmute_.tbl_df <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_renam
 }
 
 #' @export
-tq_transmute_.data.frame <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...) {
+tq_transmute_.data.frame <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
 
     # Convert data.frame to tibble
     data <- as_tibble(data)
 
     # Call tq_transmute_ for a tibble
     tq_transmute_(data          = data,
-                  ohlc_fun      = ohlc_fun,
+                  select        = select,
                   mutate_fun    = mutate_fun,
                   col_rename    = col_rename,
                   ...           = ...)
 }
 
 #' @export
-tq_transmute_.grouped_df <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_rename = NULL, ...) {
+tq_transmute_.grouped_df <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
 
     group_names <- dplyr::groups(data)
 
@@ -109,7 +123,7 @@ tq_transmute_.grouped_df <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_r
         tidyr::nest() %>%
         dplyr::mutate(nested.col = data %>%
                           purrr::map(~ tq_transmute_(data          = .x,
-                                                     ohlc_fun      = ohlc_fun,
+                                                     select        = select,
                                                      mutate_fun    = mutate_fun,
                                                      col_rename    = col_rename,
                                                      ...           = ...))
@@ -123,14 +137,7 @@ tq_transmute_.grouped_df <- function(data, ohlc_fun = "OHLCV", mutate_fun, col_r
 
 #' @rdname tq_mutate
 #' @export
-tq_transmute_xy <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, transform_fun, ...) {
-
-    # Deprecate transform_fun in favor of mutate_fun
-    if (!missing(transform_fun)) {
-        warning("argument transform_fun is deprecated; please use mutate_fun instead.",
-                call. = FALSE)
-        delayedAssign(x = "mutate_fun", value = transform_fun)
-    }
+tq_transmute_xy <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
 
     # NSE
     tq_transmute_xy_(data          = data,
@@ -256,153 +263,6 @@ tq_transmute_xy_.grouped_df <- function(data, x, y = NULL, mutate_fun, col_renam
         dplyr::group_by_(.dots = group_names)
 }
 
-
-# tq_transmute_data ------------------------------------------------------------------------------------------------
-
-#' @rdname tq_mutate
-#' @export
-tq_transmute_data <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
-
-    # NSE
-    tq_transmute_data_(data          = data,
-                       select        = lazyeval::expr_text(select),
-                       mutate_fun    = lazyeval::expr_text(mutate_fun),
-                       col_rename    = col_rename,
-                       ...           = ...)
-}
-
-#' @rdname tq_mutate
-#' @export
-tq_transmute_data_ <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
-    UseMethod("tq_transmute_data_", data)
-}
-
-# tq_transmute_data method dispatch --------------------------------------------------------------------------------
-
-#' @export
-tq_transmute_data_.default <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
-
-    # Error message
-    stop("data must be a tibble or data.frame object")
-}
-
-#' @export
-tq_transmute_data_.tbl_df <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
-
-    # Check mutate_fun in xts, quantmod or TTR
-    check_transmute_fun_options(mutate_fun)
-
-    # Find date or date-time col
-    date_col_name <- get_col_name_date_or_date_time(data)
-
-    # Get timezone
-    time_zone <- get_time_zone(data, date_col_name)
-
-    # Drop any non-numeric columns except for date
-    # Grab date column
-    date_col <- dplyr::select_(data, date_col_name)
-    # Implement select
-    if (!(select == "NULL" || is.null(select))) data <- dplyr::select_(data, select)
-    # Only grab numeric columns
-    numeric_cols <- data %>%
-        dplyr::select_if(is.numeric)
-    # Bind date with numeric columns that are within select
-    data <- dplyr::bind_cols(date_col, numeric_cols)
-
-    # Convert inputs to functions
-    fun_transmute <- eval(parse(text = mutate_fun))
-
-    # Patch for to.period functions
-    is_period_fun <- detect_period_fun(mutate_fun)
-
-    # Apply functions
-    if (is_period_fun) {
-        # Add arg: OHLC = FALSE
-        ret <- data %>%
-            as_xts_(date_col = date_col_name) %>%
-            fun_transmute(OHLC = FALSE, ...)
-
-    } else {
-        ret <- data %>%
-            as_xts_(date_col = date_col_name) %>%
-            fun_transmute(...)
-    }
-
-    # Coerce to tibble and convert date / datetime
-    if (xts::is.xts(ret)) ret <- coerce_to_tibble(ret, date_col_name,
-                                                  time_zone, col_rename)
-
-    ret
-}
-
-#' @export
-tq_transmute_data_.data.frame <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
-
-    # Convert data.frame to tibble
-    data <- as_tibble(data)
-
-    # Call tq_transmute_xy_ for a tibble
-    tq_transmute_data_(data          = data,
-                       select        = select,
-                       mutate_fun    = mutate_fun,
-                       col_rename    = col_rename,
-                       ...           = ...)
-}
-
-#' @export
-tq_transmute_data_.grouped_df <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
-
-    group_names <- dplyr::groups(data)
-
-    data %>%
-        tidyr::nest() %>%
-        dplyr::mutate(nested.col = data %>%
-                          purrr::map(~ tq_transmute_data_(data          = .x,
-                                                          select        = select,
-                                                          mutate_fun    = mutate_fun,
-                                                          col_rename    = col_rename,
-                                                          ...           = ...))
-        ) %>%
-        dplyr::select(-data) %>%
-        tidyr::unnest() %>%
-        dplyr::group_by_(.dots = group_names)
-}
-
-# tq_transform and tq_transform_xy for backwards compatability -----------------------------------------------
-
-#' @rdname deprecated
-#' @export
-tq_transform <- function(data, ohlc_fun = OHLCV, transform_fun, col_rename = NULL, ...) {
-
-    # Pass to tq_transmute_ but warn the user
-    .Deprecated("tq_transmute",
-                msg = "`tq_transform` is deprecated and will be removed in 0.5.0 \nPlease use `tq_transmute` instead.")
-
-    # NSE
-    tq_transmute_(data          = data,
-                  ohlc_fun      = lazyeval::expr_text(ohlc_fun),
-                  mutate_fun    = lazyeval::expr_text(transform_fun),
-                  col_rename    = col_rename,
-                  ...           = ...)
-}
-
-#' @rdname deprecated
-#' @export
-tq_transform_xy <- function(data, x, y = NULL, transform_fun, col_rename = NULL, ...) {
-
-    # Pass to tq_transmute_xy but warn the user
-    .Deprecated("tq_transmute_xy",
-                msg = "`tq_transform_xy` is deprecated and will be removed in 0.5.0 \nPlease use `tq_transmute_xy` instead.")
-
-    # NSE
-    tq_transmute_xy_(data          = data,
-                     x             = lazyeval::expr_text(x),
-                     y             = lazyeval::expr_text(y),
-                     mutate_fun    = lazyeval::expr_text(transform_fun),
-                     col_rename    = col_rename,
-                     ...           = ...)
-}
-
 # Function options -------------------------------------------------------------------------------------------
 
 #' @rdname tq_mutate
@@ -443,6 +303,7 @@ check_transmute_fun_options <- function(fun) {
     }
 }
 
+# Can be removed in version 0.6 with removal of ohlc_fun argument
 check_ohlc_fun_options <- function(fun) {
     x_options <- c("Op", "Hi", "Lo", "Cl", "Vo", "Ad",
                    "HLC", "OHLC", "OHLCV")
@@ -494,3 +355,26 @@ detect_period_fun <- function(fun) {
     is_period_fun
 }
 
+# For use with ohlc_fun deprecation. Can remove in version 0.6.
+map_ohlc_to_select <- function(x) {
+
+    # quantmod extractors
+    ohlc_fun_options <- list(Op    = "open",          OpLo  = "c(open, low)",
+                             OpHi  = "c(open, high)", OpCl  = "c(open, close)",
+                             Hi    = "high",          HiCl  = "c(high, close)",
+                             Lo    = "low",           LoCl  = "c(low, close)",
+                             LoHi  = "c(low, high)",  Cl    = "close",
+                             Vo    = "volume",        Ad    = "adjusted",
+                             OHLC  = "open:close",    OHLCV = "open:volume")
+
+    # Find position
+    location <- which(names(ohlc_fun_options) == x)
+
+    # Stop if invalid quantmod extractor
+    if(length(location) == 0) stop("OHLCV extractor is not valid. Cannot coerce to `select` equivalent.", call. = FALSE)
+
+    # Select equivalent
+    select_string <- ohlc_fun_options[location][[1]]
+
+    select_string
+}

@@ -6,7 +6,7 @@ AAPL <- tq_get("AAPL", get = "stock.prices", from = "2010-01-01", to = "2015-01-
 
 # Test 1: tq_transmute to.period
 test1 <- AAPL %>%
-    tq_transmute(ohlc_fun = Cl, mutate_fun = to.period, period = "months")
+    tq_transmute(select = close, mutate_fun = to.period, period = "months")
 
 # Test 1.2: Grouped_df test
 grouped_df <- tibble(symbol = c("FB", "AMZN")) %>%
@@ -21,7 +21,7 @@ grouped_df <- tibble(symbol = c("FB", "AMZN")) %>%
 test1.2a  <- mutate(grouped_df, V1 = runSD(adjusted)) %>%
     select(-(open:adjusted))
 
-test1.2b <- tq_transmute(grouped_df, Ad, runSD)
+test1.2b <- tq_transmute(grouped_df, adjusted, runSD)
 
 
 # Test 2: tq_transmute_xy test
@@ -42,23 +42,23 @@ test3 <- tibble(time_index, value) %>%
 
 # Test 4: transmute to.monthly which returns character dates
 test4 <- AAPL %>%
-    tq_transmute(ohlc_fun = OHLCV, mutate_fun = to.monthly)
+    tq_transmute(select = NULL, mutate_fun = to.monthly)
 
 # Test 5: Check tq_transmute_data
 fb_returns <- tq_get("FB", get  = "stock.prices", from = "2016-01-01", to   = "2016-12-31") %>%
-    tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "fb.returns")
+    tq_transmute(adjusted, periodReturn, period = "monthly", col_rename = "fb.returns")
 xlk_returns <- tq_get("XLK", from = "2016-01-01", to = "2016-12-31") %>%
-    tq_transmute(Ad, periodReturn, period = "monthly", col_rename = "xlk.returns")
+    tq_transmute(adjusted, periodReturn, period = "monthly", col_rename = "xlk.returns")
 test5 <- left_join(fb_returns, xlk_returns, by = "date")
 regr_fun <- function(data) {
     coef(lm(fb.returns ~ xlk.returns, data = as_data_frame(data)))
 }
 test5 <- test5 %>%
-    tq_transmute_data(mutate_fun = rollapply,
-                   width      = 6,
-                   FUN        = regr_fun,
-                   by.column  = FALSE,
-                   col_rename = c("coef.0", "coef.1"))
+    tq_transmute(mutate_fun = rollapply,
+                 width      = 6,
+                 FUN        = regr_fun,
+                 by.column  = FALSE,
+                 col_rename = c("coef.0", "coef.1"))
 
 #### Tests ----
 
@@ -117,7 +117,7 @@ test_that("Test error on invalid data inputs.", {
     # Non-data.frame objects
     expect_error(
         a = seq(1:100) %>%
-            tq_transmute(ohlc_fun = OHLCV, mutate_fun = to.monthly)
+            tq_transmute(select = NULL, mutate_fun = to.monthly)
     )
     expect_error(
         a = seq(1:100) %>%
@@ -127,7 +127,7 @@ test_that("Test error on invalid data inputs.", {
     # No date columns
     expect_error(
         tibble(a = seq(1:100)) %>%
-            tq_mutate(ohlc_fun = OHLCV, mutate_fun = to.monthly),
+            tq_mutate(select = NULL, mutate_fun = to.monthly),
         "No date or POSIXct column found in `data`."
     )
     expect_error(
@@ -137,13 +137,13 @@ test_that("Test error on invalid data inputs.", {
     )
 })
 
-# Invalid ohlc_fun, x and y inputs
-test_that("Test error on invalid ohlc_fun, x and y inputs.", {
+# Invalid select, x and y inputs
+test_that("Test error on invalid select, x and y inputs.", {
 
     expect_error(
-        {ohlc_fun <- "err"
+        {select <- "err"
         AAPL %>%
-            tq_mutate_(ohlc_fun = ohlc_fun, mutate_fun = "to.monthly")}
+            tq_mutate_(select = select, mutate_fun = "to.monthly")}
     )
     expect_error(
         {x <-  "err"
@@ -161,12 +161,12 @@ test_that("Test error on invalid ohlc_fun, x and y inputs.", {
 })
 
 # Invalid mutate_fun, x and y inputs
-test_that("Test error on invalid ohlc_fun, x and y inputs.", {
+test_that("Test error on invalid mutate_fun, x and y inputs.", {
 
     expect_error(
         {mutate_fun <- "err"
         AAPL %>%
-            tq_mutate_(ohlc_fun = "close", mutate_fun = mutate_fun)},
+            tq_mutate_(select = "close", mutate_fun = mutate_fun)},
         paste0("fun = err not a valid option.")
     )
 

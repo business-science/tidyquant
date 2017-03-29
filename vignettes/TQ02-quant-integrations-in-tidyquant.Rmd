@@ -74,12 +74,12 @@ The `xts` functions that are compatible are listed above. Generally speaking, th
 * Period Apply Functions:
     * Apply a function to a time segment (e.g. `max`, `min`, `mean`, etc).
     * Form: `apply.daily(x, FUN, ...)`.
-    * Options include apply.daily, weekly, monthly, quarterly, yearly.
+    * Options include `apply.daily`, `weekly`, `monthly`, `quarterly`, `yearly`.
 
 * To-Period Functions:
     * Convert a time series to time series of lower periodicity (e.g. convert daily to monthly periodicity).
     * Form: `to.period(x, period = 'months', k = 1, indexAt, name = NULL, OHLC = TRUE, ...)`.
-    * Options include to.minutes, hourly, daily, weekly, monthly, quarterly, yearly.
+    * Options include `to.minutes`, `hourly`, `daily`, `weekly`, `monthly`, `quarterly`, `yearly`.
     * __Note 1 (Important)__: The return structure is different for `to.period` and the `to.monthly` (`to.weekly`, `to.quarterly`, etc) forms. `to.period` returns a date, while `to.months` returns a character MON YYYY. Best to use `to.period` if you want to work with time-series via `lubridate`.  
      
 ## quantmod Functionality
@@ -97,7 +97,6 @@ The `quantmod` functions that are compatible are listed above. Generally speakin
         * Form: `OpCl(OHLC)`
     * Lag: `Lag(x, k = 1)` / Next: `Next(x, k = 1)` (Can also use `dplyr::lag` and `dplyr::lead`)
     
-
 * Period Return Functions: 
     * Get the arithmetic or logarithmic returns for various periodicity, which include daily, weekly, monthly, quarterly, and yearly.
     * Form: `periodReturn(x, period = 'monthly', subset = NULL, type = 'arithmetic', leading = TRUE, ...)`
@@ -170,12 +169,12 @@ The `quantmod::periodReturn()` function generates returns by periodicity. We'll 
 
 ### Example 1A: Getting and Charting Annual Returns
 
-We want to use the adjusted closing prices column (adjusted for stock splits, which can make it appear that a stock is performing poorly if a split is included). We set `ohlc_fun = Ad`. We research the `periodReturn` function, and we found that it accepts `type = "arithmetic"` and `period = "yearly"`, which returns the annual returns. 
+We want to use the adjusted closing prices column (adjusted for stock splits, which can make it appear that a stock is performing poorly if a split is included). We set `select = adjusted`. We research the `periodReturn` function, and we found that it accepts `type = "arithmetic"` and `period = "yearly"`, which returns the annual returns. 
 
 ```{r}
 FANG_annual_returns <- FANG %>%
     group_by(symbol) %>%
-    tq_transmute(ohlc_fun   = Ad, 
+    tq_transmute(select     = adjusted, 
                  mutate_fun = periodReturn, 
                  period     = "yearly", 
                  type       = "arithmetic")
@@ -202,13 +201,13 @@ FANG_annual_returns %>%
 
 ### Example 1B: Getting Daily Log Returns
 
-Daily log returns follows a similar approach. Normally I go with a transmute function, `tq_transmute`, because the `periodReturn` function accepts different periodicity options, and anything other than daily will blow up a mutation. But, in our situation the period returns periodicity is the same as the stock prices periodicity (both daily), so we can use either. We want to use the adjusted closing prices column (adjusted for stock splits, which can make it appear that a stock is performing poorly if a split is included), so we set `ohlc_fun = Ad`. We researched the `periodReturn` function, and we found that it accepts `type = "log"` and `period = "daily"`, which returns the daily log returns. 
+Daily log returns follows a similar approach. Normally I go with a transmute function, `tq_transmute`, because the `periodReturn` function accepts different periodicity options, and anything other than daily will blow up a mutation. But, in our situation the period returns periodicity is the same as the stock prices periodicity (both daily), so we can use either. We want to use the adjusted closing prices column (adjusted for stock splits, which can make it appear that a stock is performing poorly if a split is included), so we set `select = adjusted`. We researched the `periodReturn` function, and we found that it accepts `type = "log"` and `period = "daily"`, which returns the daily log returns. 
 
 
 ```{r}
 FANG_daily_log_returns <- FANG %>%
     group_by(symbol) %>%
-    tq_transmute(ohlc_fun   = Ad, 
+    tq_transmute(select     = adjusted, 
                  mutate_fun = periodReturn, 
                  period     = "daily", 
                  type       = "log",
@@ -229,12 +228,14 @@ FANG_daily_log_returns %>%
 
 ## Example 2: Use xts to.period to Change the Periodicity from Daily to Monthly
 
-The `xts::to.period` function is used for periodicity aggregation (converting from a lower level periodicity to a higher level such as minutes to hours or months to years). Because we are seeking a return structure that is on a different time scale than the input (daily versus weekly), we need to use a transmute function. We select `tq_transmute` and pass the open, high, low, close and volume using OHLC format via `ohlc_fun = OHLCV`. Looking at the documentation for `to.period`, we see that it accepts a `period` argument that we can set to `"weeks"`. The result is the OHLCV data returned with the dates changed to one day per week.
+The `xts::to.period` function is used for periodicity aggregation (converting from a lower level periodicity to a higher level such as minutes to hours or months to years). Because we are seeking a return structure that is on a different time scale than the input (daily versus weekly), we need to use a transmute function. We select `tq_transmute()` and pass the open, high, low, close and volume columns via `select = open:volume`. Looking at the documentation for `to.period`, we see that it accepts a `period` argument that we can set to `"weeks"`. The result is the OHLCV data returned with the dates changed to one day per week.
 
 ```{r}
 FANG %>%
     group_by(symbol) %>%
-    tq_transmute(ohlc_fun = OHLCV, mutate_fun = to.period, period = "months")
+    tq_transmute(select     = open:volume, 
+                 mutate_fun = to.period, 
+                 period     = "months")
 ```
 
 A common usage case is to reduce the number of points to smooth time series plots. Let's check out difference between daily and monthly plots. 
@@ -261,7 +262,9 @@ FANG_daily %>%
 ```{r}
 FANG_monthly <- FANG %>%
     group_by(symbol) %>%
-    tq_transmute(ohlc_fun = Ad, mutate_fun = to.period, period = "months")
+    tq_transmute(select     = adjusted, 
+                 mutate_fun = to.period, 
+                 period     = "months")
 
 FANG_monthly %>%
     ggplot(aes(x = date, y = adjusted, color = symbol)) +
@@ -275,7 +278,6 @@ FANG_monthly %>%
 ```
 
 
-
 ## Example 3: Use TTR runCor to Visualize Rolling Correlations of Returns
 
 Return correlations are a common way to analyze how closely an asset or portfolio mimics a baseline index or fund. We will need a set of returns for both the stocks and baseline. The stock will be the `FANG` data set and the baseline will be the Spdr XLK technology sector. We have the prices for the "FANG" stocks, so we use `tq_get` to retrieve the "XLK" prices. The returns can be calculated from the "adjusted" prices using the process in Example 1.
@@ -284,18 +286,18 @@ Return correlations are a common way to analyze how closely an asset or portfoli
 # Asset Returns
 FANG_returns_monthly <- FANG %>%
     group_by(symbol) %>%
-    tq_transmute(ohlc_fun   = Ad, 
+    tq_transmute(select     = adjusted, 
                  mutate_fun = periodReturn,
-                 period = "monthly")
+                 period     = "monthly")
 
 # Baseline Returns
 baseline_returns_monthly <- "XLK" %>%
     tq_get(get  = "stock.prices",
            from = "2013-01-01", 
            to   = "2016-12-31") %>%
-    tq_transmute(ohlc_fun   = Ad, 
+    tq_transmute(select     = adjusted, 
                  mutate_fun = periodReturn,
-                 period = "monthly")
+                 period     = "monthly")
 ```
 
 Next, join the asset returns with the baseline returns by date.
@@ -311,10 +313,10 @@ The `TTR::runCor` function can be used to evaluate rolling correlations using th
 
 ```{r}
 FANG_rolling_corr <- returns_joined %>%
-    tq_transmute_xy(x = monthly.returns.x, 
-                    y = monthly.returns.y,
+    tq_transmute_xy(x          = monthly.returns.x, 
+                    y          = monthly.returns.y,
                     mutate_fun = runCor,
-                    n = 6,
+                    n          = 6,
                     col_rename = "rolling.corr.6")
 ```
 
@@ -333,15 +335,14 @@ FANG_rolling_corr %>%
 ```
 
 
-
 ## Example 4: Use TTR MACD to Visualize Moving Average Convergence Divergence
 
-In reviewing the available options in the `TTR` package, we see that `MACD` will get us the Moving Average Convergence Divergence (MACD). In researching the documentation, the return is in the same periodicity as the input and the functions work with OHLC functions, so we can use `tq_mutate()`. MACD requires a price, so we select close using `Cl`. 
+In reviewing the available options in the `TTR` package, we see that `MACD` will get us the Moving Average Convergence Divergence (MACD). In researching the documentation, the return is in the same periodicity as the input and the functions work with OHLC functions, so we can use `tq_mutate()`. MACD requires a price, so we select `close`. 
 
 ```{r}
 FANG_macd <- FANG %>%
     group_by(symbol) %>%
-    tq_mutate(ohlc_fun   = Cl, 
+    tq_mutate(select     = close, 
               mutate_fun = MACD, 
               nFast      = 12, 
               nSlow      = 26, 
@@ -372,12 +373,12 @@ FANG_macd %>%
 
 ## Example 5: Use xts apply.quarterly to Get the Max and Min Price for Each Quarter
 
-The `xts::apply.quarterly()` function that is part of the period apply group can be used to apply functions by quarterly time segments. Because we are seeking a return structure that is on a different time scale than the input (quarterly versus daily), we need to use a transmute function. We select `tq_transmute` and pass the close price using OHLC format via `ohlc_fun = Cl`, and we send this subset of the data to the `apply.quarterly` function via the `mutate_fun` argument. Looking at the documentation for `apply.quarterly`, we see that we can pass a function to the argument, `FUN`. We want the maximum values, so we set `FUN = max`. The result is the quarters returned as a date and the maximum closing price during the quarter returned as a double. 
+The `xts::apply.quarterly()` function that is part of the period apply group can be used to apply functions by quarterly time segments. Because we are seeking a return structure that is on a different time scale than the input (quarterly versus daily), we need to use a transmute function. We select `tq_transmute` and pass the close price using `select`, and we send this subset of the data to the `apply.quarterly` function via the `mutate_fun` argument. Looking at the documentation for `apply.quarterly`, we see that we can pass a function to the argument, `FUN`. We want the maximum values, so we set `FUN = max`. The result is the quarters returned as a date and the maximum closing price during the quarter returned as a double. 
 
 ```{r}
 FANG_max_by_qtr <- FANG %>%
     group_by(symbol) %>%
-    tq_transmute(ohlc_fun   = Ad, 
+    tq_transmute(select     = adjusted, 
                  mutate_fun = apply.quarterly, 
                  FUN        = max, 
                  col_rename = "max.close") %>%
@@ -391,7 +392,7 @@ The minimum each quarter can be retrieved in much the same way. The data frames 
 ```{r}
 FANG_min_by_qtr <- FANG %>%
     group_by(symbol) %>%
-    tq_transmute(ohlc_fun   = Ad, 
+    tq_transmute(select     = adjusted, 
                  mutate_fun = apply.quarterly, 
                  FUN        = min, 
                  col_rename = "min.close") %>%
@@ -440,7 +441,7 @@ stock_prices <- c("MA", "V") %>%
     group_by(symbol) 
 
 stock_pairs <- stock_prices %>%
-    tq_transmute(ohlc_fun   = Ad,
+    tq_transmute(select     = adjusted,
                  mutate_fun = periodReturn,
                  period     = "daily",
                  type       = "log",
@@ -466,10 +467,10 @@ lm(MA ~ V, data = stock_pairs) %>%
     summary()
 ```
 
-While this characterizes the overall relationship, it's missing the time aspect. Fortunately, we can use the `rollapply` function from the `zoo` package to plot a rolling regression, showing how the model coefficent varies on a rolling basis over time. We calculate rolling regressions with `tq_mutate_data` in two additional steps:
+While this characterizes the overall relationship, it's missing the time aspect. Fortunately, we can use the `rollapply` function from the `zoo` package to plot a rolling regression, showing how the model coefficent varies on a rolling basis over time. We calculate rolling regressions with `tq_mutate()` in two additional steps:
 
 1. Create a custom function
-2. Apply the function with `tq_mutate_data(mutate_fun = rollapply)`
+2. Apply the function with `tq_mutate(mutate_fun = rollapply)`
 
 First, create a custom regression function. An important point is that the "data" will be passed to the regression function as an `xts` object. The `as_tibble` function takes care of converting to a data frame.
 
@@ -479,11 +480,11 @@ regr_fun <- function(data) {
 }
 ```
 
-Now we can use the `tq_mutate_data()` function to apply the custom regression function over a rolling window using `rollapply` from the `zoo` package. Internally, the `returns_combined` data frame is being passed automatically to the `data` argument of the `rollapply` function. All you need to specify is the `mutate_fun = rollapply` and any additional arguments necessary to apply the `rollapply` function. We'll specify a 90 day window via `width = 90`. The `FUN` argument is our custom regression function, `regr_fun`. It's extremely important to specify `by.column = FALSE`, which tells `rollapply` to perform the computation using the data as a whole rather than apply the function to each column independently. The `col_rename` argument is used to rename the added columns.
+Now we can use `tq_mutate()` to apply the custom regression function over a rolling window using `rollapply` from the `zoo` package. Internally, the `returns_combined` data frame is being passed automatically to the `data` argument of the `rollapply` function. All you need to specify is the `mutate_fun = rollapply` and any additional arguments necessary to apply the `rollapply` function. We'll specify a 90 day window via `width = 90`. The `FUN` argument is our custom regression function, `regr_fun`. It's extremely important to specify `by.column = FALSE`, which tells `rollapply` to perform the computation using the data as a whole rather than apply the function to each column independently. The `col_rename` argument is used to rename the added columns.
 
 ```{r}
 stock_pairs <- stock_pairs %>%
-    tq_mutate_data(mutate_fun = rollapply,
+         tq_mutate(mutate_fun = rollapply,
                    width      = 90,
                    FUN        = regr_fun,
                    by.column  = FALSE,
@@ -506,7 +507,7 @@ Stock returns during this time period.
 
 ```{r}
 stock_prices %>%
-    tq_transmute(Ad, 
+    tq_transmute(adjusted, 
                  periodReturn, 
                  period = "daily", 
                  type = "log", 

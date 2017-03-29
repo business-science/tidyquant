@@ -14,26 +14,26 @@ stock_prices <- c("AAPL", "GOOG", "NFLX") %>%
 # Get returns for individual stock components
 portfolio_monthly_returns <- stock_prices %>%
     group_by(symbol) %>%
-    tq_transmute(Ad, periodReturn, period = "monthly")
+    tq_transmute(adjusted, periodReturn, period = "monthly")
 
 # Method 1: Use tq_portfolio with numeric vector of weights
 weights = c(0.5, 0, 0.5)
 test1 <- tq_portfolio(data = portfolio_monthly_returns,
-             assets_col = symbol,
-             returns_col = monthly.returns,
-             weights = weights,
-             col_rename = NULL,
-             wealth.index = FALSE)
+                      assets_col = symbol,
+                      returns_col = monthly.returns,
+                      weights = weights,
+                      col_rename = NULL,
+                      wealth.index = FALSE)
 
 
 weights_df <- tibble(symbol = c("AAPL", "NFLX"),
                      weights = c(0.5, 0.5))
 test2 <- tq_portfolio(data = portfolio_monthly_returns,
-             assets_col = symbol,
-             returns_col = monthly.returns,
-             weights = weights_df,
-             col_rename = NULL,
-             wealth.index = FALSE)
+                      assets_col = symbol,
+                      returns_col = monthly.returns,
+                      weights = weights_df,
+                      col_rename = NULL,
+                      wealth.index = FALSE)
 
 
 
