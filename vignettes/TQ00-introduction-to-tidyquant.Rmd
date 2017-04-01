@@ -52,7 +52,7 @@ Minimizing the number of functions reduces the learning curve. What we've done i
 
   2. __Get Quantitative Data, `tq_get()`__: A one-stop shop to get data from various web-sources. 
 
-  3. __Transmute, `tq_transmute()`, and Mutate, `tq_mutate()`, Quantitative Data__: Perform and scale financial calculations completely within the `tidyverse`. These workhorse functions integrate the `xts`, `zoo`, `quantmod`, and `TTR` packages. 
+  3. __Transmute, `tq_transmute()`, and Mutate, `tq_mutate()`, Quantitative Data__: Perform and scale financial calculations completely within the `tidyverse`. These workhorse functions integrate the `xts`, `zoo`, `quantmod`, `TTR`, and `PerformanceAnalytics` packages. 
 
   4. __Coerce Quantitative Data Between tibble and xts formats, `as_tibble()` and `as_xts()`__: Coercing the various _R_ time-based objects to and from `tibble` (tidy data frame) objects _was_ a pain. These functions enable __easily going back and forth__.
   
@@ -60,11 +60,11 @@ Minimizing the number of functions reduces the learning curve. What we've done i
 
 For more information, refer to the first topic-specific vignette, [Core Functions in tidyquant](TQ01-core-functions-in-tidyquant.html).
 
-## Integrates the Quantitative Analysis Functionality of xts/zoo, quantmod and TTR
+## Integrates the Quantitative Analysis Functionality of xts/zoo, quantmod TTR and Performance Analytics
 
-There's a wide range of useful quantitative analysis functions (QAF) that work with time-series objects. The problem is that many of these _wonderful_ functions don't work with data frames or the `tidyverse` workflow. That is until now. The `tidyquant` package integrates the most useful functions from the `xts`, `zoo`, `quantmod` and `TTR` packages, enabling seamless usage within the `tidyverse` workflow. 
+There's a wide range of useful quantitative analysis functions (QAF) that work with time-series objects. The problem is that many of these _wonderful_ functions don't work with data frames or the `tidyverse` workflow. That is until now. The `tidyquant` package integrates the most useful functions from the `xts`, `zoo`, `quantmod`, `TTR`, and `PerformanceAnalytics` packages, enabling seamless usage within the `tidyverse` workflow. 
 
-Refer below for `PerformanceAnalytics` integration.
+Refer below for information on the performance analysis and portfolio attribution with the `PerformanceAnalytics` integration.
 
 For more information, refer to the second topic-specific vignette, [R Quantitative Analysis Package Integrations in tidyquant](TQ02-quant-integrations-in-tidyquant.html).
 

@@ -1,5 +1,5 @@
 ## Release Summary
-This is the fourth release of tidyquant for CRAN review. This release adds new functionality including `PerformanceAnalytics` integration, portfolio aggregation, improved documentation, and some new `ggplot2` themes. Several fixes were made to enable quickly getting, scaling, and manipulating data.
+This is the fifth release of tidyquant for CRAN review. This release adds new functionality including a new "tidyverse" style _select_ argument instead of relying on OHLC functions, new data source integrations `Quandl` and Yahoo! Finance Japan, and additional `PerformanceAnalytics` functions for use in cleaning and transforming asset returns.
 
 
 ## Test environments

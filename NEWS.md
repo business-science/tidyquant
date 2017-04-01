@@ -1,4 +1,4 @@
-# Development version
+# tidyquant 0.5.0
 
 * New Data:
     * Quandl Integration: 
@@ -10,6 +10,7 @@
     
 * Improvements and Fixes:
     * `tq_mutate()` and `tq_transmute()` now accept non-OHLC data through the `select` argument. They also now work with `rollapply`.
+    * `tq_mutate()` and `tq_transmute()` now accept `PerformanceAnalytics` functions that work to clean and transform asset returns.
     * Deprecated the `ohlc_fun` argument to instead use `select` in `tq_mutate()` and `tq_transmute`
     * `.Deprecated` -> `.Defunct` for `tq_transform()` and `tq_transform_xy()`. Use `tq_transmute()` and `tq_transmute_xy()`. Move the sign post functions to deprecated.R
     * Remove the previously deprecated argument, `transform_fun` from `tq_transmute()`. Use `mutate_fun` instead.

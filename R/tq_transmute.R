@@ -285,10 +285,18 @@ tq_transmute_fun_options <- function() {
     pkg_regex_ttr <- "^get*|^stock|^naCh" # NOT these
     funs_ttr <- ls("package:TTR")[!stringr::str_detect(ls("package:TTR"), pkg_regex_ttr)]
 
-    fun_options <- list(zoo = funs_zoo,
-                        xts = funs_xts,
-                        quantmod = funs_quantmod,
-                        TTR = funs_ttr)
+    # PerformanceAnalytics apply.rolling, Return...
+    pkg_PA <- "package:PerformanceAnalytics"
+    pkg_regex_PA <- "Return.annualized|Return.excess|Return.Geltner|Return.cumulative|Return.clean|zerofill"
+    funs_PA <- ls(pkg_PA)[stringr::str_detect(ls(pkg_PA), pkg_regex_PA)]
+
+
+
+    fun_options <- list(zoo                  = funs_zoo,
+                        xts                  = funs_xts,
+                        quantmod             = funs_quantmod,
+                        TTR                  = funs_ttr,
+                        PerformanceAnalytics = funs_PA)
 
     fun_options
 }

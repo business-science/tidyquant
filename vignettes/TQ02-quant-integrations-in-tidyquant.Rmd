@@ -20,14 +20,16 @@ knitr::opts_chunk$set(message = FALSE,
 # devtools::load_all() # Travis CI fails on load_all()
 ```
 
-> Functions that leverage the quantitative analysis functionality of `xts`, `zoo`, `quantmod` and `TTR`
+> Functions that leverage the quantitative analysis functionality of `xts`, `zoo`, `quantmod`, `TTR`, and `PerformanceAnalytics`
 
 # Overview
 
-There's a wide range of useful quantitative analysis functions that work with time-series objects. The problem is that many of these _wonderful_ functions don't work with data frames or the `tidyverse` workflow. That is until now! The `tidyquant` package integrates the most useful functions from the `xts`, `zoo`, `quantmod` and `TTR` packages. This vignette focuses on the following _core functions_ to demonstrate how the integratation works with the quantitative finance packages:
+There's a wide range of useful quantitative analysis functions that work with time-series objects. The problem is that many of these _wonderful_ functions don't work with data frames or the `tidyverse` workflow. That is until now! The `tidyquant` package integrates the most useful functions from the `xts`, `zoo`, `quantmod`, `TTR`, and `PerformanceAnalytics` packages. This vignette focuses on the following _core functions_ to demonstrate how the integratation works with the quantitative finance packages:
 
 * Transmute, `tq_transmute()`: Returns a new tidy data frame typically in a different periodicity than the input.
 * Mutate, `tq_mutate()`: Adds columns to the existing tidy data frame.
+
+Refer to [Performance Analysis with tidyquant](TQ05-performance-analysis-with-tidyquant.html) for a full discussion on performance analysis and portfolio attribution with `tidyquant`.
 
 # Prerequisites
 
@@ -152,6 +154,21 @@ Here' a brief description of the most popular functions from `TTR`:
 * Stochastic Oscillator / Stochastic Momentum Index:
     * `stoch(HLC, nFastK = 14, nFastD = 3, nSlowD = 3, maType, bounded = TRUE, smooth = 1, ...)`: Stochastic Oscillator
     * `SMI(HLC, n = 13, nFast = 2, nSlow = 25, nSig = 9, maType, bounded = TRUE, ...)`: Stochastic Momentum Index
+
+## PerformanceAnalytics Functionality
+
+```{r}
+# Get PerformanceAnalytics functions that work with tq_transmute and tq_mutate
+tq_transmute_fun_options()$PerformanceAnalytics
+```
+
+The `PerformanceAnalytics` mutation functions all deal with returns:
+
+* `Return.annualized` and `Return.annualized.excess`: Takes period returns and consolidates into annualized returns 
+* `Return.clean`: Removes outliers from returns
+* `Return.excess`: Removes the risk-free rate from the returns to yield returns in excess of the risk-free rate
+* `zerofill`: Used to replace `NA` values with zeros.
+
 
 
 # Quantitative Power In Action
@@ -518,5 +535,17 @@ stock_prices %>%
     labs(title = "MA and V: Stock Prices") +
     theme_tq() + 
     scale_color_tq()
+```
+
+## Example 7: Use Return.clean and Return.excess to clean and calculate excess returns 
+
+In this example we use several of the `PerformanceAnalytics` functions to clean and format returns. The example uses three progressive applications of `tq_transmute` to apply various quant functions to the grouped stock prices from the `FANG` data set. First, we calculate daily returns using `quantmod::periodReturn`. Next, we use `Return.clean` to clean outliers from the return data. The `alpha` parameter is the percentage of oultiers to be cleaned. Finally, the excess returns are calculated using a risk-free rate of 3% (divided by 252 for 252 trade days in one year).  
+
+```{r}
+FANG %>%
+    group_by(symbol) %>%
+    tq_transmute(adjusted, periodReturn, period = "daily") %>%
+    tq_transmute(daily.returns, Return.clean, alpha = 0.05) %>%
+    tq_transmute(daily.returns, Return.excess, Rf = 0.03 / 252)
 ```
 
