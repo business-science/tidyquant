@@ -370,7 +370,7 @@ tq_get_util_1 <-
 
         warn <- paste0("Error at ", x, " during call to get = '", vars$chr_get, "'.")
         if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
-        warning(warn)
+        warning(warn, call. = FALSE)
         return(NA) # Return NA on error
 
     })
@@ -620,14 +620,14 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
 
         warn <- w
         if (map == TRUE) warn <- paste0(x, ": ", w)
-        warning(warn)
+        warning(warn, call. = FALSE)
         return(key_ratios)
 
     }, error = function(e) {
 
         warn <- paste0("Error at ", x, " during call to get = 'key.ratios'.")
         if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
-        warning(warn)
+        warning(warn, call. = FALSE)
         return(NA) # Return NA on error
 
     })
@@ -747,7 +747,7 @@ tq_get_util_3 <- function(x, get, complete_cases, map, ...) {
 
         warn <- paste0("Error at ", x, " during call to get = 'key.stats'.")
         if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
-        warning(warn)
+        warning(warn, call. = FALSE)
         return(NA) # Return NA on error
 
     })
@@ -791,7 +791,7 @@ tq_get_util_4 <- function(x, get, type = "raw",  meta = FALSE, complete_cases, m
 
         warn <- paste0("Error at ", x, " during call to get = 'quandl'.")
         if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
-        warning(warn)
+        warning(warn, call. = FALSE)
         return(NA) # Return NA on error
 
     })
@@ -821,7 +821,7 @@ tq_get_util_5 <- function(x, get, paginate = FALSE, complete_cases, map, ...) {
 
         warn <- paste0("Error at ", x, " during call to get = 'quandl.datatable'.")
         if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
-        warning(warn)
+        warning(warn, call. = FALSE)
         return(NA) # Return NA on error
 
     })
