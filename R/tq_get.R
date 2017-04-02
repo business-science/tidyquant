@@ -127,7 +127,7 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
     if (length(get) > 1) validate_compound_gets(get)
 
     # Validate quandl api key
-    if(get == "quandl") {
+    if("quandl" %in% get) {
         if (is.null(quandl_api_key())) warning("No Quandl API key detected. Limited to 50 anonymous calls per day. Set key with 'quandl_api_key()'.",
                                                call. = FALSE)
     }
@@ -189,7 +189,7 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
     }
 
     # Clean quandl column names to make easier
-    if (get == "quandl") {
+    if ("quandl" %in% get) {
         colnames(ret) <- make.names(colnames(ret)) %>%
             stringr::str_replace_all(pattern = "\\.+", ".") %>%
             stringr::str_to_lower()
