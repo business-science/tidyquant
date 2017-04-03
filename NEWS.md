@@ -16,6 +16,7 @@
     * Remove the previously deprecated argument, `transform_fun` from `tq_transmute()`. Use `mutate_fun` instead.
     * Fix issue with `tq_mutate` returning rows incorrectly sorted
     * Fix issue with `tq_get` returning data frames as nested
+    * Fix `tq_get` error to return full error when issues are present. 
 
 
 # tidyquant 0.4.0
