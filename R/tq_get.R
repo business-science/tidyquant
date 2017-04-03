@@ -127,7 +127,7 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
     if (length(get) > 1) validate_compound_gets(get)
 
     # Validate quandl api key
-    if(get == "quandl") {
+    if("quandl" %in% get) {
         if (is.null(quandl_api_key())) warning("No Quandl API key detected. Limited to 50 anonymous calls per day. Set key with 'quandl_api_key()'.",
                                                call. = FALSE)
     }
@@ -189,7 +189,7 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
     }
 
     # Clean quandl column names to make easier
-    if (get == "quandl") {
+    if ("quandl" %in% get) {
         colnames(ret) <- make.names(colnames(ret)) %>%
             stringr::str_replace_all(pattern = "\\.+", ".") %>%
             stringr::str_to_lower()
@@ -370,7 +370,7 @@ tq_get_util_1 <-
 
         warn <- paste0("Error at ", x, " during call to get = '", vars$chr_get, "'.")
         if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
-        warning(warn)
+        warning(warn, call. = FALSE)
         return(NA) # Return NA on error
 
     })
@@ -620,14 +620,14 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
 
         warn <- w
         if (map == TRUE) warn <- paste0(x, ": ", w)
-        warning(warn)
+        warning(warn, call. = FALSE)
         return(key_ratios)
 
     }, error = function(e) {
 
         warn <- paste0("Error at ", x, " during call to get = 'key.ratios'.")
         if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
-        warning(warn)
+        warning(warn, call. = FALSE)
         return(NA) # Return NA on error
 
     })
@@ -747,7 +747,7 @@ tq_get_util_3 <- function(x, get, complete_cases, map, ...) {
 
         warn <- paste0("Error at ", x, " during call to get = 'key.stats'.")
         if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
-        warning(warn)
+        warning(warn, call. = FALSE)
         return(NA) # Return NA on error
 
     })
@@ -791,7 +791,7 @@ tq_get_util_4 <- function(x, get, type = "raw",  meta = FALSE, complete_cases, m
 
         warn <- paste0("Error at ", x, " during call to get = 'quandl'.")
         if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
-        warning(warn)
+        warning(warn, call. = FALSE)
         return(NA) # Return NA on error
 
     })
@@ -821,7 +821,7 @@ tq_get_util_5 <- function(x, get, paginate = FALSE, complete_cases, map, ...) {
 
         warn <- paste0("Error at ", x, " during call to get = 'quandl.datatable'.")
         if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
-        warning(warn)
+        warning(warn, call. = FALSE)
         return(NA) # Return NA on error
 
     })
