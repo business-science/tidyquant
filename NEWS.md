@@ -2,8 +2,8 @@
 
 * Improvements and Fixes:
     * Fixed bug with `tq_portfolio()` where `weights = NULL` would not execute an equal weighting scheme.
-
-
+    * Added error handling during dollar and percent conversion for get = "key.ratios" and get = "key.stats"
+    
 # tidyquant 0.5.0
 
 * New Data:
