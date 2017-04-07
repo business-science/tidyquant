@@ -1,3 +1,8 @@
+# Development Version
+
+* Improvements and Fixes:
+    * Added error handling during dollar and percent conversion for get = "key.ratios" and get = "key.stats"
+
 # tidyquant 0.5.0
 
 * New Data:

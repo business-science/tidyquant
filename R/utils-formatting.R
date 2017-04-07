@@ -1,6 +1,12 @@
 # GENERAL UTILITY FUNCTIONS FOR FORMATTING NUMBERS
 
 convert_to_numeric <- function(x) {
+
+    # Error handling
+    if (is.na(x) || is.null(x)) {
+        return(NA)
+    }
+
     # x = character such as "23.4B"
     units <- stringr::str_sub(x, -1, -1)
 
@@ -23,6 +29,12 @@ convert_to_numeric <- function(x) {
 }
 
 convert_to_percent <- function(x) {
+
+    # Error handling
+    if (is.na(x) || is.null(x)) {
+        return(NA)
+    }
+
     # x = character such as "-0.6104%"
     units <- stringr::str_sub(x, -1, -1)
 

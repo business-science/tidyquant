@@ -736,6 +736,14 @@ tq_get_util_3 <- function(x, get, complete_cases, map, ...) {
         # Sort by column name
         key_stats_sorted <- key_stats[, order(names(key_stats))]
 
+        # Handling for all NAs
+        if (all(is.na(key_stats_sorted))) {
+            warn <- paste0("x = '", x, "', get = 'key.stats", "': Value is not available.")
+            if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
+            warning(warn, call. = FALSE)
+            return(NA) # Return NA on error
+        }
+
         return(key_stats_sorted)
 
     }, error = function(e) {
