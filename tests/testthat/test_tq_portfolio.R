@@ -35,6 +35,22 @@ test2 <- tq_portfolio(data = portfolio_monthly_returns,
                       col_rename = NULL,
                       wealth.index = FALSE)
 
+# Test default equal weighting
+test3 <- suppressMessages(
+    tq_portfolio(data = portfolio_monthly_returns,
+                 assets_col = symbol,
+                 returns_col = monthly.returns,
+                 weights = NULL,
+                 col_rename = NULL,
+                 wealth.index = FALSE))
+
+equal_weights <- c(1/3, 1/3, 1/3)
+test3_equivalence <- tq_portfolio(data = portfolio_monthly_returns,
+                                  assets_col = symbol,
+                                  returns_col = monthly.returns,
+                                  weights = equal_weights,
+                                  col_rename = NULL,
+                                  wealth.index = FALSE)
 
 
 #### Test Successes -----
@@ -48,6 +64,13 @@ test_that("Tests return equivalent tibbles", {
     expect_equal(nrow(test1), 72)
 })
 
-
+test_that("Equal weighting works with NULL weights", {
+    # Tibble
+    expect_is(test3, "tbl")
+    # Equivalence
+    expect_equal(test3, test3_equivalence)
+    # Rows
+    expect_equal(nrow(test3), 72)
+})
 
 

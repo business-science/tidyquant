@@ -339,6 +339,11 @@ map_weights <- function(weights, assets_col) {
     } else {
         # must be numeric
 
+        # Default equal weights
+        if(is.null(weights)) {
+            return(weights)
+        }
+
         ret <- dplyr::bind_cols(unique(assets_col), tibble::tibble(weights))
 
         colnames(ret) <- c("assets", "weights")

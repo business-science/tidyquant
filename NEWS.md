@@ -1,3 +1,9 @@
+# Development version
+
+* Improvements and Fixes:
+    * Fixed bug with `tq_portfolio()` where `weights = NULL` would not execute an equal weighting scheme.
+
+
 # tidyquant 0.5.0
 
 * New Data:
