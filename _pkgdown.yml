@@ -1,0 +1,75 @@
+template:
+  params:
+    bootswatch: flatly
+
+navbar:
+  title: "tidyquant"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Function Reference"
+      href: reference/index.html
+    - text: "Vignettes"
+      href: articles/index.html
+      menu:
+        - text: "Introduction to tidyquant"
+          href: articles/TQ00-introduction-to-tidyquant.html
+        - text: "Core functions"
+          href: articles/TQ01-core-functions-in-tidyquant.html
+        - text: "Quantitative integrations"
+          href: articles/TQ02-quant-integrations-in-tidyquant.html
+        - text: "Scaling and modeling"
+          href: articles/TQ03-scaling-and-modeling-with-tidyquant.html
+        - text: "Charting"
+          href: articles/TQ04-charting-with-tidyquant.html
+        - text: "Performance Analysis"
+          href: articles/TQ05-performance-analysis-with-tidyquant.html
+    - text: "News"
+      href: news/index.html
+
+  right:
+    - icon: fa-github
+      href: https://github.com/business-science/tidyquant
+
+reference:
+  - title: Getting data
+    desc: __Functions for getting financial data from various sources.__
+    contents:
+    - starts_with("tq_get")
+    - starts_with("tq_index")
+    - starts_with("tq_exchange")
+    - starts_with("quandl")
+    - FANG
+  - title: Mutating data
+    desc: __Functions for mutating quantitative data.__
+    contents:
+    - starts_with("tq_mutate")
+    - starts_with("tq_transmute")
+  - title: Performance analysis
+    desc: __Functions for performing various financial performance analyses.__
+    contents:
+    - starts_with("tq_performance")
+  - title: Portfolio analysis
+    desc: __Functions for aggregating and analyzing portfolios.__
+    contents:
+    - starts_with("tq_portfolio")
+  - title: Charting financial data
+    desc: __Functions for creating ggplots of financial data.__
+    contents:
+    - starts_with("geom_")
+    - starts_with("theme_")
+    - starts_with("palette_")
+    - starts_with("scale_")
+    - starts_with("coord_")
+  - title: Coercion
+    desc: __Functions to bridge the gap between xts and tibble.__
+    contents:
+    - starts_with("as_")
+  - title: Tidyquant
+    desc: __Package level information.__
+    contents:
+    - starts_with("tidyquant")
+  - title: Deprecated
+    contents:
+    - starts_with("deprecated")
+
