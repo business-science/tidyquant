@@ -15,7 +15,8 @@ vignette: >
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
 knitr::opts_chunk$set(message = FALSE,
                       warning = FALSE,
-                      fig.width = 6)
+                      fig.width = 6,
+                      fig.align = 'center')
 library(tidyquant)
 # devtools::load_all() # Travis CI fails on load_all()
 ```
@@ -85,7 +86,7 @@ For more information, refer to the third topic-specific vignette, [Scaling and M
 
 The `tidyquant` package includes charting tools to assist users in developing quick visualizations in `ggplot2` using the grammar of graphics format and workflow. 
 
-```{r, echo = F, fig.height = 4.5, out.width='80%'}
+```{r, echo = F, fig.height = 4.5, fig.width=8, out.width='80%'}
 library(tidyquant)
 data("FANG")
 end <- as_date("2017-01-01")
