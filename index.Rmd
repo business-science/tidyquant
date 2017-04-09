@@ -23,11 +23,11 @@ devtools::load_all()
 
 ## Benefits
 
-* __A few core functions with a lot of power__
-* __Integrates the quantitative analysis functionality of `zoo`, `xts`, `quantmod`, `TTR`, and _now_ `PerformanceAnalytics`__
-* __Designed for modeling and scaling analyses using the the `tidyverse` tools in [_R for Data Science_](http://r4ds.had.co.nz/)__
-* __Implements `ggplot2` functionality for beautiful and meaningful financial visualizations__
-* __User-friendly documentation to get you up to speed quickly!__
+* A few core functions with a lot of power
+* Integrates the quantitative analysis functionality of `zoo`, `xts`, `quantmod`, `TTR`, and `PerformanceAnalytics`
+* Designed for modeling and scaling analyses using the the `tidyverse` tools in [_R for Data Science_](http://r4ds.had.co.nz/)
+* Implements `ggplot2` functionality for beautiful and meaningful financial visualizations
+* User-friendly documentation to get you up to speed quickly!
 
 ## One-Stop Shop for Serious Financial Analysis
 
