@@ -22,7 +22,7 @@ navbar:
           href: articles/TQ03-scaling-and-modeling-with-tidyquant.html
         - text: "Charting"
           href: articles/TQ04-charting-with-tidyquant.html
-        - text: "Performance Analysis"
+        - text: "Performance analysis"
           href: articles/TQ05-performance-analysis-with-tidyquant.html
     - text: "News"
       href: news/index.html

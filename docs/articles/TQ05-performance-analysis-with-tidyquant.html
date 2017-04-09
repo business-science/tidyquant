@@ -57,7 +57,7 @@
       <a href="../articles/TQ04-charting-with-tidyquant.html">Charting</a>
     </li>
     <li>
-      <a href="../articles/TQ05-performance-analysis-with-tidyquant.html">Performance Analysis</a>
+      <a href="../articles/TQ05-performance-analysis-with-tidyquant.html">Performance analysis</a>
     </li>
   </ul>
 </li>
@@ -994,7 +994,7 @@ portfolio_returns_monthly &lt;-<span class="st"> </span>stock_returns_monthly %&
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>() +
 <span class="st">    </span><span class="kw"><a href="../reference/scale_manual.html">scale_color_tq</a></span>() +
 <span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales::percent)</code></pre></div>
-<p><img src="TQ05-performance-analysis-with-tidyquant_files/figure-html/unnamed-chunk-44-1.png" width="576"></p>
+<p><img src="TQ05-performance-analysis-with-tidyquant_files/figure-html/unnamed-chunk-44-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p>This is good, but we want to see how our $10,000 initial investment is growing. This is simple with the underlying <code>Return.portfolio</code> argument, <code>wealth.index = TRUE</code>. All we need to do is add these as additional parameters to <code>tq_portfolio</code>!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>)
 portfolio_growth_monthly &lt;-<span class="st"> </span>stock_returns_monthly %&gt;%
@@ -1015,7 +1015,7 @@ portfolio_growth_monthly &lt;-<span class="st"> </span>stock_returns_monthly %&g
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>() +
 <span class="st">    </span><span class="kw"><a href="../reference/scale_manual.html">scale_color_tq</a></span>() +
 <span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales::dollar)</code></pre></div>
-<p><img src="TQ05-performance-analysis-with-tidyquant_files/figure-html/unnamed-chunk-46-1.png" width="576"></p>
+<p><img src="TQ05-performance-analysis-with-tidyquant_files/figure-html/unnamed-chunk-46-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p>Finally, taking this one step further, we apply the same process to the “Multiple Portfolio” example:</p>
 <ol style="list-style-type: decimal">
 <li>50% AAPL, 25% GOOG, 25% NFLX</li>
@@ -1041,7 +1041,7 @@ portfolio_growth_monthly &lt;-<span class="st"> </span>stock_returns_monthly %&g
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>() +
 <span class="st">    </span><span class="kw"><a href="../reference/scale_manual.html">scale_color_tq</a></span>() +
 <span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales::dollar)</code></pre></div>
-<p><img src="TQ05-performance-analysis-with-tidyquant_files/figure-html/unnamed-chunk-48-1.png" width="576"></p>
+<p><img src="TQ05-performance-analysis-with-tidyquant_files/figure-html/unnamed-chunk-48-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="customizing-tq_performance" class="section level2">
 <h2 class="hasAnchor">

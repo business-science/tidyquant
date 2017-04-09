@@ -4,7 +4,9 @@
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-"
+  fig.path = "README-",
+  out.width='95%',
+  fig.align='center'
 )
 devtools::load_all()
 ```
@@ -47,7 +49,7 @@ With `tidyquant` all the benefits add up to one thing: _a one-stop shop for seri
 
 Visualizing the stock price volatility of four stocks side-by-side is quick and easy...
 
-```{r echo=FALSE, out.width='80%', fig.align='center'}
+```{r echo=FALSE}
 knitr::include_graphics("README_1_volatility.png")
 ```
 
@@ -56,7 +58,7 @@ knitr::include_graphics("README_1_volatility.png")
 
 What about stock performance? Quickly visualize how a $10,000 investment in various stocks would perform.
 
-```{r echo=FALSE, out.width='80%', fig.align='center'}
+```{r echo=FALSE}
 knitr::include_graphics("README_2_returns.png")
 ```
 
@@ -64,7 +66,7 @@ knitr::include_graphics("README_2_returns.png")
 
 Ok, stocks are too easy. What about portfolios? With the `PerformanceAnalytics` integration, visualizing blended portfolios are easy too!
 
-```{r, echo=FALSE }
+```{r, echo=FALSE}
 ports <- tribble(
     ~Portfolio, ~`Facebook (%)`, ~`Amazon (%)`, ~`Netflix (%)`, ~`Google (%)`,
     1, 50, 25, 25, 0,
@@ -77,7 +79,7 @@ htmlTable::htmlTable(ports, rnames=FALSE, css.cell = "padding-bottom: .25em; pad
 ```
 
 
-```{r echo=FALSE, out.width='80%', fig.align='center'}
+```{r echo=FALSE}
 knitr::include_graphics("README_3_port_returns.png")
 ```
 

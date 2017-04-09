@@ -15,8 +15,11 @@ vignette: >
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
 knitr::opts_chunk$set(message = FALSE,
                       warning = FALSE,
-                      fig.width = 6,
-                      fig.align = 'center')
+                      fig.width = 8, 
+                      fig.height = 4.5,
+                      fig.align = 'center',
+                      out.width='95%', 
+                      dpi = 200)
 library(tidyquant)
 # devtools::load_all() # Travis CI fails on load_all()
 ```
@@ -39,11 +42,11 @@ The [tidy data principles](https://www.jstatsoft.org/article/view/v059i10) are a
 
 # Benefits
 
-* __A few core functions with a lot of power__
-* __Integrates the quantitative analysis functionality of `zoo`, `xts`, `quantmod`, `TTR`, and _now_ `PerformanceAnalytics`__
-* __Designed for modeling and scaling analyses using the the `tidyverse` tools in [_R for Data Science_](http://r4ds.had.co.nz/)__
-* __Implements `ggplot2` functionality for beautiful and meaningful financial visualizations__
-* __User-friendly documentation to get you up to speed quickly!__
+* A few core functions with a lot of power
+* Integrates the quantitative analysis functionality of `zoo`, `xts`, `quantmod`, `TTR`, and `PerformanceAnalytics`
+* Designed for modeling and scaling analyses using the the `tidyverse` tools in [_R for Data Science_](http://r4ds.had.co.nz/)
+* Implements `ggplot2` functionality for beautiful and meaningful financial visualizations
+* User-friendly documentation to get you up to speed quickly!
 
 ## A Few Core Functions with A Lot of Power
 
@@ -86,7 +89,7 @@ For more information, refer to the third topic-specific vignette, [Scaling and M
 
 The `tidyquant` package includes charting tools to assist users in developing quick visualizations in `ggplot2` using the grammar of graphics format and workflow. 
 
-```{r, echo = F, fig.height = 4.5, fig.width=8, out.width='80%'}
+```{r, echo = F}
 library(tidyquant)
 data("FANG")
 end <- as_date("2017-01-01")

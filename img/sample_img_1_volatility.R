@@ -39,4 +39,4 @@ ggsave("img/sample_img_1_volatility.png")
 #     theme_tq() +
 #     scale_y_continuous(labels = scales::dollar)
 #
-# ggsave("docs/README_1_volatility.png", width = 8, height = 5)
+# ggsave("docs/README_1_volatility.png", width = 8, height = 4.5)

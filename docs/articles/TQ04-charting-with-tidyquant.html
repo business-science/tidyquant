@@ -57,7 +57,7 @@
       <a href="../articles/TQ04-charting-with-tidyquant.html">Charting</a>
     </li>
     <li>
-      <a href="../articles/TQ05-performance-analysis-with-tidyquant.html">Performance Analysis</a>
+      <a href="../articles/TQ05-performance-analysis-with-tidyquant.html">Performance analysis</a>
     </li>
   </ul>
 </li>
@@ -149,7 +149,7 @@ AMZN &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get
 <span class="st">    </span><span class="kw">geom_line</span>() +
 <span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"AAPL Line Chart"</span>, <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) +<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-5-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-5-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="bar-chart" class="section level2">
 <h2 class="hasAnchor">
@@ -160,7 +160,7 @@ AMZN &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get
 <span class="st">    </span><span class="kw"><a href="../reference/geom_chart.html">geom_barchart</a></span>(<span class="kw">aes</span>(<span class="dt">open =</span> open, <span class="dt">high =</span> high, <span class="dt">low =</span> low, <span class="dt">close =</span> close)) +
 <span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"AAPL Bar Chart"</span>, <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) +<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-6-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-6-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p>We zoom into specific sections using <code>coord_x_date</code>, which has <code>xlim</code> and <code>ylim</code> arguments specified as <code>c(start, end)</code> to focus on a specific region of the chart. For <code>xlim</code>, we’ll use <code>lubridate</code> to convert a character date to date class, and then subtract six weeks using the <code>weeks()</code> function. For <code>ylim</code> we zoom in on prices in the range from 100 to 120.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">AAPL %&gt;%
 <span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> close)) +
@@ -171,7 +171,7 @@ AMZN &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get
 <span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw">c</span>(end -<span class="st"> </span><span class="kw">weeks</span>(<span class="dv">6</span>), end),
                  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">120</span>)) +<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-7-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-7-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p>The colors can be modified using <code>color_up</code> and <code>color_down</code> arguments, and parameters such as <code>size</code> can be used to control the appearance.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">AAPL %&gt;%
 <span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> close)) +
@@ -183,7 +183,7 @@ AMZN &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get
 <span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw">c</span>(end -<span class="st"> </span><span class="kw">weeks</span>(<span class="dv">6</span>), end),
                  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">120</span>)) +<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-8-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-8-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="candlestick-chart" class="section level2">
 <h2 class="hasAnchor">
@@ -194,7 +194,7 @@ AMZN &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get
 <span class="st">    </span><span class="kw"><a href="../reference/geom_chart.html">geom_candlestick</a></span>(<span class="kw">aes</span>(<span class="dt">open =</span> open, <span class="dt">high =</span> high, <span class="dt">low =</span> low, <span class="dt">close =</span> close)) +
 <span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"AAPL Candlestick Chart"</span>, <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) +
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-9-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-9-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p>We zoom into specific sections using <code>coord_x_date</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">AAPL %&gt;%
 <span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> close)) +
@@ -205,7 +205,7 @@ AMZN &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get
 <span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw">c</span>(end -<span class="st"> </span><span class="kw">weeks</span>(<span class="dv">6</span>), end),
                  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">120</span>)) +<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-10-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-10-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p>The colors can be modified using <code>color_up</code> and <code>color_down</code>, which control the line color, and <code>fill_up</code> and <code>fill_down</code>, which control the rectangle fills.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">AAPL %&gt;%
 <span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> close)) +
@@ -218,7 +218,7 @@ AMZN &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get
 <span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw">c</span>(end -<span class="st"> </span><span class="kw">weeks</span>(<span class="dv">6</span>), end),
                  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">120</span>)) +<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-11-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-11-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="combining-chart-geoms" class="section level2">
 <h2 class="hasAnchor">
@@ -235,7 +235,7 @@ AMZN &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get
 <span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw">c</span>(end -<span class="st"> </span><span class="kw">weeks</span>(<span class="dv">6</span>), end),
                  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">120</span>)) +<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-12-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-12-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p><a class="anchor" id="mult-chart"></a></p>
 </div>
 <div id="charting-multiple-securities" class="section level2">
@@ -253,7 +253,7 @@ FANG %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw">c</span>(start, end)) +
 <span class="st">    </span><span class="kw">facet_wrap</span>(~<span class="st"> </span>symbol, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">scale =</span> <span class="st">"free_y"</span>) +<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-13-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-13-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p><em>A note about out-of-bounds data (or “clipping”), which is particularly important with faceting and charting moving averages</em>:</p>
 <p>The <code>coord_x_date</code> coordinate function is designed to zoom into specific sections of a chart without “clipping” data that is outside of the view. This is in contrast to <code>scale_x_date</code>, which removes out-of-bounds data from the charting. Under normal circumstances clipping is not a big deal (and is actually helpful for scaling the y-axis), but with financial applications users want to chart rolling/moving averages, lags, etc that depend on data outside of the view port. Because of this need for out-of-bounds data, there is a trade-off when charting: <strong>Too much out-of-bounds data distorts the scale of the y-axis, and too little and we cannot get a moving average</strong>. The optimal method is to include “just enough” out-of-bounds data to get the chart we want. This is why below the FANG data is filtered by date from double the number of moving-average days (<code>2 * n</code>) previous to the start date. This yields a nice y-axis scale and still allows us to create a moving average line using <code>geom_ma</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start &lt;-<span class="st"> </span>end -<span class="st"> </span><span class="kw">weeks</span>(<span class="dv">6</span>)
@@ -268,7 +268,7 @@ FANG %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw">c</span>(start, end)) +
 <span class="st">    </span><span class="kw">facet_wrap</span>(~<span class="st"> </span>symbol, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">scale =</span> <span class="st">"free_y"</span>) +
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-14-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-14-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div id="visualizing-trends" class="section level1">
@@ -314,7 +314,7 @@ FANG %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw">c</span>(end -<span class="st"> </span><span class="kw">weeks</span>(<span class="dv">24</span>), end),
                  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">120</span>)) +<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-15-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-15-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="example-2-charting-exponential-moving-averages" class="section level3">
 <h3 class="hasAnchor">
@@ -331,7 +331,7 @@ FANG %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw">c</span>(end -<span class="st"> </span><span class="kw">weeks</span>(<span class="dv">24</span>), end),
                  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">120</span>)) +
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-16-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-16-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="example-3-charting-moving-averages-for-multiple-stocks-at-once" class="section level3">
 <h3 class="hasAnchor">
@@ -350,7 +350,7 @@ FANG %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw">c</span>(start, end)) +
 <span class="st">    </span><span class="kw">facet_wrap</span>(~<span class="st"> </span>symbol, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">scales =</span> <span class="st">"free_y"</span>) +<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-17-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-17-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div id="bollinger-bands" class="section level2">
@@ -373,7 +373,7 @@ FANG %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw">c</span>(end -<span class="st"> </span><span class="kw">weeks</span>(<span class="dv">24</span>), end),
                  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">120</span>)) +<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-18-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-18-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="example-2-modifying-the-appearance-of-bollinger-bands" class="section level3">
 <h3 class="hasAnchor">
@@ -394,7 +394,7 @@ FANG %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw">c</span>(end -<span class="st"> </span><span class="kw">weeks</span>(<span class="dv">24</span>), end),
                  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">120</span>)) +<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-19-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-19-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="example-3-adding-bbands-to-multiple-stocks" class="section level3">
 <h3 class="hasAnchor">
@@ -414,7 +414,7 @@ FANG %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw">c</span>(start, end)) +
 <span class="st">    </span><span class="kw">facet_wrap</span>(~<span class="st"> </span>symbol, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">scales =</span> <span class="st">"free_y"</span>) +<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-20-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-20-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
 </div>
@@ -435,7 +435,7 @@ FANG %&gt;%
          <span class="dt">subtitle =</span> <span class="st">"Continuous Scale"</span>, 
          <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) +<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-21-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-21-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p><strong>Log Scale</strong>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">AMZN %&gt;%
 <span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> adjusted)) +
@@ -445,7 +445,7 @@ FANG %&gt;%
          <span class="dt">subtitle =</span> <span class="st">"Log Scale"</span>, 
          <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) +<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-22-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-22-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="example-2-regression-trendlines-with-geom_smooth" class="section level2">
 <h2 class="hasAnchor">
@@ -461,7 +461,7 @@ FANG %&gt;%
          <span class="dt">subtitle =</span> <span class="st">"Log Scale, Applying Linear Trendline"</span>, 
          <span class="dt">y =</span> <span class="st">"Adjusted Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) +<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-23-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-23-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p><strong>Loess</strong>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">AMZN %&gt;%
 <span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> adjusted)) +
@@ -472,7 +472,7 @@ FANG %&gt;%
          <span class="dt">subtitle =</span> <span class="st">"Log Scale, Applying Loess Trendline"</span>, 
          <span class="dt">y =</span> <span class="st">"Adjusted Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) +<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-24-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-24-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="example-3-charting-volume-with-geom_segment" class="section level2">
 <h2 class="hasAnchor">
@@ -487,7 +487,7 @@ FANG %&gt;%
          <span class="dt">y =</span> <span class="st">"Volume"</span>, <span class="dt">x =</span> <span class="st">""</span>) +
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>() +
 <span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>) </code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-25-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-25-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p>And, we can zoom in on a specific region. Using <code>scale_color_gradient</code> we can quickly visualize the high and low points, and using <code>geom_smooth</code> we can see the trend.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start &lt;-<span class="st"> </span>end -<span class="st"> </span><span class="kw">weeks</span>(<span class="dv">24</span>)
 AMZN %&gt;%
@@ -502,7 +502,7 @@ AMZN %&gt;%
 <span class="st">    </span><span class="kw">scale_color_gradient</span>(<span class="dt">low =</span> <span class="st">"red"</span>, <span class="dt">high =</span> <span class="st">"darkblue"</span>) +
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>() +<span class="st"> </span>
 <span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>) </code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-26-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-26-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div id="themes" class="section level1">
@@ -537,7 +537,7 @@ FANG %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>() +
 <span class="st">    </span><span class="kw"><a href="../reference/scale_manual.html">scale_color_tq</a></span>() +
 <span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales::dollar)</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-27-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-27-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="dark" class="section level2">
 <h2 class="hasAnchor">
@@ -556,7 +556,7 @@ FANG %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq_dark</a></span>() +
 <span class="st">    </span><span class="kw"><a href="../reference/scale_manual.html">scale_color_tq</a></span>(<span class="dt">theme =</span> <span class="st">"dark"</span>) +
 <span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales::dollar)</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-28-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-28-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="green" class="section level2">
 <h2 class="hasAnchor">
@@ -575,7 +575,7 @@ FANG %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq_green</a></span>() +
 <span class="st">    </span><span class="kw"><a href="../reference/scale_manual.html">scale_color_tq</a></span>(<span class="dt">theme =</span> <span class="st">"green"</span>) +
 <span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales::dollar)</code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-29-1.png" width="576"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-29-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
 </div>
