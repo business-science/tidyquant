@@ -1,10 +1,11 @@
-# Development version
+## tidyquant 0.5.0.9001
 
 * Improvements and Fixes:
     * Fixed bug with `tq_portfolio()` where `weights = NULL` would not execute an equal weighting scheme.
-    * Added error handling during dollar and percent conversion for get = "key.ratios" and get = "key.stats"
-    
-# tidyquant 0.5.0
+    * Added error handling during dollar and percent conversion for get = "key.ratios" and get = "key.stats".
+
+
+## tidyquant 0.5.0
 
 * New Data:
     * Quandl Integration: 
@@ -25,7 +26,7 @@
     * Fix `tq_get` error to return full error when issues are present. 
 
 
-# tidyquant 0.4.0
+## tidyquant 0.4.0
 
 * New Features:
     * `tq_transmute()` replaces `tq_transform()` for consistency with `dplyr`.
@@ -53,7 +54,7 @@
     * Issue #8, Part 1: Create `tq_index()` function to return a stock index. `tq_get(get = "stock.index")` is deprecated and will be removed during the next version after 0.4.0. Use `tq_index_options()` for index options. 
     * Issue #7: Fixed issue with date column inadvertently being coerced to `dttm`. 
 
-# tidyquant 0.3.0
+## tidyquant 0.3.0
 
 * New data:
     * New `tq_get` option `get = "key.stats"`, which retrieves the current key statistics (55 total) from [www.finance.yahoo.com/](http://finance.yahoo.com/). These include various current data such as Ask, Bid, Day's High, Day's Low, Last Trade Price, current P/E Ratio, EPS, Current Market Cap, EPS Projected Current Year, EPS Projected Next Year and many more. Example: `tq_get("AAPL", get = "key.stats")`.
@@ -70,7 +71,7 @@
     * Issue #2: Fixed bug with `tq_get()`, `get = "key.ratios"`, where key ratios for stocks from the NYSE returned `NA`.
 * Removed support for deprecated arguments: `x_fun`, `.x`, and `.y` in the respective transform and mutate functions.
 
-# tidyquant 0.2.0
+## tidyquant 0.2.0
 
 * New `get = "key.ratios"` option for `tq_get()`, which retrieves 10-years of key performance ratios (89 total) from [www.morningstar.com](https://www.morningstar.com). These include various historical measures of financial performance including profitability, growth, cash flow, financial health, efficiency, and valuation ratios. Example: `tq_get("AAPL", get = "key.ratios")`.
 * Added `zoo` `rollapply()` functions to list of compatible / integrated functions used with `tq_transform()` and `tq_mutate()`. See `tq_transform_fun_options()` for the full list.
@@ -80,6 +81,6 @@
 * Fixed duplication of column names during `tq_mutate`. Names are now sequentually indexed with duplicate names starting at `.1` suffix.  
 
 
-# tidyquant 0.1.0 
+## tidyquant 0.1.0 
 
 * Initial release of `tidyquant`, for seamless quantitative financial analysis (`xts`, `quantmod`, `TTR`) package integration with the `tidyverse`.
