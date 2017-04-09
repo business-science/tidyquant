@@ -94,9 +94,6 @@
 <a href="#tidyquant" class="anchor"></a>tidyquant</h1></div>
 <p><a href="https://travis-ci.org/business-science/tidyquant.svg?branch=master"><img src="https://travis-ci.org/business-science/tidyquant.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://codecov.io/gh/business-science/tidyquant"><img src="https://codecov.io/gh/business-science/tidyquant/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://cran.r-project.org/package=tidyquant"><img src="http://www.r-pkg.org/badges/version/tidyquant" alt="CRAN_Status_Badge"></a> <img src="http://cranlogs.r-pkg.org/badges/tidyquant?color=brightgreen"><img src="http://cranlogs.r-pkg.org/badges/grand-total/tidyquant?color=brightgreen"></p>
 <p><img src="README_0_logo.png" width="147" height="170" align="right"></p>
-<blockquote>
-<p>Bringing financial analysis to the tidyverse</p>
-</blockquote>
 <p><code>tidyquant</code> integrates the best resources for collecting and analyzing financial data, <code>zoo</code>, <code>xts</code>, <code>quantmod</code>, <code>TTR</code>, and <code>PerformanceAnalytics</code>, with the tidy data infrastructure of the <code>tidyverse</code> allowing for seamless interaction between each. You can now perform complete financial analyses in the <code>tidyverse</code>.</p>
 <div id="benefits" class="section level2">
 <h2 class="hasAnchor">
@@ -127,25 +124,108 @@
 <h3 class="hasAnchor">
 <a href="#comparing-stock-prices" class="anchor"></a>Comparing Stock Prices</h3>
 <p>Visualizing the stock price volatility of four stocks side-by-side is quick and easy…</p>
-<p><img src="/Users/levinescholar/Desktop/Programming/R/tq_business/tidyquant/img/sample_img_1_volatility.png" width="75%"></p>
+<p><img src="README_1_volatility.png" width="80%" style="display: block; margin: auto;"></p>
 </div>
 <div id="evaluating-stock-performance" class="section level3">
 <h3 class="hasAnchor">
 <a href="#evaluating-stock-performance" class="anchor"></a>Evaluating Stock Performance</h3>
 <p>What about stock performance? Quickly visualize how a $10,000 investment in various stocks would perform.</p>
-<p><img src="/Users/levinescholar/Desktop/Programming/R/tq_business/tidyquant/img/sample_img_2_stock_returns.png" width="75%"></p>
+<p><img src="README_2_returns.png" width="80%" style="display: block; margin: auto;"></p>
 </div>
 <div id="evaluating-portfolio-performance" class="section level3">
 <h3 class="hasAnchor">
 <a href="#evaluating-portfolio-performance" class="anchor"></a>Evaluating Portfolio Performance</h3>
 <p>Ok, stocks are too easy. What about portfolios? With the <code>PerformanceAnalytics</code> integration, visualizing blended portfolios are easy too!</p>
-<ul>
-<li>Portfolio 1: 50% FB, 25% AMZN, 25% NFLX, 0% GOOG</li>
-<li>Portfolio 2: 0% FB, 50% AMZN, 25% NFLX, 25% GOOG</li>
-<li>Portfolio 3: 25% FB, 0% AMZN, 50% NFLX, 25% GOOG</li>
-<li>Portfolio 4: 25% FB, 25% AMZN, 0% NFLX, 50% GOOG</li>
-</ul>
-<p><img src="/Users/levinescholar/Desktop/Programming/R/tq_business/tidyquant/img/sample_img_3_portfolio_returns.png" width="75%"></p>
+<table class="table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
+<thead><tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+Portfolio
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+Facebook (%)
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+Amazon (%)
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+Netflix (%)
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+Google (%)
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="padding-bottom: .25em; padding-top: .25em; text-align: center;">
+1
+</td>
+<td style="padding-bottom: .25em; padding-top: .25em; text-align: center;">
+50
+</td>
+<td style="padding-bottom: .25em; padding-top: .25em; text-align: center;">
+25
+</td>
+<td style="padding-bottom: .25em; padding-top: .25em; text-align: center;">
+25
+</td>
+<td style="padding-bottom: .25em; padding-top: .25em; text-align: center;">
+0
+</td>
+</tr>
+<tr>
+<td style="padding-bottom: .25em; padding-top: .25em; text-align: center;">
+2
+</td>
+<td style="padding-bottom: .25em; padding-top: .25em; text-align: center;">
+0
+</td>
+<td style="padding-bottom: .25em; padding-top: .25em; text-align: center;">
+50
+</td>
+<td style="padding-bottom: .25em; padding-top: .25em; text-align: center;">
+25
+</td>
+<td style="padding-bottom: .25em; padding-top: .25em; text-align: center;">
+25
+</td>
+</tr>
+<tr>
+<td style="padding-bottom: .25em; padding-top: .25em; text-align: center;">
+3
+</td>
+<td style="padding-bottom: .25em; padding-top: .25em; text-align: center;">
+25
+</td>
+<td style="padding-bottom: .25em; padding-top: .25em; text-align: center;">
+0
+</td>
+<td style="padding-bottom: .25em; padding-top: .25em; text-align: center;">
+50
+</td>
+<td style="padding-bottom: .25em; padding-top: .25em; text-align: center;">
+25
+</td>
+</tr>
+<tr>
+<td style="padding-bottom: .25em; padding-top: .25em; border-bottom: 2px solid grey; text-align: center;">
+4
+</td>
+<td style="padding-bottom: .25em; padding-top: .25em; border-bottom: 2px solid grey; text-align: center;">
+25
+</td>
+<td style="padding-bottom: .25em; padding-top: .25em; border-bottom: 2px solid grey; text-align: center;">
+25
+</td>
+<td style="padding-bottom: .25em; padding-top: .25em; border-bottom: 2px solid grey; text-align: center;">
+0
+</td>
+<td style="padding-bottom: .25em; padding-top: .25em; border-bottom: 2px solid grey; text-align: center;">
+50
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="README_3_port_returns.png" width="80%" style="display: block; margin: auto;"></p>
 <p>This just scratches the surface of <code>tidyquant</code>. Here’s how to install to get started.</p>
 </div>
 </div>

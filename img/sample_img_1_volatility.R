@@ -25,3 +25,18 @@ FANG %>%
     scale_y_continuous(labels = scales::dollar)
 
 ggsave("img/sample_img_1_volatility.png")
+
+# Website
+
+# FANG %>%
+#     filter(date >= start - days(2 * n_mavg)) %>%
+#     ggplot(aes(x = date, y = close, group = symbol)) +
+#     geom_candlestick(aes(open = open, close = close, high = high, low = low)) +
+#     geom_bbands(aes(high = high, low = low, close = close),
+#                 ma_fun = SMA, n = n_mavg, sd = 2, size = 0.5) +
+#     coord_x_date(xlim = c(start, end)) +
+#     facet_wrap(~ symbol, scales = "free_y") +
+#     theme_tq() +
+#     scale_y_continuous(labels = scales::dollar)
+#
+# ggsave("docs/README_1_volatility.png", width = 8, height = 5)

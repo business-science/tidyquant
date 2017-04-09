@@ -31,3 +31,16 @@ FANG_wealth %>%
     scale_y_continuous(labels = scales::dollar)
 
 ggsave("img/sample_img_2_stock_returns.png")
+
+# Website
+
+# FANG_wealth %>%
+#     ggplot(aes(x = date, y = wealth.index, color = symbol)) +
+#     geom_line(size = 2) +
+#     geom_smooth(method = "loess") +
+#      labs(x = "", y = "Investment Value") +
+#     theme_tq() +
+#     scale_color_tq() +
+#     scale_y_continuous(labels = scales::dollar)
+#
+#  ggsave("docs/README_2_returns.png", height = 4.5, width = 8)

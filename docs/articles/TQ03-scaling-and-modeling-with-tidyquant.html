@@ -87,7 +87,7 @@
       <h1>Scaling and Modeling with tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2017-04-08</h4>
+            <h4 class="date">2017-04-09</h4>
           </div>
 
     
@@ -459,7 +459,7 @@ stocks_model_stats</code></pre></div>
 <p>Let’s see an example when using <code><a href="../reference/tq_get.html">tq_get()</a></code> to get the stock prices for a long list of stocks with one <code>BAD APPLE</code>. The argument <code>complete_cases</code> comes in handy. The default is <code>TRUE</code>, which removes “bad apples” so future analysis have complete cases to compute on. Note that a gentle warning stating that an error occurred and was dealt with by removing the rows from the results.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"BAD APPLE"</span>) %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get =</span> <span class="st">"stock.prices"</span>, <span class="dt">complete_cases =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## Warning: x = 'BAD APPLE', get = 'stock.prices': Error in download.file(paste(yahoo.URL, "s=", Symbols.name, "&amp;a=", from.m, : cannot open URL 'http://ichart.finance.yahoo.com/table.csv?s=BAD APPLE&amp;a=0&amp;b=01&amp;c=2007&amp;d=3&amp;e=08&amp;f=2017&amp;g=d&amp;q=q&amp;y=0&amp;z=BAD APPLE&amp;x=.csv'
+<pre><code>## Warning: x = 'BAD APPLE', get = 'stock.prices': Error in download.file(paste(yahoo.URL, "s=", Symbols.name, "&amp;a=", from.m, : cannot open URL 'http://ichart.finance.yahoo.com/table.csv?s=BAD APPLE&amp;a=0&amp;b=01&amp;c=2007&amp;d=3&amp;e=09&amp;f=2017&amp;g=d&amp;q=q&amp;y=0&amp;z=BAD APPLE&amp;x=.csv'
 ##  Removing BAD APPLE.</code></pre>
 <pre><code>## # A tibble: 5,170 × 8
 ##    symbol       date  open  high   low close    volume adjusted
@@ -478,7 +478,7 @@ stocks_model_stats</code></pre></div>
 <p>Now switching <code>complete_cases = FALSE</code> will retain any errors as <code>NA</code> values in a nested data frame. Notice that the error message and output change. The error message now states that the <code>NA</code> values exist in the output and the return is a “nested” data structure.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"BAD APPLE"</span>) %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get =</span> <span class="st">"stock.prices"</span>, <span class="dt">complete_cases =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>## Warning: x = 'BAD APPLE', get = 'stock.prices': Error in download.file(paste(yahoo.URL, "s=", Symbols.name, "&amp;a=", from.m, : cannot open URL 'http://ichart.finance.yahoo.com/table.csv?s=BAD APPLE&amp;a=0&amp;b=01&amp;c=2007&amp;d=3&amp;e=08&amp;f=2017&amp;g=d&amp;q=q&amp;y=0&amp;z=BAD APPLE&amp;x=.csv'</code></pre>
+<pre><code>## Warning: x = 'BAD APPLE', get = 'stock.prices': Error in download.file(paste(yahoo.URL, "s=", Symbols.name, "&amp;a=", from.m, : cannot open URL 'http://ichart.finance.yahoo.com/table.csv?s=BAD APPLE&amp;a=0&amp;b=01&amp;c=2007&amp;d=3&amp;e=09&amp;f=2017&amp;g=d&amp;q=q&amp;y=0&amp;z=BAD APPLE&amp;x=.csv'</code></pre>
 <pre><code>## Warning in value[[3L]](cond): Returning as nested data frame.</code></pre>
 <pre><code>## # A tibble: 3 × 2
 ##      symbol         stock.prices

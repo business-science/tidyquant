@@ -63,3 +63,18 @@ FANG_portfolio_wealth  %>%
     scale_y_continuous(labels = scales::dollar)
 
 ggsave("img/sample_img_3_portfolio_returns.png", width = 7.64, height = 4.5)
+
+
+# Website
+
+# FANG_portfolio_wealth  %>%
+#     ggplot(aes(x = date, y = wealth.index, color = factor(portfolio))) +
+#     geom_line(size = 2) +
+#     geom_smooth(method = "loess") +
+#     labs(x = "", y = "Investment Value",
+#          color = "Portfolio Number: ") +
+#     theme_tq() +
+#     scale_color_tq() +
+#     scale_y_continuous(labels = scales::dollar)
+#
+# ggsave("docs/README_3_port_returns.png", height = 4.5, width = 8)
