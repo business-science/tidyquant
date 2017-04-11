@@ -476,7 +476,20 @@ wti_price_usd </code></pre></div>
 <p>Exchange rates are entered as currency pairs using “/” notation (e.g <code>"EUR/USD"</code>), and by setting <code>get = "exchange.rates"</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eur_usd &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"EUR/USD"</span>, <span class="dt">get =</span> <span class="st">"exchange.rates"</span>, <span class="dt">from =</span> <span class="st">"2000-01-01"</span>)
 eur_usd </code></pre></div>
-<pre><code>## [1] NA</code></pre>
+<pre><code>## # A tibble: 181 × 2
+##          date exchange.rate
+##        &lt;date&gt;         &lt;dbl&gt;
+## 1  2016-10-12      1.103425
+## 2  2016-10-13      1.102470
+## 3  2016-10-14      1.101920
+## 4  2016-10-15      1.097120
+## 5  2016-10-16      1.097120
+## 6  2016-10-17      1.098700
+## 7  2016-10-18      1.100250
+## 8  2016-10-19      1.097865
+## 9  2016-10-20      1.095970
+## 10 2016-10-21      1.089410
+## # ... with 171 more rows</code></pre>
 <p>The data source is <a href="https://www.oanda.com/">Oanda</a>, and list of currencies to compare can be found on <a href="https://www.oanda.com/currency/converter/">Oanda’s currency converter</a>. It may make more sense to get this data from the FRED (See <a href="#economic-data">Economic Data</a>) since the max period for Oanda is 5-years.</p>
 </div>
 <div id="metal-prices" class="section level2">
@@ -486,7 +499,20 @@ eur_usd </code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plat_price_eur &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"plat"</span>, <span class="dt">get =</span> <span class="st">"metal.prices"</span>, 
                          <span class="dt">from =</span> <span class="st">"2000-01-01"</span>, <span class="dt">base.currency =</span> <span class="st">"EUR"</span>)
 plat_price_eur </code></pre></div>
-<pre><code>## [1] NA</code></pre>
+<pre><code>## # A tibble: 181 × 2
+##          date    price
+##        &lt;date&gt;    &lt;dbl&gt;
+## 1  2016-10-12 852.7095
+## 2  2016-10-13 847.6425
+## 3  2016-10-14 847.1625
+## 4  2016-10-15 850.8695
+## 5  2016-10-16 854.2195
+## 6  2016-10-17 853.7365
+## 7  2016-10-18 858.9610
+## 8  2016-10-19 860.3045
+## 9  2016-10-20 850.6480
+## 10 2016-10-21 857.6615
+## # ... with 171 more rows</code></pre>
 <p>The data source is <a href="https://www.oanda.com/">Oanda</a>. It may make more sense to get this data from the FRED (See <a href="#economic-data">Economic Data</a>) since the max period for Oanda is 5-years.</p>
 </div>
 </div>

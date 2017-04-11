@@ -169,15 +169,7 @@ When <code>preserve_row_names = TRUE</code> is specified, a new column,
 
 <span class='co'># xts coercion to tibble</span>
 <span class='kw'>quantmod</span><span class='kw'>::</span><span class='fu'>getSymbols</span>(<span class='st'>"AAPL"</span>, <span class='kw'>auto.assign</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'>as_tibble</span>(<span class='kw'>preserve_row_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>    As of 0.4-0, ‘getSymbols’ uses env=parent.frame() and</span>
-#&gt; <span class='message'> auto.assign=TRUE by default.</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'> This  behavior  will be  phased out in 0.5-0  when the call  will</span>
-#&gt; <span class='message'> default to use auto.assign=FALSE. getOption("getSymbols.env") and </span>
-#&gt; <span class='message'> getOptions("getSymbols.auto.assign") are now checked for alternate defaults</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'> This message is shown once per session and may be disabled by setting </span>
-#&gt; <span class='message'> options("getSymbols.warning4.0"=FALSE). See ?getSymbols for more details.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: the condition has length &gt; 1 and only the first element will be used</span></div><div class='output co'>#&gt; # A tibble: 2,586 × 7
+    <span class='fu'>as_tibble</span>(<span class='kw'>preserve_row_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: the condition has length &gt; 1 and only the first element will be used</span></div><div class='output co'>#&gt; # A tibble: 2,586 × 7
 #&gt;     row.names AAPL.Open AAPL.High AAPL.Low AAPL.Close AAPL.Volume AAPL.Adjusted
 #&gt;         &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;
 #&gt; 1  2007-01-03     86.29     86.58    81.90      83.80   309579900      10.85709
