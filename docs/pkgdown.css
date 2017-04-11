@@ -36,11 +36,8 @@ img.icon {
 
 /* Section anchors ---------------------------------*/
 
-.hasAnchor {
-  margin-left: -30px;
-}
-
 a.anchor {
+  margin-left: -30px;
   display:inline-block;
   width: 30px;
   height: 30px;
@@ -56,12 +53,30 @@ a.anchor {
   visibility: visible;
 }
 
+@media (max-width: 767px) {
+  .hasAnchor:hover a.anchor {
+    visibility: hidden;
+  }
+}
+
+
 /* Fixes for fixed navbar --------------------------*/
 
 .contents h1, .contents h2, .contents h3, .contents h4 {
   padding-top: 60px;
   margin-top: -60px;
 }
+
+/* Static header placement on mobile devices */
+@media (max-width: 767px) {
+  .navbar-fixed-top {
+    position: absolute;
+  }
+  .navbar {
+    padding: 0;
+  }
+}
+
 
 /* Sidebar --------------------------*/
 
