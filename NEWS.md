@@ -1,6 +1,10 @@
-## tidyquant 0.5.0.9001
+## tidyquant 0.5.0.9002
 
-* Improvements and Fixes:
+* Improvements
+    * Added `pkgdown` integration.
+
+* Fixes:
+    * Oanda only returns 180 days of FX and Metals data now. Updated the tests. Waiting for official `quantmod` hotfix release. The current fix is in a `quantmod` branch.
     * Fixed bug with `tq_portfolio()` where `weights = NULL` would not execute an equal weighting scheme.
     * Added error handling during dollar and percent conversion for get = "key.ratios" and get = "key.stats".
 

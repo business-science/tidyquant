@@ -8,3 +8,6 @@
 ^revdep$
 img
 ^logo\.png$
+^_pkgdown\.yml$
+^index\.Rmd$
+^docs$
