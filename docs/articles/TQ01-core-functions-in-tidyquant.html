@@ -87,7 +87,7 @@
       <h1>Core Functions in tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2017-04-09</h4>
+            <h4 class="date">2017-04-10</h4>
           </div>
 
     
@@ -150,20 +150,20 @@
 <a href="#stock-exchanges" class="anchor"></a>Stock Exchanges</h2>
 <p>Stock lists for three stock exchanges are available: NASDAQ, NYSE, and AMEX. If you forget, just use <code><a href="../reference/tq_stock_list.html">tq_exchange_options()</a></code>. We can easily get the full list of stocks on the NASDAQ exchange.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/tq_stock_list.html">tq_exchange</a></span>(<span class="st">"NASDAQ"</span>)</code></pre></div>
-<pre><code>## # A tibble: 3,192 × 7
+<pre><code>## # A tibble: 3,166 × 7
 ##    symbol                                company last.sale.price
 ##     &lt;chr&gt;                                  &lt;chr&gt;           &lt;dbl&gt;
-## 1     PIH 1347 Property Insurance Holdings, Inc.          7.6953
-## 2    TURN               180 Degree Capital Corp.          1.4300
-## 3    FLWS                1-800 FLOWERS.COM, Inc.         10.2000
-## 4    FCCY          1st Constitution Bancorp (NJ)         18.5500
-## 5    SRCE                 1st Source Corporation         45.9100
-## 6    VNET                   21Vianet Group, Inc.          5.3900
-## 7    TWOU                               2U, Inc.         41.5400
-## 8    JOBS                            51job, Inc.         38.9600
-## 9    CAFD             8point3 Energy Partners LP         11.8800
-## 10   EGHT                                8x8 Inc         15.2000
-## # ... with 3,182 more rows, and 4 more variables: market.cap &lt;chr&gt;,
+## 1     PIH 1347 Property Insurance Holdings, Inc.            7.75
+## 2    TURN               180 Degree Capital Corp.            1.44
+## 3    FLWS                1-800 FLOWERS.COM, Inc.           10.25
+## 4    FCCY          1st Constitution Bancorp (NJ)           18.05
+## 5    SRCE                 1st Source Corporation           45.33
+## 6    VNET                   21Vianet Group, Inc.            5.55
+## 7    TWOU                               2U, Inc.           41.35
+## 8    JOBS                            51job, Inc.           39.48
+## 9    CAFD             8point3 Energy Partners LP           12.12
+## 10   EGHT                                8x8 Inc           15.25
+## # ... with 3,156 more rows, and 4 more variables: market.cap &lt;chr&gt;,
 ## #   ipo.year &lt;dbl&gt;, sector &lt;chr&gt;, industry &lt;chr&gt;</code></pre>
 <p>The data source is the <a href="http://www.nasdaq.com/">NASDAQ</a>.</p>
 </div>
@@ -183,7 +183,7 @@
 <p>The stock prices can be retrieved succinctly using <code>get = "stock.prices"</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aapl_prices  &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"AAPL"</span>, <span class="dt">get =</span> <span class="st">"stock.prices"</span>, <span class="dt">from =</span> <span class="st">" 1990-01-01"</span>)
 aapl_prices </code></pre></div>
-<pre><code>## # A tibble: 6,872 × 7
+<pre><code>## # A tibble: 6,873 × 7
 ##          date   open   high   low  close   volume adjusted
 ##        &lt;date&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1  1990-01-02 35.250 37.500 35.00 37.250 45799600 1.127188
@@ -196,7 +196,7 @@ aapl_prices </code></pre></div>
 ## 8  1990-01-11 36.250 36.250 34.50 34.500 52763200 1.043972
 ## 9  1990-01-12 34.250 34.750 33.75 34.500 42974400 1.043972
 ## 10 1990-01-15 34.500 35.750 34.25 34.250 40434800 1.036407
-## # ... with 6,862 more rows</code></pre>
+## # ... with 6,863 more rows</code></pre>
 <p>Yahoo Japan stock prices can be retrieved using a similar call, <code>get = "stock.prices.japan"</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x8411T &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"8411.T"</span>, <span class="dt">get =</span> <span class="st">"stock.prices.japan"</span>, <span class="dt">from =</span> <span class="st">"2016-01-01"</span>, <span class="dt">to  =</span> <span class="st">"2016-12-31"</span>)</code></pre></div>
 <p>Dividends are obtained using <code>get = "dividends"</code>.</p>
@@ -364,9 +364,9 @@ aapl_key_stats %&gt;%
 <pre><code>## # A tibble: 3 × 8
 ##   symbol    Ask Ask.Size    Bid Bid.Size Change Days.High Days.Low
 ##    &lt;chr&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1   AAPL 143.50     4000 143.31      200  -0.32    144.18   143.27
-## 2     FB 140.95      500 140.60      200  -0.39    141.55   140.24
-## 3   GOOG 825.49      100 824.01      300  -3.21    828.48   820.51</code></pre>
+## 1   AAPL 143.21      600 143.01      100  -0.17    143.88   142.90
+## 2     FB 141.13      500 140.95      300   0.26    141.43   140.63
+## 3   GOOG 825.80      100 824.01      100   0.06    829.35   823.77</code></pre>
 <p>Finally, because the statistics are real-time, we can setup real-time monitoring by calling <code>tq_get</code> at periodic intervals. The function below is not evaluated for time considerations, but if called during active trading sessions will collect five samples at three second intervals.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Not evaluated; When run during active trading, will return real-time values</span>
 collect_real_time_data &lt;-<span class="st"> </span>function(x, interval_sec, n) {
@@ -724,7 +724,7 @@ AAPL_xts %&gt;%<span class="st"> </span><span class="kw">head</span>()</code></p
 <p>We can easily coerce to <code>tibble</code> by setting <code>preserve_row_names = TRUE</code>. Note the return column is <code>row.names</code> with class of <code>character</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">AAPL_tbl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as_tibble.html">as_tibble</a></span>(AAPL_xts, <span class="dt">preserve_row_names =</span> <span class="ot">TRUE</span>)
 AAPL_tbl</code></pre></div>
-<pre><code>## # A tibble: 2,585 × 7
+<pre><code>## # A tibble: 2,586 × 7
 ##     row.names AAPL.Open AAPL.High AAPL.Low AAPL.Close AAPL.Volume
 ##         &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
 ## 1  2007-01-03     86.29     86.58    81.90      83.80   309579900
@@ -737,12 +737,12 @@ AAPL_tbl</code></pre></div>
 ## 8  2007-01-12     94.59     95.06    93.23      94.62   328172600
 ## 9  2007-01-16     95.68     97.25    95.45      97.10   311019100
 ## 10 2007-01-17     97.56     97.60    94.82      94.95   411565000
-## # ... with 2,575 more rows, and 1 more variables: AAPL.Adjusted &lt;dbl&gt;</code></pre>
+## # ... with 2,576 more rows, and 1 more variables: AAPL.Adjusted &lt;dbl&gt;</code></pre>
 <p>Converting to date is one extra step with <code>lubridate</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">AAPL_tbl &lt;-<span class="st"> </span>AAPL_tbl %&gt;%
 <span class="st">    </span><span class="kw">mutate</span>(<span class="dt">row.names =</span> lubridate::<span class="kw">ymd</span>(row.names))
 AAPL_tbl</code></pre></div>
-<pre><code>## # A tibble: 2,585 × 7
+<pre><code>## # A tibble: 2,586 × 7
 ##     row.names AAPL.Open AAPL.High AAPL.Low AAPL.Close AAPL.Volume
 ##        &lt;date&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
 ## 1  2007-01-03     86.29     86.58    81.90      83.80   309579900
@@ -755,7 +755,7 @@ AAPL_tbl</code></pre></div>
 ## 8  2007-01-12     94.59     95.06    93.23      94.62   328172600
 ## 9  2007-01-16     95.68     97.25    95.45      97.10   311019100
 ## 10 2007-01-17     97.56     97.60    94.82      94.95   411565000
-## # ... with 2,575 more rows, and 1 more variables: AAPL.Adjusted &lt;dbl&gt;</code></pre>
+## # ... with 2,576 more rows, and 1 more variables: AAPL.Adjusted &lt;dbl&gt;</code></pre>
 </div>
 <div id="coerce-from-tibble-to-xts-as_xts" class="section level2">
 <h2 class="hasAnchor">
