@@ -1,9 +1,10 @@
-## tidyquant 0.5.0.9002
+## tidyquant 0.5.0.9003
 
 * Improvements
     * Added `pkgdown` integration.
 
 * Fixes:
+    * Quandl data returned newest to oldest. For consistency with other `tq_get()` data, it now returns oldest to newest.
     * Oanda only returns 180 days of FX and Metals data now. Updated the tests. Waiting for official `quantmod` hotfix release. The current fix is in a `quantmod` branch.
     * Fixed bug with `tq_portfolio()` where `weights = NULL` would not execute an equal weighting scheme.
     * Added error handling during dollar and percent conversion for get = "key.ratios" and get = "key.stats".

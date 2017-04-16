@@ -758,7 +758,7 @@ tq_get_util_3 <- function(x, get, complete_cases, map, ...) {
 }
 
 # Util 4: Quandl -----
-tq_get_util_4 <- function(x, get, type = "raw",  meta = FALSE, complete_cases, map, ...) {
+tq_get_util_4 <- function(x, get, type = "raw",  meta = FALSE, order = "asc", complete_cases, map, ...) {
 
     # Check x
     if (!is.character(x)) {
@@ -770,15 +770,28 @@ tq_get_util_4 <- function(x, get, type = "raw",  meta = FALSE, complete_cases, m
         stringr::str_trim(side = "both")
 
     # Check type
-    if (type != "raw") type = "raw"
+    if (type != "raw") {
+        type = "raw"
+        warning("tidyquant only supports the 'raw' return type. Returning 'raw' data.", call. = FALSE)
+    }
 
     # Check meta
-    if (meta == TRUE) meta = FALSE
+    if (meta == TRUE) {
+        meta = FALSE
+        warning("tidyquant does not support Quandl meta data. Setting `meta == FALSE`.", call. = FALSE)
+    }
+
+    # Check order
+    if (order == "desc") {
+        order = "asc"
+        warning("For consistency, tidyquant does not return descending data. Returning ascending.", call. = FALSE)
+    }
 
     # Repurpose from and to as start_date and end_date
-    args <- list(code = x,
-                 type = type,
-                 meta = meta)
+    args <- list(code  = x,
+                 type  = type,
+                 meta  = meta,
+                 order = order)
     args <- append(args, list(...))
     if (!is.null(args$from)) args$start_date <- args$from
     if (!is.null(args$to)) args$end_date <- args$to
