@@ -326,11 +326,13 @@ The FRED contains literally over 10K data sets that are free to use. See the [FR
 Exchange rates are entered as currency pairs using "/" notation (e.g `"EUR/USD"`), and by setting `get = "exchange.rates"`. 
 
 ```{r}
-eur_usd <- tq_get("EUR/USD", get = "exchange.rates", from = "2000-01-01")
+eur_usd <- tq_get("EUR/USD", 
+                  get = "exchange.rates", 
+                  from = Sys.Date() - lubridate::days(10))
 eur_usd 
 ```
 
-The data source is [Oanda](https://www.oanda.com/), and list of currencies to compare can be found on [Oanda's currency converter](https://www.oanda.com/currency/converter/). It may make more sense to get this data from the FRED (See [Economic Data](#economic-data)) since the max period for Oanda is 5-years.
+The data source is [Oanda](https://www.oanda.com/), and list of currencies to compare can be found on [Oanda's currency converter](https://www.oanda.com/currency/converter/). It may make more sense to get this data from the FRED (See [Economic Data](#economic-data)) since the max period for Oanda is 180 days.
 
 ## Metal Prices
 
@@ -338,11 +340,12 @@ Metal prices are very similar to stock prices. Set `get = "metal.prices"` along 
 
 ```{r}
 plat_price_eur <- tq_get("plat", get = "metal.prices", 
-                         from = "2000-01-01", base.currency = "EUR")
+                         from = Sys.Date() - lubridate::days(10),
+                         base.currency = "EUR")
 plat_price_eur 
 ```
 
-The data source is [Oanda](https://www.oanda.com/). It may make more sense to get this data from the FRED (See [Economic Data](#economic-data)) since the max period for Oanda is 5-years.
+The data source is [Oanda](https://www.oanda.com/). It may make more sense to get this data from the FRED (See [Economic Data](#economic-data)) since the max period for Oanda is 180 days.
 
 # Mutate Quantitative Data
 

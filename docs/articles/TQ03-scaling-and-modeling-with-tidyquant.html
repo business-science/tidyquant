@@ -9,7 +9,7 @@
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -87,7 +87,7 @@
       <h1>Scaling and Modeling with tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2017-04-10</h4>
+            <h4 class="date">2017-04-19</h4>
           </div>
 
     
@@ -131,15 +131,15 @@
 <pre><code>## # A tibble: 756 × 8
 ##    symbol       date   open   high    low  close   volume  adjusted
 ##     &lt;chr&gt;     &lt;date&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-## 1    AAPL 2016-01-04 102.61 105.37 102.00 105.35 67649400 102.61218
-## 2    AAPL 2016-01-05 105.75 105.85 102.41 102.71 55791000 100.04079
-## 3    AAPL 2016-01-06 100.56 102.37  99.87 100.70 68457400  98.08303
-## 4    AAPL 2016-01-07  98.68 100.13  96.43  96.45 81094400  93.94347
-## 5    AAPL 2016-01-08  98.55  99.11  96.76  96.96 70798000  94.44022
-## 6    AAPL 2016-01-11  98.97  99.06  97.34  98.53 49739400  95.96942
-## 7    AAPL 2016-01-12 100.55 100.69  98.84  99.96 49154200  97.36226
-## 8    AAPL 2016-01-13 100.32 101.19  97.30  97.39 62439600  94.85905
-## 9    AAPL 2016-01-14  97.96 100.48  95.74  99.52 63170100  96.93369
+##  1   AAPL 2016-01-04 102.61 105.37 102.00 105.35 67649400 102.61218
+##  2   AAPL 2016-01-05 105.75 105.85 102.41 102.71 55791000 100.04079
+##  3   AAPL 2016-01-06 100.56 102.37  99.87 100.70 68457400  98.08303
+##  4   AAPL 2016-01-07  98.68 100.13  96.43  96.45 81094400  93.94347
+##  5   AAPL 2016-01-08  98.55  99.11  96.76  96.96 70798000  94.44022
+##  6   AAPL 2016-01-11  98.97  99.06  97.34  98.53 49739400  95.96942
+##  7   AAPL 2016-01-12 100.55 100.69  98.84  99.96 49154200  97.36226
+##  8   AAPL 2016-01-13 100.32 101.19  97.30  97.39 62439600  94.85905
+##  9   AAPL 2016-01-14  97.96 100.48  95.74  99.52 63170100  96.93369
 ## 10   AAPL 2016-01-15  96.20  97.71  95.36  97.13 79010000  94.60580
 ## # ... with 746 more rows</code></pre>
 <p>The output is a single level tibble with all or the stock prices in one tibble. The auto-generated column name is “symbol”, which can be pre-emptively renamed by giving the vector a name (e.g. <code>stocks &lt;- c("AAPL", "GOOG", "FB")</code>) and then piping to <code>tq_get</code>.</p>
@@ -166,15 +166,15 @@ stock_list</code></pre></div>
 <pre><code>## # A tibble: 756 × 9
 ##    stocks   industry       date   open   high    low  close   volume
 ##     &lt;chr&gt;      &lt;chr&gt;     &lt;date&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-## 1    AAPL Technology 2016-01-04 102.61 105.37 102.00 105.35 67649400
-## 2    AAPL Technology 2016-01-05 105.75 105.85 102.41 102.71 55791000
-## 3    AAPL Technology 2016-01-06 100.56 102.37  99.87 100.70 68457400
-## 4    AAPL Technology 2016-01-07  98.68 100.13  96.43  96.45 81094400
-## 5    AAPL Technology 2016-01-08  98.55  99.11  96.76  96.96 70798000
-## 6    AAPL Technology 2016-01-11  98.97  99.06  97.34  98.53 49739400
-## 7    AAPL Technology 2016-01-12 100.55 100.69  98.84  99.96 49154200
-## 8    AAPL Technology 2016-01-13 100.32 101.19  97.30  97.39 62439600
-## 9    AAPL Technology 2016-01-14  97.96 100.48  95.74  99.52 63170100
+##  1   AAPL Technology 2016-01-04 102.61 105.37 102.00 105.35 67649400
+##  2   AAPL Technology 2016-01-05 105.75 105.85 102.41 102.71 55791000
+##  3   AAPL Technology 2016-01-06 100.56 102.37  99.87 100.70 68457400
+##  4   AAPL Technology 2016-01-07  98.68 100.13  96.43  96.45 81094400
+##  5   AAPL Technology 2016-01-08  98.55  99.11  96.76  96.96 70798000
+##  6   AAPL Technology 2016-01-11  98.97  99.06  97.34  98.53 49739400
+##  7   AAPL Technology 2016-01-12 100.55 100.69  98.84  99.96 49154200
+##  8   AAPL Technology 2016-01-13 100.32 101.19  97.30  97.39 62439600
+##  9   AAPL Technology 2016-01-14  97.96 100.48  95.74  99.52 63170100
 ## 10   AAPL Technology 2016-01-15  96.20  97.71  95.36  97.13 79010000
 ## # ... with 746 more rows, and 1 more variables: adjusted &lt;dbl&gt;</code></pre>
 </div>
@@ -186,15 +186,15 @@ stock_list</code></pre></div>
 <pre><code>## # A tibble: 65 × 2
 ##    symbol                      company
 ##     &lt;chr&gt;                        &lt;chr&gt;
-## 1     MMM                           3M
-## 2     ALK             ALASKA AIR GROUP
-## 3     AAL AMERICAN AIRLINES GROUP INC.
-## 4     AEP      AMERICAN ELECTRIC POWER
-## 5     AXP             AMERICAN EXPRESS
-## 6     AWK         AMERICAN WATER WORKS
-## 7    AAPL                        APPLE
-## 8     CAR            AVIS BUDGET GROUP
-## 9     CAT                  CATERPILLAR
+##  1    MMM                           3M
+##  2    ALK             ALASKA AIR GROUP
+##  3    AAL AMERICAN AIRLINES GROUP INC.
+##  4    AEP      AMERICAN ELECTRIC POWER
+##  5    AXP             AMERICAN EXPRESS
+##  6    AWK         AMERICAN WATER WORKS
+##  7   AAPL                        APPLE
+##  8    CAR            AVIS BUDGET GROUP
+##  9    CAT                  CATERPILLAR
 ## 10    CNP           CENTERPOINT ENERGY
 ## # ... with 55 more rows</code></pre>
 <p>…or, get an exchange.</p>
@@ -202,36 +202,36 @@ stock_list</code></pre></div>
 <pre><code>## # A tibble: 3,146 × 7
 ##    symbol                company last.sale.price market.cap ipo.year
 ##     &lt;chr&gt;                  &lt;chr&gt;           &lt;dbl&gt;      &lt;chr&gt;    &lt;dbl&gt;
-## 1     DDD 3D Systems Corporation           14.29     $1.63B       NA
-## 2     MMM             3M Company          189.71   $113.37B       NA
-## 3    WBAI        500.com Limited           14.12   $585.95M     2013
-## 4    WUBA            58.com Inc.           37.43     $5.42B     2013
-## 5     AHC  A.H. Belo Corporation            6.15   $133.65M       NA
-## 6    ATEN     A10 Networks, Inc.            8.84   $604.18M     2014
-## 7     AAC     AAC Holdings, Inc.            8.26   $195.68M     2014
-## 8     AIR              AAR Corp.           33.74     $1.16B       NA
-## 9     AAN     Aaron&amp;#39;s,  Inc.           30.53     $2.22B       NA
-## 10    ABB                ABB Ltd           23.09    $49.38B       NA
+##  1    DDD 3D Systems Corporation           15.28     $1.74B       NA
+##  2    MMM             3M Company          190.22   $113.67B       NA
+##  3   WBAI        500.com Limited           13.43   $557.32M     2013
+##  4   WUBA            58.com Inc.           35.53     $5.14B     2013
+##  5    AHC  A.H. Belo Corporation            6.10   $132.56M       NA
+##  6   ATEN     A10 Networks, Inc.            8.72   $595.98M     2014
+##  7    AAC     AAC Holdings, Inc.            7.67   $184.79M     2014
+##  8    AIR              AAR Corp.           33.62     $1.15B       NA
+##  9    AAN     Aaron&amp;#39;s,  Inc.           30.16     $2.19B       NA
+## 10    ABB                ABB Ltd           22.19    $47.46B       NA
 ## # ... with 3,136 more rows, and 2 more variables: sector &lt;chr&gt;,
 ## #   industry &lt;chr&gt;</code></pre>
 <p>Send the index or exchange to <code>tq_get</code>. <em>Important Note: This can take several minutes depending on the size of the index or exchange, which is why only the first three stocks are evaluated in the vignette.</em></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/tq_stock_list.html">tq_index</a></span>(<span class="st">"DOWJONES"</span>) %&gt;%
 <span class="st">    </span><span class="kw">slice</span>(<span class="dv">1</span>:<span class="dv">3</span>) %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get =</span> <span class="st">"stock.prices"</span>)</code></pre></div>
-<pre><code>## # A tibble: 7,758 × 9
+<pre><code>## # A tibble: 7,773 × 9
 ##    symbol company       date  open  high   low close  volume adjusted
 ##     &lt;chr&gt;   &lt;chr&gt;     &lt;date&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
-## 1     MMM      3M 2007-01-03 77.53 78.85 77.38 78.26 3781500 59.92042
-## 2     MMM      3M 2007-01-04 78.40 78.41 77.45 77.95 2968400 59.68306
-## 3     MMM      3M 2007-01-05 77.89 77.90 77.01 77.42 2765200 59.27726
-## 4     MMM      3M 2007-01-08 77.42 78.04 76.97 77.59 2434500 59.40742
-## 5     MMM      3M 2007-01-09 78.00 78.23 77.44 77.68 1896800 59.47633
-## 6     MMM      3M 2007-01-10 77.31 77.96 77.04 77.85 1787500 59.60649
-## 7     MMM      3M 2007-01-11 78.05 79.03 77.88 78.65 2372500 60.21902
-## 8     MMM      3M 2007-01-12 78.41 79.50 78.22 79.36 2582200 60.76264
-## 9     MMM      3M 2007-01-16 79.48 79.62 78.92 79.56 2526600 60.91577
+##  1    MMM      3M 2007-01-03 77.53 78.85 77.38 78.26 3781500 59.92042
+##  2    MMM      3M 2007-01-04 78.40 78.41 77.45 77.95 2968400 59.68306
+##  3    MMM      3M 2007-01-05 77.89 77.90 77.01 77.42 2765200 59.27726
+##  4    MMM      3M 2007-01-08 77.42 78.04 76.97 77.59 2434500 59.40742
+##  5    MMM      3M 2007-01-09 78.00 78.23 77.44 77.68 1896800 59.47633
+##  6    MMM      3M 2007-01-10 77.31 77.96 77.04 77.85 1787500 59.60649
+##  7    MMM      3M 2007-01-11 78.05 79.03 77.88 78.65 2372500 60.21902
+##  8    MMM      3M 2007-01-12 78.41 79.50 78.22 79.36 2582200 60.76264
+##  9    MMM      3M 2007-01-16 79.48 79.62 78.92 79.56 2526600 60.91577
 ## 10    MMM      3M 2007-01-17 79.33 79.51 78.75 78.91 2711300 60.41810
-## # ... with 7,748 more rows</code></pre>
+## # ... with 7,763 more rows</code></pre>
 <p>You can use any applicable “getter” to get data for <strong>every stock in an index or an exchange</strong>! This includes: “stock.prices”, “key.ratios”, “key.stats”, “financials”, and more.</p>
 </div>
 </div>
@@ -244,10 +244,10 @@ stock_list</code></pre></div>
 <pre><code>## # A tibble: 4 × 2
 ##   symbol         stock.prices
 ##    &lt;chr&gt;               &lt;list&gt;
-## 1   AAPL &lt;tibble [2,586 × 7]&gt;
-## 2   GOOG &lt;tibble [2,586 × 7]&gt;
-## 3   AMZN &lt;tibble [2,586 × 7]&gt;
-## 4     FB &lt;tibble [1,231 × 7]&gt;</code></pre>
+## 1   AAPL &lt;tibble [2,591 × 7]&gt;
+## 2   GOOG &lt;tibble [2,591 × 7]&gt;
+## 3   AMZN &lt;tibble [2,591 × 7]&gt;
+## 4     FB &lt;tibble [1,236 × 7]&gt;</code></pre>
 </div>
 <div id="method-4-compound-getters" class="section level2">
 <h2 class="hasAnchor">
@@ -258,8 +258,8 @@ stock_list</code></pre></div>
 <pre><code>## # A tibble: 2 × 3
 ##   symbol         stock.prices       financials
 ##    &lt;chr&gt;               &lt;list&gt;           &lt;list&gt;
-## 1   AAPL &lt;tibble [2,586 × 7]&gt; &lt;tibble [3 × 3]&gt;
-## 2   GOOG &lt;tibble [2,586 × 7]&gt; &lt;tibble [3 × 3]&gt;</code></pre>
+## 1   AAPL &lt;tibble [2,591 × 7]&gt; &lt;tibble [3 × 3]&gt;
+## 2   GOOG &lt;tibble [2,591 × 7]&gt; &lt;tibble [3 × 3]&gt;</code></pre>
 <p>This returns the stock prices and financials for each stock as one nested data frame! Any of the <code>get</code> options that accept stock symbols can be used in this manner: <code>"stock.prices"</code>, <code>"financials"</code>, <code>"key.ratios"</code>, <code>"key.stats"</code>, <code>"dividends"</code>, and <code>"splits"</code>.</p>
 </div>
 </div>
@@ -272,15 +272,15 @@ FANG</code></pre></div>
 <pre><code>## # A tibble: 4,032 × 8
 ##    symbol       date  open  high   low close    volume adjusted
 ##     &lt;chr&gt;     &lt;date&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1      FB 2013-01-02 27.44 28.18 27.42 28.00  69846400    28.00
-## 2      FB 2013-01-03 27.88 28.47 27.59 27.77  63140600    27.77
-## 3      FB 2013-01-04 28.01 28.93 27.83 28.76  72715400    28.76
-## 4      FB 2013-01-07 28.69 29.79 28.65 29.42  83781800    29.42
-## 5      FB 2013-01-08 29.51 29.60 28.86 29.06  45871300    29.06
-## 6      FB 2013-01-09 29.67 30.60 29.49 30.59 104787700    30.59
-## 7      FB 2013-01-10 30.60 31.45 30.28 31.30  95316400    31.30
-## 8      FB 2013-01-11 31.28 31.96 31.10 31.72  89598000    31.72
-## 9      FB 2013-01-14 32.08 32.21 30.62 30.95  98892800    30.95
+##  1     FB 2013-01-02 27.44 28.18 27.42 28.00  69846400    28.00
+##  2     FB 2013-01-03 27.88 28.47 27.59 27.77  63140600    27.77
+##  3     FB 2013-01-04 28.01 28.93 27.83 28.76  72715400    28.76
+##  4     FB 2013-01-07 28.69 29.79 28.65 29.42  83781800    29.42
+##  5     FB 2013-01-08 29.51 29.60 28.86 29.06  45871300    29.06
+##  6     FB 2013-01-09 29.67 30.60 29.49 30.59 104787700    30.59
+##  7     FB 2013-01-10 30.60 31.45 30.28 31.30  95316400    31.30
+##  8     FB 2013-01-11 31.28 31.96 31.10 31.72  89598000    31.72
+##  9     FB 2013-01-14 32.08 32.21 30.62 30.95  98892800    30.95
 ## 10     FB 2013-01-15 30.64 31.71 29.88 30.10 173242600    30.10
 ## # ... with 4,022 more rows</code></pre>
 <p>Second, use <code>group_by</code> to group by stock symbol. Third, apply the mutation. We can do this in one easy workflow. The <code>periodReturns</code> function is applied to each group of stock prices, and a new data frame was returned with the annual returns in the correct periodicity.</p>
@@ -336,15 +336,15 @@ AAPL_annual_log_returns</code></pre></div>
 <pre><code>## # A tibble: 10 × 2
 ##          date yearly.returns
 ##        &lt;date&gt;          &lt;dbl&gt;
-## 1  2007-12-31     0.86023789
-## 2  2008-12-31    -0.84191057
-## 3  2009-12-31     0.90381734
-## 4  2010-12-31     0.42571147
-## 5  2011-12-30     0.22759789
-## 6  2012-12-31     0.28191714
-## 7  2013-12-31     0.07760424
-## 8  2014-12-31     0.34090883
-## 9  2015-12-31    -0.03060060
+##  1 2007-12-31     0.86023789
+##  2 2008-12-31    -0.84191057
+##  3 2009-12-31     0.90381734
+##  4 2010-12-31     0.42571147
+##  5 2011-12-30     0.22759789
+##  6 2012-12-31     0.28191714
+##  7 2013-12-31     0.07760424
+##  8 2014-12-31     0.34090883
+##  9 2015-12-31    -0.03060060
 ## 10 2016-12-30     0.11760900</code></pre>
 <p>Let’s visualize to identify trends. We can see from the linear trend line that AAPL’s stock returns are declining.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">AAPL_annual_log_returns %&gt;%
@@ -459,32 +459,32 @@ stocks_model_stats</code></pre></div>
 <p>Let’s see an example when using <code><a href="../reference/tq_get.html">tq_get()</a></code> to get the stock prices for a long list of stocks with one <code>BAD APPLE</code>. The argument <code>complete_cases</code> comes in handy. The default is <code>TRUE</code>, which removes “bad apples” so future analysis have complete cases to compute on. Note that a gentle warning stating that an error occurred and was dealt with by removing the rows from the results.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"BAD APPLE"</span>) %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get =</span> <span class="st">"stock.prices"</span>, <span class="dt">complete_cases =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## Warning: x = 'BAD APPLE', get = 'stock.prices': Error in download.file(paste(yahoo.URL, "s=", Symbols.name, "&amp;a=", from.m, : cannot open URL 'http://ichart.finance.yahoo.com/table.csv?s=BAD APPLE&amp;a=0&amp;b=01&amp;c=2007&amp;d=3&amp;e=10&amp;f=2017&amp;g=d&amp;q=q&amp;y=0&amp;z=BAD APPLE&amp;x=.csv'
+<pre><code>## Warning: x = 'BAD APPLE', get = 'stock.prices': Error in download.file(paste(yahoo.URL, "s=", Symbols.name, "&amp;a=", from.m, : cannot download all files
 ##  Removing BAD APPLE.</code></pre>
-<pre><code>## # A tibble: 5,172 × 8
+<pre><code>## # A tibble: 5,182 × 8
 ##    symbol       date  open  high   low close    volume adjusted
 ##     &lt;chr&gt;     &lt;date&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1    AAPL 2007-01-03 86.29 86.58 81.90 83.80 309579900 10.85709
-## 2    AAPL 2007-01-04 84.05 85.95 83.82 85.66 211815100 11.09807
-## 3    AAPL 2007-01-05 85.77 86.20 84.40 85.05 208685400 11.01904
-## 4    AAPL 2007-01-08 85.96 86.53 85.28 85.47 199276700 11.07345
-## 5    AAPL 2007-01-09 86.45 92.98 85.15 92.57 837324600 11.99333
-## 6    AAPL 2007-01-10 94.75 97.80 93.45 97.00 738220000 12.56728
-## 7    AAPL 2007-01-11 95.94 96.78 95.10 95.80 360063200 12.41180
-## 8    AAPL 2007-01-12 94.59 95.06 93.23 94.62 328172600 12.25892
-## 9    AAPL 2007-01-16 95.68 97.25 95.45 97.10 311019100 12.58023
+##  1   AAPL 2007-01-03 86.29 86.58 81.90 83.80 309579900 10.85709
+##  2   AAPL 2007-01-04 84.05 85.95 83.82 85.66 211815100 11.09807
+##  3   AAPL 2007-01-05 85.77 86.20 84.40 85.05 208685400 11.01904
+##  4   AAPL 2007-01-08 85.96 86.53 85.28 85.47 199276700 11.07345
+##  5   AAPL 2007-01-09 86.45 92.98 85.15 92.57 837324600 11.99333
+##  6   AAPL 2007-01-10 94.75 97.80 93.45 97.00 738220000 12.56728
+##  7   AAPL 2007-01-11 95.94 96.78 95.10 95.80 360063200 12.41180
+##  8   AAPL 2007-01-12 94.59 95.06 93.23 94.62 328172600 12.25892
+##  9   AAPL 2007-01-16 95.68 97.25 95.45 97.10 311019100 12.58023
 ## 10   AAPL 2007-01-17 97.56 97.60 94.82 94.95 411565000 12.30168
-## # ... with 5,162 more rows</code></pre>
+## # ... with 5,172 more rows</code></pre>
 <p>Now switching <code>complete_cases = FALSE</code> will retain any errors as <code>NA</code> values in a nested data frame. Notice that the error message and output change. The error message now states that the <code>NA</code> values exist in the output and the return is a “nested” data structure.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"BAD APPLE"</span>) %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get =</span> <span class="st">"stock.prices"</span>, <span class="dt">complete_cases =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>## Warning: x = 'BAD APPLE', get = 'stock.prices': Error in download.file(paste(yahoo.URL, "s=", Symbols.name, "&amp;a=", from.m, : cannot open URL 'http://ichart.finance.yahoo.com/table.csv?s=BAD APPLE&amp;a=0&amp;b=01&amp;c=2007&amp;d=3&amp;e=10&amp;f=2017&amp;g=d&amp;q=q&amp;y=0&amp;z=BAD APPLE&amp;x=.csv'</code></pre>
+<pre><code>## Warning: x = 'BAD APPLE', get = 'stock.prices': Error in download.file(paste(yahoo.URL, "s=", Symbols.name, "&amp;a=", from.m, : cannot download all files</code></pre>
 <pre><code>## Warning in value[[3L]](cond): Returning as nested data frame.</code></pre>
 <pre><code>## # A tibble: 3 × 2
 ##      symbol         stock.prices
 ##       &lt;chr&gt;               &lt;list&gt;
-## 1      AAPL &lt;tibble [2,586 × 7]&gt;
-## 2      GOOG &lt;tibble [2,586 × 7]&gt;
+## 1      AAPL &lt;tibble [2,591 × 7]&gt;
+## 2      GOOG &lt;tibble [2,591 × 7]&gt;
 ## 3 BAD APPLE            &lt;lgl [1]&gt;</code></pre>
 <p>In both cases, the prudent user will review the warnings to determine what happened and whether or not this is acceptable. In the <code>complete_cases = FALSE</code> example, if the user attempts to perform downstream computations at scale, the computations will likely fail grinding the analysis to a hault. But, the advantage is that the user will more easily be able to filter to the problem childs to determine what happened and decide whether this is acceptable or not.</p>
 </div>

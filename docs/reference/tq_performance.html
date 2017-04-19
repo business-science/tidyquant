@@ -25,7 +25,7 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -118,7 +118,7 @@ implements these performance analysis functions in a tidy way, enabling scaling
 analysis using the split, apply, combine framework.</p>
     
 
-    <pre><span class='fu'>tq_performance</span>(<span class='no'>data</span>, <span class='no'>Ra</span>, <span class='kw'>Rb</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>performance_fun</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>tq_performance</span>(<span class='no'>data</span>, <span class='no'>Ra</span>, <span class='kw'>Rb</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>performance_fun</span>, <span class='no'>...</span>)
 
 <span class='fu'>tq_performance_</span>(<span class='no'>data</span>, <span class='no'>Ra</span>, <span class='kw'>Rb</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>performance_fun</span>, <span class='no'>...</span>)
 
@@ -285,6 +285,7 @@ for the <code>performance_fun</code> argument. Additional parameters can be pass
     <span class='fu'>tq_performance</span>(<span class='kw'>Ra</span> <span class='kw'>=</span> <span class='no'>Ra</span>, <span class='kw'>performance_fun</span> <span class='kw'>=</span> <span class='no'>SharpeRatio</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fl'>0.95</span>)</div><div class='output co'>#&gt; Source: local data frame [4 x 4]
 #&gt; Groups: symbol [4]
 #&gt; 
+#&gt; # A tibble: 4 × 4
 #&gt;   symbol `ESSharpe(Rf=0%,p=95%)` `StdDevSharpe(Rf=0%,p=95%)`
 #&gt;    &lt;chr&gt;                   &lt;dbl&gt;                       &lt;dbl&gt;
 #&gt; 1     FB               0.1931238                   0.3449303
@@ -296,6 +297,7 @@ for the <code>performance_fun</code> argument. Additional parameters can be pass
     <span class='fu'>tq_performance</span>(<span class='kw'>Ra</span> <span class='kw'>=</span> <span class='no'>Ra</span>, <span class='kw'>Rb</span> <span class='kw'>=</span> <span class='no'>Rb</span>, <span class='kw'>performance_fun</span> <span class='kw'>=</span> <span class='no'>table.CAPM</span>)</div><div class='output co'>#&gt; Source: local data frame [4 x 13]
 #&gt; Groups: symbol [4]
 #&gt; 
+#&gt; # A tibble: 4 × 13
 #&gt;   symbol ActivePremium  Alpha AnnualizedAlpha   Beta `Beta-` `Beta+`
 #&gt;    &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;           &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
 #&gt; 1     FB        0.4245 0.0334          0.4833 0.8594  0.6901  3.0044

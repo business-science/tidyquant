@@ -25,7 +25,7 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -111,9 +111,9 @@
     </div>
 
     <div class="contents">
-    <div id="tidyquant-0-5-0-9002" class="section level2">
+    <div id="tidyquant-0-5-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyquant-0-5-0-9002" class="anchor"></a>tidyquant 0.5.0.9002</h2>
+<a href="#tidyquant-0-5-1" class="anchor"></a>tidyquant 0.5.1</h2>
 <ul>
 <li>Improvements
 <ul>
@@ -122,7 +122,9 @@
 </li>
 <li>Fixes:
 <ul>
-<li>Oanda only returns 180 days of FX and Metals data now. Updated the tests. Waiting for official <code>quantmod</code> hotfix release. The current fix is in a <code>quantmod</code> branch.</li>
+<li>Require new <code>quantmod</code> version 0.4-8 to fix Oanda and Yahoo bugs.</li>
+<li>Quandl data returned newest to oldest. For consistency with other <code><a href="../reference/tq_get.html">tq_get()</a></code> data, it now returns oldest to newest.</li>
+<li>Oanda only returns 180 days of FX and Metals data now. Updated the tests to account for this. Also added error handling to check for valid date ranges.</li>
 <li>Fixed bug with <code><a href="../reference/tq_portfolio.html">tq_portfolio()</a></code> where <code>weights = NULL</code> would not execute an equal weighting scheme.</li>
 <li>Added error handling during dollar and percent conversion for get = “key.ratios” and get = “key.stats”.</li>
 </ul>
@@ -286,7 +288,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#tidyquant-0-5-0-9002">0.5.0.9002</a></li>
+        <li><a href="#tidyquant-0-5-1">0.5.1</a></li>
         <li><a href="#tidyquant-0-5-0">0.5.0</a></li>
         <li><a href="#tidyquant-0-4-0">0.4.0</a></li>
         <li><a href="#tidyquant-0-3-0">0.3.0</a></li>

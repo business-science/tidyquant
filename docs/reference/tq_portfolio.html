@@ -25,7 +25,7 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -113,7 +113,7 @@
     <p>Aggregates a group of returns by asset into portfolio returns</p>
     
 
-    <pre><span class='fu'>tq_portfolio</span>(<span class='no'>data</span>, <span class='no'>assets_col</span>, <span class='no'>returns_col</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>tq_portfolio</span>(<span class='no'>data</span>, <span class='no'>assets_col</span>, <span class='no'>returns_col</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
 
 <span class='fu'>tq_portfolio_</span>(<span class='no'>data</span>, <span class='no'>assets_col</span>, <span class='no'>returns_col</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -223,15 +223,15 @@ that specifies which parameters can be passed via <code>...</code></p></li>
              <span class='kw'>wealth.index</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # A tibble: 48 × 2
 #&gt;          date portfolio.returns
 #&gt;        &lt;date&gt;             &lt;dbl&gt;
-#&gt; 1  2013-01-31       0.260144557
-#&gt; 2  2013-02-28      -0.004558003
-#&gt; 3  2013-03-28      -0.019454685
-#&gt; 4  2013-04-30       0.080958243
-#&gt; 5  2013-05-31      -0.013883075
-#&gt; 6  2013-06-28      -0.017906983
-#&gt; 7  2013-07-31       0.253520291
-#&gt; 8  2013-08-30       0.103866369
-#&gt; 9  2013-09-30       0.145446247
+#&gt;  1 2013-01-31       0.260144557
+#&gt;  2 2013-02-28      -0.004558003
+#&gt;  3 2013-03-28      -0.019454685
+#&gt;  4 2013-04-30       0.080958243
+#&gt;  5 2013-05-31      -0.013883075
+#&gt;  6 2013-06-28      -0.017906983
+#&gt;  7 2013-07-31       0.253520291
+#&gt;  8 2013-08-30       0.103866369
+#&gt;  9 2013-09-30       0.145446247
 #&gt; 10 2013-10-31       0.041956895
 #&gt; # ... with 38 more rows</div><div class='input'>
 <span class='co'># Method 2: Use tq_portfolio with two column tibble and map weights</span>
@@ -248,15 +248,15 @@ that specifies which parameters can be passed via <code>...</code></p></li>
              <span class='kw'>wealth.index</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # A tibble: 48 × 2
 #&gt;          date portfolio.returns
 #&gt;        &lt;date&gt;             &lt;dbl&gt;
-#&gt; 1  2013-01-31       0.260144557
-#&gt; 2  2013-02-28      -0.004558003
-#&gt; 3  2013-03-28      -0.019454685
-#&gt; 4  2013-04-30       0.080958243
-#&gt; 5  2013-05-31      -0.013883075
-#&gt; 6  2013-06-28      -0.017906983
-#&gt; 7  2013-07-31       0.253520291
-#&gt; 8  2013-08-30       0.103866369
-#&gt; 9  2013-09-30       0.145446247
+#&gt;  1 2013-01-31       0.260144557
+#&gt;  2 2013-02-28      -0.004558003
+#&gt;  3 2013-03-28      -0.019454685
+#&gt;  4 2013-04-30       0.080958243
+#&gt;  5 2013-05-31      -0.013883075
+#&gt;  6 2013-06-28      -0.017906983
+#&gt;  7 2013-07-31       0.253520291
+#&gt;  8 2013-08-30       0.103866369
+#&gt;  9 2013-09-30       0.145446247
 #&gt; 10 2013-10-31       0.041956895
 #&gt; # ... with 38 more rows</div><div class='input'>
 <span class='co'># Method 3: Working with multiple portfolios</span>
@@ -283,17 +283,18 @@ that specifies which parameters can be passed via <code>...</code></p></li>
              <span class='kw'>wealth.index</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; Source: local data frame [192 x 3]
 #&gt; Groups: portfolio [4]
 #&gt; 
+#&gt; # A tibble: 192 × 3
 #&gt;    portfolio       date portfolio.returns
 #&gt;        &lt;int&gt;     &lt;date&gt;             &lt;dbl&gt;
-#&gt; 1          1 2013-01-31       0.260144557
-#&gt; 2          1 2013-02-28      -0.004558003
-#&gt; 3          1 2013-03-28      -0.019454685
-#&gt; 4          1 2013-04-30       0.080958243
-#&gt; 5          1 2013-05-31      -0.013883075
-#&gt; 6          1 2013-06-28      -0.017906983
-#&gt; 7          1 2013-07-31       0.253520291
-#&gt; 8          1 2013-08-30       0.103866369
-#&gt; 9          1 2013-09-30       0.145446247
+#&gt;  1         1 2013-01-31       0.260144557
+#&gt;  2         1 2013-02-28      -0.004558003
+#&gt;  3         1 2013-03-28      -0.019454685
+#&gt;  4         1 2013-04-30       0.080958243
+#&gt;  5         1 2013-05-31      -0.013883075
+#&gt;  6         1 2013-06-28      -0.017906983
+#&gt;  7         1 2013-07-31       0.253520291
+#&gt;  8         1 2013-08-30       0.103866369
+#&gt;  9         1 2013-09-30       0.145446247
 #&gt; 10         1 2013-10-31       0.041956895
 #&gt; # ... with 182 more rows</div></pre>
   </div>

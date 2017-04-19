@@ -25,7 +25,7 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -113,7 +113,7 @@
     <p>Get all stocks in a stock index or stock exchange in <code>tibble</code> format</p>
     
 
-    <pre><span class='fu'>tq_index</span>(<span class='no'>x</span>, <span class='kw'>use_fallback</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>tq_index</span>(<span class='no'>x</span>, <span class='kw'>use_fallback</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='fu'>tq_exchange</span>(<span class='no'>x</span>)
 
@@ -174,15 +174,15 @@ choose from. The options are AMEX, NASDAQ and NYSE.</p>
 <span class='fu'>tq_index</span>(<span class='st'>"DOWJONES"</span>)</div><div class='output co'>#&gt; <span class='message'>Getting data...</span></div><div class='output co'>#&gt; # A tibble: 65 × 2
 #&gt;    symbol                      company
 #&gt;     &lt;chr&gt;                        &lt;chr&gt;
-#&gt; 1     MMM                           3M
-#&gt; 2     ALK             ALASKA AIR GROUP
-#&gt; 3     AAL AMERICAN AIRLINES GROUP INC.
-#&gt; 4     AEP      AMERICAN ELECTRIC POWER
-#&gt; 5     AXP             AMERICAN EXPRESS
-#&gt; 6     AWK         AMERICAN WATER WORKS
-#&gt; 7    AAPL                        APPLE
-#&gt; 8     CAR            AVIS BUDGET GROUP
-#&gt; 9     CAT                  CATERPILLAR
+#&gt;  1    MMM                           3M
+#&gt;  2    ALK             ALASKA AIR GROUP
+#&gt;  3    AAL AMERICAN AIRLINES GROUP INC.
+#&gt;  4    AEP      AMERICAN ELECTRIC POWER
+#&gt;  5    AXP             AMERICAN EXPRESS
+#&gt;  6    AWK         AMERICAN WATER WORKS
+#&gt;  7   AAPL                        APPLE
+#&gt;  8    CAR            AVIS BUDGET GROUP
+#&gt;  9    CAT                  CATERPILLAR
 #&gt; 10    CNP           CENTERPOINT ENERGY
 #&gt; # ... with 55 more rows</div><div class='input'>
 <span class='co'># Get the list of stock exchange options</span>
@@ -191,16 +191,16 @@ choose from. The options are AMEX, NASDAQ and NYSE.</p>
 <span class='fu'>tq_exchange</span>(<span class='st'>"NYSE"</span>)</div><div class='output co'>#&gt; <span class='message'>Getting data...</span></div><div class='output co'>#&gt; # A tibble: 3,146 × 7
 #&gt;    symbol                company last.sale.price market.cap ipo.year
 #&gt;     &lt;chr&gt;                  &lt;chr&gt;           &lt;dbl&gt;      &lt;chr&gt;    &lt;dbl&gt;
-#&gt; 1     DDD 3D Systems Corporation           14.29     $1.63B       NA
-#&gt; 2     MMM             3M Company          189.71   $113.37B       NA
-#&gt; 3    WBAI        500.com Limited           14.12   $585.95M     2013
-#&gt; 4    WUBA            58.com Inc.           37.43     $5.42B     2013
-#&gt; 5     AHC  A.H. Belo Corporation            6.15   $133.65M       NA
-#&gt; 6    ATEN     A10 Networks, Inc.            8.84   $604.18M     2014
-#&gt; 7     AAC     AAC Holdings, Inc.            8.26   $195.68M     2014
-#&gt; 8     AIR              AAR Corp.           33.74     $1.16B       NA
-#&gt; 9     AAN     Aaron&amp;#39;s,  Inc.           30.53     $2.22B       NA
-#&gt; 10    ABB                ABB Ltd           23.09    $49.38B       NA
+#&gt;  1    DDD 3D Systems Corporation           15.28     $1.74B       NA
+#&gt;  2    MMM             3M Company          190.22   $113.67B       NA
+#&gt;  3   WBAI        500.com Limited           13.43   $557.32M     2013
+#&gt;  4   WUBA            58.com Inc.           35.53     $5.14B     2013
+#&gt;  5    AHC  A.H. Belo Corporation            6.10   $132.56M       NA
+#&gt;  6   ATEN     A10 Networks, Inc.            8.72   $595.98M     2014
+#&gt;  7    AAC     AAC Holdings, Inc.            7.67   $184.79M     2014
+#&gt;  8    AIR              AAR Corp.           33.62     $1.15B       NA
+#&gt;  9    AAN     Aaron&amp;#39;s,  Inc.           30.16     $2.19B       NA
+#&gt; 10    ABB                ABB Ltd           22.19    $47.46B       NA
 #&gt; # ... with 3,136 more rows, and 2 more variables: sector &lt;chr&gt;, industry &lt;chr&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
