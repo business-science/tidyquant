@@ -24,7 +24,7 @@ Depends:
     R (>= 3.3.0),
     lubridate (>= 1.6.0),
     PerformanceAnalytics (>= 1.4.3541),
-    quantmod (>= 0.4-7),
+    quantmod (>= 0.4-8),
     tidyverse (>= 1.1.0)
 Imports:
     broom (>= 0.4.2),
