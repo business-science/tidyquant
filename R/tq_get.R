@@ -309,6 +309,20 @@ tq_get_util_1 <-
         stop("x must be a character string in the form of a valid symbol.")
     }
 
+    # Handle 180 day Oanda limit
+    if(get %in% c("exchangerate", "metalprice")) {  # If pulling Oanda
+        if(from < Sys.Date() - lubridate::days(180)) {     # And some dates are past limit
+
+            warning(paste0("Oanda only provides historical data for the past 180 days. Symbol: ", x),
+                    call. = FALSE)
+
+            # If completely outside range, stop. Otherwise there is some data to pull so continue
+            if(to < Sys.Date() - lubridate::days(180)) {
+                return(NA)
+            }
+        }
+    }
+
     # Setup switches based on get
     vars <- switch(get,
                    stockprice            = list(chr_get    = "stock.prices",

@@ -1,5 +1,5 @@
 ## Release Summary
-This is a bug fix release of tidyquant for CRAN review. This release is mainly to address bugs related to Oanda returning a shorter max amount of data (180 days) and Yahoo redirecting a HTTP request to HTTPS. The bugs were fixed with the newest version of `quantmod`, and we have required that version in the Depends. There are also updated tests relating to the Oanda fix.
+This is a bug fix release of tidyquant for CRAN review. This release is mainly to address bugs related to Oanda returning a shorter maximum amount of data (180 days) and Yahoo redirecting a HTTP request to HTTPS. The bugs were fixed with the newest version of `quantmod`, and we have required that version in the Depends. There are also updated tests relating to the Oanda fix.
 
 ## Test environments
 * local Windows install, R 3.3.2

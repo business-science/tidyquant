@@ -6,7 +6,7 @@
 * Fixes:
     * Require new `quantmod` version 0.4-8 to fix Oanda and Yahoo bugs.
     * Quandl data returned newest to oldest. For consistency with other `tq_get()` data, it now returns oldest to newest.
-    * Oanda only returns 180 days of FX and Metals data now. Updated the tests to account for this.
+    * Oanda only returns 180 days of FX and Metals data now. Updated the tests to account for this. Also added error handling to check for valid date ranges.
     * Fixed bug with `tq_portfolio()` where `weights = NULL` would not execute an equal weighting scheme.
     * Added error handling during dollar and percent conversion for get = "key.ratios" and get = "key.stats".
 
