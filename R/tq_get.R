@@ -404,7 +404,7 @@ tq_get_util_1 <-
 
     # Coerce any xts to tibble
     if (xts::is.xts(ret)) {
-        names(ret) <- vars$list_names
+        dimnames(ret)[[2]] <- vars$list_names
         ret <- ret %>%
             tidyquant::as_tibble(preserve_row_names = TRUE) %>%
             dplyr::rename(date = row.names) %>%
