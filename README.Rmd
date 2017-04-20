@@ -21,7 +21,7 @@ devtools::load_all()
 ![](http://cranlogs.r-pkg.org/badges/tidyquant?color=brightgreen)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/tidyquant?color=brightgreen)
 
-<img src="img/logo.png" width="147" height="170" align="right" />
+<img src="tools/logo.png" width="147" height="170" align="right" />
 
 > Bringing financial analysis to the tidyverse
 
