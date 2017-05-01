@@ -174,34 +174,34 @@ choose from. The options are AMEX, NASDAQ and NYSE.</p>
 <span class='fu'>tq_index</span>(<span class='st'>"DOWJONES"</span>)</div><div class='output co'>#&gt; <span class='message'>Getting data...</span></div><div class='output co'>#&gt; # A tibble: 65 × 2
 #&gt;    symbol                      company
 #&gt;     &lt;chr&gt;                        &lt;chr&gt;
-#&gt;  1    MMM                           3M
-#&gt;  2    ALK             ALASKA AIR GROUP
-#&gt;  3    AAL AMERICAN AIRLINES GROUP INC.
-#&gt;  4    AEP      AMERICAN ELECTRIC POWER
-#&gt;  5    AXP             AMERICAN EXPRESS
-#&gt;  6    AWK         AMERICAN WATER WORKS
-#&gt;  7   AAPL                        APPLE
-#&gt;  8    CAR            AVIS BUDGET GROUP
-#&gt;  9    CAT                  CATERPILLAR
+#&gt; 1     MMM                           3M
+#&gt; 2     ALK             ALASKA AIR GROUP
+#&gt; 3     AAL AMERICAN AIRLINES GROUP INC.
+#&gt; 4     AEP      AMERICAN ELECTRIC POWER
+#&gt; 5     AXP             AMERICAN EXPRESS
+#&gt; 6     AWK         AMERICAN WATER WORKS
+#&gt; 7    AAPL                        APPLE
+#&gt; 8     CAR            AVIS BUDGET GROUP
+#&gt; 9     CAT                  CATERPILLAR
 #&gt; 10    CNP           CENTERPOINT ENERGY
 #&gt; # ... with 55 more rows</div><div class='input'>
 <span class='co'># Get the list of stock exchange options</span>
 <span class='fu'>tq_exchange_options</span>()</div><div class='output co'>#&gt; [1] "AMEX"   "NASDAQ" "NYSE"  </div><div class='input'>
 <span class='co'># Get all stocks in a stock exchange</span>
-<span class='fu'>tq_exchange</span>(<span class='st'>"NYSE"</span>)</div><div class='output co'>#&gt; <span class='message'>Getting data...</span></div><div class='output co'>#&gt; # A tibble: 3,146 × 7
+<span class='fu'>tq_exchange</span>(<span class='st'>"NYSE"</span>)</div><div class='output co'>#&gt; <span class='message'>Getting data...</span></div><div class='output co'>#&gt; # A tibble: 3,150 × 7
 #&gt;    symbol                company last.sale.price market.cap ipo.year
 #&gt;     &lt;chr&gt;                  &lt;chr&gt;           &lt;dbl&gt;      &lt;chr&gt;    &lt;dbl&gt;
-#&gt;  1    DDD 3D Systems Corporation           15.28     $1.74B       NA
-#&gt;  2    MMM             3M Company          190.22   $113.67B       NA
-#&gt;  3   WBAI        500.com Limited           13.43   $557.32M     2013
-#&gt;  4   WUBA            58.com Inc.           35.53     $5.14B     2013
-#&gt;  5    AHC  A.H. Belo Corporation            6.10   $132.56M       NA
-#&gt;  6   ATEN     A10 Networks, Inc.            8.72   $595.98M     2014
-#&gt;  7    AAC     AAC Holdings, Inc.            7.67   $184.79M     2014
-#&gt;  8    AIR              AAR Corp.           33.62     $1.15B       NA
-#&gt;  9    AAN     Aaron&amp;#39;s,  Inc.           30.16     $2.19B       NA
-#&gt; 10    ABB                ABB Ltd           22.19    $47.46B       NA
-#&gt; # ... with 3,136 more rows, and 2 more variables: sector &lt;chr&gt;, industry &lt;chr&gt;</div></pre>
+#&gt; 1     DDD 3D Systems Corporation           15.83      $1.8B       NA
+#&gt; 2     MMM             3M Company          195.83   $116.96B       NA
+#&gt; 3    WBAI        500.com Limited           13.01   $539.89M     2013
+#&gt; 4    WUBA            58.com Inc.           39.58     $5.73B     2013
+#&gt; 5     AHC  A.H. Belo Corporation            6.25   $135.82M       NA
+#&gt; 6    ATEN     A10 Networks, Inc.            8.10   $561.63M     2014
+#&gt; 7     AAC     AAC Holdings, Inc.            7.16    $172.5M     2014
+#&gt; 8     AIR              AAR Corp.           35.99     $1.24B       NA
+#&gt; 9     AAN     Aaron&amp;#39;s,  Inc.           35.94     $2.61B       NA
+#&gt; 10    ABB                ABB Ltd           24.60    $52.74B       NA
+#&gt; # ... with 3,140 more rows, and 2 more variables: sector &lt;chr&gt;, industry &lt;chr&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -87,7 +87,7 @@
       <h1>Performance Analysis with tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2017-04-19</h4>
+            <h4 class="date">2017-05-01</h4>
           </div>
 
     
@@ -144,18 +144,17 @@ Ra</code></pre></div>
 <pre><code>## Source: local data frame [216 x 3]
 ## Groups: symbol [3]
 ## 
-## # A tibble: 216 × 3
 ##    symbol       date          Ra
 ##     &lt;chr&gt;     &lt;date&gt;       &lt;dbl&gt;
-##  1   AAPL 2010-01-29 -0.10256526
-##  2   AAPL 2010-02-26  0.06539619
-##  3   AAPL 2010-03-31  0.14847041
-##  4   AAPL 2010-04-30  0.11102125
-##  5   AAPL 2010-05-28 -0.01612472
-##  6   AAPL 2010-06-30 -0.02082686
-##  7   AAPL 2010-07-30  0.02274081
-##  8   AAPL 2010-08-31 -0.05500481
-##  9   AAPL 2010-09-30  0.16721508
+## 1    AAPL 2010-01-29 -0.10256526
+## 2    AAPL 2010-02-26  0.06539619
+## 3    AAPL 2010-03-31  0.14847041
+## 4    AAPL 2010-04-30  0.11102125
+## 5    AAPL 2010-05-28 -0.01612472
+## 6    AAPL 2010-06-30 -0.02082686
+## 7    AAPL 2010-07-30  0.02274081
+## 8    AAPL 2010-08-31 -0.05500481
+## 9    AAPL 2010-09-30  0.16721508
 ## 10   AAPL 2010-10-29  0.06072249
 ## # ... with 206 more rows</code></pre>
 <p>Next, we get the baseline prices. We’ll use the XLK. Note that there is no need to group because we are just getting one data set.</p>
@@ -171,15 +170,15 @@ Rb</code></pre></div>
 <pre><code>## # A tibble: 72 × 2
 ##          date          Rb
 ##        &lt;date&gt;       &lt;dbl&gt;
-##  1 2010-01-29 -0.09926952
-##  2 2010-02-26  0.03482833
-##  3 2010-03-31  0.06839787
-##  4 2010-04-30  0.01255411
-##  5 2010-05-28 -0.07481831
-##  6 2010-06-30 -0.05396629
-##  7 2010-07-30  0.07450982
-##  8 2010-08-31 -0.05611312
-##  9 2010-09-30  0.11663646
+## 1  2010-01-29 -0.09926952
+## 2  2010-02-26  0.03482833
+## 3  2010-03-31  0.06839787
+## 4  2010-04-30  0.01255411
+## 5  2010-05-28 -0.07481831
+## 6  2010-06-30 -0.05396629
+## 7  2010-07-30  0.07450982
+## 8  2010-08-31 -0.05611312
+## 9  2010-09-30  0.11663646
 ## 10 2010-10-29  0.05777587
 ## # ... with 62 more rows</code></pre>
 <p>Now, we combine the two data sets using the “date” field using <code>left_join</code> from the <code>dplyr</code> package. Review the results and see that we still have three groups of returns, and columns “Ra” and “Rb” are side-by-side.</p>
@@ -188,18 +187,17 @@ RaRb</code></pre></div>
 <pre><code>## Source: local data frame [216 x 4]
 ## Groups: symbol [?]
 ## 
-## # A tibble: 216 × 4
 ##    symbol       date          Ra          Rb
 ##     &lt;chr&gt;     &lt;date&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-##  1   AAPL 2010-01-29 -0.10256526 -0.09926952
-##  2   AAPL 2010-02-26  0.06539619  0.03482833
-##  3   AAPL 2010-03-31  0.14847041  0.06839787
-##  4   AAPL 2010-04-30  0.11102125  0.01255411
-##  5   AAPL 2010-05-28 -0.01612472 -0.07481831
-##  6   AAPL 2010-06-30 -0.02082686 -0.05396629
-##  7   AAPL 2010-07-30  0.02274081  0.07450982
-##  8   AAPL 2010-08-31 -0.05500481 -0.05611312
-##  9   AAPL 2010-09-30  0.16721508  0.11663646
+## 1    AAPL 2010-01-29 -0.10256526 -0.09926952
+## 2    AAPL 2010-02-26  0.06539619  0.03482833
+## 3    AAPL 2010-03-31  0.14847041  0.06839787
+## 4    AAPL 2010-04-30  0.11102125  0.01255411
+## 5    AAPL 2010-05-28 -0.01612472 -0.07481831
+## 6    AAPL 2010-06-30 -0.02082686 -0.05396629
+## 7    AAPL 2010-07-30  0.02274081  0.07450982
+## 8    AAPL 2010-08-31 -0.05500481 -0.05611312
+## 9    AAPL 2010-09-30  0.16721508  0.11663646
 ## 10   AAPL 2010-10-29  0.06072249  0.05777587
 ## # ... with 206 more rows</code></pre>
 <p>Finally, we can retrieve the performance metrics using <code><a href="../reference/tq_performance.html">tq_performance()</a></code>. You can use <code><a href="../reference/tq_performance.html">tq_performance_fun_options()</a></code> to see the full list of compatible performance functions.</p>
@@ -211,7 +209,6 @@ RaRb_capm</code></pre></div>
 <pre><code>## Source: local data frame [3 x 13]
 ## Groups: symbol [3]
 ## 
-## # A tibble: 3 × 13
 ##   symbol ActivePremium  Alpha AnnualizedAlpha   Beta `Beta-` `Beta+`
 ##    &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;           &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
 ## 1   AAPL        0.1176 0.0087          0.1099 1.1229  0.6366  1.0427
@@ -226,7 +223,6 @@ RaRb_capm</code></pre></div>
 <pre><code>## Source: local data frame [3 x 3]
 ## Groups: symbol [3]
 ## 
-## # A tibble: 3 × 3
 ##   symbol  Alpha   Beta
 ##    &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;
 ## 1   AAPL 0.0087 1.1229
@@ -264,15 +260,15 @@ stock_prices</code></pre></div>
 <pre><code>## # A tibble: 4,530 × 8
 ##    symbol       date   open   high    low  close    volume adjusted
 ##     &lt;chr&gt;     &lt;date&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1   AAPL 2010-01-04 213.43 214.50 212.38 214.01 123432400 27.72704
-##  2   AAPL 2010-01-05 214.60 215.59 213.25 214.38 150476200 27.77498
-##  3   AAPL 2010-01-06 214.38 215.23 210.75 210.97 138040000 27.33318
-##  4   AAPL 2010-01-07 211.75 212.00 209.05 210.58 119282800 27.28265
-##  5   AAPL 2010-01-08 210.30 212.00 209.06 211.98 111902700 27.46403
-##  6   AAPL 2010-01-11 212.80 213.00 208.45 210.11 115557400 27.22176
-##  7   AAPL 2010-01-12 209.19 209.77 206.42 207.72 148614900 26.91211
-##  8   AAPL 2010-01-13 207.87 210.93 204.10 210.65 151473000 27.29172
-##  9   AAPL 2010-01-14 210.11 210.46 209.02 209.43 108223500 27.13366
+## 1    AAPL 2010-01-04 213.43 214.50 212.38 214.01 123432400 27.72704
+## 2    AAPL 2010-01-05 214.60 215.59 213.25 214.38 150476200 27.77498
+## 3    AAPL 2010-01-06 214.38 215.23 210.75 210.97 138040000 27.33318
+## 4    AAPL 2010-01-07 211.75 212.00 209.05 210.58 119282800 27.28265
+## 5    AAPL 2010-01-08 210.30 212.00 209.06 211.98 111902700 27.46403
+## 6    AAPL 2010-01-11 212.80 213.00 208.45 210.11 115557400 27.22176
+## 7    AAPL 2010-01-12 209.19 209.77 206.42 207.72 148614900 26.91211
+## 8    AAPL 2010-01-13 207.87 210.93 204.10 210.65 151473000 27.29172
+## 9    AAPL 2010-01-14 210.11 210.46 209.02 209.43 108223500 27.13366
 ## 10   AAPL 2010-01-15 210.93 211.60 205.87 205.93 148516900 26.68020
 ## # ... with 4,520 more rows</code></pre>
 </div>
@@ -290,18 +286,17 @@ stock_returns_monthly</code></pre></div>
 <pre><code>## Source: local data frame [216 x 3]
 ## Groups: symbol [3]
 ## 
-## # A tibble: 216 × 3
 ##    symbol       date          Ra
 ##     &lt;chr&gt;     &lt;date&gt;       &lt;dbl&gt;
-##  1   AAPL 2010-01-29 -0.10256526
-##  2   AAPL 2010-02-26  0.06539619
-##  3   AAPL 2010-03-31  0.14847041
-##  4   AAPL 2010-04-30  0.11102125
-##  5   AAPL 2010-05-28 -0.01612472
-##  6   AAPL 2010-06-30 -0.02082686
-##  7   AAPL 2010-07-30  0.02274081
-##  8   AAPL 2010-08-31 -0.05500481
-##  9   AAPL 2010-09-30  0.16721508
+## 1    AAPL 2010-01-29 -0.10256526
+## 2    AAPL 2010-02-26  0.06539619
+## 3    AAPL 2010-03-31  0.14847041
+## 4    AAPL 2010-04-30  0.11102125
+## 5    AAPL 2010-05-28 -0.01612472
+## 6    AAPL 2010-06-30 -0.02082686
+## 7    AAPL 2010-07-30  0.02274081
+## 8    AAPL 2010-08-31 -0.05500481
+## 9    AAPL 2010-09-30  0.16721508
 ## 10   AAPL 2010-10-29  0.06072249
 ## # ... with 206 more rows</code></pre>
 </div>
@@ -322,7 +317,6 @@ stock_returns_monthly</code></pre></div>
 <pre><code>## Source: local data frame [3 x 4]
 ## Groups: symbol [3]
 ## 
-## # A tibble: 3 × 4
 ##   symbol `ESSharpe(Rf=0%,p=95%)` `StdDevSharpe(Rf=0%,p=95%)`
 ##    &lt;chr&gt;                   &lt;dbl&gt;                       &lt;dbl&gt;
 ## 1   AAPL               0.1682209                   0.2872497
@@ -339,7 +333,6 @@ stock_returns_monthly</code></pre></div>
 <pre><code>## Source: local data frame [3 x 4]
 ## Groups: symbol [3]
 ## 
-## # A tibble: 3 × 4
 ##   symbol `ESSharpe(Rf=0.2%,p=99%)` `StdDevSharpe(Rf=0.2%,p=99%)`
 ##    &lt;chr&gt;                     &lt;dbl&gt;                         &lt;dbl&gt;
 ## 1   AAPL                0.11304625                     0.2528850
@@ -373,18 +366,17 @@ stock_returns_monthly</code></pre></div>
 <pre><code>## Source: local data frame [216 x 3]
 ## Groups: symbol [3]
 ## 
-## # A tibble: 216 × 3
 ##    symbol       date          Ra
 ##     &lt;chr&gt;     &lt;date&gt;       &lt;dbl&gt;
-##  1   AAPL 2010-01-29 -0.10256526
-##  2   AAPL 2010-02-26  0.06539619
-##  3   AAPL 2010-03-31  0.14847041
-##  4   AAPL 2010-04-30  0.11102125
-##  5   AAPL 2010-05-28 -0.01612472
-##  6   AAPL 2010-06-30 -0.02082686
-##  7   AAPL 2010-07-30  0.02274081
-##  8   AAPL 2010-08-31 -0.05500481
-##  9   AAPL 2010-09-30  0.16721508
+## 1    AAPL 2010-01-29 -0.10256526
+## 2    AAPL 2010-02-26  0.06539619
+## 3    AAPL 2010-03-31  0.14847041
+## 4    AAPL 2010-04-30  0.11102125
+## 5    AAPL 2010-05-28 -0.01612472
+## 6    AAPL 2010-06-30 -0.02082686
+## 7    AAPL 2010-07-30  0.02274081
+## 8    AAPL 2010-08-31 -0.05500481
+## 9    AAPL 2010-09-30  0.16721508
 ## 10   AAPL 2010-10-29  0.06072249
 ## # ... with 206 more rows</code></pre>
 </div>
@@ -404,15 +396,15 @@ baseline_returns_monthly</code></pre></div>
 <pre><code>## # A tibble: 72 × 2
 ##          date          Rb
 ##        &lt;date&gt;       &lt;dbl&gt;
-##  1 2010-01-29 -0.09926952
-##  2 2010-02-26  0.03482833
-##  3 2010-03-31  0.06839787
-##  4 2010-04-30  0.01255411
-##  5 2010-05-28 -0.07481831
-##  6 2010-06-30 -0.05396629
-##  7 2010-07-30  0.07450982
-##  8 2010-08-31 -0.05611312
-##  9 2010-09-30  0.11663646
+## 1  2010-01-29 -0.09926952
+## 2  2010-02-26  0.03482833
+## 3  2010-03-31  0.06839787
+## 4  2010-04-30  0.01255411
+## 5  2010-05-28 -0.07481831
+## 6  2010-06-30 -0.05396629
+## 7  2010-07-30  0.07450982
+## 8  2010-08-31 -0.05611312
+## 9  2010-09-30  0.11663646
 ## 10 2010-10-29  0.05777587
 ## # ... with 62 more rows</code></pre>
 </div>
@@ -439,15 +431,15 @@ portfolio_returns_monthly</code></pre></div>
 <pre><code>## # A tibble: 72 × 2
 ##          date          Ra
 ##        &lt;date&gt;       &lt;dbl&gt;
-##  1 2010-01-29  0.03071069
-##  2 2010-02-26  0.06293880
-##  3 2010-03-31  0.13040921
-##  4 2010-04-30  0.23915514
-##  5 2010-05-28  0.06821979
-##  6 2010-06-30 -0.02188252
-##  7 2010-07-30 -0.02723285
-##  8 2010-08-31  0.11648599
-##  9 2010-09-30  0.25123937
+## 1  2010-01-29  0.03071069
+## 2  2010-02-26  0.06293880
+## 3  2010-03-31  0.13040921
+## 4  2010-04-30  0.23915514
+## 5  2010-05-28  0.06821979
+## 6  2010-06-30 -0.02188252
+## 7  2010-07-30 -0.02723285
+## 8  2010-08-31  0.11648599
+## 9  2010-09-30  0.25123937
 ## 10 2010-10-29  0.06742970
 ## # ... with 62 more rows</code></pre>
 <p>We now have an aggregated portfolio that is a 50/50 blend of AAPL and NFLX.</p>
@@ -476,15 +468,15 @@ wts_map</code></pre></div>
 <pre><code>## # A tibble: 72 × 2
 ##          date Ra_using_wts_map
 ##        &lt;date&gt;            &lt;dbl&gt;
-##  1 2010-01-29       0.03071069
-##  2 2010-02-26       0.06293880
-##  3 2010-03-31       0.13040921
-##  4 2010-04-30       0.23915514
-##  5 2010-05-28       0.06821979
-##  6 2010-06-30      -0.02188252
-##  7 2010-07-30      -0.02723285
-##  8 2010-08-31       0.11648599
-##  9 2010-09-30       0.25123937
+## 1  2010-01-29       0.03071069
+## 2  2010-02-26       0.06293880
+## 3  2010-03-31       0.13040921
+## 4  2010-04-30       0.23915514
+## 5  2010-05-28       0.06821979
+## 6  2010-06-30      -0.02188252
+## 7  2010-07-30      -0.02723285
+## 8  2010-08-31       0.11648599
+## 9  2010-09-30       0.25123937
 ## 10 2010-10-29       0.06742970
 ## # ... with 62 more rows</code></pre>
 <p>The aggregated returns are exactly the same. The advantage with this method is that not all symbols need to be specified. Any symbol not specified by default gets a weight of zero.</p>
@@ -502,15 +494,15 @@ RaRb_single_portfolio</code></pre></div>
 <pre><code>## # A tibble: 72 × 3
 ##          date          Ra          Rb
 ##        &lt;date&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-##  1 2010-01-29  0.03071069 -0.09926952
-##  2 2010-02-26  0.06293880  0.03482833
-##  3 2010-03-31  0.13040921  0.06839787
-##  4 2010-04-30  0.23915514  0.01255411
-##  5 2010-05-28  0.06821979 -0.07481831
-##  6 2010-06-30 -0.02188252 -0.05396629
-##  7 2010-07-30 -0.02723285  0.07450982
-##  8 2010-08-31  0.11648599 -0.05611312
-##  9 2010-09-30  0.25123937  0.11663646
+## 1  2010-01-29  0.03071069 -0.09926952
+## 2  2010-02-26  0.06293880  0.03482833
+## 3  2010-03-31  0.13040921  0.06839787
+## 4  2010-04-30  0.23915514  0.01255411
+## 5  2010-05-28  0.06821979 -0.07481831
+## 6  2010-06-30 -0.02188252 -0.05396629
+## 7  2010-07-30 -0.02723285  0.07450982
+## 8  2010-08-31  0.11648599 -0.05611312
+## 9  2010-09-30  0.25123937  0.11663646
 ## 10 2010-10-29  0.06742970  0.05777587
 ## # ... with 62 more rows</code></pre>
 </div>
@@ -573,18 +565,17 @@ stock_returns_monthly_multi</code></pre></div>
 <pre><code>## Source: local data frame [648 x 4]
 ## Groups: portfolio [3]
 ## 
-## # A tibble: 648 × 4
 ##    portfolio symbol       date          Ra
 ##        &lt;int&gt;  &lt;chr&gt;     &lt;date&gt;       &lt;dbl&gt;
-##  1         1   AAPL 2010-01-29 -0.10256526
-##  2         1   AAPL 2010-02-26  0.06539619
-##  3         1   AAPL 2010-03-31  0.14847041
-##  4         1   AAPL 2010-04-30  0.11102125
-##  5         1   AAPL 2010-05-28 -0.01612472
-##  6         1   AAPL 2010-06-30 -0.02082686
-##  7         1   AAPL 2010-07-30  0.02274081
-##  8         1   AAPL 2010-08-31 -0.05500481
-##  9         1   AAPL 2010-09-30  0.16721508
+## 1          1   AAPL 2010-01-29 -0.10256526
+## 2          1   AAPL 2010-02-26  0.06539619
+## 3          1   AAPL 2010-03-31  0.14847041
+## 4          1   AAPL 2010-04-30  0.11102125
+## 5          1   AAPL 2010-05-28 -0.01612472
+## 6          1   AAPL 2010-06-30 -0.02082686
+## 7          1   AAPL 2010-07-30  0.02274081
+## 8          1   AAPL 2010-08-31 -0.05500481
+## 9          1   AAPL 2010-09-30  0.16721508
 ## 10         1   AAPL 2010-10-29  0.06072249
 ## # ... with 638 more rows</code></pre>
 <p>Examining the results, we can see that a few things happened:</p>
@@ -615,7 +606,6 @@ weights_table</code></pre></div>
 <pre><code>## Source: local data frame [9 x 3]
 ## Groups: portfolio [3]
 ## 
-## # A tibble: 9 × 3
 ##   portfolio stocks weights
 ##       &lt;int&gt;  &lt;chr&gt;   &lt;dbl&gt;
 ## 1         1   AAPL    0.50
@@ -637,18 +627,17 @@ portfolio_returns_monthly_multi</code></pre></div>
 <pre><code>## Source: local data frame [216 x 3]
 ## Groups: portfolio [3]
 ## 
-## # A tibble: 216 × 3
 ##    portfolio       date            Ra
 ##        &lt;int&gt;     &lt;date&gt;         &lt;dbl&gt;
-##  1         1 2010-01-29 -0.0489018445
-##  2         1 2010-02-26  0.0482132938
-##  3         1 2010-03-31  0.1233848612
-##  4         1 2010-04-30  0.1446899884
-##  5         1 2010-05-28  0.0245280152
-##  6         1 2010-06-30 -0.0307681832
-##  7         1 2010-07-30  0.0006001173
-##  8         1 2010-08-31  0.0474360262
-##  9         1 2010-09-30  0.2222062947
+## 1          1 2010-01-29 -0.0489018445
+## 2          1 2010-02-26  0.0482132938
+## 3          1 2010-03-31  0.1233848612
+## 4          1 2010-04-30  0.1446899884
+## 5          1 2010-05-28  0.0245280152
+## 6          1 2010-06-30 -0.0307681832
+## 7          1 2010-07-30  0.0006001173
+## 8          1 2010-08-31  0.0474360262
+## 9          1 2010-09-30  0.2222062947
 ## 10         1 2010-10-29  0.0788975110
 ## # ... with 206 more rows</code></pre>
 <p>Let’s assess the output. We now have a single, “long” format data frame of portfolio returns. It has three groups with the aggregated portfolios blended by mapping the <code>weight_table</code>.</p>
@@ -665,18 +654,17 @@ RaRb_multiple_portfolio</code></pre></div>
 <pre><code>## Source: local data frame [216 x 4]
 ## Groups: portfolio [?]
 ## 
-## # A tibble: 216 × 4
 ##    portfolio       date            Ra          Rb
 ##        &lt;int&gt;     &lt;date&gt;         &lt;dbl&gt;       &lt;dbl&gt;
-##  1         1 2010-01-29 -0.0489018445 -0.09926952
-##  2         1 2010-02-26  0.0482132938  0.03482833
-##  3         1 2010-03-31  0.1233848612  0.06839787
-##  4         1 2010-04-30  0.1446899884  0.01255411
-##  5         1 2010-05-28  0.0245280152 -0.07481831
-##  6         1 2010-06-30 -0.0307681832 -0.05396629
-##  7         1 2010-07-30  0.0006001173  0.07450982
-##  8         1 2010-08-31  0.0474360262 -0.05611312
-##  9         1 2010-09-30  0.2222062947  0.11663646
+## 1          1 2010-01-29 -0.0489018445 -0.09926952
+## 2          1 2010-02-26  0.0482132938  0.03482833
+## 3          1 2010-03-31  0.1233848612  0.06839787
+## 4          1 2010-04-30  0.1446899884  0.01255411
+## 5          1 2010-05-28  0.0245280152 -0.07481831
+## 6          1 2010-06-30 -0.0307681832 -0.05396629
+## 7          1 2010-07-30  0.0006001173  0.07450982
+## 8          1 2010-08-31  0.0474360262 -0.05611312
+## 9          1 2010-09-30  0.2222062947  0.11663646
 ## 10         1 2010-10-29  0.0788975110  0.05777587
 ## # ... with 206 more rows</code></pre>
 <p>Finally, we calculate the performance of each of the portfolios using <code>tq_performance</code>. Make sure the data frame is grouped on “portfolio”.</p>
@@ -685,7 +673,6 @@ RaRb_multiple_portfolio</code></pre></div>
 <pre><code>## Source: local data frame [3 x 13]
 ## Groups: portfolio [3]
 ## 
-## # A tibble: 3 × 13
 ##   portfolio ActivePremium  Alpha AnnualizedAlpha   Beta `Beta-` `Beta+`
 ##       &lt;int&gt;         &lt;dbl&gt;  &lt;dbl&gt;           &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
 ## 1         1        0.2294 0.0191          0.2549 0.9174  0.3425  0.7418
@@ -700,7 +687,6 @@ RaRb_multiple_portfolio</code></pre></div>
 <pre><code>## Source: local data frame [3 x 4]
 ## Groups: portfolio [3]
 ## 
-## # A tibble: 3 × 4
 ##   portfolio `ESSharpe(Rf=0%,p=95%)` `StdDevSharpe(Rf=0%,p=95%)`
 ##       &lt;int&gt;                   &lt;dbl&gt;                       &lt;dbl&gt;
 ## 1         1               0.1699068                   0.3509816
@@ -802,7 +788,6 @@ RaRb_multiple_portfolio</code></pre></div>
 <pre><code>## Source: local data frame [3 x 17]
 ## Groups: portfolio [3]
 ## 
-## # A tibble: 3 × 17
 ##   portfolio ArithmeticMean GeometricMean Kurtosis `LCLMean(0.95)` Maximum
 ##       &lt;int&gt;          &lt;dbl&gt;         &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt;   &lt;dbl&gt;
 ## 1         1         0.0290        0.0257   1.0984          0.0096  0.2222
@@ -821,7 +806,6 @@ RaRb_multiple_portfolio</code></pre></div>
 <pre><code>## Source: local data frame [3 x 13]
 ## Groups: portfolio [3]
 ## 
-## # A tibble: 3 × 13
 ##   portfolio ActivePremium  Alpha AnnualizedAlpha   Beta `Beta-` `Beta+`
 ##       &lt;int&gt;         &lt;dbl&gt;  &lt;dbl&gt;           &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
 ## 1         1        0.2294 0.0191          0.2549 0.9174  0.3425  0.7418
@@ -840,7 +824,6 @@ RaRb_multiple_portfolio</code></pre></div>
 <pre><code>## Source: local data frame [3 x 4]
 ## Groups: portfolio [3]
 ## 
-## # A tibble: 3 × 4
 ##   portfolio AnnualizedReturn `AnnualizedSharpe(Rf=0%)` AnnualizedStdDev
 ##       &lt;int&gt;            &lt;dbl&gt;                     &lt;dbl&gt;            &lt;dbl&gt;
 ## 1         1           0.3553                    1.2395           0.2866
@@ -856,7 +839,6 @@ RaRb_multiple_portfolio</code></pre></div>
 <pre><code>## Source: local data frame [3 x 5]
 ## Groups: portfolio [3]
 ## 
-## # A tibble: 3 × 5
 ##   portfolio    `p-value` `Lower CI` `Upper CI`     to.Rb
 ##       &lt;int&gt;        &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
 ## 1         1 2.362576e-05 0.27478777  0.6374931 0.4761451
@@ -872,7 +854,6 @@ RaRb_multiple_portfolio</code></pre></div>
 <pre><code>## Source: local data frame [3 x 12]
 ## Groups: portfolio [3]
 ## 
-## # A tibble: 3 × 12
 ##   portfolio `DownsideDeviation(0%)` `DownsideDeviation(MAR=10%)`
 ##       &lt;int&gt;                   &lt;dbl&gt;                        &lt;dbl&gt;
 ## 1         1                  0.0453                       0.0492
@@ -893,7 +874,6 @@ RaRb_multiple_portfolio</code></pre></div>
 <pre><code>## Source: local data frame [3 x 9]
 ## Groups: portfolio [3]
 ## 
-## # A tibble: 3 × 9
 ##   portfolio Annualiseddownsiderisk Downsidepotential Monthlydownsiderisk
 ##       &lt;int&gt;                  &lt;dbl&gt;             &lt;dbl&gt;               &lt;dbl&gt;
 ## 1         1                 0.1571            0.0201              0.0453
@@ -911,7 +891,6 @@ RaRb_multiple_portfolio</code></pre></div>
 <pre><code>## Source: local data frame [3 x 6]
 ## Groups: portfolio [3]
 ## 
-## # A tibble: 3 × 6
 ##   portfolio BetaCoKurtosis BetaCoSkewness BetaCoVariance CoKurtosis
 ##       &lt;int&gt;          &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;      &lt;dbl&gt;
 ## 1         1         0.7593         0.2388         0.9174          0
@@ -928,7 +907,6 @@ RaRb_multiple_portfolio</code></pre></div>
 <pre><code>## Source: local data frame [3 x 4]
 ## Groups: portfolio [3]
 ## 
-## # A tibble: 3 × 4
 ##   portfolio AnnualisedTrackingError InformationRatio TrackingError
 ##       &lt;int&gt;                   &lt;dbl&gt;            &lt;dbl&gt;         &lt;dbl&gt;
 ## 1         1                  0.2524           0.9088        0.0729
@@ -944,7 +922,6 @@ RaRb_multiple_portfolio</code></pre></div>
 <pre><code>## Source: local data frame [3 x 4]
 ## Groups: portfolio [3]
 ## 
-## # A tibble: 3 × 4
 ##   portfolio AnnualizedStdDev MeanAbsolutedeviation MonthlyStdDev
 ##       &lt;int&gt;            &lt;dbl&gt;                 &lt;dbl&gt;         &lt;dbl&gt;
 ## 1         1           0.2866                0.0660        0.0827
@@ -960,7 +937,6 @@ RaRb_multiple_portfolio</code></pre></div>
 <pre><code>## Source: local data frame [3 x 2]
 ## Groups: portfolio [3]
 ## 
-## # A tibble: 3 × 2
 ##   portfolio        VaR
 ##       &lt;int&gt;      &lt;dbl&gt;
 ## 1         1 -0.1120763
@@ -976,7 +952,6 @@ RaRb_multiple_portfolio</code></pre></div>
 <pre><code>## Source: local data frame [3 x 4]
 ## Groups: portfolio [3]
 ## 
-## # A tibble: 3 × 4
 ##   portfolio `ESSharpe(Rf=0%,p=95%)` `StdDevSharpe(Rf=0%,p=95%)`
 ##       &lt;int&gt;                   &lt;dbl&gt;                       &lt;dbl&gt;
 ## 1         1               0.1699068                   0.3509816
@@ -1084,7 +1059,6 @@ portfolio_growth_monthly &lt;-<span class="st"> </span>stock_returns_monthly %&g
 <pre><code>## Source: local data frame [3 x 4]
 ## Groups: portfolio [3]
 ## 
-## # A tibble: 3 × 4
 ##   portfolio `ESSharpe(Rf=0%,p=95%)` `StdDevSharpe(Rf=0%,p=95%)`
 ##       &lt;int&gt;                   &lt;dbl&gt;                       &lt;dbl&gt;
 ## 1         1               0.1699068                   0.3509816
@@ -1099,7 +1073,6 @@ portfolio_growth_monthly &lt;-<span class="st"> </span>stock_returns_monthly %&g
 <pre><code>## Source: local data frame [3 x 4]
 ## Groups: portfolio [3]
 ## 
-## # A tibble: 3 × 4
 ##   portfolio `ESSharpe(Rf=0.2%,p=95%)` `StdDevSharpe(Rf=0.2%,p=95%)`
 ##       &lt;int&gt;                     &lt;dbl&gt;                         &lt;dbl&gt;
 ## 1         1                 0.1552815                     0.3207696
@@ -1115,7 +1088,6 @@ portfolio_growth_monthly &lt;-<span class="st"> </span>stock_returns_monthly %&g
 <pre><code>## Source: local data frame [3 x 4]
 ## Groups: portfolio [3]
 ## 
-## # A tibble: 3 × 4
 ##   portfolio `ESSharpe(Rf=0.2%,p=99%)` `StdDevSharpe(Rf=0.2%,p=99%)`
 ##       &lt;int&gt;                     &lt;dbl&gt;                         &lt;dbl&gt;
 ## 1         1                0.10407622                     0.3207696

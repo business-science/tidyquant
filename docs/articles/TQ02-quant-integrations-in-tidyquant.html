@@ -87,7 +87,7 @@
       <h1>R Quantitative Analysis Package Integrations in tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2017-04-19</h4>
+            <h4 class="date">2017-05-01</h4>
           </div>
 
     
@@ -371,15 +371,15 @@ FANG</code></pre></div>
 <pre><code>## # A tibble: 4,032 × 8
 ##    symbol       date  open  high   low close    volume adjusted
 ##     &lt;chr&gt;     &lt;date&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1     FB 2013-01-02 27.44 28.18 27.42 28.00  69846400    28.00
-##  2     FB 2013-01-03 27.88 28.47 27.59 27.77  63140600    27.77
-##  3     FB 2013-01-04 28.01 28.93 27.83 28.76  72715400    28.76
-##  4     FB 2013-01-07 28.69 29.79 28.65 29.42  83781800    29.42
-##  5     FB 2013-01-08 29.51 29.60 28.86 29.06  45871300    29.06
-##  6     FB 2013-01-09 29.67 30.60 29.49 30.59 104787700    30.59
-##  7     FB 2013-01-10 30.60 31.45 30.28 31.30  95316400    31.30
-##  8     FB 2013-01-11 31.28 31.96 31.10 31.72  89598000    31.72
-##  9     FB 2013-01-14 32.08 32.21 30.62 30.95  98892800    30.95
+## 1      FB 2013-01-02 27.44 28.18 27.42 28.00  69846400    28.00
+## 2      FB 2013-01-03 27.88 28.47 27.59 27.77  63140600    27.77
+## 3      FB 2013-01-04 28.01 28.93 27.83 28.76  72715400    28.76
+## 4      FB 2013-01-07 28.69 29.79 28.65 29.42  83781800    29.42
+## 5      FB 2013-01-08 29.51 29.60 28.86 29.06  45871300    29.06
+## 6      FB 2013-01-09 29.67 30.60 29.49 30.59 104787700    30.59
+## 7      FB 2013-01-10 30.60 31.45 30.28 31.30  95316400    31.30
+## 8      FB 2013-01-11 31.28 31.96 31.10 31.72  89598000    31.72
+## 9      FB 2013-01-14 32.08 32.21 30.62 30.95  98892800    30.95
 ## 10     FB 2013-01-15 30.64 31.71 29.88 30.10 173242600    30.10
 ## # ... with 4,022 more rows</code></pre>
 <div id="example-1-use-quantmod-periodreturn-to-convert-prices-to-returns" class="section level2">
@@ -400,18 +400,17 @@ FANG_annual_returns</code></pre></div>
 <pre><code>## Source: local data frame [16 x 3]
 ## Groups: symbol [4]
 ## 
-## # A tibble: 16 × 3
 ##    symbol       date yearly.returns
 ##     &lt;chr&gt;     &lt;date&gt;          &lt;dbl&gt;
-##  1     FB 2013-12-31     0.95178579
-##  2     FB 2014-12-31     0.42763027
-##  3     FB 2015-12-31     0.34145101
-##  4     FB 2016-12-30     0.09927383
-##  5   AMZN 2013-12-31     0.54984265
-##  6   AMZN 2014-12-31    -0.22177086
-##  7   AMZN 2015-12-31     1.17783149
-##  8   AMZN 2016-12-30     0.10945565
-##  9   NFLX 2013-12-31     3.00141286
+## 1      FB 2013-12-31     0.95178579
+## 2      FB 2014-12-31     0.42763027
+## 3      FB 2015-12-31     0.34145101
+## 4      FB 2016-12-30     0.09927383
+## 5    AMZN 2013-12-31     0.54984265
+## 6    AMZN 2014-12-31    -0.22177086
+## 7    AMZN 2015-12-31     1.17783149
+## 8    AMZN 2016-12-30     0.10945565
+## 9    NFLX 2013-12-31     3.00141286
 ## 10   NFLX 2014-12-31    -0.07214057
 ## 11   NFLX 2015-12-31     1.34378372
 ## 12   NFLX 2016-12-30     0.08235711
@@ -467,18 +466,17 @@ FANG_annual_returns</code></pre></div>
 <pre><code>## Source: local data frame [192 x 7]
 ## Groups: symbol [4]
 ## 
-## # A tibble: 192 × 7
 ##    symbol       date  open  high   low close    volume
 ##     &lt;chr&gt;     &lt;date&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
-##  1     FB 2013-01-31 29.15 31.47 28.74 30.98 190744900
-##  2     FB 2013-02-28 26.84 27.30 26.34 27.25  83027800
-##  3     FB 2013-03-28 26.09 26.17 25.52 25.58  28585700
-##  4     FB 2013-04-30 27.13 27.85 27.01 27.77  36245700
-##  5     FB 2013-05-31 24.63 24.95 24.27 24.35  35925000
-##  6     FB 2013-06-28 24.68 24.98 24.42 24.88  96778900
-##  7     FB 2013-07-31 37.96 38.31 36.33 36.80 154828700
-##  8     FB 2013-08-30 42.02 42.26 41.06 41.29  67735100
-##  9     FB 2013-09-30 50.14 51.60 49.80 50.23 100095000
+## 1      FB 2013-01-31 29.15 31.47 28.74 30.98 190744900
+## 2      FB 2013-02-28 26.84 27.30 26.34 27.25  83027800
+## 3      FB 2013-03-28 26.09 26.17 25.52 25.58  28585700
+## 4      FB 2013-04-30 27.13 27.85 27.01 27.77  36245700
+## 5      FB 2013-05-31 24.63 24.95 24.27 24.35  35925000
+## 6      FB 2013-06-28 24.68 24.98 24.42 24.88  96778900
+## 7      FB 2013-07-31 37.96 38.31 36.33 36.80 154828700
+## 8      FB 2013-08-30 42.02 42.26 41.06 41.29  67735100
+## 9      FB 2013-09-30 50.14 51.60 49.80 50.23 100095000
 ## 10     FB 2013-10-31 47.16 52.00 46.50 50.21 248809000
 ## # ... with 182 more rows</code></pre>
 <p>A common usage case is to reduce the number of points to smooth time series plots. Let’s check out difference between daily and monthly plots.</p>
@@ -547,18 +545,17 @@ returns_joined</code></pre></div>
 <pre><code>## Source: local data frame [192 x 4]
 ## Groups: symbol [?]
 ## 
-## # A tibble: 192 × 4
 ##    symbol       date monthly.returns.x monthly.returns.y
 ##     &lt;chr&gt;     &lt;date&gt;             &lt;dbl&gt;             &lt;dbl&gt;
-##  1     FB 2013-01-31      0.1064285714      -0.013753802
-##  2     FB 2013-02-28     -0.1204002582       0.007823146
-##  3     FB 2013-03-28     -0.0612844037       0.025776961
-##  4     FB 2013-04-30      0.0856137608       0.017509014
-##  5     FB 2013-05-31     -0.1231544833       0.027922120
-##  6     FB 2013-06-28      0.0217658727      -0.028917565
-##  7     FB 2013-07-31      0.4790996977       0.037267072
-##  8     FB 2013-08-30      0.1220109272      -0.010400248
-##  9     FB 2013-09-30      0.2165172871       0.025321236
+## 1      FB 2013-01-31      0.1064285714      -0.013753802
+## 2      FB 2013-02-28     -0.1204002582       0.007823146
+## 3      FB 2013-03-28     -0.0612844037       0.025776961
+## 4      FB 2013-04-30      0.0856137608       0.017509014
+## 5      FB 2013-05-31     -0.1231544833       0.027922120
+## 6      FB 2013-06-28      0.0217658727      -0.028917565
+## 7      FB 2013-07-31      0.4790996977       0.037267072
+## 8      FB 2013-08-30      0.1220109272      -0.010400248
+## 9      FB 2013-09-30      0.2165172871       0.025321236
 ## 10     FB 2013-10-31     -0.0003981883       0.050249709
 ## # ... with 182 more rows</code></pre>
 <p>The <code>TTR::runCor</code> function can be used to evaluate rolling correlations using the xy pattern. Looking at the documentation (<code>?runCor</code>), we can see that the arguments include <code>x</code> and <code>y</code> along with a few additional arguments including <code>n</code> for the width of the rolling correlation. Because the scale is monthly, we’ll go with <code>n = 6</code> for a 6-month rolling correlation. The <code>col_rename</code> argument enables easy renaming of the output column(s).</p>
@@ -598,18 +595,17 @@ FANG_macd</code></pre></div>
 <pre><code>## Source: local data frame [4,032 x 6]
 ## Groups: symbol [4]
 ## 
-## # A tibble: 4,032 × 6
 ##    symbol       date adjusted  macd signal  diff
 ##     &lt;chr&gt;     &lt;date&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
-##  1     FB 2013-01-02    28.00    NA     NA    NA
-##  2     FB 2013-01-03    27.77    NA     NA    NA
-##  3     FB 2013-01-04    28.76    NA     NA    NA
-##  4     FB 2013-01-07    29.42    NA     NA    NA
-##  5     FB 2013-01-08    29.06    NA     NA    NA
-##  6     FB 2013-01-09    30.59    NA     NA    NA
-##  7     FB 2013-01-10    31.30    NA     NA    NA
-##  8     FB 2013-01-11    31.72    NA     NA    NA
-##  9     FB 2013-01-14    30.95    NA     NA    NA
+## 1      FB 2013-01-02    28.00    NA     NA    NA
+## 2      FB 2013-01-03    27.77    NA     NA    NA
+## 3      FB 2013-01-04    28.76    NA     NA    NA
+## 4      FB 2013-01-07    29.42    NA     NA    NA
+## 5      FB 2013-01-08    29.06    NA     NA    NA
+## 6      FB 2013-01-09    30.59    NA     NA    NA
+## 7      FB 2013-01-10    31.30    NA     NA    NA
+## 8      FB 2013-01-11    31.72    NA     NA    NA
+## 9      FB 2013-01-14    30.95    NA     NA    NA
 ## 10     FB 2013-01-15    30.10    NA     NA    NA
 ## # ... with 4,022 more rows</code></pre>
 <p>And, we can visualize the data like so.</p>
@@ -643,18 +639,17 @@ FANG_max_by_qtr</code></pre></div>
 <pre><code>## Source: local data frame [64 x 3]
 ## Groups: symbol [4]
 ## 
-## # A tibble: 64 × 3
 ##    symbol max.close year.qtr
 ##     &lt;chr&gt;     &lt;dbl&gt;    &lt;chr&gt;
-##  1     FB     32.47  2013-Q1
-##  2     FB     28.97  2013-Q2
-##  3     FB     51.24  2013-Q3
-##  4     FB     57.96  2013-Q4
-##  5     FB     72.03  2014-Q1
-##  6     FB     67.60  2014-Q2
-##  7     FB     79.04  2014-Q3
-##  8     FB     81.45  2014-Q4
-##  9     FB     85.31  2015-Q1
+## 1      FB     32.47  2013-Q1
+## 2      FB     28.97  2013-Q2
+## 3      FB     51.24  2013-Q3
+## 4      FB     57.96  2013-Q4
+## 5      FB     72.03  2014-Q1
+## 6      FB     67.60  2014-Q2
+## 7      FB     79.04  2014-Q3
+## 8      FB     81.45  2014-Q4
+## 9      FB     85.31  2015-Q1
 ## 10     FB     88.86  2015-Q2
 ## # ... with 54 more rows</code></pre>
 <p>The minimum each quarter can be retrieved in much the same way. The data frames can be joined using <code>left_join</code> to get the max and min by quarter.</p>
@@ -674,18 +669,17 @@ FANG_by_qtr</code></pre></div>
 <pre><code>## Source: local data frame [64 x 4]
 ## Groups: symbol [?]
 ## 
-## # A tibble: 64 × 4
 ##    symbol max.close year.qtr min.close
 ##     &lt;chr&gt;     &lt;dbl&gt;    &lt;chr&gt;     &lt;dbl&gt;
-##  1     FB     32.47  2013-Q1     25.13
-##  2     FB     28.97  2013-Q2     22.90
-##  3     FB     51.24  2013-Q3     24.37
-##  4     FB     57.96  2013-Q4     44.82
-##  5     FB     72.03  2014-Q1     53.53
-##  6     FB     67.60  2014-Q2     56.14
-##  7     FB     79.04  2014-Q3     62.76
-##  8     FB     81.45  2014-Q4     72.63
-##  9     FB     85.31  2015-Q1     74.05
+## 1      FB     32.47  2013-Q1     25.13
+## 2      FB     28.97  2013-Q2     22.90
+## 3      FB     51.24  2013-Q3     24.37
+## 4      FB     57.96  2013-Q4     44.82
+## 5      FB     72.03  2014-Q1     53.53
+## 6      FB     67.60  2014-Q2     56.14
+## 7      FB     79.04  2014-Q3     62.76
+## 8      FB     81.45  2014-Q4     72.63
+## 9      FB     85.31  2015-Q1     74.05
 ## 10     FB     88.86  2015-Q2     77.46
 ## # ... with 54 more rows</code></pre>
 <p>And, we can visualize the data like so.</p>
@@ -774,15 +768,15 @@ stock_pairs</code></pre></div>
 <pre><code>## # A tibble: 504 × 5
 ##          date           MA            V coef.0 coef.1
 ##        &lt;date&gt;        &lt;dbl&gt;        &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-##  1 2015-01-02  0.000000000  0.000000000     NA     NA
-##  2 2015-01-05 -0.028531131 -0.022320996     NA     NA
-##  3 2015-01-06 -0.002163988 -0.006464545     NA     NA
-##  4 2015-01-07  0.015435621  0.013309153     NA     NA
-##  5 2015-01-08  0.015434730  0.013323375     NA     NA
-##  6 2015-01-09 -0.012825923 -0.014934234     NA     NA
-##  7 2015-01-12 -0.012872662 -0.001959504     NA     NA
-##  8 2015-01-13  0.002276707  0.002918630     NA     NA
-##  9 2015-01-14 -0.001077833 -0.020219926     NA     NA
+## 1  2015-01-02  0.000000000  0.000000000     NA     NA
+## 2  2015-01-05 -0.028531131 -0.022320996     NA     NA
+## 3  2015-01-06 -0.002163988 -0.006464545     NA     NA
+## 4  2015-01-07  0.015435621  0.013309153     NA     NA
+## 5  2015-01-08  0.015434730  0.013323375     NA     NA
+## 6  2015-01-09 -0.012825923 -0.014934234     NA     NA
+## 7  2015-01-12 -0.012872662 -0.001959504     NA     NA
+## 8  2015-01-13  0.002276707  0.002918630     NA     NA
+## 9  2015-01-14 -0.001077833 -0.020219926     NA     NA
 ## 10 2015-01-15 -0.014604069 -0.009554005     NA     NA
 ## # ... with 494 more rows</code></pre>
 <p>Finally, we can visualize the first coefficient like so. A horizontal line is added using the full data set model. This gives us insight as to points in time where the relationship deviates significantly from the long run trend which can be explored for potential pair trade opportunities.</p>
@@ -820,18 +814,17 @@ stock_pairs</code></pre></div>
 <pre><code>## Source: local data frame [4,032 x 3]
 ## Groups: symbol [4]
 ## 
-## # A tibble: 4,032 × 3
 ##    symbol       date `daily.returns &gt; Rf`
 ##     &lt;chr&gt;     &lt;date&gt;                &lt;dbl&gt;
-##  1     FB 2013-01-02        -0.0001190476
-##  2     FB 2013-01-03        -0.0083333333
-##  3     FB 2013-01-04         0.0355309344
-##  4     FB 2013-01-07         0.0228294920
-##  5     FB 2013-01-08        -0.0123556554
-##  6     FB 2013-01-09         0.0525306789
-##  7     FB 2013-01-10         0.0230911191
-##  8     FB 2013-01-11         0.0132994832
-##  9     FB 2013-01-14        -0.0243938908
+## 1      FB 2013-01-02        -0.0001190476
+## 2      FB 2013-01-03        -0.0083333333
+## 3      FB 2013-01-04         0.0355309344
+## 4      FB 2013-01-07         0.0228294920
+## 5      FB 2013-01-08        -0.0123556554
+## 6      FB 2013-01-09         0.0525306789
+## 7      FB 2013-01-10         0.0230911191
+## 8      FB 2013-01-11         0.0132994832
+## 9      FB 2013-01-14        -0.0243938908
 ## 10     FB 2013-01-15        -0.0275827301
 ## # ... with 4,022 more rows</code></pre>
 </div>
