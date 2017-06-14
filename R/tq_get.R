@@ -445,20 +445,30 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
 
     # Convert x to uppercase
     x <- stringr::str_to_upper(x) %>%
-        stringr::str_trim(side = "both") %>%
-        stringr::str_replace_all("[[:punct:]]", "")
+        stringr::str_trim(side = "both")
+
+    # If the request has a ':', assume that it is in the form of EXCHANGE:SYMBOL
+    # Allows both forcing a specific exchange source and making requests from non-default exchanges
+    if ( stringr::str_detect(x,":") ) {
+        split_req <- stringr::str_split(x,":",2)
+        stock_exchange <- c(split_req[[1]][1])
+        x <- split_req[[1]][2]
+    } else {
+        stock_exchange <- c("XNAS", "XNYS", "XASE") # mornginstar gets from various exchanges
+    }
+
+    x <- stringr::str_replace_all(x,"[[:punct:]]", "")
 
     tryCatch({
 
         # Download file
-        stock_exchange <- c("XNAS", "XNYS", "XASE") # mornginstar gets from various exchanges
         url_base_1 <- 'http://financials.morningstar.com/finan/ajax/exportKR2CSV.html?&callback=?&t='
         url_base_2 <- '&region=usa&culture=en-US&cur=&order=asc'
         # Three URLs to try
         url <- paste0(url_base_1, stock_exchange, ":", x, url_base_2)
 
         # Try various stock exchanges
-        for(i in 1:3) {
+        for(i in 1:length(url)) {
             text <- httr::RETRY("GET", url[i], times = 5) %>%
                 httr::content()
 
