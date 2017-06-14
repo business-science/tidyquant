@@ -1,3 +1,8 @@
+## tidyquant 0.5.1.9001
+
+* Fixes:
+    * Fixed an issue where backticked columns such as numbers or multiple words were not able to be recognized when calling `as_xts()`.
+
 ## tidyquant 0.5.1
 
 * Improvements
