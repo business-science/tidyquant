@@ -16,7 +16,7 @@ test_that("Test 1 returns tibble with correct rows and columns.", {
     # Tibble
     expect_is(test1, "tbl")
     # Rows
-    expect_equal(nrow(test1), 104)
+    expect_equal(nrow(test1), 103)
     # Columns
     expect_equal(ncol(test1), 7)
 })
@@ -25,7 +25,7 @@ test_that("Test 2 returns tibble with correct rows and columns.", {
     # Tibble
     expect_is(test2, "tbl")
     # Rows
-    expect_equal(nrow(test2), 208)
+    expect_equal(nrow(test2), 206)
     # Columns
     expect_equal(ncol(test2), 8)
 })

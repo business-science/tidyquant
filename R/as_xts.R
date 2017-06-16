@@ -66,9 +66,8 @@ as_xts_ <- function(x, date_col = NULL, ...) {
         }
 
         # Select columns and reorder
-        date <- x %>% dplyr::select_(date_col)
-        not_date_names <- names(x)[names(x) != date_col]
-        not_date <- x %>% dplyr::select_(.dots = as.list(not_date_names))
+        date     <- x %>% dplyr::select_(date_col)
+        not_date <- x %>% dplyr::select(-dplyr::matches(date_col))
         x <- dplyr::bind_cols(date, not_date)
 
         # Format order.by
