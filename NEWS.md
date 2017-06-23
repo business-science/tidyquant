@@ -2,6 +2,7 @@
 
 * Improvements
     * Added `pkgdown` integration.
+    * `tq_get()` where `get = "key.ratios"` now permits specifying a specific exchange - e.g. "EPA:UBI". This enables fetching basic non-US company financials. In the event finances aren't in USD, ratios involving stock price - e.g. "Price to Earnings" - will no be calculated.
 
 * Fixes:
     * Require new `quantmod` version 0.4-8 to fix Oanda and Yahoo bugs.
