@@ -127,7 +127,7 @@ test_that("Test error on invalid data inputs.", {
     # No date columns
     expect_error(
         tibble(a = seq(1:100)) %>%
-            tq_mutate(select = NULL, mutate_fun = to.monthly),
+            tq_transmute(select = NULL, mutate_fun = to.monthly),
         "No date or POSIXct column found in `data`."
     )
     expect_error(

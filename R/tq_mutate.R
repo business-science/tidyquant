@@ -286,7 +286,7 @@ merge_two_tibbles <- function(tib1, tib2, mutate_fun) {
         stop("Could not join. Incompatible structures.")
     }
 
-    ret
+    return(ret)
 }
 
 replace_duplicate_colnames <- function(tib1, tib2) {
@@ -325,7 +325,7 @@ replace_duplicate_colnames <- function(tib1, tib2) {
         colnames(tib2) <- name_list_tib2
     }
 
-    tib2
+    return(tib2)
 }
 
 detect_duplicates <- function(name_list) {
@@ -354,7 +354,7 @@ replace_bad_names <- function(tib, fun_name) {
 
     colnames(tib) <- name_list_tib
 
-    tib
+    return(tib)
 }
 
 arrange_by_date <- function(tib) {
@@ -386,7 +386,7 @@ arrange_by_date <- function(tib) {
 
     }
 
-    tib
+    return(tib)
 }
 
 drop_date_and_group_cols <- function(tib) {
@@ -402,4 +402,6 @@ drop_date_and_group_cols <- function(tib) {
     tib <- tib %>%
         dplyr::ungroup() %>%
         dplyr::select_(.dots = as.list(tib_names_without_date_or_group))
+
+    return(tib)
 }

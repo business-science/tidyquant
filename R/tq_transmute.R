@@ -333,13 +333,13 @@ coerce_to_tibble <- function(data, date_col_name, time_zone, col_rename) {
 
     # Coerce to tibble
     ret <- data %>%
-        timekit::tk_tbl(preserve_index = TRUE, rename_index = "date", silent = TRUE)
+        timekit::tk_tbl(preserve_index = TRUE, rename_index = date_col_name, silent = TRUE)
 
-    # Convert to date
-    ret <- convert_date_cols(ret, time_zone)
+    # # Convert to date
+    # ret <- convert_date_cols(ret, time_zone)
 
-    # Rename row.names
-    names(ret)[[1]] <- date_col_name
+    # # Rename row.names
+    # names(ret)[[1]] <- date_col_name
 
     # Rename columns
     if (!is.null(col_rename)) {
