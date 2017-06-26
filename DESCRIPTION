@@ -24,13 +24,13 @@ Depends:
     R (>= 3.3.0),
     lubridate (>= 1.6.0),
     PerformanceAnalytics (>= 1.4.3541),
-    quantmod (>= 0.4-8),
+    quantmod (>= 0.4-9),
     tidyverse (>= 1.1.0)
 Imports:
     broom (>= 0.4.2),
     curl (>= 2.3),
     devtools (>= 1.12.0),
-    dplyr (>= 0.5.0),
+    dplyr (>= 0.7.0),
     ggplot2 (>= 2.2.1),
     httr (>= 1.2.1),
     lazyeval (>= 0.2.0),
@@ -44,6 +44,7 @@ Imports:
     stringr (>= 1.1.0),
     tibble (>= 1.2),
     tidyr (>= 0.6.1),
+    timekit (>= 0.3.0),
     timeSeries (>= 3022.101.2),
     tseries (>= 0.10-37),
     TTR (>= 0.23-1),

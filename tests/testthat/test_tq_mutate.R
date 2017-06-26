@@ -35,7 +35,7 @@ grouped_df <- tibble(symbol = c("FB", "AMZN")) %>%
 
 test1.2a  <- mutate(grouped_df, V1 = runSD(adjusted))
 
-test1.2b <- tq_mutate(grouped_df, adjusted, runSD)
+test1.2b <- tq_mutate(grouped_df, adjusted, runSD, col_rename = "V1")
 
 # Test 2: tq_mutate_xy piping test
 test2 <- AAPL %>%
@@ -51,9 +51,8 @@ set.seed(1)
 value <- rnorm(n = length(time_index))
 hourly_data <- xts(value, order.by = time_index)
 test3 <- hourly_data %>%
-    as_tibble(preserve_row_names = T) %>%
-    dplyr::mutate(row.names = lubridate::ymd_hms(row.names, tz = "US/Mountain")) %>%
-    tq_mutate_xy(x = V1, mutate_fun = MACD)
+    timekit::tk_tbl(preserve_index = T, silent = T) %>%
+    tq_mutate_xy(x = value, mutate_fun = MACD)
 
 # Test 4: Bind hourly data with tq_mutate_xy
 test4 <- tibble(time_index, value) %>%

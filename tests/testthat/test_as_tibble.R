@@ -1,31 +1,51 @@
 library(tidyquant)
+library(timekit)
 context("Testing as_tibble")
 
-# Setup
-test_xts <- suppressWarnings({
+AAPL_xts <- suppressWarnings({
     quantmod::getSymbols("AAPL", auto.assign = FALSE)
 })
 
-test_tib <- test_xts %>%
-    as_tibble(preserve_row_names = TRUE)
-
-test_err <- 5
-
-test_err2 <- matrix(rep(1, 25), nrow = 5)
-
-# Tests
-test_that("Test returns tibble with correct rows and columns.", {
-    # Test class
-    expect_is(test_xts, "xts")
-    expect_is(test_tib, "tbl")
-    # Rows
-    expect_equal(nrow(test_xts), nrow(test_tib))
-    # Columns
-    expect_equal(ncol(test_xts) + 1, ncol(test_tib))
+test_that("as_tibble yields a warning.", {
+    # Deprecation warning
+    expect_warning(
+        AAPL_xts %>%
+            as_tibble(preserve_row_names = TRUE)
+    )
 })
 
-test_that("Test handle errors gracefully", {
-    # Returns warning
-    expect_warning(as_tibble(test_err, preserve_row_names = TRUE))
-    expect_warning(as_tibble(test_err2, preserve_row_names = TRUE))
+test_that("as_tibble produces tibble in correct format.", {
+
+    test <- suppressWarnings(
+        AAPL_xts %>%
+            as_tibble(preserve_row_names = TRUE)
+    )
+
+    # Check tbl
+    expect_is(test, "tbl")
+
+    # Check date column is date
+    expect_equal(
+        test %>%
+            tk_get_timeseries_variables() %>%
+            length(),
+        1)
+})
+
+test_that("preserve_row_names = FALSE.", {
+
+    test <- suppressWarnings(
+        AAPL_xts %>%
+            as_tibble(preserve_row_names = FALSE)
+    )
+
+    # Check tbl
+    expect_is(test, "tbl")
+
+    # Check no date column
+    expect_equal(
+        test %>%
+            tk_get_timeseries_variables() %>%
+            length(),
+        0)
 })

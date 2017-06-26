@@ -179,7 +179,7 @@ tq_mutate_.tbl_df <- function(data, select = NULL, mutate_fun, col_rename = NULL
 tq_mutate_.data.frame <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
 
     # Convert data.frame to tibble
-    data <- as_tibble(data)
+    data <- tibble::as_tibble(data)
 
     # Get transformation
     ret <- tq_transmute_(data          = data,
@@ -239,7 +239,7 @@ tq_mutate_xy_.tbl_df <- function(data, x, y = NULL, mutate_fun, col_rename = NUL
 tq_mutate_xy_.data.frame <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
 
     # Convert data.frame to tibble
-    data <- as_tibble(data)
+    data <- tibble::as_tibble(data)
 
     # Get transformation
     ret <- tq_transmute_xy_(data          = data,

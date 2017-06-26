@@ -3,7 +3,7 @@
 \name{as_xts}
 \alias{as_xts}
 \alias{as_xts_}
-\title{Coerce objects to xts, designed to work with tibble and data.frame objects}
+\title{DEPRECATED: Coerce objects to xts, designed to work with tibble and data.frame objects}
 \usage{
 as_xts(x, date_col = NULL, ...)
 
@@ -16,13 +16,15 @@ as_xts_(x, date_col = NULL, ...)
 Must specify a date column that is of the \code{date} class. Unused for
 non-data.frame objects.}
 
-\item{...}{Additional parameters passed to \code{xts::as.xts}.}
+\item{...}{Additional parameters passed to \code{\link[timekit:tk_xts]{timekit::tk_xts()}}.}
 }
 \value{
 Returns a \code{xts} object.
 }
 \description{
 Coerce objects to xts, designed to work with tibble and data.frame objects
+
+DEPRECATED: Use \code{\link[timekit:tk_xts]{timekit::tk_xts()}} instead.
 }
 \details{
 \code{as_xts} is a wrapper for \code{xts::as.xts}
@@ -39,18 +41,17 @@ There is no need to specify the \code{date_col} argument.
 }
 \examples{
 # Load libraries
-library(tidyverse)
 library(tidyquant)
 
 tq_get("AAPL", get = "stock.prices") \%>\%
-    as_xts(date_col = date)
+    as_xts(date_col = date) # Deprecated: Use tk_xts()
 
-# Non-Standard Evaluation (NSE)
-x <- "date"
-tq_get("AAPL", get = "stock.prices") \%>\%
-    as_xts_(date_col = x)
 
 }
 \seealso{
-\code{\link[=as_tibble]{as_tibble()}}
+\itemize{
+\item \code{\link[=tk_xts]{tk_xts()}} - Coercion to xts, replaces \code{\link[tidyquant:as_xts]{tidyquant::as_xts()}}
+\item \code{\link[=tk_tbl]{tk_tbl()}} - Coercion to tbl, replaces \code{\link[tidyquant:as_tibble]{tidyquant::as_tibble()}}
+\item \code{\link[=as_tibble]{as_tibble()}} - Deprecated, use \code{\link[=tk_tbl]{tk_tbl()}} instead.
+}
 }

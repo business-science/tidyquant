@@ -2,7 +2,7 @@
 % Please edit documentation in R/as_tibble.R
 \name{as_tibble}
 \alias{as_tibble}
-\title{Coerce to tibble. Enable preserving row names when coercing matrix
+\title{DEPRECATED: Coerce to tibble. Enable preserving row names when coercing matrix
 and time-series-like objects with row names.}
 \usage{
 as_tibble(x, preserve_row_names = FALSE, ...)
@@ -15,7 +15,7 @@ timeSeries, etc objects that have row names. When \code{TRUE}, creates
 a \code{row.names} column with names of rows as character class.}
 
 \item{...}{Additional parameters passed to the appropriate
-\code{\link[tibble:as_tibble]{tibble::as_tibble()}} function.}
+\code{\link[timekit:tk_tbl]{timekit::tk_tbl()}} function.}
 }
 \value{
 Returns a \code{tibble} object.
@@ -23,6 +23,8 @@ Returns a \code{tibble} object.
 \description{
 Coerce to tibble. Enable preserving row names when coercing matrix
 and time-series-like objects with row names.
+
+DEPRECATED: Use \code{\link[timekit:tk_tbl]{timekit::tk_tbl()}} instead.
 }
 \details{
 \code{as_tibble} is a wrapper for \code{tibble::as_tibble}
@@ -34,7 +36,6 @@ When \code{preserve_row_names = TRUE} is specified, a new column,
 }
 \examples{
 # Load libraries
-library(tidyverse)
 library(tidyquant)
 
 # Matrix coercion to tibble
@@ -49,5 +50,9 @@ quantmod::getSymbols("AAPL", auto.assign = FALSE) \%>\%
 
 }
 \seealso{
-\code{\link[=as_xts]{as_xts()}}
+\itemize{
+\item \code{\link[=tk_xts]{tk_xts()}} - Coercion to xts, replaces \code{\link[tidyquant:as_xts]{tidyquant::as_xts()}}
+\item \code{\link[=tk_tbl]{tk_tbl()}} - Coercion to tbl, replaces \code{\link[tidyquant:as_tibble]{tidyquant::as_tibble()}}
+\item \code{\link[=as_xts]{as_xts()}} - Deprecated, use \code{\link[=tk_xts]{tk_xts()}} instead.
+}
 }

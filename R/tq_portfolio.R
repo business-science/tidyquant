@@ -159,7 +159,7 @@ tq_portfolio_.tbl_df <- function(data, assets_col, returns_col, weights, col_ren
 tq_portfolio_.data.frame <- function(data, assets_col, returns_col, weights = NULL, col_rename = NULL, ...) {
 
     # Convert data.frame to tibble
-    data <- as_tibble(data)
+    data <- tibble::as_tibble(data)
 
     # Call tq_portfolio_ for a tibble
     tq_portfolio_(data        = data,
@@ -272,7 +272,7 @@ tq_portfolio_base_ <- function(data, assets_col, returns_col, weights, col_renam
         data %>%
             dplyr::select_(date_col_name, assets_col_name, returns_col_name) %>%
             tidyr::spread_(key_col = assets_col_name, value_col = returns_col_name) %>%
-            as_xts_(date_col = date_col_name) %>%
+            timekit::tk_xts(silent = TRUE) %>%
             PerformanceAnalytics::Return.portfolio(weights = weights, verbose = FALSE, ...)
 
     }, error = function(e) {

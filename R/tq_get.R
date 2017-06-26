@@ -392,9 +392,10 @@ tq_get_util_1 <-
 
             group <- 1:nrow(x)
 
-            df <- dplyr::bind_cols(tibble::tibble(group),
-                                   tidyquant::as_tibble(x, preserve_row_names = TRUE)) %>%
-                dplyr::rename(category = row.names) %>%
+            df <- dplyr::bind_cols(
+                    tibble::tibble(group),
+                    timekit::tk_tbl(x, preserve_index = TRUE, rename_index = "category", silent = TRUE)
+                    ) %>%
                 tidyr::gather(date, value, -c(category, group)) %>%
                 dplyr::mutate(date = lubridate::as_date(date)) %>%
                 dplyr::arrange(group)
@@ -420,8 +421,7 @@ tq_get_util_1 <-
     if (xts::is.xts(ret)) {
         dimnames(ret)[[2]] <- vars$list_names
         ret <- ret %>%
-            tidyquant::as_tibble(preserve_row_names = TRUE) %>%
-            dplyr::rename(date = row.names) %>%
+            timekit::tk_tbl(preserve_index = TRUE, rename_index = "date", silent = TRUE) %>%
             dplyr::mutate(date = lubridate::as_date(date))
 
         # Filter economic data by date
@@ -813,7 +813,7 @@ tq_get_util_4 <- function(x, get, type = "raw",  meta = FALSE, order = "asc", co
     ret <- tryCatch({
 
         do.call("Quandl", args) %>%
-            as_tibble()
+            tibble::as_tibble()
 
 
     }, error = function(e) {
@@ -851,7 +851,7 @@ tq_get_util_5 <- function(x, get, paginate = FALSE, complete_cases, map, ...) {
     ret <- tryCatch({
 
         Quandl.datatable(code = x, paginate = paginate, ...) %>%
-            as_tibble()
+            tibble::as_tibble()
 
 
     }, error = function(e) {

@@ -21,7 +21,7 @@ grouped_df <- tibble(symbol = c("FB", "AMZN")) %>%
 test1.2a  <- mutate(grouped_df, V1 = runSD(adjusted)) %>%
     select(-(open:adjusted))
 
-test1.2b <- tq_transmute(grouped_df, adjusted, runSD)
+test1.2b <- tq_transmute(grouped_df, adjusted, runSD, col_rename = "V1")
 
 
 # Test 2: tq_transmute_xy test

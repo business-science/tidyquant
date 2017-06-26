@@ -1,14 +1,21 @@
+#' DEPRECATED: Coerce objects to xts, designed to work with tibble and data.frame objects
+#'
+#' @description
 #' Coerce objects to xts, designed to work with tibble and data.frame objects
+#'
+#' DEPRECATED: Use [timekit::tk_xts()] instead.
 #'
 #' @param x A data.frame (with date column), matrix, xts, zoo, timeSeries, etc object.
 #' @param date_col Required for objects that inherit the `data.frame` class.
 #' Must specify a date column that is of the `date` class. Unused for
 #' non-data.frame objects.
-#' @param ... Additional parameters passed to `xts::as.xts`.
+#' @param ... Additional parameters passed to [timekit::tk_xts()].
 #'
 #' @return Returns a `xts` object.
 #'
-#' @details `as_xts` is a wrapper for `xts::as.xts`
+#' @details
+#'
+#' `as_xts` is a wrapper for `xts::as.xts`
 #' that includes a `date_col` argument. When `date_col` is specified,
 #' the date column is used as row names during coercion to `xts` class. The
 #' date column must be in a date format (i.e. `date` class).
@@ -20,7 +27,11 @@
 #' `zoo`, `timeSeries`, `ts`, and `irts` objects.
 #' There is no need to specify the `date_col` argument.
 #'
-#' @seealso [as_tibble()]
+#' @seealso
+#' * [tk_xts()] - Coercion to xts, replaces [tidyquant::as_xts()]
+#' * [tk_tbl()] - Coercion to tbl, replaces [tidyquant::as_tibble()]
+#' * [as_tibble()] - Deprecated, use [tk_tbl()] instead.
+#'
 #'
 #' @name as_xts
 #'
@@ -28,25 +39,20 @@
 #'
 #' @examples
 #' # Load libraries
-#' library(tidyverse)
 #' library(tidyquant)
 #'
 #' tq_get("AAPL", get = "stock.prices") %>%
-#'     as_xts(date_col = date)
+#'     as_xts(date_col = date) # Deprecated: Use tk_xts()
 #'
-#' # Non-Standard Evaluation (NSE)
-#' x <- "date"
-#' tq_get("AAPL", get = "stock.prices") %>%
-#'     as_xts_(date_col = x)
 #'
 
 # PRIMARY FUNCTIONS ----
 
 as_xts <- function(x, date_col = NULL, ...) {
 
-    date_col <- deparse(substitute(date_col))
+    warning("The `as_xts()` function is deprecated. Please use `timekit::tk_xts()` instead.")
 
-    as_xts_(x, date_col, ...)
+    timekit::tk_xts(data = x, date_var = date_col, silent = TRUE, ...)
 
 }
 
@@ -55,35 +61,9 @@ as_xts <- function(x, date_col = NULL, ...) {
 
 as_xts_ <- function(x, date_col = NULL, ...) {
 
-    if (inherits(x, "data.frame")) {
+    warning("The `as_xts_()` function is deprecated. Please use `timekit::tk_xts()_` instead.")
 
-        # Check date_col provided
-        if (is.null(date_col)) stop("`date_col` required for coercion from data.frame to xts")
-
-        # Check date_col valid
-        if (!(date_col %in% names(x))) {
-            stop(paste0("date_col = ", date_col, " is invalid within names(x)"))
-        }
-
-        # Select columns and reorder
-        date     <- x %>% dplyr::select_(date_col)
-        not_date <- x %>% dplyr::select(-dplyr::matches(date_col))
-        x <- dplyr::bind_cols(date, not_date)
-
-        # Format order.by
-        eval(parse(text = "date_col"))
-        order.by <- eval(parse(text = stringr::str_c("x$", date_col)))
-
-        # Convert tibble to xts
-        ret <- xts::xts(x[,-1], order.by = order.by)
-
-    } else {
-
-        ret <- xts::as.xts(x)
-
-    }
-
-    ret
+    timekit::tk_xts_(data = x, date_var = date_col, silent = TRUE, ...)
 
 }
 

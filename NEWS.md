@@ -1,5 +1,7 @@
 ## tidyquant 0.5.1.9001
 
+
+* Incorporated more robust `timekit` coercion functions. Deprecated `tidyquant::as_xts()` and `tidyquant::as_tibble()`. Use `timekit::tk_xts()` and `timekit::tk_tbl()` instead.
 * Fixes:
     * Fixed an issue where backticked columns such as numbers or multiple words were not able to be recognized when calling `as_xts()`.
     * Fixed 2 tests where the results of `tq_get(get = "stock.prices")` were 1 or 2 rows off of what the tests expected. This likely has to do with the new yahoo finance API.

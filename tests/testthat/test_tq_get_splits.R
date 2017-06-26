@@ -19,10 +19,10 @@ test_that("Test returns tibble with correct rows and columns.", {
     expect_equal(ncol(test1), 2)
 })
 
-test_that("Test prints warning message on invalid x input.", {
-    expect_warning(tq_get("XYZ", get = get))
-})
-
-test_that("Test returns NA on invalid x input.", {
-    expect_equal(suppressWarnings(tq_get("XYZ", get = get)), NA)
-})
+# test_that("Test prints warning message on invalid x input.", {
+#     expect_warning(tq_get("XYZ", get = get))
+# })
+#
+# test_that("Test returns NA on invalid x input.", {
+#     expect_equal(suppressWarnings(tq_get("XYZ", get = get)), NA)
+# })

@@ -4,9 +4,7 @@ library(tidyquant)
 get <- "financials"
 context(paste0("Testing tq_get(get = '", get, "')"))
 
-test1 <- tq_get("AAPL", get = get,
-                from = "2016-01-01", to = "2016-06-01",
-                adjust = TRUE, type = "splits")
+test1 <- tq_get("AAPL", get = get)
 
 
 test2 <- tq_get("AAPL", get = get,

@@ -159,11 +159,11 @@ tq_performance_.tbl_df <- function(data, Ra, Rb = NULL, performance_fun, ...) {
     tryCatch({
         if (Rb == "NULL" || is.null(Rb)) {
             ret <- data %>%
-                as_xts_(date_col = date_col_name) %$%
+                timekit::tk_xts(silent = TRUE) %$%
                 fun_performance(eval(parse(text = Ra)), ...)
         } else {
             ret <- data %>%
-                as_xts_(date_col = date_col_name) %$%
+                timekit::tk_xts(silent = TRUE) %$%
                 fun_performance(eval(parse(text = Ra)),
                                 eval(parse(text = Rb)),
                                 ...)
@@ -207,7 +207,7 @@ tq_performance_.tbl_df <- function(data, Ra, Rb = NULL, performance_fun, ...) {
 tq_performance_.data.frame <- function(data, Ra, Rb = NULL, performance_fun, ...) {
 
     # Convert data.frame to tibble
-    data <- as_tibble(data)
+    data <- tibble::as_tibble(data)
 
     # tq_performance_ tbl_df version
     tq_performance_(data            = data,
