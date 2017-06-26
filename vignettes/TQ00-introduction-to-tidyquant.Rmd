@@ -57,10 +57,8 @@ Minimizing the number of functions reduces the learning curve. What we've done i
   2. __Get Quantitative Data, `tq_get()`__: A one-stop shop to get data from various web-sources. 
 
   3. __Transmute, `tq_transmute()`, and Mutate, `tq_mutate()`, Quantitative Data__: Perform and scale financial calculations completely within the `tidyverse`. These workhorse functions integrate the `xts`, `zoo`, `quantmod`, `TTR`, and `PerformanceAnalytics` packages. 
-
-  4. __Coerce Quantitative Data Between tibble and xts formats, `as_tibble()` and `as_xts()`__: Coercing the various _R_ time-based objects to and from `tibble` (tidy data frame) objects _was_ a pain. These functions enable __easily going back and forth__.
   
-  5. __Performance analysis, `tq_performance()`, and portfolio aggregation, `tq_portfolio()`__: The `PerformanceAnalytics` integration enables analyzing performance of assets and portfolios. Refer to [Performance Analysis with tidyquant](TQ05-performance-analysis-with-tidyquant.html).
+  4. __Performance analysis, `tq_performance()`, and portfolio aggregation, `tq_portfolio()`__: The `PerformanceAnalytics` integration enables analyzing performance of assets and portfolios. Refer to [Performance Analysis with tidyquant](TQ05-performance-analysis-with-tidyquant.html).
 
 For more information, refer to the first topic-specific vignette, [Core Functions in tidyquant](TQ01-core-functions-in-tidyquant.html).
 

@@ -35,7 +35,6 @@ The `tidyquant` package has a __core functions with a lot of power__. Few functi
 
 * __Transmute, `tq_transmute()`, and Mutate, `tq_mutate()`, Quantitative Data__: Perform and scale financial calculations completely within the `tidyverse`. These workhorse functions integrate the `xts`, `zoo`, `quantmod`, and `TTR` packages. 
 
-* __Coerce Quantitative Data Between tibble and xts formats, `as_tibble()` and `as_xts()`__: Coercing the various _R_ time-based objects to and from `tibble` (tidy data frame) objects _was_ a pain. These functions enable __easily going back and forth__.
 
 * __Performance analysis, `tq_performance()`, and portfolio aggregation, `tq_portfolio()`__: The `PerformanceAnalytics` integration enables analyzing performance of assets and portfolios. Because of the breadth of this topic, refer to [Performance Analysis with tidyquant](TQ05-performance-analysis-with-tidyquant.html) for a tutorial on these functions.
 
@@ -422,11 +421,11 @@ returns_combined
 
 _Step 2: Create a custom function_
 
-Next, create a custom regression function, which will be used to apply over the rolling window in Step 3. An important point is that the "data" will be passed to the regression function as an `xts` object. The `as_tibble` function takes care of converting to a data frame for the `lm` function to work properly with the columns "fb.returns" and "xlk.returns".
+Next, create a custom regression function, which will be used to apply over the rolling window in Step 3. An important point is that the "data" will be passed to the regression function as an `xts` object. The `timekit::tk_tbl` function takes care of converting to a data frame for the `lm` function to work properly with the columns "fb.returns" and "xlk.returns".
 
 ```{r}
 regr_fun <- function(data) {
-    coef(lm(fb.returns ~ xlk.returns, data = as_tibble(data)))
+    coef(lm(fb.returns ~ xlk.returns, data = timekit::tk_tbl(data, silent = TRUE)))
 }
 ```
 
@@ -464,45 +463,6 @@ FANG %>%
 ```
 
 
-# Coercing Time Series Objects To and From Tibble
-
-Sometimes you want to work using a `tibble` and other times you want to work using a `xts` object. The `as_tibble()` and `as_xts()` functions are the key to switching back and forth.
-
-## Coerce from time-series to tibble, as_tibble
-
-The `tidyquant::as_tibble()` function is used to coerce from a time-series object (e.g. `xts`, `zoo`, `timeSeries`, `ts`) or `matrix` object to a tidy data frame. The `preserve_row_names` argument keeps the time-series objects row names (typically dates). 
-
-Let's start with an `xts` object.
-
-```{r}
-AAPL_xts <- quantmod::getSymbols("AAPL", auto.assign = FALSE) 
-AAPL_xts %>% head()
-```
-
-We can easily coerce to `tibble` by setting `preserve_row_names = TRUE`. Note the return column is `row.names` with class of `character`.
-
-```{r}
-AAPL_tbl <- as_tibble(AAPL_xts, preserve_row_names = TRUE)
-AAPL_tbl
-```
-
-Converting to date is one extra step with `lubridate`.
-
-```{r}
-AAPL_tbl <- AAPL_tbl %>%
-    mutate(row.names = lubridate::ymd(row.names))
-AAPL_tbl
-```
-
-## Coerce from tibble to xts, as_xts
-
-We can convert back to `xts` with the tidyquant `as_xts()` function. Make sure to set the date column (`date_col`) argument to the column name containing the date (`date_col = row.names`). The date column must be in a date format (inherits either `Date` or `POSIXct` classes).
-
-```{r}
-AAPL_xts_2 <- AAPL_tbl %>%
-    as_xts(date_col = row.names)
-AAPL_xts_2 %>% head()
-```
 
 
 
