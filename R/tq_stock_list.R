@@ -303,3 +303,25 @@ clean_holdings <- function(x) {
         # Reorder
         dplyr::select(symbol, dplyr::everything())
 }
+
+# Return fallback data if necessary
+index_fallback <- function(x) {
+
+    # Date of last download
+    date.dload <- stock_indexes %>%
+        dplyr::filter(index.option == x) %>%
+        dplyr::pull(date.downloaded) %>%
+        utils::head(1)
+
+    # Date message
+    message(paste0("Using fallback dataset last downloaded ",
+                   date.dload[[1]]), ".")
+
+    # Unnest the specific index
+    stock_index <- stock_indexes %>%
+        dplyr::filter(index.option == x) %>%
+        dplyr::select(index.components) %>%
+        tidyr::unnest()
+
+    stock_index
+}

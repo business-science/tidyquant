@@ -11,7 +11,7 @@ test_that("Test returns list of 9 options when x = 'options'", {
     options %>%
         expect_is("character") %>%
         length() %>%
-        expect_gte(18)
+        expect_gte(9)
 })
 
 # Long running script: Collecting all stock lists

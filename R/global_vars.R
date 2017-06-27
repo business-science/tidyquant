@@ -122,5 +122,8 @@ globalVariables(c("A",
                   "element_text",
                   "margin",
                   "unit",
-                  "assets"
+                  "assets",
+                  "Weight",
+                  "Identifier",
+                  "Shares Held"
                   ))
