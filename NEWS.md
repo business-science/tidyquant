@@ -1,6 +1,7 @@
-## tidyquant 0.5.1.9001
+## tidyquant 0.5.1.9002
 
 * Fixes:
+    * `tq_index()` no longer pulls from marketvolume. Instead, 9 indices are available from SPDR. These indices are more reliable, and include weights for each stock in the index.
     * Fixed an issue where backticked columns such as numbers or multiple words were not able to be recognized when calling `as_xts()`.
     * Fixed 2 tests where the results of `tq_get(get = "stock.prices")` were 1 or 2 rows off of what the tests expected. This likely has to do with the new yahoo finance API.
 
