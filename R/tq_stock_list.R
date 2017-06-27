@@ -9,9 +9,9 @@
 #' @return Returns data in the form of a `tibble` object.
 #'
 #' @details
-#' `tq_index()` returns the stock symbol and company name of every stock
-#' in an index. Eighteen stock indexes are available. The source is
-#' \href{http://www.marketvolume.com/indexes_exchanges/}{www.marketvolume.com}.
+#' `tq_index()` returns the stock symbol, company name, weight, and sector of every stock
+#' in an index. Nine stock indices are available. The source is
+#' \href{https://us.spdrs.com/en/product/}{www.us.spdrs.com}.
 #'
 #' `tq_index_options()` returns a list of stock indexes you can
 #' choose from.
@@ -40,7 +40,7 @@
 #' tq_index_options()
 #'
 #' # Get all stock symbols in a stock index
-#' tq_index("DOWJONES")
+#' tq_index("DOW")
 #'
 #' # Get the list of stock exchange options
 #' tq_exchange_options()
@@ -49,180 +49,43 @@
 #' tq_exchange("NYSE")
 
 
-
 # tq_index -----
+
 #' @rdname tq_stock_list
 #' @export
 tq_index <- function(x, use_fallback = FALSE) {
 
-    # Reformat x
-    x <- stringr::str_to_upper(x) %>%
-        stringr::str_trim(side = "both") %>%
-        stringr::str_replace_all("[[:punct:]]", "")
+    # Clean index name
+    x <- clean_index(x)
 
-    # Check if x is a valid index
-    index_list <- tq_index_options()
-    if (!(x %in% c(index_list))) {
-        err <- paste0("Error: x must be a character string in the form of a valid index.",
-                      " The following are valid options:\n",
-                      stringr::str_c(index_list, collapse = ", ")
-        )
-        stop(err)
+    # Verify index
+    verified <- verify_index(x)
+
+    # If not a verified index, error
+    if(!verified$is_verified) {
+        warning(verified$err)
+        return(tibble::tibble())
     }
 
-    # Setup switches based on `get`
-    vars <- switch(x,
-                   DJI              = list(chr_x      = "index",
-                                           a          = "dji_components",
-                                           b          = "DJI",
-                                           max_page   = 1),
-                   DJT              = list(chr_x      = "index",
-                                           a          = "djt_components",
-                                           b          = "DJT",
-                                           max_page   = 1),
-                   DJU              = list(chr_x      = "index",
-                                           a          = "dju_components",
-                                           b          = "DJU",
-                                           max_page   = 1),
-                   DOWJONES         = list(chr_x      = "index",
-                                           a          = "dja_components",
-                                           b          = "DJA",
-                                           max_page   = 1),
-                   NASDAQ100        = list(chr_x      = "index",
-                                           a          = "n100_components",
-                                           b          = "SPX",
-                                           max_page   = 2),
-                   SP100            = list(chr_x      = "index",
-                                           a          = "sp100_components",
-                                           b          = "OEX",
-                                           max_page   = 1),
-                   SP400            = list(chr_x      = "index",
-                                           a          = "sp400_components",
-                                           b          = "SP400",
-                                           max_page   = 2),
-                   SP500            = list(chr_x      = "index",
-                                           a          = "sp500_components",
-                                           b          = "SPX",
-                                           max_page   = 2),
-                   SP600            = list(chr_x      = "index",
-                                           a          = "sp600_components",
-                                           b          = "SP600",
-                                           max_page   = 3),
-                   RUSSELL1000      = list(chr_x      = "index",
-                                           a          = "r1000_components",
-                                           b          = "RUI",
-                                           max_page   = 4),
-                   RUSSELL2000      = list(chr_x      = "index",
-                                           a          = "r2000_components",
-                                           b          = "RUT",
-                                           max_page   = 9),
-                   RUSSELL3000      = list(chr_x      = "index",
-                                           a          = "r3000_components",
-                                           b          = "RUA",
-                                           max_page   = 13),
-                   AMEX             = list(chr_x      = "exchange",
-                                           a          = "amex_components",
-                                           b          = "XAX",
-                                           max_page   = 2),
-                   NASDAQ           = list(chr_x      = "exchange",
-                                           a          = "nasdaq_components",
-                                           b          = "COMP",
-                                           max_page   = 9),
-                   NYSE             = list(chr_x      = "index",
-                                           a          = "nyse_components",
-                                           b          = "NYA",
-                                           max_page   = 11),
-                   AMEXGOLD         = list(chr_x      = "index",
-                                           a          = "gold_components",
-                                           b          = "HUI",
-                                           max_page   = 1),
-                   AMEXOIL          = list(chr_x      = "index",
-                                           a          = "oil_components",
-                                           b          = "XOI",
-                                           max_page   = 1),
-                   SOX              = list(chr_x      = "index",
-                                           a          = "sem_components",
-                                           b          = "SOX",
-                                           max_page   = 1)
-    )
+    # Use fallback if requested
+    if(use_fallback) return(index_fallback(x))
 
+    # Convert index name to SPDR ETF name
+    x_spdr <- spdr_mapper(x)
 
-    if (!use_fallback) {
+    # Download
+    dload <- index_download(x_spdr)
 
-        # Base path and page rows from www.marketvolume.com
-        base_path_1 <- "http://www.marketvolume.com/indexes_exchanges/"
-        base_path_2 <- ".asp?s="
-        base_path_3 <- "&row="
-        base_path <- paste0(base_path_1, vars$a, base_path_2, vars$b, base_path_3)
-
-        # Get page numbers; Add 1 to max page to adjust for 250 stock list expansion.
-        row_num <- seq(from = 0, by = 250, length.out = vars$max_page + 1)
-
-        message("Getting data...\n")
-
-        # Function to map
-        get_stock_index <- function(base_path, row_num) {
-            path <- paste0(base_path, row_num)
-            # rvest functions: Get table of stocks
-            stock_table <- xml2::read_html(curl::curl(path, handle = curl::new_handle("useragent" = "Mozilla/5.0"))) %>%
-                rvest::html_node("table") %>%
-                rvest::html_table()
-            # Format table
-            stock_table <- stock_table[-1, 1:2] %>%
-                tibble::as_tibble() %>%
-                dplyr::rename(symbol = X1, company = X2)
-            stock_table
-        }
-
-        # Map function; return stockindex
-        stock_index <- tryCatch({
-
-            tibble::tibble(row_num) %>%
-                dplyr::mutate(
-                    stock_table = purrr::map(row_num,
-                                             function(.x) get_stock_index(base_path = base_path, row_num = .x)
-                    )
-                ) %>%
-                tidyr::unnest() %>%
-                dplyr::select(-row_num) %>%
-                dplyr::mutate_all(function(x) stringr::str_trim(x, side = 'both') %>%
-                                      stringr::str_to_upper()) %>%
-                dplyr::distinct()
-
-        }, error = function(e) {
-
-            path <- paste0(base_path, 0)
-            con <- pipe(path)
-            close(con)
-            warning(paste0("Could not access ", path, ". ",
-                           "If problem persists, try setting `use_fallback = TRUE` ",
-                           "to return the last dowloaded data set."))
-
-            NA
-
-        })
-
-    } else {
-
-        # load("R/sysdata.rda")
-        date.dload <- stock_indexes %>%
-            dplyr::filter(index.option == x) %>%
-            dplyr::select(date.downloaded)
-
-        message(paste0("Using fallback dataset last downloaded ",
-                       date.dload[[1]]), ".")
-
-        stock_index <- stock_indexes %>%
-            dplyr::filter(index.option == x) %>%
-            dplyr::select(index.components) %>%
-            tidyr::unnest()
-
+    # Report download errors
+    if(!is.null(dload$err)) {
+        warning(dload$err)
+        return(tibble::tibble())
     }
 
-    ret <- stock_index
+    # Clean holdings
+    df <- clean_holdings(dload$df)
 
-    ret
-
+    df
 }
 
 # tq_exchange ----
@@ -303,25 +166,15 @@ tq_exchange <- function(x) {
 #' @rdname tq_stock_list
 #' @export
 tq_index_options <- function() {
-    c(  "DOWJONES",
-        "DJI",
-        "DJT",
-        "DJU",
-        "SP100",
-        "SP400",
-        "SP500",
-        "SP600",
-        "RUSSELL1000",
-        "RUSSELL2000",
-        "RUSSELL3000",
-        "AMEX",
-        "AMEXGOLD",
-        "AMEXOIL",
-        "NASDAQ",
-        "NASDAQ100",
-        "NYSE",
-        "SOX"
-    )
+    c("RUSSELL1000",
+      "RUSSELL2000",
+      "RUSSELL3000",
+      "DOW",
+      "DOWGLOBAL",
+      "SP400",
+      "SP500",
+      "SP600",
+      "SP1000")
 }
 
 
@@ -331,3 +184,122 @@ tq_exchange_options <- function() {
     c("AMEX", "NASDAQ", "NYSE")
 }
 
+# Utility ----------------------------------------------------------------------------------------------------
+
+# Casing and punctuation
+clean_index <- function(x) {
+
+    # Capitalize, trim space, and remove any punctuation
+    stringr::str_to_upper(x) %>%
+        stringr::str_trim(side = "both") %>%
+        stringr::str_replace_all("[[:punct:]]", "")
+}
+
+# Verify index is of the right form
+verify_index <- function(x) {
+
+    # Setup with initial values
+    verified <- list(is_verified = FALSE, err = "")
+
+    if(!(x %in% tq_index_options())) {
+
+        verified$err <- paste0(x, " must be a character string in the form of a valid index. ",
+                               "The following are valid options:\n",
+                               stringr::str_c(tq_index_options(), collapse = ", "))
+    } else {
+        verified$is_verified <- TRUE
+    }
+
+    verified
+}
+
+# Map the index to the SPDR ETF name
+spdr_mapper <- function(x) {
+
+    switch(x,
+           RUSSELL1000 = "ONEK",
+           RUSSELL2000 = "TWOK",
+           RUSSELL3000 = "THRK",
+           DOW         = "DIA",
+           DOWGLOBAL   = "DGT",
+           SP400       = "MDY",
+           SP500       = "SPY",
+           SP600       = "SLY",
+           SP1000      = "SMD")
+}
+
+# Download the index data from SPDR
+index_download <- function(x) {
+
+    # Contruct download link
+    spdr_link <- paste0("https://us.spdrs.com/site-content/xls/", x, "_All_Holdings.xls")
+
+    # Results container
+    res <- list(df = NULL, err = NULL)
+
+    # Message
+    message("Getting holdings for ", x)
+
+    # Download quietly
+    tryCatch({
+
+        # Download to disk
+        httr::GET(spdr_link, httr::write_disk(tf <- tempfile(fileext = ".xls")))
+
+        # Wait a second for it to fully download
+        Sys.sleep(1)
+
+        # Read the xls file
+        res$df <- readxl::read_excel(tf, skip = 3)
+
+        # Release temp file
+        unlink(tf)
+
+        return(res)
+
+    }, error = function(e) {
+
+        # On error, catch it and return
+        res$err <- paste0("Error at ", x, " during download. \n", e)
+
+        return(res)
+
+    })
+}
+
+# Series of commands to clean the results from SPDR
+clean_holdings <- function(x) {
+
+    # Identify the last row of data
+    last_row <- which(is.na(x$Identifier))[1] - 1
+
+    # Quiet type conversion
+    quiet_type_convert <- function(x) {
+        suppressMessages(readr::type_convert(x))
+    }
+
+    x %>%
+
+        # Subset rows with data
+        dplyr::slice(1:last_row) %>%
+
+        # Remove rows of cash
+        dplyr::filter(Sector != "Unassigned") %>%
+
+        # Type convert (bad data has been removed)
+        quiet_type_convert() %>%
+
+        # Reweight
+        dplyr::mutate(Weight = Weight / sum(Weight)) %>%
+
+        # Rename
+        dplyr::rename(
+            symbol = Identifier,
+            company = Name,
+            weight = Weight,
+            sector = Sector,
+            shares_held = `Shares Held`) %>%
+
+        # Reorder
+        dplyr::select(symbol, dplyr::everything())
+}

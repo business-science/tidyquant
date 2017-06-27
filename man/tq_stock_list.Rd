@@ -30,9 +30,9 @@ Returns data in the form of a \code{tibble} object.
 Get all stocks in a stock index or stock exchange in \code{tibble} format
 }
 \details{
-\code{tq_index()} returns the stock symbol and company name of every stock
-in an index. Eighteen stock indexes are available. The source is
-\href{http://www.marketvolume.com/indexes_exchanges/}{www.marketvolume.com}.
+\code{tq_index()} returns the stock symbol, company name, weight, and sector of every stock
+in an index. Nine stock indices are available. The source is
+\href{https://us.spdrs.com/en/product/}{www.us.spdrs.com}.
 
 \code{tq_index_options()} returns a list of stock indexes you can
 choose from.
@@ -54,7 +54,7 @@ library(tidyquant)
 tq_index_options()
 
 # Get all stock symbols in a stock index
-tq_index("DOWJONES")
+tq_index("DOW")
 
 # Get the list of stock exchange options
 tq_exchange_options()
