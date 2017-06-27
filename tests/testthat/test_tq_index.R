@@ -7,7 +7,7 @@ options <- tq_index_options()
 
 #### Tests
 
-test_that("Test returns list of 18+ options when x = 'options'", {
+test_that("Test returns list of 9 options when x = 'options'", {
     options %>%
         expect_is("character") %>%
         length() %>%
@@ -27,12 +27,12 @@ test_that("Test all stock.index options to ensure no issues during fetch.", {
 
 })
 
-test_that("Test returns error on invalid x input.", {
-    expect_error(tq_index("XYZ"))
+test_that("Test returns warning on invalid x input.", {
+    expect_warning(tq_index("XYZ"))
 })
 
 test_that("Test returns error on invalid x input.", {
-    expect_error(tq_index("XYZ", use_fallback = TRUE))
+    expect_warning(tq_index("XYZ", use_fallback = TRUE))
 })
 
 test_that("Test returns message on use_fallback = TRUE.", {
