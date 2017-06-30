@@ -1,6 +1,4 @@
 ## tidyquant 0.5.1.9002
-
-
 * Incorporated more robust `timekit` coercion functions. Deprecated `tidyquant::as_xts()` and `tidyquant::as_tibble()`. Use `timekit::tk_xts()` and `timekit::tk_tbl()` instead.
 * Fixes:
     * `tq_index()` no longer pulls from marketvolume. Instead, 9 indices are available from SPDR. These indices are more reliable, and include weights for each stock in the index.
