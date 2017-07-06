@@ -74,7 +74,7 @@ tq_index <- function(x, use_fallback = FALSE) {
     x_spdr <- spdr_mapper(x)
 
     # Download
-    dload <- index_download(x_spdr)
+    dload <- index_download(x_spdr, index_name = x)
 
     # Report download errors
     if(!is.null(dload$err)) {
@@ -229,7 +229,7 @@ spdr_mapper <- function(x) {
 }
 
 # Download the index data from SPDR
-index_download <- function(x) {
+index_download <- function(x, index_name) {
 
     # Contruct download link
     spdr_link <- paste0("https://us.spdrs.com/site-content/xls/", x, "_All_Holdings.xls")
@@ -238,19 +238,18 @@ index_download <- function(x) {
     res <- list(df = NULL, err = NULL)
 
     # Message
-    message("Getting holdings for ", x)
+    message("Getting holdings for ", index_name)
 
     # Download quietly
     tryCatch({
 
-        # Download to disk
+        # Download to disk, force as a xls
         httr::GET(spdr_link, httr::write_disk(tf <- tempfile(fileext = ".xls")))
 
-        # Wait a second for it to fully download
-        Sys.sleep(1)
-
         # Read the xls file
-        res$df <- readxl::read_excel(tf, skip = 3)
+        suppressMessages({
+            res$df <- gdata::read.xls(tf, skip = 3, stringsAsFactors = FALSE)
+        })
 
         # Release temp file
         unlink(tf)
@@ -260,7 +259,7 @@ index_download <- function(x) {
     }, error = function(e) {
 
         # On error, catch it and return
-        res$err <- paste0("Error at ", x, " during download. \n", e)
+        res$err <- paste0("Error at ", index_name, " during download. \n", e)
 
         return(res)
 
@@ -271,7 +270,7 @@ index_download <- function(x) {
 clean_holdings <- function(x) {
 
     # Identify the last row of data
-    last_row <- which(is.na(x$Identifier))[1] - 1
+    last_row <- which(is.na(x[["Weight"]]))[1] - 1
 
     # Quiet type conversion
     quiet_type_convert <- function(x) {
@@ -298,7 +297,7 @@ clean_holdings <- function(x) {
             company = Name,
             weight = Weight,
             sector = Sector,
-            shares_held = `Shares Held`) %>%
+            shares_held = `Shares.Held`) %>%
 
         # Reorder
         dplyr::select(symbol, dplyr::everything())
