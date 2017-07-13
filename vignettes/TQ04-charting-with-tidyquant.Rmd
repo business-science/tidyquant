@@ -167,24 +167,6 @@ AAPL %>%
     theme_tq()
 ```
 
-## Combining Chart Geoms
-
-Because the geoms are applied as layers, we can combine multiple chart types. The order of the geoms matters: the further down geoms will be overlayed on the preceding geoms. We'll build up the plot starting with the candlestick, adding a line, and then adding a points.  
-
-```{r}
-AAPL %>%
-    ggplot(aes(x = date, y = close)) +
-    geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
-    geom_line(color = "steelblue", size = 1) +
-    geom_point(color = "steelblue", size = 3) +
-    labs(title = "AAPL Candlestick Chart", 
-         subtitle = "Combining Chart Geoms",
-         y = "Closing Price", x = "") + 
-    coord_x_date(xlim = c(end - weeks(6), end),
-                 ylim = c(100, 120)) + 
-    theme_tq()
-```
-
 <a class="anchor" id="mult-chart"></a>
 
 ## Charting Multiple Securities
@@ -434,21 +416,6 @@ AMZN %>%
     theme_tq()
 ```
 
-__Loess__:
-
-```{r}
-AMZN %>%
-    ggplot(aes(x = date, y = adjusted)) +
-    geom_line(color = palette_light()[[1]]) + 
-    scale_y_log10() +
-    geom_smooth(method = "loess") +
-    labs(title = "AMZN Line Chart", 
-         subtitle = "Log Scale, Applying Loess Trendline", 
-         y = "Adjusted Closing Price", x = "") + 
-    theme_tq()
-```
-
-
 ## Example 3: Charting volume with geom_segment
 
 We can use the `geom_segment()` function to chart daily volume, which uses xy points for the beginning and end of the line. Using the aesthetic color argument, we color based on the value of volume to make these data stick out. 
@@ -492,25 +459,6 @@ The `tidyquant` package comes with three themes to help quickly customize financ
 * __Dark__: `theme_tq_dark()` + `scale_color_tq(theme = "dark")` + `scale_fill_tq(theme = "dark")`
 * __Green__: `theme_tq_green()` + `scale_color_tq(theme = "green")` + `scale_fill_tq(theme = "green")`
 
-## Light
-
-```{r, fig.height = 6}
-n_mavg <- 50 # Number of periods (days) for moving average
-FANG %>%
-    filter(date >= start - days(2 * n_mavg)) %>%
-    ggplot(aes(x = date, y = close, color = symbol)) +
-    geom_line(size = 1) +
-    geom_ma(n = 15, color = "darkblue", size = 1) + 
-    geom_ma(n = n_mavg, color = "red", size = 1) +
-    labs(title = "Light Theme",
-         x = "", y = "Closing Price") +
-    coord_x_date(xlim = c(start, end)) +
-    facet_wrap(~ symbol, scales = "free_y") +
-    theme_tq() +
-    scale_color_tq() +
-    scale_y_continuous(labels = scales::dollar)
-```
-
 ## Dark
 
 ```{r, fig.height = 6}
@@ -527,25 +475,6 @@ FANG %>%
     facet_wrap(~ symbol, scales = "free_y") +
     theme_tq_dark() +
     scale_color_tq(theme = "dark") +
-    scale_y_continuous(labels = scales::dollar)
-```
-
-## Green
-
-```{r, fig.height = 6}
-n_mavg <- 50 # Number of periods (days) for moving average
-FANG %>%
-    filter(date >= start - days(2 * n_mavg)) %>%
-    ggplot(aes(x = date, y = close, color = symbol)) +
-    geom_line(size = 1) +
-    geom_ma(n = 15, color = "darkblue", size = 1) + 
-    geom_ma(n = n_mavg, color = "red", size = 1) +
-    labs(title = "Green Theme",
-         x = "", y = "Closing Price") +
-    coord_x_date(xlim = c(start, end)) +
-    facet_wrap(~ symbol, scales = "free_y") +
-    theme_tq_green() +
-    scale_color_tq(theme = "green") +
     scale_y_continuous(labels = scales::dollar)
 ```
 

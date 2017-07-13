@@ -1,11 +1,11 @@
 ## Release Summary
-This is a bug fix release of tidyquant for CRAN review. This release is mainly to address bugs related to Oanda returning a shorter maximum amount of data (180 days) and Yahoo redirecting a HTTP request to HTTPS. The bugs were fixed with the newest version of `quantmod`, and we have required that version in the Depends. There are also updated tests relating to the Oanda fix.
+This is a bug fix release of tidyquant for CRAN review. This release fixes 2 tests that were still broken due to the Yahoo API change. It also fixes `tq_index()` which had broken due to a change with Marketvolume. Lastly, it uses the coercion functions from `timekit` instead of `tidyquant`, and does a soft deprecation of `tidyquant::as_tibble()` and `tidyquant::as_xts()`.
 
 ## Test environments
-* local Windows install, R 3.3.2
-* ubuntu 12.04 (on travis-ci), R 3.3.2
+* local Windows install, R 3.4.0
+* local Mac install, R 3.4.0
+* ubuntu 12.04 (on travis-ci), R 3.4.4
 * win-builder (devel and release)
-
 
 ## R CMD check results
 There were no ERRORs, WARNINGs or NOTEs.
