@@ -37,13 +37,13 @@ With `tidyquant` all the benefits add up to one thing: *a one-stop shop for seri
 
 Visualizing the stock price volatility of four stocks side-by-side is quick and easy...
 
-<img src="img/sample_img_1_volatility.png" width="100%" />
+<img src="tools/sample_img_1_volatility.png" width="100%" />
 
 ### Evaluating Stock Performance
 
 What about stock performance? Quickly visualize how a $10,000 investment in various stocks would perform.
 
-<img src="img/sample_img_2_stock_returns.png" width="100%" />
+<img src="tools/sample_img_2_stock_returns.png" width="100%" />
 
 ### Evaluating Portfolio Performance
 
@@ -54,7 +54,7 @@ Ok, stocks are too easy. What about portfolios? With the `PerformanceAnalytics` 
 -   Portfolio 3: 25% FB, 0% AMZN, 50% NFLX, 25% GOOG
 -   Portfolio 4: 25% FB, 25% AMZN, 0% NFLX, 50% GOOG
 
-<img src="img/sample_img_3_portfolio_returns.png" width="100%" />
+<img src="tools/sample_img_3_portfolio_returns.png" width="100%" />
 
 This just scratches the surface of `tidyquant`. Here's how to install to get started.
 
