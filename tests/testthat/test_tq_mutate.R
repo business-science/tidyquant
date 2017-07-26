@@ -51,7 +51,7 @@ set.seed(1)
 value <- rnorm(n = length(time_index))
 hourly_data <- xts(value, order.by = time_index)
 test3 <- hourly_data %>%
-    timekit::tk_tbl(preserve_index = T, silent = T) %>%
+    timetk::tk_tbl(preserve_index = T, silent = T) %>%
     tq_mutate_xy(x = value, mutate_fun = MACD)
 
 # Test 4: Bind hourly data with tq_mutate_xy
