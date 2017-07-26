@@ -15,7 +15,7 @@ timeSeries, etc objects that have row names. When \code{TRUE}, creates
 a \code{row.names} column with names of rows as character class.}
 
 \item{...}{Additional parameters passed to the appropriate
-\code{\link[timekit:tk_tbl]{timekit::tk_tbl()}} function.}
+\code{\link[timetk:tk_tbl]{timetk::tk_tbl()}} function.}
 }
 \value{
 Returns a \code{tibble} object.
@@ -24,7 +24,7 @@ Returns a \code{tibble} object.
 Coerce to tibble. Enable preserving row names when coercing matrix
 and time-series-like objects with row names.
 
-DEPRECATED: Use \code{\link[timekit:tk_tbl]{timekit::tk_tbl()}} instead.
+DEPRECATED: Use \code{\link[timetk:tk_tbl]{timetk::tk_tbl()}} instead.
 }
 \details{
 \code{as_tibble} is a wrapper for \code{tibble::as_tibble}

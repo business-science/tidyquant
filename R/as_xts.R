@@ -3,13 +3,13 @@
 #' @description
 #' Coerce objects to xts, designed to work with tibble and data.frame objects
 #'
-#' DEPRECATED: Use [timekit::tk_xts()] instead.
+#' DEPRECATED: Use [timetk::tk_xts()] instead.
 #'
 #' @param x A data.frame (with date column), matrix, xts, zoo, timeSeries, etc object.
 #' @param date_col Required for objects that inherit the `data.frame` class.
 #' Must specify a date column that is of the `date` class. Unused for
 #' non-data.frame objects.
-#' @param ... Additional parameters passed to [timekit::tk_xts()].
+#' @param ... Additional parameters passed to [timetk::tk_xts()].
 #'
 #' @return Returns a `xts` object.
 #'
@@ -50,9 +50,9 @@
 
 as_xts <- function(x, date_col = NULL, ...) {
 
-    warning("The `as_xts()` function is deprecated. Please use `timekit::tk_xts()` instead.")
+    warning("The `as_xts()` function is deprecated. Please use `timetk::tk_xts()` instead.")
 
-    timekit::tk_xts(data = x, date_var = date_col, silent = TRUE, ...)
+    timetk::tk_xts(data = x, date_var = date_col, silent = TRUE, ...)
 
 }
 
@@ -61,9 +61,9 @@ as_xts <- function(x, date_col = NULL, ...) {
 
 as_xts_ <- function(x, date_col = NULL, ...) {
 
-    warning("The `as_xts_()` function is deprecated. Please use `timekit::tk_xts()_` instead.")
+    warning("The `as_xts_()` function is deprecated. Please use `timetk::tk_xts()_` instead.")
 
-    timekit::tk_xts_(data = x, date_var = date_col, silent = TRUE, ...)
+    timetk::tk_xts_(data = x, date_var = date_col, silent = TRUE, ...)
 
 }
 

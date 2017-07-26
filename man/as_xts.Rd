@@ -16,7 +16,7 @@ as_xts_(x, date_col = NULL, ...)
 Must specify a date column that is of the \code{date} class. Unused for
 non-data.frame objects.}
 
-\item{...}{Additional parameters passed to \code{\link[timekit:tk_xts]{timekit::tk_xts()}}.}
+\item{...}{Additional parameters passed to \code{\link[timetk:tk_xts]{timetk::tk_xts()}}.}
 }
 \value{
 Returns a \code{xts} object.
@@ -24,7 +24,7 @@ Returns a \code{xts} object.
 \description{
 Coerce objects to xts, designed to work with tibble and data.frame objects
 
-DEPRECATED: Use \code{\link[timekit:tk_xts]{timekit::tk_xts()}} instead.
+DEPRECATED: Use \code{\link[timetk:tk_xts]{timetk::tk_xts()}} instead.
 }
 \details{
 \code{as_xts} is a wrapper for \code{xts::as.xts}

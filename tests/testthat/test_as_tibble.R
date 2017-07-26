@@ -1,5 +1,5 @@
 library(tidyquant)
-library(timekit)
+library(timetk)
 context("Testing as_tibble")
 
 AAPL_xts <- suppressWarnings({

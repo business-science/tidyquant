@@ -45,7 +45,7 @@ Imports:
     stringr (>= 1.1.0),
     tibble (>= 1.2),
     tidyr (>= 0.6.1),
-    timekit (>= 0.3.1),
+    timetk (>= 0.1.0),
     timeSeries (>= 3022.101.2),
     tseries (>= 0.10-37),
     TTR (>= 0.23-1),

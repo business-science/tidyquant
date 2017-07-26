@@ -421,11 +421,11 @@ returns_combined
 
 _Step 2: Create a custom function_
 
-Next, create a custom regression function, which will be used to apply over the rolling window in Step 3. An important point is that the "data" will be passed to the regression function as an `xts` object. The `timekit::tk_tbl` function takes care of converting to a data frame for the `lm` function to work properly with the columns "fb.returns" and "xlk.returns".
+Next, create a custom regression function, which will be used to apply over the rolling window in Step 3. An important point is that the "data" will be passed to the regression function as an `xts` object. The `timetk::tk_tbl` function takes care of converting to a data frame for the `lm` function to work properly with the columns "fb.returns" and "xlk.returns".
 
 ```{r}
 regr_fun <- function(data) {
-    coef(lm(fb.returns ~ xlk.returns, data = timekit::tk_tbl(data, silent = TRUE)))
+    coef(lm(fb.returns ~ xlk.returns, data = timetk::tk_tbl(data, silent = TRUE)))
 }
 ```
 

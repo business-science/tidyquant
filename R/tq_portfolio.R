@@ -272,7 +272,7 @@ tq_portfolio_base_ <- function(data, assets_col, returns_col, weights, col_renam
         data %>%
             dplyr::select_(date_col_name, assets_col_name, returns_col_name) %>%
             tidyr::spread_(key_col = assets_col_name, value_col = returns_col_name) %>%
-            timekit::tk_xts(silent = TRUE) %>%
+            timetk::tk_xts(silent = TRUE) %>%
             PerformanceAnalytics::Return.portfolio(weights = weights, verbose = FALSE, ...)
 
     }, error = function(e) {

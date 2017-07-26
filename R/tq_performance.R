@@ -159,11 +159,11 @@ tq_performance_.tbl_df <- function(data, Ra, Rb = NULL, performance_fun, ...) {
     tryCatch({
         if (Rb == "NULL" || is.null(Rb)) {
             ret <- data %>%
-                timekit::tk_xts(silent = TRUE) %$%
+                timetk::tk_xts(silent = TRUE) %$%
                 fun_performance(eval(parse(text = Ra)), ...)
         } else {
             ret <- data %>%
-                timekit::tk_xts(silent = TRUE) %$%
+                timetk::tk_xts(silent = TRUE) %$%
                 fun_performance(eval(parse(text = Ra)),
                                 eval(parse(text = Rb)),
                                 ...)

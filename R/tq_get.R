@@ -394,7 +394,7 @@ tq_get_util_1 <-
 
             df <- dplyr::bind_cols(
                     tibble::tibble(group),
-                    timekit::tk_tbl(x, preserve_index = TRUE, rename_index = "category", silent = TRUE)
+                    timetk::tk_tbl(x, preserve_index = TRUE, rename_index = "category", silent = TRUE)
                     ) %>%
                 tidyr::gather(date, value, -c(category, group)) %>%
                 dplyr::mutate(date = lubridate::as_date(date)) %>%
@@ -421,7 +421,7 @@ tq_get_util_1 <-
     if (xts::is.xts(ret)) {
         dimnames(ret)[[2]] <- vars$list_names
         ret <- ret %>%
-            timekit::tk_tbl(preserve_index = TRUE, rename_index = "date", silent = TRUE) %>%
+            timetk::tk_tbl(preserve_index = TRUE, rename_index = "date", silent = TRUE) %>%
             dplyr::mutate(date = lubridate::as_date(date))
 
         # Filter economic data by date

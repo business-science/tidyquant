@@ -84,12 +84,12 @@ tq_transmute_.tbl_df <- function(data, select = NULL, mutate_fun, col_rename = N
     if (is_period_fun) {
         # Add arg: OHLC = FALSE
         ret <- data %>%
-            timekit::tk_xts_(silent = TRUE) %>%
+            timetk::tk_xts_(silent = TRUE) %>%
             fun_transmute(OHLC = FALSE, ...)
 
     } else {
         ret <- data %>%
-            timekit::tk_xts_(silent = TRUE) %>%
+            timetk::tk_xts_(silent = TRUE) %>%
             fun_transmute(...)
     }
 
@@ -195,11 +195,11 @@ tq_transmute_xy_.tbl_df <- function(data, x, y = NULL, mutate_fun, col_rename = 
         # Add arg: OHLC = FALSE
         if (y == "NULL" || is.null(y)) {
             ret <- data %>%
-                timekit::tk_xts_(silent = TRUE) %$%
+                timetk::tk_xts_(silent = TRUE) %$%
                 fun_transmute(eval(parse(text = x)), OHLC = FALSE, ...)
         } else {
             ret <- data %>%
-                timekit::tk_xts_(silent = TRUE) %$%
+                timetk::tk_xts_(silent = TRUE) %$%
                 fun_transmute(eval(parse(text = x)),
                               eval(parse(text = y)),
                               OHLC = FALSE,
@@ -208,12 +208,12 @@ tq_transmute_xy_.tbl_df <- function(data, x, y = NULL, mutate_fun, col_rename = 
     } else {
         if (y == "NULL" || is.null(y)) {
             ret <- data %>%
-                timekit::tk_xts_(silent = TRUE) %$%
+                timetk::tk_xts_(silent = TRUE) %$%
                 # OHLCV() %$%
                 fun_transmute(eval(parse(text = x)), ...)
         } else {
             ret <- data %>%
-                timekit::tk_xts_(silent = TRUE) %$%
+                timetk::tk_xts_(silent = TRUE) %$%
                 # OHLCV() %$%
                 fun_transmute(eval(parse(text = x)),
                               eval(parse(text = y)),
@@ -333,7 +333,7 @@ coerce_to_tibble <- function(data, date_col_name, time_zone, col_rename) {
 
     # Coerce to tibble
     ret <- data %>%
-        timekit::tk_tbl(preserve_index = TRUE, rename_index = date_col_name, silent = TRUE)
+        timetk::tk_tbl(preserve_index = TRUE, rename_index = date_col_name, silent = TRUE)
 
     # # Convert to date
     # ret <- convert_date_cols(ret, time_zone)

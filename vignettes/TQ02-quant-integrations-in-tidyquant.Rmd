@@ -491,11 +491,11 @@ While this characterizes the overall relationship, it's missing the time aspect.
 1. Create a custom function
 2. Apply the function with `tq_mutate(mutate_fun = rollapply)`
 
-First, create a custom regression function. An important point is that the "data" will be passed to the regression function as an `xts` object. The `timekit::tk_tbl` function takes care of converting to a data frame.
+First, create a custom regression function. An important point is that the "data" will be passed to the regression function as an `xts` object. The `timetk::tk_tbl` function takes care of converting to a data frame.
 
 ```{r}
 regr_fun <- function(data) {
-    coef(lm(MA ~ V, data = timekit::tk_tbl(data, silent = TRUE)))
+    coef(lm(MA ~ V, data = timetk::tk_tbl(data, silent = TRUE)))
 }
 ```
 

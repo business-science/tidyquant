@@ -3,7 +3,7 @@
 # Checks a data frame and returns true / false if date or date-time column exists
 check_date_or_date_time_exists <- function(data) {
 
-    date_cols <- timekit::tk_get_timeseries_variables(data)
+    date_cols <- timetk::tk_get_timeseries_variables(data)
     return(length(date_cols) > 0)
 
 }
@@ -11,7 +11,7 @@ check_date_or_date_time_exists <- function(data) {
 # Takes a dateframe and returns name of date / date-time column
 get_col_name_date_or_date_time <- function(data) {
 
-    date_cols <- timekit::tk_get_timeseries_variables(data)
+    date_cols <- timetk::tk_get_timeseries_variables(data)
     if (length(date_cols) == 0) {
         stop("No date or POSIXct column found in `data`.")
     }
