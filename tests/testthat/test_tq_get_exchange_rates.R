@@ -5,15 +5,13 @@ get <- "exchange.rates"
 context(paste0("Testing tq_get(get = '", get, "')"))
 
 test1 <- tq_get("EUR/USD", get = get,
-                from = "2017-01-01", to = "2017-04-01")
+                from = Sys.Date()-100, to = Sys.Date())
 
 #### Tests
 
 test_that("Test returns tibble with correct rows and columns.", {
     # Tibble
     expect_is(test1, "tbl")
-    # Rows
-    expect_equal(nrow(test1), 91)
     # Columns
     expect_equal(ncol(test1), 2)
 })

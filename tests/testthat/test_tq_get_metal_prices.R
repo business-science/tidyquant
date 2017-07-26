@@ -6,12 +6,12 @@ get <- "metal.prices"
 context(paste0("Testing tq_get(get = '", get, "')"))
 
 test1 <- tq_get("gold", get = get,
-                from = "2017-01-01", to = "2017-04-01",
+                from = Sys.Date()-100, to = Sys.Date(),
                 adjust = TRUE, type = "splits")
 
 
 test2 <- tq_get("gold", get = get,
-                from = "2017-01-01", to = "2017-04-01",
+                from = Sys.Date()-100, to = Sys.Date(),
                 adjust = FALSE, type = "price")
 
 #### Tests
@@ -22,8 +22,6 @@ test_that("Test returns tibble with correct rows and columns.", {
     expect_is(test2, "tbl")
     # Identical
     expect_identical(test1, test2)
-    # Rows
-    expect_equal(nrow(test1), 91)
     # Columns
     expect_equal(ncol(test1), 2)
 })

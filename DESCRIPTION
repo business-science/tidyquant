@@ -1,8 +1,8 @@
 Package: tidyquant
 Type: Package
 Title: Tidy Quantitative Financial Analysis
-Version: 0.5.1.9002
-Date: 2017-06-30
+Version: 0.5.2
+Date: 2017-07-26
 Authors@R: c(
     person("Matt", "Dancho", email = "mdancho@business-science.io", role = c("aut", "cre")),
     person("Davis", "Vaughan", email = "dvaughan@business-science.io", role = c("aut"))
@@ -31,6 +31,7 @@ Imports:
     curl (>= 2.3),
     devtools (>= 1.12.0),
     dplyr (>= 0.7.0),
+    gdata (>= 2.18.0),
     ggplot2 (>= 2.2.1),
     httr (>= 1.2.1),
     lazyeval (>= 0.2.0),
@@ -38,7 +39,6 @@ Imports:
     purrr (>= 0.2.2),
     Quandl (>= 2.8.0),
     readr (>= 1.0.0),
-    readxl (>= 1.0.0),
     rvest (>= 0.3.2),
     scales (>= 0.4.1),
     stats (>= 3.3.0),

@@ -125,5 +125,5 @@ globalVariables(c("A",
                   "assets",
                   "Weight",
                   "Identifier",
-                  "Shares Held"
+                  "Shares.Held"
                   ))
