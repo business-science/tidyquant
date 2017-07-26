@@ -248,7 +248,10 @@ index_download <- function(x, index_name) {
 
         # Read the xls file
         suppressMessages({
-            res$df <- gdata::read.xls(tf, skip = 3, stringsAsFactors = FALSE)
+            # res$df <- gdata::read.xls(tf, skip = 3, stringsAsFactors = FALSE)
+            # res$df <- readxl::read_xls(tf, skip = 3)
+            wb     <- XLConnect::loadWorkbook(filename = tf)
+            res$df <- XLConnect::readWorksheet(wb, sheet = 1, startRow = 4)
         })
 
         # Release temp file
@@ -277,7 +280,7 @@ clean_holdings <- function(x) {
         suppressMessages(readr::type_convert(x))
     }
 
-    x %>%
+    ret <- x %>%
 
         # Subset rows with data
         dplyr::slice(1:last_row) %>%
@@ -289,18 +292,15 @@ clean_holdings <- function(x) {
         quiet_type_convert() %>%
 
         # Reweight
-        dplyr::mutate(Weight = Weight / sum(Weight)) %>%
+        dplyr::mutate(Weight = Weight / sum(Weight))
 
-        # Rename
-        dplyr::rename(
-            symbol = Identifier,
-            company = Name,
-            weight = Weight,
-            sector = Sector,
-            shares_held = `Shares.Held`) %>%
+    # Rename
+    names(ret) <- c("company", "symbol", "weight", "sector", "shares_held")
 
-        # Reorder
-        dplyr::select(symbol, dplyr::everything())
+    # Reorder
+    ret <- ret %>% dplyr::select(symbol, dplyr::everything())
+
+    return(ret)
 }
 
 # Return fallback data if necessary
