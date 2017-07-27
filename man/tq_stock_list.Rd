@@ -54,13 +54,17 @@ library(tidyquant)
 tq_index_options()
 
 # Get all stock symbols in a stock index
+\dontrun{
 tq_index("DOW")
+}
 
 # Get the list of stock exchange options
 tq_exchange_options()
 
 # Get all stocks in a stock exchange
+\dontrun{
 tq_exchange("NYSE")
+}
 }
 \seealso{
 \code{\link[=tq_get]{tq_get()}} to get stock prices, financials, key stats, etc using the stock symbols.
