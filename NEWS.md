@@ -1,6 +1,6 @@
-## tidyquant 0.5.2.9000
+## tidyquant 0.5.3
 
-* Fixes to update to `purrr` v0.2.3. 
+* Fixes for compatibility with `purrr` v0.2.3. 
 
 
 ## tidyquant 0.5.2
