@@ -231,7 +231,7 @@ tq_portfolio_.grouped_df <- function(data, assets_col, returns_col, weights, col
     data_weights %>%
         dplyr::mutate(
             portfolio.. = purrr::pmap(list(returns.., weights.., portfolio), custom_function),
-            class.. = purrr::map_chr(.x = portfolio.., ~ class(.x)[[1]])
+            class.. = purrr::map_chr(.x = portfolio.., .f = function(x) class(x)[[1]])
             ) %>%
         dplyr::filter(class.. != "logical") %>%
         dplyr::select(-c(returns.., weights.., class..)) %>%

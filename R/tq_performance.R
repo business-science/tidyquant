@@ -226,12 +226,13 @@ tq_performance_.grouped_df <- function(data, Ra, Rb = NULL, performance_fun, ...
     # Apply tq_performance_ to each group
     data %>%
         tidyr::nest() %>%
-        dplyr::mutate(nested.col = data %>%
-              purrr::map(~ tq_performance_.tbl_df(data = .x,
-                                                  Ra = Ra,
-                                                  Rb = Rb,
-                                                  performance_fun = performance_fun,
-                                                  ...))
+        dplyr::mutate(nested.col = purrr::map(
+            .x              = data,
+            .f              = tq_performance_.tbl_df,
+            Ra              = Ra,
+            Rb              = Rb,
+            performance_fun = performance_fun,
+            ...)
         ) %>%
         dplyr::select(-data) %>%
         tidyr::unnest() %>%

@@ -121,12 +121,13 @@ tq_transmute_.grouped_df <- function(data, select = NULL, mutate_fun, col_rename
 
     data %>%
         tidyr::nest() %>%
-        dplyr::mutate(nested.col = data %>%
-                          purrr::map(~ tq_transmute_(data          = .x,
-                                                     select        = select,
-                                                     mutate_fun    = mutate_fun,
-                                                     col_rename    = col_rename,
-                                                     ...           = ...))
+        dplyr::mutate(nested.col = purrr::map(
+            .x         = data,
+            .f         = tq_transmute_,
+            select     = select,
+            mutate_fun = mutate_fun,
+            col_rename = col_rename,
+            ...)
         ) %>%
         dplyr::select(-data) %>%
         tidyr::unnest() %>%
@@ -250,14 +251,15 @@ tq_transmute_xy_.grouped_df <- function(data, x, y = NULL, mutate_fun, col_renam
 
     data %>%
         tidyr::nest() %>%
-        dplyr::mutate(nested.col = data %>%
-                          purrr::map(~ tq_transmute_xy_(data          = .x,
-                                                        x             = x,
-                                                        y             = y,
-                                                        mutate_fun    = mutate_fun,
-                                                        col_rename    = col_rename,
-                                                        ...           = ...))
-        ) %>%
+        dplyr::mutate(nested.col = purrr::map(
+            .x            = data,
+            .f            = tq_transmute_xy_,
+            x             = x,
+            y             = y,
+            mutate_fun    = mutate_fun,
+            col_rename    = col_rename,
+            ...)
+            ) %>%
         dplyr::select(-data) %>%
         tidyr::unnest() %>%
         dplyr::group_by_(.dots = group_names)

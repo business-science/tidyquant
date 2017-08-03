@@ -28,6 +28,9 @@ test1.2b <- tq_transmute(grouped_df, adjusted, runSD, col_rename = "V1")
 test2 <- AAPL %>%
     tq_transmute_xy(x = close, mutate_fun = to.period, period = "months")
 
+test2b <- grouped_df %>%
+    tq_transmute_xy(x = close, y = open, mutate_fun = runCor, n = 5)
+
 
 # Test 3: Test transmute hourly data / Test transmute timezone data
 time_index <- seq(from = as.POSIXct("2012-05-15 07:00"),

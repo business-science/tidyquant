@@ -2,7 +2,7 @@ library(tidyquant)
 
 #### Setup
 get <- c("stock.prices", "financials")
-context(paste0("Testing tq_get(get = '", get, "')"))
+context(paste0("Testing tq_get(get = c('stock.prices', 'financials'))"))
 
 test1 <- tq_get("AAPL", get = get,
                 from = "2016-01-01", to = "2016-06-01")

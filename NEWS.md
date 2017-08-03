@@ -1,5 +1,7 @@
 ## tidyquant 0.5.2.9000
 
+* Fixes to update to `purrr` v0.2.3. 
+
 
 ## tidyquant 0.5.2
 

@@ -146,7 +146,7 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
 
         x_tib <- tibble::tibble(symbol.. = x)
 
-        ret <- tq_get_map(x = x_tib, get = get, complete_cases, ...)
+        ret <- tq_get_map(x = x_tib, get = get, complete_cases = complete_cases, ...)
 
         names(ret)[[1]] <- col_name[[1]]
 
@@ -165,7 +165,7 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
         x_tib <- x %>%
             tibble::as_tibble()
 
-        ret <- tq_get_map(x = x_tib, get = get, complete_cases, ...)
+        ret <- tq_get_map(x = x_tib, get = get, complete_cases = complete_cases, ...)
 
         names(ret)[[1]] <- col_name[[1]]
 
@@ -204,27 +204,35 @@ tq_get_map <- function(x, get, complete_cases, ...) {
         if (complete_cases) {
 
             ret <- ret %>%
-                dplyr::mutate(data.. = purrr::map(.x = symbol..,
-                                                  ~ tq_get_base(x = .x,
-                                                                get = get[[i]],
-                                                                complete_cases = complete_cases,
-                                                                map = TRUE,
-                                                                ...)),
-                              class.. = purrr::map_chr(.x = data..,
-                                                       ~ class(.x)[[1]])
-                              ) %>%
+                dplyr::mutate(
+                    data.. = purrr::map(
+                        .x             = symbol..,
+                        .f             = tq_get_base,
+                        get            = get[[i]],
+                        complete_cases = complete_cases,
+                        map            = TRUE,
+                        ...),
+                    class.. = purrr::map_chr(
+                        .x = data..,
+                        .f = function(x) class(x)[[1]]
+                        )
+                    ) %>%
                 dplyr::filter(class.. != "logical") %>%
                 dplyr::select(-class..)
 
         } else {
 
             ret <- ret %>%
-                dplyr::mutate(data.. = purrr::map(.x = symbol..,
-                                                  ~ tq_get_base(x = .x,
-                                                                get = get[[i]],
-                                                                complete_cases = complete_cases,
-                                                                map = TRUE,
-                                                                ...)))
+                dplyr::mutate(
+                    data.. = purrr::map(
+                        .x             = symbol..,
+                        .f             = tq_get_base,
+                        get            = get[[i]],
+                        complete_cases = complete_cases,
+                        map            = TRUE,
+                        ...
+                    )
+                )
 
         }
 
@@ -405,12 +413,13 @@ tq_get_util_1 <-
         }
 
         # Setup tibble and map tidy_fin function
+
         ret <- tibble::tibble(
             type = c("IS", "IS", "BS", "BS", "CF", "CF"),
             period = rep(c("A", "Q"), 3)) %>%
             dplyr::mutate(retrieve = paste0("ret$", type, "$", period)) %>%
-            dplyr::mutate(data = purrr::map(retrieve, ~ eval(parse(text = .x)))) %>%
-            dplyr::mutate(data = purrr::map(data, tidy_fin)) %>%
+            dplyr::mutate(data = purrr::map(.x = retrieve, .f = function(x) eval(parse(text = x)))) %>%
+            dplyr::mutate(data = purrr::map(.x = data, .f = tidy_fin)) %>%
             dplyr::select(-retrieve) %>%
             tidyr::spread(key = period, value = data) %>%
             dplyr::rename(annual = A, quarter = Q)
