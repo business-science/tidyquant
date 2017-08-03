@@ -55,22 +55,22 @@ test_that("Error on invalid compound gets", {
 
 test_that("Test prints warning message on invalid x input.", {
     expect_warning(
-        test4 <- c("AAPL", "XYZ") %>%
+        c("AAPL", "XYZ") %>%
             tq_get(get = get)
     )
-    # Rows
-    expect_equal(nrow(test4), 1)
-    # Columns
-    expect_equal(ncol(test4), 3)
+    # # Rows
+    # expect_equal(nrow(test4), 1)
+    # # Columns
+    # expect_equal(ncol(test4), 3)
 })
 
 test_that("Test prints warning message on invalid x input.", {
     expect_warning(
-        test5 <- c("AAPL", "XYZ") %>%
+        c("AAPL", "XYZ") %>%
             tq_get(get = get, complete_cases = FALSE)
     )
-    # Rows
-    expect_equal(nrow(test5), 2)
-    # Columns
-    expect_equal(ncol(test5), 3)
+    # # Rows
+    # expect_equal(nrow(test5), 2)
+    # # Columns
+    # expect_equal(ncol(test5), 3)
 })
