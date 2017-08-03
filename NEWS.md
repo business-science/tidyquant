@@ -1,3 +1,6 @@
+## tidyquant 0.5.2.9000
+
+
 ## tidyquant 0.5.2
 
 * Incorporated more robust `timetk` coercion functions. Deprecated `tidyquant::as_xts()` and `tidyquant::as_tibble()`. Use `timetk::tk_xts()` and `timetk::tk_tbl()` instead.
