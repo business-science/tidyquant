@@ -62,6 +62,10 @@ scale_color_tq <- function(..., theme = "light") {
 
 #' @rdname scale_manual
 #' @export
+scale_colour_tq <- scale_color_tq
+
+#' @rdname scale_manual
+#' @export
 scale_fill_tq <- function(..., theme = "light") {
 
   pal <- switch(theme,
