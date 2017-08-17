@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -32,6 +33,18 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76139189-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 
   </head>
 
@@ -113,8 +126,8 @@
     <p>Financial charts provide visual cues to open, high, low, and close prices.
 Use <code><a href='coord_x_date.html'>coord_x_date()</a></code> to zoom into specific plot regions.
 The following financial chart geoms are available:</p><ul>
-<li><p><strong><a href = 'http://www.investopedia.com/terms/b/barchart.asp'>Bar Chart</a></strong></p></li>
-<li><p><strong><a href = 'http://www.investopedia.com/terms/c/candlestick.asp'>Candlestick Chart</a></strong></p></li>
+<li><p><strong><a href='http://www.investopedia.com/terms/b/barchart.asp'>Bar Chart</a></strong></p></li>
+<li><p><strong><a href='http://www.investopedia.com/terms/c/candlestick.asp'>Candlestick Chart</a></strong></p></li>
 </ul>
     
 
@@ -236,14 +249,14 @@ to the paired geom/stat.</p></td>
     <span class='fu'>geom_barchart</span>(<span class='fu'>aes</span>(<span class='kw'>open</span> <span class='kw'>=</span> <span class='no'>open</span>, <span class='kw'>high</span> <span class='kw'>=</span> <span class='no'>high</span>, <span class='kw'>low</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>close</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
     <span class='fu'><a href='geom_ma.html'>geom_ma</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
     <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fu'>today</span>() - <span class='fu'>weeks</span>(<span class='fl'>6</span>), <span class='fu'>today</span>()),
-                 <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>100</span>, <span class='fl'>130</span>))</div><img src='geom_chart-2.png' alt='' width='540' height='400' /><div class='input'>
+                 <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>100</span>, <span class='fl'>130</span>))</div><div class='img'><img src='geom_chart-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># Candlestick Chart</span>
 <span class='no'>AAPL</span> <span class='kw'>%&gt;%</span>
     <span class='fu'>ggplot</span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
     <span class='fu'>geom_candlestick</span>(<span class='fu'>aes</span>(<span class='kw'>open</span> <span class='kw'>=</span> <span class='no'>open</span>, <span class='kw'>high</span> <span class='kw'>=</span> <span class='no'>high</span>, <span class='kw'>low</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>close</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
     <span class='fu'><a href='geom_ma.html'>geom_ma</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
     <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fu'>today</span>() - <span class='fu'>weeks</span>(<span class='fl'>6</span>), <span class='fu'>today</span>()),
-                 <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>100</span>, <span class='fl'>130</span>))</div><img src='geom_chart-4.png' alt='' width='540' height='400' /></pre>
+                 <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>100</span>, <span class='fl'>130</span>))</div><div class='img'><img src='geom_chart-6.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

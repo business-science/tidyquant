@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -32,6 +33,18 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76139189-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 
   </head>
 
@@ -282,9 +295,8 @@ for the <code>performance_fun</code> argument. Additional parameters can be pass
 #&gt; </div><div class='input'>
 <span class='co'># Get performance metrics</span>
 <span class='no'>RaRb</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>tq_performance</span>(<span class='kw'>Ra</span> <span class='kw'>=</span> <span class='no'>Ra</span>, <span class='kw'>performance_fun</span> <span class='kw'>=</span> <span class='no'>SharpeRatio</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fl'>0.95</span>)</div><div class='output co'>#&gt; Source: local data frame [4 x 4]
-#&gt; Groups: symbol [4]
-#&gt; 
+    <span class='fu'>tq_performance</span>(<span class='kw'>Ra</span> <span class='kw'>=</span> <span class='no'>Ra</span>, <span class='kw'>performance_fun</span> <span class='kw'>=</span> <span class='no'>SharpeRatio</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fl'>0.95</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 4
+#&gt; # Groups:   symbol [4]
 #&gt;   symbol `ESSharpe(Rf=0%,p=95%)` `StdDevSharpe(Rf=0%,p=95%)`
 #&gt;    &lt;chr&gt;                   &lt;dbl&gt;                       &lt;dbl&gt;
 #&gt; 1     FB               0.1931238                   0.3449303
@@ -293,15 +305,14 @@ for the <code>performance_fun</code> argument. Additional parameters can be pass
 #&gt; 4   GOOG               0.2131204                   0.2958109
 #&gt; # ... with 1 more variables: `VaRSharpe(Rf=0%,p=95%)` &lt;dbl&gt;</div><div class='input'>
 <span class='no'>RaRb</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>tq_performance</span>(<span class='kw'>Ra</span> <span class='kw'>=</span> <span class='no'>Ra</span>, <span class='kw'>Rb</span> <span class='kw'>=</span> <span class='no'>Rb</span>, <span class='kw'>performance_fun</span> <span class='kw'>=</span> <span class='no'>table.CAPM</span>)</div><div class='output co'>#&gt; Source: local data frame [4 x 13]
-#&gt; Groups: symbol [4]
-#&gt; 
+    <span class='fu'>tq_performance</span>(<span class='kw'>Ra</span> <span class='kw'>=</span> <span class='no'>Ra</span>, <span class='kw'>Rb</span> <span class='kw'>=</span> <span class='no'>Rb</span>, <span class='kw'>performance_fun</span> <span class='kw'>=</span> <span class='no'>table.CAPM</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 13
+#&gt; # Groups:   symbol [4]
 #&gt;   symbol ActivePremium  Alpha AnnualizedAlpha   Beta `Beta-` `Beta+`
 #&gt;    &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;           &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-#&gt; 1     FB        0.4245 0.0334          0.4833 0.8594  0.6901  3.0044
-#&gt; 2   AMZN        0.2523 0.0154          0.2013 1.4319  0.0589  2.0363
-#&gt; 3   NFLX        0.9294 0.0591          0.9923 1.4500 -2.9860  1.9036
-#&gt; 4   GOOG        0.1533 0.0133          0.1713 0.8790 -0.1653  1.5605
+#&gt; 1     FB        0.4312 0.0340          0.4929 0.8465  0.8188  3.0044
+#&gt; 2   AMZN        0.2464 0.0144          0.1869 1.4557 -0.0442  2.0363
+#&gt; 3   NFLX        1.0164 0.0632          1.0873 1.3541 -2.7843  1.9036
+#&gt; 4   GOOG        0.1420 0.0123          0.1584 0.9007 -0.2470  1.5605
 #&gt; # ... with 6 more variables: Correlation &lt;dbl&gt;, `Correlationp-value` &lt;dbl&gt;,
 #&gt; #   InformationRatio &lt;dbl&gt;, `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;,
 #&gt; #   TreynorRatio &lt;dbl&gt;</div><div class='input'>

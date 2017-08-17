@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -32,6 +33,18 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76139189-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 
   </head>
 
@@ -133,36 +146,36 @@ stock symbol, metal symbol, currency combination, FRED code, etc.</p></td>
 for <code>x</code>. Options include:</p><ul>
 <li><p><code>"stock.prices"</code>: Get the open, high, low, close, volume and adjusted
 stock prices for a stock symbol from
-<a href = 'https://finance.yahoo.com/'>Yahoo Finance</a>. Wrapper for <code>quantmod::getSymbols()</code>.</p></li>
+<a href='https://finance.yahoo.com/'>Yahoo Finance</a>. Wrapper for <code><a href='http://www.rdocumentation.org/packages/quantmod/topics/getSymbols'>quantmod::getSymbols()</a></code>.</p></li>
 <li><p><code>"stock.prices.japan"</code>: Get the open, high, low, close, volume and adjusted
 stock prices for a stock symbol from
-<a href = 'http://finance.yahoo.co.jp/'>Yahoo Finance Japan</a>. Wrapper for <code>quantmod::getSymbols.yahooj()</code>.</p></li>
+<a href='http://finance.yahoo.co.jp/'>Yahoo Finance Japan</a>. Wrapper for <code><a href='http://www.rdocumentation.org/packages/quantmod/topics/getSymbols.yahooj'>quantmod::getSymbols.yahooj()</a></code>.</p></li>
 <li><p><code>"financials"</code>: Get the income, balance sheet, and cash flow
 financial statements for a stock symbol from
-<a href = 'https://www.google.com/finance'>Google Finance</a>. Wrapper for <code>quantmod::getFinancials()</code>.</p></li>
+<a href='https://www.google.com/finance'>Google Finance</a>. Wrapper for <code><a href='http://www.rdocumentation.org/packages/quantmod/topics/getFinancials'>quantmod::getFinancials()</a></code>.</p></li>
 <li><p><code>"key.ratios"</code>: Get 89 historical growth, profitablity, financial health,
 efficiency, and valuation ratios that span 10-years from
-<a href = 'https://www.morningstar.com'>Morningstar</a>.</p></li>
+<a href='https://www.morningstar.com'>Morningstar</a>.</p></li>
 <li><p><code>"key.stats"</code>: Get 55 real-time key statistics such as
 Ask, Bid, Day's High, Day's Low, Last Trade Price, current P/E Ratio, EPS,
 Market Cap, EPS Projected Current Year, EPS Projected Next Year and many more from
-<a href = 'https://finance.yahoo.com/'>Yahoo Finance</a>.</p></li>
+<a href='https://finance.yahoo.com/'>Yahoo Finance</a>.</p></li>
 <li><p><code>"dividends"</code>: Get the dividends for a stock symbol
-from <a href = 'https://finance.yahoo.com/'>Yahoo Finance</a>. Wrapper for <code>quantmod::getDividends()</code>.</p></li>
+from <a href='https://finance.yahoo.com/'>Yahoo Finance</a>. Wrapper for <code><a href='http://www.rdocumentation.org/packages/quantmod/topics/getDividends'>quantmod::getDividends()</a></code>.</p></li>
 <li><p><code>"splits"</code>: Get the splits for a stock symbol
-from <a href = 'https://finance.yahoo.com/'>Yahoo Finance</a>. Wrapper for <code>quantmod::getSplits()</code>.</p></li>
+from <a href='https://finance.yahoo.com/'>Yahoo Finance</a>. Wrapper for <code><a href='http://www.rdocumentation.org/packages/quantmod/topics/getSplits'>quantmod::getSplits()</a></code>.</p></li>
 <li><p><code>"economic.data"</code>: Get economic data from
-<a href = 'https://fred.stlouisfed.org/'>FRED</a>. rapper for <code>quantmod::getSymbols.FRED()</code>.</p></li>
+<a href='https://fred.stlouisfed.org/'>FRED</a>. rapper for <code><a href='http://www.rdocumentation.org/packages/quantmod/topics/getSymbols.FRED'>quantmod::getSymbols.FRED()</a></code>.</p></li>
 <li><p><code>"metal.prices"</code>: Get the metal prices from
-<a href = 'https://www.oanda.com/'>Oanda</a>. Wrapper for <code>quantmod::getMetals()</code>.</p></li>
+<a href='https://www.oanda.com/'>Oanda</a>. Wrapper for <code><a href='http://www.rdocumentation.org/packages/quantmod/topics/getMetals'>quantmod::getMetals()</a></code>.</p></li>
 <li><p><code>"exchange.rates"</code>: Get exchange rates from
-<a href = 'https://www.oanda.com/currency/converter/'>Oanda</a>. Wrapper for <code>quantmod::getFX()</code>.</p></li>
+<a href='https://www.oanda.com/currency/converter/'>Oanda</a>. Wrapper for <code><a href='http://www.rdocumentation.org/packages/quantmod/topics/getFX'>quantmod::getFX()</a></code>.</p></li>
 <li><p><code>"quandl"</code>: Get data sets from
-<a href = 'https://www.quandl.com/'>Quandl</a>. Wrapper for <code>Quandl()</code>.
-See also <code><a href='quandl_api_key.html'>quandl_api_key()</a></code>.</p></li>
+<a href='https://www.quandl.com/'>Quandl</a>. Wrapper for <code>Quandl()</code>.
+See also <code>quandl_api_key()</code>.</p></li>
 <li><p><code>"quandl.datatable"</code>: Get data tables from
-<a href = 'https://www.quandl.com/'>Quandl</a>. Wrapper for <code>Quandl.datatable()</code>.
-See also <code><a href='quandl_api_key.html'>quandl_api_key()</a></code>.</p></li>
+<a href='https://www.quandl.com/'>Quandl</a>. Wrapper for <code>Quandl.datatable()</code>.
+See also <code>quandl_api_key()</code>.</p></li>
 </ul></td>
     </tr>
     <tr>
@@ -207,14 +220,14 @@ can be seemlessly used with the tidyverse: <code>purrr</code>, <code>tidyr</code
     <code>tq_get_options()</code> returns a list of valid <code>get</code> options you can
 choose from.
     <code>tq_get_stock_index_options()</code> Is deprecated and will be removed in the
-next version. Please use <code>tq_index_options()</code> instead.</p>
+next version. Please use <code><a href='tq_stock_list.html'>tq_index_options()</a></code> instead.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <ul>
 <li><p><code><a href='tq_stock_list.html'>tq_index()</a></code> to get a ful list of stocks in an index.</p></li>
 <li><p><code><a href='tq_stock_list.html'>tq_exchange()</a></code> to get a ful list of stocks in an exchange.</p></li>
-<li><p><code><a href='quandl_api_key.html'>quandl_api_key()</a></code> to set the api key for collecting data via the <code>"quandl"</code>
+<li><p><code>quandl_api_key()</code> to set the api key for collecting data via the <code>"quandl"</code>
 get option.</p></li>
 </ul>
     

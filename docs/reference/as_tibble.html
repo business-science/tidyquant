@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Coerce to tibble. Enable preserving row names when coercing matrix
+<title>DEPRECATED: Coerce to tibble. Enable preserving row names when coercing matrix
 and time-series-like objects with row names. — as_tibble • tidyquant</title>
 
 <!-- jquery -->
@@ -24,7 +24,8 @@ and time-series-like objects with row names. — as_tibble • tidyquant</title>
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -33,6 +34,18 @@ and time-series-like objects with row names. — as_tibble • tidyquant</title>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76139189-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 
   </head>
 
@@ -107,13 +120,14 @@ and time-series-like objects with row names. — as_tibble • tidyquant</title>
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Coerce to tibble. Enable preserving row names when coercing matrix
+    <h1>DEPRECATED: Coerce to tibble. Enable preserving row names when coercing matrix
 and time-series-like objects with row names.</h1>
     </div>
 
     
     <p>Coerce to tibble. Enable preserving row names when coercing matrix
 and time-series-like objects with row names.</p>
+<p>DEPRECATED: Use <code><a href='http://www.rdocumentation.org/packages/timetk/topics/tk_tbl'>timetk::tk_tbl()</a></code> instead.</p>
     
 
     <pre class="usage"><span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='kw'>preserve_row_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
@@ -134,7 +148,7 @@ a <code>row.names</code> column with names of rows as character class.</p></td>
     <tr>
       <th>...</th>
       <td><p>Additional parameters passed to the appropriate
-<code><a href='http://www.rdocumentation.org/packages/tibble/topics/as_tibble'>tibble::as_tibble()</a></code> function.</p></td>
+<code><a href='http://www.rdocumentation.org/packages/timetk/topics/tk_tbl'>timetk::tk_tbl()</a></code> function.</p></td>
     </tr>
     </table>
     
@@ -144,7 +158,7 @@ a <code>row.names</code> column with names of rows as character class.</p></td>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>as_tibble</code> is a wrapper for <code>tibble::as_tibble</code>
+    <p><code>as_tibble</code> is a wrapper for <code><a href='http://www.rdocumentation.org/packages/tibble/topics/as_tibble'>tibble::as_tibble</a></code>
 that includes a <code>preserve_row_names</code> argument. The function is designed
 to coerce <code>xts</code>, <code>zoo</code>, <code>timeSeries</code>, <code>ts</code>, and <code>irts</code>
 objects that are used frequently in quantitative financial analysis.
@@ -153,44 +167,38 @@ When <code>preserve_row_names = TRUE</code> is specified, a new column,
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='as_xts.html'>as_xts()</a></code></p>
+    <ul>
+<li><p><code>tk_xts()</code> - Coercion to xts, replaces <code><a href='as_xts.html'>tidyquant::as_xts()</a></code></p></li>
+<li><p><code>tk_tbl()</code> - Coercion to tbl, replaces <code><a href='http://www.rdocumentation.org/packages/tidyquant/topics/as_tibble'>tidyquant::as_tibble()</a></code></p></li>
+<li><p><code><a href='as_xts.html'>as_xts()</a></code> - Deprecated, use <code>tk_xts()</code> instead.</p></li>
+</ul>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Load libraries</span>
-<span class='fu'>library</span>(<span class='no'>tidyverse</span>)
 <span class='fu'>library</span>(<span class='no'>tidyquant</span>)
 
 <span class='co'># Matrix coercion to tibble</span>
 <span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(<span class='fu'>rnorm</span>(<span class='fl'>50</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>5</span>)
 <span class='fu'>colnames</span>(<span class='no'>m</span>) <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"d"</span>, <span class='st'>"e"</span>)
 <span class='fu'>rownames</span>(<span class='no'>m</span>) <span class='kw'>&lt;-</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fu'>nrow</span>(<span class='no'>m</span>)]
-<span class='no'>m_tbl</span> <span class='kw'>&lt;-</span> <span class='fu'>as_tibble</span>(<span class='no'>m</span>, <span class='kw'>preserve_row_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
+<span class='no'>m_tbl</span> <span class='kw'>&lt;-</span> <span class='fu'>as_tibble</span>(<span class='no'>m</span>, <span class='kw'>preserve_row_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The `tidyquant::as_tibble()` function is deprecated. Please use `timetk::tk_tbl()` instead.</span></div><div class='input'>
 <span class='co'># xts coercion to tibble</span>
-<span class='kw'>quantmod</span><span class='kw'>::</span><span class='fu'>getSymbols</span>(<span class='st'>"AAPL"</span>, <span class='kw'>auto.assign</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'>as_tibble</span>(<span class='kw'>preserve_row_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>    As of 0.4-0, ‘getSymbols’ uses env=parent.frame() and</span>
-#&gt; <span class='message'> auto.assign=TRUE by default.</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'> This  behavior  will be  phased out in 0.5-0  when the call  will</span>
-#&gt; <span class='message'> default to use auto.assign=FALSE. getOption("getSymbols.env") and </span>
-#&gt; <span class='message'> getOptions("getSymbols.auto.assign") are now checked for alternate defaults</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'> This message is shown once per session and may be disabled by setting </span>
-#&gt; <span class='message'> options("getSymbols.warning4.0"=FALSE). See ?getSymbols for more details.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: the condition has length &gt; 1 and only the first element will be used</span></div><div class='output co'>#&gt; # A tibble: 2,599 × 7
-#&gt;     row.names AAPL.Open AAPL.High AAPL.Low AAPL.Close AAPL.Volume AAPL.Adjusted
-#&gt;         &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;
-#&gt; 1  2007-01-03     86.29     86.58    81.90      83.80   309579900      10.85709
-#&gt; 2  2007-01-04     84.05     85.95    83.82      85.66   211815100      11.09807
-#&gt; 3  2007-01-05     85.77     86.20    84.40      85.05   208685400      11.01904
-#&gt; 4  2007-01-08     85.96     86.53    85.28      85.47   199276700      11.07345
-#&gt; 5  2007-01-09     86.45     92.98    85.15      92.57   837324600      11.99333
-#&gt; 6  2007-01-10     94.75     97.80    93.45      97.00   738220000      12.56728
-#&gt; 7  2007-01-11     95.94     96.78    95.10      95.80   360063200      12.41180
-#&gt; 8  2007-01-12     94.59     95.06    93.23      94.62   328172600      12.25892
-#&gt; 9  2007-01-16     95.68     97.25    95.45      97.10   311019100      12.58023
-#&gt; 10 2007-01-17     97.56     97.60    94.82      94.95   411565000      12.30168
-#&gt; # ... with 2,589 more rows</div><div class='input'>
+<span class='kw pkg'>quantmod</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/quantmod/topics/getSymbols'>getSymbols</a></span>(<span class='st'>"AAPL"</span>, <span class='kw'>auto.assign</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'>as_tibble</span>(<span class='kw'>preserve_row_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The `tidyquant::as_tibble()` function is deprecated. Please use `timetk::tk_tbl()` instead.</span></div><div class='output co'>#&gt; # A tibble: 2,675 x 7
+#&gt;         index AAPL.Open AAPL.High AAPL.Low AAPL.Close AAPL.Volume AAPL.Adjusted
+#&gt;        &lt;date&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;
+#&gt;  1 2007-01-03    13.702    13.748   13.005   11.97143   309579900      10.77017
+#&gt;  2 2007-01-04    13.346    13.648   13.310   12.23714   211815100      11.00922
+#&gt;  3 2007-01-05    13.619    13.688   13.402   12.15000   208685400      10.93082
+#&gt;  4 2007-01-08    13.650    13.740   13.542   12.21000   199276700      10.98480
+#&gt;  5 2007-01-09    13.727    14.764   13.521   13.22429   837324600      11.89731
+#&gt;  6 2007-01-10    15.045    15.530   14.839   13.85714   738220000      12.46666
+#&gt;  7 2007-01-11    15.234    15.368   15.101   13.68572   360063200      12.31244
+#&gt;  8 2007-01-12    15.020    15.095   14.804   13.51714   328172600      12.16078
+#&gt;  9 2007-01-16    15.193    15.442   15.157   13.87143   311019100      12.47951
+#&gt; 10 2007-01-17    15.492    15.498   15.057   13.56428   411565000      12.20319
+#&gt; # ... with 2,665 more rows</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

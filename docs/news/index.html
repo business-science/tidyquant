@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -32,6 +33,18 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76139189-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 
   </head>
 
@@ -111,6 +124,27 @@
     </div>
 
     <div class="contents">
+    <div id="tidyquant-0-5-3" class="section level2">
+<h2 class="hasAnchor">
+<a href="#tidyquant-0-5-3" class="anchor"></a>tidyquant 0.5.3</h2>
+<ul>
+<li>Fixes for compatibility with <code>purrr</code> v0.2.3.</li>
+</ul>
+</div>
+    <div id="tidyquant-0-5-2" class="section level2">
+<h2 class="hasAnchor">
+<a href="#tidyquant-0-5-2" class="anchor"></a>tidyquant 0.5.2</h2>
+<ul>
+<li>Incorporated more robust <code>timetk</code> coercion functions. Deprecated <code><a href="http://www.rdocumentation.org/packages/tidyquant/topics/as_xts">tidyquant::as_xts()</a></code> and <code><a href="http://www.rdocumentation.org/packages/tidyquant/topics/as_tibble">tidyquant::as_tibble()</a></code>. Use <code><a href="http://www.rdocumentation.org/packages/timetk/topics/tk_xts">timetk::tk_xts()</a></code> and <code><a href="http://www.rdocumentation.org/packages/timetk/topics/tk_tbl">timetk::tk_tbl()</a></code> instead.</li>
+<li>Fixes:
+<ul>
+<li>
+<code><a href="../reference/tq_stock_list.html">tq_index()</a></code> no longer pulls from marketvolume. Instead, 9 indices are available from SPDR. These indices are more reliable, and include weights for each stock in the index.</li>
+<li>Fixed 2 tests where the results of <code><a href="../reference/tq_get.html">tq_get(get = "stock.prices")</a></code> were 1 or 2 rows off of what the tests expected. This likely has to do with the new yahoo finance API.</li>
+</ul>
+</li>
+</ul>
+</div>
     <div id="tidyquant-0-5-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tidyquant-0-5-1" class="anchor"></a>tidyquant 0.5.1</h2>
@@ -140,25 +174,25 @@
 <li>Quandl Integration:
 <ul>
 <li>
-<code><a href="../reference/tq_get.html">tq_get(get = "quandl")</a></code> is a wrapper for <code>Quandl::Quandl()</code> that pulls multiple Quandl Codes in a “tidy” fashion.</li>
+<code><a href="../reference/tq_get.html">tq_get(get = "quandl")</a></code> is a wrapper for <code><a href="http://www.rdocumentation.org/packages/Quandl/topics/Quandl">Quandl::Quandl()</a></code> that pulls multiple Quandl Codes in a “tidy” fashion.</li>
 <li>
 <code><a href="../reference/tq_get.html">tq_get(get = "quandl.datatable")</a></code> is a wrapper for <code>Quandl::Quandl.datable()</code> that pulls Quandl datatables.</li>
 <li>
-<code><a href="../reference/quandl_api_key.html">quandl_api_key()</a></code> is a wrapper for <code>Quandl::Quandl.api_key()</code>.</li>
+<code>quandl_api_key()</code> is a wrapper for <code><a href="http://www.rdocumentation.org/packages/Quandl/topics/Quandl.api_key">Quandl::Quandl.api_key()</a></code>.</li>
 <li>
-<code>quandl_search</code> is a wrapper for <code>Quandl::Quandl.search()</code>.</li>
+<code>quandl_search</code> is a wrapper for <code><a href="http://www.rdocumentation.org/packages/Quandl/topics/Quandl.search">Quandl::Quandl.search()</a></code>.</li>
 </ul>
 </li>
-<li>Yahoo Japan Integration: <code><a href="../reference/tq_get.html">tq_get(get = "stock.prices.japan")</a></code> is a wrapper for <code>quantmod::getSymbols(src = "yahooj")</code> that enables getting stocks from Yahoo Finance Japan.</li>
+<li>Yahoo Japan Integration: <code><a href="../reference/tq_get.html">tq_get(get = "stock.prices.japan")</a></code> is a wrapper for <code><a href="http://www.rdocumentation.org/packages/quantmod/topics/getSymbols">quantmod::getSymbols(src = "yahooj")</a></code> that enables getting stocks from Yahoo Finance Japan.</li>
 </ul>
 </li>
 <li>Improvements and Fixes:
 <ul>
 <li>
-<code><a href="../reference/tq_mutate.html">tq_mutate()</a></code> and <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code> now accept non-OHLC data through the <code>select</code> argument. They also now work with <code>rollapply</code>.</li>
+<code>tq_mutate()</code> and <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code> now accept non-OHLC data through the <code>select</code> argument. They also now work with <code>rollapply</code>.</li>
 <li>
-<code><a href="../reference/tq_mutate.html">tq_mutate()</a></code> and <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code> now accept <code>PerformanceAnalytics</code> functions that work to clean and transform asset returns.</li>
-<li>Deprecated the <code>ohlc_fun</code> argument to instead use <code>select</code> in <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code> and <code>tq_transmute</code>
+<code>tq_mutate()</code> and <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code> now accept <code>PerformanceAnalytics</code> functions that work to clean and transform asset returns.</li>
+<li>Deprecated the <code>ohlc_fun</code> argument to instead use <code>select</code> in <code>tq_mutate()</code> and <code>tq_transmute</code>
 </li>
 <li>
 <code>.Deprecated</code> -&gt; <code>.Defunct</code> for <code><a href="../reference/deprecated.html">tq_transform()</a></code> and <code><a href="../reference/deprecated.html">tq_transform_xy()</a></code>. Use <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code> and <code><a href="../reference/tq_mutate.html">tq_transmute_xy()</a></code>. Move the sign post functions to deprecated.R</li>
@@ -189,7 +223,7 @@
 <li>Documentation:
 <ul>
 <li>
-<code><a href="../reference/tq_mutate.html">tq_mutate()</a></code> and <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code> help pages have been combined.</li>
+<code>tq_mutate()</code> and <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code> help pages have been combined.</li>
 <li>Split introduction into four separate vignettes, which improves flow and enables readers to more easily get to needed documentation. Now five docs total covering the primary needs of <code>tidyquant</code> users!</li>
 </ul>
 </li>
@@ -206,14 +240,14 @@
 <li>
 <code>palette_()</code> functions used to create scales are exported.</li>
 <li>
-<code><a href="../reference/theme_tq.html">theme_tq()</a></code> creates light, dark, and green themes for tidyquant visualizations.</li>
+<code>theme_tq()</code> creates light, dark, and green themes for tidyquant visualizations.</li>
 <li>
 <code><a href="../reference/scale_manual.html">scale_color_tq()</a></code> and <code><a href="../reference/scale_manual.html">scale_fill_tq()</a></code> add color/fill scales for the data used in tidyquant visualizations.</li>
 </ul>
 </li>
 <li>Improvements and Fixes:
 <ul>
-<li>The <code>transform_fun</code> argument of <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code> has been replaced with <code>mutate_fun</code> for consistency with <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code>.</li>
+<li>The <code>transform_fun</code> argument of <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code> has been replaced with <code>mutate_fun</code> for consistency with <code>tq_mutate()</code>.</li>
 <li>Core functions are now generics to allow for extendability.</li>
 <li>Issue #11: Part 2. Fix multiple stocks that only return 110 lines. Handle stocks that return csv with “We’re sorry” message.</li>
 <li>Issue #11: Part 1. Fix instability with <code>get = key.ratios</code> failing with HTTP 500 error on download. Use httr RETRY in case of failure.</li>
@@ -238,7 +272,7 @@
 <li>New visualizations that integrate with <code>ggplot2</code>:
 <ul>
 <li>Chart geoms: Bar charts (<code>geom_barchart</code>) and candlestick charts (<code>geom_candlestick</code>) can be quickly created with the new geoms.</li>
-<li>Moving Averages: Seven moving averages can be quickly visualized / prototyped using <code>geom_ma</code>. The geom wraps the <code>TTR::SMA</code> functions.</li>
+<li>Moving Averages: Seven moving averages can be quickly visualized / prototyped using <code>geom_ma</code>. The geom wraps the <code><a href="http://www.rdocumentation.org/packages/TTR/topics/MovingAverages">TTR::SMA</a></code> functions.</li>
 <li>Bollinger bands can be visualized with <code>geom_bbands</code>. The same seven moving averages are compatible with the geom.</li>
 <li>Zooming Into Chart Sections: Two functions (<code>coord_x_date</code> and <code>coord_x_datetime</code>) were added to enable zooming into chart sections using dates with no out-of-bounds data loss (e.g. out-of-bounds data loss with the <code>scale_x_</code> functions).</li>
 </ul>
@@ -248,7 +282,7 @@
 <ul>
 <li>Issue #5: <code>tq_get</code> can now accept character vectors and data frames for the <code>x</code> arg, in addition to a single character input. This streamlines the getting of data for multiple inputs (e.g. stock symbols, stock indexes, etc).</li>
 <li>Issue #4: Added <code>col_rename</code> arg to <code>tq_mutate</code> and <code>tq_transform</code>, which enables fast and easy renaming during the operation.</li>
-<li>Issue #3: Integrated <code>dplyr::group_by()</code> with <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code> and <code><a href="../reference/deprecated.html">tq_transform()</a></code>. The transform and mutate functions now work properly with grouped data frames.</li>
+<li>Issue #3: Integrated <code><a href="http://dplyr.tidyverse.org/reference/group_by.html">dplyr::group_by()</a></code> with <code>tq_mutate()</code> and <code><a href="../reference/deprecated.html">tq_transform()</a></code>. The transform and mutate functions now work properly with grouped data frames.</li>
 <li>Issue #2: Fixed bug with <code><a href="../reference/tq_get.html">tq_get()</a></code>, <code>get = "key.ratios"</code>, where key ratios for stocks from the NYSE returned <code>NA</code>.</li>
 </ul>
 </li>
@@ -260,11 +294,11 @@
 <a href="#tidyquant-0-2-0" class="anchor"></a>tidyquant 0.2.0</h2>
 <ul>
 <li>New <code>get = "key.ratios"</code> option for <code><a href="../reference/tq_get.html">tq_get()</a></code>, which retrieves 10-years of key performance ratios (89 total) from <a href="https://www.morningstar.com">www.morningstar.com</a>. These include various historical measures of financial performance including profitability, growth, cash flow, financial health, efficiency, and valuation ratios. Example: <code><a href="../reference/tq_get.html">tq_get("AAPL", get = "key.ratios")</a></code>.</li>
-<li>Added <code>zoo</code> <code>rollapply()</code> functions to list of compatible / integrated functions used with <code><a href="../reference/deprecated.html">tq_transform()</a></code> and <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code>. See <code>tq_transform_fun_options()</code> for the full list.</li>
-<li>Changed <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code>, <code><a href="../reference/deprecated.html">tq_transform()</a></code>, <code><a href="../reference/tq_mutate.html">tq_mutate_xy()</a></code> and <code><a href="../reference/deprecated.html">tq_transform_xy()</a></code> arguments to be more obvious:
+<li>Added <code>zoo</code> <code>rollapply()</code> functions to list of compatible / integrated functions used with <code><a href="../reference/deprecated.html">tq_transform()</a></code> and <code>tq_mutate()</code>. See <code>tq_transform_fun_options()</code> for the full list.</li>
+<li>Changed <code>tq_mutate()</code>, <code><a href="../reference/deprecated.html">tq_transform()</a></code>, <code><a href="../reference/tq_mutate.html">tq_mutate_xy()</a></code> and <code><a href="../reference/deprecated.html">tq_transform_xy()</a></code> arguments to be more obvious:
 <ul>
 <li>
-<code>x_fun</code> is now <code>ohlc_fun</code> for <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code> and <code><a href="../reference/deprecated.html">tq_transform()</a></code>
+<code>x_fun</code> is now <code>ohlc_fun</code> for <code>tq_mutate()</code> and <code><a href="../reference/deprecated.html">tq_transform()</a></code>
 </li>
 <li>
 <code>.x</code> is now <code>x</code> and <code>.y</code> is now <code>y</code> for <code><a href="../reference/tq_mutate.html">tq_mutate_xy()</a></code> and <code><a href="../reference/deprecated.html">tq_transform_xy()</a></code>
@@ -288,6 +322,8 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#tidyquant-0-5-3">0.5.3</a></li>
+        <li><a href="#tidyquant-0-5-2">0.5.2</a></li>
         <li><a href="#tidyquant-0-5-1">0.5.1</a></li>
         <li><a href="#tidyquant-0-5-0">0.5.0</a></li>
         <li><a href="#tidyquant-0-4-0">0.4.0</a></li>

@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -32,6 +33,18 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76139189-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 
   </head>
 
@@ -143,16 +156,16 @@ Set to <code>FALSE</code> by default.</p></td>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>tq_index()</code> returns the stock symbol and company name of every stock
-in an index. Eighteen stock indexes are available. The source is
-<a href = 'http://www.marketvolume.com/indexes_exchanges/'>www.marketvolume.com</a>.
+    <p><code>tq_index()</code> returns the stock symbol, company name, weight, and sector of every stock
+in an index. Nine stock indices are available. The source is
+<a href='https://us.spdrs.com/en/product/'>www.us.spdrs.com</a>.
     <code>tq_index_options()</code> returns a list of stock indexes you can
 choose from.
     <code>tq_exchange()</code> returns the stock symbol, company, last sale price,
 market capitalization, sector and industry of every stock
 in an exchange. Three stock exchanges are available (AMEX, NASDAQ, and NYSE).
 The source is
-<a href = 'http://www.nasdaq.com/'>NASDAQ</a>.
+<a href='http://www.nasdaq.com/'>NASDAQ</a>.
     <code>tq_exchange_options()</code> returns a list of stock exchanges you can
 choose from. The options are AMEX, NASDAQ and NYSE.</p>
     
@@ -166,42 +179,18 @@ choose from. The options are AMEX, NASDAQ and NYSE.</p>
 <span class='fu'>library</span>(<span class='no'>tidyquant</span>)
 
 <span class='co'># Get the list of stock index options</span>
-<span class='fu'>tq_index_options</span>()</div><div class='output co'>#&gt;  [1] "DOWJONES"    "DJI"         "DJT"         "DJU"         "SP100"      
-#&gt;  [6] "SP400"       "SP500"       "SP600"       "RUSSELL1000" "RUSSELL2000"
-#&gt; [11] "RUSSELL3000" "AMEX"        "AMEXGOLD"    "AMEXOIL"     "NASDAQ"     
-#&gt; [16] "NASDAQ100"   "NYSE"        "SOX"        </div><div class='input'>
-<span class='co'># Get all stock symbols in a stock index</span>
-<span class='fu'>tq_index</span>(<span class='st'>"DOWJONES"</span>)</div><div class='output co'>#&gt; <span class='message'>Getting data...</span></div><div class='output co'>#&gt; # A tibble: 65 × 2
-#&gt;    symbol                      company
-#&gt;     &lt;chr&gt;                        &lt;chr&gt;
-#&gt; 1     MMM                           3M
-#&gt; 2     ALK             ALASKA AIR GROUP
-#&gt; 3     AAL AMERICAN AIRLINES GROUP INC.
-#&gt; 4     AEP      AMERICAN ELECTRIC POWER
-#&gt; 5     AXP             AMERICAN EXPRESS
-#&gt; 6     AWK         AMERICAN WATER WORKS
-#&gt; 7    AAPL                        APPLE
-#&gt; 8     CAR            AVIS BUDGET GROUP
-#&gt; 9     CAT                  CATERPILLAR
-#&gt; 10    CNP           CENTERPOINT ENERGY
-#&gt; # ... with 55 more rows</div><div class='input'>
+<span class='fu'>tq_index_options</span>()</div><div class='output co'>#&gt; [1] "RUSSELL1000" "RUSSELL2000" "RUSSELL3000" "DOW"         "DOWGLOBAL"  
+#&gt; [6] "SP400"       "SP500"       "SP600"       "SP1000"     </div><div class='input'>
+# Get all stock symbols in a stock index
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'>tq_index</span>(<span class='st'>"DOW"</span>)
+<span class='co'># }</span><div class='input'>
 <span class='co'># Get the list of stock exchange options</span>
 <span class='fu'>tq_exchange_options</span>()</div><div class='output co'>#&gt; [1] "AMEX"   "NASDAQ" "NYSE"  </div><div class='input'>
-<span class='co'># Get all stocks in a stock exchange</span>
-<span class='fu'>tq_exchange</span>(<span class='st'>"NYSE"</span>)</div><div class='output co'>#&gt; <span class='message'>Getting data...</span></div><div class='output co'>#&gt; # A tibble: 3,150 × 7
-#&gt;    symbol                company last.sale.price market.cap ipo.year
-#&gt;     &lt;chr&gt;                  &lt;chr&gt;           &lt;dbl&gt;      &lt;chr&gt;    &lt;dbl&gt;
-#&gt; 1     DDD 3D Systems Corporation           15.83      $1.8B       NA
-#&gt; 2     MMM             3M Company          195.83   $116.96B       NA
-#&gt; 3    WBAI        500.com Limited           13.01   $539.89M     2013
-#&gt; 4    WUBA            58.com Inc.           39.58     $5.73B     2013
-#&gt; 5     AHC  A.H. Belo Corporation            6.25   $135.82M       NA
-#&gt; 6    ATEN     A10 Networks, Inc.            8.10   $561.63M     2014
-#&gt; 7     AAC     AAC Holdings, Inc.            7.16    $172.5M     2014
-#&gt; 8     AIR              AAR Corp.           35.99     $1.24B       NA
-#&gt; 9     AAN     Aaron&amp;#39;s,  Inc.           35.94     $2.61B       NA
-#&gt; 10    ABB                ABB Ltd           24.60    $52.74B       NA
-#&gt; # ... with 3,140 more rows, and 2 more variables: sector &lt;chr&gt;, industry &lt;chr&gt;</div></pre>
+# Get all stocks in a stock exchange
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'>tq_exchange</span>(<span class='st'>"NYSE"</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

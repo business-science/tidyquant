@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -32,6 +33,18 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76139189-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 
   </head>
 
@@ -113,20 +126,20 @@
     <p>The underlying moving average functions used are specified in <code><a href='http://www.rdocumentation.org/packages/TTR/topics/MovingAverages'>TTR::SMA()</a></code>
 from the TTR package. Use <code><a href='coord_x_date.html'>coord_x_date()</a></code> to zoom into specific plot regions.
 The following moving averages are available:</p><ul>
-<li><p><strong><a href = 'http://www.investopedia.com/terms/s/sma.asp'>Simple moving averages (SMA)</a></strong>:
+<li><p><strong><a href='http://www.investopedia.com/terms/s/sma.asp'>Simple moving averages (SMA)</a></strong>:
 Rolling mean over a period defined by <code>n</code>.</p></li>
-<li><p><strong><a href = 'http://www.investopedia.com/terms/e/ema.asp'>Exponential moving averages (EMA)</a></strong>: Includes
+<li><p><strong><a href='http://www.investopedia.com/terms/e/ema.asp'>Exponential moving averages (EMA)</a></strong>: Includes
 exponentially-weighted mean that gives more weight to recent observations.
 Uses <code>wilder</code> and <code>ratio</code> args.</p></li>
-<li><p><strong><a href = 'http://www.investopedia.com/ask/answers/071414/whats-difference-between-moving-average-and-weighted-moving-average.asp'>Weighted moving averages (WMA)</a></strong>:
+<li><p><strong><a href='http://www.investopedia.com/ask/answers/071414/whats-difference-between-moving-average-and-weighted-moving-average.asp'>Weighted moving averages (WMA)</a></strong>:
 Uses a set of weights, <code>wts</code>, to weight observations in the moving average.</p></li>
-<li><p><strong><a href = 'http://www.investopedia.com/articles/trading/10/double-exponential-moving-average.asp'>Double exponential moving averages (DEMA)</a></strong>:
+<li><p><strong><a href='http://www.investopedia.com/articles/trading/10/double-exponential-moving-average.asp'>Double exponential moving averages (DEMA)</a></strong>:
 Uses <code>v</code> volume factor, <code>wilder</code> and <code>ratio</code> args.</p></li>
-<li><p><strong><a href = 'https://en.wikipedia.org/wiki/Zero_lag_exponential_moving_average'>Zero-lag exponential moving averages (ZLEMA)</a></strong>:
+<li><p><strong><a href='https://en.wikipedia.org/wiki/Zero_lag_exponential_moving_average'>Zero-lag exponential moving averages (ZLEMA)</a></strong>:
 Uses <code>wilder</code> and <code>ratio</code> args.</p></li>
-<li><p><strong><a href = 'http://www.investopedia.com/articles/trading/11/trading-with-vwap-mvwap.asp'>Volume-weighted moving averages (VWMA)</a></strong>:
+<li><p><strong><a href='http://www.investopedia.com/articles/trading/11/trading-with-vwap-mvwap.asp'>Volume-weighted moving averages (VWMA)</a></strong>:
 Requires <code>volume</code> aesthetic.</p></li>
-<li><p><strong><a href = 'http://www.motivewave.com/studies/elastic_volume_weighted_moving_average.htm'>Elastic, volume-weighted moving averages (EVWMA)</a></strong>:
+<li><p><strong><a href='http://www.motivewave.com/studies/elastic_volume_weighted_moving_average.htm'>Elastic, volume-weighted moving averages (EVWMA)</a></strong>:
 Requires <code>volume</code> aesthetic.</p></li>
 </ul>
     
@@ -263,14 +276,14 @@ to the paired geom/stat.</p></td>
     <span class='fu'>geom_ma</span>(<span class='kw'>ma_fun</span> <span class='kw'>=</span> <span class='no'>SMA</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>50</span>) +                 <span class='co'># Plot 50-day SMA</span>
     <span class='fu'>geom_ma</span>(<span class='kw'>ma_fun</span> <span class='kw'>=</span> <span class='no'>SMA</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>200</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>) + <span class='co'># Plot 200-day SMA</span>
     <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fu'>today</span>() - <span class='fu'>weeks</span>(<span class='fl'>12</span>), <span class='fu'>today</span>()),
-               <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>100</span>, <span class='fl'>130</span>))                     <span class='co'># Zoom in</span></div><img src='geom_ma-2.png' alt='' width='540' height='400' /><div class='input'>
+               <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>100</span>, <span class='fl'>130</span>))                     <span class='co'># Zoom in</span></div><div class='img'><img src='geom_ma-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># EVWMA</span>
 <span class='no'>AAPL</span> <span class='kw'>%&gt;%</span>
     <span class='fu'>ggplot</span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>adjusted</span>)) +
     <span class='fu'>geom_line</span>() +                                                   <span class='co'># Plot stock price</span>
     <span class='fu'>geom_ma</span>(<span class='fu'>aes</span>(<span class='kw'>volume</span> <span class='kw'>=</span> <span class='no'>volume</span>), <span class='kw'>ma_fun</span> <span class='kw'>=</span> <span class='no'>EVWMA</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>50</span>) +   <span class='co'># Plot 50-day EVWMA</span>
     <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fu'>today</span>() - <span class='fu'>weeks</span>(<span class='fl'>12</span>), <span class='fu'>today</span>()),
-               <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>100</span>, <span class='fl'>130</span>))                                  <span class='co'># Zoom in</span></div><img src='geom_ma-4.png' alt='' width='540' height='400' /></pre>
+               <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>100</span>, <span class='fl'>130</span>))                                  <span class='co'># Zoom in</span></div><div class='img'><img src='geom_ma-6.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
