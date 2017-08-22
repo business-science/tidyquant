@@ -261,6 +261,7 @@ tq_get_base <- function(x, get, ...) {
                   financial        = tq_get_util_1(x, get, ...),
                   keystat          = tq_get_util_3(x, get, ...),
                   keyratio         = tq_get_util_2(x, get, ...),
+                  morningstarratio = tq_get_util_6(x, get, ...),
                   metalprice       = tq_get_util_1(x, get, ...),
                   exchangerate     = tq_get_util_1(x, get, ...),
                   economicdata     = tq_get_util_1(x, get, ...),
@@ -281,6 +282,7 @@ tq_get_options <- function() {
       "financials",
       "key.stats",
       "key.ratios",
+      "morningstar.ratios",
       "dividends",
       "splits",
       "economic.data",
@@ -454,126 +456,41 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
 
     # Convert x to uppercase
     x <- stringr::str_to_upper(x) %>%
-        stringr::str_trim(side = "both") %>%
-        stringr::str_replace_all("[[:punct:]]", "")
+        stringr::str_trim(side = "both")
+
+    # If the request has a ':', assume that it is in the form of EXCHANGE:SYMBOL
+    # Allows both forcing a specific exchange source and making requests from non-default exchanges
+    if ( stringr::str_detect(x,":") ) {
+        split_req <- stringr::str_split(x,":",2)
+        stock_exchange <- c(split_req[[1]][1])
+        symbol <- split_req[[1]][2]
+    } else {
+        symbol <- x
+    }
+
+    # NOTE: This may need to be reworked to handle companies with periods in their symbols (non-US)
+    symbol <- stringr::str_replace_all(symbol,"[[:punct:]]", "")
 
     tryCatch({
+        key_ratios <- tq_get(x, get= "morningstar.ratios")
 
-        # Download file
-        stock_exchange <- c("XNAS", "XNYS", "XASE") # mornginstar gets from various exchanges
-        url_base_1 <- 'http://financials.morningstar.com/finan/ajax/exportKR2CSV.html?&callback=?&t='
-        url_base_2 <- '&region=usa&culture=en-US&cur=&order=asc'
-        # Three URLs to try
-        url <- paste0(url_base_1, stock_exchange, ":", x, url_base_2)
+        # HACK: there is definitely a better way to manage this...
+        currency <- key_ratios %>%
+            dplyr::filter(section=='Financials') %>%
+            dplyr::select(data) %>%
+            unnest() %>%
+            dplyr::select(category) %>%
+            dplyr::filter(stringr::str_detect(category,"Revenue")) %>%
+            dplyr::first() %>%
+            dplyr::first() %>%
+            stringr::str_replace("Revenue ","") %>%
+            stringr::str_replace(" Mil","")
 
-        # Try various stock exchanges
-        for(i in 1:3) {
-            text <- httr::RETRY("GET", url[i], times = 5) %>%
-                httr::content()
-
-            if(!is.null(text)) {
-
-                # Test to see if file returned is just a message containing "We're sorry"
-                text_test <- text %>%
-                    xml2::as_list() %>%
-                    unlist() %>%
-                    stringr::str_detect("^We.re sorry")
-
-                # If text does not contain "We're sorry" message, break
-                if (!text_test) {
-                    break
-                }
-            }
+        # We can't do valuation  calculations across currencies
+        # TODO - populate Valuations with NA so they're present
+        if (currency != "USD") {
+            return(key_ratios)
         }
-
-        # Read lines
-        text <- text %>%
-            xml2::as_list() %>%
-            unlist() %>%
-            readr::read_lines()
-
-        # Skip rows & setup key ratio categories
-
-        # Patch for stocks with only 110 lines, missing Free Cash Flow/Net Income (line 71)
-        if (length(text) == 111)  {
-            # 111 Lines is normal
-            skip_rows <- c(1:2, 19:21, 31:32, 41:44, 49, 54, 59, 64:66, 72:74, 95:96, 101:103)
-
-            key_ratios_1 <- tibble::tibble(
-                section            = c(rep("Financials", 15),
-                                       rep("Profitability", 17),
-                                       rep("Growth", 16),
-                                       rep("Cash Flow", 5),
-                                       rep("Financial Health", 24),
-                                       rep("Efficiency Ratios", 8)),
-                sub.section        = c(rep("Financials", 15),
-                                       rep("Margin of Sales %", 9),
-                                       rep("Profitability", 8),
-                                       rep("Revenue %", 4),
-                                       rep("Operating Income %", 4),
-                                       rep("Net Income %", 4),
-                                       rep("EPS %", 4),
-                                       rep("Cash Flow Ratios", 5),
-                                       rep("Balance Sheet Items (in %)", 20),
-                                       rep("Liquidty/Financial Health", 4),
-                                       rep("Efficiency", 8)),
-                group               = 1:85
-            )
-        } else {
-            # Patch for stocks with 110 lines
-            skip_rows <- c(1:2, 19:21, 31:32, 41:44, 49, 54, 59, 64:66, 71:73, 94:95, 100:102)
-
-            key_ratios_1 <- tibble::tibble(
-                section            = c(rep("Financials", 15),
-                                       rep("Profitability", 17),
-                                       rep("Growth", 16),
-                                       rep("Cash Flow", 4), # One less
-                                       rep("Financial Health", 24),
-                                       rep("Efficiency Ratios", 8)),
-                sub.section        = c(rep("Financials", 15),
-                                       rep("Margin of Sales %", 9),
-                                       rep("Profitability", 8),
-                                       rep("Revenue %", 4),
-                                       rep("Operating Income %", 4),
-                                       rep("Net Income %", 4),
-                                       rep("EPS %", 4),
-                                       rep("Cash Flow Ratios", 4), # One less
-                                       rep("Balance Sheet Items (in %)", 20),
-                                       rep("Liquidty/Financial Health", 4),
-                                       rep("Efficiency", 8)),
-                group              = c(1:52, 54:85)
-            )
-        }
-
-        text <- text[-skip_rows]
-
-        # Parse text
-        key_ratios_2 <-
-            suppressMessages(
-                suppressWarnings(
-                    utils::read.csv(text = text, na.strings=c("", "NA")) %>%
-                        tibble::as_tibble() %>%
-                        dplyr::mutate_all(as.character)
-                )
-            )
-
-
-        # Combine tibble parts into raw data
-        key_ratios_raw <- dplyr::bind_cols(key_ratios_1, key_ratios_2)
-
-        # Cleanup raw data
-        key_ratios_bind <- key_ratios_raw %>%
-            dplyr::select(-TTM) %>%
-            dplyr::rename(category = X) %>%
-            dplyr::mutate(group = as.numeric(group)) %>%
-            tidyr::gather(key = date, value = value, -c(group, section, sub.section, category)) %>%
-            dplyr::arrange(group) %>%
-            dplyr::mutate(date = stringr::str_sub(date, start = 2, end = length(date))) %>%
-            dplyr::mutate(date = stringr::str_replace(date, "\\.", "-")) %>%
-            dplyr::mutate(date = lubridate::ymd(date, truncated = 2)) %>%
-            dplyr::mutate(value = stringr::str_replace(value, ",", "")) %>%
-            dplyr::mutate(value = as.double(value)) %>%
-            dplyr::select(section, sub.section, group, category, date, value)
 
         # Calculate valuations
 
@@ -585,8 +502,9 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
             dplyr::select(year, date, adjusted)
 
         # Get key ratios
-        valuations_1 <- key_ratios_bind %>%
+        valuations_1 <- key_ratios %>%
             dplyr::filter(section == "Financials") %>%
+            unnest() %>%
             dplyr::filter(category %in% c("Revenue USD Mil",
                                           "Shares Mil",
                                           "Earnings Per Share USD",
@@ -619,20 +537,23 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
             dplyr::mutate(date = lubridate::as_date(date))
 
         # Get last group number
-        last_group_num <- key_ratios_bind$group %>% max()
+        last_group_num <- key_ratios %>%
+            unnest() %>%
+            dplyr::select(group) %>%
+            max()
 
         # Create valuation tibble and bind_rows
         valuation_bind <- dplyr::bind_cols(
             tibble::tibble(section = rep("Valuation Ratios", nrow(valuation))),
             tibble::tibble(sub.section = rep("Valuation Ratios", nrow(valuation))),
             tibble::tibble(group = rep(seq(last_group_num + 1, length.out = 4), each = 10)),
-            valuation)
-
-        key_ratios <- dplyr::bind_rows(key_ratios_bind, valuation_bind) %>%
+            valuation) %>%
             dplyr::group_by(section) %>%
             tidyr::nest()
 
-        return(key_ratios)
+        key_ratios_final <- dplyr::bind_rows(key_ratios, valuation_bind)
+
+        return(key_ratios_final)
 
     }, warning = function(w) {
 
@@ -873,6 +794,177 @@ tq_get_util_5 <- function(x, get, paginate = FALSE, complete_cases, map, ...) {
     })
 
     return(ret)
+
+}
+
+
+# Util 6: Morningstar Ratios -----
+tq_get_util_6 <- function(x, get, complete_cases, map, ...) {
+
+    # Check x
+    if (!is.character(x)) {
+        stop("x must be a character string in the form of a valid symbol.")
+    }
+
+    # Convert x to uppercase
+    x <- stringr::str_to_upper(x) %>%
+         stringr::str_trim(side = "both")
+
+    # If the request has a ':', assume that it is in the form of EXCHANGE:SYMBOL
+    # Allows both forcing a specific exchange source and making requests from non-default exchanges
+    if ( stringr::str_detect(x,":") ) {
+        split_req <- stringr::str_split(x,":",2)
+        stock_exchange <- c(split_req[[1]][1])
+        x <- split_req[[1]][2]
+    } else {
+        # default US exchanges
+        stock_exchange <- c("XNAS", "XNYS", "XASE") # mornginstar gets from various exchanges
+    }
+
+    # NOTE: This may need to be reworked to handle companies with periods in their symbols (non-US)
+    x <- stringr::str_replace_all(x,"[[:punct:]]", "")
+
+    tryCatch({
+
+        # Download file
+        url_base_1 <- 'http://financials.morningstar.com/finan/ajax/exportKR2CSV.html?&callback=?&t='
+        url_base_2 <- '&region=usa&culture=en-US&cur=&order=asc'
+        # Three URLs to try
+        url <- paste0(url_base_1, stock_exchange, ":", x, url_base_2)
+
+        # Try various stock exchanges
+        for(i in 1:length(url)) {
+            text <- httr::RETRY("GET", url[i], times = 5) %>%
+                httr::content()
+
+            if(!is.null(text)) {
+
+                # Test to see if file returned is just a message containing "We're sorry"
+                text_test <- text %>%
+                    xml2::as_list() %>%
+                    unlist() %>%
+                    stringr::str_detect("^We.re sorry")
+
+                # If text does not contain "We're sorry" message, break
+                if (!text_test) {
+                    break
+                }
+            }
+        }
+
+        # Read lines
+        text <- text %>%
+            xml2::as_list() %>%
+            unlist() %>%
+            readr::read_lines()
+
+        # Skip rows & setup key ratio categories
+
+        # Patch for stocks with only 110 lines, missing Free Cash Flow/Net Income (line 71)
+        if (length(text) == 111)  {
+            # 111 Lines is normal
+            skip_rows <- c(1:2, 19:21, 31:32, 41:44, 49, 54, 59, 64:66, 72:74, 95:96, 101:103)
+
+            key_ratios_1 <- tibble::tibble(
+                section            = c(rep("Financials", 15),
+                                       rep("Profitability", 17),
+                                       rep("Growth", 16),
+                                       rep("Cash Flow", 5),
+                                       rep("Financial Health", 24),
+                                       rep("Efficiency Ratios", 8)),
+                sub.section        = c(rep("Financials", 15),
+                                       rep("Margin of Sales %", 9),
+                                       rep("Profitability", 8),
+                                       rep("Revenue %", 4),
+                                       rep("Operating Income %", 4),
+                                       rep("Net Income %", 4),
+                                       rep("EPS %", 4),
+                                       rep("Cash Flow Ratios", 5),
+                                       rep("Balance Sheet Items (in %)", 20),
+                                       rep("Liquidty/Financial Health", 4),
+                                       rep("Efficiency", 8)),
+                group               = 1:85
+            )
+        } else if (length(text) == 110 ) {
+            # Patch for stocks with 110 lines
+            skip_rows <- c(1:2, 19:21, 31:32, 41:44, 49, 54, 59, 64:66, 71:73, 94:95, 100:102)
+
+            key_ratios_1 <- tibble::tibble(
+                section            = c(rep("Financials", 15),
+                                       rep("Profitability", 17),
+                                       rep("Growth", 16),
+                                       rep("Cash Flow", 4), # One less
+                                       rep("Financial Health", 24),
+                                       rep("Efficiency Ratios", 8)),
+                sub.section        = c(rep("Financials", 15),
+                                       rep("Margin of Sales %", 9),
+                                       rep("Profitability", 8),
+                                       rep("Revenue %", 4),
+                                       rep("Operating Income %", 4),
+                                       rep("Net Income %", 4),
+                                       rep("EPS %", 4),
+                                       rep("Cash Flow Ratios", 4), # One less
+                                       rep("Balance Sheet Items (in %)", 20),
+                                       rep("Liquidty/Financial Health", 4),
+                                       rep("Efficiency", 8)),
+                group              = c(1:52, 54:85)
+            )
+        } else {
+            # TODO: this should probably be more graceful, returning an empty frame so processing continues
+            stop("Unexpected return from Morningstar")
+        }
+
+        text <- text[-skip_rows]
+
+        # Parse text
+        key_ratios_2 <-
+            suppressMessages(
+                suppressWarnings(
+                    utils::read.csv(text = text, na.strings=c("", "NA")) %>%
+                        tibble::as_tibble() %>%
+                        dplyr::mutate_all(as.character)
+                )
+            )
+
+
+        # Combine tibble parts into raw data
+        key_ratios_raw <- dplyr::bind_cols(key_ratios_1, key_ratios_2)
+
+        # Cleanup raw data
+        key_ratios_bind <- key_ratios_raw %>%
+            dplyr::select(-TTM) %>%
+            dplyr::rename(category = X) %>%
+            dplyr::mutate(group = as.numeric(group)) %>%
+            tidyr::gather(key = date, value = value, -c(group, section, sub.section, category)) %>%
+            dplyr::arrange(group) %>%
+            dplyr::mutate(date = stringr::str_sub(date, start = 2, end = length(date))) %>%
+            dplyr::mutate(date = stringr::str_replace(date, "\\.", "-")) %>%
+            dplyr::mutate(date = lubridate::ymd(date, truncated = 2)) %>%
+            dplyr::mutate(value = stringr::str_replace(value, ",", "")) %>%
+            dplyr::mutate(value = as.double(value)) %>%
+            dplyr::select(section, sub.section, group, category, date, value)
+
+        key_ratios <- key_ratios_bind %>%
+            dplyr::group_by(section) %>%
+            tidyr::nest()
+
+        return(key_ratios)
+
+    }, warning = function(w) {
+
+        warn <- w
+        if (map == TRUE) warn <- paste0(x, ": ", w)
+        warning(warn, call. = FALSE)
+        return(key_ratios)
+
+    }, error = function(e) {
+
+        warn <- paste0("x = '", x, "', get = 'morningstar.ratios", "': ", e)
+        if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
+        warning(warn, call. = FALSE)
+        return(NA) # Return NA on error
+
+    })
 
 }
 
