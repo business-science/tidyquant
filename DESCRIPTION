@@ -27,6 +27,7 @@ Depends:
     quantmod (>= 0.4-9),
     tidyverse (>= 1.1.0)
 Imports:
+    alphavantager (>= 0.1.0),
     broom (>= 0.4.2),
     curl (>= 2.3),
     devtools (>= 1.12.0),

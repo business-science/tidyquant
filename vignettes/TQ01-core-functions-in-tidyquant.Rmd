@@ -304,6 +304,29 @@ tq_get("ZACKS/MKTV", get = "quandl.datatable") # Zacks Market Value Supplement
 tq_get("ZACKS/SHRS", get = "quandl.datatable") # Zacks Shares Out Supplement
 ```
 
+## Alpha Vantage
+
+[Alpha Vantage](https://www.alphavantage.co/) provides access to a real-time and historical financial data. The `alphavantager` package, a lightweight R interface, has been integrated into `tidyquant` as follows. The benefit of the integration is the __scalability since we can now get multiple symbols returned in a tidy format__. 
+
+### Authentication
+
+To make full use of the integration you need to get an API key and then set your api key. If you don't have one already, go to [Alpha Vantage](https://www.alphavantage.co/) account and get your FREE API key. You can then set it as follows:
+
+```{r, eval = F}
+av_api_key("enter-your-api-key-here")
+```
+
+### Getting Alpha Vantage Data
+
+Getting data is simple as the structure follows the [Alpha Vantage API documentation](https://www.alphavantage.co/documentation/). For example, if you wish to retrieve intraday data at 5 minute intervals for FB and MSFT, you can build the parameters `x = c("FB", "MSFT"), get = "alphavantager", av_fun = "TIME_SERIES_INTRADAY", interval = "5min"`. The familiar `x` and `get` are the same as you always use. The `av_fun` argument comes from `alphavantager::av_get()` and the Alpha Vantage documentation. The `interval` argument comes from the docs as well.
+
+```{r, eval = F}
+# Scaling is as simple as supplying multiple symbols
+my_intraday_data <- c("FB", "MSFT") %>%
+    tq_get(get = "alphavantager", av_fun = "TIME_SERIES_INTRADAY", interval = "5min")
+```
+
+
 
 
 
