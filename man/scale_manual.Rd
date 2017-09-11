@@ -3,10 +3,13 @@
 \name{scale_manual}
 \alias{scale_manual}
 \alias{scale_color_tq}
+\alias{scale_colour_tq}
 \alias{scale_fill_tq}
 \title{tidyquant colors and fills for ggplot2.}
 \usage{
 scale_color_tq(..., theme = "light")
+
+scale_colour_tq(..., theme = "light")
 
 scale_fill_tq(..., theme = "light")
 }

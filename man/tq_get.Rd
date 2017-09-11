@@ -46,11 +46,14 @@ from \href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for \code{quantmo
 \item \code{"exchange.rates"}: Get exchange rates from
 \href{https://www.oanda.com/currency/converter/}{Oanda}. Wrapper for \code{quantmod::getFX()}.
 \item \code{"quandl"}: Get data sets from
-\href{https://www.quandl.com/}{Quandl}. Wrapper for \code{Quandl()}.
+\href{https://www.quandl.com/}{Quandl}. Wrapper for \code{Quandl::Quandl()}.
 See also \code{\link[=quandl_api_key]{quandl_api_key()}}.
 \item \code{"quandl.datatable"}: Get data tables from
-\href{https://www.quandl.com/}{Quandl}. Wrapper for \code{Quandl.datatable()}.
+\href{https://www.quandl.com/}{Quandl}. Wrapper for \code{Quandl::Quandl.datatable()}.
 See also \code{\link[=quandl_api_key]{quandl_api_key()}}.
+\item \code{"alphavantager"}: Get data sets from
+\href{https://www.alphavantage.co/}{Alpha Vantage}. Wrapper for \code{alphavantager::av_get()}.
+See also \code{\link[=av_api_key]{av_api_key()}}.
 }}
 
 \item{complete_cases}{Removes symbols that return an NA value due to an error with the get
@@ -122,6 +125,8 @@ mult_gets <- tq_get("AAPL",
 \item \code{\link[=tq_index]{tq_index()}} to get a ful list of stocks in an index.
 \item \code{\link[=tq_exchange]{tq_exchange()}} to get a ful list of stocks in an exchange.
 \item \code{\link[=quandl_api_key]{quandl_api_key()}} to set the api key for collecting data via the \code{"quandl"}
+get option.
+\item \code{\link[=av_api_key]{av_api_key()}} to set the api key for collecting data via the \code{"alphavantage"}
 get option.
 }
 }

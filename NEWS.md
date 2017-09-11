@@ -1,3 +1,8 @@
+## tidyquant 0.5.3.9000
+
+* Features:
+    * Incorporate `alphavantager`, a lightweight API to the [Alpha Vantage financial data provider](https://www.alphavantage.co/).
+
 ## tidyquant 0.5.3
 
 * Fixes for compatibility with `purrr` v0.2.3. 

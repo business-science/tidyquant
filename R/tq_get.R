@@ -32,11 +32,14 @@
 #'   \item `"exchange.rates"`: Get exchange rates from
 #'   \href{https://www.oanda.com/currency/converter/}{Oanda}. Wrapper for `quantmod::getFX()`.
 #'   \item `"quandl"`: Get data sets from
-#'   \href{https://www.quandl.com/}{Quandl}. Wrapper for `Quandl()`.
+#'   \href{https://www.quandl.com/}{Quandl}. Wrapper for `Quandl::Quandl()`.
 #'   See also [quandl_api_key()].
 #'   \item `"quandl.datatable"`: Get data tables from
-#'   \href{https://www.quandl.com/}{Quandl}. Wrapper for `Quandl.datatable()`.
+#'   \href{https://www.quandl.com/}{Quandl}. Wrapper for `Quandl::Quandl.datatable()`.
 #'   See also [quandl_api_key()].
+#'   \item `"alphavantager"`: Get data sets from
+#'   \href{https://www.alphavantage.co/}{Alpha Vantage}. Wrapper for `alphavantager::av_get()`.
+#'   See also [av_api_key()].
 #' }
 #' @param complete_cases Removes symbols that return an NA value due to an error with the get
 #' call such as sending an incorrect symbol "XYZ" to get = "stock.prices". This is useful in
@@ -81,6 +84,8 @@
 #'   \item [tq_index()] to get a ful list of stocks in an index.
 #'   \item [tq_exchange()] to get a ful list of stocks in an exchange.
 #'   \item [quandl_api_key()] to set the api key for collecting data via the `"quandl"`
+#'   get option.
+#'   \item [av_api_key()] to set the api key for collecting data via the `"alphavantage"`
 #'   get option.
 #' }
 #'
@@ -129,6 +134,12 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
     # Validate quandl api key
     if("quandl" %in% get) {
         if (is.null(quandl_api_key())) warning("No Quandl API key detected. Limited to 50 anonymous calls per day. Set key with 'quandl_api_key()'.",
+                                               call. = FALSE)
+    }
+
+    # Validate Alpha Vantage api key
+    if("alphavantager" %in% get) {
+        if (is.null(tidyquant::av_api_key())) stop("No Alpha Vantager API key detected. Set key with 'av_api_key()'.",
                                                call. = FALSE)
     }
 
@@ -266,7 +277,8 @@ tq_get_base <- function(x, get, ...) {
                   economicdata     = tq_get_util_1(x, get, ...),
                   stockindex       = tq_index(x), # Deprecated, remove next version
                   quandl           = tq_get_util_4(x, get, ...),
-                  quandldatatable  = tq_get_util_5(x, get, ...)
+                  quandldatatable  = tq_get_util_5(x, get, ...),
+                  alphavantager    = tq_get_util_6(x, get, ...)
                   )
 
     ret
@@ -287,7 +299,8 @@ tq_get_options <- function() {
       "exchange.rates",
       "metal.prices",
       "quandl",
-      "quandl.datatable"
+      "quandl.datatable",
+      "alphavantager"
       )
 }
 
@@ -866,6 +879,47 @@ tq_get_util_5 <- function(x, get, paginate = FALSE, complete_cases, map, ...) {
     }, error = function(e) {
 
         warn <- paste0("x = '", x, "', get = 'quandl.datatable", "': ", e)
+        if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
+        warning(warn, call. = FALSE)
+        return(NA) # Return NA on error
+
+    })
+
+    return(ret)
+
+}
+
+# Util 6: alphavantager -----
+tq_get_util_6 <- function(x, get, av_fun, complete_cases, map, ...) {
+
+    # Check x
+    if (!is.character(x)) {
+        stop("x must be a character string in the form of a valid symbol.")
+    }
+
+    # Check av_fun exists
+    # dots <- list(...)
+    # if (is.null(dots$av_fun)) {
+    #     stop("`av_fun` argument must be present. See Alpha Van")
+    # }
+
+    # Convert x to uppercase
+    x <- stringr::str_to_upper(x) %>%
+        stringr::str_trim(side = "both")
+
+    # Get av_fun
+    # av_fun <- dots$av_fun
+    # other_dots <- dots
+    # other_dots$av_fun <- NULL
+
+    ret <- tryCatch({
+
+        alphavantager::av_get(symbol = x, av_fun = av_fun, ...)
+
+
+    }, error = function(e) {
+
+        warn <- paste0("x = '", x, "', get = 'alphavantager", "': ", e)
         if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
         warning(warn, call. = FALSE)
         return(NA) # Return NA on error
