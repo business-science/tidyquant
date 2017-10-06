@@ -110,11 +110,9 @@
 #' col_name <- "adjusted"
 #' mutate <- c("MACD", "SMA")
 #' tq_mutate_xy_(fb_stock_prices, x = col_name, mutate_fun = mutate[[1]])
-NULL
 
 # tq_mutate ------------------------------------------------------------------------------------------------
 
-#' @rdname tq_mutate
 #' @export
 tq_mutate <- function(data, select = NULL, mutate_fun, col_rename = NULL, ohlc_fun = NULL, ...) {
 
