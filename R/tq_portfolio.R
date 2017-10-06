@@ -415,6 +415,11 @@ check_weights <- function(weights, assets_col, map, x) {
 
 check_data_weights_compatibility <- function(data, weights) {
 
+    # Weights must not be NULL if multiple portfolios
+    if(is.null(weights)) {
+        stop("weights must be a weights tibble if using multiple portfolios")
+    }
+
     # Weights has one group
     if (length(dplyr::groups(weights)) != 1) {
         stop("weights must be grouped by portfolio index.")

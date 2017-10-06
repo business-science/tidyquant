@@ -2,7 +2,6 @@
 % Please edit documentation in R/tq_mutate.R, R/tq_transmute.R
 \name{tq_mutate}
 \alias{tq_mutate}
-\alias{tq_mutate}
 \alias{tq_mutate_}
 \alias{tq_mutate_xy}
 \alias{tq_mutate_xy_}
