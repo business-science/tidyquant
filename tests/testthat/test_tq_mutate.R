@@ -139,12 +139,13 @@ test_that("Test error on incompatible structures.", {
 test_that("Test error on invalid data inputs.", {
 
     # Non-data.frame objects
+    a <- seq(1:100)
     expect_error(
-        a = seq(1:100) %>%
+        seq(1:100) %>%
             tq_mutate(select = NULL, mutate_fun = to.monthly)
     )
     expect_error(
-        a = seq(1:100) %>%
+        seq(1:100) %>%
             tq_mutate_xy(x = a, mutate_fun = to.monthly)
     )
 
