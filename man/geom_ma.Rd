@@ -51,7 +51,8 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{ggplot2::borde
 available including: SMA, EMA, WMA, DEMA, ZLEMA, VWMA, and EVWMA. The default is
 \code{SMA}. See \code{\link[TTR:SMA]{TTR::SMA()}} for underlying functions.}
 
-\item{n}{Number of periods to average over.}
+\item{n}{Number of periods to average over. Must be between 1 and
+\code{nrow(x)}, inclusive.}
 
 \item{wilder}{logical; if \code{TRUE}, a Welles Wilder type EMA will be
 calculated; see notes.}

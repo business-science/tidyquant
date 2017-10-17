@@ -1,8 +1,8 @@
 Package: tidyquant
 Type: Package
 Title: Tidy Quantitative Financial Analysis
-Version: 0.5.3
-Date: 2017-08-03
+Version: 0.5.3.9000
+Date: 2017-09-14
 Authors@R: c(
     person("Matt", "Dancho", email = "mdancho@business-science.io", role = c("aut", "cre")),
     person("Davis", "Vaughan", email = "dvaughan@business-science.io", role = c("aut"))
@@ -27,6 +27,7 @@ Depends:
     quantmod (>= 0.4-9),
     tidyverse (>= 1.1.0)
 Imports:
+    alphavantager (>= 0.1.0),
     broom (>= 0.4.2),
     curl (>= 2.3),
     devtools (>= 1.12.0),
