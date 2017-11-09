@@ -54,6 +54,10 @@ See also \code{\link[=quandl_api_key]{quandl_api_key()}}.
 \item \code{"alphavantager"}: Get data sets from
 \href{https://www.alphavantage.co/}{Alpha Vantage}. Wrapper for \code{alphavantager::av_get()}.
 See also \code{\link[=av_api_key]{av_api_key()}}.
+\item \code{"Rblpapi"}: Get data sets from
+\href{https://www.bloomberg.com/professional/solution/bloomberg-terminal}{Bloomberg}. Wrapper for \code{Rblpapi::bdh()}..
+See also \code{\link[Rblpapi:blpConnect]{Rblpapi::blpConnect()}} to connect to Bloomberg terminal (required).
+Use the argument \code{rblpapi_fun} to set the function such as "bdh", "bds", or "bdp".
 }}
 
 \item{complete_cases}{Removes symbols that return an NA value due to an error with the get

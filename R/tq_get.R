@@ -40,6 +40,10 @@
 #'   \item `"alphavantager"`: Get data sets from
 #'   \href{https://www.alphavantage.co/}{Alpha Vantage}. Wrapper for `alphavantager::av_get()`.
 #'   See also [av_api_key()].
+#'   \item `"Rblpapi"`: Get data sets from
+#'   \href{https://www.bloomberg.com/professional/solution/bloomberg-terminal}{Bloomberg}. Wrapper for `Rblpapi`.
+#'   See also [Rblpapi::blpConnect()] to connect to Bloomberg terminal (required).
+#'   Use the argument `rblpapi_fun` to set the function such as "bdh" (default), "bds", or "bdp".
 #' }
 #' @param complete_cases Removes symbols that return an NA value due to an error with the get
 #' call such as sending an incorrect symbol "XYZ" to get = "stock.prices". This is useful in
@@ -141,6 +145,10 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
     if("alphavantager" %in% get) {
         if (is.null(tidyquant::av_api_key())) stop("No Alpha Vantager API key detected. Set key with 'av_api_key()'.",
                                                call. = FALSE)
+    }
+
+    if("Rblpapi" %in% get) {
+        Rblpapi::blpConnect() #must have a valid blp session running
     }
 
     # Distribute operations based on x
@@ -278,7 +286,8 @@ tq_get_base <- function(x, get, ...) {
                   stockindex       = tq_index(x), # Deprecated, remove next version
                   quandl           = tq_get_util_4(x, get, ...),
                   quandldatatable  = tq_get_util_5(x, get, ...),
-                  alphavantager    = tq_get_util_6(x, get, ...)
+                  alphavantager    = tq_get_util_6(x, get, ...),
+                  rblpapi          = tq_get_rblpapi(x, get, ...)
                   )
 
     ret
@@ -300,7 +309,8 @@ tq_get_options <- function() {
       "metal.prices",
       "quandl",
       "quandl.datatable",
-      "alphavantager"
+      "alphavantager",
+      "rblpapi"
       )
 }
 
@@ -920,6 +930,43 @@ tq_get_util_6 <- function(x, get, av_fun, complete_cases, map, ...) {
     }, error = function(e) {
 
         warn <- paste0("x = '", x, "', get = 'alphavantager", "': ", e)
+        if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
+        warning(warn, call. = FALSE)
+        return(NA) # Return NA on error
+
+    })
+
+    return(ret)
+
+}
+
+
+# Util: rblpapi -----
+tq_get_rblpapi <- function(x, get, rblpapi_fun = "bdh", complete_cases, map, ...) {
+
+    # Check x
+    if (!is.character(x)) {
+        stop("x must be a character string in the form of a valid symbol.")
+    }
+
+    # # Convert x to uppercase
+    # x <- stringr::str_to_upper(x) %>%
+    #     stringr::str_trim(side = "both")
+
+    ret <- tryCatch({
+
+        # Repurpose from and to as start_date and end_date
+        args <- list(securities = x)
+        args <- append(args, list(...))
+        if (!is.null(args$from)) args$start.date <- as.Date(args$from)
+        if (!is.null(args$to))   args$end.date   <- as.Date(args$to)
+
+        do.call(rblpapi_fun, args) %>%
+            tibble::as.tibble()
+
+    }, error = function(e) {
+
+        warn <- paste0("x = '", x, "', get = 'Rblpapi", "': ", e)
         if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
         warning(warn, call. = FALSE)
         return(NA) # Return NA on error

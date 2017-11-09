@@ -41,5 +41,6 @@
 #' @importFrom TTR "SMA"
 #' @importFrom xts "to.period"
 #' @importFrom Quandl "Quandl" "Quandl.datatable" "Quandl.api_key" "Quandl.search"
+#' @importFrom Rblpapi "blpConnect" "bdh" "bds" "bdp"
 
 NULL
