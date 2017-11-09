@@ -17,9 +17,7 @@
 #'   \item `"key.ratios"`: Get 89 historical growth, profitablity, financial health,
 #'   efficiency, and valuation ratios that span 10-years from
 #'   \href{https://www.morningstar.com}{Morningstar}.
-#'   \item `"key.stats"`: Get 55 real-time key statistics such as
-#'   Ask, Bid, Day's High, Day's Low, Last Trade Price, current P/E Ratio, EPS,
-#'   Market Cap, EPS Projected Current Year, EPS Projected Next Year and many more from
+#'   \item `"key.stats"`: Discontinued CSV download per
 #'   \href{https://finance.yahoo.com/}{Yahoo Finance}.
 #'   \item `"dividends"`: Get the dividends for a stock symbol
 #'   from \href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for `quantmod::getDividends()`.
@@ -147,9 +145,13 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
                                                call. = FALSE)
     }
 
+    # Setup Rblpapi
     if("Rblpapi" %in% get) {
         Rblpapi::blpConnect() #must have a valid blp session running
     }
+
+    # Discontinue key.stats
+    if("key.stats" %in% get) stop("Yahoo Key Statistics has been discontinued.", call. = FALSE)
 
     # Distribute operations based on x
     if (is.character(x) && length(x) == 1 && length(get) == 1) {
