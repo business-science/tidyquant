@@ -326,7 +326,38 @@ my_intraday_data <- c("FB", "MSFT") %>%
     tq_get(get = "alphavantager", av_fun = "TIME_SERIES_INTRADAY", interval = "5min")
 ```
 
+## Bloomberg
 
+[Bloomberg](https://www.bloomberg.com/professional/solution/bloomberg-terminal/) provides access to arguably the most comprehensive financial data and is actively used by most major financial instutions that work with financial data. The `Rblpapi` package, an R interface to Bloomberg, has been integrated into `tidyquant` as follows. The benefit of the integration is the __scalability since we can now get multiple symbols returned in a tidy format__. 
+
+### Authentication
+
+To make full use of the integration you need to have a Bloomberg Terminal account (Note this is not a free service). If you have Bloomberg Terminal running on your machine, you can connect as follows:
+
+```{r, eval = F}
+blpConnect()
+```
+
+### Getting Bloomberg Data
+
+Getting data is simple as the structure follows the [Rblpapi API documentation](https://CRAN.R-project.org/package=Rblpapi). For example, if you wish to retrieve monthly data for SPX Index and AGTHX Equity, you can build the `tq_get` parameters as follows:
+
+- `x = c("FB", "MSFT")`
+- `get = "rblpapi"`
+- `rblpapi_fun = "bdh"` Note that "bdh" is the default, and options include "bdh" (Bloomberg Data History), "bds" (Bloomberg Data Set), and "bdp" (Bloomberg Data Point)
+- `from / to` These get passed to `start.date` and `end.date` and can be provided in "YYYY-MM-DD" format. Note that `start.date` and `end.date` from `Rblpapi` can be used. 
+- Other arguments: These are options that depend on the `rblpapi_fun`. See `Rblpapi` documentation. 
+
+```{r, eval = F}
+# Scaling is as simple as supplying multiple symbols
+my_bloomberg_data <- c('SPX Index','AGTHX Equity') %>%
+    tq_get(get         = "rblpapi",
+           rblpapi_fun = "bdh",
+           fields      = c('RETURN','PRICE'),
+           options     = c("periodicitySelection" = "MONTHLY"),
+           from        = "2016-01-01",
+           to          = "2016-12-31")
+```
 
 
 
