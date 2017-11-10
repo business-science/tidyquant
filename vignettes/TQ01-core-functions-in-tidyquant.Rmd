@@ -196,42 +196,7 @@ The data source is [Morningstar](http://www.morningstar.com/).
 
 ### Key Stats
 
-For any given stock, the current key statistics are available in real time. It's quite a bit of information, with 55 real-time stats available, so we'll just take a look at the column names. 
-
-```{r}
-aapl_key_stats <- tq_get("AAPL", get = "key.stats")
-aapl_key_stats %>%
-    colnames() %>%
-    cat() # Print in condensed format
-```
-
-The data is returned in wide format (as opposed to long format) because we can easily get the key stats for multiple stocks and pare down the list for comparisons. Here I use `select` to select several columns to compare.
-
-```{r}
-c("AAPL", "FB", "GOOG") %>%
-    tq_get(get = "key.stats") %>%
-    select(symbol, Ask, Ask.Size, Bid, Bid.Size, Change, Days.High, Days.Low)
-```
-
-Finally, because the statistics are real-time, we can setup real-time monitoring by calling `tq_get` at periodic intervals. The function below is not evaluated for time considerations, but if called during active trading sessions will collect five samples at three second intervals. 
-
-```{r, eval = FALSE}
-# Not evaluated; When run during active trading, will return real-time values
-collect_real_time_data <- function(x, interval_sec, n) {
-    data <- tibble()
-    while (n > 0) {
-        data <- bind_rows(data, tq_get(x, get = "key.stats"))
-        Sys.sleep(interval_sec)
-        n <- n - 1
-    }
-    return(data)
-}
-collect_real_time_data("AAPL", interval_sec = 3, n = 5) %>%
-    select(Ask, Ask.Size, Bid, Bid.Size, Open, Change)
-```
-
-
-The data source is [Yahoo Finance](https://finance.yahoo.com/).
+The Key Statistics have been discontinued by [Yahoo Finance](https://finance.yahoo.com/). We are looking for an alternative solution for real-time finanical data.
 
 ## Quandl
 
