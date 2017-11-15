@@ -960,8 +960,14 @@ tq_get_rblpapi <- function(x, get, rblpapi_fun = "bdh", complete_cases, map, ...
         # Repurpose from and to as start_date and end_date
         args <- list(securities = x)
         args <- append(args, list(...))
-        if (!is.null(args$from)) args$start.date <- as.Date(args$from)
-        if (!is.null(args$to))   args$end.date   <- as.Date(args$to)
+        if (!is.null(args$from)) {
+            args$start.date <- as.Date(args$from)
+            args$from <- NULL
+            }
+        if (!is.null(args$to)) {
+            args$end.date   <- as.Date(args$to)
+            args$to <- NULL
+        }
 
         do.call(rblpapi_fun, args) %>%
             tibble::as.tibble()
