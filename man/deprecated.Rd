@@ -4,11 +4,17 @@
 \alias{deprecated}
 \alias{tq_transform}
 \alias{tq_transform_xy}
+\alias{as_xts}
+\alias{as_tibble}
 \title{Deprecated functions}
 \usage{
 tq_transform(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL, ...)
 
 tq_transform_xy(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
+
+as_xts(data, ...)
+
+as_tibble(data, ...)
 }
 \arguments{
 \item{data}{A \code{tibble} (tidy data frame) of data typically from \code{\link[=tq_get]{tq_get()}}.}
@@ -38,5 +44,7 @@ A record of functions that have been deprecated.
 \itemize{
 \item \code{tq_transform()} - use \code{\link[=tq_transmute]{tq_transmute()}}
 \item \code{tq_transform_xy()} - use \code{\link[=tq_transmute_xy]{tq_transmute_xy()}}
+\item \code{as_xts()} - use \code{\link[timetk:tk_xts]{timetk::tk_xts()}}
+\item \code{as_tibble()} - use \code{\link[timetk:tk_tbl]{timetk::tk_tbl()}}
 }
 }

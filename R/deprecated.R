@@ -10,6 +10,8 @@
 #' \itemize{
 #'   \item `tq_transform()` - use [tq_transmute()]
 #'   \item `tq_transform_xy()` - use [tq_transmute_xy()]
+#'   \item `as_xts()` - use [timetk::tk_xts()]
+#'   \item `as_tibble()` - use [timetk::tk_tbl()]
 #' }
 #'
 NULL
@@ -33,4 +35,24 @@ tq_transform_xy <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ..
     # Throw error
     .Defunct("tq_transmute_xy",
              msg = "`tq_transform_xy` is deprecated, please use `tq_transmute_xy` instead.")
+}
+
+#' @rdname deprecated
+#' @export
+as_xts <- function(data, ...) {
+
+    # Throw error
+    .Defunct("as_xts",
+             msg = "`as_xts` is deprecated, please use `timetk::tk_xts` instead.")
+
+}
+
+#' @rdname deprecated
+#' @export
+as_tibble <- function(data, ...) {
+
+    # Throw error
+    .Defunct("as_tibble",
+             msg = "`as_tibble` is deprecated, please use `timetk::tk_tbl` instead.")
+
 }

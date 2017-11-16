@@ -4,7 +4,10 @@
     * Incorporate `alphavantager`, a lightweight API to the [Alpha Vantage financial data provider](https://www.alphavantage.co/).
     * Integrate `Rblpapi`, R interface to "Bloomberg"
     * Add Google Finance as a source in `tq_get(get = "stock.prices.google")`
+
+* Important Changes:
     * Remove Key Statistics from `tq_get(get = "key.stats")`. Yahoo Finance no longer supports the Key Statistics CSV API. 
+    * Completed deprecation of `tidyquant::as_tibble()` and `tidyquant::as_xts()`. Use `timetk::tk_tbl()` and `timetk::tk_xts()` instead. 
 
 ## tidyquant 0.5.3
 
