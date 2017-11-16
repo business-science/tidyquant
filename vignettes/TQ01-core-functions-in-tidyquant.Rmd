@@ -307,19 +307,19 @@ blpConnect()
 
 Getting data is simple as the structure follows the [Rblpapi API documentation](https://CRAN.R-project.org/package=Rblpapi). For example, if you wish to retrieve monthly data for SPX Index and AGTHX Equity, you can build the `tq_get` parameters as follows:
 
-- `x = c("FB", "MSFT")`
+- `x = c('SPX Index','ODMAX Equity')`
 - `get = "rblpapi"`
 - `rblpapi_fun = "bdh"` Note that "bdh" is the default, and options include "bdh" (Bloomberg Data History), "bds" (Bloomberg Data Set), and "bdp" (Bloomberg Data Point)
-- `from / to` These get passed to `start.date` and `end.date` and can be provided in "YYYY-MM-DD" format. Note that `start.date` and `end.date` from `Rblpapi` can be used. 
+- `from / to` These get passed to `start.date` and `end.date` and can be provided in "YYYY-MM-DD" character format. Note that `start.date` and `end.date` from `Rblpapi` can be used but must be converted to date or datetime. 
 - Other arguments: These are options that depend on the `rblpapi_fun`. See `Rblpapi` documentation. 
 
 ```{r, eval = F}
-# Scaling is as simple as supplying multiple symbols
-my_bloomberg_data <- c('SPX Index','AGTHX Equity') %>%
-    tq_get(get         = "rblpapi",
+# Get Bloomberg data in a tidy data frame
+my_bloomberg_data <- c('SPX Index','ODMAX Equity') %>%
+    tq_get(get         = "Rblpapi",
            rblpapi_fun = "bdh",
-           fields      = c('RETURN','PRICE'),
-           options     = c("periodicitySelection" = "MONTHLY"),
+           fields      = c("PX_LAST"),
+           options     = c("periodicitySelection" = "WEEKLY"),
            from        = "2016-01-01",
            to          = "2016-12-31")
 ```
