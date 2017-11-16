@@ -86,11 +86,18 @@ tq_get_options()
 
 ## Stock Prices, Dividends and Splits
 
-The stock prices can be retrieved succinctly using `get = "stock.prices"`.  
+The stock prices can be retrieved succinctly using `get = "stock.prices"`. This returns stock price data from Yahoo Finance. 
 
 ```{r}
 aapl_prices  <- tq_get("AAPL", get = "stock.prices", from = " 1990-01-01")
 aapl_prices 
+```
+
+An alternative source is from Google Finance, which can be retrieved using `get = "stock.prices.google"`.  
+
+```{r}
+aapl_prices_google  <- tq_get("AAPL", get = "stock.prices.google", from = " 1990-01-01")
+aapl_prices_google
 ```
 
 Yahoo Japan stock prices can be retrieved using a similar call, `get = "stock.prices.japan"`.

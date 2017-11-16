@@ -22,6 +22,9 @@ for \code{x}. Options include:
 \item \code{"stock.prices"}: Get the open, high, low, close, volume and adjusted
 stock prices for a stock symbol from
 \href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for \code{quantmod::getSymbols()}.
+\item \code{"stock.prices.google"}: Get the open, high, low, close, and volume
+stock prices for a stock symbol from
+\href{https://finance.google.com/finance}{Google Finance}. Wrapper for \code{quantmod::getSymbols.google()}.
 \item \code{"stock.prices.japan"}: Get the open, high, low, close, volume and adjusted
 stock prices for a stock symbol from
 \href{http://finance.yahoo.co.jp/}{Yahoo Finance Japan}. Wrapper for \code{quantmod::getSymbols.yahooj()}.
@@ -31,9 +34,7 @@ financial statements for a stock symbol from
 \item \code{"key.ratios"}: Get 89 historical growth, profitablity, financial health,
 efficiency, and valuation ratios that span 10-years from
 \href{https://www.morningstar.com}{Morningstar}.
-\item \code{"key.stats"}: Get 55 real-time key statistics such as
-Ask, Bid, Day's High, Day's Low, Last Trade Price, current P/E Ratio, EPS,
-Market Cap, EPS Projected Current Year, EPS Projected Next Year and many more from
+\item \code{"key.stats"}: Discontinued CSV download per
 \href{https://finance.yahoo.com/}{Yahoo Finance}.
 \item \code{"dividends"}: Get the dividends for a stock symbol
 from \href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for \code{quantmod::getDividends()}.
@@ -55,9 +56,9 @@ See also \code{\link[=quandl_api_key]{quandl_api_key()}}.
 \href{https://www.alphavantage.co/}{Alpha Vantage}. Wrapper for \code{alphavantager::av_get()}.
 See also \code{\link[=av_api_key]{av_api_key()}}.
 \item \code{"Rblpapi"}: Get data sets from
-\href{https://www.bloomberg.com/professional/solution/bloomberg-terminal}{Bloomberg}. Wrapper for \code{Rblpapi::bdh()}..
+\href{https://www.bloomberg.com/professional/solution/bloomberg-terminal}{Bloomberg}. Wrapper for \code{Rblpapi}.
 See also \code{\link[Rblpapi:blpConnect]{Rblpapi::blpConnect()}} to connect to Bloomberg terminal (required).
-Use the argument \code{rblpapi_fun} to set the function such as "bdh", "bds", or "bdp".
+Use the argument \code{rblpapi_fun} to set the function such as "bdh" (default), "bds", or "bdp".
 }}
 
 \item{complete_cases}{Removes symbols that return an NA value due to an error with the get
