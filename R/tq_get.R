@@ -962,7 +962,7 @@ tq_get_rblpapi <- function(x, get, rblpapi_fun = "bdh", complete_cases, map, ...
     ret <- tryCatch({
 
         # Repurpose from and to as start_date and end_date
-        if (rblpapi_fun = "bds") {
+        if (rblpapi_fun == "bds") {
             args <- list(security = x)
         } else {
             args <- list(securities = x)
