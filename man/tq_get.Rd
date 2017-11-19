@@ -34,8 +34,7 @@ financial statements for a stock symbol from
 \item \code{"key.ratios"}: Get 89 historical growth, profitablity, financial health,
 efficiency, and valuation ratios that span 10-years from
 \href{https://www.morningstar.com}{Morningstar}.
-\item \code{"key.stats"}: Discontinued CSV download per
-\href{https://finance.yahoo.com/}{Yahoo Finance}.
+\item \code{"key.stats"}: DISCONTINUED.
 \item \code{"dividends"}: Get the dividends for a stock symbol
 from \href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for \code{quantmod::getDividends()}.
 \item \code{"splits"}: Get the splits for a stock symbol
@@ -55,7 +54,7 @@ See also \code{\link[=quandl_api_key]{quandl_api_key()}}.
 \item \code{"alphavantager"}: Get data sets from
 \href{https://www.alphavantage.co/}{Alpha Vantage}. Wrapper for \code{alphavantager::av_get()}.
 See also \code{\link[=av_api_key]{av_api_key()}}.
-\item \code{"Rblpapi"}: Get data sets from
+\item \code{"rblpapi"}: Get data sets from
 \href{https://www.bloomberg.com/professional/solution/bloomberg-terminal}{Bloomberg}. Wrapper for \code{Rblpapi}.
 See also \code{\link[Rblpapi:blpConnect]{Rblpapi::blpConnect()}} to connect to Bloomberg terminal (required).
 Use the argument \code{rblpapi_fun} to set the function such as "bdh" (default), "bds", or "bdp".

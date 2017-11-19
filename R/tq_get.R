@@ -20,8 +20,7 @@
 #'   \item `"key.ratios"`: Get 89 historical growth, profitablity, financial health,
 #'   efficiency, and valuation ratios that span 10-years from
 #'   \href{https://www.morningstar.com}{Morningstar}.
-#'   \item `"key.stats"`: Discontinued CSV download per
-#'   \href{https://finance.yahoo.com/}{Yahoo Finance}.
+#'   \item `"key.stats"`: DISCONTINUED.
 #'   \item `"dividends"`: Get the dividends for a stock symbol
 #'   from \href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for `quantmod::getDividends()`.
 #'   \item `"splits"`: Get the splits for a stock symbol
@@ -41,7 +40,7 @@
 #'   \item `"alphavantager"`: Get data sets from
 #'   \href{https://www.alphavantage.co/}{Alpha Vantage}. Wrapper for `alphavantager::av_get()`.
 #'   See also [av_api_key()].
-#'   \item `"Rblpapi"`: Get data sets from
+#'   \item `"rblpapi"`: Get data sets from
 #'   \href{https://www.bloomberg.com/professional/solution/bloomberg-terminal}{Bloomberg}. Wrapper for `Rblpapi`.
 #'   See also [Rblpapi::blpConnect()] to connect to Bloomberg terminal (required).
 #'   Use the argument `rblpapi_fun` to set the function such as "bdh" (default), "bds", or "bdp".
@@ -960,14 +959,14 @@ tq_get_rblpapi <- function(x, get, rblpapi_fun = "bdh", complete_cases, map, ...
         stop("x must be a character string in the form of a valid symbol.")
     }
 
-    # # Convert x to uppercase
-    # x <- stringr::str_to_upper(x) %>%
-    #     stringr::str_trim(side = "both")
-
     ret <- tryCatch({
 
         # Repurpose from and to as start_date and end_date
-        args <- list(securities = x)
+        if (rblpapi_fun = "bds") {
+            args <- list(security = x)
+        } else {
+            args <- list(securities = x)
+        }
         args <- append(args, list(...))
         if (!is.null(args$from)) {
             args$start.date <- as.Date(args$from)
