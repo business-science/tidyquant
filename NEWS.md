@@ -1,4 +1,4 @@
-## tidyquant 0.5.3.9000
+## tidyquant 0.5.4
 
 * Features:
     * Incorporate `alphavantager`, a lightweight API to the [Alpha Vantage financial data provider](https://www.alphavantage.co/).
