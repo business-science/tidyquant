@@ -118,12 +118,13 @@ test_that("Test 5 returns tibble with correct rows and columns.", {
 test_that("Test error on invalid data inputs.", {
 
     # Non-data.frame objects
+    a <- seq(1:100)
     expect_error(
-        a = seq(1:100) %>%
+        seq(1:100) %>%
             tq_transmute(select = NULL, mutate_fun = to.monthly)
     )
     expect_error(
-        a = seq(1:100) %>%
+        seq(1:100) %>%
             tq_mutate_xy(x = a, mutate_fun = to.monthly)
     )
 
