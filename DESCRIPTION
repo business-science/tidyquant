@@ -45,6 +45,7 @@ Imports:
     stats (>= 3.3.0),
     stringr (>= 1.1.0),
     tibble (>= 1.2),
+    tibbletime (>= 0.1.0),
     tidyr (>= 0.6.1),
     timetk (>= 0.1.0),
     timeSeries (>= 3022.101.2),
