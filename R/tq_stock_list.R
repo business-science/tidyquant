@@ -77,7 +77,7 @@ tq_index <- function(x, use_fallback = FALSE) {
     # Require XLConnect since now in Suggests
     # Follows https://stackoverflow.com/questions/5260079/how-to-properly-use-functions-from-other-packages-in-a-r-package/5261662#5261662
     if(!require(XLConnect)) {
-        msg <- paste0("The XLConnect package is required for tq_index().",
+        msg <- paste0("The XLConnect package is required for tq_index(). ",
                       "Please install it yourself, then retry.")
         stop(msg, call. = FALSE)
     }
