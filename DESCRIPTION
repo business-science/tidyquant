@@ -51,7 +51,6 @@ Imports:
     timeSeries (>= 3022.101.2),
     tseries (>= 0.10-37),
     TTR (>= 0.23-1),
-    XLConnect (>= 0.2-13),
     xml2 (>= 1.1.0),
     xts (>= 0.9-7),
     zoo (>= 1.7-14)
@@ -59,7 +58,8 @@ Suggests:
     knitr,
     rmarkdown,
     testthat,
-    forcats
+    forcats,
+    XLConnect (>= 0.2-13)
 RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
