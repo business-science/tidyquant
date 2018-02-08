@@ -1,6 +1,7 @@
 ## Release Summary
 This release of tidyquant updates for compatibility with `testthat` v2.0 and
 adds a few bug fixes. A few new sources of data are added for `tq_get()`.
+There may be a NOTE about Rblpapi, but we feel that this should be ignored.
 
 ## Test environments
 * local Windows install, R 3.4.3
