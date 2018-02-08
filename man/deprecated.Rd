@@ -4,17 +4,11 @@
 \alias{deprecated}
 \alias{tq_transform}
 \alias{tq_transform_xy}
-\alias{as_xts}
-\alias{as_tibble}
 \title{Deprecated functions}
 \usage{
 tq_transform(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL, ...)
 
 tq_transform_xy(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
-
-as_xts(data, ...)
-
-as_tibble(data, ...)
 }
 \arguments{
 \item{data}{A \code{tibble} (tidy data frame) of data typically from \code{\link[=tq_get]{tq_get()}}.}
