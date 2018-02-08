@@ -1,10 +1,11 @@
 ## Release Summary
-This release of tidyquant updates for compatibility with `purrr` v0.2.3.
+This release of tidyquant updates for compatibility with `testthat` v2.0 and
+adds a few bug fixes. A few new sources of data are added for `tq_get()`.
 
 ## Test environments
-* local Windows install, R 3.4.1
-* local Mac install, R 3.4.1
-* ubuntu 12.04 (on travis-ci), R 3.4.1
+* local Windows install, R 3.4.3
+* local Mac install, R 3.4.3
+* ubuntu 12.04 (on travis-ci), R 3.4.3
 * win-builder (devel and release)
 
 ## R CMD check results
