@@ -2,12 +2,17 @@
 
 * Features:
     * Incorporate `alphavantager`, a lightweight API to the [Alpha Vantage financial data provider](https://www.alphavantage.co/).
-    * Integrate `Rblpapi`, R interface to "Bloomberg"
+    * Integrate `Rblpapi`, R interface to "Bloomberg". You must have a Bloomberg account to use this.
     * Add Google Finance as a source in `tq_get(get = "stock.prices.google")`
 
 * Important Changes:
     * Remove Key Statistics from `tq_get(get = "key.stats")`. Yahoo Finance no longer supports the Key Statistics CSV API. 
     * Completed deprecation of `tidyquant::as_tibble()` and `tidyquant::as_xts()`. Use `timetk::tk_tbl()` and `timetk::tk_xts()` instead. 
+    * `tibbletime` support was added so that all `tidyquant` functions play nicely with `tbl_time` objects.
+    * A hard dependency on `XLConnect` was removed. This should ease the use of the package, especially for Mac users.
+    
+* Bug Fixes:
+    * Some tests failed with `testthat` 2.0. They have been updated.
 
 ## tidyquant 0.5.3
 
