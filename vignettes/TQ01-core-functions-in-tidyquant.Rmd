@@ -60,7 +60,7 @@ tq_index_options()
 
 Set `x` as one of the options in the list of options above to get the desired stock index / exchange.
 
-```{r}
+```{r, eval = FALSE}
 tq_index("SP500")
 ```
 
