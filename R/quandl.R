@@ -57,6 +57,6 @@ NULL
 quandl_search <- function(query, silent = FALSE, per_page = 10, ...) {
 
     Quandl.search(query = query, silent = silent, per_page = per_page, ...) %>%
-        as_tibble()
+        tibble::as_tibble()
 
 }
