@@ -57,7 +57,7 @@ Suggests:
     knitr,
     rmarkdown,
     testthat,
-    tibbletime (>= 0.1.0),
+    tibbletime (>= 0.1.1),
     forcats,
     XLConnect (>= 0.2-13)
 RoxygenNote: 6.0.1
