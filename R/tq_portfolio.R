@@ -241,7 +241,7 @@ tq_portfolio_.grouped_df <- function(data, assets_col, returns_col, weights, col
 
 #' @export
 tq_portfolio_.tbl_time <- function(data, assets_col, returns_col, weights = NULL, col_rename = NULL, ...) {
-    if(!require(tibbletime)) {
+    if(!requireNamespace("tibbletime")) {
         stop("tibbletime must be installed to use a tidyquant function on a tbl_time object.", call. = FALSE)
     }
     tibbletime::reconstruct(NextMethod(), data)
