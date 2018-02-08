@@ -17,8 +17,6 @@
 #' \itemize{
 #'   \item \strong{Getting Data from the Web:} [tq_get()]
 #'   \item \strong{Manipulating Data:} [tq_transmute()] and [tq_mutate()]
-#'   \item \strong{Coercing Data To and From xts and tibble:} [as_tibble()]
-#'   and [as_xts()]
 #'   \item \strong{Performance Analysis and Portfolio Aggregation:}
 #'   [tq_performance()] and [tq_portfolio()]
 #' }

@@ -23,8 +23,6 @@ Users will probably be interested in the following:
 \itemize{
 \item \strong{Getting Data from the Web:} \code{\link[=tq_get]{tq_get()}}
 \item \strong{Manipulating Data:} \code{\link[=tq_transmute]{tq_transmute()}} and \code{\link[=tq_mutate]{tq_mutate()}}
-\item \strong{Coercing Data To and From xts and tibble:} \code{\link[=as_tibble]{as_tibble()}}
-and \code{\link[=as_xts]{as_xts()}}
 \item \strong{Performance Analysis and Portfolio Aggregation:}
 \code{\link[=tq_performance]{tq_performance()}} and \code{\link[=tq_portfolio]{tq_portfolio()}}
 }
