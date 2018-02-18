@@ -149,6 +149,9 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
 
     # Setup Rblpapi
     if("Rblpapi" %in% get) {
+        if(!requireNamespace("Rblpapi", quietly = TRUE)) {
+            stop("Rblpapi must be installed to get data from Bloomberg.", call. = FALSE)
+        }
         Rblpapi::blpConnect() #must have a valid blp session running
     }
 

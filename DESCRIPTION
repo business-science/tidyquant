@@ -2,7 +2,7 @@ Package: tidyquant
 Type: Package
 Title: Tidy Quantitative Financial Analysis
 Version: 0.5.4
-Date: 2018-02-08
+Date: 2018-02-18
 Authors@R: c(
     person("Matt", "Dancho", email = "mdancho@business-science.io", role = c("aut", "cre")),
     person("Davis", "Vaughan", email = "dvaughan@business-science.io", role = c("aut"))
@@ -38,7 +38,6 @@ Imports:
     magrittr (>= 1.5),
     purrr (>= 0.2.3),
     Quandl (>= 2.8.0),
-    Rblpapi (>= 0.3.6),
     readr (>= 1.0.0),
     rvest (>= 0.3.2),
     scales (>= 0.4.1),
@@ -59,6 +58,7 @@ Suggests:
     testthat,
     tibbletime (>= 0.1.1),
     forcats,
+    Rblpapi (>= 0.3.6),
     XLConnect (>= 0.2-13)
 RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
