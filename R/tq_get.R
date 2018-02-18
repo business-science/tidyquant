@@ -983,7 +983,7 @@ tq_get_rblpapi <- function(x, get, rblpapi_fun = "bdh", complete_cases, map, ...
         }
 
         # Call function
-        do.call(rblpapi_fun, args) %>%
+        do.call(getExportedValue("Rblpapi", rblpapi_fun), args) %>%
             tibble::as.tibble()
 
     }, error = function(e) {
