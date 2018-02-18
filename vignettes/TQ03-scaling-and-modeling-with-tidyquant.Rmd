@@ -250,7 +250,7 @@ get_model <- function(stock.symbol) {
 }
 ```
 
-Testing it out on a single stock. We can see that the "term" that contains the direction of the trend (the slope) is "year(date)". The interpetation is that as year increases one unit, the annual returns decrease by 3%. 
+Testing it out on a single stock. We can see that the "term" that contains the direction of the trend (the slope) is "year(date)". The interpretation is that as year increases one unit, the annual returns decrease by 3%. 
 
 ```{r}
 get_model("AAPL")
@@ -269,7 +269,7 @@ stocks <- tq_index("SP500", use_fallback = TRUE) %>%
 stocks
 ```
 
-We can now apply our analysis function to the stocks using `dplyr::mutate` and `purrr::map`. The `mutate()` function adds a column to our tibble, and the `map()` function maps our custom `get_model` function to our tibble of stocks using the `symbol` column. The `tidyr::unnest` function unrolls the nested data frame so all of the model statistics are accessable in the top data frame level. The `filter`, `arrange` and `select` steps just manipulate the data frame to isolate and arrange the data for our viewing. 
+We can now apply our analysis function to the stocks using `dplyr::mutate` and `purrr::map`. The `mutate()` function adds a column to our tibble, and the `map()` function maps our custom `get_model` function to our tibble of stocks using the `symbol` column. The `tidyr::unnest` function unrolls the nested data frame so all of the model statistics are accessible in the top data frame level. The `filter`, `arrange` and `select` steps just manipulate the data frame to isolate and arrange the data for our viewing. 
 
 ```{r}
 stocks_model_stats <- stocks %>%
@@ -304,7 +304,7 @@ There are pros and cons to this approach that you may not agree with, but I beli
 
 * __Pros__: Long running scripts are not interrupted because of one error
 
-* __Cons__: Errors can be inadvertently handled or flow downstream if the users does not read the warnings
+* __Cons__: Errors can be inadvertently handled or flow downstream if the user does not read the warnings
 
 
 ## Bad Apples Fail Gracefully, tq_get
@@ -323,4 +323,4 @@ c("AAPL", "GOOG", "BAD APPLE") %>%
     tq_get(get = "stock.prices", complete_cases = FALSE)
 ```
 
-In both cases, the prudent user will review the warnings to determine what happened and whether or not this is acceptable. In the `complete_cases = FALSE` example, if the user attempts to perform downstream computations at scale, the computations will likely fail grinding the analysis to a hault. But, the advantage is that the user will more easily be able to filter to the problem childs to determine what happened and decide whether this is acceptable or not.
+In both cases, the prudent user will review the warnings to determine what happened and whether or not this is acceptable. In the `complete_cases = FALSE` example, if the user attempts to perform downstream computations at scale, the computations will likely fail grinding the analysis to a halt. But, the advantage is that the user will more easily be able to filter to the problem childs to determine what happened and decide whether this is acceptable or not.

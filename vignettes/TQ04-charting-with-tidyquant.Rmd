@@ -72,7 +72,7 @@ Financial charts provide visual cues to open, high, low, and close prices. The f
 
 Before we visualize bar charts and candlestick charts using the `tidyquant` geoms, let's visualize stock prices with a simple line chart to get a sense of the "grammar of graphics" workflow. This is done using the `geom_line` from the `ggplot2` package. The workflow begins with the stock data, and uses the pipe operator (`%>%`) to send to the `ggplot()` function. 
 
-The primary features controlling the chart are the aesthetic arguments: these are used to add data to the chart by way of the `aes()` function. When added inside the `ggplot()` function, the aesthetic arguments are available to all underlying layers. Alternatively, the aesthetic arguments can be applied to each geom individually, but typically this is minimized in practice because it duplicates code. We set aesthetic arguments, `x = date` and `y = close`, to chart the closing price versus date. The `geom_line()` function inherits the aesthetic arguments from the `ggplot()` function and produces a line on the chart. Labels are added separately using the `labs()` function. Thus, the chart is built from the ground up by starting with data and progressively adding geoms, labels, coordinates / scales and other attributes to create a the final chart. This is enables maximum flexibility wherein the analyst can create very complex charts using the "grammar of graphics".
+The primary features controlling the chart are the aesthetic arguments: these are used to add data to the chart by way of the `aes()` function. When added inside the `ggplot()` function, the aesthetic arguments are available to all underlying layers. Alternatively, the aesthetic arguments can be applied to each geom individually, but typically this is minimized in practice because it duplicates code. We set aesthetic arguments, `x = date` and `y = close`, to chart the closing price versus date. The `geom_line()` function inherits the aesthetic arguments from the `ggplot()` function and produces a line on the chart. Labels are added separately using the `labs()` function. Thus, the chart is built from the ground up by starting with data and progressively adding geoms, labels, coordinates / scales and other attributes to create the final chart. This is enables maximum flexibility wherein the analyst can create very complex charts using the "grammar of graphics".
 
 ```{r}
 AAPL %>%
@@ -182,7 +182,7 @@ FANG %>%
     ggplot(aes(x = date, y = close, group = symbol)) +
     geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
     labs(title = "FANG Candlestick Chart", 
-         subtitle = "Experimenting with Mulitple Stocks",
+         subtitle = "Experimenting with Multiple Stocks",
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(start, end)) +
     facet_wrap(~ symbol, ncol = 2, scale = "free_y") + 
