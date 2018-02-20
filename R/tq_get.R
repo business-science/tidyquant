@@ -489,20 +489,31 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
 
     # Convert x to uppercase
     x <- stringr::str_to_upper(x) %>%
-        stringr::str_trim(side = "both") %>%
-        stringr::str_replace_all("[[:punct:]]", "")
+        stringr::str_trim(side = "both")
+
+    # If the request has a ':', assume that it is in the form of EXCHANGE:SYMBOL
+    # Allows both forcing a specific exchange source and making requests from non-default exchanges
+    if ( stringr::str_detect(x,":") ) {
+        split_req <- stringr::str_split(x,":",2)
+        stock_exchange <- c(split_req[[1]][1])
+        x <- split_req[[1]][2]
+    } else {
+        # Three Default URLs to try
+        stock_exchange <- c("XNAS", "XNYS", "XASE") # mornginstar gets from various exchanges
+    }
+
+    # This may need to be less agressive as some symbols have periods
+    x <- stringr::str_replace_all(x,"[[:punct:]]", "")
 
     tryCatch({
 
         # Download file
-        stock_exchange <- c("XNAS", "XNYS", "XASE") # mornginstar gets from various exchanges
         url_base_1 <- 'http://financials.morningstar.com/finan/ajax/exportKR2CSV.html?&callback=?&t='
         url_base_2 <- '&region=usa&culture=en-US&cur=&order=asc'
-        # Three URLs to try
         url <- paste0(url_base_1, stock_exchange, ":", x, url_base_2)
 
         # Try various stock exchanges
-        for(i in 1:3) {
+        for(i in 1:length(url)) {
             text <- httr::RETRY("GET", url[i], times = 5) %>%
                 httr::content()
 
@@ -519,6 +530,10 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
                     break
                 }
             }
+        }
+
+        if (is.null(text)) {
+            stop("Could not fetch key_ratios")
         }
 
         # Read lines
@@ -554,7 +569,7 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
                                        rep("Efficiency", 8)),
                 group               = 1:85
             )
-        } else {
+        } else if (length(text) == 110) {
             # Patch for stocks with 110 lines
             skip_rows <- c(1:2, 19:21, 31:32, 41:44, 49, 54, 59, 64:66, 71:73, 94:95, 100:102)
 
@@ -578,6 +593,9 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
                                        rep("Efficiency", 8)),
                 group              = c(1:52, 54:85)
             )
+        } else {
+          # Catch unknown return from morningstar request
+          stop("Unexpected return from Morningstar")
         }
 
         text <- text[-skip_rows]
@@ -591,7 +609,6 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
                         dplyr::mutate_all(as.character)
                 )
             )
-
 
         # Combine tibble parts into raw data
         key_ratios_raw <- dplyr::bind_cols(key_ratios_1, key_ratios_2)
@@ -611,61 +628,70 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
             dplyr::select(section, sub.section, group, category, date, value)
 
         # Calculate valuations
+        currency = strsplit(text[2]," ")[[1]][2]
 
-        # Get stock prices
-        from = lubridate::today() - lubridate::years(12)
-        valuations_2 <- tq_get(x, get = "stock.prices", from = from) %>%
-            tq_transmute_xy(adjusted, mutate_fun = to.period, period = "years") %>%
-            dplyr::mutate(year = lubridate::year(date)) %>%
-            dplyr::select(year, date, adjusted)
+        if (currency == "USD") {
+          # We can only trust stock price ratios if existing data is in USD
+          # Get stock prices
+          from = lubridate::today() - lubridate::years(12)
+          valuations_2 <- tq_get(x, get = "stock.prices", from = from) %>%
+              tq_transmute_xy(adjusted, mutate_fun = to.period, period = "years") %>%
+              dplyr::mutate(year = lubridate::year(date)) %>%
+              dplyr::select(year, date, adjusted)
 
-        # Get key ratios
-        valuations_1 <- key_ratios_bind %>%
-            dplyr::filter(section == "Financials") %>%
-            dplyr::filter(category %in% c("Revenue USD Mil",
-                                          "Shares Mil",
-                                          "Earnings Per Share USD",
-                                          "Book Value Per Share * USD",
-                                          "Operating Cash Flow USD Mil")) %>%
-            dplyr::mutate(year = lubridate::year(date)) %>%
-            dplyr::select(year, category, value) %>%
-            tidyr::spread(key = category, value = value) %>%
-            dplyr::mutate(`Revenue Per Share USD` = `Revenue USD Mil` / `Shares Mil`,
-                          `Cash Flow Per Share USD` = `Operating Cash Flow USD Mil` / `Shares Mil`) %>%
-            dplyr::select(year,
-                          `Earnings Per Share USD`,
-                          `Revenue Per Share USD`,
-                          `Book Value Per Share * USD`,
-                          `Cash Flow Per Share USD`)
+          # Get key ratios
+          valuations_1 <- key_ratios_bind %>%
+              dplyr::filter(section == "Financials") %>%
+              dplyr::filter(category %in% c("Revenue USD Mil",
+                                            "Shares Mil",
+                                            "Earnings Per Share USD",
+                                            "Book Value Per Share * USD",
+                                            "Operating Cash Flow USD Mil")) %>%
+              dplyr::mutate(year = lubridate::year(date)) %>%
+              dplyr::select(year, category, value) %>%
+              tidyr::spread(key = category, value = value) %>%
+              dplyr::mutate(`Revenue Per Share USD` = `Revenue USD Mil` / `Shares Mil`,
+                            `Cash Flow Per Share USD` = `Operating Cash Flow USD Mil` / `Shares Mil`) %>%
+              dplyr::select(year,
+                            `Earnings Per Share USD`,
+                            `Revenue Per Share USD`,
+                            `Book Value Per Share * USD`,
+                            `Cash Flow Per Share USD`)
 
-        # Merge and calculate valuations
-        valuation <- dplyr::left_join(valuations_1, valuations_2, by = "year") %>%
-            dplyr::mutate(`Price to Earnings`  = adjusted / `Earnings Per Share USD`,
-                          `Price to Sales`     = adjusted / `Revenue Per Share USD`,
-                          `Price to Book`      = adjusted / `Book Value Per Share * USD`,
-                          `Price to Cash Flow` = adjusted / `Cash Flow Per Share USD`) %>%
-            dplyr::select(date,
-                          `Price to Earnings`,
-                          `Price to Sales`,
-                          `Price to Book`,
-                          `Price to Cash Flow`) %>%
-            tidyr::gather(key = category, value = value, -date) %>%
-            dplyr::select(category, date, value) %>%
-            dplyr::mutate(date = lubridate::as_date(date))
+          # Merge and calculate valuations
+          valuation <- dplyr::left_join(valuations_1, valuations_2, by = "year") %>%
+              dplyr::mutate(`Price to Earnings`  = adjusted / `Earnings Per Share USD`,
+                            `Price to Sales`     = adjusted / `Revenue Per Share USD`,
+                            `Price to Book`      = adjusted / `Book Value Per Share * USD`,
+                            `Price to Cash Flow` = adjusted / `Cash Flow Per Share USD`) %>%
+              dplyr::select(date,
+                            `Price to Earnings`,
+                            `Price to Sales`,
+                            `Price to Book`,
+                            `Price to Cash Flow`) %>%
+              tidyr::gather(key = category, value = value, -date) %>%
+              dplyr::select(category, date, value) %>%
+              dplyr::mutate(date = lubridate::as_date(date))
 
-        # Get last group number
-        last_group_num <- key_ratios_bind$group %>% max()
+          # Get last group number
+          last_group_num <- key_ratios_bind$group %>% max()
 
-        # Create valuation tibble and bind_rows
-        valuation_bind <- dplyr::bind_cols(
-            tibble::tibble(section = rep("Valuation Ratios", nrow(valuation))),
-            tibble::tibble(sub.section = rep("Valuation Ratios", nrow(valuation))),
-            tibble::tibble(group = rep(seq(last_group_num + 1, length.out = 4), each = 10)),
-            valuation)
+          # Create valuation tibble and bind_rows
+          valuation_bind <- dplyr::bind_cols(
+              tibble::tibble(section = rep("Valuation Ratios", nrow(valuation))),
+              tibble::tibble(sub.section = rep("Valuation Ratios", nrow(valuation))),
+              tibble::tibble(group = rep(seq(last_group_num + 1, length.out = 4), each = 10)),
+              valuation)
 
-        key_ratios <- dplyr::bind_rows(key_ratios_bind, valuation_bind) %>%
-            dplyr::group_by(section) %>%
-            tidyr::nest()
+          key_ratios <- dplyr::bind_rows(key_ratios_bind, valuation_bind) %>%
+              dplyr::group_by(section) %>%
+              tidyr::nest()
+        } else {
+          # Cant calculate ratios for non-USD companies - just set to return key ratios.
+          key_ratios <- key_ratios_bind %>%
+              dplyr::group_by(section) %>%
+              tidyr::nest()
+        }
 
         return(key_ratios)
 
