@@ -525,7 +525,8 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
         text <- text %>%
             xml2::as_list() %>%
             unlist() %>%
-            readr::read_lines()
+            strsplit(split = "\n") %>%
+            purrr::flatten_chr()
 
         # Skip rows & setup key ratio categories
 

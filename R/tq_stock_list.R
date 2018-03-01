@@ -136,7 +136,7 @@ tq_exchange <- function(x) {
         # Read data
         exchange_raw <- suppressMessages(
             suppressWarnings(
-                readr::read_csv(tmp, na = c("", "NA", "N/A", "<NA>", "n/a"))[1:7]
+                read.csv(tmp, na.strings = c("", "NA", "N/A", "<NA>", "n/a"), stringsAsFactors = FALSE)[1:7]
             )
         )
 
@@ -145,6 +145,8 @@ tq_exchange <- function(x) {
 
         # Format df
         exchange <- exchange_raw %>%
+            dplyr::mutate_if(is.character, stringr::str_trim) %>%
+            dplyr::as_tibble() %>%
             dplyr::rename(
                 symbol = Symbol,
                 company = Name,
@@ -287,11 +289,6 @@ clean_holdings <- function(x) {
     # Identify the last row of data
     last_row <- which(is.na(x[["Weight"]]))[1] - 1
 
-    # Quiet type conversion
-    quiet_type_convert <- function(x) {
-        suppressMessages(readr::type_convert(x))
-    }
-
     ret <- x %>%
 
         # Subset rows with data
@@ -301,7 +298,8 @@ clean_holdings <- function(x) {
         dplyr::filter(Sector != "Unassigned") %>%
 
         # Type convert (bad data has been removed)
-        quiet_type_convert() %>%
+        # as.is = TRUE to prevent character -> factor
+        purrr::modify(~type.convert(., as.is = TRUE)) %>%
 
         # Reweight
         dplyr::mutate(Weight = Weight / sum(Weight))

@@ -1,8 +1,8 @@
 Package: tidyquant
 Type: Package
 Title: Tidy Quantitative Financial Analysis
-Version: 0.5.4
-Date: 2018-02-18
+Version: 0.5.4.9000
+Date: 2018-03-01
 Authors@R: c(
     person("Matt", "Dancho", email = "mdancho@business-science.io", role = c("aut", "cre")),
     person("Davis", "Vaughan", email = "dvaughan@business-science.io", role = c("aut"))
@@ -28,9 +28,6 @@ Depends:
     tidyverse (>= 1.1.0)
 Imports:
     alphavantager (>= 0.1.0),
-    broom (>= 0.4.2),
-    curl (>= 2.3),
-    devtools (>= 1.12.0),
     dplyr (>= 0.7.2),
     ggplot2 (>= 2.2.1),
     httr (>= 1.2.1),
@@ -38,26 +35,21 @@ Imports:
     magrittr (>= 1.5),
     purrr (>= 0.2.3),
     Quandl (>= 2.8.0),
-    readr (>= 1.0.0),
-    rvest (>= 0.3.2),
-    scales (>= 0.4.1),
-    stats (>= 3.3.0),
     stringr (>= 1.1.0),
     tibble (>= 1.2),
     tidyr (>= 0.6.1),
     timetk (>= 0.1.0),
-    timeSeries (>= 3022.101.2),
-    tseries (>= 0.10-37),
     TTR (>= 0.23-1),
     xml2 (>= 1.1.0),
     xts (>= 0.9-7),
     zoo (>= 1.7-14)
 Suggests:
+    broom (>= 0.4.2),
     knitr,
     rmarkdown,
     testthat,
     tibbletime (>= 0.1.1),
-    forcats,
+    scales (>= 0.4.1),
     Rblpapi (>= 0.3.6),
     XLConnect (>= 0.2-13)
 RoxygenNote: 6.0.1

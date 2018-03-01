@@ -212,7 +212,7 @@ tq_portfolio_.grouped_df <- function(data, assets_col, returns_col, weights, col
     # Join data and weights
     y <- names(data_nested)[[1]]
     x <- names(weights_nested)[[1]]
-    data_weights <- left_join(data_nested, weights_nested, by = setNames(x, y))
+    data_weights <- left_join(data_nested, weights_nested, by = purrr::set_names(x, y))
 
     # Custom function for mapping
     custom_function <- function(x, y, z) {
@@ -336,7 +336,7 @@ map_weights <- function(weights, assets_col) {
 
         # arrange added to sort in alphabetic order, which matches spread order
         ret <- dplyr::left_join(unique(assets_col), weights,
-                                by = setNames(x, y)) %>%
+                                by = purrr::set_names(x, y)) %>%
             dplyr::rename_(weights = names(weights)[[2]]) %>%
             tidyr::replace_na(list(weights = 0)) %>%
             dplyr::arrange_(y) %>%
