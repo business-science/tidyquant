@@ -504,7 +504,7 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
         # Try various stock exchanges
         for(i in 1:3) {
             text <- httr::RETRY("GET", url[i], times = 5) %>%
-                httr::content()
+                httr::content(type = "text/html", encoding = "UTF-8")
 
             if(!is.null(text)) {
 
