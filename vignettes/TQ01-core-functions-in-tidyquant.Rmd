@@ -190,9 +190,9 @@ Once we have a section, we can quickly visualize the ratios:
 aapl_key_ratios %>%
     filter(section == "Valuation Ratios") %>%
     unnest() %>%
-    ggplot(aes(x = date, y = value)) + 
-    geom_line(aes(col = forcats::fct_reorder2(category, date, value)),
-              size = 1) +
+    ggplot(aes(x = date, y = value)) +
+    geom_line(aes(col = factor(category, levels = c("Price to Earnings", "Price to Cash Flow", "Price to Book", "Price to Sales"))), 
+              size = 1)  + 
     labs(title = "10-Year Historical Valuation Ratios for AAPL", x = "", 
          y = "", col = "") +
     theme_tq() +

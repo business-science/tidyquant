@@ -28,13 +28,11 @@
 #' @name tidyquant
 #'
 #' @import quantmod
-#' @import scales
 #' @import tidyverse
 #' @import lubridate
 #' @import PerformanceAnalytics
 #' @importFrom magrittr "%>%"
 #' @importFrom magrittr "%$%"
-#' @importFrom stats "setNames"
 #' @importFrom utils "data" "download.file" "read.csv"
 #' @importFrom TTR "SMA"
 #' @importFrom xts "to.period"

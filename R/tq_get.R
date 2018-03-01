@@ -525,7 +525,8 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
         text <- text %>%
             xml2::as_list() %>%
             unlist() %>%
-            readr::read_lines()
+            strsplit(split = "\n") %>%
+            purrr::flatten_chr()
 
         # Skip rows & setup key ratio categories
 
@@ -914,6 +915,10 @@ tq_get_util_5 <- function(x, get, paginate = FALSE, complete_cases, map, ...) {
 
 # Util 6: alphavantager -----
 tq_get_util_6 <- function(x, get, av_fun, complete_cases, map, ...) {
+
+    if(!requireNamespace("alphavantager", quietly = TRUE)) {
+      stop("alphavantager must be installed to use this functionality.", call. = FALSE)
+    }
 
     # Check x
     if (!is.character(x)) {
