@@ -916,6 +916,10 @@ tq_get_util_5 <- function(x, get, paginate = FALSE, complete_cases, map, ...) {
 # Util 6: alphavantager -----
 tq_get_util_6 <- function(x, get, av_fun, complete_cases, map, ...) {
 
+    if(!requireNamespace("alphavantager", quietly = TRUE)) {
+      stop("alphavantager must be installed to use this functionality.", call. = FALSE)
+    }
+
     # Check x
     if (!is.character(x)) {
         stop("x must be a character string in the form of a valid symbol.")

@@ -20,6 +20,11 @@
 #'
 #' @name av_api_key
 #' @export
-av_api_key <- alphavantager::av_api_key
+av_api_key <- function(api_key) {
+    if(!requireNamespace("alphavantager", quietly = TRUE)) {
+        stop("alphavantager must be installed to use this functionality.", call. = FALSE)
+    }
+    alphavantager::av_api_key(api_key)
+}
 
 
