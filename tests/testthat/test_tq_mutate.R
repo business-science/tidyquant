@@ -20,8 +20,8 @@ test1.1 <- AAPL %>%
     tq_mutate(high:close, BBands, n = 50)
 
 test1.1_names <- c("date", "open", "high", "low", "close", "volume", "adjusted",
-                   "rollapply", "SMA", "rollapply.1", "SMA.1", "dn", "mavg",
-                   "up", "pctB", "dn.1", "mavg.1", "up.1", "pctB.1")
+                   "rollapply", "SMA", "rollapply..1", "SMA..1", "dn", "mavg",
+                   "up", "pctB", "dn..1", "mavg..1", "up..1", "pctB..1")
 
 # Test 1.2: Grouped_df test
 grouped_df <- tibble(symbol = c("FB", "AMZN")) %>%

@@ -307,12 +307,12 @@ replace_duplicate_colnames <- function(tib1, tib2) {
 
             dup_names_stripped <-
                 stringr::str_split(name_list[duplicated(name_list)],
-                                   pattern = "\\.",
+                                   pattern = "\\.\\.",
                                    simplify = FALSE) %>%
                 sapply(function(x) x[[1]])
 
             name_list[duplicated(name_list)] <-
-                stringr::str_c(dup_names_stripped, ".", i)
+                stringr::str_c(dup_names_stripped, "..", i)
 
             i <- i + 1
 

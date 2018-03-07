@@ -1,3 +1,10 @@
+## tidyquant 0.5.4.9000
+
+* Bux fix
+
+    * Fix duplicate name collision issue when the original name already includes 
+    a `.`. Duplicate names now get a `..1`, `..2`, etc. as opposed to `.1`, `.2`.
+
 ## tidyquant 0.5.4
 
 * Features:
