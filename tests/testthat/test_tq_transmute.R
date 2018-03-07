@@ -175,3 +175,17 @@ test_that("Test error on invalid mutate_fun, x and y inputs.", {
     )
 
 })
+
+# Invalid col_rename, can't have duplicate names
+test_that("Test error on invalid col_rename, duplicate names.", {
+
+    expect_error({
+        col_rename <- c("name1", "name2", "name1")
+        AAPL %>%
+            tq_mutate_(select = "close", mutate_fun = "lag.xts",
+                       k = 1:3, col_rename = col_rename)
+        },
+        paste0("Could not rename columns. Do you have duplicate names in `col_rename`?")
+    )
+
+})

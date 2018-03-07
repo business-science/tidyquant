@@ -2,6 +2,9 @@
 
 * Bux fix
 
+    * Catch duplicate names in `col_rename` when you are renaming more than 1 column.
+    Duplicate names are not allowed and return an error.
+
     * Fix duplicate name collision issue when the original name already includes 
     a `.`. Duplicate names now get a `..1`, `..2`, etc. as opposed to `.1`, `.2`.
 

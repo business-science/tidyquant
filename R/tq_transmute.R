@@ -354,9 +354,14 @@ coerce_to_tibble <- function(data, date_col_name, time_zone, col_rename) {
     # Rename columns
     if (!is.null(col_rename)) {
         if (length(col_rename) == length(names(ret)) - 1) {
-            names(ret)[2:length(names(ret))] <- col_rename
+            # Are any col_rename names repeated? Can't have duplicates!
+            if(any(purrr::map_lgl(seq_along(col_rename), ~any(col_rename[-.x] == col_rename[.x])))) {
+                stop("Could not rename columns. Do you have duplicate names in `col_rename`?", call. = FALSE)
+            } else {
+                names(ret)[2:length(names(ret))] <- col_rename
+            }
         } else {
-            warning("Could not rename columns")
+            warning("Could not rename columns. The function name will be used. \n  Is the length of `col_rename` the same as the number of columns returned from the `mutate_fun`?")
         }
     }
 
