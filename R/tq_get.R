@@ -604,6 +604,7 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
             dplyr::mutate(group = as.numeric(group)) %>%
             tidyr::gather(key = date, value = value, -c(group, section, sub.section, category)) %>%
             dplyr::arrange(group) %>%
+            dplyr::mutate(value = ifelse(value == "false", NA, value)) %>%
             dplyr::mutate(date = stringr::str_sub(date, start = 2, end = length(date))) %>%
             dplyr::mutate(date = stringr::str_replace(date, "\\.", "-")) %>%
             dplyr::mutate(date = lubridate::ymd(date, truncated = 2)) %>%
