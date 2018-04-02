@@ -21,37 +21,37 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
-    R (>= 3.3.0),
-    lubridate (>= 1.6.0),
-    PerformanceAnalytics (>= 1.4.3541),
-    quantmod (>= 0.4-9),
-    tidyverse (>= 1.1.0)
+    R (>= 3.0.0),
+    lubridate,
+    PerformanceAnalytics,
+    quantmod,
+    tidyverse
 Imports:
-    dplyr (>= 0.7.2),
-    ggplot2 (>= 2.2.1),
-    httr (>= 1.2.1),
-    lazyeval (>= 0.2.0),
-    magrittr (>= 1.5),
-    purrr (>= 0.2.3),
-    Quandl (>= 2.8.0),
-    stringr (>= 1.1.0),
-    tibble (>= 1.2),
-    tidyr (>= 0.6.1),
-    timetk (>= 0.1.0),
-    TTR (>= 0.23-1),
-    xml2 (>= 1.1.0),
-    xts (>= 0.9-7),
-    zoo (>= 1.7-14)
+    dplyr,
+    ggplot2,
+    httr,
+    lazyeval,
+    magrittr,
+    purrr,
+    Quandl,
+    stringr,
+    tibble,
+    tidyr,
+    timetk,
+    TTR,
+    xml2,
+    xts,
+    rlang
 Suggests:
-    alphavantager (>= 0.1.0),
-    broom (>= 0.4.2),
+    alphavantager,
+    broom,
     knitr,
     rmarkdown,
     testthat,
-    tibbletime (>= 0.1.1),
-    scales (>= 0.4.1),
-    Rblpapi (>= 0.3.6),
-    XLConnect (>= 0.2-13)
+    tibbletime,
+    scales,
+    Rblpapi,
+    XLConnect
 RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
