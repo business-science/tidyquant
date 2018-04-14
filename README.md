@@ -20,9 +20,9 @@ perform complete financial analyses in the `tidyverse`.
 ## 2-Minutes To Tidyquant
 
 Our short introduction to `tidyquant` on
-[YouTube](https://www.youtube.com/embed/pL4SAvvyJHc).
+[YouTube](https://www.youtube.com/embed/woxJZTL2hok).
 
-<iframe width="100%" height="350" src="https://www.youtube.com/embed/pL4SAvvyJHc" frameborder="1" allow="autoplay; encrypted-media" allowfullscreen>
+<iframe width="100%" height="350" src="https://www.youtube.com/embed/woxJZTL2hok" frameborder="1" allow="autoplay; encrypted-media" allowfullscreen>
 
 </iframe>
 
