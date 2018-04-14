@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 devtools::load_all()
 ```
 
-# tidyquant 
+# tidyquant <img src="man/figures/logo.png" width="147" height="170" align="right" />
 
 [![Travis-CI Build Status](https://travis-ci.org/business-science/tidyquant.svg?branch=master)](https://travis-ci.org/business-science/tidyquant.svg?branch=master)
 [![codecov](https://codecov.io/gh/business-science/tidyquant/branch/master/graph/badge.svg)](https://codecov.io/gh/business-science/tidyquant)
@@ -21,7 +21,7 @@ devtools::load_all()
 ![](http://cranlogs.r-pkg.org/badges/tidyquant?color=brightgreen)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/tidyquant?color=brightgreen)
 
-<img src="tools/logo.png" width="147" height="170" align="right" />
+
 
 > Bringing financial analysis to the tidyverse
 
@@ -58,7 +58,7 @@ Our short introduction to `tidyquant` on [YouTube](https://www.youtube.com/embed
 Visualizing the stock price volatility of four stocks side-by-side is quick and easy...
 
 ```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("tools/sample_img_1_volatility.png")
+knitr::include_graphics("man/figures/sample_img_1_volatility.png")
 ```
 
 
@@ -67,7 +67,7 @@ knitr::include_graphics("tools/sample_img_1_volatility.png")
 What about stock performance? Quickly visualize how a $10,000 investment in various stocks would perform.
 
 ```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("tools/sample_img_2_stock_returns.png")
+knitr::include_graphics("man/figures/sample_img_2_stock_returns.png")
 ```
 
 ### Evaluating Portfolio Performance
@@ -80,7 +80,7 @@ Ok, stocks are too easy. What about portfolios? With the `PerformanceAnalytics` 
 * Portfolio 4: 25% FB, 25% AMZN, 0% NFLX, 50% GOOG
 
 ```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("tools/sample_img_3_portfolio_returns.png")
+knitr::include_graphics("man/figures/sample_img_3_portfolio_returns.png")
 ```
 
 This just scratches the surface of `tidyquant`. Here's how to install to get started.

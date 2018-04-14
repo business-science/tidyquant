@@ -1,15 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidyquant
+# tidyquant <img src="man/figures/logo.png" width="147" height="170" align="right" />
 
 <https://travis-ci.org/business-science/tidyquant.svg?branch=master>
 [![codecov](https://codecov.io/gh/business-science/tidyquant/branch/master/graph/badge.svg)](https://codecov.io/gh/business-science/tidyquant)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/tidyquant)](https://cran.r-project.org/package=tidyquant)
 ![](http://cranlogs.r-pkg.org/badges/tidyquant?color=brightgreen)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/tidyquant?color=brightgreen)
-
-<img src="tools/logo.png" width="147" height="170" align="right" />
 
 > Bringing financial analysis to the tidyverse
 
@@ -73,14 +71,14 @@ Our short introduction to `tidyquant` on
 Visualizing the stock price volatility of four stocks side-by-side is
 quick and easy…
 
-<img src="tools/sample_img_1_volatility.png" width="100%" />
+<img src="man/figures/sample_img_1_volatility.png" width="100%" />
 
 ### Evaluating Stock Performance
 
 What about stock performance? Quickly visualize how a $10,000 investment
 in various stocks would perform.
 
-<img src="tools/sample_img_2_stock_returns.png" width="100%" />
+<img src="man/figures/sample_img_2_stock_returns.png" width="100%" />
 
 ### Evaluating Portfolio Performance
 
@@ -91,9 +89,10 @@ easy too\!
   - Portfolio 1: 50% FB, 25% AMZN, 25% NFLX, 0% GOOG
   - Portfolio 2: 0% FB, 50% AMZN, 25% NFLX, 25% GOOG
   - Portfolio 3: 25% FB, 0% AMZN, 50% NFLX, 25% GOOG
-  - Portfolio 4: 25% FB, 25% AMZN, 0% NFLX, 50% GOOG
+  - Portfolio 4: 25% FB, 25% AMZN, 0% NFLX, 50%
+GOOG
 
-<img src="tools/sample_img_3_portfolio_returns.png" width="100%" />
+<img src="man/figures/sample_img_3_portfolio_returns.png" width="100%" />
 
 This just scratches the surface of `tidyquant`. Here’s how to install to
 get started.
