@@ -128,25 +128,25 @@ The data source is [Yahoo Finance](https://finance.yahoo.com/) and [Yahoo Financ
 For any given stock, a total of six financials statements are retrieved as nested tibbles, one for each combination of statement type (Income Statement, Balance Sheet, and Cash Flow) and period (by annual and quarter). 
 
 ```{r}
-aapl_financials <- tq_get("AAPL", get = "financials")
-aapl_financials
+# aapl_financials <- tq_get("AAPL", get = "financials")
+# aapl_financials
 ```
 
 The statement information can be extracted by selecting (`dplyr::select()`) and filtering (`dplyr::filter()`) to the desired statement and unnesting (`tidyr::unnest()`) the results.
 
 ```{r}
-aapl_financials %>%
-    filter(type == "IS") %>%
-    select(annual) %>%
-    unnest()
+# aapl_financials %>%
+#     filter(type == "IS") %>%
+#     select(annual) %>%
+#     unnest()
 ```
 
 A slightly more powerful example is looking at all quarterly statements together. This is easy to do with `unnest` and `spread` from the `tidyr` package.
 
 ```{r}
-aapl_financials %>%
-    unnest(quarter) %>% 
-    spread(key = date, value = value)
+# aapl_financials %>%
+#     unnest(quarter) %>% 
+#     spread(key = date, value = value)
 ```
 
 

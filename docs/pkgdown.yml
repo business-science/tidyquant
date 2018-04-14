@@ -1,0 +1,11 @@
+pandoc: 2.1.2
+pkgdown: 0.1.0.9000
+pkgdown_sha: bfbf38c443ef2dafc17b9255d7b5db9d05dfb537
+articles:
+  TQ00-introduction-to-tidyquant: TQ00-introduction-to-tidyquant.html
+  TQ01-core-functions-in-tidyquant: TQ01-core-functions-in-tidyquant.html
+  TQ02-quant-integrations-in-tidyquant: TQ02-quant-integrations-in-tidyquant.html
+  TQ03-scaling-and-modeling-with-tidyquant: TQ03-scaling-and-modeling-with-tidyquant.html
+  TQ04-charting-with-tidyquant: TQ04-charting-with-tidyquant.html
+  TQ05-performance-analysis-with-tidyquant: TQ05-performance-analysis-with-tidyquant.html
+

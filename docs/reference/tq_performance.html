@@ -18,13 +18,24 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+<meta property="og:title" content="Computes a wide variety of summary performance metrics from stock or portfolio returns — tq_performance" />
+
+<meta property="og:description" content="Asset and portfolio performance analysis is a deep field with a wide range of theories and
+methods for analyzing risk versus reward. The PerformanceAnalytics package
+consolidates many of the most widely used performance metrics as functions that can
+be applied to stock or portfolio returns. tq_performance
+implements these performance analysis functions in a tidy way, enabling scaling
+analysis using the split, apply, combine framework." />
+<meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -46,6 +57,8 @@
 
 </script>
 
+
+
   </head>
 
   <body>
@@ -59,8 +72,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">tidyquant</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">tidyquant</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.5.4.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -109,6 +126,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -120,6 +138,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Computes a wide variety of summary performance metrics from stock or portfolio returns</h1>
+    <small>Source: <a href='https://github.com/business-science/tidyquant/blob/master/R/tq_performance.R'><code>R/tq_performance.R</code></a></small>
     </div>
 
     
@@ -137,7 +156,7 @@ analysis using the split, apply, combine framework.</p>
 
 <span class='fu'>tq_performance_fun_options</span>()</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -171,17 +190,17 @@ analysis using the split, apply, combine framework.</p>
 
     <p><strong>Important concept</strong>: Performance is based on the statistical properties of returns,
 and as a result this function uses stock or portfolio returns as opposed
-to stock prices.
-    <code>tq_performance</code> is a wrapper for various <code>PerformanceAnalytics</code> functions
+to stock prices.</p>
+<p><code>tq_performance</code> is a wrapper for various <code>PerformanceAnalytics</code> functions
 that return portfolio statistics.
-The main advantage is the ability to scale with the <code>tidyverse</code>.
-    <code>Ra</code> and <code>Rb</code> are the columns containing asset and baseline returns, respectively.
+The main advantage is the ability to scale with the <code>tidyverse</code>.</p>
+<p><code>Ra</code> and <code>Rb</code> are the columns containing asset and baseline returns, respectively.
 These columns are mapped to the <code>PerformanceAnalytics</code> functions. Note that <code>Rb</code>
 is not always required, and in these instances the argument defaults to <code>Rb = NULL</code>.
-The user can tell if <code>Rb</code> is required by researching the underlying performance function.
-    <code>...</code> are additional arguments that are passed to the <code>PerformanceAnalytics</code>
-function. Search the underlying function to see what arguments can be passed through.
-    <code>tq_performance_fun_options</code> returns a list of compatible <code>PerformanceAnalytics</code> functions
+The user can tell if <code>Rb</code> is required by researching the underlying performance function.</p>
+<p><code>...</code> are additional arguments that are passed to the <code>PerformanceAnalytics</code>
+function. Search the underlying function to see what arguments can be passed through.</p>
+<p><code>tq_performance_fun_options</code> returns a list of compatible <code>PerformanceAnalytics</code> functions
 that can be supplied to the <code>performance_fun</code> argument.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -229,9 +248,10 @@ for the <code>performance_fun</code> argument. Additional parameters can be pass
 #&gt;  [7] "table.Distributions"     "table.DownsideRisk"     
 #&gt;  [9] "table.DownsideRiskRatio" "table.DrawdownsRatio"   
 #&gt; [11] "table.HigherMoments"     "table.InformationRatio" 
-#&gt; [13] "table.SFM"               "table.SpecificRisk"     
-#&gt; [15] "table.Stats"             "table.TrailingPeriods"  
-#&gt; [17] "table.UpDownRatios"      "table.Variability"      
+#&gt; [13] "table.RollingPeriods"    "table.SFM"              
+#&gt; [15] "table.SpecificRisk"      "table.Stats"            
+#&gt; [17] "table.TrailingPeriods"   "table.UpDownRatios"     
+#&gt; [19] "table.Variability"      
 #&gt; 
 #&gt; $CAPM.funs
 #&gt;  [1] "CAPM.alpha"       "CAPM.beta"        "CAPM.beta.bear"   "CAPM.beta.bull"  
@@ -297,23 +317,22 @@ for the <code>performance_fun</code> argument. Additional parameters can be pass
 <span class='no'>RaRb</span> <span class='kw'>%&gt;%</span>
     <span class='fu'>tq_performance</span>(<span class='kw'>Ra</span> <span class='kw'>=</span> <span class='no'>Ra</span>, <span class='kw'>performance_fun</span> <span class='kw'>=</span> <span class='no'>SharpeRatio</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fl'>0.95</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 4
 #&gt; # Groups:   symbol [4]
-#&gt;   symbol `ESSharpe(Rf=0%,p=95%)` `StdDevSharpe(Rf=0%,p=95%)`
-#&gt;    &lt;chr&gt;                   &lt;dbl&gt;                       &lt;dbl&gt;
-#&gt; 1     FB               0.1931238                   0.3449303
-#&gt; 2   AMZN               0.2147921                   0.3140940
-#&gt; 3   NFLX               0.1991395                   0.3554136
-#&gt; 4   GOOG               0.2131204                   0.2958109
-#&gt; # ... with 1 more variables: `VaRSharpe(Rf=0%,p=95%)` &lt;dbl&gt;</div><div class='input'>
+#&gt;   symbol `ESSharpe(Rf=0%,p=95%)` `StdDevSharpe(Rf=0%,p=95%)` `VaRSharpe(Rf=0%,~
+#&gt;   &lt;chr&gt;                    &lt;dbl&gt;                       &lt;dbl&gt;              &lt;dbl&gt;
+#&gt; 1 FB                       0.193                       0.345              0.605
+#&gt; 2 AMZN                     0.215                       0.314              0.265
+#&gt; 3 NFLX                     0.199                       0.355              0.606
+#&gt; 4 GOOG                     0.213                       0.296              0.310</div><div class='input'>
 <span class='no'>RaRb</span> <span class='kw'>%&gt;%</span>
     <span class='fu'>tq_performance</span>(<span class='kw'>Ra</span> <span class='kw'>=</span> <span class='no'>Ra</span>, <span class='kw'>Rb</span> <span class='kw'>=</span> <span class='no'>Rb</span>, <span class='kw'>performance_fun</span> <span class='kw'>=</span> <span class='no'>table.CAPM</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 13
 #&gt; # Groups:   symbol [4]
-#&gt;   symbol ActivePremium  Alpha AnnualizedAlpha   Beta `Beta-` `Beta+`
-#&gt;    &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;           &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-#&gt; 1     FB        0.4312 0.0340          0.4929 0.8465  0.8188  3.0044
-#&gt; 2   AMZN        0.2464 0.0144          0.1869 1.4557 -0.0442  2.0363
-#&gt; 3   NFLX        1.0164 0.0632          1.0873 1.3541 -2.7843  1.9036
-#&gt; 4   GOOG        0.1420 0.0123          0.1584 0.9007 -0.2470  1.5605
-#&gt; # ... with 6 more variables: Correlation &lt;dbl&gt;, `Correlationp-value` &lt;dbl&gt;,
+#&gt;   symbol ActivePremium  Alpha AnnualizedAlpha  Beta `Beta-` `Beta+` Correlation
+#&gt;   &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;
+#&gt; 1 FB             0.431 0.0340           0.493 0.846  0.819     3.00       0.234
+#&gt; 2 AMZN           0.246 0.0144           0.187 1.46  -0.0442    2.04       0.524
+#&gt; 3 NFLX           1.02  0.0632           1.09  1.35  -2.78      1.90       0.234
+#&gt; 4 GOOG           0.142 0.0123           0.158 0.901 -0.247     1.56       0.451
+#&gt; # ... with 5 more variables: `Correlationp-value` &lt;dbl&gt;,
 #&gt; #   InformationRatio &lt;dbl&gt;, `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;,
 #&gt; #   TreynorRatio &lt;dbl&gt;</div><div class='input'>
 </div></pre>
@@ -341,11 +360,14 @@ for the <code>performance_fun</code> argument. Additional parameters can be pass
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

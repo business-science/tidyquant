@@ -18,13 +18,19 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+<meta property="og:title" content="Deprecated functions — deprecated" />
+
+<meta property="og:description" content="A record of functions that have been deprecated." />
+<meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -46,6 +52,8 @@
 
 </script>
 
+
+
   </head>
 
   <body>
@@ -59,8 +67,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">tidyquant</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">tidyquant</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.5.4.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -109,6 +121,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -120,6 +133,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Deprecated functions</h1>
+    <small>Source: <a href='https://github.com/business-science/tidyquant/blob/master/R/deprecated.R'><code>R/deprecated.R</code></a></small>
     </div>
 
     
@@ -130,7 +144,7 @@
 
 <span class='fu'>tq_transform_xy</span>(<span class='no'>data</span>, <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>mutate_fun</span>, <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -174,6 +188,8 @@ to be passed to the mutatation function (instead of OHLC functions).</p></td>
     <ul>
 <li><p><code>tq_transform()</code> - use <code><a href='tq_mutate.html'>tq_transmute()</a></code></p></li>
 <li><p><code>tq_transform_xy()</code> - use <code><a href='tq_mutate.html'>tq_transmute_xy()</a></code></p></li>
+<li><p><code>as_xts()</code> - use <code><a href='http://www.rdocumentation.org/packages/timetk/topics/tk_xts'>timetk::tk_xts()</a></code></p></li>
+<li><p><code>as_tibble()</code> - use <code><a href='http://www.rdocumentation.org/packages/timetk/topics/tk_tbl'>timetk::tk_tbl()</a></code></p></li>
 </ul>
     
 
@@ -195,11 +211,14 @@ to be passed to the mutatation function (instead of OHLC functions).</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

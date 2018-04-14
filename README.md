@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidyquant <img src="man/figures/logo.png" width="147" height="170" align="right" />
+# tidyquant <img src="man/figures/tidyquant-logo.png" width="147" height="170" align="right" />
 
 <https://travis-ci.org/business-science/tidyquant.svg?branch=master>
 [![codecov](https://codecov.io/gh/business-science/tidyquant/branch/master/graph/badge.svg)](https://codecov.io/gh/business-science/tidyquant)
@@ -16,6 +16,15 @@ financial data, `zoo`, `xts`, `quantmod`, `TTR`, and
 `PerformanceAnalytics`, with the tidy data infrastructure of the
 `tidyverse` allowing for seamless interaction between each. You can now
 perform complete financial analyses in the `tidyverse`.
+
+## 2-Minutes To Tidyquant
+
+Our short introduction to `tidyquant` on
+[YouTube](https://www.youtube.com/embed/pL4SAvvyJHc).
+
+<iframe width="100%" height="350" src="https://www.youtube.com/embed/pL4SAvvyJHc" frameborder="1" allow="autoplay; encrypted-media" allowfullscreen>
+
+</iframe>
 
 ## Benefits
 
@@ -33,15 +42,6 @@ perform complete financial analyses in the `tidyverse`.
 
 With `tidyquant` all the benefits add up to one thing: *a one-stop shop
 for serious financial analysis\!*
-
-### 2-Minutes To Tidyquant
-
-Our short introduction to `tidyquant` on
-[YouTube](https://www.youtube.com/embed/pL4SAvvyJHc).
-
-<iframe width="100%" height="350" src="https://www.youtube.com/embed/pL4SAvvyJHc" frameborder="1" allow="autoplay; encrypted-media" allowfullscreen>
-
-</iframe>
 
 ### Core Functions
 
@@ -71,7 +71,7 @@ Our short introduction to `tidyquant` on
 Visualizing the stock price volatility of four stocks side-by-side is
 quick and easy…
 
-<img src="man/figures/sample_img_1_volatility.png" width="100%" />
+<img src="./man/figures/sample_img_1_volatility.png" width="100%" />
 
 ### Evaluating Stock Performance
 

@@ -18,13 +18,19 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+<meta property="og:title" content="Aggregates a group of returns by asset into portfolio returns — tq_portfolio" />
+
+<meta property="og:description" content="Aggregates a group of returns by asset into portfolio returns" />
+<meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -46,6 +52,8 @@
 
 </script>
 
+
+
   </head>
 
   <body>
@@ -59,8 +67,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">tidyquant</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">tidyquant</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.5.4.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -109,6 +121,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -120,6 +133,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Aggregates a group of returns by asset into portfolio returns</h1>
+    <small>Source: <a href='https://github.com/business-science/tidyquant/blob/master/R/tq_portfolio.R'><code>R/tq_portfolio.R</code></a></small>
     </div>
 
     
@@ -134,7 +148,7 @@
 
 <span class='fu'>tq_repeat_df</span>(<span class='no'>data</span>, <span class='no'>n</span>, <span class='kw'>index_col_name</span> <span class='kw'>=</span> <span class='st'>"portfolio"</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -182,12 +196,12 @@ to quickly rename columns.</p></td>
 
     <p><code>tq_portfolio</code> is a wrapper for <code>PerformanceAnalytics::Returns.portfolio</code>.
 The main advantage is the results are returned as a <code>tibble</code> and the
-function can be used with the <code>tidyverse</code>.
-    <code>assets_col</code> and <code>returns_col</code> are columns within <code>data</code> that are used
+function can be used with the <code>tidyverse</code>.</p>
+<p><code>assets_col</code> and <code>returns_col</code> are columns within <code>data</code> that are used
 to compute returns for a portfolio. The columns should be in "long" format (or "tidy" format)
 meaning there is only one column containing all of the assets and one column containing
-all of the return values (i.e. not in "wide" format with returns spread by asset).
-    <code>weights</code> are the weights to be applied to the asset returns.
+all of the return values (i.e. not in "wide" format with returns spread by asset).</p>
+<p><code>weights</code> are the weights to be applied to the asset returns.
 Weights can be input in one of three options:</p><ul>
 <li><p>Single Portfolio: A numeric vector of weights that is the same length as unique number of assets.
 The weights are applied in the order of the assets.</p></li>
@@ -197,7 +211,8 @@ assets default to a weight of zero.</p></li>
 <li><p>Multiple Portfolios: A three column tibble with portfolio index in the first
 column, assets in the second column, and weights in the third column. The tibble
 must be grouped by portfolio index.</p></li>
-</ul><p><code>tq_repeat_df</code> is a simple function that repeats
+</ul>
+    <p><code>tq_repeat_df</code> is a simple function that repeats
 a data frame <code>n</code> times row-wise (long-wise), and adds a new column for a portfolio index.
 The function is used to assist in Multiple Portfolio analyses, and
 is a useful precursor to <code>tq_portfolio</code>.</p>
@@ -234,18 +249,18 @@ that specifies which parameters can be passed via <code>...</code></p></li>
              <span class='kw'>weights</span> <span class='kw'>=</span> <span class='no'>weights</span>,
              <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
              <span class='kw'>wealth.index</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # A tibble: 48 x 2
-#&gt;          date portfolio.returns
-#&gt;        &lt;date&gt;             &lt;dbl&gt;
-#&gt;  1 2013-01-31       0.260144557
-#&gt;  2 2013-02-28      -0.004558003
-#&gt;  3 2013-03-28      -0.019454685
-#&gt;  4 2013-04-30       0.080958243
-#&gt;  5 2013-05-31      -0.013883075
-#&gt;  6 2013-06-28      -0.017906983
-#&gt;  7 2013-07-31       0.253520291
-#&gt;  8 2013-08-30       0.103866369
-#&gt;  9 2013-09-30       0.145446247
-#&gt; 10 2013-10-31       0.041956895
+#&gt;    date       portfolio.returns
+#&gt;    &lt;date&gt;                 &lt;dbl&gt;
+#&gt;  1 2013-01-31           0.260  
+#&gt;  2 2013-02-28          -0.00456
+#&gt;  3 2013-03-28          -0.0195 
+#&gt;  4 2013-04-30           0.0810 
+#&gt;  5 2013-05-31          -0.0139 
+#&gt;  6 2013-06-28          -0.0179 
+#&gt;  7 2013-07-31           0.254  
+#&gt;  8 2013-08-30           0.104  
+#&gt;  9 2013-09-30           0.145  
+#&gt; 10 2013-10-31           0.0420 
 #&gt; # ... with 38 more rows</div><div class='input'>
 <span class='co'># Method 2: Use tq_portfolio with two column tibble and map weights</span>
 
@@ -259,18 +274,18 @@ that specifies which parameters can be passed via <code>...</code></p></li>
              <span class='kw'>weights</span> <span class='kw'>=</span> <span class='no'>weights_df</span>,
              <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
              <span class='kw'>wealth.index</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # A tibble: 48 x 2
-#&gt;          date portfolio.returns
-#&gt;        &lt;date&gt;             &lt;dbl&gt;
-#&gt;  1 2013-01-31       0.260144557
-#&gt;  2 2013-02-28      -0.004558003
-#&gt;  3 2013-03-28      -0.019454685
-#&gt;  4 2013-04-30       0.080958243
-#&gt;  5 2013-05-31      -0.013883075
-#&gt;  6 2013-06-28      -0.017906983
-#&gt;  7 2013-07-31       0.253520291
-#&gt;  8 2013-08-30       0.103866369
-#&gt;  9 2013-09-30       0.145446247
-#&gt; 10 2013-10-31       0.041956895
+#&gt;    date       portfolio.returns
+#&gt;    &lt;date&gt;                 &lt;dbl&gt;
+#&gt;  1 2013-01-31           0.260  
+#&gt;  2 2013-02-28          -0.00456
+#&gt;  3 2013-03-28          -0.0195 
+#&gt;  4 2013-04-30           0.0810 
+#&gt;  5 2013-05-31          -0.0139 
+#&gt;  6 2013-06-28          -0.0179 
+#&gt;  7 2013-07-31           0.254  
+#&gt;  8 2013-08-30           0.104  
+#&gt;  9 2013-09-30           0.145  
+#&gt; 10 2013-10-31           0.0420 
 #&gt; # ... with 38 more rows</div><div class='input'>
 <span class='co'># Method 3: Working with multiple portfolios</span>
 
@@ -295,18 +310,18 @@ that specifies which parameters can be passed via <code>...</code></p></li>
              <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
              <span class='kw'>wealth.index</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # A tibble: 192 x 3
 #&gt; # Groups:   portfolio [4]
-#&gt;    portfolio       date portfolio.returns
-#&gt;        &lt;int&gt;     &lt;date&gt;             &lt;dbl&gt;
-#&gt;  1         1 2013-01-31       0.260144557
-#&gt;  2         1 2013-02-28      -0.004558003
-#&gt;  3         1 2013-03-28      -0.019454685
-#&gt;  4         1 2013-04-30       0.080958243
-#&gt;  5         1 2013-05-31      -0.013883075
-#&gt;  6         1 2013-06-28      -0.017906983
-#&gt;  7         1 2013-07-31       0.253520291
-#&gt;  8         1 2013-08-30       0.103866369
-#&gt;  9         1 2013-09-30       0.145446247
-#&gt; 10         1 2013-10-31       0.041956895
+#&gt;    portfolio date       portfolio.returns
+#&gt;        &lt;int&gt; &lt;date&gt;                 &lt;dbl&gt;
+#&gt;  1         1 2013-01-31           0.260  
+#&gt;  2         1 2013-02-28          -0.00456
+#&gt;  3         1 2013-03-28          -0.0195 
+#&gt;  4         1 2013-04-30           0.0810 
+#&gt;  5         1 2013-05-31          -0.0139 
+#&gt;  6         1 2013-06-28          -0.0179 
+#&gt;  7         1 2013-07-31           0.254  
+#&gt;  8         1 2013-08-30           0.104  
+#&gt;  9         1 2013-09-30           0.145  
+#&gt; 10         1 2013-10-31           0.0420 
 #&gt; # ... with 182 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -332,11 +347,14 @@ that specifies which parameters can be passed via <code>...</code></p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

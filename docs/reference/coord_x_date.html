@@ -18,13 +18,19 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+<meta property="og:title" content="Zoom in on plot regions using date ranges or date-time ranges — coord_x_date" />
+
+<meta property="og:description" content="Zoom in on plot regions using date ranges or date-time ranges" />
+<meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -46,6 +52,8 @@
 
 </script>
 
+
+
   </head>
 
   <body>
@@ -59,8 +67,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">tidyquant</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">tidyquant</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.5.4.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -109,6 +121,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -120,6 +133,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Zoom in on plot regions using date ranges or date-time ranges</h1>
+    <small>Source: <a href='https://github.com/business-science/tidyquant/blob/master/R/coord_date.R'><code>R/coord_date.R</code></a></small>
     </div>
 
     
@@ -130,7 +144,7 @@
 
 <span class='fu'>coord_x_datetime</span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>expand</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -156,10 +170,10 @@ limits are taken exactly from the data or <code>xlim</code>/<code>ylim</code>.</
 necessary when zooming in on plots that calculate <code>stats</code> using data
 outside of the zoom range (e.g. when plotting moving averages
 with <code><a href='geom_ma.html'>geom_ma()</a></code>). Setting limits using <code>scale_x_date</code>
-changes the underlying data which causes moving averages to fail.
-    <code>coord_x_date</code> is a wrapper for <code>coord_cartesian</code>
-that enables quickly zooming in on plot regions using a date range.
-    <code>coord_x_datetime</code> is a wrapper for <code>coord_cartesian</code>
+changes the underlying data which causes moving averages to fail.</p>
+<p><code>coord_x_date</code> is a wrapper for <code>coord_cartesian</code>
+that enables quickly zooming in on plot regions using a date range.</p>
+<p><code>coord_x_datetime</code> is a wrapper for <code>coord_cartesian</code>
 that enables quickly zooming in on plot regions using a date-time range.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -179,7 +193,7 @@ that enables quickly zooming in on plot regions using a date-time range.</p>
     <span class='fu'><a href='geom_ma.html'>geom_ma</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>50</span>) +                 <span class='co'># Plot 50-day Moving Average</span>
     <span class='fu'><a href='geom_ma.html'>geom_ma</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>200</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>) + <span class='co'># Plot 200-day Moving Average</span>
     <span class='fu'>coord_x_date</span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fu'>today</span>() - <span class='fu'>weeks</span>(<span class='fl'>12</span>), <span class='fu'>today</span>()),
-               <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>100</span>, <span class='fl'>130</span>))        <span class='co'># Zoom in</span></div><div class='img'><img src='coord_x_date-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+               <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>100</span>, <span class='fl'>130</span>))        <span class='co'># Zoom in</span></div><div class='img'><img src='coord_x_date-1.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'># coord_x_datetime</span>
 <span class='no'>time_index</span> <span class='kw'>&lt;-</span> <span class='fu'>seq</span>(<span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'>as.POSIXct</span>(<span class='st'>"2012-05-15 07:00"</span>),
@@ -192,7 +206,7 @@ that enables quickly zooming in on plot regions using a date-time range.</p>
 <span class='no'>hourly_data</span> <span class='kw'>%&gt;%</span>
     <span class='fu'>ggplot</span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>time.index</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>value</span>)) +
     <span class='fu'>geom_point</span>() +
-    <span class='fu'>coord_x_datetime</span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"2012-05-15 07:00:00"</span>, <span class='st'>"2012-05-15 16:00:00"</span>))</div><div class='img'><img src='coord_x_date-6.png' alt='' width='700' height='432.632880098887' /></div></pre>
+    <span class='fu'>coord_x_datetime</span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"2012-05-15 07:00:00"</span>, <span class='st'>"2012-05-15 16:00:00"</span>))</div><div class='img'><img src='coord_x_date-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -215,11 +229,14 @@ that enables quickly zooming in on plot regions using a date-time range.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

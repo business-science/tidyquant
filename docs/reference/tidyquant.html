@@ -18,13 +18,22 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+<meta property="og:title" content="tidyquant: Integrating quantitative financial analysis tools with the tidyverse — tidyquant" />
+
+<meta property="og:description" content="The main advantage of tidyquant is to
+bridge the gap between the best quantitative resources for collecting and
+manipulating quantitative data, xts, quantmod and TTR,
+and the data modeling workflow and infrastructure of the tidyverse." />
+<meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -46,6 +55,8 @@
 
 </script>
 
+
+
   </head>
 
   <body>
@@ -59,8 +70,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">tidyquant</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">tidyquant</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.5.4.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -109,6 +124,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -120,6 +136,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>tidyquant: Integrating quantitative financial analysis tools with the tidyverse</h1>
+    <small>Source: <a href='https://github.com/business-science/tidyquant/blob/master/R/tidyquant.R'><code>R/tidyquant.R</code></a></small>
     </div>
 
     
@@ -141,8 +158,6 @@ and examples.</p>
 <p>Users will probably be interested in the following:</p><ul>
 <li><p><strong>Getting Data from the Web:</strong> <code><a href='tq_get.html'>tq_get()</a></code></p></li>
 <li><p><strong>Manipulating Data:</strong> <code><a href='tq_mutate.html'>tq_transmute()</a></code> and <code>tq_mutate()</code></p></li>
-<li><p><strong>Coercing Data To and From xts and tibble:</strong> <code><a href='as_tibble.html'>as_tibble()</a></code>
-and <code><a href='as_xts.html'>as_xts()</a></code></p></li>
 <li><p><strong>Performance Analysis and Portfolio Aggregation:</strong>
 <code><a href='tq_performance.html'>tq_performance()</a></code> and <code><a href='tq_portfolio.html'>tq_portfolio()</a></code></p></li>
 </ul>
@@ -167,11 +182,14 @@ and <code><a href='as_xts.html'>as_xts()</a></code></p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

@@ -40,6 +40,7 @@ reference:
     - starts_with("tq_index")
     - starts_with("tq_exchange")
     - starts_with("quandl")
+    - contains("api")
     - FANG
   - title: Mutating data
     desc: __Functions for mutating quantitative data.__
@@ -62,10 +63,6 @@ reference:
     - starts_with("palette_")
     - starts_with("scale_")
     - starts_with("coord_")
-  - title: Coercion
-    desc: __Functions to bridge the gap between xts and tibble.__
-    contents:
-    - starts_with("as_")
   - title: Tidyquant
     desc: __Package level information.__
     contents:
@@ -73,4 +70,5 @@ reference:
   - title: Deprecated
     contents:
     - starts_with("deprecated")
+    - starts_with("as_")
 

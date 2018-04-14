@@ -8,12 +8,16 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-"
+  fig.path = "man/figures/README-",
+  out.width = "100%",
+  dpi = 300,
+  message = F,
+  warning = F
 )
 devtools::load_all()
 ```
 
-# tidyquant <img src="man/figures/logo.png" width="147" height="170" align="right" />
+# tidyquant <img src="man/figures/tidyquant-logo.png" width="147" height="170" align="right" />
 
 [![Travis-CI Build Status](https://travis-ci.org/business-science/tidyquant.svg?branch=master)](https://travis-ci.org/business-science/tidyquant.svg?branch=master)
 [![codecov](https://codecov.io/gh/business-science/tidyquant/branch/master/graph/badge.svg)](https://codecov.io/gh/business-science/tidyquant)
@@ -27,6 +31,12 @@ devtools::load_all()
 
 `tidyquant` integrates the best resources for collecting and analyzing financial data, `zoo`, `xts`, `quantmod`, `TTR`, and `PerformanceAnalytics`, with the tidy data infrastructure of the `tidyverse` allowing for seamless interaction between each. You can now perform complete financial analyses in the `tidyverse`. 
 
+## 2-Minutes To Tidyquant
+
+Our short introduction to `tidyquant` on [YouTube](https://www.youtube.com/embed/pL4SAvvyJHc).
+
+<iframe width="100%" height="350" src="https://www.youtube.com/embed/pL4SAvvyJHc" frameborder="1" allow="autoplay; encrypted-media" allowfullscreen> </iframe>
+
 ## Benefits
 
 * __A few core functions with a lot of power__
@@ -39,11 +49,6 @@ devtools::load_all()
 
 With `tidyquant` all the benefits add up to one thing: _a one-stop shop for serious financial analysis!_
 
-### 2-Minutes To Tidyquant
-
-Our short introduction to `tidyquant` on [YouTube](https://www.youtube.com/embed/pL4SAvvyJHc).
-
-<iframe width="100%" height="350" src="https://www.youtube.com/embed/pL4SAvvyJHc" frameborder="1" allow="autoplay; encrypted-media" allowfullscreen> </iframe>
 
 ### Core Functions
 
@@ -58,7 +63,7 @@ Our short introduction to `tidyquant` on [YouTube](https://www.youtube.com/embed
 Visualizing the stock price volatility of four stocks side-by-side is quick and easy...
 
 ```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("man/figures/sample_img_1_volatility.png")
+knitr::include_graphics("./man/figures/sample_img_1_volatility.png")
 ```
 
 

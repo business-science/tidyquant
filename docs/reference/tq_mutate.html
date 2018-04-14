@@ -18,13 +18,21 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+<meta property="og:title" content="Mutates quantitative data — tq_mutate" />
+
+<meta property="og:description" content="tq_mutate() adds new variables to an existing tibble;
+tq_transmute() returns only newly created columns and is typically
+used when periodicity changes" />
+<meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -46,6 +54,8 @@
 
 </script>
 
+
+
   </head>
 
   <body>
@@ -59,8 +69,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">tidyquant</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">tidyquant</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.5.4.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -109,6 +123,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -120,6 +135,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Mutates quantitative data</h1>
+    <small>Source: <a href='https://github.com/business-science/tidyquant/blob/master/R/tq_mutate.R'><code>R/tq_mutate.R</code></a>, <a href='https://github.com/business-science/tidyquant/blob/master/R/tq_transmute.R'><code>R/tq_transmute.R</code></a></small>
     </div>
 
     
@@ -150,7 +166,7 @@ used when periodicity changes</p>
 
 <span class='fu'>tq_transmute_fun_options</span>()</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -201,31 +217,31 @@ function can be used with the <code>tidyverse</code>. <code>tq_mutate</code> is 
 columns are added to the return data frame. <code>tq_transmute</code> works exactly like <code>tq_mutate</code>
 except it only returns the newly created columns. This is helpful when
 changing periodicity where the new columns would not have the same number of rows
-as the original tibble.
-    <code>select</code> specifies the columns that get passed to the mutation function. Select works
+as the original tibble.</p>
+<p><code>select</code> specifies the columns that get passed to the mutation function. Select works
 as a more flexible version of the OHLC extractor functions from <code>quantmod</code> where
 non-OHLC data works as well. When <code>select</code> is <code>NULL</code>, all columns are selected.
 In Example 1 below, <code>close</code> returns the "close" price and sends this to the
-mutate function, <code>periodReturn</code>.
-    <code>mutate_fun</code> is the function that performs the work. In Example 1, this
+mutate function, <code>periodReturn</code>.</p>
+<p><code>mutate_fun</code> is the function that performs the work. In Example 1, this
 is <code>periodReturn</code>, which calculates the period returns. The <code>...</code>
 are additional arguments passed to the <code>mutate_fun</code>. Think of
 the whole operation in Example 1 as the close price, obtained by <code>select = close</code>,
 being sent to the <code>periodReturn</code> function along
 with additional arguments defining how to perform the period return, which
 includes <code>period = "daily"</code> and <code>type = "log"</code>.
-Example 4 shows how to apply a rolling regression.
-    <code>tq_mutate_xy</code> and <code>tq_transmute_xy</code> are designed to enable working with mutatation
+Example 4 shows how to apply a rolling regression.</p>
+<p><code>tq_mutate_xy</code> and <code>tq_transmute_xy</code> are designed to enable working with mutatation
 functions that require two primary inputs (e.g. EVWMA, VWAP, etc).
 Example 2 shows this benefit in action: using the EVWMA function that uses
-volume to define the moving average period.
-    <code>tq_mutate_</code>, <code>tq_mutate_xy_</code>, <code>tq_transmute_</code>, and <code>tq_transmute_xy_</code>
+volume to define the moving average period.</p>
+<p><code>tq_mutate_</code>, <code>tq_mutate_xy_</code>, <code>tq_transmute_</code>, and <code>tq_transmute_xy_</code>
 are setup for Non-Standard
 Evaluation (NSE). This enables programatically changing column names by modifying
 the text representations. Example 5 shows the difference in implementation.
 Note that character strings are being passed to the variables instead of
-unquoted variable names. See <code>vignette("nse")</code> for more information.
-    <code>tq_mutate_fun_options</code> and <code>tq_transmute_fun_options</code> return a list of various
+unquoted variable names. See <code>vignette("nse")</code> for more information.</p>
+<p><code>tq_mutate_fun_options</code> and <code>tq_transmute_fun_options</code> return a list of various
 financial functions that are compatible with <code>tq_mutate</code> and <code>tq_transmute</code>,
 respectively.</p>
     
@@ -249,52 +265,52 @@ respectively.</p>
 <span class='no'>fb_stock_prices</span> <span class='kw'>%&gt;%</span>
     <span class='fu'>tq_mutate</span>(<span class='kw'>select</span> <span class='kw'>=</span> <span class='no'>close</span>, <span class='kw'>mutate_fun</span> <span class='kw'>=</span> <span class='no'>periodReturn</span>,
               <span class='kw'>period</span> <span class='kw'>=</span> <span class='st'>"daily"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"log"</span>)</div><div class='output co'>#&gt; # A tibble: 252 x 8
-#&gt;          date   open   high    low  close   volume adjusted daily.returns
-#&gt;        &lt;date&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;         &lt;dbl&gt;
-#&gt;  1 2016-01-04 101.95 102.24  99.75 102.22 37912400   102.22   0.000000000
-#&gt;  2 2016-01-05 102.89 103.71 101.67 102.73 23258200   102.73   0.004976853
-#&gt;  3 2016-01-06 101.13 103.77 100.90 102.97 25096200   102.97   0.002333477
-#&gt;  4 2016-01-07 100.50 101.43  97.30  97.92 45172900    97.92  -0.050286895
-#&gt;  5 2016-01-08  99.88 100.50  97.03  97.33 35402300    97.33  -0.006043511
-#&gt;  6 2016-01-11  97.91  98.60  95.39  97.51 29932400    97.51   0.001847670
-#&gt;  7 2016-01-12  99.00  99.96  97.55  99.37 28395400    99.37   0.018895330
-#&gt;  8 2016-01-13 100.58 100.58  95.21  95.44 33410600    95.44  -0.040352489
-#&gt;  9 2016-01-14  95.85  98.87  92.45  98.37 48658600    98.37   0.030238111
-#&gt; 10 2016-01-15  93.98  96.38  93.54  94.97 45935600    94.97  -0.035174847
+#&gt;    date        open  high   low close    volume adjusted daily.returns
+#&gt;    &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;         &lt;dbl&gt;
+#&gt;  1 2016-01-04 102.  102.   99.8 102.  37912400.    102.        0.     
+#&gt;  2 2016-01-05 103.  104.  102.  103.  23258200.    103.        0.00498
+#&gt;  3 2016-01-06 101.  104.  101.  103.  25096200.    103.        0.00233
+#&gt;  4 2016-01-07 100.  101.   97.3  97.9 45172900.     97.9      -0.0503 
+#&gt;  5 2016-01-08  99.9 100.   97.0  97.3 35402300.     97.3      -0.00604
+#&gt;  6 2016-01-11  97.9  98.6  95.4  97.5 29873100.     97.5       0.00185
+#&gt;  7 2016-01-12  99.0 100.0  97.6  99.4 28395400.     99.4       0.0189 
+#&gt;  8 2016-01-13 101.  101.   95.2  95.4 33410600.     95.4      -0.0404 
+#&gt;  9 2016-01-14  95.8  98.9  92.4  98.4 48658600.     98.4       0.0302 
+#&gt; 10 2016-01-15  94.0  96.4  93.5  95.0 46132800.     95.0      -0.0352 
 #&gt; # ... with 242 more rows</div><div class='input'>
 <span class='co'># Example 2: Use tq_mutate_xy to use functions with two columns required</span>
 <span class='no'>fb_stock_prices</span> <span class='kw'>%&gt;%</span>
     <span class='fu'>tq_mutate_xy</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>close</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>volume</span>, <span class='kw'>mutate_fun</span> <span class='kw'>=</span> <span class='no'>EVWMA</span>,
                  <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='st'>"EVWMA"</span>)</div><div class='output co'>#&gt; # A tibble: 252 x 8
-#&gt;          date   open   high    low  close   volume adjusted EVWMA
-#&gt;        &lt;date&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
-#&gt;  1 2016-01-04 101.95 102.24  99.75 102.22 37912400   102.22    NA
-#&gt;  2 2016-01-05 102.89 103.71 101.67 102.73 23258200   102.73    NA
-#&gt;  3 2016-01-06 101.13 103.77 100.90 102.97 25096200   102.97    NA
-#&gt;  4 2016-01-07 100.50 101.43  97.30  97.92 45172900    97.92    NA
-#&gt;  5 2016-01-08  99.88 100.50  97.03  97.33 35402300    97.33    NA
-#&gt;  6 2016-01-11  97.91  98.60  95.39  97.51 29932400    97.51    NA
-#&gt;  7 2016-01-12  99.00  99.96  97.55  99.37 28395400    99.37    NA
-#&gt;  8 2016-01-13 100.58 100.58  95.21  95.44 33410600    95.44    NA
-#&gt;  9 2016-01-14  95.85  98.87  92.45  98.37 48658600    98.37    NA
-#&gt; 10 2016-01-15  93.98  96.38  93.54  94.97 45935600    94.97 94.97
+#&gt;    date        open  high   low close    volume adjusted EVWMA
+#&gt;    &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1 2016-01-04 102.  102.   99.8 102.  37912400.    102.   NA  
+#&gt;  2 2016-01-05 103.  104.  102.  103.  23258200.    103.   NA  
+#&gt;  3 2016-01-06 101.  104.  101.  103.  25096200.    103.   NA  
+#&gt;  4 2016-01-07 100.  101.   97.3  97.9 45172900.     97.9  NA  
+#&gt;  5 2016-01-08  99.9 100.   97.0  97.3 35402300.     97.3  NA  
+#&gt;  6 2016-01-11  97.9  98.6  95.4  97.5 29873100.     97.5  NA  
+#&gt;  7 2016-01-12  99.0 100.0  97.6  99.4 28395400.     99.4  NA  
+#&gt;  8 2016-01-13 101.  101.   95.2  95.4 33410600.     95.4  NA  
+#&gt;  9 2016-01-14  95.8  98.9  92.4  98.4 48658600.     98.4  NA  
+#&gt; 10 2016-01-15  94.0  96.4  93.5  95.0 46132800.     95.0  95.0
 #&gt; # ... with 242 more rows</div><div class='input'>
 <span class='co'># Example 3: Using tq_mutate to work with non-OHLC data</span>
 <span class='fu'><a href='tq_get.html'>tq_get</a></span>(<span class='st'>"DCOILWTICO"</span>, <span class='kw'>get</span> <span class='kw'>=</span> <span class='st'>"economic.data"</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'>tq_mutate</span>(<span class='kw'>select</span> <span class='kw'>=</span> <span class='no'>price</span>, <span class='kw'>mutate_fun</span> <span class='kw'>=</span> <span class='no'>lag.xts</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>na.pad</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 2,771 x 3
-#&gt;          date price lag.xts
-#&gt;        &lt;date&gt; &lt;dbl&gt;   &lt;dbl&gt;
-#&gt;  1 2007-01-01    NA      NA
-#&gt;  2 2007-01-02 60.77      NA
-#&gt;  3 2007-01-03 58.31   60.77
-#&gt;  4 2007-01-04 55.65   58.31
-#&gt;  5 2007-01-05 56.29   55.65
-#&gt;  6 2007-01-08 56.08   56.29
-#&gt;  7 2007-01-09 55.65   56.08
-#&gt;  8 2007-01-10 53.95   55.65
-#&gt;  9 2007-01-11 51.91   53.95
-#&gt; 10 2007-01-12 52.96   51.91
-#&gt; # ... with 2,761 more rows</div><div class='input'>
+    <span class='fu'>tq_mutate</span>(<span class='kw'>select</span> <span class='kw'>=</span> <span class='no'>price</span>, <span class='kw'>mutate_fun</span> <span class='kw'>=</span> <span class='no'>lag.xts</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>na.pad</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 2,680 x 3
+#&gt;    date       price lag.xts
+#&gt;    &lt;date&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt;  1 2008-01-01  NA      NA  
+#&gt;  2 2008-01-02  99.6    NA  
+#&gt;  3 2008-01-03  99.2    99.6
+#&gt;  4 2008-01-04  97.9    99.2
+#&gt;  5 2008-01-07  95.1    97.9
+#&gt;  6 2008-01-08  96.4    95.1
+#&gt;  7 2008-01-09  95.6    96.4
+#&gt;  8 2008-01-10  93.9    95.6
+#&gt;  9 2008-01-11  92.7    93.9
+#&gt; 10 2008-01-14  94.2    92.7
+#&gt; # ... with 2,670 more rows</div><div class='input'>
 <span class='co'># Example 4: Using tq_mutate to apply a rolling regression</span>
 <span class='no'>fb_returns</span> <span class='kw'>&lt;-</span> <span class='no'>fb_stock_prices</span> <span class='kw'>%&gt;%</span>
     <span class='fu'>tq_transmute</span>(<span class='no'>adjusted</span>, <span class='no'>periodReturn</span>, <span class='kw'>period</span> <span class='kw'>=</span> <span class='st'>"monthly"</span>, <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='st'>"fb.returns"</span>)
@@ -310,37 +326,37 @@ respectively.</p>
               <span class='kw'>FUN</span>        <span class='kw'>=</span> <span class='no'>regr_fun</span>,
               <span class='kw'>by.column</span>  <span class='kw'>=</span> <span class='fl'>FALSE</span>,
               <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"coef.0"</span>, <span class='st'>"coef.1"</span>))</div><div class='output co'>#&gt; # A tibble: 12 x 5
-#&gt;          date  fb.returns  xlk.returns       coef.0    coef.1
-#&gt;        &lt;date&gt;       &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;
-#&gt;  1 2016-01-29  0.09773036 -0.024367105           NA        NA
-#&gt;  2 2016-02-29 -0.04714376 -0.006547176           NA        NA
-#&gt;  3 2016-03-31  0.06715301  0.088222401           NA        NA
-#&gt;  4 2016-04-29  0.03049960 -0.050270314           NA        NA
-#&gt;  5 2016-05-31  0.01046093  0.048896164           NA        NA
-#&gt;  6 2016-06-30 -0.03812810 -0.013770983  0.018763474 0.1895313
-#&gt;  7 2016-07-29  0.08452925  0.071016804  0.003547136 0.6258820
-#&gt;  8 2016-08-31  0.01758916  0.011625551  0.015421275 0.5110224
-#&gt;  9 2016-09-30  0.01704726  0.021008649  0.013648900 0.4531305
-#&gt; 10 2016-10-31  0.02120528 -0.007534395 -0.001427791 0.9240238
-#&gt; 11 2016-11-30 -0.09596157  0.001686985 -0.018894774 1.4238512
-#&gt; 12 2016-12-30 -0.02845799  0.022603283 -0.025419581 1.3991633</div><div class='input'>
+#&gt;    date       fb.returns xlk.returns    coef.0 coef.1
+#&gt;    &lt;date&gt;          &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+#&gt;  1 2016-01-29     0.0977    -0.0244   NA       NA    
+#&gt;  2 2016-02-29    -0.0471    -0.00655  NA       NA    
+#&gt;  3 2016-03-31     0.0672     0.0882   NA       NA    
+#&gt;  4 2016-04-29     0.0305    -0.0503   NA       NA    
+#&gt;  5 2016-05-31     0.0105     0.0489   NA       NA    
+#&gt;  6 2016-06-30    -0.0381    -0.0138    0.0188   0.190
+#&gt;  7 2016-07-29     0.0845     0.0710    0.00355  0.626
+#&gt;  8 2016-08-31     0.0176     0.0116    0.0154   0.511
+#&gt;  9 2016-09-30     0.0170     0.0210    0.0136   0.453
+#&gt; 10 2016-10-31     0.0212    -0.00753  -0.00143  0.924
+#&gt; 11 2016-11-30    -0.0960     0.00169  -0.0189   1.42 
+#&gt; 12 2016-12-30    -0.0285     0.0226   -0.0254   1.40 </div><div class='input'>
 <span class='co'># Example 5: Non-standard evaluation:</span>
 <span class='co'># Programming with tq_mutate_() and tq_mutate_xy_()</span>
 <span class='no'>col_name</span> <span class='kw'>&lt;-</span> <span class='st'>"adjusted"</span>
 <span class='no'>mutate</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"MACD"</span>, <span class='st'>"SMA"</span>)
 <span class='fu'>tq_mutate_xy_</span>(<span class='no'>fb_stock_prices</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>col_name</span>, <span class='kw'>mutate_fun</span> <span class='kw'>=</span> <span class='no'>mutate</span><span class='kw'>[[</span><span class='fl'>1</span>]])</div><div class='output co'>#&gt; # A tibble: 252 x 9
-#&gt;          date   open   high    low  close   volume adjusted  macd signal
-#&gt;        &lt;date&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-#&gt;  1 2016-01-04 101.95 102.24  99.75 102.22 37912400   102.22    NA     NA
-#&gt;  2 2016-01-05 102.89 103.71 101.67 102.73 23258200   102.73    NA     NA
-#&gt;  3 2016-01-06 101.13 103.77 100.90 102.97 25096200   102.97    NA     NA
-#&gt;  4 2016-01-07 100.50 101.43  97.30  97.92 45172900    97.92    NA     NA
-#&gt;  5 2016-01-08  99.88 100.50  97.03  97.33 35402300    97.33    NA     NA
-#&gt;  6 2016-01-11  97.91  98.60  95.39  97.51 29932400    97.51    NA     NA
-#&gt;  7 2016-01-12  99.00  99.96  97.55  99.37 28395400    99.37    NA     NA
-#&gt;  8 2016-01-13 100.58 100.58  95.21  95.44 33410600    95.44    NA     NA
-#&gt;  9 2016-01-14  95.85  98.87  92.45  98.37 48658600    98.37    NA     NA
-#&gt; 10 2016-01-15  93.98  96.38  93.54  94.97 45935600    94.97    NA     NA
+#&gt;    date        open  high   low close    volume adjusted  macd signal
+#&gt;    &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+#&gt;  1 2016-01-04 102.  102.   99.8 102.  37912400.    102.     NA     NA
+#&gt;  2 2016-01-05 103.  104.  102.  103.  23258200.    103.     NA     NA
+#&gt;  3 2016-01-06 101.  104.  101.  103.  25096200.    103.     NA     NA
+#&gt;  4 2016-01-07 100.  101.   97.3  97.9 45172900.     97.9    NA     NA
+#&gt;  5 2016-01-08  99.9 100.   97.0  97.3 35402300.     97.3    NA     NA
+#&gt;  6 2016-01-11  97.9  98.6  95.4  97.5 29873100.     97.5    NA     NA
+#&gt;  7 2016-01-12  99.0 100.0  97.6  99.4 28395400.     99.4    NA     NA
+#&gt;  8 2016-01-13 101.  101.   95.2  95.4 33410600.     95.4    NA     NA
+#&gt;  9 2016-01-14  95.8  98.9  92.4  98.4 48658600.     98.4    NA     NA
+#&gt; 10 2016-01-15  94.0  96.4  93.5  95.0 46132800.     95.0    NA     NA
 #&gt; # ... with 242 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -366,11 +382,14 @@ respectively.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
