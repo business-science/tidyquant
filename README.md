@@ -22,9 +22,11 @@ perform complete financial analyses in the `tidyverse`.
 Our short introduction to `tidyquant` on
 [YouTube](https://www.youtube.com/embed/woxJZTL2hok).
 
-<iframe width="100%" height="350" src="https://www.youtube.com/embed/woxJZTL2hok" frameborder="1" allow="autoplay; encrypted-media" allowfullscreen>
+<a href="https://www.youtube.com/embed/woxJZTL2hok" target="_blank"><img src="http://img.youtube.com/vi/woxJZTL2hok/0.jpg" alt="Anomalize" width="100%" height="350"/></a>
 
-</iframe>
+Check out our entire [Software Intro
+Series](https://www.youtube.com/watch?v=Gk_HwjhlQJs&list=PLo32uKohmrXsYNhpdwr15W143rX6uMAze)
+on YouTube\!
 
 ## Benefits
 
