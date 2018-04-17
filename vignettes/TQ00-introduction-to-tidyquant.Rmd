@@ -39,6 +39,15 @@ The four primary quantitative packages that are the backbone for financial analy
 
 The [tidy data principles](https://www.jstatsoft.org/article/view/v059i10) are a cornerstone of data management and the data modeling workflow. The foundation for tidy data management is the `tidyverse`, a collection of _R packages_: `ggplot2`, `dplyr`, `tidyr`, `purrr`, `readr`, `tibble`, that work in harmony, are built for scaleability, and are well documented in [R for Data Science](http://r4ds.had.co.nz/). Using this infrastructure and the core tidy concepts, we can apply the tidy data principles to financial analysis using the _R package_, `tidyquant`. 
 
+## 2-Minutes To Tidyquant
+
+Our short introduction to `tidyquant` on
+[YouTube](https://www.youtube.com/embed/woxJZTL2hok).
+
+<a href="https://www.youtube.com/embed/woxJZTL2hok" target="_blank"><img src="http://img.youtube.com/vi/woxJZTL2hok/0.jpg" alt="Anomalize" width="100%" height="350"/></a>
+
+Check out our entire [Software Intro Series](https://www.youtube.com/watch?v=Gk_HwjhlQJs&list=PLo32uKohmrXsYNhpdwr15W143rX6uMAze) on YouTube!
+
 
 # Benefits
 
