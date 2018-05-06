@@ -31,6 +31,7 @@
 #' @import tidyverse
 #' @import lubridate
 #' @import PerformanceAnalytics
+#' @importFrom rlang ":="
 #' @importFrom magrittr "%>%"
 #' @importFrom magrittr "%$%"
 #' @importFrom utils "data" "download.file" "read.csv"

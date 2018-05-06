@@ -686,7 +686,7 @@ tq_get_util_2 <- function(x, get, complete_cases, map, ...) {
         book_val_expr     <- rlang::sym(book_val_name)
         op_cash_flow_expr <- rlang::sym(op_cash_flow_name)
 
-        units <- str_split(revenue_name, pattern = " ")[[1]][[2]]
+        units <- stringr::str_split(revenue_name, pattern = " ")[[1]][[2]]
 
         if (units != "USD") {
             warning("Units of Key Ratios Not Compatible for Valuation Ratios.
