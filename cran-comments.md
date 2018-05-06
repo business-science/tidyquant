@@ -1,15 +1,12 @@
-## Resubmission
-This resubmission removed Rblpapi from Imports and moved it to Suggests. This
-should remove the NOTE about licensing.
-
 ## Release Summary
-This release of tidyquant updates for compatibility with `testthat` v2.0 and
-adds a few bug fixes. A few new sources of data are added for `tq_get()`.
+This release of tidyquant fixes the ERROR messages on CRAN. The Google Finance
+API no longer provides data, which was the cause of most failures. It has been
+deprecated in tidyquant.
 
 ## Test environments
-* local Windows install, R 3.4.3
-* local Mac install, R 3.4.3
-* ubuntu 12.04 (on travis-ci), R 3.4.3
+* local Windows install, R 3.4.4
+* local Mac install, R 3.4.4
+* ubuntu 12.04 (on travis-ci), R 3.4.4
 * win-builder (devel and release)
 
 ## R CMD check results

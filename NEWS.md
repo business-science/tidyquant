@@ -1,4 +1,4 @@
-## tidyquant 0.5.4.9001
+## tidyquant 0.5.5
 
 * Bux fix
 
