@@ -1,8 +1,8 @@
 library(tidyquant)
 
 #### Setup
-get <- c("stock.prices", "financials")
-context(paste0("Testing tq_get(get = c('stock.prices', 'financials'))"))
+get <- c("stock.prices", "dividends")
+context(paste0("Testing tq_get(get = c('stock.prices', 'dividends'))"))
 
 test1 <- tq_get("AAPL", get = get,
                 from = "2016-01-01", to = "2016-06-01")
@@ -49,7 +49,7 @@ test_that("Test 3 returns tibble with correct rows and columns.", {
 test_that("Error on invalid compound gets", {
     expect_error(
         c("AAPL", "GOOG") %>%
-            tq_get(c("stock.prices", "financials", "economic.data"))
+            tq_get(c("stock.prices", "dividends", "economic.data"))
     )
 })
 

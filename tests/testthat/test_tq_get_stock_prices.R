@@ -10,9 +10,6 @@ test1 <- tq_get("AAPL", get = get,
 test2 <- c("AAPL", "FB") %>%
     tq_get(get = get, from = "2016-01-01", to = "2016-06-01")
 
-test3 <- c("AAPL", "FB") %>%
-    tq_get(get = "stock.prices.google", from = "2016-01-01", to = "2016-06-01")
-
 #### Tests
 
 test_that("Test 1 returns tibble with correct rows and columns.", {
@@ -33,13 +30,8 @@ test_that("Test 2 returns tibble with correct rows and columns.", {
     expect_equal(ncol(test2), 8)
 })
 
-test_that("Test 3 returns tibble with correct rows and columns.", {
-    # Tibble
-    expect_is(test3, "tbl")
-    # Rows
-    expect_equal(nrow(test3), 208)
-    # Columns
-    expect_equal(ncol(test3), 7)
+test_that("Google finance is now defunct.", {
+    expect_warning(tq_get("AAPL", get = "stock.prices.google"))
 })
 
 test_that("Test prints warning message on invalid x input.", {

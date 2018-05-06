@@ -342,6 +342,20 @@ tq_get_util_1 <-
              to   = as.character(lubridate::today()),
              ...) {
 
+    # google.stock.prices is now defunct (google no longer provides data)
+    if(get == "stockpricesgoogle") {
+      warning("Google Finance stopped providing data in March, 2018. \n",
+              "Use get = 'stock.prices' instead to pull from Yahoo Finance.", call. = FALSE)
+      return(NA)
+    }
+
+    # Google Financials is now defunct (google no longer provides data)
+    if(get == "financial") {
+      warning("Google Finance stopped providing data in March, 2018. \n",
+              "We are currently looking for alternative financial data sources.", call. = FALSE)
+      return(NA)
+    }
+
     # Check x
     if (!is.character(x)) {
         stop("x must be a character string in the form of a valid symbol.")
@@ -368,11 +382,11 @@ tq_get_util_1 <-
                                                 chr_fun    = "quantmod::getSymbols",
                                                 list_names = c("open", "high", "low", "close", "volume", "adjusted"),
                                                 source     = "yahoo"),
-                   stockpricesgoogle     = list(chr_get    = "stock.prices",
-                                                fun        = quantmod::getSymbols,
-                                                chr_fun    = "quantmod::getSymbols.google",
-                                                list_names = c("open", "high", "low", "close", "volume"),
-                                                source     = "google"),
+                   # stockpricesgoogle     = list(chr_get    = "stock.prices",
+                   #                              fun        = quantmod::getSymbols,
+                   #                              chr_fun    = "quantmod::getSymbols.google",
+                   #                              list_names = c("open", "high", "low", "close", "volume"),
+                   #                              source     = "google"),
                    stockpricesjapan      = list(chr_get    = "stock.prices",
                                                 fun        = quantmod::getSymbols,
                                                 chr_fun    = "quantmod::getSymbols.yahooj",
@@ -388,10 +402,10 @@ tq_get_util_1 <-
                                                 chr_fun    = "quantmod::getSplits",
                                                 list_names = "splits",
                                                 source     = "yahoo"),
-                   financial             = list(chr_get    = "financials",
-                                                fun        = quantmod::getFinancials,
-                                                chr_fun    = "quantmod::getFinancials",
-                                                source     = "google"),
+                   # financial             = list(chr_get    = "financials",
+                   #                              fun        = quantmod::getFinancials,
+                   #                              chr_fun    = "quantmod::getFinancials",
+                   #                              source     = "google"),
                    metalprice            = list(chr_get    = "metal.prices",
                                                 fun        = quantmod::getMetals,
                                                 chr_fun    = "quantmod::getMetals",

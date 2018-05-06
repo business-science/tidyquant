@@ -1,7 +1,15 @@
-## tidyquant 0.5.4.9000
+## tidyquant 0.5.4.9001
 
 * Bux fix
 
+    * `tq_get()` `get = "financials"` now returns a warning and `NA`
+    as Google Finance no longer provides data. We are actively looking for 
+    alternative data sources.
+
+    * `tq_get()` `get = "stock.prices.google"` now returns a warning and `NA`
+    as Google Finance no longer provides data. Use `get = "stock.prices"` instead
+    to use Yahoo Finance, or use the `riingo` package to download from Tiingo.
+    
     * Catch duplicate names in `col_rename` when you are renaming more than 1 column.
     Duplicate names are not allowed and return an error.
 
