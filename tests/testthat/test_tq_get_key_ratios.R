@@ -25,6 +25,7 @@ test_that("Test unnest returns correct rows.", {
     expect_equal(ncol(unnest(test1)), 6)
 })
 
+# Multiple warnings are printed and testthat complains but this is okay
 test_that("Test prints warning message on invalid x input.", {
     expect_warning(tq_get("XYZ", get = get))
 })

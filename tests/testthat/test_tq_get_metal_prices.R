@@ -27,9 +27,9 @@ context(paste0("Testing tq_get(get = '", get, "')"))
 # })
 
 test_that("Test prints warning message on invalid x input.", {
-    expect_warning(tq_get("XYZ", get = get))
+    expect_warning(tq_get("XYZ", get = get, from = Sys.Date() - 100, to = Sys.Date()))
 })
 
 test_that("Test returns NA on invalid x input.", {
-    expect_equal(suppressWarnings(tq_get("XYZ", get = get)), NA)
+    expect_equal(suppressWarnings(tq_get("XYZ", get = get, from = Sys.Date() - 100, to = Sys.Date())), NA)
 })
