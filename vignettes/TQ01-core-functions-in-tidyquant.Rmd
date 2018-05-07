@@ -93,13 +93,6 @@ aapl_prices  <- tq_get("AAPL", get = "stock.prices", from = " 1990-01-01")
 aapl_prices 
 ```
 
-An alternative source is from Google Finance, which can be retrieved using `get = "stock.prices.google"`.  
-
-```{r}
-aapl_prices_google  <- tq_get("AAPL", get = "stock.prices.google", from = " 1990-01-01")
-aapl_prices_google
-```
-
 Yahoo Japan stock prices can be retrieved using a similar call, `get = "stock.prices.japan"`.
 
 ```{r, eval = F}
@@ -124,6 +117,8 @@ aapl_splits
 The data source is [Yahoo Finance](https://finance.yahoo.com/) and [Yahoo Finance Japan](http://finance.yahoo.co.jp/).
 
 ## Financial Statements
+
+_Google Finance no longer provides access to financial statements_
 
 For any given stock, a total of six financials statements are retrieved as nested tibbles, one for each combination of statement type (Income Statement, Balance Sheet, and Cash Flow) and period (by annual and quarter). 
 
