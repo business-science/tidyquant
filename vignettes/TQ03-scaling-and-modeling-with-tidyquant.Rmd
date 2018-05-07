@@ -107,7 +107,7 @@ tq_index("DOW", use_fallback = TRUE) %>%
     tq_get(get = "stock.prices")
 ```
 
-You can use any applicable "getter" to get data for __every stock in an index or an exchange__! This includes: "stock.prices", "key.ratios", "key.stats", "financials", and more.
+You can use any applicable "getter" to get data for __every stock in an index or an exchange__! This includes: "stock.prices", "key.ratios", "key.stats", and more.
 
 
 ## Method 3: Use purrr to map a function
