@@ -1,0 +1,132 @@
+---
+title: "Introduction to tidyquant"
+author: "Matt Dancho"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 2
+vignette: >
+  %\VignetteIndexEntry{Introduction to tidyquant}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(message = FALSE,
+                      warning = FALSE,
+                      fig.width = 8, 
+                      fig.height = 4.5,
+                      fig.align = 'center',
+                      out.width='95%', 
+                      dpi = 200)
+library(tidyquant)
+# devtools::load_all() # Travis CI fails on load_all()
+```
+
+> Bringing financial analysis to the tidyverse
+
+# Overview
+
+`tidyquant` integrates the best resources for collecting and analyzing financial data, `xts` and `zoo`, `quantmod`, `TTR`, and `PerformanceAnalytics` with the tidy data infrastructure of the `tidyverse` allowing for seamless interaction between each. 
+
+The four primary quantitative packages that are the backbone for financial analysis in _R programming_ are: 
+
+* [xts](https://CRAN.R-project.org/package=xts), or [eXtensible time series](http://joshuaulrich.github.io/xts/index.html): The data structure for handling time-series data. The underlying time-series structure is `zoo`, which is also integrated.
+* [quantmod](https://CRAN.R-project.org/package=quantmod), or [Quantitative Financial Modelling & Trading Framework for R](http://www.quantmod.com/): A package designed for retrieving, manipulating, and modeling quantitative data.
+* [TTR](https://CRAN.R-project.org/package=TTR), or Technical Trading Rules: A package that includes various functions to compute technical trading equations for quantitative or trading data.
+* [PerformanceAnalytics](https://CRAN.R-project.org/package=PerformanceAnalytics): A package that includes a collection of econometric functions for performance and risk analysis. The package analyzes returns (not prices).
+
+The [tidy data principles](https://www.jstatsoft.org/article/view/v059i10) are a cornerstone of data management and the data modeling workflow. The foundation for tidy data management is the `tidyverse`, a collection of _R packages_: `ggplot2`, `dplyr`, `tidyr`, `purrr`, `readr`, `tibble`, that work in harmony, are built for scaleability, and are well documented in [R for Data Science](http://r4ds.had.co.nz/). Using this infrastructure and the core tidy concepts, we can apply the tidy data principles to financial analysis using the _R package_, `tidyquant`. 
+
+## 2-Minutes To Tidyquant
+
+Our short introduction to `tidyquant` on
+[YouTube](https://www.youtube.com/embed/woxJZTL2hok).
+
+<a href="https://www.youtube.com/embed/woxJZTL2hok" target="_blank"><img src="http://img.youtube.com/vi/woxJZTL2hok/0.jpg" alt="Anomalize" width="100%" height="350"/></a>
+
+Check out our entire [Software Intro Series](https://www.youtube.com/watch?v=Gk_HwjhlQJs&list=PLo32uKohmrXsYNhpdwr15W143rX6uMAze) on YouTube!
+
+
+# Benefits
+
+* A few core functions with a lot of power
+* Integrates the quantitative analysis functionality of `zoo`, `xts`, `quantmod`, `TTR`, and `PerformanceAnalytics`
+* Designed for modeling and scaling analyses using the the `tidyverse` tools in [_R for Data Science_](http://r4ds.had.co.nz/)
+* Implements `ggplot2` functionality for beautiful and meaningful financial visualizations
+* User-friendly documentation to get you up to speed quickly!
+
+## A Few Core Functions with A Lot of Power
+
+Minimizing the number of functions reduces the learning curve. What we've done is group the core functions into four categories: 
+
+  1. __Get a Stock Index, `tq_index()`, or a Stock Exchange, `tq_exchange()`__: Returns the stock symbols and various attributes for every stock in an index or exchange. Eighteen indexes and three exchanges are available.
+
+  2. __Get Quantitative Data, `tq_get()`__: A one-stop shop to get data from various web-sources. 
+
+  3. __Transmute, `tq_transmute()`, and Mutate, `tq_mutate()`, Quantitative Data__: Perform and scale financial calculations completely within the `tidyverse`. These workhorse functions integrate the `xts`, `zoo`, `quantmod`, `TTR`, and `PerformanceAnalytics` packages. 
+  
+  4. __Performance analysis, `tq_performance()`, and portfolio aggregation, `tq_portfolio()`__: The `PerformanceAnalytics` integration enables analyzing performance of assets and portfolios. Refer to [Performance Analysis with tidyquant](TQ05-performance-analysis-with-tidyquant.html).
+
+For more information, refer to the first topic-specific vignette, [Core Functions in tidyquant](TQ01-core-functions-in-tidyquant.html).
+
+## Integrates the Quantitative Analysis Functionality of xts/zoo, quantmod TTR and Performance Analytics
+
+There's a wide range of useful quantitative analysis functions (QAF) that work with time-series objects. The problem is that many of these _wonderful_ functions don't work with data frames or the `tidyverse` workflow. That is until now. The `tidyquant` package integrates the most useful functions from the `xts`, `zoo`, `quantmod`, `TTR`, and `PerformanceAnalytics` packages, enabling seamless usage within the `tidyverse` workflow. 
+
+Refer below for information on the performance analysis and portfolio attribution with the `PerformanceAnalytics` integration.
+
+For more information, refer to the second topic-specific vignette, [R Quantitative Analysis Package Integrations in tidyquant](TQ02-quant-integrations-in-tidyquant.html).
+
+## Designed for the data science workflow of the tidyverse
+
+The greatest benefit to `tidyquant` is the ability to easily model and scale your financial analysis. Scaling is the process of creating an analysis for one security and then extending it to multiple groups. This idea of scaling is incredibly useful to financial analysts because typically one wants to compare many securities to make informed decisions. Fortunately, the `tidyquant` package integrates with the `tidyverse` making scaling super simple!
+
+All `tidyquant` functions return data in the `tibble` (tidy data frame) format, which allows for interaction within the `tidyverse`. This means we can:
+
+* Seamlessly scale data retrieval and mutations
+* Use the pipe (`%>%`) for chaining operations
+* Use `dplyr` and `tidyr`: `select`, `filter`, `group_by`, `nest`/`unnest`, `spread`/`gather`, etc
+* Use `purrr`: mapping functions with `map`
+
+For more information, refer to the third topic-specific vignette, [Scaling and Modeling with tidyquant](TQ03-scaling-and-modeling-with-tidyquant.html).
+
+## Implements ggplot2 Functionality for Financial Visualizations
+
+The `tidyquant` package includes charting tools to assist users in developing quick visualizations in `ggplot2` using the grammar of graphics format and workflow. 
+
+```{r, echo = F}
+library(tidyquant)
+data("FANG")
+end <- as_date("2017-01-01")
+start <- end - weeks(24)
+FANG %>%
+    filter(date >= start - days(2 * 20)) %>%
+    ggplot(aes(x = date, y = close, 
+               open = open, high = high, low = low, close = close, 
+               group = symbol)) +
+    geom_barchart() +
+    geom_bbands(ma_fun = SMA, sd = 2, n = 20, linetype = 5) +
+    labs(title = "FANG Bar Chart", 
+         subtitle = "BBands with SMA Applied, Multiple Stocks", 
+         y = "Closing Price", x = "") + 
+    coord_x_date(xlim = c(start, end)) +
+    facet_wrap(~ symbol, ncol = 2, scales = "free_y") +
+    theme_tq()
+```
+
+
+For more information, refer to the fourth topic-specific vignette, [Charting with tidyquant](TQ04-charting-with-tidyquant.html).
+
+
+## Performance Analysis of Asset and Portfolio Returns
+
+Asset and portfolio performance analysis is a deep field with a wide range of theories and methods for analyzing risk versus reward. The `PerformanceAnalytics` package consolidates many of the most widely used performance metrics as functions that can be applied to stock or portfolio returns. `tidquant` implements the functionality with two primary functions:
+
+* `tq_performance` implements the performance analysis functions in a tidy way, enabling scaling analysis using the split, apply, combine framework.
+* `tq_portfolio` provides a useful toolset for aggregating a group of individual asset returns into one or many portfolios. 
+
+Performance is based on the statistical properties of returns, and as a result both functions use __returns as opposed to stock prices__.
+
+For more information, refer to the fifth topic-specific vignette, [Performance Analysis with tidyquant](TQ05-performance-analysis-with-tidyquant.html).

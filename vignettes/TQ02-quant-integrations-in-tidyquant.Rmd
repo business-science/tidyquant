@@ -1,0 +1,553 @@
+---
+title: "R Quantitative Analysis Package Integrations in tidyquant"
+author: "Matt Dancho"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 2
+vignette: >
+  %\VignetteIndexEntry{R Quantitative Analysis Package Integrations in tidyquant}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(message = FALSE,
+                      warning = FALSE,
+                      fig.width = 8, 
+                      fig.height = 4.5,
+                      fig.align = 'center',
+                      out.width='95%')
+# devtools::load_all() # Travis CI fails on load_all()
+```
+
+> Functions that leverage the quantitative analysis functionality of `xts`, `zoo`, `quantmod`, `TTR`, and `PerformanceAnalytics`
+
+# Overview
+
+There's a wide range of useful quantitative analysis functions that work with time-series objects. The problem is that many of these _wonderful_ functions don't work with data frames or the `tidyverse` workflow. That is until now! The `tidyquant` package integrates the most useful functions from the `xts`, `zoo`, `quantmod`, `TTR`, and `PerformanceAnalytics` packages. This vignette focuses on the following _core functions_ to demonstrate how the integratation works with the quantitative finance packages:
+
+* Transmute, `tq_transmute()`: Returns a new tidy data frame typically in a different periodicity than the input.
+* Mutate, `tq_mutate()`: Adds columns to the existing tidy data frame.
+
+Refer to [Performance Analysis with tidyquant](TQ05-performance-analysis-with-tidyquant.html) for a full discussion on performance analysis and portfolio attribution with `tidyquant`.
+
+# Prerequisites
+
+Load the `tidyquant` package to get started.
+
+```{r}
+# Loads tidyquant, tidyverse, lubridate, xts, quantmod, TTR 
+library(tidyquant)
+```
+
+# Function Compatibility
+
+`tq_transmute_fun_options()` returns a list the __compatible mutate functions__ by each package. We'll discuss these options by package briefly.
+
+```{r}
+tq_transmute_fun_options() %>% str()
+```
+
+## zoo Functionality
+
+```{r}
+# Get zoo functions that work with tq_transmute and tq_mutate
+tq_transmute_fun_options()$zoo
+```
+
+The `zoo` functions that are compatible are listed above. Generally speaking, these are the:
+
+* Roll Apply Functions:
+    * A generic function for applying a function to rolling margins.
+    * Form: `rollapply(data, width, FUN, ..., by = 1, by.column = TRUE, fill = if (na.pad) NA, na.pad = FALSE, partial = FALSE, align = c("center", "left", "right"), coredata = TRUE)`.
+    * Options include `rollmax`, `rollmean`, `rollmedian`, `rollsum`, etc.
+
+
+## xts Functionality
+
+
+```{r}
+# Get xts functions that work with tq_transmute and tq_mutate
+tq_transmute_fun_options()$xts
+```
+
+The `xts` functions that are compatible are listed above. Generally speaking, these are the:
+
+* Period Apply Functions:
+    * Apply a function to a time segment (e.g. `max`, `min`, `mean`, etc).
+    * Form: `apply.daily(x, FUN, ...)`.
+    * Options include `apply.daily`, `weekly`, `monthly`, `quarterly`, `yearly`.
+
+* To-Period Functions:
+    * Convert a time series to time series of lower periodicity (e.g. convert daily to monthly periodicity).
+    * Form: `to.period(x, period = 'months', k = 1, indexAt, name = NULL, OHLC = TRUE, ...)`.
+    * Options include `to.minutes`, `hourly`, `daily`, `weekly`, `monthly`, `quarterly`, `yearly`.
+    * __Note 1 (Important)__: The return structure is different for `to.period` and the `to.monthly` (`to.weekly`, `to.quarterly`, etc) forms. `to.period` returns a date, while `to.months` returns a character MON YYYY. Best to use `to.period` if you want to work with time-series via `lubridate`.  
+     
+## quantmod Functionality
+
+```{r}
+# Get quantmod functions that work with tq_transmute and tq_mutate
+tq_transmute_fun_options()$quantmod
+```
+
+The `quantmod` functions that are compatible are listed above. Generally speaking, these are the:
+
+* Percentage Change (Delt) and Lag Functions
+    * Delt: `Delt(x1, x2 = NULL, k = 0, type = c("arithmetic", "log"))`
+        * Variations of Delt: ClCl, HiCl, LoCl, LoHi, OpCl, OpHi, OpLo, OpOp 
+        * Form: `OpCl(OHLC)`
+    * Lag: `Lag(x, k = 1)` / Next: `Next(x, k = 1)` (Can also use `dplyr::lag` and `dplyr::lead`)
+    
+* Period Return Functions: 
+    * Get the arithmetic or logarithmic returns for various periodicity, which include daily, weekly, monthly, quarterly, and yearly.
+    * Form: `periodReturn(x, period = 'monthly', subset = NULL, type = 'arithmetic', leading = TRUE, ...)`
+
+* Series Functions: 
+    * Return values that describe the series. Options include describing the increases/decreases, acceleration/deceleration, and hi/low.
+    * Forms: `seriesHi(x)`, `seriesIncr(x, thresh = 0, diff. = 1L)`, `seriesAccel(x)`
+
+## TTR Functionality
+
+```{r}
+# Get TTR functions that work with tq_transmute and tq_mutate
+tq_transmute_fun_options()$TTR
+```
+
+
+Here' a brief description of the most popular functions from `TTR`:
+
+* Welles Wilder's Directional Movement Index: 
+    *  `ADX(HLC, n = 14, maType, ...)`
+* Bollinger Bands: 
+    *  `BBands(HLC, n = 20, maType, sd = 2, ...)`: Bollinger Bands
+* Rate of Change / Momentum: 
+    * `ROC(x, n = 1, type = c("continuous", "discrete"), na.pad = TRUE)`: Rate of Change
+    * `momentum(x, n = 1, na.pad = TRUE)`: Momentum
+* Moving Averages (maType):
+    * `SMA(x, n = 10, ...)`: Simple Moving Average
+    * `EMA(x, n = 10, wilder = FALSE, ratio = NULL, ...)`: Exponential Moving Average
+    * `DEMA(x, n = 10, v = 1, wilder = FALSE, ratio = NULL)`: Double Exponential Moving Average
+    * `WMA(x, n = 10, wts = 1:n, ...)`: Weighted Moving Average
+    * `EVWMA(price, volume, n = 10, ...)`: Elastic, Volume-Weighted Moving Average
+    * `ZLEMA(x, n = 10, ratio = NULL, ...)`: Zero Lag Exponential Moving Average
+    * `VWAP(price, volume, n = 10, ...)`: Volume-Weighted Moving Average Price
+    * `VMA(x, w, ratio = 1, ...)`: Variable-Length Moving Average
+    * `HMA(x, n = 20, ...)`: Hull Moving Average
+    * `ALMA(x, n = 9, offset = 0.85, sigma = 6, ...)`: Arnaud Legoux Moving Average
+* MACD Oscillator: 
+    *  `MACD(x, nFast = 12, nSlow = 26, nSig = 9, maType, percent = TRUE, ...)`
+* Relative Strength Index: 
+    *  `RSI(price, n = 14, maType, ...)`
+* runFun: 
+    * `runSum(x, n = 10, cumulative = FALSE)`: returns sums over a n-period moving window.
+    * `runMin(x, n = 10, cumulative = FALSE)`: returns minimums over a n-period moving window.
+    * `runMax(x, n = 10, cumulative = FALSE)`: returns maximums over a n-period moving window.
+    * `runMean(x, n = 10, cumulative = FALSE)`: returns means over a n-period moving window.
+    * `runMedian(x, n = 10, non.unique = "mean", cumulative = FALSE)`: returns medians over a n-period moving window.
+    * `runCov(x, y, n = 10, use = "all.obs", sample = TRUE, cumulative = FALSE)`: returns covariances over a n-period moving window.
+    * `runCor(x, y, n = 10, use = "all.obs", sample = TRUE, cumulative = FALSE)`: returns correlations over a n-period moving window.
+    * `runVar(x, y = NULL, n = 10, sample = TRUE, cumulative = FALSE)`: returns variances over a n-period moving window.
+    * `runSD(x, n = 10, sample = TRUE, cumulative = FALSE)`: returns standard deviations over a n-period moving window.
+    * `runMAD(x, n = 10, center = NULL, stat = "median", constant = 1.4826, non.unique = "mean", cumulative = FALSE)`: returns median/mean absolute deviations over a n-period moving window.
+    * `wilderSum(x, n = 10)`: retuns a Welles Wilder style weighted sum over a n-period moving window.
+* Stochastic Oscillator / Stochastic Momentum Index:
+    * `stoch(HLC, nFastK = 14, nFastD = 3, nSlowD = 3, maType, bounded = TRUE, smooth = 1, ...)`: Stochastic Oscillator
+    * `SMI(HLC, n = 13, nFast = 2, nSlow = 25, nSig = 9, maType, bounded = TRUE, ...)`: Stochastic Momentum Index
+
+## PerformanceAnalytics Functionality
+
+```{r}
+# Get PerformanceAnalytics functions that work with tq_transmute and tq_mutate
+tq_transmute_fun_options()$PerformanceAnalytics
+```
+
+The `PerformanceAnalytics` mutation functions all deal with returns:
+
+* `Return.annualized` and `Return.annualized.excess`: Takes period returns and consolidates into annualized returns 
+* `Return.clean`: Removes outliers from returns
+* `Return.excess`: Removes the risk-free rate from the returns to yield returns in excess of the risk-free rate
+* `zerofill`: Used to replace `NA` values with zeros.
+
+
+
+# Quantitative Power In Action
+
+We'll go through some examples, but first let's get some data. The `FANG` data set will be used which consists of stock prices for FB, AMZN, NFLX, and GOOG from the beginning of 2013 to the end of 2016.
+
+```{r}
+data(FANG)
+FANG
+```
+
+## Example 1: Use quantmod periodReturn to Convert Prices to Returns 
+
+The `quantmod::periodReturn()` function generates returns by periodicity. We'll go through a couple usage cases.  
+
+### Example 1A: Getting and Charting Annual Returns
+
+We want to use the adjusted closing prices column (adjusted for stock splits, which can make it appear that a stock is performing poorly if a split is included). We set `select = adjusted`. We research the `periodReturn` function, and we found that it accepts `type = "arithmetic"` and `period = "yearly"`, which returns the annual returns. 
+
+```{r}
+FANG_annual_returns <- FANG %>%
+    group_by(symbol) %>%
+    tq_transmute(select     = adjusted, 
+                 mutate_fun = periodReturn, 
+                 period     = "yearly", 
+                 type       = "arithmetic")
+FANG_annual_returns
+```
+
+Charting annual returns is just a quick use of the `ggplot2` package.  
+
+```{r, fig.height = 4.5}
+FANG_annual_returns %>%
+    ggplot(aes(x = date, y = yearly.returns, fill = symbol)) +
+    geom_bar(stat = "identity") +
+    geom_hline(yintercept = 0, color = palette_light()[[1]]) +
+    scale_y_continuous(labels = scales::percent) +
+    labs(title = "FANG: Annual Returns",
+         subtitle = "Get annual returns quickly with tq_transmute!",
+         y = "Annual Returns", x = "") + 
+    facet_wrap(~ symbol, ncol = 2) +
+    theme_tq() + 
+    scale_fill_tq()
+```
+
+
+
+### Example 1B: Getting Daily Log Returns
+
+Daily log returns follows a similar approach. Normally I go with a transmute function, `tq_transmute`, because the `periodReturn` function accepts different periodicity options, and anything other than daily will blow up a mutation. But, in our situation the period returns periodicity is the same as the stock prices periodicity (both daily), so we can use either. We want to use the adjusted closing prices column (adjusted for stock splits, which can make it appear that a stock is performing poorly if a split is included), so we set `select = adjusted`. We researched the `periodReturn` function, and we found that it accepts `type = "log"` and `period = "daily"`, which returns the daily log returns. 
+
+
+```{r}
+FANG_daily_log_returns <- FANG %>%
+    group_by(symbol) %>%
+    tq_transmute(select     = adjusted, 
+                 mutate_fun = periodReturn, 
+                 period     = "daily", 
+                 type       = "log",
+                 col_rename = "monthly.returns")
+```
+
+```{r, fig.height = 4.5}
+FANG_daily_log_returns %>%
+    ggplot(aes(x = monthly.returns, fill = symbol)) +
+    geom_density(alpha = 0.5) +
+    labs(title = "FANG: Charting the Daily Log Returns",
+         x = "Monthly Returns", y = "Density") +
+    theme_tq() +
+    scale_fill_tq() + 
+    facet_wrap(~ symbol, ncol = 2)
+```
+
+
+## Example 2: Use xts to.period to Change the Periodicity from Daily to Monthly
+
+The `xts::to.period` function is used for periodicity aggregation (converting from a lower level periodicity to a higher level such as minutes to hours or months to years). Because we are seeking a return structure that is on a different time scale than the input (daily versus weekly), we need to use a transmute function. We select `tq_transmute()` and pass the open, high, low, close and volume columns via `select = open:volume`. Looking at the documentation for `to.period`, we see that it accepts a `period` argument that we can set to `"weeks"`. The result is the OHLCV data returned with the dates changed to one day per week.
+
+```{r}
+FANG %>%
+    group_by(symbol) %>%
+    tq_transmute(select     = open:volume, 
+                 mutate_fun = to.period, 
+                 period     = "months")
+```
+
+A common usage case is to reduce the number of points to smooth time series plots. Let's check out difference between daily and monthly plots. 
+
+### Without Periodicity Aggregation
+
+```{r}
+FANG_daily <- FANG %>%
+    group_by(symbol)
+
+FANG_daily %>%
+    ggplot(aes(x = date, y = adjusted, color = symbol)) +
+    geom_line(size = 1) +
+    labs(title = "Daily Stock Prices",
+         x = "", y = "Adjusted Prices", color = "") +
+    facet_wrap(~ symbol, ncol = 2, scales = "free_y") +
+    scale_y_continuous(labels = scales::dollar) +
+    theme_tq() + 
+    scale_color_tq()
+```
+
+### With Periodicity Aggregation
+
+```{r}
+FANG_monthly <- FANG %>%
+    group_by(symbol) %>%
+    tq_transmute(select     = adjusted, 
+                 mutate_fun = to.period, 
+                 period     = "months")
+
+FANG_monthly %>%
+    ggplot(aes(x = date, y = adjusted, color = symbol)) +
+    geom_line(size = 1) +
+    labs(title = "Monthly Stock Prices",
+         x = "", y = "Adjusted Prices", color = "") +
+    facet_wrap(~ symbol, ncol = 2, scales = "free_y") +
+    scale_y_continuous(labels = scales::dollar) +
+    theme_tq() + 
+    scale_color_tq()
+```
+
+
+## Example 3: Use TTR runCor to Visualize Rolling Correlations of Returns
+
+Return correlations are a common way to analyze how closely an asset or portfolio mimics a baseline index or fund. We will need a set of returns for both the stocks and baseline. The stock will be the `FANG` data set and the baseline will be the Spdr XLK technology sector. We have the prices for the "FANG" stocks, so we use `tq_get` to retrieve the "XLK" prices. The returns can be calculated from the "adjusted" prices using the process in Example 1.
+
+```{r}
+# Asset Returns
+FANG_returns_monthly <- FANG %>%
+    group_by(symbol) %>%
+    tq_transmute(select     = adjusted, 
+                 mutate_fun = periodReturn,
+                 period     = "monthly")
+
+# Baseline Returns
+baseline_returns_monthly <- "XLK" %>%
+    tq_get(get  = "stock.prices",
+           from = "2013-01-01", 
+           to   = "2016-12-31") %>%
+    tq_transmute(select     = adjusted, 
+                 mutate_fun = periodReturn,
+                 period     = "monthly")
+```
+
+Next, join the asset returns with the baseline returns by date.
+
+```{r}
+returns_joined <- left_join(FANG_returns_monthly, 
+                            baseline_returns_monthly,
+                            by = "date")
+returns_joined
+```
+
+The `TTR::runCor` function can be used to evaluate rolling correlations using the xy pattern. Looking at the documentation (`?runCor`), we can see that the arguments include `x` and `y` along with a few additional arguments including `n` for the width of the rolling correlation. Because the scale is monthly, we'll go with `n = 6` for a 6-month rolling correlation. The `col_rename` argument enables easy renaming of the output column(s).
+
+```{r}
+FANG_rolling_corr <- returns_joined %>%
+    tq_transmute_xy(x          = monthly.returns.x, 
+                    y          = monthly.returns.y,
+                    mutate_fun = runCor,
+                    n          = 6,
+                    col_rename = "rolling.corr.6")
+```
+
+And, we can plot the rolling correlations for the FANG stocks.
+
+```{r}
+FANG_rolling_corr %>%
+    ggplot(aes(x = date, y = rolling.corr.6, color = symbol)) +
+    geom_hline(yintercept = 0, color = palette_light()[[1]]) +
+    geom_line(size = 1) +
+    labs(title = "FANG: Six Month Rolling Correlation to XLK",
+         x = "", y = "Correlation", color = "") +
+    facet_wrap(~ symbol, ncol = 2) +
+    theme_tq() + 
+    scale_color_tq()
+```
+
+
+## Example 4: Use TTR MACD to Visualize Moving Average Convergence Divergence
+
+In reviewing the available options in the `TTR` package, we see that `MACD` will get us the Moving Average Convergence Divergence (MACD). In researching the documentation, the return is in the same periodicity as the input and the functions work with OHLC functions, so we can use `tq_mutate()`. MACD requires a price, so we select `close`. 
+
+```{r}
+FANG_macd <- FANG %>%
+    group_by(symbol) %>%
+    tq_mutate(select     = close, 
+              mutate_fun = MACD, 
+              nFast      = 12, 
+              nSlow      = 26, 
+              nSig       = 9, 
+              maType     = SMA) %>%
+    mutate(diff = macd - signal) %>%
+    select(-(open:volume))
+FANG_macd
+```
+
+And, we can visualize the data like so.
+
+```{r}
+FANG_macd %>%
+    filter(date >= as_date("2016-10-01")) %>%
+    ggplot(aes(x = date)) + 
+    geom_hline(yintercept = 0, color = palette_light()[[1]]) +
+    geom_line(aes(y = macd, col = symbol)) +
+    geom_line(aes(y = signal), color = "blue", linetype = 2) +
+    geom_bar(aes(y = diff), stat = "identity", color = palette_light()[[1]]) +
+    facet_wrap(~ symbol, ncol = 2, scale = "free_y") +
+    labs(title = "FANG: Moving Average Convergence Divergence",
+         y = "MACD", x = "", color = "") +
+    theme_tq() +
+    scale_color_tq()
+```
+
+
+## Example 5: Use xts apply.quarterly to Get the Max and Min Price for Each Quarter
+
+The `xts::apply.quarterly()` function that is part of the period apply group can be used to apply functions by quarterly time segments. Because we are seeking a return structure that is on a different time scale than the input (quarterly versus daily), we need to use a transmute function. We select `tq_transmute` and pass the close price using `select`, and we send this subset of the data to the `apply.quarterly` function via the `mutate_fun` argument. Looking at the documentation for `apply.quarterly`, we see that we can pass a function to the argument, `FUN`. We want the maximum values, so we set `FUN = max`. The result is the quarters returned as a date and the maximum closing price during the quarter returned as a double. 
+
+```{r}
+FANG_max_by_qtr <- FANG %>%
+    group_by(symbol) %>%
+    tq_transmute(select     = adjusted, 
+                 mutate_fun = apply.quarterly, 
+                 FUN        = max, 
+                 col_rename = "max.close") %>%
+    mutate(year.qtr = paste0(year(date), "-Q", quarter(date))) %>%
+    select(-date)
+FANG_max_by_qtr
+```
+
+The minimum each quarter can be retrieved in much the same way. The data frames can be joined using `left_join` to get the max and min by quarter.
+
+```{r}
+FANG_min_by_qtr <- FANG %>%
+    group_by(symbol) %>%
+    tq_transmute(select     = adjusted, 
+                 mutate_fun = apply.quarterly, 
+                 FUN        = min, 
+                 col_rename = "min.close") %>%
+    mutate(year.qtr = paste0(year(date), "-Q", quarter(date))) %>%
+    select(-date)
+
+FANG_by_qtr <- left_join(FANG_max_by_qtr, FANG_min_by_qtr,
+                         by = c("symbol"   = "symbol",
+                                "year.qtr" = "year.qtr"))
+FANG_by_qtr
+```
+
+
+And, we can visualize the data like so.
+
+```{r}
+FANG_by_qtr %>%
+    ggplot(aes(x = year.qtr, color = symbol)) +
+    geom_segment(aes(xend = year.qtr, y = min.close, yend = max.close),
+                 size = 1) +
+    geom_point(aes(y = max.close), size = 2) +
+    geom_point(aes(y = min.close), size = 2) +
+    facet_wrap(~ symbol, ncol = 2, scale = "free_y") +
+    labs(title = "FANG: Min/Max Price By Quarter",
+         y = "Stock Price", color = "") +
+    theme_tq() +
+    scale_color_tq() +
+    scale_y_continuous(labels = scales::dollar) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1),
+          axis.title.x = element_blank())
+```
+
+
+## Example 6: Use zoo rollapply to visualize a rolling regression
+
+A good way to analyze relationships over time is using rolling calculations that compare two assets. Pairs trading is a common mechanism for similar assets. While we will not go into a pairs trade analysis, we will analyze the relationship between two similar assets as a precursor to a pairs trade. In this example we will analyze two similar assets, Mastercard (MA) and Visa (V) to show the relationship via regression. 
+
+Before we analyze a rolling regression, it's helpful to view the overall trend in returns. To do this, we use `tq_get()` to get stock prices for the assets and `tq_transmute()` to transform the daily prices to daily returns. We'll collect the data and visualize via a scatter plot.
+
+```{r}
+# Get stock pairs
+stock_prices <- c("MA", "V") %>%
+    tq_get(get  = "stock.prices",
+           from = "2015-01-01",
+           to   = "2016-12-31") %>%
+    group_by(symbol) 
+
+stock_pairs <- stock_prices %>%
+    tq_transmute(select     = adjusted,
+                 mutate_fun = periodReturn,
+                 period     = "daily",
+                 type       = "log",
+                 col_rename = "returns") %>%
+    spread(key = symbol, value = returns)
+```
+
+We can visualize the relationship between the returns of the stock pairs like so.
+
+```{r}
+stock_pairs %>%
+    ggplot(aes(x = V, y = MA)) +
+    geom_point(color = palette_light()[[1]], alpha = 0.5) +
+    geom_smooth(method = "lm") +
+    labs(title = "Visualizing Returns Relationship of Stock Pairs") +
+    theme_tq()
+```
+
+We can get statistcs on the relationship from the `lm` function. The model is highly correlated with a p-value of essential zero. The coefficient estimate for V (Coefficient 1) is 0.8134 indicating a positive relationship, meaning as V increases MA also tends to increase. 
+
+```{r}
+lm(MA ~ V, data = stock_pairs) %>%
+    summary()
+```
+
+While this characterizes the overall relationship, it's missing the time aspect. Fortunately, we can use the `rollapply` function from the `zoo` package to plot a rolling regression, showing how the model coefficent varies on a rolling basis over time. We calculate rolling regressions with `tq_mutate()` in two additional steps:
+
+1. Create a custom function
+2. Apply the function with `tq_mutate(mutate_fun = rollapply)`
+
+First, create a custom regression function. An important point is that the "data" will be passed to the regression function as an `xts` object. The `timetk::tk_tbl` function takes care of converting to a data frame.
+
+```{r}
+regr_fun <- function(data) {
+    coef(lm(MA ~ V, data = timetk::tk_tbl(data, silent = TRUE)))
+}
+```
+
+Now we can use `tq_mutate()` to apply the custom regression function over a rolling window using `rollapply` from the `zoo` package. Internally, the `returns_combined` data frame is being passed automatically to the `data` argument of the `rollapply` function. All you need to specify is the `mutate_fun = rollapply` and any additional arguments necessary to apply the `rollapply` function. We'll specify a 90 day window via `width = 90`. The `FUN` argument is our custom regression function, `regr_fun`. It's extremely important to specify `by.column = FALSE`, which tells `rollapply` to perform the computation using the data as a whole rather than apply the function to each column independently. The `col_rename` argument is used to rename the added columns.
+
+```{r}
+stock_pairs <- stock_pairs %>%
+         tq_mutate(mutate_fun = rollapply,
+                   width      = 90,
+                   FUN        = regr_fun,
+                   by.column  = FALSE,
+                   col_rename = c("coef.0", "coef.1"))
+stock_pairs
+```
+
+Finally, we can visualize the first coefficient like so. A horizontal line is added using the full data set model. This gives us insight as to points in time where the relationship deviates significantly from the long run trend which can be explored for potential pair trade opportunities. 
+
+```{r}
+stock_pairs %>%
+    ggplot(aes(x = date, y = coef.1)) +
+    geom_line(size = 1, color = palette_light()[[1]]) +
+    geom_hline(yintercept = 0.8134, size = 1, color = palette_light()[[2]]) +
+    labs(title = "MA ~ V: Visualizing Rolling Regression Coefficient", x = "") +
+    theme_tq()
+```
+
+Stock returns during this time period.
+
+```{r}
+stock_prices %>%
+    tq_transmute(adjusted, 
+                 periodReturn, 
+                 period = "daily", 
+                 type = "log", 
+                 col_rename = "returns") %>%
+    mutate(wealth.index = 100 * cumprod(1 + returns)) %>%
+    ggplot(aes(x = date, y = wealth.index, color = symbol)) +
+    geom_line(size = 1) +
+    labs(title = "MA and V: Stock Prices") +
+    theme_tq() + 
+    scale_color_tq()
+```
+
+## Example 7: Use Return.clean and Return.excess to clean and calculate excess returns 
+
+In this example we use several of the `PerformanceAnalytics` functions to clean and format returns. The example uses three progressive applications of `tq_transmute` to apply various quant functions to the grouped stock prices from the `FANG` data set. First, we calculate daily returns using `quantmod::periodReturn`. Next, we use `Return.clean` to clean outliers from the return data. The `alpha` parameter is the percentage of oultiers to be cleaned. Finally, the excess returns are calculated using a risk-free rate of 3% (divided by 252 for 252 trade days in one year).  
+
+```{r}
+FANG %>%
+    group_by(symbol) %>%
+    tq_transmute(adjusted, periodReturn, period = "daily") %>%
+    tq_transmute(daily.returns, Return.clean, alpha = 0.05) %>%
+    tq_transmute(daily.returns, Return.excess, Rf = 0.03 / 252)
+```
+
