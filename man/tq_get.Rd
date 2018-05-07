@@ -22,15 +22,11 @@ for \code{x}. Options include:
 \item \code{"stock.prices"}: Get the open, high, low, close, volume and adjusted
 stock prices for a stock symbol from
 \href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for \code{quantmod::getSymbols()}.
-\item \code{"stock.prices.google"}: Get the open, high, low, close, and volume
-stock prices for a stock symbol from
-\href{https://finance.google.com/finance}{Google Finance}. Wrapper for \code{quantmod::getSymbols.google()}.
+\item \code{"stock.prices.google"}: DISCONTINUED.
 \item \code{"stock.prices.japan"}: Get the open, high, low, close, volume and adjusted
 stock prices for a stock symbol from
 \href{http://finance.yahoo.co.jp/}{Yahoo Finance Japan}. Wrapper for \code{quantmod::getSymbols.yahooj()}.
-\item \code{"financials"}: Get the income, balance sheet, and cash flow
-financial statements for a stock symbol from
-\href{https://www.google.com/finance}{Google Finance}. Wrapper for \code{quantmod::getFinancials()}.
+\item \code{"financials"}: DISCONTINUED.
 \item \code{"key.ratios"}: Get 89 historical growth, profitablity, financial health,
 efficiency, and valuation ratios that span 10-years from
 \href{https://www.morningstar.com}{Morningstar}.
@@ -73,11 +69,11 @@ Common optional parameters include:
 \item \code{from}: Optional for various time series functions in quantmod / quandl packages.
 A character string representing a start date in
 YYYY-MM-DD format. No effect on
-\code{"financials"}, \code{"key.ratios"}, or \code{"key.stats"}.
+\code{"key.ratios"}, or \code{"key.stats"}.
 \item \code{to}: Optional for various time series functions in quantmod / quandl packages.
 A character string representing a end date in
 YYYY-MM-DD format. No effect on
-\code{get = "financials"},  \code{"key.ratios"}, or \code{"key.stats"}.
+\code{get = "key.ratios"} or \code{"key.stats"}.
 }}
 }
 \value{
@@ -120,7 +116,7 @@ mult_stocks <- tq_get(c("FB", "AMZN"),
 
 # Multiple gets
 mult_gets <- tq_get("AAPL",
-                    get = c("stock.prices", "financials"),
+                    get = c("stock.prices", "dividends"),
                     from = "2016-01-01",
                     to   = "2017-01-01")
 }

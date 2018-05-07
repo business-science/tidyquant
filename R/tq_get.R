@@ -8,15 +8,11 @@
 #'   \item `"stock.prices"`: Get the open, high, low, close, volume and adjusted
 #'   stock prices for a stock symbol from
 #'   \href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for `quantmod::getSymbols()`.
-#'   \item `"stock.prices.google"`: Get the open, high, low, close, and volume
-#'   stock prices for a stock symbol from
-#'   \href{https://finance.google.com/finance}{Google Finance}. Wrapper for `quantmod::getSymbols.google()`.
+#'   \item `"stock.prices.google"`: DISCONTINUED.
 #'   \item `"stock.prices.japan"`: Get the open, high, low, close, volume and adjusted
 #'   stock prices for a stock symbol from
 #'   \href{http://finance.yahoo.co.jp/}{Yahoo Finance Japan}. Wrapper for `quantmod::getSymbols.yahooj()`.
-#'   \item `"financials"`: Get the income, balance sheet, and cash flow
-#'   financial statements for a stock symbol from
-#'   \href{https://www.google.com/finance}{Google Finance}. Wrapper for `quantmod::getFinancials()`.
+#'   \item `"financials"`: DISCONTINUED.
 #'   \item `"key.ratios"`: Get 89 historical growth, profitablity, financial health,
 #'   efficiency, and valuation ratios that span 10-years from
 #'   \href{https://www.morningstar.com}{Morningstar}.
@@ -57,11 +53,11 @@
 #'   \item `from`: Optional for various time series functions in quantmod / quandl packages.
 #'   A character string representing a start date in
 #'   YYYY-MM-DD format. No effect on
-#'   `"financials"`, `"key.ratios"`, or `"key.stats"`.
+#'   `"key.ratios"`, or `"key.stats"`.
 #'   \item `to`: Optional for various time series functions in quantmod / quandl packages.
 #'   A character string representing a end date in
 #'   YYYY-MM-DD format. No effect on
-#'   `get = "financials"`,  `"key.ratios"`, or `"key.stats"`.
+#'   `get = "key.ratios"` or `"key.stats"`.
 #' }
 #'
 #'
@@ -116,7 +112,7 @@
 #'
 #' # Multiple gets
 #' mult_gets <- tq_get("AAPL",
-#'                     get = c("stock.prices", "financials"),
+#'                     get = c("stock.prices", "dividends"),
 #'                     from = "2016-01-01",
 #'                     to   = "2017-01-01")
 
