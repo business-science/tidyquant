@@ -11,3 +11,4 @@ img
 ^_pkgdown\.yml$
 ^index\.Rmd$
 ^docs$
+^appveyor\.yml$
