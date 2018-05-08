@@ -33,7 +33,7 @@ library(tidyquant)
 The four primary quantitative packages that are the backbone for financial analysis in _R programming_ are: 
 
 * [xts](https://CRAN.R-project.org/package=xts), or [eXtensible time series](http://joshuaulrich.github.io/xts/index.html): The data structure for handling time-series data. The underlying time-series structure is `zoo`, which is also integrated.
-* [quantmod](https://CRAN.R-project.org/package=quantmod), or [Quantitative Financial Modelling & Trading Framework for R](http://www.quantmod.com/): A package designed for retrieving, manipulating, and modeling quantitative data.
+* [quantmod](https://CRAN.R-project.org/package=quantmod), or Quantitative Financial Modelling & Trading Framework for R: A package designed for retrieving, manipulating, and modeling quantitative data.
 * [TTR](https://CRAN.R-project.org/package=TTR), or Technical Trading Rules: A package that includes various functions to compute technical trading equations for quantitative or trading data.
 * [PerformanceAnalytics](https://CRAN.R-project.org/package=PerformanceAnalytics): A package that includes a collection of econometric functions for performance and risk analysis. The package analyzes returns (not prices).
 

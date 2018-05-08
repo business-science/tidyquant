@@ -26,7 +26,7 @@
 #'   \item `"metal.prices"`: Get the metal prices from
 #'   \href{https://www.oanda.com/}{Oanda}. Wrapper for `quantmod::getMetals()`.
 #'   \item `"exchange.rates"`: Get exchange rates from
-#'   \href{https://www.oanda.com/currency/converter/}{Oanda}. Wrapper for `quantmod::getFX()`.
+#'   Oanda. Wrapper for `quantmod::getFX()`.
 #'   \item `"quandl"`: Get data sets from
 #'   \href{https://www.quandl.com/}{Quandl}. Wrapper for `Quandl::Quandl()`.
 #'   See also [quandl_api_key()].

@@ -74,8 +74,6 @@ Stock lists for three stock exchanges are available: NASDAQ, NYSE, and AMEX. If 
 tq_exchange("NASDAQ")
 ```
 
-The data source is the [NASDAQ](http://www.nasdaq.com/).
-
 # Get Quantitative Data
 
 The `tq_get()` function is used to collect data by changing the `get` argument. The options include stock prices, key statistics, dividends and splits from Yahoo Finance, key ratios from Morningstar, financial statements from Google Finance, metal prices and exchange rates from Oanda, and economic data from the FRED database. Use `tq_get_options()` to see the full list.
@@ -352,7 +350,7 @@ eur_usd <- tq_get("EUR/USD",
 eur_usd 
 ```
 
-The data source is [Oanda](https://www.oanda.com/), and list of currencies to compare can be found on [Oanda's currency converter](https://www.oanda.com/currency/converter/). It may make more sense to get this data from the FRED (See [Economic Data](#economic-data)) since the max period for Oanda is 180 days.
+The data source is [Oanda](https://www.oanda.com/), and list of currencies to compare can be found on Oanda's currency converter. It may make more sense to get this data from the FRED (See [Economic Data](#economic-data)) since the max period for Oanda is 180 days.
 
 ## Metal Prices
 

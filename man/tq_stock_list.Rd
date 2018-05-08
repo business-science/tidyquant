@@ -40,8 +40,6 @@ choose from.
 \code{tq_exchange()} returns the stock symbol, company, last sale price,
 market capitalization, sector and industry of every stock
 in an exchange. Three stock exchanges are available (AMEX, NASDAQ, and NYSE).
-The source is
-\href{http://www.nasdaq.com/}{NASDAQ}.
 
 \code{tq_exchange_options()} returns a list of stock exchanges you can
 choose from. The options are AMEX, NASDAQ and NYSE.

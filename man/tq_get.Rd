@@ -40,7 +40,7 @@ from \href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for \code{quantmo
 \item \code{"metal.prices"}: Get the metal prices from
 \href{https://www.oanda.com/}{Oanda}. Wrapper for \code{quantmod::getMetals()}.
 \item \code{"exchange.rates"}: Get exchange rates from
-\href{https://www.oanda.com/currency/converter/}{Oanda}. Wrapper for \code{quantmod::getFX()}.
+Oanda. Wrapper for \code{quantmod::getFX()}.
 \item \code{"quandl"}: Get data sets from
 \href{https://www.quandl.com/}{Quandl}. Wrapper for \code{Quandl::Quandl()}.
 See also \code{\link[=quandl_api_key]{quandl_api_key()}}.
