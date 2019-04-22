@@ -1,13 +1,12 @@
 ## Release Summary
-This release of tidyquant fixes the ERROR messages on CRAN. The Google Finance
-API no longer provides data, which was the cause of most failures. It has been
-deprecated in tidyquant.
+This release of tidyquant fixes the ERROR messages on CRAN. 
+The Mornginstar Key Ratios was deprecated due to website change. 
 
 ## Test environments
-* local Windows install, R 3.4.4
-* local Mac install, R 3.4.4
-* ubuntu 12.04 (on travis-ci), R 3.4.4
-* ubuntu 12.04 (on travis-ci), R 3.5.0
+* local Windows install, R 3.5.2
+* local Mac install, R 3.5.2
+* ubuntu 12.04 (on travis-ci), R 3.5.2
+* ubuntu 12.04 (on travis-ci), R 3.5.2
 * win-builder (devel and release)
 
 ## R CMD check results
