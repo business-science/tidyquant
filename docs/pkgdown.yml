@@ -1,6 +1,6 @@
-pandoc: 2.1.2
-pkgdown: 0.1.0.9000
-pkgdown_sha: bfbf38c443ef2dafc17b9255d7b5db9d05dfb537
+pandoc: 2.3.1
+pkgdown: 1.3.0
+pkgdown_sha: ~
 articles:
   TQ00-introduction-to-tidyquant: TQ00-introduction-to-tidyquant.html
   TQ01-core-functions-in-tidyquant: TQ01-core-functions-in-tidyquant.html
