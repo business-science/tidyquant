@@ -3,7 +3,8 @@
 
 # tidyquant <img src="man/figures/tidyquant-logo.png" width="147" height="170" align="right" />
 
-<https://travis-ci.org/business-science/tidyquant.svg?branch=master>
+[![Build
+Status](https://travis-ci.org/business-science/tidyquant.svg?branch=master)](https://travis-ci.org/business-science/tidyquant)
 [![codecov](https://codecov.io/gh/business-science/tidyquant/branch/master/graph/badge.svg)](https://codecov.io/gh/business-science/tidyquant)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/tidyquant)](https://cran.r-project.org/package=tidyquant)
 ![](http://cranlogs.r-pkg.org/badges/tidyquant?color=brightgreen)
