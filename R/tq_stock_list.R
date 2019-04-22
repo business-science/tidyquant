@@ -72,14 +72,6 @@ tq_index <- function(x, use_fallback = FALSE) {
     # Use fallback if requested
     if(use_fallback) return(index_fallback(x))
 
-    # Require XLConnect since now in Suggests
-    # Follows https://stackoverflow.com/questions/5260079/how-to-properly-use-functions-from-other-packages-in-a-r-package/5261662#5261662
-    if(!requireNamespace("XLConnect", quietly = TRUE)) {
-        msg <- paste0("The XLConnect package is required for tq_index(). ",
-                      "Please install it yourself, then retry.")
-        stop(msg, call. = FALSE)
-    }
-
     # Convert index name to SPDR ETF name
     x_spdr <- spdr_mapper(x)
 
@@ -262,8 +254,10 @@ index_download <- function(x, index_name) {
         suppressMessages({
             # res$df <- gdata::read.xls(tf, skip = 3, stringsAsFactors = FALSE)
             # res$df <- readxl::read_xls(tf, skip = 3)
-            wb     <- XLConnect::loadWorkbook(filename = tf)
-            res$df <- XLConnect::readWorksheet(wb, sheet = 1, startRow = 4)
+            # wb     <- XLConnect::loadWorkbook(filename = tf)
+            # res$df <- XLConnect::readWorksheet(wb, sheet = 1, startRow = 4)
+
+            res$df <- readxl::read_xls(tf, skip = 3)
         })
 
         # Release temp file

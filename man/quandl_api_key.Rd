@@ -2,7 +2,6 @@
 % Please edit documentation in R/quandl.R
 \name{quandl_api_key}
 \alias{quandl_api_key}
-\alias{quandl_api_key}
 \title{Query or set Quandl API Key}
 \usage{
 quandl_api_key(api_key)

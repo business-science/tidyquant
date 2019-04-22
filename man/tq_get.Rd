@@ -27,9 +27,7 @@ stock prices for a stock symbol from
 stock prices for a stock symbol from
 \href{http://finance.yahoo.co.jp/}{Yahoo Finance Japan}. Wrapper for \code{quantmod::getSymbols.yahooj()}.
 \item \code{"financials"}: DISCONTINUED.
-\item \code{"key.ratios"}: Get 89 historical growth, profitablity, financial health,
-efficiency, and valuation ratios that span 10-years from
-\href{https://www.morningstar.com}{Morningstar}.
+\item \code{"key.ratios"}: DISCONTINUED.
 \item \code{"key.stats"}: DISCONTINUED.
 \item \code{"dividends"}: Get the dividends for a stock symbol
 from \href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for \code{quantmod::getDividends()}.

@@ -1,3 +1,9 @@
+## tidyquant 0.5.6
+
+* Morningstar Key Ratios: The `tq_get()` argument `get = "key.ratios"` has been deprecated due to a change in Morningstar's website.
+
+* Remove dependency on `XLConnect`. Replace with `readxl`.
+
 ## tidyquant 0.5.5
 
 * Bux fix

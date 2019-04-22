@@ -10,8 +10,9 @@ geom_ma(mapping = NULL, data = NULL, position = "identity",
   n = 20, wilder = FALSE, ratio = NULL, v = 1, wts = 1:n, ...)
 
 geom_ma_(mapping = NULL, data = NULL, position = "identity",
-  na.rm = TRUE, show.legend = NA, inherit.aes = TRUE, ma_fun = "SMA",
-  n = 20, wilder = FALSE, ratio = NULL, v = 1, wts = 1:n, ...)
+  na.rm = TRUE, show.legend = NA, inherit.aes = TRUE,
+  ma_fun = "SMA", n = 20, wilder = FALSE, ratio = NULL, v = 1,
+  wts = 1:n, ...)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{ggplot2::aes()}} or

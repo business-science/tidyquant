@@ -2,7 +2,6 @@
 % Please edit documentation in R/theme_tq.R
 \name{theme_tq}
 \alias{theme_tq}
-\alias{theme_tq}
 \alias{theme_tq_dark}
 \alias{theme_tq_green}
 \title{tidyquant themes for ggplot2.}

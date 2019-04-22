@@ -2,7 +2,6 @@
 % Please edit documentation in R/quandl.R
 \name{quandl_search}
 \alias{quandl_search}
-\alias{quandl_search}
 \title{Search the Quandl database}
 \usage{
 quandl_search(query, silent = FALSE, per_page = 10, ...)

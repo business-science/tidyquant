@@ -152,6 +152,8 @@ The next two getters, key ratios and key stats, work in tandem. Key ratios provi
 
 ### Key Ratios
 
+Key Ratios have been deprecated due to a change in Mornginstar's website.
+
 For any given stock, the historical key ratios are available for 10 years, and are classified into the following sections:
 
 * __Financials__: These ratios include gross margin %, operating margin %, EPS, book value per share, and more.
@@ -165,34 +167,35 @@ For any given stock, the historical key ratios are available for 10 years, and a
 To get the key ratios:
 
 ```{r}
-aapl_key_ratios <- tq_get("AAPL", get = "key.ratios")
-aapl_key_ratios
+# aapl_key_ratios <- tq_get("AAPL", get = "key.ratios")
+# aapl_key_ratios
 ```
 
 The ratios can be filtered and unnested to peel away the hierarchical nesting layers and access the underlying data:
 
 ```{r}
-aapl_key_ratios %>%
-    filter(section == "Valuation Ratios") %>%
-    unnest()
+# aapl_key_ratios %>%
+#     filter(section == "Valuation Ratios") %>%
+#     unnest()
 ```
 
 Once we have a section, we can quickly visualize the ratios:
 
 ```{r}
-aapl_key_ratios %>%
-    filter(section == "Valuation Ratios") %>%
-    unnest() %>%
-    ggplot(aes(x = date, y = value)) +
-    geom_line(aes(col = factor(category, levels = c("Price to Earnings", "Price to Cash Flow", "Price to Book", "Price to Sales"))), 
-              size = 1)  + 
-    labs(title = "10-Year Historical Valuation Ratios for AAPL", x = "", 
-         y = "", col = "") +
-    theme_tq() +
-    scale_color_tq()
+# aapl_key_ratios %>%
+#     filter(section == "Valuation Ratios") %>%
+#     unnest() %>%
+#     ggplot(aes(x = date, y = value)) +
+#     geom_line(aes(col = factor(category, levels = c("Price to Earnings", "Price to Cash Flow", "Price to Book", "Price to Sales"))),
+#               size = 1)  +
+#     labs(title = "10-Year Historical Valuation Ratios for AAPL", x = "",
+#          y = "", col = "") +
+#     theme_tq() +
+#     scale_color_tq()
 ```
 
 The data source is [Morningstar](http://www.morningstar.com/).
+
 
 ### Key Stats
 

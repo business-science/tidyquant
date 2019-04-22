@@ -6,7 +6,8 @@
 \alias{tq_transform_xy}
 \title{Deprecated functions}
 \usage{
-tq_transform(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL, ...)
+tq_transform(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL,
+  ...)
 
 tq_transform_xy(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
 }
