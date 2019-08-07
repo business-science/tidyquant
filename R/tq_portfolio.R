@@ -339,7 +339,7 @@ map_weights <- function(weights, assets_col) {
                                 by = purrr::set_names(x, y)) %>%
             dplyr::rename_(weights = names(weights)[[2]]) %>%
             tidyr::replace_na(list(weights = 0)) %>%
-            dplyr::arrange_(y) %>%
+            dplyr::arrange(!!rlang::sym(y)) %>%
             dplyr::select(weights) %>%
             unlist() %>%
             as.numeric()

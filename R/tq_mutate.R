@@ -366,7 +366,7 @@ arrange_by_date <- function(tib) {
         arrange_date <- function(tib) {
             date_col <- get_col_name_date_or_date_time(tib)
             tib %>%
-                dplyr::arrange_(date_col)
+                dplyr::arrange(!!rlang::sym(date_col))
         }
 
         tib <- tib %>%
@@ -380,9 +380,10 @@ arrange_by_date <- function(tib) {
 
 
     } else {
+        date_col <- get_col_name_date_or_date_time(tib)
 
         tib <- tib %>%
-            dplyr::arrange_(get_col_name_date_or_date_time(tib))
+            dplyr::arrange(!!rlang::sym(date_col))
 
     }
 
