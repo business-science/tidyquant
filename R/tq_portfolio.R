@@ -337,7 +337,7 @@ map_weights <- function(weights, assets_col) {
         # arrange added to sort in alphabetic order, which matches spread order
         ret <- dplyr::left_join(unique(assets_col), weights,
                                 by = purrr::set_names(x, y)) %>%
-            dplyr::rename_(weights = names(weights)[[2]]) %>%
+            dplyr::rename(weights = !!rlang::sym(names(weights)[[2]])) %>%
             tidyr::replace_na(list(weights = 0)) %>%
             dplyr::arrange(!!rlang::sym(y)) %>%
             dplyr::select(weights) %>%
