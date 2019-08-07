@@ -143,12 +143,12 @@ tq_performance_.tbl_df <- function(data, Ra, Rb = NULL, performance_fun, ...) {
     date_col_name <- get_col_name_date_or_date_time(data)
 
     # Drop any non-numeric columns except for date
-    date_col <- dplyr::select_(data, date_col_name)
-    Ra_col <- dplyr::select_(data, Ra)
+    date_col <- dplyr::select(data, !!rlang::sym(date_col_name))
+    Ra_col <- dplyr::select(data, !!rlang::sym(Ra))
     if (is.null(Rb) || Rb == "NULL")  {
         data <- dplyr::bind_cols(date_col, Ra_col)
     } else {
-        Rb_col <- dplyr::select_(data, Rb)
+        Rb_col <- dplyr::select(data, !!rlang::sym(Rb))
         data <- dplyr::bind_cols(date_col, Ra_col, Rb_col)
     }
 

@@ -401,7 +401,7 @@ drop_date_and_group_cols <- function(tib) {
 
     tib <- tib %>%
         dplyr::ungroup() %>%
-        dplyr::select_(.dots = as.list(tib_names_without_date_or_group))
+        dplyr::select(!!!rlang::syms(tib_names_without_date_or_group))
 
     return(tib)
 }

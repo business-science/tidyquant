@@ -62,10 +62,10 @@ tq_transmute_.tbl_df <- function(data, select = NULL, mutate_fun, col_rename = N
     time_zone <- get_time_zone(data, date_col_name)
 
     # Get date column
-    date_col <- dplyr::select_(data, date_col_name)
+    date_col <- dplyr::select(data, !!rlang::sym(date_col_name))
 
     # Implement select
-    if (!(select == "NULL" || is.null(select))) data <- dplyr::select_(data, select)
+    if (!(select == "NULL" || is.null(select))) data <- dplyr::select(data, !!rlang::parse_expr(select))
 
     # Only grab numeric columns
     numeric_cols <- data %>%
@@ -188,7 +188,7 @@ tq_transmute_xy_.tbl_df <- function(data, x, y = NULL, mutate_fun, col_rename = 
     time_zone <- get_time_zone(data, date_col_name)
 
     # Drop any non-numeric columns except for date
-    date_col <- dplyr::select_(data, date_col_name)
+    date_col <- dplyr::select(data, !!rlang::sym(date_col_name))
     numeric_cols <- data %>%
         dplyr::select_if(is.numeric)
     data <- dplyr::bind_cols(date_col, numeric_cols)

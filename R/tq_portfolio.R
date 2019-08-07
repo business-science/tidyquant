@@ -258,13 +258,13 @@ tq_portfolio_base_ <- function(data, assets_col, returns_col, weights, col_renam
     time_zone <- get_time_zone(data, date_col_name)
 
     # Select date
-    date_col <- dplyr::select_(data, date_col_name)
+    date_col <- dplyr::select(data, !!rlang::sym(date_col_name))
 
     # Re-map assets and returns column names
     returns_col_name <- returns_col
     assets_col_name <- assets_col
-    returns_col <- dplyr::select_(data, returns_col)
-    assets_col <- dplyr::select_(data, assets_col)
+    returns_col <- dplyr::select(data, !!rlang::sym(returns_col))
+    assets_col <- dplyr::select(data, !!rlang::sym(assets_col))
 
     # Apply function
     ret <- tryCatch({
@@ -278,7 +278,7 @@ tq_portfolio_base_ <- function(data, assets_col, returns_col, weights, col_renam
 
         # Spread for xts form and apply Return.portfolio()
         data %>%
-            dplyr::select_(date_col_name, assets_col_name, returns_col_name) %>%
+            dplyr::select(!!!rlang::syms(c(date_col_name, assets_col_name, returns_col_name))) %>%
             tidyr::spread_(key_col = assets_col_name, value_col = returns_col_name) %>%
             timetk::tk_xts(silent = TRUE) %>%
             PerformanceAnalytics::Return.portfolio(weights = weights, verbose = FALSE, ...)
