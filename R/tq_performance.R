@@ -221,7 +221,7 @@ tq_performance_.data.frame <- function(data, Ra, Rb = NULL, performance_fun, ...
 tq_performance_.grouped_df <- function(data, Ra, Rb = NULL, performance_fun, ...) {
 
     # Get groups
-    group_names <- dplyr::groups(data)
+    group_names <- dplyr::group_vars(data)
 
     # Apply tq_performance_ to each group
     data %>%
@@ -236,7 +236,7 @@ tq_performance_.grouped_df <- function(data, Ra, Rb = NULL, performance_fun, ...
         ) %>%
         dplyr::select(-data) %>%
         tidyr::unnest(cols = nested.col) %>%
-        dplyr::group_by_(.dots = group_names)
+        dplyr::group_by_at(.vars = group_names)
 }
 
 # Function options ---------------------------------------------------------------------------------------------

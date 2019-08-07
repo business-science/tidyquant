@@ -361,7 +361,7 @@ arrange_by_date <- function(tib) {
 
     if (dplyr::is.grouped_df(tib)) {
 
-        group_names <- dplyr::groups(tib)
+        group_names <- dplyr::group_vars(tib)
 
         arrange_date <- function(tib) {
             date_col <- get_col_name_date_or_date_time(tib)
@@ -376,7 +376,7 @@ arrange_by_date <- function(tib) {
             ) %>%
             dplyr::select(-data) %>%
             tidyr::unnest(cols = nested.col) %>%
-            dplyr::group_by_(.dots = group_names)
+            dplyr::group_by_at(.vars = group_names)
 
 
     } else {

@@ -117,7 +117,7 @@ tq_transmute_.data.frame <- function(data, select = NULL, mutate_fun, col_rename
 #' @export
 tq_transmute_.grouped_df <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
 
-    group_names <- dplyr::groups(data)
+    group_names <- dplyr::group_vars(data)
 
     data %>%
         tidyr::nest() %>%
@@ -131,7 +131,7 @@ tq_transmute_.grouped_df <- function(data, select = NULL, mutate_fun, col_rename
         ) %>%
         dplyr::select(-data) %>%
         tidyr::unnest(cols = nested.col) %>%
-        dplyr::group_by_(.dots = group_names)
+        dplyr::group_by_at(.vars = group_names)
 }
 
 #' @export
@@ -255,7 +255,7 @@ tq_transmute_xy_.data.frame <- function(data, x, y = NULL, mutate_fun, col_renam
 #' @export
 tq_transmute_xy_.grouped_df <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
 
-    group_names <- dplyr::groups(data)
+    group_names <- dplyr::group_vars(data)
 
     data %>%
         tidyr::nest() %>%
@@ -270,7 +270,7 @@ tq_transmute_xy_.grouped_df <- function(data, x, y = NULL, mutate_fun, col_renam
             ) %>%
         dplyr::select(-data) %>%
         tidyr::unnest(cols = nested.col) %>%
-        dplyr::group_by_(.dots = group_names)
+        dplyr::group_by_at(.vars = group_names)
 }
 
 # Function options -------------------------------------------------------------------------------------------

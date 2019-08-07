@@ -197,7 +197,7 @@ tq_portfolio_.grouped_df <- function(data, assets_col, returns_col, weights, col
     check_data_weights_compatibility(data, weights)
 
     # Get groups
-    group_names_data <- dplyr::groups(data)
+    group_names_data <- dplyr::group_vars(data)
 
     # Format data
     data_nested <- data %>%
@@ -236,7 +236,7 @@ tq_portfolio_.grouped_df <- function(data, assets_col, returns_col, weights, col
         dplyr::filter(class.. != "logical") %>%
         dplyr::select(-c(returns.., weights.., class..)) %>%
         tidyr::unnest(cols = portfolio..) %>%
-        dplyr::group_by_(.dots = group_names_data)
+        dplyr::group_by_at(.vars = group_names_data)
 }
 
 #' @export
@@ -321,7 +321,7 @@ tq_repeat_df <- function(data, n, index_col_name = "portfolio") {
     colnames(ret)[[1]] <- index_col_name
 
     ret <- ret %>%
-        group_by_(index_col_name)
+        group_by_at(.vars = index_col_name)
 
     ret
 }
