@@ -64,7 +64,7 @@ test5 <- c("AAPL", "FB") %>%
            to   = "2017-01-01") %>%
     group_by(symbol)
 my_lm_fun <- function(data) {
-    coef(lm(close ~ open, data = as_data_frame(data)))
+    coef(lm(close ~ open, data = as_tibble(data)))
 }
 test5 <- test5 %>%
     tq_mutate(mutate_fun = rollapply,

@@ -136,7 +136,7 @@ xlk_returns <- tq_get("XLK", from = "2016-01-01", to = "2016-12-31") \%>\%
     tq_transmute(adjusted, periodReturn, period = "monthly", col_rename = "xlk.returns")
 returns_combined <- left_join(fb_returns, xlk_returns, by = "date")
 regr_fun <- function(data) {
-    coef(lm(fb.returns ~ xlk.returns, data = as_data_frame(data)))
+    coef(lm(fb.returns ~ xlk.returns, data = as_tibble(data)))
 }
 returns_combined \%>\%
     tq_mutate(mutate_fun = rollapply,
