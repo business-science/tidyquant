@@ -90,7 +90,7 @@ test_that("Test 1.1 returns correct column names", {
 })
 
 test_that("Test 1.2 grouped data frames are same with mutate and tq_mutate", {
-    expect_identical(test1.2a, test1.2b)
+    expect_equal(test1.2a, test1.2b)
 })
 
 test_that("Test 2 returns tibble with correct rows and columns.", {
