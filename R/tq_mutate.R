@@ -375,7 +375,7 @@ arrange_by_date <- function(tib) {
                               purrr::map(data, arrange_date)
             ) %>%
             dplyr::select(-data) %>%
-            tidyr::unnest() %>%
+            tidyr::unnest(cols = nested.col) %>%
             dplyr::group_by_(.dots = group_names)
 
 

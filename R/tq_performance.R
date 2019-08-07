@@ -235,7 +235,7 @@ tq_performance_.grouped_df <- function(data, Ra, Rb = NULL, performance_fun, ...
             ...)
         ) %>%
         dplyr::select(-data) %>%
-        tidyr::unnest() %>%
+        tidyr::unnest(cols = nested.col) %>%
         dplyr::group_by_(.dots = group_names)
 }
 

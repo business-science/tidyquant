@@ -235,7 +235,7 @@ tq_portfolio_.grouped_df <- function(data, assets_col, returns_col, weights, col
             ) %>%
         dplyr::filter(class.. != "logical") %>%
         dplyr::select(-c(returns.., weights.., class..)) %>%
-        tidyr::unnest() %>%
+        tidyr::unnest(cols = portfolio..) %>%
         dplyr::group_by_(.dots = group_names_data)
 }
 

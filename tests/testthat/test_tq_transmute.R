@@ -15,7 +15,7 @@ grouped_df <- tibble(symbol = c("FB", "AMZN")) %>%
                                                           get  = "stock.prices",
                                                           from = "2015-01-01",
                                                           to   = "2016-01-01"))) %>%
-    tidyr::unnest() %>%
+    tidyr::unnest(cols = stock.prices) %>%
     dplyr::group_by(symbol)
 
 test1.2a  <- mutate(grouped_df, V1 = runSD(adjusted)) %>%

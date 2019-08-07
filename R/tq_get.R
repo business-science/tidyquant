@@ -200,7 +200,7 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
 
         ret <- tryCatch({
             ret %>%
-                tidyr::unnest()
+                tidyr::unnest(cols = !!get)
         }, error = function(e) {
             warning("Returning as nested data frame.")
             ret

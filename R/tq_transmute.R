@@ -130,7 +130,7 @@ tq_transmute_.grouped_df <- function(data, select = NULL, mutate_fun, col_rename
             ...)
         ) %>%
         dplyr::select(-data) %>%
-        tidyr::unnest() %>%
+        tidyr::unnest(cols = nested.col) %>%
         dplyr::group_by_(.dots = group_names)
 }
 
@@ -269,7 +269,7 @@ tq_transmute_xy_.grouped_df <- function(data, x, y = NULL, mutate_fun, col_renam
             ...)
             ) %>%
         dplyr::select(-data) %>%
-        tidyr::unnest() %>%
+        tidyr::unnest(cols = nested.col) %>%
         dplyr::group_by_(.dots = group_names)
 }
 
