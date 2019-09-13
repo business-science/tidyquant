@@ -1,3 +1,7 @@
+## tidyquant 0.5.7
+
+* Added color names of `theme_tq` palettes for easier identification.
+
 ## tidyquant 0.5.6
 
 * Morningstar Key Ratios: The `tq_get()` argument `get = "key.ratios"` has been deprecated due to a change in Morningstar's website.
