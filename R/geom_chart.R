@@ -102,7 +102,7 @@ geom_barchart <- function(mapping = NULL, data = NULL, stat = "identity",
     list(linerange, segment_left, segment_right)
 }
 
-StatLinerangeBC <- ggplot2::ggproto("StatLinerangeBC", Stat,
+StatLinerangeBC <- ggplot2::ggproto("StatLinerangeBC", ggplot2::Stat,
                                     required_aes = c("x", "open", "high", "low", "close"),
 
                                     compute_group = function(data, scales, params,
@@ -119,7 +119,7 @@ StatLinerangeBC <- ggplot2::ggproto("StatLinerangeBC", Stat,
                                     }
 )
 
-StatSegmentLeftBC <- ggplot2::ggproto("StatSegmentLeftBC", Stat,
+StatSegmentLeftBC <- ggplot2::ggproto("StatSegmentLeftBC", ggplot2::Stat,
                                     required_aes = c("x", "open", "high", "low", "close"),
 
                                     compute_group = function(data, scales, params,
@@ -138,7 +138,7 @@ StatSegmentLeftBC <- ggplot2::ggproto("StatSegmentLeftBC", Stat,
 )
 
 
-StatSegmentRightBC <- ggplot2::ggproto("StatSegmentRightBC", Stat,
+StatSegmentRightBC <- ggplot2::ggproto("StatSegmentRightBC", ggplot2::Stat,
                                       required_aes = c("x", "open", "high", "low", "close"),
 
                                       compute_group = function(data, scales, params,
@@ -156,13 +156,13 @@ StatSegmentRightBC <- ggplot2::ggproto("StatSegmentRightBC", Stat,
                                       }
 )
 
-GeomLinerangeBC <- ggproto("GeomLinerangeBC", GeomLinerange,
+GeomLinerangeBC <- ggproto("GeomLinerangeBC", ggplot2::GeomLinerange,
                            default_aes = aes(size = 0.5,
                                              linetype = 1,
                                              alpha = NA)
 )
 
-GeomSegmentBC <- ggproto("GeomSegmentBC", GeomSegment,
+GeomSegmentBC <- ggproto("GeomSegmentBC", ggplot2::GeomSegment,
                        default_aes = aes(size = 0.5,
                                          linetype = 1,
                                          alpha = NA)
@@ -199,7 +199,7 @@ geom_candlestick <- function(mapping = NULL, data = NULL, stat = "identity",
     list(linerange, rect)
 }
 
-StatRectCS <- ggplot2::ggproto("StatRectCS", Stat,
+StatRectCS <- ggplot2::ggproto("StatRectCS", ggplot2::Stat,
                                 required_aes = c("x", "open", "high", "low", "close"),
 
                                 compute_group = function(data, scales, params,
@@ -223,7 +223,7 @@ StatRectCS <- ggplot2::ggproto("StatRectCS", Stat,
 
 
 
-GeomRectCS <- ggproto("GeomRectCS", GeomRect,
+GeomRectCS <- ggproto("GeomRectCS", ggplot2::GeomRect,
                       default_aes = aes(colour = NA,
                                         size = 0.5,
                                         linetype = 1,
