@@ -118,7 +118,8 @@ tq_exchange <- function(x) {
 
         # Download File
         tmp <- tempfile()
-        base_path_1 <- "http://www.nasdaq.com/screening/companies-by-name.aspx?letter=0&exchange="
+        # base_path_1 <- "http://www.nasdaq.com/screening/companies-by-name.aspx?letter=0&exchange="
+        base_path_1 <- "https://old.nasdaq.com/screening/companies-by-name.aspx?letter=0&exchange="
         base_path_2 <- "&render=download"
         url <- paste0(base_path_1, x, base_path_2)
         download.file(url, destfile = tmp, quiet = TRUE)

@@ -1,6 +1,7 @@
 ## tidyquant 0.5.7
 
 * Added color names of `theme_tq` palettes for easier identification.
+* `tq_exchange()` - Fix NASDAQ URL change Issue #138.
 
 ## tidyquant 0.5.6
 
