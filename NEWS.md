@@ -1,13 +1,19 @@
 ## tidyquant 0.5.7
 
-* Added color names of `theme_tq` palettes for easier identification.
+_Stock Index & Exchanges_
+
 * `tq_exchange()` - Fix NASDAQ URL change Issue #138.
+
+_Visualizations & Color Palettes_
+
+* `geom_candlestick` and `geom_barchart` - Issue #112.
+* Added color names of `theme_tq` palettes (`palette_light`, `palette_dark`, and  `palette_green`) for easier identification.
 
 ## tidyquant 0.5.6
 
-* Morningstar Key Ratios: The `tq_get()` argument `get = "key.ratios"` has been deprecated due to a change in Morningstar's website.
+* Morningstar Key Ratios: The `tq_get()` argument `get = "key.ratios"` has been deprecated due to a change in Morningstar's website. (Help Wanted - Ref. Issue #125)
 
-* Remove dependency on `XLConnect`. Replace with `readxl`.
+* Remove dependency on `XLConnect`. Replace with `readxl`. Issue #119.
 
 ## tidyquant 0.5.5
 
