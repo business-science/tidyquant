@@ -10,9 +10,9 @@
 #'
 #' @inheritParams geom_ma
 #' @inheritParams ggplot2::geom_linerange
-#' @param color_up,color_down Select colors to be applied based on price movement
-#' from open to close. If close >= open, `color_up` is used. Otherwise,
-#' `color_down` is used. The default is "darkblue" and "red", respectively.
+#' @param colour_up,colour_down Select colors to be applied based on price movement
+#' from open to close. If close >= open, `colour_up` is used. Otherwise,
+#' `colour_down` is used. The default is "darkblue" and "red", respectively.
 #' @param fill_up,fill_down Select fills to be applied based on price movement
 #' from open to close. If close >= open, `fill_up` is used. Otherwise,
 #' `fill_down` is used. The default is "darkblue" and "red", respectively.
@@ -72,7 +72,7 @@
 geom_barchart <- function(mapping = NULL, data = NULL, stat = "identity",
                              position = "identity", na.rm = TRUE, show.legend = NA,
                              inherit.aes = TRUE,
-                             color_up = "darkblue", color_down = "red",
+                             colour_up = "darkblue", colour_down = "red",
                              fill_up = "darkblue", fill_down = "red",
                              ...) {
 
@@ -82,21 +82,21 @@ geom_barchart <- function(mapping = NULL, data = NULL, stat = "identity",
         stat = StatLinerangeBC, geom = GeomLinerangeBC, data = data, mapping = mapping,
         position = position, show.legend = show.legend, inherit.aes = inherit.aes,
         params = list(na.rm = na.rm, fill_up = fill_up, fill_down = fill_down,
-                      color_up = color_up, color_down = color_down, ...)
+                      colour_up = colour_up, colour_down = colour_down, ...)
     )
 
     segment_left <- ggplot2::layer(
         stat = StatSegmentLeftBC, geom = GeomSegmentBC, data = data, mapping = mapping,
         position = position, show.legend = show.legend, inherit.aes = inherit.aes,
         params = list(na.rm = na.rm, fill_up = fill_up, fill_down = fill_down,
-                      color_up = color_up, color_down = color_down, ...)
+                      colour_up = colour_up, colour_down = colour_down, ...)
     )
 
     segment_right <- ggplot2::layer(
         stat = StatSegmentRightBC, geom = GeomSegmentBC, data = data, mapping = mapping,
         position = position, show.legend = show.legend, inherit.aes = inherit.aes,
         params = list(na.rm = na.rm, fill_up = fill_up, fill_down = fill_down,
-                      color_up = color_up, color_down = color_down, ...)
+                      colour_up = colour_up, colour_down = colour_down, ...)
     )
 
     list(linerange, segment_left, segment_right)
@@ -107,10 +107,10 @@ StatLinerangeBC <- ggplot2::ggproto("StatLinerangeBC", ggplot2::Stat,
 
                                     compute_group = function(data, scales, params,
                                                              fill_up, fill_down,
-                                                             color_up, color_down) {
+                                                             colour_up, colour_down) {
 
                                         data <-  data %>%
-                                            dplyr::mutate(color = ifelse(open < close, color_up, color_down))
+                                            dplyr::mutate(color = ifelse(open < close, colour_up, colour_down))
 
                                         tibble::tibble(x = data$x,
                                                        ymin = data$low,
@@ -124,10 +124,10 @@ StatSegmentLeftBC <- ggplot2::ggproto("StatSegmentLeftBC", ggplot2::Stat,
 
                                     compute_group = function(data, scales, params,
                                                              fill_up, fill_down,
-                                                             color_up, color_down) {
+                                                             colour_up, colour_down) {
 
                                         data <-  data %>%
-                                            dplyr::mutate(color = ifelse(open < close, color_up, color_down))
+                                            dplyr::mutate(color = ifelse(open < close, colour_up, colour_down))
 
                                         tibble::tibble(x    = data$x,
                                                        xend = data$x - 0.5,
@@ -143,10 +143,10 @@ StatSegmentRightBC <- ggplot2::ggproto("StatSegmentRightBC", ggplot2::Stat,
 
                                       compute_group = function(data, scales, params,
                                                                fill_up, fill_down,
-                                                               color_up, color_down) {
+                                                               colour_up, colour_down) {
 
                                           data <-  data %>%
-                                              dplyr::mutate(color = ifelse(open < close, color_up, color_down))
+                                              dplyr::mutate(color = ifelse(open < close, colour_up, colour_down))
 
                                           tibble::tibble(x    = data$x,
                                                          xend = data$x + 0.5,
@@ -176,7 +176,7 @@ GeomSegmentBC <- ggproto("GeomSegmentBC", ggplot2::GeomSegment,
 geom_candlestick <- function(mapping = NULL, data = NULL, stat = "identity",
                                 position = "identity", na.rm = TRUE, show.legend = NA,
                                 inherit.aes = TRUE,
-                                color_up = "darkblue", color_down = "red",
+                                colour_up = "darkblue", colour_down = "red",
                                 fill_up = "darkblue", fill_down = "red",
                                 ...) {
 
@@ -184,14 +184,14 @@ geom_candlestick <- function(mapping = NULL, data = NULL, stat = "identity",
         stat = StatLinerangeBC, geom = GeomLinerangeBC, data = data, mapping = mapping,
         position = position, show.legend = show.legend, inherit.aes = inherit.aes,
         params = list(na.rm = na.rm, fill_up = fill_up, fill_down = fill_down,
-                      color_up = color_up, color_down = color_down, ...)
+                      colour_up = colour_up, colour_down = colour_down, ...)
     )
 
     rect <- ggplot2::layer(
         stat = StatRectCS, geom = GeomRectCS, data = data, mapping = mapping,
         position = position, show.legend = show.legend, inherit.aes = inherit.aes,
         params = list(na.rm = na.rm, fill_up = fill_up, fill_down = fill_down,
-                      color_up = color_up, color_down = color_down, ...)
+                      colour_up = colour_up, colour_down = colour_down, ...)
     )
 
 
@@ -204,7 +204,7 @@ StatRectCS <- ggplot2::ggproto("StatRectCS", ggplot2::Stat,
 
                                 compute_group = function(data, scales, params,
                                                          fill_up, fill_down,
-                                                         color_up, color_down) {
+                                                         colour_up, colour_down) {
 
                                     data <-  data %>%
                                         dplyr::mutate(fill = ifelse(open < close, fill_up, fill_down),
