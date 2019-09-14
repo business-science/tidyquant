@@ -8,12 +8,12 @@
 \usage{
 geom_barchart(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", na.rm = TRUE, show.legend = NA,
-  inherit.aes = TRUE, color_up = "darkblue", color_down = "red",
+  inherit.aes = TRUE, colour_up = "darkblue", colour_down = "red",
   fill_up = "darkblue", fill_down = "red", ...)
 
 geom_candlestick(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", na.rm = TRUE, show.legend = NA,
-  inherit.aes = TRUE, color_up = "darkblue", color_down = "red",
+  inherit.aes = TRUE, colour_up = "darkblue", colour_down = "red",
   fill_up = "darkblue", fill_down = "red", ...)
 }
 \arguments{
@@ -55,9 +55,9 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{ggplot2::borders()}}.}
 
-\item{color_up, color_down}{Select colors to be applied based on price movement
-from open to close. If close >= open, \code{color_up} is used. Otherwise,
-\code{color_down} is used. The default is "darkblue" and "red", respectively.}
+\item{colour_up, colour_down}{Select colors to be applied based on price movement
+from open to close. If close >= open, \code{colour_up} is used. Otherwise,
+\code{colour_down} is used. The default is "darkblue" and "red", respectively.}
 
 \item{fill_up, fill_down}{Select fills to be applied based on price movement
 from open to close. If close >= open, \code{fill_up} is used. Otherwise,
