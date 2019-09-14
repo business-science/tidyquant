@@ -41,7 +41,10 @@ Imports:
     TTR,
     xml2,
     xts,
-    rlang
+    rlang,
+    rstudioapi,
+    crayon,
+    cli
 Suggests:
     alphavantager,
     broom,
