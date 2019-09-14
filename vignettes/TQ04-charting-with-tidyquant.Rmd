@@ -110,13 +110,13 @@ AAPL %>%
     theme_tq()
 ```
 
-The colors can be modified using `color_up` and `color_down` arguments, and parameters such as `size` can be used to control the appearance. 
+The colors can be modified using `colour_up` and `colour_down` arguments, and parameters such as `size` can be used to control the appearance. 
 
 ```{r}
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
     geom_barchart(aes(open = open, high = high, low = low, close = close),
-                     color_up = "darkgreen", color_down = "darkred", size = 1) +
+                     colour_up = "darkgreen", colour_down = "darkred", size = 1) +
     labs(title = "AAPL Bar Chart", 
          subtitle = "Zoomed in, Experimenting with Formatting",
          y = "Closing Price", x = "") + 
@@ -151,13 +151,13 @@ AAPL %>%
     theme_tq()
 ```
 
-The colors can be modified using `color_up` and `color_down`, which control the line color, and `fill_up` and `fill_down`, which control the rectangle fills.
+The colors can be modified using `colour_up` and `colour_down`, which control the line color, and `fill_up` and `fill_down`, which control the rectangle fills.
 
 ```{r}
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
     geom_candlestick(aes(open = open, high = high, low = low, close = close),
-                        color_up = "darkgreen", color_down = "darkred", 
+                        colour_up = "darkgreen", colour_down = "darkred", 
                         fill_up  = "darkgreen", fill_down  = "darkred") +
     labs(title = "AAPL Candlestick Chart", 
          subtitle = "Zoomed in, Experimenting with Formatting",
