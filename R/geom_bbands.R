@@ -160,7 +160,7 @@ geom_bbands_ <- function(mapping = NULL, data = NULL,
 }
 
 
-StatBBandsRibbon <- ggplot2::ggproto("StatBBandsRibbon", Stat,
+StatBBandsRibbon <- ggplot2::ggproto("StatBBandsRibbon", ggplot2::Stat,
                             required_aes = c("x", "high", "low", "close"),
 
                             compute_group = function(data, scales, params,
@@ -186,7 +186,7 @@ StatBBandsRibbon <- ggplot2::ggproto("StatBBandsRibbon", Stat,
 )
 
 
-StatBBandsMA <- ggplot2::ggproto("StatBBandsMA", Stat,
+StatBBandsMA <- ggplot2::ggproto("StatBBandsMA", ggplot2::Stat,
                                  required_aes = c("x", "high", "low", "close"),
 
                                  compute_group = function(data, scales, params,
@@ -211,7 +211,7 @@ StatBBandsMA <- ggplot2::ggproto("StatBBandsMA", Stat,
                                  }
 )
 
-StatBBandsRibbon_vol <- ggplot2::ggproto("StatBBandsRibbon", Stat,
+StatBBandsRibbon_vol <- ggplot2::ggproto("StatBBandsRibbon", ggplot2::Stat,
                                          required_aes = c("x", "high", "low", "close", "volume"),
 
                                          compute_group = function(data, scales, params,
@@ -238,7 +238,7 @@ StatBBandsRibbon_vol <- ggplot2::ggproto("StatBBandsRibbon", Stat,
                                          }
 )
 
-StatBBandsMA_vol <- ggplot2::ggproto("StatBBandsMA", Stat,
+StatBBandsMA_vol <- ggplot2::ggproto("StatBBandsMA", ggplot2::Stat,
                                  required_aes = c("x", "high", "low", "close", "volume"),
 
                                  compute_group = function(data, scales, params,
@@ -267,16 +267,16 @@ StatBBandsMA_vol <- ggplot2::ggproto("StatBBandsMA", Stat,
 
 # Geoms ----
 
-GeomBBandsRibbon <- ggproto("GeomBBandsRibbon", GeomRibbon,
-                            default_aes = aes(colour = "red",
+GeomBBandsRibbon <- ggplot2::ggproto("GeomBBandsRibbon", ggplot2::GeomRibbon,
+                            default_aes = ggplot2::aes(colour = "red",
                                               fill = "grey20",
                                               size = 0.5,
                                               linetype = 2,
                                               alpha = 0.15)
 )
 
-GeomBBandsMA <- ggproto("GeomBBandsMA", GeomLine,
-                        default_aes = aes(colour = "darkblue",
+GeomBBandsMA <- ggplot2::ggproto("GeomBBandsMA", ggplot2::GeomLine,
+                        default_aes = ggplot2::aes(colour = "darkblue",
                                           linetype = 2,
                                           size = 0.5,
                                           alpha = NA)

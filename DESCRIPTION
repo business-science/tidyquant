@@ -24,8 +24,7 @@ Depends:
     R (>= 3.0.0),
     lubridate,
     PerformanceAnalytics,
-    quantmod (>= 0.4-13),
-    tidyverse
+    quantmod (>= 0.4-13)
 Imports:
     dplyr (>= 0.8.3),
     ggplot2,
@@ -36,7 +35,7 @@ Imports:
     Quandl,
     stringr,
     tibble,
-    tidyr (>= 0.8.3.9000),
+    tidyr (>= 1.0.0),
     timetk,
     TTR,
     xml2,
@@ -46,6 +45,7 @@ Imports:
     crayon,
     cli
 Suggests:
+    tidyverse,
     alphavantager,
     broom,
     knitr,
@@ -58,5 +58,3 @@ Suggests:
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
-Remotes:
-    tidyverse/tidyr

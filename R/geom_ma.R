@@ -158,7 +158,7 @@ geom_ma_ <- function(mapping = NULL, data = NULL,
 }
 
 
-StatMA <- ggplot2::ggproto("StatSMA", Stat,
+StatMA <- ggplot2::ggproto("StatSMA", ggplot2::Stat,
                    required_aes = c("x", "y"),
 
                    compute_group = function(data, scales, params,
@@ -178,7 +178,7 @@ StatMA <- ggplot2::ggproto("StatSMA", Stat,
                    }
 )
 
-StatMA_vol <- ggplot2::ggproto("StatSMA_vol", Stat,
+StatMA_vol <- ggplot2::ggproto("StatSMA_vol", ggplot2::Stat,
                            required_aes = c("x", "y", "volume"),
 
                            compute_group = function(data, scales, params,
@@ -202,8 +202,8 @@ StatMA_vol <- ggplot2::ggproto("StatSMA_vol", Stat,
 
 # Utility Functions -----
 
-GeomMA <- ggproto("GeomMA", GeomLine,
-                  default_aes = aes(colour = "darkblue",
+GeomMA <- ggplot2::ggproto("GeomMA", ggplot2::GeomLine,
+                  default_aes = ggplot2::aes(colour = "darkblue",
                                     linetype = 2,
                                     size = 0.5,
                                     alpha = NA)

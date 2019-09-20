@@ -156,14 +156,14 @@ StatSegmentRightBC <- ggplot2::ggproto("StatSegmentRightBC", ggplot2::Stat,
                                       }
 )
 
-GeomLinerangeBC <- ggproto("GeomLinerangeBC", ggplot2::GeomLinerange,
-                           default_aes = aes(size = 0.5,
+GeomLinerangeBC <- ggplot2::ggproto("GeomLinerangeBC", ggplot2::GeomLinerange,
+                           default_aes = ggplot2::aes(size = 0.5,
                                              linetype = 1,
                                              alpha = NA)
 )
 
-GeomSegmentBC <- ggproto("GeomSegmentBC", ggplot2::GeomSegment,
-                       default_aes = aes(size = 0.5,
+GeomSegmentBC <- ggplot2::ggproto("GeomSegmentBC", ggplot2::GeomSegment,
+                       default_aes = ggplot2::aes(size = 0.5,
                                          linetype = 1,
                                          alpha = NA)
 )
@@ -223,8 +223,8 @@ StatRectCS <- ggplot2::ggproto("StatRectCS", ggplot2::Stat,
 
 
 
-GeomRectCS <- ggproto("GeomRectCS", ggplot2::GeomRect,
-                      default_aes = aes(colour = NA,
+GeomRectCS <- ggplot2::ggproto("GeomRectCS", ggplot2::GeomRect,
+                      default_aes = ggplot2::aes(colour = NA,
                                         size = 0.5,
                                         linetype = 1,
                                         alpha = NA)
