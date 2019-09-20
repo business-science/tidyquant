@@ -52,9 +52,9 @@ NULL
 scale_color_tq <- function(..., theme = "light") {
 
   pal <- switch(theme,
-         "light" = palette_light(),
-         "dark"  = palette_dark(),
-         "green" = palette_green()
+         "light" = unname(palette_light()),
+         "dark"  = unname(palette_dark()),
+         "green" = unname(palette_green())
          )
 
   scale_color_manual(values = pal)
@@ -69,9 +69,9 @@ scale_colour_tq <- scale_color_tq
 scale_fill_tq <- function(..., theme = "light") {
 
   pal <- switch(theme,
-                "light" = palette_light(),
-                "dark"  = palette_dark(),
-                "green" = palette_green()
+                "light" = unname(palette_light()),
+                "dark"  = unname(palette_dark()),
+                "green" = unname(palette_green())
   )
 
   scale_fill_manual(values = pal)
