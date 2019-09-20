@@ -9,9 +9,13 @@ _Visualizations & Color Palettes_
 * `geom_candlestick` and `geom_barchart` - Issue #112.
 * Added color names of `theme_tq` palettes (`palette_light`, `palette_dark`, and  `palette_green`) for easier identification.
 
-_Compatability with tidyr v1.0.0_
+_Compatability with `tidyr` v1.0.0_
 
 * Improvements to ensure compatability with `tidyr` v1.0.0
+
+_[Potential Breaking Change] Move `tidyverse` to suggests_
+
+* This is actually potentially a "breaking change" (although most users will see no difference since you likely load `tidyverse` in your scripts) - if you do not load `tidyverse`, then you will now need to do so. Previously `tidyquant` loaded `tidyverse` behind the scenes.  
 
 ## tidyquant 0.5.6
 
