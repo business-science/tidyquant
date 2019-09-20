@@ -16,7 +16,7 @@
 
     msg <- paste0(
         cli::rule(left = "Need to Learn tidyquant?", col = bsu_rule_color, line = 2),
-        bsu_main('\nBusiness Science offers a 1-hour course through Learning Labs PRO - Lab #9!\n'),
+        bsu_main('\nBusiness Science offers a 1-hour course - Learning Lab #9: Performance Analysis & Portfolio Optimization with tidyquant!\n'),
         bsu_main('</> Learn more at: https://university.business-science.io/p/learning-labs-pro </>')
     )
 

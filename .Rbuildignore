@@ -12,3 +12,5 @@ img
 ^index\.Rmd$
 ^docs$
 ^appveyor\.yml$
+^doc$
+^Meta$

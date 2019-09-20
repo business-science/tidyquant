@@ -56,6 +56,7 @@
 #' @examples
 #' # Load libraries
 #' library(tidyquant)
+#' library(dplyr)
 #'
 #' # Use FANG data set
 #' data(FANG)
@@ -321,7 +322,7 @@ tq_repeat_df <- function(data, n, index_col_name = "portfolio") {
     colnames(ret)[[1]] <- index_col_name
 
     ret <- ret %>%
-        group_by_at(.vars = index_col_name)
+        dplyr::group_by_at(.vars = index_col_name)
 
     ret
 }

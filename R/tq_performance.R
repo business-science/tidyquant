@@ -56,6 +56,7 @@
 #' @examples
 #' # Load libraries
 #' library(tidyquant)
+#' library(dplyr)
 #'
 #' # Use FANG data set
 #' data(FANG)

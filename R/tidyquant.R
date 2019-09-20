@@ -28,7 +28,6 @@
 #' @name tidyquant
 #'
 #' @import quantmod
-#' @import tidyverse
 #' @import lubridate
 #' @import PerformanceAnalytics
 #' @importFrom rlang ":="

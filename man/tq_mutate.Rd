@@ -107,6 +107,7 @@ respectively.
 \examples{
 # Load libraries
 library(tidyquant)
+library(dplyr)
 
 ##### Basic Functionality
 

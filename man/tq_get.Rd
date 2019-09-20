@@ -99,6 +99,7 @@ next version. Please use \code{tq_index_options()} instead.
 \examples{
 # Load libraries
 library(tidyquant)
+library(dplyr)
 
 # Get the list of `get` options
 tq_get_options()

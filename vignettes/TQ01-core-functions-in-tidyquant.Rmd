@@ -43,7 +43,8 @@ The `tidyquant` package has a __core functions with a lot of power__. Few functi
 Load the `tidyquant` package to get started.
 
 ```{r}
-# Loads tidyquant, tidyverse, lubridate, xts, quantmod, TTR 
+# Loads tidyquant, lubridate, xts, quantmod, TTR 
+library(tidyverse)
 library(tidyquant)
 ```
 

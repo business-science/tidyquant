@@ -39,7 +39,8 @@ The `tidyquant` package includes charting tools to assist users in developing qu
 Load the `tidyquant` package to get started.
 
 ```{r}
-# Loads tidyquant, tidyverse, lubridate, xts, quantmod, TTR 
+# Loads tidyquant, lubridate, xts, quantmod, TTR, and PerformanceAnalytics
+library(tidyverse)
 library(tidyquant)  
 ```
 

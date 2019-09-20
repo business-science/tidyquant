@@ -59,7 +59,8 @@ We'll use the `PerformanceAnalytics` function, `table.CAPM`, to evaluate the ret
 
 First, load the `tidyquant` package.
 
-```{r, eval = F}
+```{r}
+library(tidyverse)
 library(tidyquant)
 ```
 

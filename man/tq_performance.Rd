@@ -58,6 +58,7 @@ that can be supplied to the \code{performance_fun} argument.
 \examples{
 # Load libraries
 library(tidyquant)
+library(dplyr)
 
 # Use FANG data set
 data(FANG)

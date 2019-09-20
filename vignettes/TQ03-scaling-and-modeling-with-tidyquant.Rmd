@@ -44,7 +44,8 @@ We'll go through some useful techniques for getting and manipulating groups of d
 Load the `tidyquant` package to get started.
 
 ```{r}
-# Loads tidyquant, tidyverse, lubridate, xts, quantmod, TTR 
+# Loads tidyquant, lubridate, xts, quantmod, TTR, and PerformanceAnalytics
+library(tidyverse)
 library(tidyquant)  
 ```
 

@@ -28,14 +28,16 @@
 #' @examples
 #' # Load libraries
 #' library(tidyquant)
+#' library(dplyr)
+#' library(ggplot2)
 #'
 #' # coord_x_date
 #' AAPL <- tq_get("AAPL")
 #' AAPL %>%
 #'     ggplot(aes(x = date, y = adjusted)) +
 #'     geom_line() +                         # Plot stock price
-#'     geom_ma(n = 50) +                 # Plot 50-day Moving Average
-#'     geom_ma(n = 200, color = "red") + # Plot 200-day Moving Average
+#'     geom_ma(n = 50) +                     # Plot 50-day Moving Average
+#'     geom_ma(n = 200, color = "red") +     # Plot 200-day Moving Average
 #'     coord_x_date(xlim = c(today() - weeks(12), today()),
 #'                ylim = c(100, 130))        # Zoom in
 #'

@@ -23,6 +23,8 @@
 #' @examples
 #' # Load libraries
 #' library(tidyquant)
+#' library(dplyr)
+#' library(ggplot2)
 #'
 #' # Get stock prices
 #' stocks <- c("AAPL", "FB", "NFLX") %>%

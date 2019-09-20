@@ -9,6 +9,10 @@ _Visualizations & Color Palettes_
 * `geom_candlestick` and `geom_barchart` - Issue #112.
 * Added color names of `theme_tq` palettes (`palette_light`, `palette_dark`, and  `palette_green`) for easier identification.
 
+_Compatability with tidyr v1.0.0_
+
+* Improvements to ensure compatability with `tidyr` v1.0.0
+
 ## tidyquant 0.5.6
 
 * Morningstar Key Ratios: The `tq_get()` argument `get = "key.ratios"` has been deprecated due to a change in Morningstar's website. (Help Wanted - Ref. Issue #125)
