@@ -27,7 +27,7 @@ Depends:
     quantmod (>= 0.4-13),
     tidyverse
 Imports:
-    dplyr,
+    dplyr (>= 0.8.3),
     ggplot2,
     httr,
     lazyeval,
@@ -36,7 +36,7 @@ Imports:
     Quandl,
     stringr,
     tibble,
-    tidyr,
+    tidyr (>= 0.8.3.9000),
     timetk,
     TTR,
     xml2,
@@ -58,3 +58,5 @@ Suggests:
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
+Remotes:
+    tidyverse/tidyr

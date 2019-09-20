@@ -15,7 +15,7 @@ grouped_df <- tibble(symbol = c("FB", "AMZN")) %>%
                                                           get  = "stock.prices",
                                                           from = "2015-01-01",
                                                           to   = "2016-01-01"))) %>%
-    tidyr::unnest() %>%
+    tidyr::unnest(cols = stock.prices) %>%
     dplyr::group_by(symbol)
 
 test1.2a  <- mutate(grouped_df, V1 = runSD(adjusted)) %>%
@@ -54,7 +54,7 @@ xlk_returns <- tq_get("XLK", from = "2016-01-01", to = "2016-12-31") %>%
     tq_transmute(adjusted, periodReturn, period = "monthly", col_rename = "xlk.returns")
 test5 <- left_join(fb_returns, xlk_returns, by = "date")
 regr_fun <- function(data) {
-    coef(lm(fb.returns ~ xlk.returns, data = as_data_frame(data)))
+    coef(lm(fb.returns ~ xlk.returns, data = as.data.frame(data)))
 }
 test5 <- test5 %>%
     tq_transmute(mutate_fun = rollapply,

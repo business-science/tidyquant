@@ -30,7 +30,7 @@ grouped_df <- tibble(symbol = c("FB", "AMZN")) %>%
                                                           get  = "stock.prices",
                                                           from = "2015-01-01",
                                                           to   = "2016-01-01"))) %>%
-    tidyr::unnest() %>%
+    tidyr::unnest(cols = stock.prices) %>%
     dplyr::group_by(symbol)
 
 test1.2a  <- mutate(grouped_df, V1 = runSD(adjusted))
@@ -64,7 +64,7 @@ test5 <- c("AAPL", "FB") %>%
            to   = "2017-01-01") %>%
     group_by(symbol)
 my_lm_fun <- function(data) {
-    coef(lm(close ~ open, data = as_data_frame(data)))
+    coef(lm(close ~ open, data = as.data.frame(data)))
 }
 test5 <- test5 %>%
     tq_mutate(mutate_fun = rollapply,
@@ -90,7 +90,7 @@ test_that("Test 1.1 returns correct column names", {
 })
 
 test_that("Test 1.2 grouped data frames are same with mutate and tq_mutate", {
-    expect_identical(test1.2a, test1.2b)
+    expect_equal(test1.2a, test1.2b)
 })
 
 test_that("Test 2 returns tibble with correct rows and columns.", {

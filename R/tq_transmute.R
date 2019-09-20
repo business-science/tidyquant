@@ -62,10 +62,10 @@ tq_transmute_.tbl_df <- function(data, select = NULL, mutate_fun, col_rename = N
     time_zone <- get_time_zone(data, date_col_name)
 
     # Get date column
-    date_col <- dplyr::select_(data, date_col_name)
+    date_col <- dplyr::select(data, !!rlang::sym(date_col_name))
 
     # Implement select
-    if (!(select == "NULL" || is.null(select))) data <- dplyr::select_(data, select)
+    if (!(select == "NULL" || is.null(select))) data <- dplyr::select(data, !!rlang::parse_expr(select))
 
     # Only grab numeric columns
     numeric_cols <- data %>%
@@ -117,7 +117,7 @@ tq_transmute_.data.frame <- function(data, select = NULL, mutate_fun, col_rename
 #' @export
 tq_transmute_.grouped_df <- function(data, select = NULL, mutate_fun, col_rename = NULL, ...) {
 
-    group_names <- dplyr::groups(data)
+    group_names <- dplyr::group_vars(data)
 
     data %>%
         tidyr::nest() %>%
@@ -130,8 +130,8 @@ tq_transmute_.grouped_df <- function(data, select = NULL, mutate_fun, col_rename
             ...)
         ) %>%
         dplyr::select(-data) %>%
-        tidyr::unnest() %>%
-        dplyr::group_by_(.dots = group_names)
+        tidyr::unnest(cols = nested.col) %>%
+        dplyr::group_by_at(.vars = group_names)
 }
 
 #' @export
@@ -188,7 +188,7 @@ tq_transmute_xy_.tbl_df <- function(data, x, y = NULL, mutate_fun, col_rename = 
     time_zone <- get_time_zone(data, date_col_name)
 
     # Drop any non-numeric columns except for date
-    date_col <- dplyr::select_(data, date_col_name)
+    date_col <- dplyr::select(data, !!rlang::sym(date_col_name))
     numeric_cols <- data %>%
         dplyr::select_if(is.numeric)
     data <- dplyr::bind_cols(date_col, numeric_cols)
@@ -255,7 +255,7 @@ tq_transmute_xy_.data.frame <- function(data, x, y = NULL, mutate_fun, col_renam
 #' @export
 tq_transmute_xy_.grouped_df <- function(data, x, y = NULL, mutate_fun, col_rename = NULL, ...) {
 
-    group_names <- dplyr::groups(data)
+    group_names <- dplyr::group_vars(data)
 
     data %>%
         tidyr::nest() %>%
@@ -269,8 +269,8 @@ tq_transmute_xy_.grouped_df <- function(data, x, y = NULL, mutate_fun, col_renam
             ...)
             ) %>%
         dplyr::select(-data) %>%
-        tidyr::unnest() %>%
-        dplyr::group_by_(.dots = group_names)
+        tidyr::unnest(cols = nested.col) %>%
+        dplyr::group_by_at(.vars = group_names)
 }
 
 # Function options -------------------------------------------------------------------------------------------

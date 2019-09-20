@@ -143,12 +143,12 @@ tq_performance_.tbl_df <- function(data, Ra, Rb = NULL, performance_fun, ...) {
     date_col_name <- get_col_name_date_or_date_time(data)
 
     # Drop any non-numeric columns except for date
-    date_col <- dplyr::select_(data, date_col_name)
-    Ra_col <- dplyr::select_(data, Ra)
+    date_col <- dplyr::select(data, !!rlang::sym(date_col_name))
+    Ra_col <- dplyr::select(data, !!rlang::sym(Ra))
     if (is.null(Rb) || Rb == "NULL")  {
         data <- dplyr::bind_cols(date_col, Ra_col)
     } else {
-        Rb_col <- dplyr::select_(data, Rb)
+        Rb_col <- dplyr::select(data, !!rlang::sym(Rb))
         data <- dplyr::bind_cols(date_col, Ra_col, Rb_col)
     }
 
@@ -221,7 +221,7 @@ tq_performance_.data.frame <- function(data, Ra, Rb = NULL, performance_fun, ...
 tq_performance_.grouped_df <- function(data, Ra, Rb = NULL, performance_fun, ...) {
 
     # Get groups
-    group_names <- dplyr::groups(data)
+    group_names <- dplyr::group_vars(data)
 
     # Apply tq_performance_ to each group
     data %>%
@@ -235,8 +235,8 @@ tq_performance_.grouped_df <- function(data, Ra, Rb = NULL, performance_fun, ...
             ...)
         ) %>%
         dplyr::select(-data) %>%
-        tidyr::unnest() %>%
-        dplyr::group_by_(.dots = group_names)
+        tidyr::unnest(cols = nested.col) %>%
+        dplyr::group_by_at(.vars = group_names)
 }
 
 # Function options ---------------------------------------------------------------------------------------------

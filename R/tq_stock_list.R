@@ -323,7 +323,7 @@ index_fallback <- function(x) {
     stock_index <- stock_indexes %>%
         dplyr::filter(index.option == x) %>%
         dplyr::select(index.components) %>%
-        tidyr::unnest()
+        tidyr::unnest(cols = index.components)
 
     stock_index
 }

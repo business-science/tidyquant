@@ -197,7 +197,7 @@ tq_portfolio_.grouped_df <- function(data, assets_col, returns_col, weights, col
     check_data_weights_compatibility(data, weights)
 
     # Get groups
-    group_names_data <- dplyr::groups(data)
+    group_names_data <- dplyr::group_vars(data)
 
     # Format data
     data_nested <- data %>%
@@ -235,8 +235,8 @@ tq_portfolio_.grouped_df <- function(data, assets_col, returns_col, weights, col
             ) %>%
         dplyr::filter(class.. != "logical") %>%
         dplyr::select(-c(returns.., weights.., class..)) %>%
-        tidyr::unnest() %>%
-        dplyr::group_by_(.dots = group_names_data)
+        tidyr::unnest(cols = portfolio..) %>%
+        dplyr::group_by_at(.vars = group_names_data)
 }
 
 #' @export
@@ -258,13 +258,13 @@ tq_portfolio_base_ <- function(data, assets_col, returns_col, weights, col_renam
     time_zone <- get_time_zone(data, date_col_name)
 
     # Select date
-    date_col <- dplyr::select_(data, date_col_name)
+    date_col <- dplyr::select(data, !!rlang::sym(date_col_name))
 
     # Re-map assets and returns column names
     returns_col_name <- returns_col
     assets_col_name <- assets_col
-    returns_col <- dplyr::select_(data, returns_col)
-    assets_col <- dplyr::select_(data, assets_col)
+    returns_col <- dplyr::select(data, !!rlang::sym(returns_col))
+    assets_col <- dplyr::select(data, !!rlang::sym(assets_col))
 
     # Apply function
     ret <- tryCatch({
@@ -278,7 +278,7 @@ tq_portfolio_base_ <- function(data, assets_col, returns_col, weights, col_renam
 
         # Spread for xts form and apply Return.portfolio()
         data %>%
-            dplyr::select_(date_col_name, assets_col_name, returns_col_name) %>%
+            dplyr::select(!!!rlang::syms(c(date_col_name, assets_col_name, returns_col_name))) %>%
             tidyr::spread_(key_col = assets_col_name, value_col = returns_col_name) %>%
             timetk::tk_xts(silent = TRUE) %>%
             PerformanceAnalytics::Return.portfolio(weights = weights, verbose = FALSE, ...)
@@ -321,7 +321,7 @@ tq_repeat_df <- function(data, n, index_col_name = "portfolio") {
     colnames(ret)[[1]] <- index_col_name
 
     ret <- ret %>%
-        group_by_(index_col_name)
+        group_by_at(.vars = index_col_name)
 
     ret
 }
@@ -337,9 +337,9 @@ map_weights <- function(weights, assets_col) {
         # arrange added to sort in alphabetic order, which matches spread order
         ret <- dplyr::left_join(unique(assets_col), weights,
                                 by = purrr::set_names(x, y)) %>%
-            dplyr::rename_(weights = names(weights)[[2]]) %>%
+            dplyr::rename(weights = !!rlang::sym(names(weights)[[2]])) %>%
             tidyr::replace_na(list(weights = 0)) %>%
-            dplyr::arrange_(y) %>%
+            dplyr::arrange(!!rlang::sym(y)) %>%
             dplyr::select(weights) %>%
             unlist() %>%
             as.numeric()

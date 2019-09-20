@@ -96,7 +96,7 @@
 #'     tq_transmute(adjusted, periodReturn, period = "monthly", col_rename = "xlk.returns")
 #' returns_combined <- left_join(fb_returns, xlk_returns, by = "date")
 #' regr_fun <- function(data) {
-#'     coef(lm(fb.returns ~ xlk.returns, data = as_data_frame(data)))
+#'     coef(lm(fb.returns ~ xlk.returns, data = as_tibble(data)))
 #' }
 #' returns_combined %>%
 #'     tq_mutate(mutate_fun = rollapply,
@@ -361,12 +361,12 @@ arrange_by_date <- function(tib) {
 
     if (dplyr::is.grouped_df(tib)) {
 
-        group_names <- dplyr::groups(tib)
+        group_names <- dplyr::group_vars(tib)
 
         arrange_date <- function(tib) {
             date_col <- get_col_name_date_or_date_time(tib)
             tib %>%
-                dplyr::arrange_(date_col)
+                dplyr::arrange(!!rlang::sym(date_col))
         }
 
         tib <- tib %>%
@@ -375,14 +375,15 @@ arrange_by_date <- function(tib) {
                               purrr::map(data, arrange_date)
             ) %>%
             dplyr::select(-data) %>%
-            tidyr::unnest() %>%
-            dplyr::group_by_(.dots = group_names)
+            tidyr::unnest(cols = nested.col) %>%
+            dplyr::group_by_at(.vars = group_names)
 
 
     } else {
+        date_col <- get_col_name_date_or_date_time(tib)
 
         tib <- tib %>%
-            dplyr::arrange_(get_col_name_date_or_date_time(tib))
+            dplyr::arrange(!!rlang::sym(date_col))
 
     }
 
@@ -401,7 +402,7 @@ drop_date_and_group_cols <- function(tib) {
 
     tib <- tib %>%
         dplyr::ungroup() %>%
-        dplyr::select_(.dots = as.list(tib_names_without_date_or_group))
+        dplyr::select(!!!rlang::syms(tib_names_without_date_or_group))
 
     return(tib)
 }
