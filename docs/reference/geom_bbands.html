@@ -8,21 +8,25 @@
 
 <title>Plot Bollinger Bands using Moving Averages — geom_bbands • tidyquant</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,8 +34,8 @@
 
 
 
-<meta property="og:title" content="Plot Bollinger Bands using Moving Averages — geom_bbands" />
 
+<meta property="og:title" content="Plot Bollinger Bands using Moving Averages — geom_bbands" />
 <meta property="og:description" content="Bollinger Bands plot a range around a moving average typically two standard deviations up and down.
 The geom_bbands() function enables plotting Bollinger Bands quickly using various moving average functions.
 The moving average functions used are specified in TTR::SMA()
@@ -52,8 +56,10 @@ Volume-weighted moving averages (VWMA):
 Requires volume aesthetic.
 Elastic, volume-weighted moving averages (EVWMA):
 Requires volume aesthetic.
+
 " />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -77,6 +83,7 @@ Requires volume aesthetic.
   gtag('config', 'UA-76139189-1');
 </script>
 
+
   </head>
 
   <body>
@@ -93,7 +100,7 @@ Requires volume aesthetic.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
       </span>
     </div>
 
@@ -136,7 +143,6 @@ Requires volume aesthetic.
   <a href="../news/index.html">News</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/business-science/tidyquant">
@@ -151,6 +157,7 @@ Requires volume aesthetic.
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -162,10 +169,9 @@ Requires volume aesthetic.
     </div>
 
     <div class="ref-description">
-    
     <p>Bollinger Bands plot a range around a moving average typically two standard deviations up and down.
 The <code>geom_bbands()</code> function enables plotting Bollinger Bands quickly using various moving average functions.
-The moving average functions used are specified in <code><a href='https://www.rdocumentation.org/packages/TTR/topics/MovingAverages'>TTR::SMA()</a></code>
+The moving average functions used are specified in <code><a href='https://rdrr.io/pkg/TTR/man/MovingAverages.html'>TTR::SMA()</a></code>
 from the TTR package. Use <code><a href='coord_x_date.html'>coord_x_date()</a></code> to zoom into specific plot regions.
 The following moving averages are available:</p><ul>
 <li><p><strong><a href='http://www.investopedia.com/terms/s/sma.asp'>Simple moving averages (SMA)</a></strong>:
@@ -184,7 +190,7 @@ Requires <code>volume</code> aesthetic.</p></li>
 <li><p><strong><a href='http://www.motivewave.com/studies/elastic_volume_weighted_moving_average.htm'>Elastic, volume-weighted moving averages (EVWMA)</a></strong>:
 Requires <code>volume</code> aesthetic.</p></li>
 </ul>
-    
+
     </div>
 
     <pre class="usage"><span class='fu'>geom_bbands</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
@@ -198,14 +204,14 @@ Requires <code>volume</code> aesthetic.</p></li>
   <span class='kw'>ma_fun</span> <span class='kw'>=</span> <span class='st'>"SMA"</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>wilder</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ratio</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>v</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>wts</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='no'>n</span>, <span class='kw'>color_ma</span> <span class='kw'>=</span> <span class='st'>"darkblue"</span>, <span class='kw'>color_bands</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
   <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.15</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"grey20"</span>, <span class='no'>...</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>mapping</th>
-      <td><p>Set of aesthetic mappings created by <code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>ggplot2::aes()</a></code> or
-<code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes_'>ggplot2::aes_()</a></code>. If specified and <code>inherit.aes = TRUE</code> (the
+      <td><p>Set of aesthetic mappings created by <code><a href='https://ggplot2.tidyverse.org/reference/aes.html'>ggplot2::aes()</a></code> or
+<code><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>ggplot2::aes_()</a></code>. If specified and <code>inherit.aes = TRUE</code> (the
 default), it is combined with the default mapping at the top level of the
 plot. You must supply <code>mapping</code> if there is no plot mapping.</p></td>
     </tr>
@@ -213,10 +219,10 @@ plot. You must supply <code>mapping</code> if there is no plot mapping.</p></td>
       <th>data</th>
       <td><p>The data to be displayed in this layer. There are three options:</p>
 <p>If <code>NULL</code>, the default, the data is inherited from the plot
-data as specified in the call to <code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot2::ggplot()</a></code>.</p>
+data as specified in the call to <code><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot2::ggplot()</a></code>.</p>
 <p>A <code>data.frame</code>, or other object, will override the plot
 data. All objects will be fortified to produce a data frame. See
-<code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/fortify'>ggplot2::fortify()</a></code> for which variables will be created.</p>
+<code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>ggplot2::fortify()</a></code> for which variables will be created.</p>
 <p>A <code>function</code> will be called with a single argument,
 the plot data. The return value must be a <code>data.frame.</code>, and
 will be used as the layer data.</p></td>
@@ -244,18 +250,18 @@ display.</p></td>
       <td><p>If <code>FALSE</code>, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. <code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/borders'>ggplot2::borders()</a></code>.</p></td>
+the default plot specification, e.g. <code><a href='https://ggplot2.tidyverse.org/reference/borders.html'>ggplot2::borders()</a></code>.</p></td>
     </tr>
     <tr>
       <th>ma_fun</th>
       <td><p>The function used to calculate the moving average. Seven options are
 available including: SMA, EMA, WMA, DEMA, ZLEMA, VWMA, and EVWMA. The default is
-<code>SMA</code>. See <code><a href='https://www.rdocumentation.org/packages/TTR/topics/MovingAverages'>TTR::SMA()</a></code> for underlying functions.</p></td>
+<code>SMA</code>. See <code><a href='https://rdrr.io/pkg/TTR/man/MovingAverages.html'>TTR::SMA()</a></code> for underlying functions.</p></td>
     </tr>
     <tr>
       <th>n</th>
       <td><p>Number of periods to average over. Must be between 1 and
-<code><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>nrow(x)</a></code>, inclusive.</p></td>
+<code><a href='https://rdrr.io/r/base/nrow.html'>nrow(x)</a></code>, inclusive.</p></td>
     </tr>
     <tr>
       <th>sd</th>
@@ -295,17 +301,18 @@ average line and the Bollinger band line.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Other arguments passed on to <code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/layer'>ggplot2::layer()</a></code>. These are
+      <td><p>Other arguments passed on to <code><a href='https://ggplot2.tidyverse.org/reference/layer.html'>ggplot2::layer()</a></code>. These are
 often aesthetics, used to set an aesthetic to a fixed value, like
 <code>color = "red"</code> or <code>size = 3</code>. They may also be parameters
 to the paired geom/stat.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="aesthetics"><a class="anchor" href="#aesthetics"></a>Aesthetics</h2>
 
     
-    <p>The following aesthetics are understood (required are in bold):</p><ul>
+
+<p>The following aesthetics are understood (required are in bold):</p><ul>
 <li><p><strong><code>x</code></strong>, Typically a date</p></li>
 <li><p><strong><code>high</code></strong>, Required to be the high price</p></li>
 <li><p><strong><code>low</code></strong>, Required to be the low price</p></li>
@@ -318,64 +325,65 @@ to the paired geom/stat.</p></td>
 <li><p><code>linetype</code></p></li>
 <li><p><code>size</code></p></li>
 </ul>
-    
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>See individual modeling functions for underlying parameters:</p><ul>
-<li><p><code><a href='https://www.rdocumentation.org/packages/TTR/topics/MovingAverages'>TTR::SMA()</a></code> for simple moving averages</p></li>
-<li><p><code><a href='https://www.rdocumentation.org/packages/TTR/topics/MovingAverages'>TTR::EMA()</a></code> for exponential moving averages</p></li>
-<li><p><code><a href='https://www.rdocumentation.org/packages/TTR/topics/MovingAverages'>TTR::WMA()</a></code> for weighted moving averages</p></li>
-<li><p><code><a href='https://www.rdocumentation.org/packages/TTR/topics/MovingAverages'>TTR::DEMA()</a></code> for double exponential moving averages</p></li>
-<li><p><code><a href='https://www.rdocumentation.org/packages/TTR/topics/MovingAverages'>TTR::ZLEMA()</a></code> for zero-lag exponential moving averages</p></li>
-<li><p><code><a href='https://www.rdocumentation.org/packages/TTR/topics/MovingAverages'>TTR::VWMA()</a></code> for volume-weighted moving averages</p></li>
-<li><p><code><a href='https://www.rdocumentation.org/packages/TTR/topics/MovingAverages'>TTR::EVWMA()</a></code> for elastic, volume-weighted moving averages</p></li>
+<li><p><code><a href='https://rdrr.io/pkg/TTR/man/MovingAverages.html'>TTR::SMA()</a></code> for simple moving averages</p></li>
+<li><p><code><a href='https://rdrr.io/pkg/TTR/man/MovingAverages.html'>TTR::EMA()</a></code> for exponential moving averages</p></li>
+<li><p><code><a href='https://rdrr.io/pkg/TTR/man/MovingAverages.html'>TTR::WMA()</a></code> for weighted moving averages</p></li>
+<li><p><code><a href='https://rdrr.io/pkg/TTR/man/MovingAverages.html'>TTR::DEMA()</a></code> for double exponential moving averages</p></li>
+<li><p><code><a href='https://rdrr.io/pkg/TTR/man/MovingAverages.html'>TTR::ZLEMA()</a></code> for zero-lag exponential moving averages</p></li>
+<li><p><code><a href='https://rdrr.io/pkg/TTR/man/MovingAverages.html'>TTR::VWMA()</a></code> for volume-weighted moving averages</p></li>
+<li><p><code><a href='https://rdrr.io/pkg/TTR/man/MovingAverages.html'>TTR::EVWMA()</a></code> for elastic, volume-weighted moving averages</p></li>
 <li><p><code><a href='coord_x_date.html'>coord_x_date()</a></code> for zooming into specific regions of a plot</p></li>
-</ul></div>
-    
+</ul>
+</div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Load libraries</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>tidyquant</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyquant</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
+
 
 <span class='no'>AAPL</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tq_get.html'>tq_get</a></span>(<span class='st'>"AAPL"</span>)
 
 <span class='co'># SMA</span>
 <span class='no'>AAPL</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>ggplot</span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
-    <span class='fu'>geom_line</span>() +           <span class='co'># Plot stock price</span>
-    <span class='fu'>geom_bbands</span>(<span class='fu'>aes</span>(<span class='kw'>high</span> <span class='kw'>=</span> <span class='no'>high</span>, <span class='kw'>low</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>close</span> <span class='kw'>=</span> <span class='no'>close</span>), <span class='kw'>ma_fun</span> <span class='kw'>=</span> <span class='no'>SMA</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>50</span>) +
-    <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fu'>today</span>() - <span class='fu'>years</span>(<span class='fl'>1</span>), <span class='fu'>today</span>()), <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>80</span>, <span class='fl'>130</span>))</div><div class='img'><img src='geom_bbands-1.png' alt='' width='700' height='433' /></div><div class='input'>
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() +           <span class='co'># Plot stock price</span>
+    <span class='fu'>geom_bbands</span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>high</span> <span class='kw'>=</span> <span class='no'>high</span>, <span class='kw'>low</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>close</span> <span class='kw'>=</span> <span class='no'>close</span>), <span class='kw'>ma_fun</span> <span class='kw'>=</span> <span class='no'>SMA</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>50</span>) +
+    <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'>today</span>() - <span class='fu'>years</span>(<span class='fl'>1</span>), <span class='fu'>today</span>()), <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>80</span>, <span class='fl'>130</span>))</div><div class='img'><img src='geom_bbands-1.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'># EMA</span>
 <span class='no'>AAPL</span> <span class='kw'>%&gt;%</span>
-   <span class='fu'>ggplot</span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
-   <span class='fu'>geom_line</span>() +           <span class='co'># Plot stock price</span>
-   <span class='fu'>geom_bbands</span>(<span class='fu'>aes</span>(<span class='kw'>high</span> <span class='kw'>=</span> <span class='no'>high</span>, <span class='kw'>low</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>close</span> <span class='kw'>=</span> <span class='no'>close</span>),
+   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
+   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() +           <span class='co'># Plot stock price</span>
+   <span class='fu'>geom_bbands</span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>high</span> <span class='kw'>=</span> <span class='no'>high</span>, <span class='kw'>low</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>close</span> <span class='kw'>=</span> <span class='no'>close</span>),
                   <span class='kw'>ma_fun</span> <span class='kw'>=</span> <span class='no'>EMA</span>, <span class='kw'>wilder</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>ratio</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>50</span>) +
-   <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fu'>today</span>() - <span class='fu'>years</span>(<span class='fl'>1</span>), <span class='fu'>today</span>()), <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>80</span>, <span class='fl'>130</span>))</div><div class='img'><img src='geom_bbands-2.png' alt='' width='700' height='433' /></div><div class='input'>
+   <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'>today</span>() - <span class='fu'>years</span>(<span class='fl'>1</span>), <span class='fu'>today</span>()), <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>80</span>, <span class='fl'>130</span>))</div><div class='img'><img src='geom_bbands-2.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'># VWMA</span>
 <span class='no'>AAPL</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>ggplot</span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
-    <span class='fu'>geom_line</span>() +           <span class='co'># Plot stock price</span>
-    <span class='fu'>geom_bbands</span>(<span class='fu'>aes</span>(<span class='kw'>high</span> <span class='kw'>=</span> <span class='no'>high</span>, <span class='kw'>low</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>close</span> <span class='kw'>=</span> <span class='no'>close</span>, <span class='kw'>volume</span> <span class='kw'>=</span> <span class='no'>volume</span>),
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() +           <span class='co'># Plot stock price</span>
+    <span class='fu'>geom_bbands</span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>high</span> <span class='kw'>=</span> <span class='no'>high</span>, <span class='kw'>low</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>close</span> <span class='kw'>=</span> <span class='no'>close</span>, <span class='kw'>volume</span> <span class='kw'>=</span> <span class='no'>volume</span>),
                    <span class='kw'>ma_fun</span> <span class='kw'>=</span> <span class='no'>VWMA</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>50</span>) +
-    <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fu'>today</span>() - <span class='fu'>years</span>(<span class='fl'>1</span>), <span class='fu'>today</span>()), <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>80</span>, <span class='fl'>130</span>))</div><div class='img'><img src='geom_bbands-3.png' alt='' width='700' height='433' /></div></pre>
+    <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'>today</span>() - <span class='fu'>years</span>(<span class='fl'>1</span>), <span class='fu'>today</span>()), <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>80</span>, <span class='fl'>130</span>))</div><div class='img'><img src='geom_bbands-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#aesthetics">Aesthetics</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -383,13 +391,16 @@ to the paired geom/stat.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

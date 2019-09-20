@@ -70,5 +70,4 @@ reference:
   - title: Deprecated
     contents:
     - starts_with("deprecated")
-    - starts_with("as_")
 

@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Performance Analysis with tidyquant • tidyquant</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Performance Analysis with tidyquant">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
@@ -36,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
       </span>
     </div>
 
@@ -95,13 +96,14 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Performance Analysis with tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2019-04-22</h4>
+            <h4 class="date">2019-09-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ05-performance-analysis-with-tidyquant.Rmd"><code>vignettes/TQ05-performance-analysis-with-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ05-performance-analysis-with-tidyquant.Rmd</code></div>
@@ -146,9 +148,10 @@
 </blockquote>
 <p>We’ll use the <code>PerformanceAnalytics</code> function, <code>table.CAPM</code>, to evaluate the returns of several technology stocks against the SPDR Technology ETF (XLK).</p>
 <p>First, load the <code>tidyquant</code> package.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyquant)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyverse)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyquant)</a></code></pre></div>
 <p>Second, get the stock returns for the stocks we wish to evaluate. We use <code>tq_get</code> to get stock prices from Yahoo Finance, <code>group_by</code> to group the stock prices related to each symbol, and <code>tq_transmute</code> to retrieve period returns in a monthly periodicity using the “adjusted” stock prices (adjusted for stock splits, which can throw off returns, affecting the performance analysis). Review the output and see that there are three groups of symbols indicating the data has been grouped appropriately.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">Ra &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"NFLX"</span>) <span class="op">%&gt;%</span></a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">Ra &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"NFLX"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get  =</span> <span class="st">"stock.prices"</span>,</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">           <span class="dt">from =</span> <span class="st">"2010-01-01"</span>,</a>
 <a class="sourceLine" id="cb2-4" data-line-number="4">           <span class="dt">to   =</span> <span class="st">"2015-12-31"</span>) <span class="op">%&gt;%</span></a>
@@ -198,7 +201,7 @@
 ## 10 2010-10-29  0.0578
 ## # … with 62 more rows</code></pre>
 <p>Now, we combine the two data sets using the “date” field using <code>left_join</code> from the <code>dplyr</code> package. Review the results and see that we still have three groups of returns, and columns “Ra” and “Rb” are side-by-side.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">RaRb &lt;-<span class="st"> </span><span class="kw">left_join</span>(Ra, Rb, <span class="dt">by =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"date"</span> =<span class="st"> "date"</span>))</a>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">RaRb &lt;-<span class="st"> </span><span class="kw">left_join</span>(Ra, Rb, <span class="dt">by =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"date"</span> =<span class="st"> "date"</span>))</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">RaRb</a></code></pre></div>
 <pre><code>## # A tibble: 216 x 4
 ## # Groups:   symbol [3]
@@ -225,9 +228,9 @@
 ## # Groups:   symbol [3]
 ##   symbol ActivePremium  Alpha AnnualizedAlpha  Beta `Beta-` `Beta+`
 ##   &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-## 1 AAPL          0.178  0.0127          0.163  1.14    0.638  0.981 
-## 2 GOOG          0.0345 0.0028          0.0344 1.14    1.39   1.16  
-## 3 NFLX          0.447  0.053           0.859  0.384  -1.52   0.0044
+## 1 AAPL           0.119 0.0089           0.112 1.11    0.578  1.04  
+## 2 GOOG           0.034 0.0028           0.034 1.14    1.39   1.16  
+## 3 NFLX           0.447 0.053            0.859 0.384  -1.52   0.0044
 ## # … with 6 more variables: Correlation &lt;dbl&gt;, `Correlationp-value` &lt;dbl&gt;,
 ## #   InformationRatio &lt;dbl&gt;, `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;,
 ## #   TreynorRatio &lt;dbl&gt;</code></pre>
@@ -238,7 +241,7 @@
 ## # Groups:   symbol [3]
 ##   symbol  Alpha  Beta
 ##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
-## 1 AAPL   0.0127 1.14 
+## 1 AAPL   0.0089 1.11 
 ## 2 GOOG   0.0028 1.14 
 ## 3 NFLX   0.053  0.384</code></pre>
 <p>With <code>tidyquant</code> it’s efficient and easy to get the CAPM information! And, that’s just one of 129 available functions to analyze stock and portfolio return performance. Just use <code><a href="../reference/tq_performance.html">tq_performance_fun_options()</a></code> to see the full list.</p>
@@ -256,7 +259,7 @@
 <a href="#individual-assets" class="anchor"></a>Individual Assets</h2>
 <p>Individual assets are the simplest form of analysis because there is no portfolio aggregation (Step 3A). We’ll re-do the “Quick Example” this time getting the <strong>Sharpe Ratio</strong>, a measure of reward-to-risk.</p>
 <p>Before we get started let’s find the performance function we want to use from <code>PerformanceAnalytics</code>. Searching <code>tq_performance_fun_options</code>, we can see that <code>SharpeRatio</code> is available. Type <code>?SharpeRatio</code>, and we can see that the arguments are:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/args">args</a></span>(SharpeRatio)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/args.html">args</a></span>(SharpeRatio)</a></code></pre></div>
 <pre><code>## function (R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR", "ES"), 
 ##     weights = NULL, annualize = FALSE, ...) 
 ## NULL</code></pre>
@@ -265,7 +268,7 @@
 <h3 class="hasAnchor">
 <a href="#step-1a-get-stock-prices" class="anchor"></a>Step 1A: Get stock prices</h3>
 <p>Use <code><a href="../reference/tq_get.html">tq_get()</a></code> to get stock prices.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">stock_prices &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"NFLX"</span>) <span class="op">%&gt;%</span></a>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">stock_prices &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"NFLX"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb14-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get  =</span> <span class="st">"stock.prices"</span>,</a>
 <a class="sourceLine" id="cb14-3" data-line-number="3">           <span class="dt">from =</span> <span class="st">"2010-01-01"</span>,</a>
 <a class="sourceLine" id="cb14-4" data-line-number="4">           <span class="dt">to   =</span> <span class="st">"2015-12-31"</span>)</a>
@@ -273,16 +276,16 @@
 <pre><code>## # A tibble: 4,527 x 8
 ##    symbol date        open  high   low close    volume adjusted
 ##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1 AAPL   2010-01-04  30.5  30.6  30.3  30.6 123432400     20.4
-##  2 AAPL   2010-01-05  30.7  30.8  30.5  30.6 150476200     20.4
-##  3 AAPL   2010-01-06  30.6  30.7  30.1  30.1 138040000     20.1
-##  4 AAPL   2010-01-07  30.2  30.3  29.9  30.1 119282800     20.1
-##  5 AAPL   2010-01-08  30.0  30.3  29.9  30.3 111902700     20.2
-##  6 AAPL   2010-01-11  30.4  30.4  29.8  30.0 115557400     20.0
-##  7 AAPL   2010-01-12  29.9  30.0  29.5  29.7 148614900     19.8
-##  8 AAPL   2010-01-13  29.7  30.1  29.2  30.1 151473000     20.1
-##  9 AAPL   2010-01-14  30.0  30.1  29.9  29.9 108223500     19.9
-## 10 AAPL   2010-01-15  30.1  30.2  29.4  29.4 148516900     19.6
+##  1 AAPL   2010-01-04  30.5  30.6  30.3  30.6 123432400     26.7
+##  2 AAPL   2010-01-05  30.7  30.8  30.5  30.6 150476200     26.7
+##  3 AAPL   2010-01-06  30.6  30.7  30.1  30.1 138040000     26.3
+##  4 AAPL   2010-01-07  30.2  30.3  29.9  30.1 119282800     26.3
+##  5 AAPL   2010-01-08  30.0  30.3  29.9  30.3 111902700     26.4
+##  6 AAPL   2010-01-11  30.4  30.4  29.8  30.0 115557400     26.2
+##  7 AAPL   2010-01-12  29.9  30.0  29.5  29.7 148614900     25.9
+##  8 AAPL   2010-01-13  29.7  30.1  29.2  30.1 151473000     26.3
+##  9 AAPL   2010-01-14  30.0  30.1  29.9  29.9 108223500     26.1
+## 10 AAPL   2010-01-15  30.1  30.2  29.4  29.4 148516900     25.7
 ## # … with 4,517 more rows</code></pre>
 </div>
 <div id="step-2a-mutate-to-returns" class="section level3">
@@ -330,7 +333,7 @@
 ## # Groups:   symbol [3]
 ##   symbol `ESSharpe(Rf=0%,p=95… `StdDevSharpe(Rf=0%,p=… `VaRSharpe(Rf=0%,p=…
 ##   &lt;chr&gt;                  &lt;dbl&gt;                   &lt;dbl&gt;                &lt;dbl&gt;
-## 1 AAPL                   0.206                   0.337                0.257
+## 1 AAPL                   0.173                   0.292                0.218
 ## 2 GOOG                   0.129                   0.203                0.157
 ## 3 NFLX                   0.237                   0.284                0.272</code></pre>
 <p>Now we have the Sharpe Ratio for each of the three stocks. What if we want to adjust the parameters of the function? We can just add on the arguments of the underlying function.</p>
@@ -344,9 +347,9 @@
 ## # Groups:   symbol [3]
 ##   symbol `ESSharpe(Rf=0.2%,p=… `StdDevSharpe(Rf=0.2%… `VaRSharpe(Rf=0.2%,p…
 ##   &lt;chr&gt;                  &lt;dbl&gt;                  &lt;dbl&gt;                 &lt;dbl&gt;
-## 1 AAPL                  0.139                   0.304                 0.163
-## 2 GOOG                  0.0830                  0.170                 0.100
-## 3 NFLX                  0.115                   0.272                 0.142</code></pre>
+## 1 AAPL                  0.116                   0.258                0.134 
+## 2 GOOG                  0.0826                  0.170                0.0998
+## 3 NFLX                  0.115                   0.272                0.142</code></pre>
 </div>
 </div>
 <div id="portfolios-asset-groups" class="section level2">
@@ -361,7 +364,7 @@
 <h4 class="hasAnchor">
 <a href="#steps-1a-and-2a-asset-period-returns" class="anchor"></a>Steps 1A and 2A: Asset Period Returns</h4>
 <p>This is the same as what we did previously to get the monthly returns for groups of individual stock prices. We use the split, apply, combine framework using the workflow of <code>tq_get</code>, <code>group_by</code>, and <code>tq_transmute</code>.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">stock_returns_monthly &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"NFLX"</span>) <span class="op">%&gt;%</span></a>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">stock_returns_monthly &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"NFLX"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb22-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get  =</span> <span class="st">"stock.prices"</span>,</a>
 <a class="sourceLine" id="cb22-3" data-line-number="3">           <span class="dt">from =</span> <span class="st">"2010-01-01"</span>,</a>
 <a class="sourceLine" id="cb22-4" data-line-number="4">           <span class="dt">to   =</span> <span class="st">"2015-12-31"</span>) <span class="op">%&gt;%</span></a>
@@ -427,8 +430,8 @@
 <div id="method-1-aggregating-a-portfolio-using-vector-of-weights" class="section level5">
 <h5 class="hasAnchor">
 <a href="#method-1-aggregating-a-portfolio-using-vector-of-weights" class="anchor"></a>Method 1: Aggregating a Portfolio using Vector of Weights</h5>
-<p>We’ll use the weight vector, <code><a href="https://www.rdocumentation.org/packages/base/topics/c">c(0.5, 0, 0.5)</a></code>. Two important aspects to supplying a numeric vector of weights: First, notice that the length (3) is equal to the number of assets (3). This is a requirement. Second, notice that the sum of the weighting vector is equal to 1. This is not “required”, but is best practice. If the sum is not 1, the weights will be distributed accordingly by scaling the vector to 1, and a warning message will appear.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">wts &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.5</span>, <span class="fl">0.0</span>, <span class="fl">0.5</span>)</a>
+<p>We’ll use the weight vector, <code><a href="https://rdrr.io/r/base/c.html">c(0.5, 0, 0.5)</a></code>. Two important aspects to supplying a numeric vector of weights: First, notice that the length (3) is equal to the number of assets (3). This is a requirement. Second, notice that the sum of the weighting vector is equal to 1. This is not “required”, but is best practice. If the sum is not 1, the weights will be distributed accordingly by scaling the vector to 1, and a warning message will appear.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">wts &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.5</span>, <span class="fl">0.0</span>, <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb26-2" data-line-number="2">portfolio_returns_monthly &lt;-<span class="st"> </span>stock_returns_monthly <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb26-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="../reference/tq_portfolio.html">tq_portfolio</a></span>(<span class="dt">assets_col  =</span> symbol, </a>
 <a class="sourceLine" id="cb26-4" data-line-number="4">                 <span class="dt">returns_col =</span> Ra, </a>
@@ -457,8 +460,8 @@
 <a href="#method-2-aggregating-a-portfolio-using-two-column-tibble-with-symbols-and-weights" class="anchor"></a>Method 2: Aggregating a Portfolio using Two Column Tibble with Symbols and Weights</h5>
 <p>A possibly more useful method of aggregating returns is using a tibble of symbols and weights that are mapped to the portfolio. We’ll recreate the previous portfolio example using mapped weights.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">wts_map &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb28-2" data-line-number="2">    <span class="dt">symbols =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"NFLX"</span>),</a>
-<a class="sourceLine" id="cb28-3" data-line-number="3">    <span class="dt">weights =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">    <span class="dt">symbols =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"NFLX"</span>),</a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">    <span class="dt">weights =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb28-4" data-line-number="4">)</a>
 <a class="sourceLine" id="cb28-5" data-line-number="5">wts_map</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
@@ -522,7 +525,7 @@
 <pre><code>## # A tibble: 1 x 12
 ##   ActivePremium  Alpha AnnualizedAlpha  Beta `Beta-` `Beta+` Correlation
 ##           &lt;dbl&gt;  &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;
-## 1         0.342 0.0304           0.433 0.774  -0.216   0.486       0.294
+## 1         0.327 0.0299           0.425 0.754  -0.244   0.503       0.283
 ## # … with 5 more variables: `Correlationp-value` &lt;dbl&gt;,
 ## #   InformationRatio &lt;dbl&gt;, `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;,
 ## #   TreynorRatio &lt;dbl&gt;</code></pre>
@@ -542,7 +545,7 @@
 <h4 class="hasAnchor">
 <a href="#steps-1-and-2-are-the-exact-same-as-the-single-portfolio-example" class="anchor"></a>Steps 1 and 2 are the Exact Same as the Single Portfolio Example</h4>
 <p>First, get individual asset returns grouped by asset, which is the exact same as Steps 1A and 1B from the Single Portfolio example.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">stock_returns_monthly &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"NFLX"</span>) <span class="op">%&gt;%</span></a>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">stock_returns_monthly &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"NFLX"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb36-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get  =</span> <span class="st">"stock.prices"</span>,</a>
 <a class="sourceLine" id="cb36-3" data-line-number="3">           <span class="dt">from =</span> <span class="st">"2010-01-01"</span>,</a>
 <a class="sourceLine" id="cb36-4" data-line-number="4">           <span class="dt">to   =</span> <span class="st">"2015-12-31"</span>) <span class="op">%&gt;%</span></a>
@@ -598,12 +601,12 @@
 <li>The tibble must be grouped by the portfolio column.</li>
 </ol>
 <p>Here’s what the weights table should look like for our example:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">weights &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(</a>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">weights &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(</a>
 <a class="sourceLine" id="cb40-2" data-line-number="2">    <span class="fl">0.50</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>,</a>
 <a class="sourceLine" id="cb40-3" data-line-number="3">    <span class="fl">0.25</span>, <span class="fl">0.50</span>, <span class="fl">0.25</span>,</a>
 <a class="sourceLine" id="cb40-4" data-line-number="4">    <span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.50</span></a>
 <a class="sourceLine" id="cb40-5" data-line-number="5">)</a>
-<a class="sourceLine" id="cb40-6" data-line-number="6">stocks &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"NFLX"</span>)</a>
+<a class="sourceLine" id="cb40-6" data-line-number="6">stocks &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"NFLX"</span>)</a>
 <a class="sourceLine" id="cb40-7" data-line-number="7">weights_table &lt;-<span class="st">  </span><span class="kw">tibble</span>(stocks) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb40-8" data-line-number="8"><span class="st">    </span><span class="kw"><a href="../reference/tq_portfolio.html">tq_repeat_df</a></span>(<span class="dt">n =</span> <span class="dv">3</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb40-9" data-line-number="9"><span class="st">    </span><span class="kw">bind_cols</span>(<span class="kw">tibble</span>(weights)) <span class="op">%&gt;%</span></a>
@@ -677,9 +680,9 @@
 ## # Groups:   portfolio [3]
 ##   portfolio ActivePremium  Alpha AnnualizedAlpha  Beta `Beta-` `Beta+`
 ##       &lt;int&gt;         &lt;dbl&gt;  &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-## 1         1         0.252 0.0203           0.273 0.931   0.344   0.714
-## 2         2         0.230 0.0197           0.263 0.902   0.453   0.646
-## 3         3         0.327 0.031            0.442 0.734  -0.164   0.386
+## 1         1         0.231 0.0193           0.258 0.908   0.312   0.741
+## 2         2         0.219 0.0192           0.256 0.886   0.436   0.660
+## 3         3         0.319 0.0308           0.439 0.721  -0.179   0.394
 ## # … with 6 more variables: Correlation &lt;dbl&gt;, `Correlationp-value` &lt;dbl&gt;,
 ## #   InformationRatio &lt;dbl&gt;, `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;,
 ## #   TreynorRatio &lt;dbl&gt;</code></pre>
@@ -690,9 +693,9 @@
 ## # Groups:   portfolio [3]
 ##   portfolio `ESSharpe(Rf=0%,p=9… `StdDevSharpe(Rf=0%,… `VaRSharpe(Rf=0%,p=…
 ##       &lt;int&gt;                &lt;dbl&gt;                 &lt;dbl&gt;                &lt;dbl&gt;
-## 1         1                0.179                 0.372                0.278
-## 2         2                0.150                 0.344                0.244
-## 3         3                0.151                 0.323                0.242</code></pre>
+## 1         1                0.172                 0.355                0.263
+## 2         2                0.146                 0.334                0.236
+## 3         3                0.150                 0.317                0.238</code></pre>
 </div>
 </div>
 </div>
@@ -790,9 +793,9 @@
 ## # Groups:   portfolio [3]
 ##   portfolio ArithmeticMean GeometricMean Kurtosis `LCLMean(0.95)` Maximum
 ##       &lt;int&gt;          &lt;dbl&gt;         &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt;   &lt;dbl&gt;
-## 1         1         0.0306        0.0272     1.19          0.0113   0.222
-## 2         2         0.0296        0.0259     1.75          0.0094   0.227
-## 3         3         0.0391        0.0318     1.89          0.0106   0.370
+## 1         1         0.0293        0.0259     1.14          0.0099   0.222
+## 2         2         0.029         0.0252     1.65          0.0086   0.227
+## 3         3         0.0388        0.0313     1.81          0.01     0.370
 ## # … with 11 more variables: Median &lt;dbl&gt;, Minimum &lt;dbl&gt;, NAs &lt;dbl&gt;,
 ## #   Observations &lt;dbl&gt;, Quartile1 &lt;dbl&gt;, Quartile3 &lt;dbl&gt;, SEMean &lt;dbl&gt;,
 ## #   Skewness &lt;dbl&gt;, Stdev &lt;dbl&gt;, `UCLMean(0.95)` &lt;dbl&gt;, Variance &lt;dbl&gt;</code></pre>
@@ -807,9 +810,9 @@
 ## # Groups:   portfolio [3]
 ##   portfolio ActivePremium  Alpha AnnualizedAlpha  Beta `Beta-` `Beta+`
 ##       &lt;int&gt;         &lt;dbl&gt;  &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-## 1         1         0.252 0.0203           0.273 0.931   0.344   0.714
-## 2         2         0.230 0.0197           0.263 0.902   0.453   0.646
-## 3         3         0.327 0.031            0.442 0.734  -0.164   0.386
+## 1         1         0.231 0.0193           0.258 0.908   0.312   0.741
+## 2         2         0.219 0.0192           0.256 0.886   0.436   0.660
+## 3         3         0.319 0.0308           0.439 0.721  -0.179   0.394
 ## # … with 6 more variables: Correlation &lt;dbl&gt;, `Correlationp-value` &lt;dbl&gt;,
 ## #   InformationRatio &lt;dbl&gt;, `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;,
 ## #   TreynorRatio &lt;dbl&gt;</code></pre>
@@ -824,9 +827,9 @@
 ## # Groups:   portfolio [3]
 ##   portfolio AnnualizedReturn `AnnualizedSharpe(Rf=0%)` AnnualizedStdDev
 ##       &lt;int&gt;            &lt;dbl&gt;                     &lt;dbl&gt;            &lt;dbl&gt;
-## 1         1            0.381                      1.34            0.284
-## 2         2            0.359                      1.21            0.298
-## 3         3            0.455                      1.09            0.419</code></pre>
+## 1         1            0.360                      1.26            0.286
+## 2         2            0.348                      1.16            0.301
+## 3         3            0.448                      1.06            0.424</code></pre>
 </div>
 <div id="table-correlation" class="section level2">
 <h2 class="hasAnchor">
@@ -838,9 +841,9 @@
 ## # Groups:   portfolio [3]
 ##   portfolio `p-value` `Lower CI` `Upper CI` to.Rb
 ##       &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;
-## 1         1 0.0000149     0.287       0.645 0.486
-## 2         2 0.0000745     0.243       0.617 0.450
-## 3         3 0.0275        0.0300      0.464 0.260</code></pre>
+## 1         1 0.0000284     0.270       0.634 0.472
+## 2         2 0.000122      0.229       0.608 0.437
+## 3         3 0.0325        0.0220      0.457 0.252</code></pre>
 </div>
 <div id="table-downsiderisk" class="section level2">
 <h2 class="hasAnchor">
@@ -852,9 +855,9 @@
 ## # Groups:   portfolio [3]
 ##   portfolio `DownsideDeviat… `DownsideDeviat… `DownsideDeviat…
 ##       &lt;int&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
-## 1         1           0.0444           0.0482           0.0444
-## 2         2           0.0494           0.0532           0.0494
-## 3         3           0.0678           0.0714           0.0678
+## 1         1           0.045            0.0488           0.045 
+## 2         2           0.0501           0.0538           0.0501
+## 3         3           0.0684           0.0721           0.0684
 ## # … with 8 more variables: GainDeviation &lt;dbl&gt;, `HistoricalES(95%)` &lt;dbl&gt;,
 ## #   `HistoricalVaR(95%)` &lt;dbl&gt;, LossDeviation &lt;dbl&gt;,
 ## #   MaximumDrawdown &lt;dbl&gt;, `ModifiedES(95%)` &lt;dbl&gt;,
@@ -868,11 +871,11 @@
 <a class="sourceLine" id="cb62-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, <span class="dt">Rb =</span> <span class="ot">NULL</span>, <span class="dt">performance_fun =</span> table.DownsideRiskRatio)</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 9
 ## # Groups:   portfolio [3]
-##   portfolio Annualiseddowns… Downsidepotenti… Monthlydownside… Omega
+##   portfolio Annualiseddowns… Downsidepotenti… monthlydownside… Omega
 ##       &lt;int&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt; &lt;dbl&gt;
-## 1         1            0.154           0.0192           0.0444  2.59
-## 2         2            0.171           0.0213           0.0494  2.39
-## 3         3            0.235           0.0289           0.0678  2.35
+## 1         1            0.156           0.0198           0.045   2.48
+## 2         2            0.173           0.0217           0.0501  2.34
+## 3         3            0.237           0.0294           0.0684  2.32
 ## # … with 4 more variables: `Omega-sharperatio` &lt;dbl&gt;, Sortinoratio &lt;dbl&gt;,
 ## #   Upsidepotential &lt;dbl&gt;, Upsidepotentialratio &lt;dbl&gt;</code></pre>
 </div>
@@ -886,9 +889,9 @@
 ## # Groups:   portfolio [3]
 ##   portfolio BetaCoKurtosis BetaCoSkewness BetaCoVariance CoKurtosis
 ##       &lt;int&gt;          &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;      &lt;dbl&gt;
-## 1         1          0.767          0.837          0.931          0
-## 2         2          0.779          2.06           0.902          0
-## 3         3          0.463          0.592          0.734          0
+## 1         1          0.756          0.196          0.908          0
+## 2         2          0.772          1.71           0.886          0
+## 3         3          0.455          0.368          0.721          0
 ## # … with 1 more variable: CoSkewness &lt;dbl&gt;</code></pre>
 </div>
 <div id="table-informationratio" class="section level2">
@@ -901,9 +904,9 @@
 ## # Groups:   portfolio [3]
 ##   portfolio AnnualisedTrackingError InformationRatio TrackingError
 ##       &lt;int&gt;                   &lt;dbl&gt;            &lt;dbl&gt;         &lt;dbl&gt;
-## 1         1                   0.249            1.01         0.0718
-## 2         2                   0.266            0.865        0.0769
-## 3         3                   0.407            0.803        0.117</code></pre>
+## 1         1                   0.252            0.917        0.0728
+## 2         2                   0.271            0.809        0.0782
+## 3         3                   0.412            0.774        0.119</code></pre>
 </div>
 <div id="table-variability" class="section level2">
 <h2 class="hasAnchor">
@@ -913,11 +916,11 @@
 <a class="sourceLine" id="cb68-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, <span class="dt">Rb =</span> <span class="ot">NULL</span>, <span class="dt">performance_fun =</span> table.Variability)</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ## # Groups:   portfolio [3]
-##   portfolio AnnualizedStdDev MeanAbsolutedeviation MonthlyStdDev
+##   portfolio AnnualizedStdDev MeanAbsolutedeviation monthlyStdDev
 ##       &lt;int&gt;            &lt;dbl&gt;                 &lt;dbl&gt;         &lt;dbl&gt;
-## 1         1            0.284                0.0656        0.0821
-## 2         2            0.298                0.0675        0.086 
-## 3         3            0.419                0.0903        0.121</code></pre>
+## 1         1            0.286                0.0658        0.0825
+## 2         2            0.301                0.0679        0.0868
+## 3         3            0.424                0.091         0.122</code></pre>
 </div>
 <div id="var" class="section level2">
 <h2 class="hasAnchor">
@@ -929,9 +932,9 @@
 ## # Groups:   portfolio [3]
 ##   portfolio    VaR
 ##       &lt;int&gt;  &lt;dbl&gt;
-## 1         1 -0.110
-## 2         2 -0.121
-## 3         3 -0.162</code></pre>
+## 1         1 -0.111
+## 2         2 -0.123
+## 3         3 -0.163</code></pre>
 </div>
 <div id="sharperatio" class="section level2">
 <h2 class="hasAnchor">
@@ -943,9 +946,9 @@
 ## # Groups:   portfolio [3]
 ##   portfolio `ESSharpe(Rf=0%,p=9… `StdDevSharpe(Rf=0%,… `VaRSharpe(Rf=0%,p=…
 ##       &lt;int&gt;                &lt;dbl&gt;                 &lt;dbl&gt;                &lt;dbl&gt;
-## 1         1                0.179                 0.372                0.278
-## 2         2                0.150                 0.344                0.244
-## 3         3                0.151                 0.323                0.242</code></pre>
+## 1         1                0.172                 0.355                0.263
+## 2         2                0.146                 0.334                0.236
+## 3         3                0.150                 0.317                0.238</code></pre>
 </div>
 </div>
 <div id="customizing-using-the" class="section level1">
@@ -956,7 +959,7 @@
 <h2 class="hasAnchor">
 <a href="#customizing-tq_portfolio" class="anchor"></a>Customizing tq_portfolio</h2>
 <p>The <code>tq_portfolio</code> function is a wrapper for <code>Return.portfolio</code>. This means that during the portfolio aggregation process, we can make use of most of the <code>Return.portfolio</code> arguments such as <code>wealth.index</code>, <code>contribution</code>, <code>geometric</code>, <code>rebalance_on</code>, and <code>value</code>. Here’s the arguments of the underlying function:</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/args">args</a></span>(Return.portfolio)</a></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/args.html">args</a></span>(Return.portfolio)</a></code></pre></div>
 <pre><code>## function (R, weights = NULL, wealth.index = FALSE, contribution = FALSE, 
 ##     geometric = TRUE, rebalance_on = c(NA, "years", "quarters", 
 ##         "months", "weeks", "days"), value = 1, verbose = FALSE, 
@@ -965,7 +968,7 @@
 <p>Let’s see an example of passing parameters to the <code>...</code>. Suppose we want to instead see how our money is grows for a $10,000 investment. We’ll use the “Single Portfolio” example, where our portfolio mix was 50% AAPL, 0% GOOG, and 50% NFLX.</p>
 <p>Method 3A, Aggregating Portfolio Returns, showed us two methods to aggregate for a single portfolio. Either will work for this example. For simplicity, we’ll examine the first.</p>
 <p>Here’s the original output, without adjusting parameters.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">wts &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.5</span>, <span class="fl">0.0</span>, <span class="fl">0.5</span>)</a>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">wts &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.5</span>, <span class="fl">0.0</span>, <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb76-2" data-line-number="2">portfolio_returns_monthly &lt;-<span class="st"> </span>stock_returns_monthly <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb76-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="../reference/tq_portfolio.html">tq_portfolio</a></span>(<span class="dt">assets_col  =</span> symbol, </a>
 <a class="sourceLine" id="cb76-4" data-line-number="4">                 <span class="dt">returns_col =</span> Ra, </a>
@@ -984,7 +987,7 @@
 <a class="sourceLine" id="cb77-11" data-line-number="11"><span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent)</a></code></pre></div>
 <p><img src="TQ05-performance-analysis-with-tidyquant_files/figure-html/unnamed-chunk-44-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p>This is good, but we want to see how our $10,000 initial investment is growing. This is simple with the underlying <code>Return.portfolio</code> argument, <code>wealth.index = TRUE</code>. All we need to do is add these as additional parameters to <code>tq_portfolio</code>!</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">wts &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>)</a>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">wts &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb78-2" data-line-number="2">portfolio_growth_monthly &lt;-<span class="st"> </span>stock_returns_monthly <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb78-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="../reference/tq_portfolio.html">tq_portfolio</a></span>(<span class="dt">assets_col   =</span> symbol, </a>
 <a class="sourceLine" id="cb78-4" data-line-number="4">                 <span class="dt">returns_col  =</span> Ra, </a>
@@ -1018,7 +1021,7 @@
 <a class="sourceLine" id="cb80-6" data-line-number="6">                 <span class="dt">wealth.index =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb80-7" data-line-number="7"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">investment.growth =</span> investment.growth <span class="op">*</span><span class="st"> </span><span class="dv">10000</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1">portfolio_growth_monthly_multi <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb81-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> investment.growth, <span class="dt">color =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(portfolio))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb81-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> investment.growth, <span class="dt">color =</span> <span class="kw"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(portfolio))) <span class="op">+</span></a>
 <a class="sourceLine" id="cb81-3" data-line-number="3"><span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb81-4" data-line-number="4"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"Portfolio Growth"</span>,</a>
 <a class="sourceLine" id="cb81-5" data-line-number="5">         <span class="dt">subtitle =</span> <span class="st">"Comparing Multiple Portfolios"</span>,</a>
@@ -1035,7 +1038,7 @@
 <h2 class="hasAnchor">
 <a href="#customizing-tq_performance" class="anchor"></a>Customizing tq_performance</h2>
 <p>Finally, the same concept of passing arguments works with all the <code>tidyquant</code> functions that are wrappers including <code>tq_transmute</code>, <code>tq_mutate</code>, <code>tq_performance</code>, etc. Let’s use a final example with the <code>SharpeRatio</code>, which has the following arguments.</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/args">args</a></span>(SharpeRatio)</a></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/args.html">args</a></span>(SharpeRatio)</a></code></pre></div>
 <pre><code>## function (R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR", "ES"), 
 ##     weights = NULL, annualize = FALSE, ...) 
 ## NULL</code></pre>
@@ -1048,9 +1051,9 @@
 ## # Groups:   portfolio [3]
 ##   portfolio `ESSharpe(Rf=0%,p=9… `StdDevSharpe(Rf=0%,… `VaRSharpe(Rf=0%,p=…
 ##       &lt;int&gt;                &lt;dbl&gt;                 &lt;dbl&gt;                &lt;dbl&gt;
-## 1         1                0.179                 0.372                0.278
-## 2         2                0.150                 0.344                0.244
-## 3         3                0.151                 0.323                0.242</code></pre>
+## 1         1                0.172                 0.355                0.263
+## 2         2                0.146                 0.334                0.236
+## 3         3                0.150                 0.317                0.238</code></pre>
 <p>With <code>Rf = 0.03 / 12</code> (adjusted for monthly periodicity):</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1">RaRb_multiple_portfolio <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb86-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra              =</span> Ra, </a>
@@ -1060,9 +1063,9 @@
 ## # Groups:   portfolio [3]
 ##   portfolio `ESSharpe(Rf=0.2%,p… `StdDevSharpe(Rf=0.2… `VaRSharpe(Rf=0.2%,…
 ##       &lt;int&gt;                &lt;dbl&gt;                 &lt;dbl&gt;                &lt;dbl&gt;
-## 1         1                0.165                 0.342                0.256
-## 2         2                0.137                 0.315                0.223
-## 3         3                0.141                 0.302                0.226</code></pre>
+## 1         1                0.157                 0.325                0.241
+## 2         2                0.134                 0.305                0.216
+## 3         3                0.141                 0.296                0.222</code></pre>
 <p>And, with both <code>Rf = 0.03 / 12</code> (adjusted for monthly periodicity) and <code>p = 0.99</code>:</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1">RaRb_multiple_portfolio <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb88-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra              =</span> Ra, </a>
@@ -1073,14 +1076,15 @@
 ## # Groups:   portfolio [3]
 ##   portfolio `ESSharpe(Rf=0.2%,p… `StdDevSharpe(Rf=0.2… `VaRSharpe(Rf=0.2%,…
 ##       &lt;int&gt;                &lt;dbl&gt;                 &lt;dbl&gt;                &lt;dbl&gt;
-## 1         1               0.111                  0.342                0.141
-## 2         2               0.0984                 0.315                0.118
-## 3         3               0.0944                 0.302                0.117</code></pre>
+## 1         1               0.105                  0.325                0.134
+## 2         2               0.0952                 0.305                0.115
+## 3         3               0.0915                 0.296                0.117</code></pre>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -1122,17 +1126,20 @@
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Matt Dancho, Davis Vaughan.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

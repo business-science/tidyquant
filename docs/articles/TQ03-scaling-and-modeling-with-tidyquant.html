@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Scaling and Modeling with tidyquant • tidyquant</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Scaling and Modeling with tidyquant">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
@@ -36,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
       </span>
     </div>
 
@@ -95,13 +96,14 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Scaling and Modeling with tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2019-04-22</h4>
+            <h4 class="date">2019-09-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ03-scaling-and-modeling-with-tidyquant.Rmd"><code>vignettes/TQ03-scaling-and-modeling-with-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ03-scaling-and-modeling-with-tidyquant.Rmd</code></div>
@@ -120,7 +122,7 @@
 <p>All <code>tidyquant</code> functions return data in the <code>tibble</code> (tidy data frame) format, which allows for interaction within the <code>tidyverse</code>. This means we can:</p>
 <ul>
 <li>Seamlessly scale data retrieval and mutations</li>
-<li>Use the pipe (<code>%&gt;%</code>) for chaining operations</li>
+<li>Use the pipe (<code><a href="../reference/pipe.html">%&gt;%</a></code>) for chaining operations</li>
 <li>Use <code>dplyr</code> and <code>tidyr</code>: <code>select</code>, <code>filter</code>, <code>group_by</code>, <code>nest</code>/<code>unnest</code>, <code>spread</code>/<code>gather</code>, etc</li>
 <li>Use <code>purrr</code>: mapping functions with <code>map</code>
 </li>
@@ -133,8 +135,9 @@
 <h1 class="hasAnchor">
 <a href="#prerequisites" class="anchor"></a>Prerequisites</h1>
 <p>Load the <code>tidyquant</code> package to get started.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Loads tidyquant, tidyverse, lubridate, xts, quantmod, TTR </span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyquant)  </a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Loads tidyquant, lubridate, xts, quantmod, TTR, and PerformanceAnalytics</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyverse)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyquant)  </a></code></pre></div>
 </div>
 <div id="scaling-the-getting-of-financial-data" class="section level1">
 <h1 class="hasAnchor">
@@ -143,21 +146,21 @@
 <div id="method-1-map-a-character-vector-with-multiple-stock-symbols" class="section level2">
 <h2 class="hasAnchor">
 <a href="#method-1-map-a-character-vector-with-multiple-stock-symbols" class="anchor"></a>Method 1: Map a character vector with multiple stock symbols</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"FB"</span>) <span class="op">%&gt;%</span></a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"FB"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get =</span> <span class="st">"stock.prices"</span>, <span class="dt">from =</span> <span class="st">"2016-01-01"</span>, <span class="dt">to =</span> <span class="st">"2017-01-01"</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 756 x 8
 ##    symbol date        open  high   low close   volume adjusted
 ##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-##  1 AAPL   2016-01-04 103.  105.  102   105.  67649400     99.5
-##  2 AAPL   2016-01-05 106.  106.  102.  103.  55791000     97.0
-##  3 AAPL   2016-01-06 101.  102.   99.9 101.  68457400     95.1
-##  4 AAPL   2016-01-07  98.7 100.   96.4  96.4 81094400     91.1
-##  5 AAPL   2016-01-08  98.6  99.1  96.8  97.0 70798000     91.6
-##  6 AAPL   2016-01-11  99.0  99.1  97.3  98.5 49739400     93.1
-##  7 AAPL   2016-01-12 101.  101.   98.8 100.0 49154200     94.4
-##  8 AAPL   2016-01-13 100.  101.   97.3  97.4 62439600     92.0
-##  9 AAPL   2016-01-14  98.0 100.   95.7  99.5 63170100     94.0
-## 10 AAPL   2016-01-15  96.2  97.7  95.4  97.1 79010000     91.7
+##  1 AAPL   2016-01-04 103.  105.  102   105.  67649400     98.7
+##  2 AAPL   2016-01-05 106.  106.  102.  103.  55791000     96.3
+##  3 AAPL   2016-01-06 101.  102.   99.9 101.  68457400     94.4
+##  4 AAPL   2016-01-07  98.7 100.   96.4  96.4 81094400     90.4
+##  5 AAPL   2016-01-08  98.6  99.1  96.8  97.0 70798000     90.9
+##  6 AAPL   2016-01-11  99.0  99.1  97.3  98.5 49739400     92.4
+##  7 AAPL   2016-01-12 101.  101.   98.8 100.0 49154200     93.7
+##  8 AAPL   2016-01-13 100.  101.   97.3  97.4 62439600     91.3
+##  9 AAPL   2016-01-14  98.0 100.   95.7  99.5 63170100     93.3
+## 10 AAPL   2016-01-15  96.2  97.7  95.4  97.1 79833900     91.0
 ## # … with 746 more rows</code></pre>
 <p>The output is a single level tibble with all or the stock prices in one tibble. The auto-generated column name is “symbol”, which can be pre-emptively renamed by giving the vector a name (e.g. <code>stocks &lt;- c("AAPL", "GOOG", "FB")</code>) and then piping to <code>tq_get</code>.</p>
 </div>
@@ -168,8 +171,8 @@
 <div id="method-2a-make-a-tibble" class="section level3">
 <h3 class="hasAnchor">
 <a href="#method-2a-make-a-tibble" class="anchor"></a>Method 2A: Make a tibble</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">stock_list &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">stocks =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"JPM"</span>, <span class="st">"CVX"</span>),</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">                     <span class="dt">industry =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Technology"</span>, <span class="st">"Financial"</span>, <span class="st">"Energy"</span>))</a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">stock_list &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">stocks =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"JPM"</span>, <span class="st">"CVX"</span>),</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">                     <span class="dt">industry =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Technology"</span>, <span class="st">"Financial"</span>, <span class="st">"Energy"</span>))</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">stock_list</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##   stocks industry  
@@ -183,16 +186,16 @@
 <pre><code>## # A tibble: 756 x 9
 ##    stocks industry   date        open  high   low close   volume adjusted
 ##    &lt;chr&gt;  &lt;chr&gt;      &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-##  1 AAPL   Technology 2016-01-04 103.  105.  102   105.  67649400     99.5
-##  2 AAPL   Technology 2016-01-05 106.  106.  102.  103.  55791000     97.0
-##  3 AAPL   Technology 2016-01-06 101.  102.   99.9 101.  68457400     95.1
-##  4 AAPL   Technology 2016-01-07  98.7 100.   96.4  96.4 81094400     91.1
-##  5 AAPL   Technology 2016-01-08  98.6  99.1  96.8  97.0 70798000     91.6
-##  6 AAPL   Technology 2016-01-11  99.0  99.1  97.3  98.5 49739400     93.1
-##  7 AAPL   Technology 2016-01-12 101.  101.   98.8 100.0 49154200     94.4
-##  8 AAPL   Technology 2016-01-13 100.  101.   97.3  97.4 62439600     92.0
-##  9 AAPL   Technology 2016-01-14  98.0 100.   95.7  99.5 63170100     94.0
-## 10 AAPL   Technology 2016-01-15  96.2  97.7  95.4  97.1 79010000     91.7
+##  1 AAPL   Technology 2016-01-04 103.  105.  102   105.  67649400     98.7
+##  2 AAPL   Technology 2016-01-05 106.  106.  102.  103.  55791000     96.3
+##  3 AAPL   Technology 2016-01-06 101.  102.   99.9 101.  68457400     94.4
+##  4 AAPL   Technology 2016-01-07  98.7 100.   96.4  96.4 81094400     90.4
+##  5 AAPL   Technology 2016-01-08  98.6  99.1  96.8  97.0 70798000     90.9
+##  6 AAPL   Technology 2016-01-11  99.0  99.1  97.3  98.5 49739400     92.4
+##  7 AAPL   Technology 2016-01-12 101.  101.   98.8 100.0 49154200     93.7
+##  8 AAPL   Technology 2016-01-13 100.  101.   97.3  97.4 62439600     91.3
+##  9 AAPL   Technology 2016-01-14  98.0 100.   95.7  99.5 63170100     93.3
+## 10 AAPL   Technology 2016-01-15  96.2  97.7  95.4  97.1 79833900     91.0
 ## # … with 746 more rows</code></pre>
 </div>
 <div id="method-2b-use-index-or-exchange" class="section level3">
@@ -220,7 +223,7 @@
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="../reference/tq_stock_list.html">tq_index</a></span>(<span class="st">"DOW"</span>, <span class="dt">use_fallback =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">    </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get =</span> <span class="st">"stock.prices"</span>)</a></code></pre></div>
-<pre><code>## # A tibble: 7,773 x 12
+<pre><code>## # A tibble: 8,091 x 12
 ##    symbol company weight sector shares_held date        open  high   low
 ##    &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ##  1 GS     Goldma… 0.0695 Finan…     5288604 2009-01-02  84.0  87.6  82.2
@@ -233,7 +236,7 @@
 ##  8 GS     Goldma… 0.0695 Finan…     5288604 2009-01-13  74.2  78.9  73.7
 ##  9 GS     Goldma… 0.0695 Finan…     5288604 2009-01-14  75.9  76.9  73.4
 ## 10 GS     Goldma… 0.0695 Finan…     5288604 2009-01-15  75.0  76.2  69  
-## # … with 7,763 more rows, and 3 more variables: close &lt;dbl&gt;, volume &lt;dbl&gt;,
+## # … with 8,081 more rows, and 3 more variables: close &lt;dbl&gt;, volume &lt;dbl&gt;,
 ## #   adjusted &lt;dbl&gt;</code></pre>
 <p>You can use any applicable “getter” to get data for <strong>every stock in an index or an exchange</strong>! This includes: “stock.prices”, “key.ratios”, “key.stats”, and more.</p>
 </div>
@@ -242,27 +245,27 @@
 <h2 class="hasAnchor">
 <a href="#method-3-use-purrr-to-map-a-function" class="anchor"></a>Method 3: Use purrr to map a function</h2>
 <p>We can pipe a tibble of stock symbols to a mutation that maps the <code><a href="../reference/tq_get.html">tq_get(get = "stock.prices")</a></code> function. The result is all of the stock prices in nested format.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">tibble</span>(<span class="dt">symbol =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"AMZN"</span>, <span class="st">"FB"</span>)) <span class="op">%&gt;%</span></a>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">tibble</span>(<span class="dt">symbol =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"AMZN"</span>, <span class="st">"FB"</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">stock.prices =</span> <span class="kw">map</span>(<span class="dt">.x =</span> symbol, <span class="op">~</span><span class="st"> </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(.x, <span class="dt">get =</span> <span class="st">"stock.prices"</span>)))</a></code></pre></div>
 <pre><code>## # A tibble: 4 x 2
 ##   symbol stock.prices        
 ##   &lt;chr&gt;  &lt;list&gt;              
-## 1 AAPL   &lt;tibble [2,591 × 7]&gt;
-## 2 GOOG   &lt;tibble [2,591 × 7]&gt;
-## 3 AMZN   &lt;tibble [2,591 × 7]&gt;
-## 4 FB     &lt;tibble [1,740 × 7]&gt;</code></pre>
+## 1 AAPL   &lt;tibble [2,697 × 7]&gt;
+## 2 GOOG   &lt;tibble [2,697 × 7]&gt;
+## 3 AMZN   &lt;tibble [2,697 × 7]&gt;
+## 4 FB     &lt;tibble [1,846 × 7]&gt;</code></pre>
 </div>
 <div id="method-4-compound-getters" class="section level2">
 <h2 class="hasAnchor">
 <a href="#method-4-compound-getters" class="anchor"></a>Method 4: Compound Getters</h2>
 <p>In financial analysis, it’s very common to need data from various sources to combine in an analysis. For this reason multiple <code>get</code> options (“compound getters”) can be used to return a “compound get”. A quick example:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"stock.prices"</span>, <span class="st">"dividends"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"stock.prices"</span>, <span class="st">"dividends"</span>))</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 3
 ##   symbol stock.prices         dividends        
 ##   &lt;chr&gt;  &lt;list&gt;               &lt;list&gt;           
-## 1 AAPL   &lt;tibble [2,591 × 7]&gt; &lt;tibble [27 × 2]&gt;
-## 2 GOOG   &lt;tibble [2,591 × 7]&gt; &lt;tibble [0 × 2]&gt;</code></pre>
+## 1 AAPL   &lt;tibble [2,697 × 7]&gt; &lt;tibble [29 × 2]&gt;
+## 2 GOOG   &lt;tibble [2,697 × 7]&gt; &lt;tibble [0 × 2]&gt;</code></pre>
 <p>This returns the stock prices and dividends for each stock as one nested data frame! Any of the <code>get</code> options that accept stock symbols can be used in this manner: <code>"stock.prices"</code>, <code>"key.ratios"</code>, <code>"key.stats"</code>, <code>"dividends"</code>, and <code>"splits"</code>.</p>
 </div>
 </div>
@@ -270,7 +273,7 @@
 <h1 class="hasAnchor">
 <a href="#scaling-the-mutation-of-financial-data" class="anchor"></a>Scaling the Mutation of Financial Data</h1>
 <p>Once you get the data, you typically want to do something with it. You can easily do this at scale. Let’s get the yearly returns for multiple stocks using <code>tq_transmute</code>. First, get the prices. We’ll use the <code>FANG</code> data set, but you typically will use <code>tq_get</code> to retrieve data in “tibble” format.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">"FANG"</span>)</a>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"FANG"</span>)</a>
 <a class="sourceLine" id="cb17-2" data-line-number="2">FANG</a></code></pre></div>
 <pre><code>## # A tibble: 4,032 x 8
 ##    symbol date        open  high   low close    volume adjusted
@@ -344,9 +347,9 @@
 ##  3 2009-12-31         0.904 
 ##  4 2010-12-31         0.426 
 ##  5 2011-12-30         0.228 
-##  6 2012-12-31         0.336 
-##  7 2013-12-31         0.230 
-##  8 2014-12-31         0.412 
+##  6 2012-12-31         0.282 
+##  7 2013-12-31         0.0776
+##  8 2014-12-31         0.341 
 ##  9 2015-12-31        -0.0306
 ## 10 2016-12-30         0.118</code></pre>
 <p>Let’s visualize to identify trends. We can see from the linear trend line that AAPL’s stock returns are declining.</p>
@@ -360,8 +363,8 @@
 <a class="sourceLine" id="cb24-8" data-line-number="8">         <span class="dt">x =</span> <span class="st">""</span>, <span class="dt">y =</span> <span class="st">"Annual Returns"</span>, <span class="dt">color =</span> <span class="st">""</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb24-9" data-line-number="9"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</a></code></pre></div>
 <p><img src="TQ03-scaling-and-modeling-with-tidyquant_files/figure-html/unnamed-chunk-16-1.png" width="95%" style="display: block; margin: auto;"></p>
-<p>Now, we can get the linear model using the <code><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm()</a></code> function. However, there is one problem: the output is not “tidy”.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">mod &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(yearly.returns <span class="op">~</span><span class="st"> </span><span class="kw">year</span>(date), <span class="dt">data =</span> AAPL_annual_log_returns)</a>
+<p>Now, we can get the linear model using the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function. However, there is one problem: the output is not “tidy”.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">mod &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(yearly.returns <span class="op">~</span><span class="st"> </span><span class="kw">year</span>(date), <span class="dt">data =</span> AAPL_annual_log_returns)</a>
 <a class="sourceLine" id="cb25-2" data-line-number="2">mod</a></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -369,7 +372,7 @@
 ## 
 ## Coefficients:
 ## (Intercept)   year(date)  
-##    48.36002     -0.02391</code></pre>
+##    58.86277     -0.02915</code></pre>
 <p>We can utilize the <code>broom</code> package to get “tidy” data from the model. There’s three primary functions:</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -380,33 +383,33 @@
 <code>tidy</code>: summarizes a model’s statistical findings such as coefficients of a regression</li>
 </ol>
 <p>We’ll use <code>tidy</code> to retrieve the model coefficients.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(broom)</a>
-<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/broom/topics/reexports">tidy</a></span>(mod)</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(broom)</a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(mod)</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 5
 ##   term        estimate std.error statistic p.value
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept)  48.4     114.         0.426   0.682
-## 2 year(date)   -0.0239    0.0565    -0.423   0.683</code></pre>
+## 1 (Intercept)  58.9     113.         0.520   0.617
+## 2 year(date)   -0.0291    0.0562    -0.518   0.618</code></pre>
 <p>Adding to our workflow, we have the following:</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">get_model &lt;-<span class="st"> </span><span class="cf">function</span>(stock.symbol) {</a>
 <a class="sourceLine" id="cb29-2" data-line-number="2">    annual_returns &lt;-<span class="st"> </span><span class="kw">get_annual_returns</span>(stock.symbol)</a>
-<a class="sourceLine" id="cb29-3" data-line-number="3">    mod &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(yearly.returns <span class="op">~</span><span class="st"> </span><span class="kw">year</span>(date), <span class="dt">data =</span> annual_returns)</a>
-<a class="sourceLine" id="cb29-4" data-line-number="4">    <span class="kw"><a href="https://www.rdocumentation.org/packages/broom/topics/reexports">tidy</a></span>(mod)</a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">    mod &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(yearly.returns <span class="op">~</span><span class="st"> </span><span class="kw">year</span>(date), <span class="dt">data =</span> annual_returns)</a>
+<a class="sourceLine" id="cb29-4" data-line-number="4">    <span class="kw"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(mod)</a>
 <a class="sourceLine" id="cb29-5" data-line-number="5">}</a></code></pre></div>
 <p>Testing it out on a single stock. We can see that the “term” that contains the direction of the trend (the slope) is “year(date)”. The interpetation is that as year increases one unit, the annual returns decrease by 3%.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">get_model</span>(<span class="st">"AAPL"</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 5
 ##   term        estimate std.error statistic p.value
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept)  48.4     114.         0.426   0.682
-## 2 year(date)   -0.0239    0.0565    -0.423   0.683</code></pre>
+## 1 (Intercept)  58.9     113.         0.520   0.617
+## 2 year(date)   -0.0291    0.0562    -0.518   0.618</code></pre>
 <p>Now that we have identified the trend direction, it looks like we are ready to scale.</p>
 </div>
 <div id="scale-to-many-stocks" class="section level3">
 <h3 class="hasAnchor">
 <a href="#scale-to-many-stocks" class="anchor"></a>Scale to Many Stocks</h3>
 <p>Once the analysis for one stock is done scale to many stocks is simple. For brevity, we’ll randomly sample ten stocks from the S&amp;P500 with a call to <code><a href="https://dplyr.tidyverse.org/reference/sample.html">dplyr::sample_n()</a></code>.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Random">set.seed</a></span>(<span class="dv">10</span>)</a>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">10</span>)</a>
 <a class="sourceLine" id="cb32-2" data-line-number="2">stocks &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_stock_list.html">tq_index</a></span>(<span class="st">"SP500"</span>, <span class="dt">use_fallback =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb32-3" data-line-number="3"><span class="st">    </span><span class="kw">sample_n</span>(<span class="dv">5</span>)</a>
 <a class="sourceLine" id="cb32-4" data-line-number="4">stocks</a></code></pre></div>
@@ -418,11 +421,11 @@
 ## 3 CBS    CBS Corporation Class B       0.00113  Consumer Discr…     4263471
 ## 4 FTI    TechnipFMC Plc                0.000597 Energy              5362002
 ## 5 HON    Honeywell International Inc.  0.00489  Industrials         8746874</code></pre>
-<p>We can now apply our analysis function to the stocks using <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate</a></code> and <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map</a></code>. The <code>mutate()</code> function adds a column to our tibble, and the <code>map()</code> function maps our custom <code>get_model</code> function to our tibble of stocks using the <code>symbol</code> column. The <code><a href="https://tidyr.tidyverse.org/reference/unnest.html">tidyr::unnest</a></code> function unrolls the nested data frame so all of the model statistics are accessable in the top data frame level. The <code>filter</code>, <code>arrange</code> and <code>select</code> steps just manipulate the data frame to isolate and arrange the data for our viewing.</p>
+<p>We can now apply our analysis function to the stocks using <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate</a></code> and <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map</a></code>. The <code>mutate()</code> function adds a column to our tibble, and the <code>map()</code> function maps our custom <code>get_model</code> function to our tibble of stocks using the <code>symbol</code> column. The <code><a href="https://tidyr.tidyverse.org/reference/nest.html">tidyr::unnest</a></code> function unrolls the nested data frame so all of the model statistics are accessable in the top data frame level. The <code>filter</code>, <code>arrange</code> and <code>select</code> steps just manipulate the data frame to isolate and arrange the data for our viewing.</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">stocks_model_stats &lt;-<span class="st"> </span>stocks <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb34-2" data-line-number="2"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="kw">map</span>(symbol, get_model)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb34-3" data-line-number="3"><span class="st">    </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb34-4" data-line-number="4"><span class="st">    </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter</a></span>(term <span class="op">==</span><span class="st"> "year(date)"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb34-4" data-line-number="4"><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(term <span class="op">==</span><span class="st"> "year(date)"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb34-5" data-line-number="5"><span class="st">    </span><span class="kw">arrange</span>(<span class="kw">desc</span>(estimate)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb34-6" data-line-number="6"><span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>term)</a>
 <a class="sourceLine" id="cb34-7" data-line-number="7">stocks_model_stats</a></code></pre></div>
@@ -465,28 +468,28 @@
 <h2 class="hasAnchor">
 <a href="#bad-apples-fail-gracefully-tq_get" class="anchor"></a>Bad Apples Fail Gracefully, tq_get</h2>
 <p>Let’s see an example when using <code><a href="../reference/tq_get.html">tq_get()</a></code> to get the stock prices for a long list of stocks with one <code>BAD APPLE</code>. The argument <code>complete_cases</code> comes in handy. The default is <code>TRUE</code>, which removes “bad apples” so future analysis have complete cases to compute on. Note that a gentle warning stating that an error occurred and was dealt with by removing the rows from the results.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"BAD APPLE"</span>) <span class="op">%&gt;%</span></a>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"BAD APPLE"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb38-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get =</span> <span class="st">"stock.prices"</span>, <span class="dt">complete_cases =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## Warning: x = 'BAD APPLE', get = 'stock.prices': Error in getSymbols.yahoo(Symbols = "BAD APPLE", env = &lt;environment&gt;, : Unable to import "BAD APPLE".
 ## BAD APPLE download failed after two attempts. Error message:
 ## HTTP error 400.
 ##  Removing BAD APPLE.</code></pre>
-<pre><code>## # A tibble: 5,182 x 8
+<pre><code>## # A tibble: 5,394 x 8
 ##    symbol date        open  high   low close    volume adjusted
 ##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1 AAPL   2009-01-02  12.3  13.0  12.2  13.0 186503800     8.64
-##  2 AAPL   2009-01-05  13.3  13.7  13.2  13.5 295402100     9.01
-##  3 AAPL   2009-01-06  13.7  13.9  13.2  13.3 322327600     8.86
-##  4 AAPL   2009-01-07  13.1  13.2  12.9  13.0 188262200     8.67
-##  5 AAPL   2009-01-08  12.9  13.3  12.9  13.2 168375200     8.83
-##  6 AAPL   2009-01-09  13.3  13.3  12.9  12.9 136711400     8.63
-##  7 AAPL   2009-01-12  12.9  13.0  12.5  12.7 154429100     8.45
-##  8 AAPL   2009-01-13  12.6  12.8  12.3  12.5 199599400     8.36
-##  9 AAPL   2009-01-14  12.3  12.5  12.1  12.2 255416000     8.13
-## 10 AAPL   2009-01-15  11.5  12.0  11.4  11.9 457908500     7.94
-## # … with 5,172 more rows</code></pre>
+##  1 AAPL   2009-01-02  12.3  13.0  12.2  13.0 186503800     11.3
+##  2 AAPL   2009-01-05  13.3  13.7  13.2  13.5 295402100     11.8
+##  3 AAPL   2009-01-06  13.7  13.9  13.2  13.3 322327600     11.6
+##  4 AAPL   2009-01-07  13.1  13.2  12.9  13.0 188262200     11.3
+##  5 AAPL   2009-01-08  12.9  13.3  12.9  13.2 168375200     11.6
+##  6 AAPL   2009-01-09  13.3  13.3  12.9  12.9 136711400     11.3
+##  7 AAPL   2009-01-12  12.9  13.0  12.5  12.7 154429100     11.1
+##  8 AAPL   2009-01-13  12.6  12.8  12.3  12.5 199599400     10.9
+##  9 AAPL   2009-01-14  12.3  12.5  12.1  12.2 255416000     10.6
+## 10 AAPL   2009-01-15  11.5  12.0  11.4  11.9 457908500     10.4
+## # … with 5,384 more rows</code></pre>
 <p>Now switching <code>complete_cases = FALSE</code> will retain any errors as <code>NA</code> values in a nested data frame. Notice that the error message and output change. The error message now states that the <code>NA</code> values exist in the output and the return is a “nested” data structure.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"BAD APPLE"</span>) <span class="op">%&gt;%</span></a>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"BAD APPLE"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb41-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get =</span> <span class="st">"stock.prices"</span>, <span class="dt">complete_cases =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>## Warning: x = 'BAD APPLE', get = 'stock.prices': Error in getSymbols.yahoo(Symbols = "BAD APPLE", env = &lt;environment&gt;, : Unable to import "BAD APPLE".
 ## BAD APPLE download failed after two attempts. Error message:
@@ -495,8 +498,8 @@
 <pre><code>## # A tibble: 3 x 2
 ##   symbol    stock.prices        
 ##   &lt;chr&gt;     &lt;list&gt;              
-## 1 AAPL      &lt;tibble [2,591 × 7]&gt;
-## 2 GOOG      &lt;tibble [2,591 × 7]&gt;
+## 1 AAPL      &lt;tibble [2,697 × 7]&gt;
+## 2 GOOG      &lt;tibble [2,697 × 7]&gt;
 ## 3 BAD APPLE &lt;lgl [1]&gt;</code></pre>
 <p>In both cases, the prudent user will review the warnings to determine what happened and whether or not this is acceptable. In the <code>complete_cases = FALSE</code> example, if the user attempts to perform downstream computations at scale, the computations will likely fail grinding the analysis to a hault. But, the advantage is that the user will more easily be able to filter to the problem childs to determine what happened and decide whether this is acceptable or not.</p>
 </div>
@@ -504,6 +507,7 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -537,17 +541,20 @@
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Matt Dancho, Davis Vaughan.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

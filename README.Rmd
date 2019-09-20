@@ -67,7 +67,7 @@ With `tidyquant` all the benefits add up to one thing: _a one-stop shop for seri
 Visualizing the stock price volatility of four stocks side-by-side is quick and easy...
 
 ```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("./man/figures/sample_img_1_volatility.png")
+knitr::include_graphics("man/figures/sample_img_1_volatility.png")
 ```
 
 
@@ -124,3 +124,16 @@ The `tidyquant` package includes several vignettes to help users get up to speed
 
 See the [`tidyquant` vignettes](https://cran.r-project.org/package=tidyquant) for further details on the package.
 
+# Want to Learn tidyquant?
+
+- [Learning Lab #9:](https://university.business-science.io/p/learning-labs-pro) 
+  
+  - __Performance Analysis & Portfolio Optimization with `tidyquant`__ - A 1-hour course on `tidyquant` in Learning Labs PRO
+
+- [Learning Lab #10:](https://university.business-science.io/p/learning-labs-pro) 
+  
+  - __Building an API with `plumber`__ - Build a stock optimization API with `plumber` and `tidyquant`
+  
+- [Learning Lab #16:](https://university.business-science.io/p/learning-labs-pro) 
+  
+  - __Stock Portfolio Optimization and Nonlinear Programming__ - Use the `ROI` package with `tidyquant` to calculate optimal minimum variance portfolios and develop an efficient frontier.  

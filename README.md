@@ -74,7 +74,7 @@ for serious financial analysis\!*
 Visualizing the stock price volatility of four stocks side-by-side is
 quick and easy…
 
-<img src="./man/figures/sample_img_1_volatility.png" width="100%" />
+<img src="man/figures/sample_img_1_volatility.png" width="100%" />
 
 ### Evaluating Stock Performance
 
@@ -130,3 +130,25 @@ to speed quickly:
 See the [`tidyquant`
 vignettes](https://cran.r-project.org/package=tidyquant) for further
 details on the package.
+
+# Want to Learn tidyquant?
+
+  - [Learning Lab
+    \#9:](https://university.business-science.io/p/learning-labs-pro)
+    
+      - **Performance Analysis & Portfolio Optimization with
+        `tidyquant`** - A 1-hour course on `tidyquant` in Learning Labs
+        PRO
+
+  - [Learning Lab
+    \#10:](https://university.business-science.io/p/learning-labs-pro)
+    
+      - **Building an API with `plumber`** - Build a stock optimization
+        API with `plumber` and `tidyquant`
+
+  - [Learning Lab
+    \#16:](https://university.business-science.io/p/learning-labs-pro)
+    
+      - **Stock Portfolio Optimization and Nonlinear Programming** - Use
+        the `ROI` package with `tidyquant` to calculate optimal minimum
+        variance portfolios and develop an efficient frontier.

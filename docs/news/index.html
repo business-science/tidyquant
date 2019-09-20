@@ -8,21 +8,25 @@
 
 <title>Changelog • tidyquant</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,7 +34,9 @@
 
 
 
+
 <meta property="og:title" content="Changelog" />
+
 
 
 
@@ -54,6 +60,7 @@
   gtag('config', 'UA-76139189-1');
 </script>
 
+
   </head>
 
   <body>
@@ -70,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
       </span>
     </div>
 
@@ -113,7 +120,6 @@
   <a href="../news/index.html">News</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/business-science/tidyquant">
@@ -128,6 +134,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -137,12 +144,35 @@
       <small>Source: <a href='https://github.com/business-science/tidyquant/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="tidyquant-0-5-7" class="section level2">
+<h2 class="hasAnchor">
+<a href="#tidyquant-0-5-7" class="anchor"></a>tidyquant 0.5.7</h2>
+<p><em>Stock Index &amp; Exchanges</em></p>
+<ul>
+<li>
+<code><a href="../reference/tq_stock_list.html">tq_exchange()</a></code> - Fix NASDAQ URL change Issue <a href='https://github.com/business-science/tidyquant/issues/138'>#138</a>.</li>
+</ul>
+<p><em>Visualizations &amp; Color Palettes</em></p>
+<ul>
+<li>
+<code>geom_candlestick</code> and <code>geom_barchart</code> - Issue <a href='https://github.com/business-science/tidyquant/issues/112'>#112</a>.</li>
+<li>Added color names of <code>theme_tq</code> palettes (<code>palette_light</code>, <code>palette_dark</code>, and <code>palette_green</code>) for easier identification.</li>
+</ul>
+<p><em>Compatability with <code>tidyr</code> v1.0.0</em></p>
+<ul>
+<li>Improvements to ensure compatability with <code>tidyr</code> v1.0.0</li>
+</ul>
+<p><em>[Potential Breaking Change] Move <code>tidyverse</code> to suggests</em></p>
+<ul>
+<li>This is actually potentially a “breaking change” (although most users will see no difference since you likely load <code>tidyverse</code> in your scripts) - if you do not load <code>tidyverse</code>, then you will now need to do so. Previously <code>tidyquant</code> loaded <code>tidyverse</code> behind the scenes.</li>
+</ul>
+</div>
     <div id="tidyquant-0-5-6" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tidyquant-0-5-6" class="anchor"></a>tidyquant 0.5.6</h2>
 <ul>
-<li><p>Morningstar Key Ratios: The <code><a href="../reference/tq_get.html">tq_get()</a></code> argument <code>get = "key.ratios"</code> has been deprecated due to a change in Morningstar’s website.</p></li>
-<li><p>Remove dependency on <code>XLConnect</code>. Replace with <code>readxl</code>.</p></li>
+<li><p>Morningstar Key Ratios: The <code><a href="../reference/tq_get.html">tq_get()</a></code> argument <code>get = "key.ratios"</code> has been deprecated due to a change in Morningstar’s website. (Help Wanted - Ref. Issue <a href='https://github.com/business-science/tidyquant/issues/125'>#125</a>)</p></li>
+<li><p>Remove dependency on <code>XLConnect</code>. Replace with <code>readxl</code>. Issue <a href='https://github.com/business-science/tidyquant/issues/119'>#119</a>.</p></li>
 </ul>
 </div>
     <div id="tidyquant-0-5-5" class="section level2">
@@ -175,7 +205,7 @@
 <li>Important Changes:
 <ul>
 <li>Remove Key Statistics from <code><a href="../reference/tq_get.html">tq_get(get = "key.stats")</a></code>. Yahoo Finance no longer supports the Key Statistics CSV API.</li>
-<li>Completed deprecation of <code>tidyquant::as_tibble()</code> and <code>tidyquant::as_xts()</code>. Use <code><a href="https://www.rdocumentation.org/packages/timetk/topics/tk_tbl">timetk::tk_tbl()</a></code> and <code><a href="https://www.rdocumentation.org/packages/timetk/topics/tk_xts">timetk::tk_xts()</a></code> instead.</li>
+<li>Completed deprecation of <code>tidyquant::as_tibble()</code> and <code>tidyquant::as_xts()</code>. Use <code><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html">timetk::tk_tbl()</a></code> and <code><a href="https://rdrr.io/pkg/timetk/man/tk_xts.html">timetk::tk_xts()</a></code> instead.</li>
 <li>
 <code>tibbletime</code> support was added so that all <code>tidyquant</code> functions play nicely with <code>tbl_time</code> objects.</li>
 <li>A hard dependency on <code>XLConnect</code> was removed. This should ease the use of the package, especially for Mac users.</li>
@@ -199,7 +229,7 @@
 <h2 class="hasAnchor">
 <a href="#tidyquant-0-5-2" class="anchor"></a>tidyquant 0.5.2</h2>
 <ul>
-<li>Incorporated more robust <code>timetk</code> coercion functions. Deprecated <code>tidyquant::as_xts()</code> and <code>tidyquant::as_tibble()</code>. Use <code><a href="https://www.rdocumentation.org/packages/timetk/topics/tk_xts">timetk::tk_xts()</a></code> and <code><a href="https://www.rdocumentation.org/packages/timetk/topics/tk_tbl">timetk::tk_tbl()</a></code> instead.</li>
+<li>Incorporated more robust <code>timetk</code> coercion functions. Deprecated <code>tidyquant::as_xts()</code> and <code>tidyquant::as_tibble()</code>. Use <code><a href="https://rdrr.io/pkg/timetk/man/tk_xts.html">timetk::tk_xts()</a></code> and <code><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html">timetk::tk_tbl()</a></code> instead.</li>
 <li>Fixes:
 <ul>
 <li>
@@ -238,16 +268,16 @@
 <li>Quandl Integration:
 <ul>
 <li>
-<code><a href="../reference/tq_get.html">tq_get(get = "quandl")</a></code> is a wrapper for <code><a href="https://www.rdocumentation.org/packages/Quandl/topics/Quandl">Quandl::Quandl()</a></code> that pulls multiple Quandl Codes in a “tidy” fashion.</li>
+<code><a href="../reference/tq_get.html">tq_get(get = "quandl")</a></code> is a wrapper for <code><a href="https://rdrr.io/pkg/Quandl/man/Quandl.html">Quandl::Quandl()</a></code> that pulls multiple Quandl Codes in a “tidy” fashion.</li>
 <li>
 <code><a href="../reference/tq_get.html">tq_get(get = "quandl.datatable")</a></code> is a wrapper for <code>Quandl::Quandl.datable()</code> that pulls Quandl datatables.</li>
 <li>
-<code><a href="../reference/quandl_api_key.html">quandl_api_key()</a></code> is a wrapper for <code><a href="https://www.rdocumentation.org/packages/Quandl/topics/Quandl.api_key">Quandl::Quandl.api_key()</a></code>.</li>
+<code><a href="../reference/quandl_api_key.html">quandl_api_key()</a></code> is a wrapper for <code><a href="https://rdrr.io/pkg/Quandl/man/Quandl.api_key.html">Quandl::Quandl.api_key()</a></code>.</li>
 <li>
-<code>quandl_search</code> is a wrapper for <code><a href="https://www.rdocumentation.org/packages/Quandl/topics/Quandl.search">Quandl::Quandl.search()</a></code>.</li>
+<code>quandl_search</code> is a wrapper for <code><a href="https://rdrr.io/pkg/Quandl/man/Quandl.search.html">Quandl::Quandl.search()</a></code>.</li>
 </ul>
 </li>
-<li>Yahoo Japan Integration: <code><a href="../reference/tq_get.html">tq_get(get = "stock.prices.japan")</a></code> is a wrapper for <code><a href="https://www.rdocumentation.org/packages/quantmod/topics/getSymbols">quantmod::getSymbols(src = "yahooj")</a></code> that enables getting stocks from Yahoo Finance Japan.</li>
+<li>Yahoo Japan Integration: <code><a href="../reference/tq_get.html">tq_get(get = "stock.prices.japan")</a></code> is a wrapper for <code><a href="https://rdrr.io/pkg/quantmod/man/getSymbols.html">quantmod::getSymbols(src = "yahooj")</a></code> that enables getting stocks from Yahoo Finance Japan.</li>
 </ul>
 </li>
 <li>Improvements and Fixes:
@@ -296,7 +326,7 @@
 <li>
 <code><a href="../reference/tq_stock_list.html">tq_exchange()</a></code> gets the stock list for NASDAQ, NYSE, and AMEX exchanges. Use <code><a href="../reference/tq_stock_list.html">tq_exchange_options()</a></code> to exchange options.</li>
 <li>
-<code>FANG</code> data set that can be loaded with <code><a href="https://www.rdocumentation.org/packages/utils/topics/data">data(FANG)</a></code>.</li>
+<code>FANG</code> data set that can be loaded with <code><a href="https://rdrr.io/r/utils/data.html">data(FANG)</a></code>.</li>
 </ul>
 </li>
 <li>New visualizations that integrate with <code>ggplot2</code>:
@@ -316,7 +346,7 @@
 <li>Issue <a href='https://github.com/business-science/tidyquant/issues/11'>#11</a>: Part 2. Fix multiple stocks that only return 110 lines. Handle stocks that return csv with “We’re sorry” message.</li>
 <li>Issue <a href='https://github.com/business-science/tidyquant/issues/11'>#11</a>: Part 1. Fix instability with <code>get = key.ratios</code> failing with HTTP 500 error on download. Use httr RETRY in case of failure.</li>
 <li>Fixed issue with <code>get = "key.ratios"</code> where stocks listed on AMEX exchange were not able to return key ratios.</li>
-<li>Issue <a href='https://github.com/business-science/tidyquant/issues/9'>#9</a>: Fix problem with <code>get = "key.stats"</code> where NA’s in multiple <code>x</code> (e.g. <code><a href="https://www.rdocumentation.org/packages/base/topics/c">c("AAPL", "GOOG")</a></code>) cause call to fail during coercion.</li>
+<li>Issue <a href='https://github.com/business-science/tidyquant/issues/9'>#9</a>: Fix problem with <code>get = "key.stats"</code> where NA’s in multiple <code>x</code> (e.g. <code><a href="https://rdrr.io/r/base/c.html">c("AAPL", "GOOG")</a></code>) cause call to fail during coercion.</li>
 <li>Issue <a href='https://github.com/business-science/tidyquant/issues/8'>#8</a>, Part 2: Enable compound gets (e.g. <code><a href="../reference/tq_get.html">tq_get("AAPL", get = c("stock.prices", "financials"))</a></code>).</li>
 <li>Issue <a href='https://github.com/business-science/tidyquant/issues/8'>#8</a>, Part 1: Create <code><a href="../reference/tq_stock_list.html">tq_index()</a></code> function to return a stock index. <code><a href="../reference/tq_get.html">tq_get(get = "stock.index")</a></code> is deprecated and will be removed during the next version after 0.4.0. Use <code><a href="../reference/tq_stock_list.html">tq_index_options()</a></code> for index options.</li>
 <li>Issue <a href='https://github.com/business-science/tidyquant/issues/7'>#7</a>: Fixed issue with date column inadvertently being coerced to <code>dttm</code>.</li>
@@ -336,7 +366,7 @@
 <li>New visualizations that integrate with <code>ggplot2</code>:
 <ul>
 <li>Chart geoms: Bar charts (<code>geom_barchart</code>) and candlestick charts (<code>geom_candlestick</code>) can be quickly created with the new geoms.</li>
-<li>Moving Averages: Seven moving averages can be quickly visualized / prototyped using <code>geom_ma</code>. The geom wraps the <code><a href="https://www.rdocumentation.org/packages/TTR/topics/MovingAverages">TTR::SMA</a></code> functions.</li>
+<li>Moving Averages: Seven moving averages can be quickly visualized / prototyped using <code>geom_ma</code>. The geom wraps the <code><a href="https://rdrr.io/pkg/TTR/man/MovingAverages.html">TTR::SMA</a></code> functions.</li>
 <li>Bollinger bands can be visualized with <code>geom_bbands</code>. The same seven moving averages are compatible with the geom.</li>
 <li>Zooming Into Chart Sections: Two functions (<code>coord_x_date</code> and <code>coord_x_datetime</code>) were added to enable zooming into chart sections using dates with no out-of-bounds data loss (e.g. out-of-bounds data loss with the <code>scale_x_</code> functions).</li>
 </ul>
@@ -385,6 +415,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#tidyquant-0-5-7">0.5.7</a></li>
         <li><a href="#tidyquant-0-5-6">0.5.6</a></li>
         <li><a href="#tidyquant-0-5-5">0.5.5</a></li>
         <li><a href="#tidyquant-0-5-4">0.5.4</a></li>
@@ -402,19 +433,23 @@
 
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Matt Dancho, Davis Vaughan.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
