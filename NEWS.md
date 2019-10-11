@@ -1,3 +1,7 @@
+## tidyquant 0.5.8
+
+* `tq_index()` - Fix naming issue with stock index data downloaded from www.us.spdrs.com.
+
 ## tidyquant 0.5.7
 
 _Stock Index & Exchanges_

@@ -298,10 +298,13 @@ clean_holdings <- function(x) {
         dplyr::mutate(Weight = Weight / sum(Weight))
 
     # Rename
-    names(ret) <- c("company", "symbol", "weight", "sector", "shares_held")
+    names(ret)[1:2] <- c("company", "symbol")
+    names(ret) <- names(ret) %>%
+        stringr::str_to_lower() %>%
+        stringr::str_replace_all(" ", "_")
 
     # Reorder
-    ret <- ret %>% dplyr::select(symbol, dplyr::everything())
+    ret <- ret %>% dplyr::select(symbol, company, dplyr::everything())
 
     return(ret)
 }
