@@ -1,3 +1,10 @@
+## tidyquant 0.5.9
+
+* `tq_index()` 
+    - Fix issue #144 - `tq_index()` download issue. Note that "RUSSEL1000", "RUSSELL2000", "RUSSELL3000", and "SP1000" are no longer available due to changes from www.us.spdrs.com. 
+    - Update Stock Index Fallback. 
+ 
+
 ## tidyquant 0.5.8
 
 * `tq_index()` - Fix naming issue with stock index data downloaded from www.us.spdrs.com.

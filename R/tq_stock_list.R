@@ -10,7 +10,7 @@
 #'
 #' @details
 #' `tq_index()` returns the stock symbol, company name, weight, and sector of every stock
-#' in an index. Nine stock indices are available. The source is
+#' in an index. The source is
 #' \href{https://us.spdrs.com/en/product/}{www.us.spdrs.com}.
 #'
 #' `tq_index_options()` returns a list of stock indexes you can
@@ -171,15 +171,13 @@ tq_exchange <- function(x) {
 #' @rdname tq_stock_list
 #' @export
 tq_index_options <- function() {
-    c("RUSSELL1000",
-      "RUSSELL2000",
-      "RUSSELL3000",
+    c(
       "DOW",
       "DOWGLOBAL",
       "SP400",
       "SP500",
-      "SP600",
-      "SP1000")
+      "SP600"
+      )
 }
 
 
@@ -230,14 +228,18 @@ spdr_mapper <- function(x) {
            SP400       = "MDY",
            SP500       = "SPY",
            SP600       = "SLY",
-           SP1000      = "SMD")
+           SP1000      = "SMD"
+           )
 }
 
 # Download the index data from SPDR
 index_download <- function(x, index_name) {
 
     # Contruct download link
-    spdr_link <- paste0("https://us.spdrs.com/site-content/xls/", x, "_All_Holdings.xls")
+    #     OLD (< 2019-12-15): https://us.spdrs.com/site-content/xls/SPY_All_Holdings.xls
+    #     NEW (> 2019-12-15) https://www.ssga.com/us/en/institutional/etfs/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx
+    # spdr_link <- paste0("https://us.spdrs.com/site-content/xls/", x, "_All_Holdings.xls")
+    spdr_link <- paste0("https://www.ssga.com/us/en/institutional/etfs/library-content/products/fund-data/etfs/us/holdings-daily-us-en-", tolower(x), ".xlsx")
 
     # Results container
     res <- list(df = NULL, err = NULL)
@@ -248,8 +250,8 @@ index_download <- function(x, index_name) {
     # Download quietly
     tryCatch({
 
-        # Download to disk, force as a xls
-        httr::GET(spdr_link, httr::write_disk(tf <- tempfile(fileext = ".xls")))
+        # Download to disk, force as a xlsx
+        httr::GET(spdr_link, httr::write_disk(tf <- tempfile(fileext = ".xlsx")))
 
         # Read the xls file
         suppressMessages({
@@ -258,7 +260,7 @@ index_download <- function(x, index_name) {
             # wb     <- XLConnect::loadWorkbook(filename = tf)
             # res$df <- XLConnect::readWorksheet(wb, sheet = 1, startRow = 4)
 
-            res$df <- readxl::read_xls(tf, skip = 3)
+            res$df <- readxl::read_xlsx(tf, skip = 3)
         })
 
         # Release temp file

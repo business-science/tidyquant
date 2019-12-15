@@ -65,7 +65,7 @@ Set `x` as one of the options in the list of options above to get the desired st
 tq_index("SP500")
 ```
 
-The data source is [www.marketvolume.com](http://www.marketvolume.com/indexes_exchanges/).
+The data source is [State Street Global Advisors - US SPDRS ETFs](https://www.ssga.com/us/en/institutional/etfs).
 
 ## Stock Exchanges
 
@@ -153,7 +153,7 @@ The next two getters, key ratios and key stats, work in tandem. Key ratios provi
 
 ### Key Ratios
 
-Key Ratios have been deprecated due to a change in Mornginstar's website.
+_Key Ratios have been deprecated due to a change in Mornginstar's website._
 
 For any given stock, the historical key ratios are available for 10 years, and are classified into the following sections:
 

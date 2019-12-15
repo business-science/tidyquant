@@ -5,7 +5,7 @@
 # Data is used as a fail-safe if cannot be retrieved from www.marketvolume.com
 re_run_fallback <- function() {
 
-    index.option <- tq_get("options", get = "stock.index")
+    index.option <- tq_index_options()
     group <- seq_along(index.option)
     date.downloaded <- rep(as.character(Sys.Date()), length.out = length(index.option))
 
@@ -18,9 +18,7 @@ re_run_fallback <- function() {
         ) %>%
             dplyr::mutate(index.components =
                               purrr::map(index.option,
-                                         ~ tq_get(.x,
-                                                  get = "stock.index",
-                                                  use_fallback = FALSE))) %>%
+                                         ~ tq_index(.x, use_fallback = FALSE))) %>%
             dplyr::select(group, index.option, index.components, date.downloaded)
         stock_indexes
     }
@@ -57,10 +55,8 @@ re_run_fallback <- function() {
 
 # Function to get yahoo key statistic codes
 run_yahoo_finance_tags <- function() {
-    require(xlsx)
-    yahoo_tags <- xlsx::read.xlsx("../yahoo.key.statistics.xlsx",
-                                  sheetIndex = 1,
-                                  colClasses = c("character", "character")) %>%
+    require(readxl)
+    yahoo_tags <- readxl::read_excel("../yahoo.key.statistics.xlsx") %>%
         tibble::as_tibble() %>%
         dplyr::mutate_all(as.character)
     yahoo_tags
@@ -71,4 +67,4 @@ run_yahoo_finance_tags <- function() {
 stock_indexes <- re_run_fallback()
 yahoo_tags <- run_yahoo_finance_tags()
 
-devtools::use_data(stock_indexes, yahoo_tags, internal = TRUE, overwrite = TRUE)
+usethis::use_data(stock_indexes, yahoo_tags, internal = TRUE, overwrite = TRUE)
