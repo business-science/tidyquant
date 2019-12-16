@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 devtools::load_all()
 ```
 
-# tidyquant <img src="man/figures/tidyquant-logo.png" width="147" height="170" align="right" />
+<!-- # tidyquant <img src="man/figures/tidyquant-logo.png" width="147" height="170" align="right" /> -->
 
 [![Build Status](https://travis-ci.org/business-science/tidyquant.svg?branch=master)](https://travis-ci.org/business-science/tidyquant)
 [![codecov](https://codecov.io/gh/business-science/tidyquant/branch/master/graph/badge.svg)](https://codecov.io/gh/business-science/tidyquant)

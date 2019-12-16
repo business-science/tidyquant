@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9</span>
       </span>
     </div>
 
@@ -181,7 +181,7 @@ Set to <code>FALSE</code> by default.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>tq_index()</code> returns the stock symbol, company name, weight, and sector of every stock
-in an index. Nine stock indices are available. The source is
+in an index. The source is
 <a href='https://us.spdrs.com/en/product/'>www.us.spdrs.com</a>.</p>
 <p><code>tq_index_options()</code> returns a list of stock indexes you can
 choose from.</p>
@@ -199,8 +199,7 @@ choose from. The options are AMEX, NASDAQ and NYSE.</p>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyquant</span>)
 
 <span class='co'># Get the list of stock index options</span>
-<span class='fu'>tq_index_options</span>()</div><div class='output co'>#&gt; [1] "RUSSELL1000" "RUSSELL2000" "RUSSELL3000" "DOW"         "DOWGLOBAL"  
-#&gt; [6] "SP400"       "SP500"       "SP600"       "SP1000"     </div><div class='input'>
+<span class='fu'>tq_index_options</span>()</div><div class='output co'>#&gt; [1] "DOW"       "DOWGLOBAL" "SP400"     "SP500"     "SP600"    </div><div class='input'>
 <span class='co'># Get all stock symbols in a stock index</span>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'>tq_index</span>(<span class='st'>"DOW"</span>)

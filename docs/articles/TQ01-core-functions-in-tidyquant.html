@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9</span>
       </span>
     </div>
 
@@ -103,7 +103,7 @@
       <h1>Core Functions in tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2019-09-20</h4>
+            <h4 class="date">2019-12-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ01-core-functions-in-tidyquant.Rmd"><code>vignettes/TQ01-core-functions-in-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ01-core-functions-in-tidyquant.Rmd</code></div>
@@ -142,11 +142,10 @@
 <a href="#stock-indexes" class="anchor"></a>Stock Indexes</h2>
 <p>A wide range of stock index / exchange lists can be retrieved using <code><a href="../reference/tq_stock_list.html">tq_index()</a></code>. To get a full list of the options, use <code><a href="../reference/tq_stock_list.html">tq_index_options()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../reference/tq_stock_list.html">tq_index_options</a></span>()</a></code></pre></div>
-<pre><code>## [1] "RUSSELL1000" "RUSSELL2000" "RUSSELL3000" "DOW"         "DOWGLOBAL"  
-## [6] "SP400"       "SP500"       "SP600"       "SP1000"</code></pre>
+<pre><code>## [1] "DOW"       "DOWGLOBAL" "SP400"     "SP500"     "SP600"</code></pre>
 <p>Set <code>x</code> as one of the options in the list of options above to get the desired stock index / exchange.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/tq_stock_list.html">tq_index</a></span>(<span class="st">"SP500"</span>)</a></code></pre></div>
-<p>The data source is <a href="http://www.marketvolume.com/indexes_exchanges/">www.marketvolume.com</a>.</p>
+<p>The data source is <a href="https://www.ssga.com/us/en/institutional/etfs">State Street Global Advisors - US SPDRS ETFs</a>.</p>
 </div>
 <div id="stock-exchanges" class="section level2">
 <h2 class="hasAnchor">
@@ -171,26 +170,26 @@
 <p>The stock prices can be retrieved succinctly using <code>get = "stock.prices"</code>. This returns stock price data from Yahoo Finance.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">aapl_prices  &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"AAPL"</span>, <span class="dt">get =</span> <span class="st">"stock.prices"</span>, <span class="dt">from =</span> <span class="st">" 1990-01-01"</span>)</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">aapl_prices </a></code></pre></div>
-<pre><code>## # A tibble: 7,488 x 7
+<pre><code>## # A tibble: 7,548 x 7
 ##    date        open  high   low close   volume adjusted
 ##    &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ##  1 1990-01-02  1.26  1.34  1.25  1.33 45799600    1.08 
 ##  2 1990-01-03  1.36  1.36  1.34  1.34 51998800    1.09 
-##  3 1990-01-04  1.37  1.38  1.33  1.34 55378400    1.10 
+##  3 1990-01-04  1.37  1.38  1.33  1.34 55378400    1.09 
 ##  4 1990-01-05  1.35  1.37  1.32  1.35 30828000    1.10 
-##  5 1990-01-08  1.34  1.36  1.32  1.36 25393200    1.11 
-##  6 1990-01-09  1.36  1.36  1.32  1.34 21534800    1.10 
+##  5 1990-01-08  1.34  1.36  1.32  1.36 25393200    1.10 
+##  6 1990-01-09  1.36  1.36  1.32  1.34 21534800    1.09 
 ##  7 1990-01-10  1.34  1.34  1.28  1.29 49929600    1.05 
 ##  8 1990-01-11  1.29  1.29  1.23  1.23 52763200    1.00 
 ##  9 1990-01-12  1.22  1.24  1.21  1.23 42974400    1.00 
-## 10 1990-01-15  1.23  1.28  1.22  1.22 40434800    0.997
-## # … with 7,478 more rows</code></pre>
+## 10 1990-01-15  1.23  1.28  1.22  1.22 40434800    0.994
+## # … with 7,538 more rows</code></pre>
 <p>Yahoo Japan stock prices can be retrieved using a similar call, <code>get = "stock.prices.japan"</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">x8411T &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"8411.T"</span>, <span class="dt">get =</span> <span class="st">"stock.prices.japan"</span>, <span class="dt">from =</span> <span class="st">"2016-01-01"</span>, <span class="dt">to  =</span> <span class="st">"2016-12-31"</span>)</a></code></pre></div>
 <p>Dividends are obtained using <code>get = "dividends"</code>.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">aapl_divs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"AAPL"</span>, <span class="dt">get =</span> <span class="st">"dividends"</span>, <span class="dt">from =</span> <span class="st">"1990-01-01"</span>)</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2">aapl_divs</a></code></pre></div>
-<pre><code>## # A tibble: 53 x 2
+<pre><code>## # A tibble: 54 x 2
 ##    date       dividends
 ##    &lt;date&gt;         &lt;dbl&gt;
 ##  1 1990-02-16  0.000140
@@ -203,7 +202,7 @@
 ##  8 1991-11-18  0.000153
 ##  9 1992-02-14  0.000153
 ## 10 1992-06-01  0.000153
-## # … with 43 more rows</code></pre>
+## # … with 44 more rows</code></pre>
 <p>Stock splits are obtained using <code>get = "splits"</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">aapl_splits &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"AAPL"</span>, <span class="dt">get =</span> <span class="st">"splits"</span>, <span class="dt">from =</span> <span class="st">"1990-01-01"</span>)</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2">aapl_splits</a></code></pre></div>
@@ -240,7 +239,7 @@
 <div id="key-ratios" class="section level3">
 <h3 class="hasAnchor">
 <a href="#key-ratios" class="anchor"></a>Key Ratios</h3>
-<p>Key Ratios have been deprecated due to a change in Mornginstar’s website.</p>
+<p><em>Key Ratios have been deprecated due to a change in Mornginstar’s website.</em></p>
 <p>For any given stock, the historical key ratios are available for 10 years, and are classified into the following sections:</p>
 <ul>
 <li>
@@ -405,7 +404,7 @@
 <p>A wealth of economic data can be extracted from the Federal Reserve Economic Data (FRED) database. The <a href="https://fred.stlouisfed.org/series/DCOILWTICO">WTI Crude Oil Prices</a> are shown below.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">wti_price_usd &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"DCOILWTICO"</span>, <span class="dt">get =</span> <span class="st">"economic.data"</span>)</a>
 <a class="sourceLine" id="cb30-2" data-line-number="2">wti_price_usd </a></code></pre></div>
-<pre><code>## # A tibble: 2,793 x 2
+<pre><code>## # A tibble: 2,853 x 2
 ##    date       price
 ##    &lt;date&gt;     &lt;dbl&gt;
 ##  1 2009-01-01  NA  
@@ -418,7 +417,7 @@
 ##  8 2009-01-12  37.6
 ##  9 2009-01-13  37.8
 ## 10 2009-01-14  37.4
-## # … with 2,783 more rows</code></pre>
+## # … with 2,843 more rows</code></pre>
 <p>The FRED contains literally over 10K data sets that are free to use. See the <a href="https://fred.stlouisfed.org/categories">FRED categories</a> to narrow down the data base and to get data codes.</p>
 </div>
 <div id="exchange-rates" class="section level2">
@@ -432,16 +431,16 @@
 <pre><code>## # A tibble: 10 x 2
 ##    date       exchange.rate
 ##    &lt;date&gt;             &lt;dbl&gt;
-##  1 2019-09-10          1.10
-##  2 2019-09-11          1.10
-##  3 2019-09-12          1.10
-##  4 2019-09-13          1.11
-##  5 2019-09-14          1.11
-##  6 2019-09-15          1.11
-##  7 2019-09-16          1.10
-##  8 2019-09-17          1.10
-##  9 2019-09-18          1.11
-## 10 2019-09-19          1.10</code></pre>
+##  1 2019-12-06          1.11
+##  2 2019-12-07          1.11
+##  3 2019-12-08          1.11
+##  4 2019-12-09          1.11
+##  5 2019-12-10          1.11
+##  6 2019-12-11          1.11
+##  7 2019-12-12          1.11
+##  8 2019-12-13          1.12
+##  9 2019-12-14          1.11
+## 10 2019-12-15          1.11</code></pre>
 <p>The data source is <a href="https://www.oanda.com/">Oanda</a>, and list of currencies to compare can be found on Oanda’s currency converter. It may make more sense to get this data from the FRED (See <a href="#economic-data">Economic Data</a>) since the max period for Oanda is 180 days.</p>
 </div>
 <div id="metal-prices" class="section level2">
@@ -455,16 +454,16 @@
 <pre><code>## # A tibble: 10 x 2
 ##    date       price
 ##    &lt;date&gt;     &lt;dbl&gt;
-##  1 2019-09-10  853.
-##  2 2019-09-11  852.
-##  3 2019-09-12  862.
-##  4 2019-09-13  860.
-##  5 2019-09-14  858.
-##  6 2019-09-15  858.
-##  7 2019-09-16  857.
-##  8 2019-09-17  848.
-##  9 2019-09-18  848.
-## 10 2019-09-19  848.</code></pre>
+##  1 2019-12-06  810.
+##  2 2019-12-07  811.
+##  3 2019-12-08  811.
+##  4 2019-12-09  810.
+##  5 2019-12-10  821.
+##  6 2019-12-11  836.
+##  7 2019-12-12  846.
+##  8 2019-12-13  838.
+##  9 2019-12-14  834.
+## 10 2019-12-15  834.</code></pre>
 <p>The data source is <a href="https://www.oanda.com/">Oanda</a>. It may make more sense to get this data from the FRED (See <a href="#economic-data">Economic Data</a>) since the max period for Oanda is 180 days.</p>
 </div>
 </div>
@@ -521,7 +520,7 @@
 <a class="sourceLine" id="cb40-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="../reference/tq_mutate.html">tq_transmute</a></span>(<span class="dt">mutate_fun =</span> to.period,</a>
 <a class="sourceLine" id="cb40-4" data-line-number="4">                 <span class="dt">period =</span> <span class="st">"months"</span>, </a>
 <a class="sourceLine" id="cb40-5" data-line-number="5">                 <span class="dt">col_rename =</span> <span class="st">"WTI Price"</span>)</a></code></pre></div>
-<pre><code>## # A tibble: 129 x 2
+<pre><code>## # A tibble: 132 x 2
 ##    date       `WTI Price`
 ##    &lt;date&gt;           &lt;dbl&gt;
 ##  1 2009-01-30        41.7
@@ -534,7 +533,7 @@
 ##  8 2009-08-31        70.0
 ##  9 2009-09-30        70.5
 ## 10 2009-10-30        77.0
-## # … with 119 more rows</code></pre>
+## # … with 122 more rows</code></pre>
 </div>
 </div>
 <div id="mutate-quantitative-data-tq_mutate" class="section level2">
