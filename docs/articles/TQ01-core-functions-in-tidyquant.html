@@ -120,7 +120,7 @@
 <a href="#overview" class="anchor"></a>Overview</h1>
 <p>The <code>tidyquant</code> package has a <strong>core functions with a lot of power</strong>. Few functions means less of a learning curve for the user, which is why there are only a handful of functions the user needs to learn to perform the vast majority of financial analysis tasks. The main functions are:</p>
 <ul>
-<li><p><strong>Get a Stock Index, <code><a href="../reference/tq_stock_list.html">tq_index()</a></code>, or a Stock Exchange, <code><a href="../reference/tq_stock_list.html">tq_exchange()</a></code></strong>: Returns the stock symbols and various attributes for every stock in an index or exchange. Eighteen indexes and three exchanges are available.</p></li>
+<li><p><strong>Get a Stock Index, <code><a href="../reference/tq_index.html">tq_index()</a></code>, or a Stock Exchange, <code><a href="../reference/tq_index.html">tq_exchange()</a></code></strong>: Returns the stock symbols and various attributes for every stock in an index or exchange. Eighteen indexes and three exchanges are available.</p></li>
 <li><p><strong>Get Quantitative Data, <code><a href="../reference/tq_get.html">tq_get()</a></code></strong>: A one-stop shop to get data from various web-sources.</p></li>
 <li><p><strong>Transmute, <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code>, and Mutate, <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code>, Quantitative Data</strong>: Perform and scale financial calculations completely within the <code>tidyverse</code>. These workhorse functions integrate the <code>xts</code>, <code>zoo</code>, <code>quantmod</code>, and <code>TTR</code> packages.</p></li>
 <li><p><strong>Performance analysis, <code><a href="../reference/tq_performance.html">tq_performance()</a></code>, and portfolio aggregation, <code><a href="../reference/tq_portfolio.html">tq_portfolio()</a></code></strong>: The <code>PerformanceAnalytics</code> integration enables analyzing performance of assets and portfolios. Because of the breadth of this topic, refer to <a href="TQ05-performance-analysis-with-tidyquant.html">Performance Analysis with tidyquant</a> for a tutorial on these functions.</p></li>
@@ -140,18 +140,18 @@
 <div id="stock-indexes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#stock-indexes" class="anchor"></a>Stock Indexes</h2>
-<p>A wide range of stock index / exchange lists can be retrieved using <code><a href="../reference/tq_stock_list.html">tq_index()</a></code>. To get a full list of the options, use <code><a href="../reference/tq_stock_list.html">tq_index_options()</a></code>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../reference/tq_stock_list.html">tq_index_options</a></span>()</a></code></pre></div>
+<p>A wide range of stock index / exchange lists can be retrieved using <code><a href="../reference/tq_index.html">tq_index()</a></code>. To get a full list of the options, use <code><a href="../reference/tq_index.html">tq_index_options()</a></code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../reference/tq_index.html">tq_index_options</a></span>()</a></code></pre></div>
 <pre><code>## [1] "DOW"       "DOWGLOBAL" "SP400"     "SP500"     "SP600"</code></pre>
 <p>Set <code>x</code> as one of the options in the list of options above to get the desired stock index / exchange.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/tq_stock_list.html">tq_index</a></span>(<span class="st">"SP500"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/tq_index.html">tq_index</a></span>(<span class="st">"SP500"</span>)</a></code></pre></div>
 <p>The data source is <a href="https://www.ssga.com/us/en/institutional/etfs">State Street Global Advisors - US SPDRS ETFs</a>.</p>
 </div>
 <div id="stock-exchanges" class="section level2">
 <h2 class="hasAnchor">
 <a href="#stock-exchanges" class="anchor"></a>Stock Exchanges</h2>
-<p>Stock lists for three stock exchanges are available: NASDAQ, NYSE, and AMEX. If you forget, just use <code><a href="../reference/tq_stock_list.html">tq_exchange_options()</a></code>. We can easily get the full list of stocks on the NASDAQ exchange.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/tq_stock_list.html">tq_exchange</a></span>(<span class="st">"NASDAQ"</span>)</a></code></pre></div>
+<p>Stock lists for three stock exchanges are available: NASDAQ, NYSE, and AMEX. If you forget, just use <code><a href="../reference/tq_index.html">tq_exchange_options()</a></code>. We can easily get the full list of stocks on the NASDAQ exchange.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/tq_index.html">tq_exchange</a></span>(<span class="st">"NASDAQ"</span>)</a></code></pre></div>
 </div>
 </div>
 <div id="get-quantitative-data" class="section level1">
@@ -189,7 +189,20 @@
 <p>Dividends are obtained using <code>get = "dividends"</code>.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">aapl_divs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"AAPL"</span>, <span class="dt">get =</span> <span class="st">"dividends"</span>, <span class="dt">from =</span> <span class="st">"1990-01-01"</span>)</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2">aapl_divs</a></code></pre></div>
-<pre><code>## [1] NA</code></pre>
+<pre><code>## # A tibble: 54 x 2
+##    date       dividends
+##    &lt;date&gt;         &lt;dbl&gt;
+##  1 1990-02-16  0.000140
+##  2 1990-05-21  0.000140
+##  3 1990-08-20  0.000140
+##  4 1990-11-16  0.000153
+##  5 1991-02-15  0.000153
+##  6 1991-05-20  0.000153
+##  7 1991-08-19  0.000153
+##  8 1991-11-18  0.000153
+##  9 1992-02-14  0.000153
+## 10 1992-06-01  0.000153
+## # … with 44 more rows</code></pre>
 <p>Stock splits are obtained using <code>get = "splits"</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">aapl_splits &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"AAPL"</span>, <span class="dt">get =</span> <span class="st">"splits"</span>, <span class="dt">from =</span> <span class="st">"1990-01-01"</span>)</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2">aapl_splits</a></code></pre></div>

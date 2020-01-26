@@ -202,7 +202,7 @@
 <h3 class="hasAnchor">
 <a href="#method-2b-use-index-or-exchange" class="anchor"></a>Method 2B: Use index or exchange</h3>
 <p>Get an index…</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="../reference/tq_stock_list.html">tq_index</a></span>(<span class="st">"DOW"</span>, <span class="dt">use_fallback =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="../reference/tq_index.html">tq_index</a></span>(<span class="st">"DOW"</span>, <span class="dt">use_fallback =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 30 x 8
 ##    symbol company     identifier sedol weight sector  shares_held local_currency
 ##    &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;         
@@ -218,9 +218,9 @@
 ## 10 IBM    Internatio… 45920010   2005… 0.0361 Inform…     5457203 USD           
 ## # … with 20 more rows</code></pre>
 <p>…or, get an exchange.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="../reference/tq_stock_list.html">tq_exchange</a></span>(<span class="st">"NYSE"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="../reference/tq_index.html">tq_exchange</a></span>(<span class="st">"NYSE"</span>)</a></code></pre></div>
 <p>Send the index or exchange to <code>tq_get</code>. <em>Important Note: This can take several minutes depending on the size of the index or exchange, which is why only the first three stocks are evaluated in the vignette.</em></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="../reference/tq_stock_list.html">tq_index</a></span>(<span class="st">"DOW"</span>, <span class="dt">use_fallback =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="../reference/tq_index.html">tq_index</a></span>(<span class="st">"DOW"</span>, <span class="dt">use_fallback =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">    </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get =</span> <span class="st">"stock.prices"</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 7,596 x 15
@@ -409,7 +409,7 @@
 <a href="#scale-to-many-stocks" class="anchor"></a>Scale to Many Stocks</h3>
 <p>Once the analysis for one stock is done scale to many stocks is simple. For brevity, we’ll randomly sample ten stocks from the S&amp;P500 with a call to <code><a href="https://dplyr.tidyverse.org/reference/sample.html">dplyr::sample_n()</a></code>.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb32-2" data-line-number="2">stocks &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_stock_list.html">tq_index</a></span>(<span class="st">"SP500"</span>, <span class="dt">use_fallback =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">stocks &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_index.html">tq_index</a></span>(<span class="st">"SP500"</span>, <span class="dt">use_fallback =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb32-3" data-line-number="3"><span class="st">    </span><span class="kw">sample_n</span>(<span class="dv">5</span>)</a>
 <a class="sourceLine" id="cb32-4" data-line-number="4">stocks</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 8
@@ -438,7 +438,7 @@
 ## 5 BWA    BorgWa… 09972410   2111… 2.98e-4 Consu…     2248867 USD           
 ## # … with 4 more variables: estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,
 ## #   p.value &lt;dbl&gt;</code></pre>
-<p>We’re done! We now have the coefficient of the linear regression that tracks the direction of the trend line. We can easily extend this type of analysis to larger lists or stock indexes. For example, the entire S&amp;P500 could be analyzed removing the <code>sample_n()</code> following the call to <code><a href="../reference/tq_stock_list.html">tq_index("SP500")</a></code>.</p>
+<p>We’re done! We now have the coefficient of the linear regression that tracks the direction of the trend line. We can easily extend this type of analysis to larger lists or stock indexes. For example, the entire S&amp;P500 could be analyzed removing the <code>sample_n()</code> following the call to <code><a href="../reference/tq_index.html">tq_index("SP500")</a></code>.</p>
 </div>
 </div>
 </div>

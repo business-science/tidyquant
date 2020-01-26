@@ -150,7 +150,7 @@
 <ul>
 <li>
 <code><a href="../reference/tq_get.html">tq_get()</a></code> - Temporarily adjust tests for <code><a href="../reference/tq_get.html">tq_get(get = "dividends")</a></code> until API is stabilizes. Yahoo! Dividends intermitently returns errors.</li>
-<li>Fix documentation warnings during package build checks.</li>
+<li>Fix documentation warnings during package build checks. Documentation moved from <code>tq_stocklist</code> to <code><a href="../reference/tq_index.html">?tq_index</a></code>.</li>
 </ul>
 </div>
     <div id="tidyquant-0-5-9" class="section level2">
@@ -158,9 +158,9 @@
 <a href="#tidyquant-0-5-9" class="anchor"></a>tidyquant 0.5.9</h2>
 <ul>
 <li>
-<code><a href="../reference/tq_stock_list.html">tq_index()</a></code>
+<code><a href="../reference/tq_index.html">tq_index()</a></code>
 <ul>
-<li>Fix issue <a href='https://github.com/business-science/tidyquant/issues/144'>#144</a> - <code><a href="../reference/tq_stock_list.html">tq_index()</a></code> download issue. Note that “RUSSEL1000”, “RUSSELL2000”, “RUSSELL3000”, and “SP1000” are no longer available due to changes from www.us.spdrs.com.</li>
+<li>Fix issue <a href='https://github.com/business-science/tidyquant/issues/144'>#144</a> - <code><a href="../reference/tq_index.html">tq_index()</a></code> download issue. Note that “RUSSEL1000”, “RUSSELL2000”, “RUSSELL3000”, and “SP1000” are no longer available due to changes from www.us.spdrs.com.</li>
 <li>Update Stock Index Fallback.</li>
 </ul>
 </li>
@@ -171,7 +171,7 @@
 <a href="#tidyquant-0-5-8" class="anchor"></a>tidyquant 0.5.8</h2>
 <ul>
 <li>
-<code><a href="../reference/tq_stock_list.html">tq_index()</a></code> - Fix naming issue with stock index data downloaded from www.us.spdrs.com.</li>
+<code><a href="../reference/tq_index.html">tq_index()</a></code> - Fix naming issue with stock index data downloaded from www.us.spdrs.com.</li>
 </ul>
 </div>
     <div id="tidyquant-0-5-7" class="section level2">
@@ -180,7 +180,7 @@
 <p><em>Stock Index &amp; Exchanges</em></p>
 <ul>
 <li>
-<code><a href="../reference/tq_stock_list.html">tq_exchange()</a></code> - Fix NASDAQ URL change Issue <a href='https://github.com/business-science/tidyquant/issues/138'>#138</a>.</li>
+<code><a href="../reference/tq_index.html">tq_exchange()</a></code> - Fix NASDAQ URL change Issue <a href='https://github.com/business-science/tidyquant/issues/138'>#138</a>.</li>
 </ul>
 <p><em>Visualizations &amp; Color Palettes</em></p>
 <ul>
@@ -263,7 +263,7 @@
 <li>Fixes:
 <ul>
 <li>
-<code><a href="../reference/tq_stock_list.html">tq_index()</a></code> no longer pulls from marketvolume. Instead, 9 indices are available from SPDR. These indices are more reliable, and include weights for each stock in the index.</li>
+<code><a href="../reference/tq_index.html">tq_index()</a></code> no longer pulls from marketvolume. Instead, 9 indices are available from SPDR. These indices are more reliable, and include weights for each stock in the index.</li>
 <li>Fixed 2 tests where the results of <code><a href="../reference/tq_get.html">tq_get(get = "stock.prices")</a></code> were 1 or 2 rows off of what the tests expected. This likely has to do with the new yahoo finance API.</li>
 </ul>
 </li>
@@ -354,7 +354,7 @@
 <li>New data:
 <ul>
 <li>
-<code><a href="../reference/tq_stock_list.html">tq_exchange()</a></code> gets the stock list for NASDAQ, NYSE, and AMEX exchanges. Use <code><a href="../reference/tq_stock_list.html">tq_exchange_options()</a></code> to exchange options.</li>
+<code><a href="../reference/tq_index.html">tq_exchange()</a></code> gets the stock list for NASDAQ, NYSE, and AMEX exchanges. Use <code><a href="../reference/tq_index.html">tq_exchange_options()</a></code> to exchange options.</li>
 <li>
 <code>FANG</code> data set that can be loaded with <code><a href="https://rdrr.io/r/utils/data.html">data(FANG)</a></code>.</li>
 </ul>
@@ -378,7 +378,7 @@
 <li>Fixed issue with <code>get = "key.ratios"</code> where stocks listed on AMEX exchange were not able to return key ratios.</li>
 <li>Issue <a href='https://github.com/business-science/tidyquant/issues/9'>#9</a>: Fix problem with <code>get = "key.stats"</code> where NA’s in multiple <code>x</code> (e.g. <code><a href="https://rdrr.io/r/base/c.html">c("AAPL", "GOOG")</a></code>) cause call to fail during coercion.</li>
 <li>Issue <a href='https://github.com/business-science/tidyquant/issues/8'>#8</a>, Part 2: Enable compound gets (e.g. <code><a href="../reference/tq_get.html">tq_get("AAPL", get = c("stock.prices", "financials"))</a></code>).</li>
-<li>Issue <a href='https://github.com/business-science/tidyquant/issues/8'>#8</a>, Part 1: Create <code><a href="../reference/tq_stock_list.html">tq_index()</a></code> function to return a stock index. <code><a href="../reference/tq_get.html">tq_get(get = "stock.index")</a></code> is deprecated and will be removed during the next version after 0.4.0. Use <code><a href="../reference/tq_stock_list.html">tq_index_options()</a></code> for index options.</li>
+<li>Issue <a href='https://github.com/business-science/tidyquant/issues/8'>#8</a>, Part 1: Create <code><a href="../reference/tq_index.html">tq_index()</a></code> function to return a stock index. <code><a href="../reference/tq_get.html">tq_get(get = "stock.index")</a></code> is deprecated and will be removed during the next version after 0.4.0. Use <code><a href="../reference/tq_index.html">tq_index_options()</a></code> for index options.</li>
 <li>Issue <a href='https://github.com/business-science/tidyquant/issues/7'>#7</a>: Fixed issue with date column inadvertently being coerced to <code>dttm</code>.</li>
 </ul>
 </li>
