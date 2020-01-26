@@ -8,7 +8,6 @@
 #'
 #' @seealso [tq_get()] `get = "alphavantager"`
 #'
-#' @name av_api_key
 #'
 #' @export
 #'

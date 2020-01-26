@@ -6,15 +6,35 @@
 \alias{geom_candlestick}
 \title{Plot Financial Charts in ggplot2}
 \usage{
-geom_barchart(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", na.rm = TRUE, show.legend = NA,
-  inherit.aes = TRUE, colour_up = "darkblue", colour_down = "red",
-  fill_up = "darkblue", fill_down = "red", ...)
+geom_barchart(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  na.rm = TRUE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  colour_up = "darkblue",
+  colour_down = "red",
+  fill_up = "darkblue",
+  fill_down = "red",
+  ...
+)
 
-geom_candlestick(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", na.rm = TRUE, show.legend = NA,
-  inherit.aes = TRUE, colour_up = "darkblue", colour_down = "red",
-  fill_up = "darkblue", fill_down = "red", ...)
+geom_candlestick(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  na.rm = TRUE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  colour_up = "darkblue",
+  colour_down = "red",
+  fill_up = "darkblue",
+  fill_down = "red",
+  ...
+)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{ggplot2::aes()}} or

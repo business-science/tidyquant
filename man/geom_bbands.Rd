@@ -5,17 +5,47 @@
 \alias{geom_bbands_}
 \title{Plot Bollinger Bands using Moving Averages}
 \usage{
-geom_bbands(mapping = NULL, data = NULL, position = "identity",
-  na.rm = TRUE, show.legend = NA, inherit.aes = TRUE, ma_fun = SMA,
-  n = 20, sd = 2, wilder = FALSE, ratio = NULL, v = 1,
-  wts = 1:n, color_ma = "darkblue", color_bands = "red",
-  alpha = 0.15, fill = "grey20", ...)
+geom_bbands(
+  mapping = NULL,
+  data = NULL,
+  position = "identity",
+  na.rm = TRUE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ma_fun = SMA,
+  n = 20,
+  sd = 2,
+  wilder = FALSE,
+  ratio = NULL,
+  v = 1,
+  wts = 1:n,
+  color_ma = "darkblue",
+  color_bands = "red",
+  alpha = 0.15,
+  fill = "grey20",
+  ...
+)
 
-geom_bbands_(mapping = NULL, data = NULL, position = "identity",
-  na.rm = TRUE, show.legend = NA, inherit.aes = TRUE,
-  ma_fun = "SMA", n = 10, sd = 2, wilder = FALSE, ratio = NULL,
-  v = 1, wts = 1:n, color_ma = "darkblue", color_bands = "red",
-  alpha = 0.15, fill = "grey20", ...)
+geom_bbands_(
+  mapping = NULL,
+  data = NULL,
+  position = "identity",
+  na.rm = TRUE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ma_fun = "SMA",
+  n = 10,
+  sd = 2,
+  wilder = FALSE,
+  ratio = NULL,
+  v = 1,
+  wts = 1:n,
+  color_ma = "darkblue",
+  color_bands = "red",
+  alpha = 0.15,
+  fill = "grey20",
+  ...
+)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{ggplot2::aes()}} or

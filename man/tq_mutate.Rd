@@ -13,8 +13,14 @@
 \alias{tq_transmute_fun_options}
 \title{Mutates quantitative data}
 \usage{
-tq_mutate(data, select = NULL, mutate_fun, col_rename = NULL,
-  ohlc_fun = NULL, ...)
+tq_mutate(
+  data,
+  select = NULL,
+  mutate_fun,
+  col_rename = NULL,
+  ohlc_fun = NULL,
+  ...
+)
 
 tq_mutate_(data, select = NULL, mutate_fun, col_rename = NULL, ...)
 
@@ -24,8 +30,14 @@ tq_mutate_xy_(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
 
 tq_mutate_fun_options()
 
-tq_transmute(data, select = NULL, mutate_fun, col_rename = NULL,
-  ohlc_fun = NULL, ...)
+tq_transmute(
+  data,
+  select = NULL,
+  mutate_fun,
+  col_rename = NULL,
+  ohlc_fun = NULL,
+  ...
+)
 
 tq_transmute_(data, select = NULL, mutate_fun, col_rename = NULL, ...)
 
@@ -52,7 +64,7 @@ to quickly rename columns.}
 \item{...}{Additional parameters passed to the appropriate mutatation
 function.}
 
-\item{x, y}{Parameters used with \code{_xy} that consist of column names of variables
+\item{x, y}{Parameters used with \verb{_xy} that consist of column names of variables
 to be passed to the mutatation function (instead of OHLC functions).}
 }
 \value{

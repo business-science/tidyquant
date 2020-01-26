@@ -13,7 +13,6 @@
 #' }
 #'
 #'
-#' @inheritParams ggplot2::scale_color_manual
 #'
 #' @seealso [theme_tq()]
 #'

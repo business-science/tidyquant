@@ -6,8 +6,7 @@
 \alias{tq_transform_xy}
 \title{Deprecated functions}
 \usage{
-tq_transform(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL,
-  ...)
+tq_transform(data, ohlc_fun = OHLCV, mutate_fun, col_rename = NULL, ...)
 
 tq_transform_xy(data, x, y = NULL, mutate_fun, col_rename = NULL, ...)
 }
@@ -26,10 +25,10 @@ to quickly rename columns.}
 \item{...}{Additional parameters passed to the appropriate mutatation
 function.}
 
-\item{x}{Parameters used with \code{_xy} that consist of column names of variables
+\item{x}{Parameters used with \verb{_xy} that consist of column names of variables
 to be passed to the mutatation function (instead of OHLC functions).}
 
-\item{y}{Parameters used with \code{_xy} that consist of column names of variables
+\item{y}{Parameters used with \verb{_xy} that consist of column names of variables
 to be passed to the mutatation function (instead of OHLC functions).}
 }
 \description{

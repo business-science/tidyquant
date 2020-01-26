@@ -3,7 +3,6 @@
 \docType{package}
 \name{tidyquant}
 \alias{tidyquant}
-\alias{tidyquant-package}
 \title{tidyquant: Integrating quantitative financial analysis tools with the tidyverse}
 \description{
 The main advantage of \code{tidyquant} is to

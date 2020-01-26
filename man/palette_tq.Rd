@@ -14,7 +14,7 @@ palette_dark()
 palette_green()
 }
 \description{
-These palettes are mainly called internally by tidyquant \code{scale_*_tq()} functions.
+These palettes are mainly called internally by tidyquant \verb{scale_*_tq()} functions.
 }
 \examples{
 library(scales)

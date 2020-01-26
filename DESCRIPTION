@@ -1,8 +1,8 @@
 Package: tidyquant
 Type: Package
 Title: Tidy Quantitative Financial Analysis
-Version: 0.5.9
-Date: 2019-12-15
+Version: 0.5.10
+Date: 2020-01-25
 Authors@R: c(
     person("Matt", "Dancho", email = "mdancho@business-science.io", role = c("aut", "cre")),
     person("Davis", "Vaughan", email = "dvaughan@business-science.io", role = c("aut"))
@@ -55,6 +55,6 @@ Suggests:
     scales,
     Rblpapi,
     readxl
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr

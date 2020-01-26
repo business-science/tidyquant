@@ -26,9 +26,6 @@
 #' @seealso
 #' [tq_get()] to get stock prices, financials, key stats, etc using the stock symbols.
 #'
-#' @rdname tq_stock_list
-#'
-#' @export
 #'
 #' @examples
 #' # Load libraries
@@ -49,7 +46,9 @@
 #' \dontrun{
 #' tq_exchange("NYSE")
 #' }
-
+#'
+#' @name tq_stock_list
+NULL
 
 # tq_index -----
 
