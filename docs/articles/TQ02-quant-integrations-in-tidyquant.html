@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.10</span>
       </span>
     </div>
 
@@ -103,7 +103,7 @@
       <h1>R Quantitative Analysis Package Integrations in tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2019-12-16</h4>
+            <h4 class="date">2020-01-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ02-quant-integrations-in-tidyquant.Rmd"><code>vignettes/TQ02-quant-integrations-in-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ02-quant-integrations-in-tidyquant.Rmd</code></div>
@@ -170,14 +170,12 @@
 <a href="#xts-functionality" class="anchor"></a>xts Functionality</h2>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># Get xts functions that work with tq_transmute and tq_mutate</span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="../reference/tq_mutate.html">tq_transmute_fun_options</a></span>()<span class="op">$</span>xts</a></code></pre></div>
-<pre><code>##  [1] "apply.daily"     "apply.monthly"   "apply.quarterly"
-##  [4] "apply.weekly"    "apply.yearly"    "diff.xts"       
-##  [7] "lag.xts"         "period.apply"    "period.max"     
-## [10] "period.min"      "period.prod"     "period.sum"     
-## [13] "periodicity"     "to_period"       "to.daily"       
-## [16] "to.hourly"       "to.minutes"      "to.minutes10"   
-## [19] "to.minutes15"    "to.minutes3"     "to.minutes30"   
-## [22] "to.minutes5"     "to.monthly"      "to.period"      
+<pre><code>##  [1] "apply.daily"     "apply.monthly"   "apply.quarterly" "apply.weekly"   
+##  [5] "apply.yearly"    "diff.xts"        "lag.xts"         "period.apply"   
+##  [9] "period.max"      "period.min"      "period.prod"     "period.sum"     
+## [13] "periodicity"     "to_period"       "to.daily"        "to.hourly"      
+## [17] "to.minutes"      "to.minutes10"    "to.minutes15"    "to.minutes3"    
+## [21] "to.minutes30"    "to.minutes5"     "to.monthly"      "to.period"      
 ## [25] "to.quarterly"    "to.weekly"       "to.yearly"</code></pre>
 <p>The <code>xts</code> functions that are compatible are listed above. Generally speaking, these are the:</p>
 <ul>
@@ -204,14 +202,12 @@
 <a href="#quantmod-functionality" class="anchor"></a>quantmod Functionality</h2>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># Get quantmod functions that work with tq_transmute and tq_mutate</span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw"><a href="../reference/tq_mutate.html">tq_transmute_fun_options</a></span>()<span class="op">$</span>quantmod</a></code></pre></div>
-<pre><code>##  [1] "allReturns"      "annualReturn"    "ClCl"           
-##  [4] "dailyReturn"     "Delt"            "HiCl"           
-##  [7] "Lag"             "LoCl"            "LoHi"           
-## [10] "monthlyReturn"   "Next"            "OpCl"           
-## [13] "OpHi"            "OpLo"            "OpOp"           
-## [16] "periodReturn"    "quarterlyReturn" "seriesAccel"    
-## [19] "seriesDecel"     "seriesDecr"      "seriesHi"       
-## [22] "seriesIncr"      "seriesLo"        "weeklyReturn"   
+<pre><code>##  [1] "allReturns"      "annualReturn"    "ClCl"            "dailyReturn"    
+##  [5] "Delt"            "HiCl"            "Lag"             "LoCl"           
+##  [9] "LoHi"            "monthlyReturn"   "Next"            "OpCl"           
+## [13] "OpHi"            "OpLo"            "OpOp"            "periodReturn"   
+## [17] "quarterlyReturn" "seriesAccel"     "seriesDecel"     "seriesDecr"     
+## [21] "seriesHi"        "seriesIncr"      "seriesLo"        "weeklyReturn"   
 ## [25] "yearlyReturn"</code></pre>
 <p>The <code>quantmod</code> functions that are compatible are listed above. Generally speaking, these are the:</p>
 <ul>
@@ -749,12 +745,12 @@
 ## 
 ## Residuals:
 ##        Min         1Q     Median         3Q        Max 
-## -0.0268887 -0.0039702  0.0002264  0.0039571  0.0289147 
+## -0.0268887 -0.0039703  0.0002265  0.0039570  0.0289148 
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(&gt;|t|)    
 ## (Intercept) 0.0001014  0.0003101   0.327    0.744    
-## V           0.8119851  0.0226456  35.856   &lt;2e-16 ***
+## V           0.8119850  0.0226457  35.856   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 

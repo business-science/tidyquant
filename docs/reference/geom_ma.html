@@ -98,7 +98,7 @@ Requires volume aesthetic.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.10</span>
       </span>
     </div>
 
@@ -189,14 +189,37 @@ Requires <code>volume</code> aesthetic.</p></li>
 
     </div>
 
-    <pre class="usage"><span class='fu'>geom_ma</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>ma_fun</span> <span class='kw'>=</span> <span class='no'>SMA</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>wilder</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ratio</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>v</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>wts</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='no'>n</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>geom_ma</span>(
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>ma_fun</span> <span class='kw'>=</span> <span class='no'>SMA</span>,
+  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>20</span>,
+  <span class='kw'>wilder</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>ratio</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>v</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>wts</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='no'>n</span>,
+  <span class='no'>...</span>
+)
 
-<span class='fu'>geom_ma_</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>ma_fun</span> <span class='kw'>=</span> <span class='st'>"SMA"</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>wilder</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ratio</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>v</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>wts</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='no'>n</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>geom_ma_</span>(
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>ma_fun</span> <span class='kw'>=</span> <span class='st'>"SMA"</span>,
+  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>20</span>,
+  <span class='kw'>wilder</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>ratio</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>v</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>wts</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='no'>n</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

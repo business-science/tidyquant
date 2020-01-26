@@ -81,7 +81,7 @@ used when periodicity changes" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.10</span>
       </span>
     </div>
 
@@ -155,8 +155,14 @@ used when periodicity changes" />
 used when periodicity changes</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tq_mutate</span>(<span class='no'>data</span>, <span class='kw'>select</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>mutate_fun</span>, <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ohlc_fun</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>tq_mutate</span>(
+  <span class='no'>data</span>,
+  <span class='kw'>select</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>mutate_fun</span>,
+  <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ohlc_fun</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>
+)
 
 <span class='fu'>tq_mutate_</span>(<span class='no'>data</span>, <span class='kw'>select</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>mutate_fun</span>, <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
 
@@ -166,8 +172,14 @@ used when periodicity changes</p>
 
 <span class='fu'>tq_mutate_fun_options</span>()
 
-<span class='fu'>tq_transmute</span>(<span class='no'>data</span>, <span class='kw'>select</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>mutate_fun</span>, <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ohlc_fun</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+<span class='fu'>tq_transmute</span>(
+  <span class='no'>data</span>,
+  <span class='kw'>select</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>mutate_fun</span>,
+  <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ohlc_fun</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>
+)
 
 <span class='fu'>tq_transmute_</span>(<span class='no'>data</span>, <span class='kw'>select</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>mutate_fun</span>, <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
 
@@ -282,7 +294,7 @@ respectively.</p>
 #&gt; </span><span style='color: #555555;'> 4</span><span> 2016-01-07 100.  101.   97.3  97.9 45</span><span style='text-decoration: underline;'>172</span><span>900     97.9      -</span><span style='color: #BB0000;'>0.050</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span> 
 #&gt; </span><span style='color: #555555;'> 5</span><span> 2016-01-08  99.9 100.   97.0  97.3 35</span><span style='text-decoration: underline;'>402</span><span>300     97.3      -</span><span style='color: #BB0000;'>0.006</span><span style='color: #BB0000;text-decoration: underline;'>04</span><span>
 #&gt; </span><span style='color: #555555;'> 6</span><span> 2016-01-11  97.9  98.6  95.4  97.5 29</span><span style='text-decoration: underline;'>932</span><span>400     97.5       0.001</span><span style='text-decoration: underline;'>85</span><span>
-#&gt; </span><span style='color: #555555;'> 7</span><span> 2016-01-12  99   100.0  97.6  99.4 28</span><span style='text-decoration: underline;'>395</span><span>400     99.4       0.018</span><span style='text-decoration: underline;'>9</span><span> 
+#&gt; </span><span style='color: #555555;'> 7</span><span> 2016-01-12  99   100.   97.6  99.4 28</span><span style='text-decoration: underline;'>395</span><span>400     99.4       0.018</span><span style='text-decoration: underline;'>9</span><span> 
 #&gt; </span><span style='color: #555555;'> 8</span><span> 2016-01-13 101.  101.   95.2  95.4 33</span><span style='text-decoration: underline;'>410</span><span>600     95.4      -</span><span style='color: #BB0000;'>0.040</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span> 
 #&gt; </span><span style='color: #555555;'> 9</span><span> 2016-01-14  95.8  98.9  92.4  98.4 48</span><span style='text-decoration: underline;'>658</span><span>600     98.4       0.030</span><span style='text-decoration: underline;'>2</span><span> 
 #&gt; </span><span style='color: #555555;'>10</span><span> 2016-01-15  94.0  96.4  93.5  95.0 46</span><span style='text-decoration: underline;'>132</span><span>800     95.0      -</span><span style='color: #BB0000;'>0.035</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span> 
@@ -299,27 +311,27 @@ respectively.</p>
 #&gt; </span><span style='color: #555555;'> 4</span><span> 2016-01-07 100.  101.   97.3  97.9 45</span><span style='text-decoration: underline;'>172</span><span>900     97.9  </span><span style='color: #BB0000;'>NA</span><span>  
 #&gt; </span><span style='color: #555555;'> 5</span><span> 2016-01-08  99.9 100.   97.0  97.3 35</span><span style='text-decoration: underline;'>402</span><span>300     97.3  </span><span style='color: #BB0000;'>NA</span><span>  
 #&gt; </span><span style='color: #555555;'> 6</span><span> 2016-01-11  97.9  98.6  95.4  97.5 29</span><span style='text-decoration: underline;'>932</span><span>400     97.5  </span><span style='color: #BB0000;'>NA</span><span>  
-#&gt; </span><span style='color: #555555;'> 7</span><span> 2016-01-12  99   100.0  97.6  99.4 28</span><span style='text-decoration: underline;'>395</span><span>400     99.4  </span><span style='color: #BB0000;'>NA</span><span>  
+#&gt; </span><span style='color: #555555;'> 7</span><span> 2016-01-12  99   100.   97.6  99.4 28</span><span style='text-decoration: underline;'>395</span><span>400     99.4  </span><span style='color: #BB0000;'>NA</span><span>  
 #&gt; </span><span style='color: #555555;'> 8</span><span> 2016-01-13 101.  101.   95.2  95.4 33</span><span style='text-decoration: underline;'>410</span><span>600     95.4  </span><span style='color: #BB0000;'>NA</span><span>  
 #&gt; </span><span style='color: #555555;'> 9</span><span> 2016-01-14  95.8  98.9  92.4  98.4 48</span><span style='text-decoration: underline;'>658</span><span>600     98.4  </span><span style='color: #BB0000;'>NA</span><span>  
 #&gt; </span><span style='color: #555555;'>10</span><span> 2016-01-15  94.0  96.4  93.5  95.0 46</span><span style='text-decoration: underline;'>132</span><span>800     95.0  95.0
 #&gt; </span><span style='color: #555555;'># … with 242 more rows</span><span></div><div class='input'>
 <span class='co'># Example 3: Using tq_mutate to work with non-OHLC data</span>
 <span class='fu'><a href='tq_get.html'>tq_get</a></span>(<span class='st'>"DCOILWTICO"</span>, <span class='kw'>get</span> <span class='kw'>=</span> <span class='st'>"economic.data"</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'>tq_mutate</span>(<span class='kw'>select</span> <span class='kw'>=</span> <span class='no'>price</span>, <span class='kw'>mutate_fun</span> <span class='kw'>=</span> <span class='no'>lag.xts</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>na.pad</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2,853 x 3</span><span>
+    <span class='fu'>tq_mutate</span>(<span class='kw'>select</span> <span class='kw'>=</span> <span class='no'>price</span>, <span class='kw'>mutate_fun</span> <span class='kw'>=</span> <span class='no'>lag.xts</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>na.pad</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2,623 x 3</span><span>
 #&gt;    date       price lag.xts
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> 2009-01-01  </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>  
-#&gt; </span><span style='color: #555555;'> 2</span><span> 2009-01-02  46.2    </span><span style='color: #BB0000;'>NA</span><span>  
-#&gt; </span><span style='color: #555555;'> 3</span><span> 2009-01-05  48.6    46.2
-#&gt; </span><span style='color: #555555;'> 4</span><span> 2009-01-06  48.6    48.6
-#&gt; </span><span style='color: #555555;'> 5</span><span> 2009-01-07  42.8    48.6
-#&gt; </span><span style='color: #555555;'> 6</span><span> 2009-01-08  41.7    42.8
-#&gt; </span><span style='color: #555555;'> 7</span><span> 2009-01-09  40.7    41.7
-#&gt; </span><span style='color: #555555;'> 8</span><span> 2009-01-12  37.6    40.7
-#&gt; </span><span style='color: #555555;'> 9</span><span> 2009-01-13  37.8    37.6
-#&gt; </span><span style='color: #555555;'>10</span><span> 2009-01-14  37.4    37.8
-#&gt; </span><span style='color: #555555;'># … with 2,843 more rows</span><span></div><div class='input'>
+#&gt; </span><span style='color: #555555;'> 1</span><span> 2010-01-01  </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>  
+#&gt; </span><span style='color: #555555;'> 2</span><span> 2010-01-04  81.5    </span><span style='color: #BB0000;'>NA</span><span>  
+#&gt; </span><span style='color: #555555;'> 3</span><span> 2010-01-05  81.7    81.5
+#&gt; </span><span style='color: #555555;'> 4</span><span> 2010-01-06  83.1    81.7
+#&gt; </span><span style='color: #555555;'> 5</span><span> 2010-01-07  82.6    83.1
+#&gt; </span><span style='color: #555555;'> 6</span><span> 2010-01-08  82.7    82.6
+#&gt; </span><span style='color: #555555;'> 7</span><span> 2010-01-11  82.5    82.7
+#&gt; </span><span style='color: #555555;'> 8</span><span> 2010-01-12  80.8    82.5
+#&gt; </span><span style='color: #555555;'> 9</span><span> 2010-01-13  79.7    80.8
+#&gt; </span><span style='color: #555555;'>10</span><span> 2010-01-14  79.4    79.7
+#&gt; </span><span style='color: #555555;'># … with 2,613 more rows</span><span></div><div class='input'>
 <span class='co'># Example 4: Using tq_mutate to apply a rolling regression</span>
 <span class='no'>fb_returns</span> <span class='kw'>&lt;-</span> <span class='no'>fb_stock_prices</span> <span class='kw'>%&gt;%</span>
     <span class='fu'>tq_transmute</span>(<span class='no'>adjusted</span>, <span class='no'>periodReturn</span>, <span class='kw'>period</span> <span class='kw'>=</span> <span class='st'>"monthly"</span>, <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='st'>"fb.returns"</span>)
@@ -363,7 +375,7 @@ respectively.</p>
 #&gt; </span><span style='color: #555555;'> 4</span><span> 2016-01-07 100.  101.   97.3  97.9 45</span><span style='text-decoration: underline;'>172</span><span>900     97.9    </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
 #&gt; </span><span style='color: #555555;'> 5</span><span> 2016-01-08  99.9 100.   97.0  97.3 35</span><span style='text-decoration: underline;'>402</span><span>300     97.3    </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
 #&gt; </span><span style='color: #555555;'> 6</span><span> 2016-01-11  97.9  98.6  95.4  97.5 29</span><span style='text-decoration: underline;'>932</span><span>400     97.5    </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #555555;'> 7</span><span> 2016-01-12  99   100.0  97.6  99.4 28</span><span style='text-decoration: underline;'>395</span><span>400     99.4    </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #555555;'> 7</span><span> 2016-01-12  99   100.   97.6  99.4 28</span><span style='text-decoration: underline;'>395</span><span>400     99.4    </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
 #&gt; </span><span style='color: #555555;'> 8</span><span> 2016-01-13 101.  101.   95.2  95.4 33</span><span style='text-decoration: underline;'>410</span><span>600     95.4    </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
 #&gt; </span><span style='color: #555555;'> 9</span><span> 2016-01-14  95.8  98.9  92.4  98.4 48</span><span style='text-decoration: underline;'>658</span><span>600     98.4    </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
 #&gt; </span><span style='color: #555555;'>10</span><span> 2016-01-15  94.0  96.4  93.5  95.0 46</span><span style='text-decoration: underline;'>132</span><span>800     95.0    </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>

@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.10</span>
       </span>
     </div>
 
@@ -103,7 +103,7 @@
       <h1>Performance Analysis with tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2019-12-16</h4>
+            <h4 class="date">2020-01-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ05-performance-analysis-with-tidyquant.Rmd"><code>vignettes/TQ05-performance-analysis-with-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ05-performance-analysis-with-tidyquant.Rmd</code></div>
@@ -226,14 +226,13 @@
 <a class="sourceLine" id="cb8-5" data-line-number="5">RaRb_capm</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 13
 ## # Groups:   symbol [3]
-##   symbol ActivePremium  Alpha AnnualizedAlpha  Beta `Beta-` `Beta+`
-##   &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-## 1 AAPL           0.119 0.0089           0.112 1.11    0.578  1.04  
-## 2 GOOG           0.034 0.0028           0.034 1.14    1.39   1.16  
-## 3 NFLX           0.447 0.053            0.859 0.384  -1.52   0.0045
-## # … with 6 more variables: Correlation &lt;dbl&gt;, `Correlationp-value` &lt;dbl&gt;,
-## #   InformationRatio &lt;dbl&gt;, `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;,
-## #   TreynorRatio &lt;dbl&gt;</code></pre>
+##   symbol ActivePremium  Alpha AnnualizedAlpha  Beta `Beta-` `Beta+` Correlation
+##   &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;
+## 1 AAPL           0.119 0.0089           0.112 1.11    0.578  1.04        0.659 
+## 2 GOOG           0.034 0.0028           0.034 1.14    1.39   1.16        0.644 
+## 3 NFLX           0.447 0.053            0.859 0.384  -1.52   0.0045      0.0817
+## # … with 5 more variables: `Correlationp-value` &lt;dbl&gt;, InformationRatio &lt;dbl&gt;,
+## #   `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;, TreynorRatio &lt;dbl&gt;</code></pre>
 <p>We can quickly isolate attributes, such as alpha, the measure of growth, and beta, the measure of risk.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">RaRb_capm <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="st">    </span><span class="kw">select</span>(Alpha, Beta)</a></code></pre></div>
@@ -330,11 +329,11 @@
 <a class="sourceLine" id="cb19-4" data-line-number="4">                   <span class="dt">performance_fun =</span> SharpeRatio)</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ## # Groups:   symbol [3]
-##   symbol `ESSharpe(Rf=0%,p=95… `StdDevSharpe(Rf=0%,p=… `VaRSharpe(Rf=0%,p=…
-##   &lt;chr&gt;                  &lt;dbl&gt;                   &lt;dbl&gt;                &lt;dbl&gt;
-## 1 AAPL                   0.173                   0.292                0.218
-## 2 GOOG                   0.129                   0.203                0.157
-## 3 NFLX                   0.237                   0.284                0.272</code></pre>
+##   symbol `ESSharpe(Rf=0%,p=95%… `StdDevSharpe(Rf=0%,p=95… `VaRSharpe(Rf=0%,p=95…
+##   &lt;chr&gt;                   &lt;dbl&gt;                     &lt;dbl&gt;                  &lt;dbl&gt;
+## 1 AAPL                    0.173                     0.292                  0.218
+## 2 GOOG                    0.129                     0.203                  0.157
+## 3 NFLX                    0.237                     0.284                  0.272</code></pre>
 <p>Now we have the Sharpe Ratio for each of the three stocks. What if we want to adjust the parameters of the function? We can just add on the arguments of the underlying function.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">stock_returns_monthly <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb21-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, </a>
@@ -344,11 +343,11 @@
 <a class="sourceLine" id="cb21-6" data-line-number="6">                   <span class="dt">p =</span> <span class="fl">0.99</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ## # Groups:   symbol [3]
-##   symbol `ESSharpe(Rf=0.2%,p=… `StdDevSharpe(Rf=0.2%… `VaRSharpe(Rf=0.2%,p…
-##   &lt;chr&gt;                  &lt;dbl&gt;                  &lt;dbl&gt;                 &lt;dbl&gt;
-## 1 AAPL                  0.116                   0.258                0.134 
-## 2 GOOG                  0.0826                  0.170                0.0998
-## 3 NFLX                  0.115                   0.272                0.142</code></pre>
+##   symbol `ESSharpe(Rf=0.2%,p=9… `StdDevSharpe(Rf=0.2%,p=… `VaRSharpe(Rf=0.2%,p=…
+##   &lt;chr&gt;                   &lt;dbl&gt;                     &lt;dbl&gt;                  &lt;dbl&gt;
+## 1 AAPL                   0.116                      0.258                 0.134 
+## 2 GOOG                   0.0826                     0.170                 0.0998
+## 3 NFLX                   0.115                      0.272                 0.142</code></pre>
 </div>
 </div>
 <div id="portfolios-asset-groups" class="section level2">
@@ -525,9 +524,8 @@
 ##   ActivePremium  Alpha AnnualizedAlpha  Beta `Beta-` `Beta+` Correlation
 ##           &lt;dbl&gt;  &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;
 ## 1         0.327 0.0299           0.425 0.754  -0.243   0.503       0.283
-## # … with 5 more variables: `Correlationp-value` &lt;dbl&gt;,
-## #   InformationRatio &lt;dbl&gt;, `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;,
-## #   TreynorRatio &lt;dbl&gt;</code></pre>
+## # … with 5 more variables: `Correlationp-value` &lt;dbl&gt;, InformationRatio &lt;dbl&gt;,
+## #   `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;, TreynorRatio &lt;dbl&gt;</code></pre>
 <p>Now we have the CAPM performance metrics for a portfolio! While this is cool, it’s cooler to do multiple portfolios. Let’s see how.</p>
 </div>
 </div>
@@ -690,11 +688,11 @@
 <a class="sourceLine" id="cb49-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, <span class="dt">Rb =</span> <span class="ot">NULL</span>, <span class="dt">performance_fun =</span> SharpeRatio)</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ## # Groups:   portfolio [3]
-##   portfolio `ESSharpe(Rf=0%,p=9… `StdDevSharpe(Rf=0%,… `VaRSharpe(Rf=0%,p=…
-##       &lt;int&gt;                &lt;dbl&gt;                 &lt;dbl&gt;                &lt;dbl&gt;
-## 1         1                0.172                 0.355                0.263
-## 2         2                0.146                 0.334                0.236
-## 3         3                0.150                 0.317                0.238</code></pre>
+##   portfolio `ESSharpe(Rf=0%,p=95… `StdDevSharpe(Rf=0%,p=9… `VaRSharpe(Rf=0%,p=9…
+##       &lt;int&gt;                 &lt;dbl&gt;                    &lt;dbl&gt;                 &lt;dbl&gt;
+## 1         1                 0.172                    0.355                 0.263
+## 2         2                 0.146                    0.334                 0.236
+## 3         3                 0.150                    0.317                 0.238</code></pre>
 </div>
 </div>
 </div>
@@ -717,10 +715,9 @@
 ## [19] "table.Variability"      
 ## 
 ## $CAPM.funs
-##  [1] "CAPM.alpha"       "CAPM.beta"        "CAPM.beta.bear"  
-##  [4] "CAPM.beta.bull"   "CAPM.CML"         "CAPM.CML.slope"  
-##  [7] "CAPM.dynamic"     "CAPM.epsilon"     "CAPM.jensenAlpha"
-## [10] "CAPM.RiskPremium" "CAPM.SML.slope"   "TimingRatio"     
+##  [1] "CAPM.alpha"       "CAPM.beta"        "CAPM.beta.bear"   "CAPM.beta.bull"  
+##  [5] "CAPM.CML"         "CAPM.CML.slope"   "CAPM.dynamic"     "CAPM.epsilon"    
+##  [9] "CAPM.jensenAlpha" "CAPM.RiskPremium" "CAPM.SML.slope"   "TimingRatio"     
 ## [13] "MarketTiming"    
 ## 
 ## $SFM.funs
@@ -740,10 +737,9 @@
 ## [1] "VaR"  "ES"   "ETL"  "CDD"  "CVaR"
 ## 
 ## $moment.funs
-##  [1] "var"              "cov"              "skewness"        
-##  [4] "kurtosis"         "CoVariance"       "CoSkewness"      
-##  [7] "CoSkewnessMatrix" "CoKurtosis"       "CoKurtosisMatrix"
-## [10] "M3.MM"            "M4.MM"            "BetaCoVariance"  
+##  [1] "var"              "cov"              "skewness"         "kurtosis"        
+##  [5] "CoVariance"       "CoSkewness"       "CoSkewnessMatrix" "CoKurtosis"      
+##  [9] "CoKurtosisMatrix" "M3.MM"            "M4.MM"            "BetaCoVariance"  
 ## [13] "BetaCoSkewness"   "BetaCoKurtosis"  
 ## 
 ## $drawdown.funs
@@ -755,29 +751,24 @@
 ## [4] "MSquared"              "MSquaredExcess"        "HurstIndex"           
 ## 
 ## $Bacon.regression.funs
-##  [1] "CAPM.alpha"       "CAPM.beta"        "CAPM.epsilon"    
-##  [4] "CAPM.jensenAlpha" "SystematicRisk"   "SpecificRisk"    
-##  [7] "TotalRisk"        "TreynorRatio"     "AppraisalRatio"  
-## [10] "FamaBeta"         "Selectivity"      "NetSelectivity"  
+##  [1] "CAPM.alpha"       "CAPM.beta"        "CAPM.epsilon"     "CAPM.jensenAlpha"
+##  [5] "SystematicRisk"   "SpecificRisk"     "TotalRisk"        "TreynorRatio"    
+##  [9] "AppraisalRatio"   "FamaBeta"         "Selectivity"      "NetSelectivity"  
 ## 
 ## $Bacon.relative.risk.funs
-## [1] "ActivePremium"    "ActiveReturn"     "TrackingError"   
-## [4] "InformationRatio"
+## [1] "ActivePremium"    "ActiveReturn"     "TrackingError"    "InformationRatio"
 ## 
 ## $Bacon.drawdown.funs
 ## [1] "PainIndex"     "PainRatio"     "CalmarRatio"   "SterlingRatio"
 ## [5] "BurkeRatio"    "MartinRatio"   "UlcerIndex"   
 ## 
 ## $Bacon.downside.risk.funs
-##  [1] "DownsideDeviation"     "DownsidePotential"    
-##  [3] "DownsideFrequency"     "SemiDeviation"        
-##  [5] "SemiVariance"          "UpsideRisk"           
-##  [7] "UpsidePotentialRatio"  "UpsideFrequency"      
-##  [9] "BernardoLedoitRatio"   "DRatio"               
-## [11] "Omega"                 "OmegaSharpeRatio"     
-## [13] "OmegaExcessReturn"     "SortinoRatio"         
-## [15] "M2Sortino"             "Kappa"                
-## [17] "VolatilitySkewness"    "AdjustedSharpeRatio"  
+##  [1] "DownsideDeviation"     "DownsidePotential"     "DownsideFrequency"    
+##  [4] "SemiDeviation"         "SemiVariance"          "UpsideRisk"           
+##  [7] "UpsidePotentialRatio"  "UpsideFrequency"       "BernardoLedoitRatio"  
+## [10] "DRatio"                "Omega"                 "OmegaSharpeRatio"     
+## [13] "OmegaExcessReturn"     "SortinoRatio"          "M2Sortino"            
+## [16] "Kappa"                 "VolatilitySkewness"    "AdjustedSharpeRatio"  
 ## [19] "SkewnessKurtosisRatio" "ProspectRatio"        
 ## 
 ## $misc.funs
@@ -790,14 +781,14 @@
 <a class="sourceLine" id="cb53-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, <span class="dt">Rb =</span> <span class="ot">NULL</span>, <span class="dt">performance_fun =</span> table.Stats)</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 17
 ## # Groups:   portfolio [3]
-##   portfolio ArithmeticMean GeometricMean Kurtosis `LCLMean(0.95)` Maximum
-##       &lt;int&gt;          &lt;dbl&gt;         &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt;   &lt;dbl&gt;
-## 1         1         0.0293        0.0259     1.14          0.0099   0.222
-## 2         2         0.029         0.0252     1.65          0.0086   0.227
-## 3         3         0.0388        0.0313     1.81          0.01     0.370
-## # … with 11 more variables: Median &lt;dbl&gt;, Minimum &lt;dbl&gt;, NAs &lt;dbl&gt;,
-## #   Observations &lt;dbl&gt;, Quartile1 &lt;dbl&gt;, Quartile3 &lt;dbl&gt;, SEMean &lt;dbl&gt;,
-## #   Skewness &lt;dbl&gt;, Stdev &lt;dbl&gt;, `UCLMean(0.95)` &lt;dbl&gt;, Variance &lt;dbl&gt;</code></pre>
+##   portfolio ArithmeticMean GeometricMean Kurtosis `LCLMean(0.95)` Maximum Median
+##       &lt;int&gt;          &lt;dbl&gt;         &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+## 1         1         0.0293        0.0259     1.14          0.0099   0.222 0.0307
+## 2         2         0.029         0.0252     1.65          0.0086   0.227 0.037 
+## 3         3         0.0388        0.0313     1.81          0.01     0.370 0.046 
+## # … with 10 more variables: Minimum &lt;dbl&gt;, NAs &lt;dbl&gt;, Observations &lt;dbl&gt;,
+## #   Quartile1 &lt;dbl&gt;, Quartile3 &lt;dbl&gt;, SEMean &lt;dbl&gt;, Skewness &lt;dbl&gt;,
+## #   Stdev &lt;dbl&gt;, `UCLMean(0.95)` &lt;dbl&gt;, Variance &lt;dbl&gt;</code></pre>
 </div>
 <div id="table-capm" class="section level2">
 <h2 class="hasAnchor">
@@ -852,15 +843,14 @@
 <a class="sourceLine" id="cb61-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, <span class="dt">Rb =</span> <span class="ot">NULL</span>, <span class="dt">performance_fun =</span> table.DownsideRisk)</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 12
 ## # Groups:   portfolio [3]
-##   portfolio `DownsideDeviat… `DownsideDeviat… `DownsideDeviat…
-##       &lt;int&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
-## 1         1           0.045            0.0488           0.045 
-## 2         2           0.0501           0.0538           0.0501
-## 3         3           0.0684           0.0721           0.0684
-## # … with 8 more variables: GainDeviation &lt;dbl&gt;, `HistoricalES(95%)` &lt;dbl&gt;,
-## #   `HistoricalVaR(95%)` &lt;dbl&gt;, LossDeviation &lt;dbl&gt;,
-## #   MaximumDrawdown &lt;dbl&gt;, `ModifiedES(95%)` &lt;dbl&gt;,
-## #   `ModifiedVaR(95%)` &lt;dbl&gt;, SemiDeviation &lt;dbl&gt;</code></pre>
+##   portfolio `DownsideDeviat… `DownsideDeviat… `DownsideDeviat… GainDeviation
+##       &lt;int&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;         &lt;dbl&gt;
+## 1         1           0.045            0.0488           0.045         0.0538
+## 2         2           0.0501           0.0538           0.0501        0.0528
+## 3         3           0.0684           0.0721           0.0684        0.0831
+## # … with 7 more variables: `HistoricalES(95%)` &lt;dbl&gt;,
+## #   `HistoricalVaR(95%)` &lt;dbl&gt;, LossDeviation &lt;dbl&gt;, MaximumDrawdown &lt;dbl&gt;,
+## #   `ModifiedES(95%)` &lt;dbl&gt;, `ModifiedVaR(95%)` &lt;dbl&gt;, SemiDeviation &lt;dbl&gt;</code></pre>
 </div>
 <div id="table-downsideriskratio" class="section level2">
 <h2 class="hasAnchor">
@@ -886,12 +876,11 @@
 <a class="sourceLine" id="cb65-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, <span class="dt">Rb =</span> Rb, <span class="dt">performance_fun =</span> table.HigherMoments)</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 6
 ## # Groups:   portfolio [3]
-##   portfolio BetaCoKurtosis BetaCoSkewness BetaCoVariance CoKurtosis
-##       &lt;int&gt;          &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;      &lt;dbl&gt;
-## 1         1          0.756          0.196          0.908          0
-## 2         2          0.772          1.71           0.886          0
-## 3         3          0.455          0.369          0.721          0
-## # … with 1 more variable: CoSkewness &lt;dbl&gt;</code></pre>
+##   portfolio BetaCoKurtosis BetaCoSkewness BetaCoVariance CoKurtosis CoSkewness
+##       &lt;int&gt;          &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+## 1         1          0.756          0.196          0.908          0          0
+## 2         2          0.772          1.71           0.886          0          0
+## 3         3          0.455          0.369          0.721          0          0</code></pre>
 </div>
 <div id="table-informationratio" class="section level2">
 <h2 class="hasAnchor">
@@ -943,11 +932,11 @@
 <a class="sourceLine" id="cb73-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, <span class="dt">Rb =</span> <span class="ot">NULL</span>, <span class="dt">performance_fun =</span> SharpeRatio)</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ## # Groups:   portfolio [3]
-##   portfolio `ESSharpe(Rf=0%,p=9… `StdDevSharpe(Rf=0%,… `VaRSharpe(Rf=0%,p=…
-##       &lt;int&gt;                &lt;dbl&gt;                 &lt;dbl&gt;                &lt;dbl&gt;
-## 1         1                0.172                 0.355                0.263
-## 2         2                0.146                 0.334                0.236
-## 3         3                0.150                 0.317                0.238</code></pre>
+##   portfolio `ESSharpe(Rf=0%,p=95… `StdDevSharpe(Rf=0%,p=9… `VaRSharpe(Rf=0%,p=9…
+##       &lt;int&gt;                 &lt;dbl&gt;                    &lt;dbl&gt;                 &lt;dbl&gt;
+## 1         1                 0.172                    0.355                 0.263
+## 2         2                 0.146                    0.334                 0.236
+## 3         3                 0.150                    0.317                 0.238</code></pre>
 </div>
 </div>
 <div id="customizing-using-the" class="section level1">
@@ -1048,11 +1037,11 @@
 <a class="sourceLine" id="cb85-3" data-line-number="3">                   <span class="dt">performance_fun =</span> SharpeRatio)</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ## # Groups:   portfolio [3]
-##   portfolio `ESSharpe(Rf=0%,p=9… `StdDevSharpe(Rf=0%,… `VaRSharpe(Rf=0%,p=…
-##       &lt;int&gt;                &lt;dbl&gt;                 &lt;dbl&gt;                &lt;dbl&gt;
-## 1         1                0.172                 0.355                0.263
-## 2         2                0.146                 0.334                0.236
-## 3         3                0.150                 0.317                0.238</code></pre>
+##   portfolio `ESSharpe(Rf=0%,p=95… `StdDevSharpe(Rf=0%,p=9… `VaRSharpe(Rf=0%,p=9…
+##       &lt;int&gt;                 &lt;dbl&gt;                    &lt;dbl&gt;                 &lt;dbl&gt;
+## 1         1                 0.172                    0.355                 0.263
+## 2         2                 0.146                    0.334                 0.236
+## 3         3                 0.150                    0.317                 0.238</code></pre>
 <p>With <code>Rf = 0.03 / 12</code> (adjusted for monthly periodicity):</p>
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1">RaRb_multiple_portfolio <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb87-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra              =</span> Ra, </a>
@@ -1060,11 +1049,11 @@
 <a class="sourceLine" id="cb87-4" data-line-number="4">                   <span class="dt">Rf              =</span> <span class="fl">0.03</span> <span class="op">/</span><span class="st"> </span><span class="dv">12</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ## # Groups:   portfolio [3]
-##   portfolio `ESSharpe(Rf=0.2%,p… `StdDevSharpe(Rf=0.2… `VaRSharpe(Rf=0.2%,…
-##       &lt;int&gt;                &lt;dbl&gt;                 &lt;dbl&gt;                &lt;dbl&gt;
-## 1         1                0.157                 0.325                0.241
-## 2         2                0.134                 0.305                0.216
-## 3         3                0.141                 0.296                0.222</code></pre>
+##   portfolio `ESSharpe(Rf=0.2%,p=9… `StdDevSharpe(Rf=0.2%,… `VaRSharpe(Rf=0.2%,p…
+##       &lt;int&gt;                  &lt;dbl&gt;                   &lt;dbl&gt;                 &lt;dbl&gt;
+## 1         1                  0.157                   0.325                 0.241
+## 2         2                  0.134                   0.305                 0.216
+## 3         3                  0.141                   0.296                 0.222</code></pre>
 <p>And, with both <code>Rf = 0.03 / 12</code> (adjusted for monthly periodicity) and <code>p = 0.99</code>:</p>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1">RaRb_multiple_portfolio <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb89-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra              =</span> Ra, </a>
@@ -1073,11 +1062,11 @@
 <a class="sourceLine" id="cb89-5" data-line-number="5">                   <span class="dt">p               =</span> <span class="fl">0.99</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ## # Groups:   portfolio [3]
-##   portfolio `ESSharpe(Rf=0.2%,p… `StdDevSharpe(Rf=0.2… `VaRSharpe(Rf=0.2%,…
-##       &lt;int&gt;                &lt;dbl&gt;                 &lt;dbl&gt;                &lt;dbl&gt;
-## 1         1               0.105                  0.325                0.134
-## 2         2               0.0952                 0.305                0.115
-## 3         3               0.0915                 0.296                0.117</code></pre>
+##   portfolio `ESSharpe(Rf=0.2%,p=9… `StdDevSharpe(Rf=0.2%,… `VaRSharpe(Rf=0.2%,p…
+##       &lt;int&gt;                  &lt;dbl&gt;                   &lt;dbl&gt;                 &lt;dbl&gt;
+## 1         1                 0.105                    0.325                 0.134
+## 2         2                 0.0952                   0.305                 0.115
+## 3         3                 0.0915                   0.296                 0.117</code></pre>
 </div>
 </div>
   </div>

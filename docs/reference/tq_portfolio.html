@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.10</span>
       </span>
     </div>
 
@@ -151,11 +151,23 @@
     <p>Aggregates a group of returns by asset into portfolio returns</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tq_portfolio</span>(<span class='no'>data</span>, <span class='no'>assets_col</span>, <span class='no'>returns_col</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>tq_portfolio</span>(
+  <span class='no'>data</span>,
+  <span class='no'>assets_col</span>,
+  <span class='no'>returns_col</span>,
+  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>
+)
 
-<span class='fu'>tq_portfolio_</span>(<span class='no'>data</span>, <span class='no'>assets_col</span>, <span class='no'>returns_col</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+<span class='fu'>tq_portfolio_</span>(
+  <span class='no'>data</span>,
+  <span class='no'>assets_col</span>,
+  <span class='no'>returns_col</span>,
+  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>
+)
 
 <span class='fu'>tq_repeat_df</span>(<span class='no'>data</span>, <span class='no'>n</span>, <span class='kw'>index_col_name</span> <span class='kw'>=</span> <span class='st'>"portfolio"</span>)</pre>
 

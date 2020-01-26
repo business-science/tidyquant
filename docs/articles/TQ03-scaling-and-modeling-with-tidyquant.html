@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.10</span>
       </span>
     </div>
 
@@ -103,7 +103,7 @@
       <h1>Scaling and Modeling with tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2019-12-16</h4>
+            <h4 class="date">2020-01-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ03-scaling-and-modeling-with-tidyquant.Rmd"><code>vignettes/TQ03-scaling-and-modeling-with-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ03-scaling-and-modeling-with-tidyquant.Rmd</code></div>
@@ -157,7 +157,7 @@
 ##  4 AAPL   2016-01-07  98.7 100.   96.4  96.4 81094400     90.1
 ##  5 AAPL   2016-01-08  98.6  99.1  96.8  97.0 70798000     90.6
 ##  6 AAPL   2016-01-11  99.0  99.1  97.3  98.5 49739400     92.1
-##  7 AAPL   2016-01-12 101.  101.   98.8 100.0 49154200     93.4
+##  7 AAPL   2016-01-12 101.  101.   98.8 100.  49154200     93.4
 ##  8 AAPL   2016-01-13 100.  101.   97.3  97.4 62439600     91.0
 ##  9 AAPL   2016-01-14  98.0 100.   95.7  99.5 63170100     93.0
 ## 10 AAPL   2016-01-15  96.2  97.7  95.4  97.1 79833900     90.8
@@ -192,7 +192,7 @@
 ##  4 AAPL   Technology 2016-01-07  98.7 100.   96.4  96.4 81094400     90.1
 ##  5 AAPL   Technology 2016-01-08  98.6  99.1  96.8  97.0 70798000     90.6
 ##  6 AAPL   Technology 2016-01-11  99.0  99.1  97.3  98.5 49739400     92.1
-##  7 AAPL   Technology 2016-01-12 101.  101.   98.8 100.0 49154200     93.4
+##  7 AAPL   Technology 2016-01-12 101.  101.   98.8 100.  49154200     93.4
 ##  8 AAPL   Technology 2016-01-13 100.  101.   97.3  97.4 62439600     91.0
 ##  9 AAPL   Technology 2016-01-14  98.0 100.   95.7  99.5 63170100     93.0
 ## 10 AAPL   Technology 2016-01-15  96.2  97.7  95.4  97.1 79833900     90.8
@@ -204,18 +204,18 @@
 <p>Get an index…</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="../reference/tq_stock_list.html">tq_index</a></span>(<span class="st">"DOW"</span>, <span class="dt">use_fallback =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 30 x 8
-##    symbol company identifier sedol weight sector shares_held local_currency
-##    &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;         
-##  1 BA     Boeing… 09702310   2108… 0.0950 Indus…     5457203 USD           
-##  2 HD     Home D… 43707610   2434… 0.0593 Consu…     5457203 USD           
-##  3 AAPL   Apple … 03783310   2046… 0.0589 Infor…     5457203 USD           
-##  4 UNH    United… 91324P10   2917… 0.0573 Healt…     5457203 USD           
-##  5 MCD    McDona… 58013510   2550… 0.0542 Consu…     5457203 USD           
-##  6 GS     Goldma… 38141G10   2407… 0.0512 Finan…     5457203 USD           
-##  7 V      Visa I… 92826C83   B2PZ… 0.0448 Infor…     5457203 USD           
-##  8 MMM    3M Com… 88579Y10   2595… 0.0390 Indus…     5457203 USD           
-##  9 TRV    Travel… 89417E10   2769… 0.0362 Finan…     5457203 USD           
-## 10 IBM    Intern… 45920010   2005… 0.0361 Infor…     5457203 USD           
+##    symbol company     identifier sedol weight sector  shares_held local_currency
+##    &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;         
+##  1 BA     Boeing Com… 09702310   2108… 0.0950 Indust…     5457203 USD           
+##  2 HD     Home Depot… 43707610   2434… 0.0593 Consum…     5457203 USD           
+##  3 AAPL   Apple Inc.  03783310   2046… 0.0589 Inform…     5457203 USD           
+##  4 UNH    UnitedHeal… 91324P10   2917… 0.0573 Health…     5457203 USD           
+##  5 MCD    McDonald's… 58013510   2550… 0.0542 Consum…     5457203 USD           
+##  6 GS     Goldman Sa… 38141G10   2407… 0.0512 Financ…     5457203 USD           
+##  7 V      Visa Inc. … 92826C83   B2PZ… 0.0448 Inform…     5457203 USD           
+##  8 MMM    3M Company  88579Y10   2595… 0.0390 Indust…     5457203 USD           
+##  9 TRV    Travelers … 89417E10   2769… 0.0362 Financ…     5457203 USD           
+## 10 IBM    Internatio… 45920010   2005… 0.0361 Inform…     5457203 USD           
 ## # … with 20 more rows</code></pre>
 <p>…or, get an exchange.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="../reference/tq_stock_list.html">tq_exchange</a></span>(<span class="st">"NYSE"</span>)</a></code></pre></div>
@@ -223,7 +223,7 @@
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="../reference/tq_stock_list.html">tq_index</a></span>(<span class="st">"DOW"</span>, <span class="dt">use_fallback =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">    </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get =</span> <span class="st">"stock.prices"</span>)</a></code></pre></div>
-<pre><code>## # A tibble: 8,271 x 15
+<pre><code>## # A tibble: 7,596 x 15
 ##    symbol company identifier sedol weight sector shares_held local_currency
 ##    &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;         
 ##  1 BA     Boeing… 09702310   2108… 0.0950 Indus…     5457203 USD           
@@ -236,7 +236,7 @@
 ##  8 BA     Boeing… 09702310   2108… 0.0950 Indus…     5457203 USD           
 ##  9 BA     Boeing… 09702310   2108… 0.0950 Indus…     5457203 USD           
 ## 10 BA     Boeing… 09702310   2108… 0.0950 Indus…     5457203 USD           
-## # … with 8,261 more rows, and 7 more variables: date &lt;date&gt;, open &lt;dbl&gt;,
+## # … with 7,586 more rows, and 7 more variables: date &lt;date&gt;, open &lt;dbl&gt;,
 ## #   high &lt;dbl&gt;, low &lt;dbl&gt;, close &lt;dbl&gt;, volume &lt;dbl&gt;, adjusted &lt;dbl&gt;</code></pre>
 <p>You can use any applicable “getter” to get data for <strong>every stock in an index or an exchange</strong>! This includes: “stock.prices”, “key.ratios”, “key.stats”, and more.</p>
 </div>
@@ -250,10 +250,10 @@
 <pre><code>## # A tibble: 4 x 2
 ##   symbol stock.prices        
 ##   &lt;chr&gt;  &lt;list&gt;              
-## 1 AAPL   &lt;tibble [2,757 × 7]&gt;
-## 2 GOOG   &lt;tibble [2,757 × 7]&gt;
-## 3 AMZN   &lt;tibble [2,757 × 7]&gt;
-## 4 FB     &lt;tibble [1,906 × 7]&gt;</code></pre>
+## 1 AAPL   &lt;tibble [2,532 × 7]&gt;
+## 2 GOOG   &lt;tibble [2,532 × 7]&gt;
+## 3 AMZN   &lt;tibble [2,532 × 7]&gt;
+## 4 FB     &lt;tibble [1,933 × 7]&gt;</code></pre>
 </div>
 <div id="method-4-compound-getters" class="section level2">
 <h2 class="hasAnchor">
@@ -261,11 +261,10 @@
 <p>In financial analysis, it’s very common to need data from various sources to combine in an analysis. For this reason multiple <code>get</code> options (“compound getters”) can be used to return a “compound get”. A quick example:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb15-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"stock.prices"</span>, <span class="st">"dividends"</span>))</a></code></pre></div>
-<pre><code>## # A tibble: 2 x 3
-##   symbol stock.prices         dividends        
-##   &lt;chr&gt;  &lt;list&gt;               &lt;list&gt;           
-## 1 AAPL   &lt;tibble [2,757 × 7]&gt; &lt;tibble [30 × 2]&gt;
-## 2 GOOG   &lt;tibble [2,757 × 7]&gt; &lt;tibble [0 × 2]&gt;</code></pre>
+<pre><code>## # A tibble: 1 x 3
+##   symbol stock.prices         dividends       
+##   &lt;chr&gt;  &lt;list&gt;               &lt;list&gt;          
+## 1 GOOG   &lt;tibble [2,532 × 7]&gt; &lt;tibble [0 × 2]&gt;</code></pre>
 <p>This returns the stock prices and dividends for each stock as one nested data frame! Any of the <code>get</code> options that accept stock symbols can be used in this manner: <code>"stock.prices"</code>, <code>"key.ratios"</code>, <code>"key.stats"</code>, <code>"dividends"</code>, and <code>"splits"</code>.</p>
 </div>
 </div>
@@ -414,13 +413,13 @@
 <a class="sourceLine" id="cb32-3" data-line-number="3"><span class="st">    </span><span class="kw">sample_n</span>(<span class="dv">5</span>)</a>
 <a class="sourceLine" id="cb32-4" data-line-number="4">stocks</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 8
-##   symbol company identifier sedol  weight sector shares_held local_currency
-##   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;         
-## 1 IPGP   IPG Ph… 44980X10   2698… 1.89e-4 Infor…      387370 USD           
-## 2 SCHW   Charle… 80851310   2779… 1.72e-3 Finan…    12739475 USD           
-## 3 UDR    UDR In… 90265310   2727… 5.83e-4 Real …     3206653 USD           
-## 4 NVR    NVR In… 62944T10   2637… 5.00e-4 Consu…       37060 USD           
-## 5 BWA    BorgWa… 09972410   2111… 2.98e-4 Consu…     2248867 USD</code></pre>
+##   symbol company    identifier sedol  weight sector   shares_held local_currency
+##   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;         
+## 1 IPGP   IPG Photo… 44980X10   2698… 1.89e-4 Informa…      387370 USD           
+## 2 SCHW   Charles S… 80851310   2779… 1.72e-3 Financi…    12739475 USD           
+## 3 UDR    UDR Inc.   90265310   2727… 5.83e-4 Real Es…     3206653 USD           
+## 4 NVR    NVR Inc.   62944T10   2637… 5.00e-4 Consume…       37060 USD           
+## 5 BWA    BorgWarne… 09972410   2111… 2.98e-4 Consume…     2248867 USD</code></pre>
 <p>We can now apply our analysis function to the stocks using <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate</a></code> and <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map</a></code>. The <code>mutate()</code> function adds a column to our tibble, and the <code>map()</code> function maps our custom <code>get_model</code> function to our tibble of stocks using the <code>symbol</code> column. The <code><a href="https://tidyr.tidyverse.org/reference/nest.html">tidyr::unnest</a></code> function unrolls the nested data frame so all of the model statistics are accessable in the top data frame level. The <code>filter</code>, <code>arrange</code> and <code>select</code> steps just manipulate the data frame to isolate and arrange the data for our viewing.</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">stocks_model_stats &lt;-<span class="st"> </span>stocks <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb34-2" data-line-number="2"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="kw">map</span>(symbol, get_model)) <span class="op">%&gt;%</span></a>
@@ -437,8 +436,8 @@
 ## 3 IPGP   IPG Ph… 44980X10   2698… 1.89e-4 Infor…      387370 USD           
 ## 4 NVR    NVR In… 62944T10   2637… 5.00e-4 Consu…       37060 USD           
 ## 5 BWA    BorgWa… 09972410   2111… 2.98e-4 Consu…     2248867 USD           
-## # … with 4 more variables: estimate &lt;dbl&gt;, std.error &lt;dbl&gt;,
-## #   statistic &lt;dbl&gt;, p.value &lt;dbl&gt;</code></pre>
+## # … with 4 more variables: estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,
+## #   p.value &lt;dbl&gt;</code></pre>
 <p>We’re done! We now have the coefficient of the linear regression that tracks the direction of the trend line. We can easily extend this type of analysis to larger lists or stock indexes. For example, the entire S&amp;P500 could be analyzed removing the <code>sample_n()</code> following the call to <code><a href="../reference/tq_stock_list.html">tq_index("SP500")</a></code>.</p>
 </div>
 </div>
@@ -475,20 +474,20 @@
 ## BAD APPLE download failed after two attempts. Error message:
 ## HTTP error 400.
 ##  Removing BAD APPLE.</code></pre>
-<pre><code>## # A tibble: 5,514 x 8
+<pre><code>## # A tibble: 5,064 x 8
 ##    symbol date        open  high   low close    volume adjusted
 ##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1 AAPL   2009-01-02  12.3  13.0  12.2  13.0 186503800     11.3
-##  2 AAPL   2009-01-05  13.3  13.7  13.2  13.5 295402100     11.8
-##  3 AAPL   2009-01-06  13.7  13.9  13.2  13.3 322327600     11.6
-##  4 AAPL   2009-01-07  13.1  13.2  12.9  13.0 188262200     11.3
-##  5 AAPL   2009-01-08  12.9  13.3  12.9  13.2 168375200     11.5
-##  6 AAPL   2009-01-09  13.3  13.3  12.9  12.9 136711400     11.3
-##  7 AAPL   2009-01-12  12.9  13.0  12.5  12.7 154429100     11.0
-##  8 AAPL   2009-01-13  12.6  12.8  12.3  12.5 199599400     10.9
-##  9 AAPL   2009-01-14  12.3  12.5  12.1  12.2 255416000     10.6
-## 10 AAPL   2009-01-15  11.5  12.0  11.4  11.9 457908500     10.4
-## # … with 5,504 more rows</code></pre>
+##  1 AAPL   2010-01-04  30.5  30.6  30.3  30.6 123432400     26.6
+##  2 AAPL   2010-01-05  30.7  30.8  30.5  30.6 150476200     26.6
+##  3 AAPL   2010-01-06  30.6  30.7  30.1  30.1 138040000     26.2
+##  4 AAPL   2010-01-07  30.2  30.3  29.9  30.1 119282800     26.2
+##  5 AAPL   2010-01-08  30.0  30.3  29.9  30.3 111902700     26.3
+##  6 AAPL   2010-01-11  30.4  30.4  29.8  30.0 115557400     26.1
+##  7 AAPL   2010-01-12  29.9  30.0  29.5  29.7 148614900     25.8
+##  8 AAPL   2010-01-13  29.7  30.1  29.2  30.1 151473000     26.2
+##  9 AAPL   2010-01-14  30.0  30.1  29.9  29.9 108223500     26.0
+## 10 AAPL   2010-01-15  30.1  30.2  29.4  29.4 148516900     25.6
+## # … with 5,054 more rows</code></pre>
 <p>Now switching <code>complete_cases = FALSE</code> will retain any errors as <code>NA</code> values in a nested data frame. Notice that the error message and output change. The error message now states that the <code>NA</code> values exist in the output and the return is a “nested” data structure.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"BAD APPLE"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb41-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get =</span> <span class="st">"stock.prices"</span>, <span class="dt">complete_cases =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
@@ -499,8 +498,8 @@
 <pre><code>## # A tibble: 3 x 2
 ##   symbol    stock.prices        
 ##   &lt;chr&gt;     &lt;list&gt;              
-## 1 AAPL      &lt;tibble [2,757 × 7]&gt;
-## 2 GOOG      &lt;tibble [2,757 × 7]&gt;
+## 1 AAPL      &lt;tibble [2,532 × 7]&gt;
+## 2 GOOG      &lt;tibble [2,532 × 7]&gt;
 ## 3 BAD APPLE &lt;lgl [1]&gt;</code></pre>
 <p>In both cases, the prudent user will review the warnings to determine what happened and whether or not this is acceptable. In the <code>complete_cases = FALSE</code> example, if the user attempts to perform downstream computations at scale, the computations will likely fail grinding the analysis to a hault. But, the advantage is that the user will more easily be able to filter to the problem childs to determine what happened and decide whether this is acceptable or not.</p>
 </div>
