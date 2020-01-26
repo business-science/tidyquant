@@ -1,6 +1,6 @@
 ## tidyquant 0.5.10
 
-* `tq_get()` - Temporarily adjust tests for `tq_get(get = "dividends")` until API is stabilizes. Yahoo! Dividends intermitently returns errors.
+* `tq_get()` - Temporarily adjust tests for `tq_get(get = "dividends")` and `tq_get(get = "splits")` until API is stabilizes. Yahoo! Dividends and Splits intermitently returns errors.
 * Fix documentation warnings during package build checks. Documentation moved from `tq_stocklist` to `?tq_index`. 
 
 ## tidyquant 0.5.9
