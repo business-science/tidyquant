@@ -47,8 +47,9 @@
 #' tq_exchange("NYSE")
 #' }
 #'
-#' @name tq_stock_list
-NULL
+#' @rdname tq_stock_list
+#' @export
+
 
 # tq_index -----
 
