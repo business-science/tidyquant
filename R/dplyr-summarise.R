@@ -5,18 +5,19 @@
 #'
 #' `summarise_by_time()` and `summarize_by_time()` are synonyms.
 #'
-#' @section Useful functions:
+#' @section Useful summary functions:
 #'
-#' * Center: [mean()], [median()]
-#' * Spread: [sd()], [IQR()], [mad()]
-#' * Range: [min()], [max()], [quantile()]
-#' * Position: [first()], [last()], [nth()],
-#' * Count: [n()], [n_distinct()]
-#' * Logical: [any()], [all()]
+#' * Sum: [SUM()]
+#' * Center: [AVERAGE()], [MEDIAN()]
+#' * Spread: [STDEV()], [VAR()]
+#' * Range: [MIN()], [MAX()]
+#' * Count: [COUNT()], [COUNT_UNIQUE()]
+#' * Position: [FIRST()], [LAST()], [NTH()]
+#' * Correlation: [COR()], [COV()]
 #'
 #'
 #' @export
-#' @inheritParams dplyr::summarise
+#' @param .data A `tbl` object or `data.frame`
 #' @param .date_var A column of date or date-time (e.g. POSIXct) data class
 #' @param ... Name-value pairs of summary functions.
 #'   The name will be the name of the variable in the result.
@@ -26,7 +27,7 @@
 #'   * A vector of length 1, e.g. `min(x)`, `n()`, or `sum(is.na(y))`.
 #'   * A vector of length `n`, e.g. `quantile()`.
 #'   * A data frame, to add multiple columns from a single expression.
-#' @param time_unit A time unit to summarise by.
+#' @param .time_unit A time unit to summarise by.
 #'   Time units are collapsed using `lubridate::floor_date()` or `lubridate::ceiling_date()`.
 #'
 #'   The value can be:
@@ -68,20 +69,21 @@
 #' @examples
 #' # Libraries
 #' library(tidyquant)
-#' library(timetk)
+#' library(dplyr)
 #'
-#' fang_tbl <- data(FANG)
-#'
-#' # Get the first date in each period
-#' fang_tbl %>%
+#' # Get the First Value in each Month
+#' FANG %>%
 #'     group_by(symbol) %>%
-#'     summarise_by_time(date_var = date, time_unit = "month",
-#'         adjusted = first(adjusted)
+#'     summarise_by_time(
+#'         .date_var = date,
+#'         .time_unit = "month",
+#'         adjusted = FIRST(adjusted)
 #'     )
 #'
 #'
 #' @export
-summarise_by_time <- function(.data, date_var, ..., time_unit = "week") {
+summarise_by_time <- function(.data, .date_var, ..., .time_unit = "week",
+                              .type = c("floor", "ceiling", "round")) {
     UseMethod("summarise_by_time")
 }
 
@@ -90,7 +92,7 @@ summarise_by_time <- function(.data, date_var, ..., time_unit = "week") {
 summarize_by_time <- summarise_by_time
 
 #' @export
-summarise_by_time.default <- function(.data, .date_var, ..., time_unit = "week",
+summarise_by_time.default <- function(.data, .date_var, ..., .time_unit = "week",
                                       .type = c("floor", "ceiling", "round")) {
 
     stop("Object is not of class `data.frame`.", call. = FALSE)
@@ -98,14 +100,14 @@ summarise_by_time.default <- function(.data, .date_var, ..., time_unit = "week",
 }
 
 #' @export
-summarise_by_time.data.frame <- function(.data, .date_var, ..., time_unit = "week",
+summarise_by_time.data.frame <- function(.data, .date_var, ..., .time_unit = "week",
                                          .type = c("floor", "ceiling", "round")) {
 
     data_groups_expr   <- rlang::syms(dplyr::group_vars(.data))
-    date_var_expr      <- rlang::enquo(date_var)
+    date_var_expr      <- rlang::enquo(.date_var)
 
     # Choose lubridate function
-    fun_type <- .type[[1]]
+    fun_type <- tolower(.type[[1]])
     if (fun_type == "floor") {
         .f <- lubridate::floor_date
     } else if (fun_type == "ceiling") {
@@ -116,7 +118,7 @@ summarise_by_time.data.frame <- function(.data, .date_var, ..., time_unit = "wee
 
     # Timb-based summarization logic
     ret_tbl <- .data %>%
-        dplyr::mutate(!! date_var_expr := .f(!! date_var_expr, unit = time_unit)) %>%
+        dplyr::mutate(!! date_var_expr := .f(!! date_var_expr, unit = .time_unit)) %>%
         dplyr::group_by_at(.vars = dplyr::vars(!!! data_groups_expr, !! date_var_expr)) %>%
         dplyr::arrange(!! date_var_expr, .by_group = TRUE) %>%
         dplyr::summarize(...)

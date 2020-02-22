@@ -5,13 +5,26 @@
 \alias{summarize_by_time}
 \title{Summarise each group by time}
 \usage{
-summarise_by_time(.data, date_var, ..., time_unit = "week")
+summarise_by_time(
+  .data,
+  .date_var,
+  ...,
+  .time_unit = "week",
+  .type = c("floor", "ceiling", "round")
+)
 
-summarize_by_time(.data, date_var, ..., time_unit = "week")
+summarize_by_time(
+  .data,
+  .date_var,
+  ...,
+  .time_unit = "week",
+  .type = c("floor", "ceiling", "round")
+)
 }
 \arguments{
-\item{.data}{A tbl. All main verbs are S3 generics and provide methods
-for \code{\link[dplyr:tbl_df]{tbl_df()}}, \code{\link[dtplyr:tbl_dt]{dtplyr::tbl_dt()}} and \code{\link[dbplyr:tbl_dbi]{dbplyr::tbl_dbi()}}.}
+\item{.data}{A \code{tbl} object or \code{data.frame}}
+
+\item{.date_var}{A column of date or date-time (e.g. POSIXct) data class}
 
 \item{...}{Name-value pairs of summary functions.
 The name will be the name of the variable in the result.
@@ -23,7 +36,7 @@ The value can be:
 \item A data frame, to add multiple columns from a single expression.
 }}
 
-\item{time_unit}{A time unit to summarise by.
+\item{.time_unit}{A time unit to summarise by.
 Time units are collapsed using \code{lubridate::floor_date()} or \code{lubridate::ceiling_date()}.
 
 The value can be:
@@ -42,8 +55,6 @@ The value can be:
 }
 
 Arbitrary unique English abbreviations as in the \code{lubridate::period()} constructor are allowed.}
-
-\item{.date_var}{A column of date or date-time (e.g. POSIXct) data class}
 
 \item{.type}{One of "floor", "ceiling", or "round. Defaults to "floor". See \code{lubridate::round_date}.}
 }
@@ -66,15 +77,16 @@ fundamentally creates a new data frame.
 
 \code{summarise_by_time()} and \code{summarize_by_time()} are synonyms.
 }
-\section{Useful functions}{
+\section{Useful summary functions}{
 
 \itemize{
-\item Center: \code{\link[=mean]{mean()}}, \code{\link[=median]{median()}}
-\item Spread: \code{\link[=sd]{sd()}}, \code{\link[=IQR]{IQR()}}, \code{\link[=mad]{mad()}}
-\item Range: \code{\link[=min]{min()}}, \code{\link[=max]{max()}}, \code{\link[=quantile]{quantile()}}
-\item Position: \code{\link[=first]{first()}}, \code{\link[=last]{last()}}, \code{\link[=nth]{nth()}},
-\item Count: \code{\link[=n]{n()}}, \code{\link[=n_distinct]{n_distinct()}}
-\item Logical: \code{\link[=any]{any()}}, \code{\link[=all]{all()}}
+\item Sum: \code{\link[=SUM]{SUM()}}
+\item Center: \code{\link[=AVERAGE]{AVERAGE()}}, \code{\link[=MEDIAN]{MEDIAN()}}
+\item Spread: \code{\link[=STDEV]{STDEV()}}, \code{\link[=VAR]{VAR()}}
+\item Range: \code{\link[=MIN]{MIN()}}, \code{\link[=MAX]{MAX()}}
+\item Count: \code{\link[=COUNT]{COUNT()}}, \code{\link[=COUNT_UNIQUE]{COUNT_UNIQUE()}}
+\item Position: \code{\link[=FIRST]{FIRST()}}, \code{\link[=LAST]{LAST()}}, \code{\link[=NTH]{NTH()}}
+\item Correlation: \code{\link[=COR]{COR()}}, \code{\link[=COV]{COV()}}
 }
 }
 
@@ -88,15 +100,15 @@ individual methods for extra arguments and differences in behaviour.
 \examples{
 # Libraries
 library(tidyquant)
-library(timetk)
+library(dplyr)
 
-fang_tbl <- data(FANG)
-
-# Get the first date in each period
-fang_tbl \%>\%
+# Get the First Value in each Month
+FANG \%>\%
     group_by(symbol) \%>\%
-    summarise_by_time(date_var = date, time_unit = "month",
-        adjusted = first(adjusted)
+    summarise_by_time(
+        .date_var = date,
+        .time_unit = "month",
+        adjusted = FIRST(adjusted)
     )
 
 

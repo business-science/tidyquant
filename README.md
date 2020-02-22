@@ -92,8 +92,7 @@ easy too\!
   - Portfolio 1: 50% FB, 25% AMZN, 25% NFLX, 0% GOOG
   - Portfolio 2: 0% FB, 50% AMZN, 25% NFLX, 25% GOOG
   - Portfolio 3: 25% FB, 0% AMZN, 50% NFLX, 25% GOOG
-  - Portfolio 4: 25% FB, 25% AMZN, 0% NFLX, 50%
-GOOG
+  - Portfolio 4: 25% FB, 25% AMZN, 0% NFLX, 50% GOOG
 
 <img src="man/figures/sample_img_3_portfolio_returns.png" width="100%" />
 
