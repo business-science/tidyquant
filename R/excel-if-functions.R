@@ -48,11 +48,52 @@
 #'
 #'
 #' @examples
-#' # Libraries
-#' library(tidyquant)
 #' library(tidyverse)
+#' library(tidyquant)
+#' library(stringr)
+#' library(lubridate)
 #'
-#' # TODO
+#' # --- Basic Usage ---
+#' SUM_IFS(x = 1:10, x > 5)
+#'
+#' COUNT_IFS(x = letters, str_detect(x, "a|b|c"))
+#'
+#' SUM_IFS(-10:10, x >8 | x < -5)
+#'
+#' # --- Usage with tidyverse ---
+#'
+#' # Using multiple cases IFS cases to count the frequency of days with
+#' # high trade volume in a given year
+#' FANG %>%
+#'     group_by(symbol) %>%
+#'     summarise(
+#'         high_volume_in_2015 = COUNT_IFS(volume,
+#'                                         year(date) == 2015,
+#'                                         volume > quantile(volume, 0.75))
+#'     )
+#'
+#' # Count negative returns by month
+#' FANG %>%
+#'     mutate(symbol = as_factor(symbol)) %>%
+#'     group_by(symbol) %>%
+#'
+#'     # Collapse from daily to FIRST value by month
+#'     summarise_by_time(
+#'         .date_var  = date,
+#'         .time_unit = "month",
+#'         adjusted   = FIRST(adjusted)
+#'     ) %>%
+#'
+#'     # Calculate monthly returns
+#'     group_by(symbol) %>%
+#'     mutate(
+#'         returns = PCT_CHANGE(adjusted, fill_na = 0)
+#'     ) %>%
+#'
+#'     # Find returns less than zero and count the frequency
+#'     summarise(
+#'         negative_monthly_returns = COUNT_IFS(returns, returns < 0)
+#'     )
 #'
 #' @name excel_if_functions
 

@@ -1,11 +1,12 @@
 #' Excel Statistical Functions
 #'
 #' @description
-#' Common statistical functions familiar to users of Excel.
+#' 30+ common statistical functions familiar to users of Excel (e.g. [SUM()], [AVERAGE()]).
 #'
 #' These functions are designed to help users coming from an __Excel background__.
 #' Most functions replicate the behavior of Excel:
 #' - Names in most cases match Excel function names
+#' - Functionality replicates Excel
 #' - By default, missing values are ignored (same as in Excel)
 #'
 #' @section Useful functions:
@@ -36,13 +37,45 @@
 #' - __Summary functions__ return a single value
 #' - __Mutation functions__ return a mutated version of the vector
 #'
+#' @details
+#' __Summary Functions__
+#' - All functions remove missing values (`NA`). This is the same behavior as in Excel and most commonly what is desired.
 #'
 #' @examples
 #' # Libraries
 #' library(tidyquant)
 #' library(tidyverse)
+#' library(forcats)
 #'
-#' # TODO
+#' # --- Basic Usage ----
+#'
+#' SUM(1:10)
+#'
+#' CUMULATIVE_SUM(1:10)
+#'
+#' PCT_CHANGE(c(21, 24, 22, 25), fill_na = 0)
+#'
+#' # --- Usage with tidyverse ---
+#'
+#' # Go from daily to monthly periodicity,
+#' # then calculate returns and growth of $1 USD
+#' FANG %>%
+#'     mutate(symbol = as_factor(symbol)) %>%
+#'     group_by(symbol) %>%
+#'
+#'     # Collapse from daily to FIRST value by month
+#'     summarise_by_time(
+#'         .date_var  = date,
+#'         .time_unit = "month",
+#'         adjusted   = FIRST(adjusted)
+#'     ) %>%
+#'
+#'     # Calculate monthly returns and cumulative growth of $1 USD
+#'     group_by(symbol) %>%
+#'     mutate(
+#'         returns = PCT_CHANGE(adjusted, fill_na = 0),
+#'         growth  = CUMULATIVE_SUM(returns) + 1
+#'     )
 #'
 #' @name excel_stat_functions
 

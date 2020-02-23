@@ -102,14 +102,31 @@ individual methods for extra arguments and differences in behaviour.
 library(tidyquant)
 library(dplyr)
 
-# Get the First Value in each Month
+# First adjusted price in each month
 FANG \%>\%
     group_by(symbol) \%>\%
     summarise_by_time(
-        .date_var = date,
+        .date_var  = date,
         .time_unit = "month",
-        adjusted = FIRST(adjusted)
+        adjusted   = FIRST(adjusted)
     )
+
+# Last adjused price in each month (day is last day of month with ceiling option)
+FANG \%>\%
+    group_by(symbol) \%>\%
+    summarise_by_time(
+        .date_var  = date,
+        .time_unit = "month",
+        adjusted   = LAST(adjusted),
+        .type      = "ceiling")
+
+# Total Volume each year (.time_unit is set to "year" now)
+FANG \%>\%
+    group_by(symbol) \%>\%
+    summarise_by_time(
+        .date_var  = date,
+        .time_unit = "year",
+        adjusted   = SUM(volume))
 
 
 }

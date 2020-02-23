@@ -46,6 +46,7 @@ Imports:
     cli
 Suggests:
     tidyverse,
+    forcats, 
     alphavantager,
     broom,
     knitr,
