@@ -1,3 +1,28 @@
+## tidyquant 0.6.0.9000
+
+* __Tidyverse Functionality__
+    - `summarise_by_time()` - This is a new time-based variant of `summarise()` that allows collapsing the time-series by "day", "week", "month", "quarter", "year", and more. 
+
+* __Excel Functions__ 
+    
+    * __Why Excel functions?__ Designed to help users coming from an __Excel Background__ more easily transition to the `tidyverse` and _"tidy- finance / business analysis"_ in R.
+    
+    * __Reference Functions__ 
+        - __`VLOOKUP()`__ - Performs the classic __Excel VLOOKUP.__ Excel user's: rejoice. 
+    
+    * __Summarising "IFS" Functions__
+        - NEW filtering versions of their summarization counterparts. Simply add "cases" that filter if a condition is true. 
+        - __Summarising "IFS" Functions__ - `SUM_IFS()`, `COUNT_IFS()`, `AVERAGE_IFS()` 
+        - __Create your own "IFS" functions__ - Have and idea for a new "IFS" function that hasn't been made yet? Use `CREATE_IFS()` to make your own by supplying a summarization function.
+    
+    * __Statistical and Financial Math Functions__ 
+        - ___30+ new statistical and financial math functions.___ Names are similar to Excel function names. By default, missing values are ignored (same as in Excel).
+        - __Summarizations Functions__ - `SUM()`, `AVERAGE()`, `COUNT()`, and friends.
+        - __Transformation Functions__ - `CHANGE()`, `PCT_CHANGE()`, `LAG()`, `CUMULATIVE_SUM()`, and friends.
+        - __Financial Math Functions__ - `NPV()`, `IRR()`, `FV()`, `PV()`, `PMT()`, `RATE()`
+  
+
+
 ## tidyquant 0.5.10
 
 * `tq_get()` - Temporarily adjust tests for `tq_get(get = "dividends")` and `tq_get(get = "splits")` until API is stabilizes. Yahoo! Dividends and Splits intermitently returns errors.
