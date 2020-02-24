@@ -36,6 +36,7 @@
 #' @return
 #' - __Summary functions__ return a single value
 #' - __Mutation functions__ return a mutated version of the vector
+#' - __Logical evaluations functions__ returns a boolean version of the vector
 #'
 #' @details
 #' __Summary Functions__
@@ -159,7 +160,6 @@ COV <- function(x, y) {
     validate_numericish(y, "COV")
     stats::cov(x, y, use = "pairwise.complete.obs", method = "pearson")
 }
-
 
 #' @rdname excel_stat_functions
 #' @export
@@ -299,6 +299,8 @@ CUMULATIVE_MEDIAN <- function(x) {
     validate_numericish(x, "CUMULATIVE_MEDIAN")
     purrr::accumulate(x, .f = stats::median, na.rm = TRUE)
 }
+
+
 
 
 # # ROWWISE FUNCTIONS ----

@@ -1,4 +1,4 @@
-#' Excel "If" Functions
+#' Excel Summarising "If" Functions
 #'
 #' @description
 #' __"IFS" functions__ are filtering versions of their summarization counterparts.
@@ -14,14 +14,16 @@
 #'
 #' @section Useful functions:
 #'
+#'
+#'
 #' __Summary Functions__ - Return a single value from a vector
 #' * Sum: [SUM_IFS()]
 #' * Center: [AVERAGE_IFS()], [MEDIAN_IFS()]
 #' * Count: [COUNT_IFS()], [COUNT_UNIQUE()]
 #' * Range: [MIN_IFS()], [MAX_IFS()]
 #'
-#' __Create your own "_IF" function__
-#' This is a function factory that generates "_IFS"
+#' __Create your own summary "_IF" function__
+#' This is a function factory that generates summary "_IFS" functions.
 #'
 #' @param x A vector. Most functions are designed for numeric data.
 #' Some functions like [COUNT_IFS()] handle multiple data types.
@@ -43,7 +45,7 @@
 #' Compound single cases with `|` ("OR") bars can be created to accomplish an "OR".
 #' Simply use a statement like `x > 10 | x < -10` to perform an "OR" if-statement.
 #'
-#' __Creating New "IFS" Functions:__
+#' __Creating New "Summarizing IFS" Functions:__
 #' Users can create new "IFS" functions using the [CREATE_IFS()] function factory.
 #'
 #'
@@ -54,11 +56,12 @@
 #' library(lubridate)
 #'
 #' # --- Basic Usage ---
+#'
 #' SUM_IFS(x = 1:10, x > 5)
 #'
 #' COUNT_IFS(x = letters, str_detect(x, "a|b|c"))
 #'
-#' SUM_IFS(-10:10, x >8 | x < -5)
+#' SUM_IFS(-10:10, x > 8 | x < -5)
 #'
 #' # --- Usage with tidyverse ---
 #'
@@ -97,7 +100,28 @@
 #'
 #' @name excel_if_functions
 
-# PRIMARY IFS ----
+# MUTATING IFS ----
+#
+# #' @rdname excel_if_functions
+# #' @export
+# IF <- function(logical_test, value_if_true, value_if_false) {
+#     ifelse(logical_test, value_if_true, value_if_false)
+# }
+#
+# #' @rdname excel_if_functions
+# #' @export
+# IFS <- function(..., .not_meets_criteria = FALSE) {
+#     ifelse(logical_test, value_if_true, value_if_false)
+# }
+# IF <- function(x, ...) {
+#     meets_criteria <- eval_cases(x, ...)
+#     meets_criteria[is.na(meets_criteria)] <- FALSE
+#     meets_criteria
+# }
+#
+# IF <- IFS
+
+# SUMMARIZATION IFS ----
 
 #' @rdname excel_if_functions
 #' @export

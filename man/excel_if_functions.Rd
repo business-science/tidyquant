@@ -9,7 +9,7 @@
 \alias{MIN_IFS}
 \alias{MAX_IFS}
 \alias{CREATE_IFS}
-\title{Excel "If" Functions}
+\title{Excel Summarising "If" Functions}
 \usage{
 SUM_IFS(x, ...)
 
@@ -65,7 +65,7 @@ Multiple cases are evaluated as "AND" filtering operations.
 Compound single cases with \code{|} ("OR") bars can be created to accomplish an "OR".
 Simply use a statement like \code{x > 10 | x < -10} to perform an "OR" if-statement.
 
-\strong{Creating New "IFS" Functions:}
+\strong{Creating New "Summarizing IFS" Functions:}
 Users can create new "IFS" functions using the \code{\link[=CREATE_IFS]{CREATE_IFS()}} function factory.
 }
 \section{Useful functions}{
@@ -79,8 +79,8 @@ Users can create new "IFS" functions using the \code{\link[=CREATE_IFS]{CREATE_I
 \item Range: \code{\link[=MIN_IFS]{MIN_IFS()}}, \code{\link[=MAX_IFS]{MAX_IFS()}}
 }
 
-_\emph{Create your own "\emph{IF" function}}
-This is a function factory that generates "_IFS"
+_\emph{Create your own summary "\emph{IF" function}}
+This is a function factory that generates summary "_IFS" functions.
 }
 
 \examples{
@@ -90,11 +90,12 @@ library(stringr)
 library(lubridate)
 
 # --- Basic Usage ---
+
 SUM_IFS(x = 1:10, x > 5)
 
 COUNT_IFS(x = letters, str_detect(x, "a|b|c"))
 
-SUM_IFS(-10:10, x >8 | x < -5)
+SUM_IFS(-10:10, x > 8 | x < -5)
 
 # --- Usage with tidyverse ---
 

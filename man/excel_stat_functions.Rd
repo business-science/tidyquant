@@ -105,6 +105,7 @@ Some functions like \code{\link[=COUNT]{COUNT()}} handle multiple data types.}
 \itemize{
 \item \strong{Summary functions} return a single value
 \item \strong{Mutation functions} return a mutated version of the vector
+\item \strong{Logical evaluations functions} returns a boolean version of the vector
 }
 }
 \description{

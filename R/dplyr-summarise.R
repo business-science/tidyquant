@@ -133,7 +133,7 @@ summarise_by_time.data.frame <- function(.data, .date_var, ..., .time_unit = "we
         .f <- lubridate::round_date
     }
 
-    # Timb-based summarization logic
+    # Time-based summarization logic
     ret_tbl <- .data %>%
         dplyr::mutate(!! date_var_expr := .f(!! date_var_expr, unit = .time_unit)) %>%
         dplyr::group_by_at(.vars = dplyr::vars(!!! data_groups_expr, !! date_var_expr)) %>%
