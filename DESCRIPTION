@@ -1,14 +1,14 @@
 Package: tidyquant
 Type: Package
 Title: Tidy Quantitative Financial Analysis
-Version: 0.6.0.9000
-Date: 2020-01-25
+Version: 1.0.0.9000
+Date: 2020-02-28
 Authors@R: c(
     person("Matt", "Dancho", email = "mdancho@business-science.io", role = c("aut", "cre")),
     person("Davis", "Vaughan", email = "dvaughan@business-science.io", role = c("aut"))
   )
 Maintainer: Matt Dancho <mdancho@business-science.io>
-Description: Bringing financial analysis to the 'tidyverse'. The 'tidyquant' 
+Description: Bringing business and financial analysis to the 'tidyverse'. The 'tidyquant' 
     package provides a convenient wrapper to various 'xts', 'zoo', 'quantmod', 'TTR' 
     and 'PerformanceAnalytics' package 
     functions and returns the objects in the tidy 'tibble' format. The main 
@@ -37,10 +37,12 @@ Imports:
     tibble,
     tidyr (>= 1.0.0),
     timetk,
+    timeDate,
     TTR,
     xml2,
     xts,
     rlang,
+    tidyselect, 
     rstudioapi,
     crayon,
     cli

@@ -1,27 +1,36 @@
-## tidyquant 0.6.0.9000
+## tidyquant 1.0.0.9000
 
-* __Tidyverse Functionality__
-    - `summarise_by_time()` - This is a new time-based variant of `summarise()` that allows collapsing the time-series by "day", "week", "month", "quarter", "year", and more. 
+This is the _"R for Excel Users"_ release. My aim is to build functionality that helps users coming from an __Excel Background__ (background I came from). It's important to have these users feel at home. I have a full suite of functionality to accomplish your Excel-to-R transition. 
 
 * __Excel Functions__ 
     
     * __Why Excel functions?__ Designed to help users coming from an __Excel Background__ more easily transition to the `tidyverse` and _"tidy- finance / business analysis"_ in R.
+    * __Pivot Table__ 
+        - __`pivot_table()` - A tidyverse-style function to perform data summarizations just like the popular Excel Pivot Table.__ Enables stacking calculations using a tidy-esque syntax: `.rows = ~ YEAR(order_date)`. 
     
     * __Reference Functions__ 
         - __`VLOOKUP()`__ - Performs the classic __Excel VLOOKUP.__ Excel user's: rejoice. 
     
     * __Summarising "IFS" Functions__
-        - NEW filtering versions of their summarization counterparts. Simply add "cases" that filter if a condition is true. 
-        - __Summarising "IFS" Functions__ - `SUM_IFS()`, `COUNT_IFS()`, `AVERAGE_IFS()` 
+        - __Summarising "IFS" Functions__ - Filtering versions of Excel summarization counterparts. Simply add "cases" that filter if a condition is true. `SUM_IFS()`, `COUNT_IFS()`, `AVERAGE_IFS()` 
         - __Create your own "IFS" functions__ - Have and idea for a new "IFS" function that hasn't been made yet? Use `CREATE_IFS()` to make your own by supplying a summarization function.
     
-    * __Statistical and Financial Math Functions__ 
-        - ___30+ new statistical and financial math functions.___ Names are similar to Excel function names. By default, missing values are ignored (same as in Excel).
+    * __Statistical, Date, and Financial Math Functions__ 
+        - ___100+ Excel-based statistical, date, and financial math functions.___ Names are similar to Excel function names. By default, missing values are ignored (same as in Excel).
         - __Summarizations Functions__ - `SUM()`, `AVERAGE()`, `COUNT()`, and friends.
         - __Transformation Functions__ - `CHANGE()`, `PCT_CHANGE()`, `LAG()`, `CUMULATIVE_SUM()`, and friends.
+        - __Date and Date Time Functions__ 
+            - Integrated date calculations with `lubridate()` (e.g. `AS_DATE()`, `YEAR()`)
+            - Holidays and business calendars with `timeDate` (e.g. `HOLIDAY_SEQUENCE()`, `HOLIDAY_LIST()`)
+            - Excel Date Math functions: `NET_WORKDAYS()`, `EOMONTH()`
         - __Financial Math Functions__ - `NPV()`, `IRR()`, `FV()`, `PV()`, `PMT()`, `RATE()`
   
+* __NEW Tidyverse Functionality__
+    - `summarise_by_time()` - This is a new time-based variant of `summarise()` that allows collapsing the time-series by "day", "week", "month", "quarter", "year", and more. 
+    - Note: I will evaluate the need for `summarise_at_by_time()`, `summarise_all_by_time()`, and `summarise_if_by_time()` after the release of `dplyr` v1.0.0.
 
+* __NEW API Integrations__
+    - __Tingo API__ - A popular Open-Source for stock prices, cryptocurrencies, and intraday feeds from the IEX (Investors Exchange). This can serve as an alternate source of data to Yahoo Finance. Integrated via the `riingo` package. 
 
 ## tidyquant 0.5.10
 

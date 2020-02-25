@@ -18,13 +18,13 @@
 #' * Range: [MIN()], [MAX()]
 #' * Count: [COUNT()], [COUNT_UNIQUE()]
 #' * Position: [FIRST()], [LAST()], [NTH()]
+#' * Change (Summary): [CHANGE_FIRSTLAST()], [PCT_CHANGE_FIRSTLAST()]
 #' * Correlation: [COR()], [COV()]
 #'
 #' __Mutation Functions__ - Transforms a vector
 #' * Transformation: [ABS()], [SQRT()], [LOG()], [EXP()]
 #' * Lags & Change (Offsetting Functions): [CHANGE()], [PCT_CHANGE()], [LAG()], [LEAD()]
 #' * Cumulative Totals: [CUMULATIVE_SUM()], [CUMULATIVE_PRODUCT()]
-#'
 #'
 #' @param x A vector. Most functions are designed for numeric data.
 #' Some functions like [COUNT()] handle multiple data types.
@@ -55,6 +55,8 @@
 #' CUMULATIVE_SUM(1:10)
 #'
 #' PCT_CHANGE(c(21, 24, 22, 25), fill_na = 0)
+#'
+#' PCT_CHANGE_FIRSTLAST(c(21, 24, 22, 25))
 #'
 #' # --- Usage with tidyverse ---
 #'
@@ -177,6 +179,18 @@ LAST <- function(x) {
 #' @export
 NTH <- function(x, n = 1) {
     dplyr::nth(x, n)
+}
+
+#' @rdname excel_stat_functions
+#' @export
+CHANGE_FIRSTLAST <- function(x) {
+    LAST(x) - FIRST(x)
+}
+
+#' @rdname excel_stat_functions
+#' @export
+PCT_CHANGE_FIRSTLAST <- function(x) {
+    (LAST(x) - FIRST(x)) / FIRST(x)
 }
 
 # MUTATION FUNCTIONS ----

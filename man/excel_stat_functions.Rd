@@ -16,6 +16,8 @@
 \alias{FIRST}
 \alias{LAST}
 \alias{NTH}
+\alias{CHANGE_FIRSTLAST}
+\alias{PCT_CHANGE_FIRSTLAST}
 \alias{ABS}
 \alias{SQRT}
 \alias{LOG}
@@ -60,6 +62,10 @@ FIRST(x)
 LAST(x)
 
 NTH(x, n = 1)
+
+CHANGE_FIRSTLAST(x)
+
+PCT_CHANGE_FIRSTLAST(x)
 
 ABS(x)
 
@@ -136,6 +142,7 @@ Most functions replicate the behavior of Excel:
 \item Range: \code{\link[=MIN]{MIN()}}, \code{\link[=MAX]{MAX()}}
 \item Count: \code{\link[=COUNT]{COUNT()}}, \code{\link[=COUNT_UNIQUE]{COUNT_UNIQUE()}}
 \item Position: \code{\link[=FIRST]{FIRST()}}, \code{\link[=LAST]{LAST()}}, \code{\link[=NTH]{NTH()}}
+\item Change (Summary): \code{\link[=CHANGE_FIRSTLAST]{CHANGE_FIRSTLAST()}}, \code{\link[=PCT_CHANGE_FIRSTLAST]{PCT_CHANGE_FIRSTLAST()}}
 \item Correlation: \code{\link[=COR]{COR()}}, \code{\link[=COV]{COV()}}
 }
 
@@ -160,6 +167,8 @@ SUM(1:10)
 CUMULATIVE_SUM(1:10)
 
 PCT_CHANGE(c(21, 24, 22, 25), fill_na = 0)
+
+PCT_CHANGE_FIRSTLAST(c(21, 24, 22, 25))
 
 # --- Usage with tidyverse ---
 

@@ -14,8 +14,6 @@
 #'
 #' @section Useful functions:
 #'
-#'
-#'
 #' __Summary Functions__ - Return a single value from a vector
 #' * Sum: [SUM_IFS()]
 #' * Center: [AVERAGE_IFS()], [MEDIAN_IFS()]
