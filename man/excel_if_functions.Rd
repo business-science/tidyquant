@@ -23,7 +23,7 @@ MIN_IFS(x, ...)
 
 MAX_IFS(x, ...)
 
-CREATE_IFS(.f, ..., .NAME = "_IFS", .validate_numericish = FALSE)
+CREATE_IFS(.f, ...)
 }
 \arguments{
 \item{x}{A vector. Most functions are designed for numeric data.
@@ -31,12 +31,8 @@ Some functions like \code{\link[=COUNT_IFS]{COUNT_IFS()}} handle multiple data t
 
 \item{...}{Add cases to evaluate. See Details.}
 
-\item{.f}{A function to convert to an "IFS" function}
-
-\item{.NAME}{The name for the new "IFS" function you create}
-
-\item{.validate_numericish}{Validate whether the input, \code{x}, should be numeric or logical.
-Some summary functions like \code{\link[=COUNT_IFS]{COUNT_IFS()}} can more than just numeric and logical data types.}
+\item{.f}{A function to convert to an "IFS" function.
+Use \code{...} in this case to provide parameters to the \code{.f} like \code{na.rm = TRUE}.}
 }
 \value{
 \itemize{
@@ -67,6 +63,8 @@ Simply use a statement like \code{x > 10 | x < -10} to perform an "OR" if-statem
 
 \strong{Creating New "Summarizing IFS" Functions:}
 Users can create new "IFS" functions using the \code{\link[=CREATE_IFS]{CREATE_IFS()}} function factory.
+The only requirement is that the output of your function (\code{.f}) must be a single
+value (scalar). See examples below.
 }
 \section{Useful functions}{
 
@@ -96,6 +94,10 @@ SUM_IFS(x = 1:10, x > 5)
 COUNT_IFS(x = letters, str_detect(x, "a|b|c"))
 
 SUM_IFS(-10:10, x > 8 | x < -5)
+
+# Create your own IFS function (Mind blowingly simple)!
+Q75_IFS <- CREATE_IFS(.f = quantile, probs = 0.75, na.rm = TRUE)
+Q75_IFS(1:10, x > 5)
 
 # --- Usage with tidyverse ---
 
