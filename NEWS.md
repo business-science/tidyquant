@@ -1,6 +1,8 @@
 ## tidyquant 1.0.0.9000
 
-This is the _"R for Excel Users"_ release. My aim is to build functionality that helps users coming from an __Excel Background__ (background I came from). It's important to have these users feel at home. I have a full suite of functionality to accomplish your Excel-to-R transition. 
+> This is the _"R for Excel Users"_ release. My aim is to build functionality that helps users coming from an __Excel Background__ (background I came from). It's important to have these users feel at home. I have a full suite of functionality to accomplish your Excel-to-R transition. 
+>
+>-Matt
 
 * __Excel Functions__ 
     
@@ -30,7 +32,10 @@ This is the _"R for Excel Users"_ release. My aim is to build functionality that
     - Note: I will evaluate the need for `summarise_at_by_time()`, `summarise_all_by_time()`, and `summarise_if_by_time()` after the release of `dplyr` v1.0.0.
 
 * __NEW API Integrations__
-    - __Tingo API__ - A popular Open-Source for stock prices, cryptocurrencies, and intraday feeds from the IEX (Investors Exchange). This can serve as an alternate source of data to Yahoo Finance. Integrated via the `riingo` package. 
+    - __Tingo API__ - A popular Open-Source for stock prices, cryptocurrencies, and intraday feeds from the IEX (Investors Exchange). This can serve as an alternate source of data to Yahoo Finance. Integrated via the `riingo` package.
+    
+* Bug Fixes
+    - `theme_tq()` - Fix issues with collisions with `margin()` in `dials` R package. 
 
 ## tidyquant 0.5.10
 
