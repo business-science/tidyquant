@@ -27,7 +27,7 @@
 #'   * A vector of length 1, e.g. `min(x)`, `n()`, or `sum(is.na(y))`.
 #'   * A vector of length `n`, e.g. `quantile()`.
 #'   * A data frame, to add multiple columns from a single expression.
-#' @param .time_unit A time unit to summarise by.
+#' @param .by A time unit to summarise by.
 #'   Time units are collapsed using `lubridate::floor_date()` or `lubridate::ceiling_date()`.
 #'
 #'   The value can be:
@@ -76,7 +76,7 @@
 #'     group_by(symbol) %>%
 #'     summarise_by_time(
 #'         .date_var  = date,
-#'         .time_unit = "month",
+#'         .by         = "month",
 #'         adjusted   = FIRST(adjusted)
 #'     )
 #'
@@ -85,21 +85,21 @@
 #'     group_by(symbol) %>%
 #'     summarise_by_time(
 #'         .date_var  = date,
-#'         .time_unit = "month",
+#'         .by        = "month",
 #'         adjusted   = LAST(adjusted),
 #'         .type      = "ceiling")
 #'
-#' # Total Volume each year (.time_unit is set to "year" now)
+#' # Total Volume each year (.by is set to "year" now)
 #' FANG %>%
 #'     group_by(symbol) %>%
 #'     summarise_by_time(
 #'         .date_var  = date,
-#'         .time_unit = "year",
+#'         .by        = "year",
 #'         adjusted   = SUM(volume))
 #'
 #'
 #' @export
-summarise_by_time <- function(.data, .date_var, ..., .time_unit = "week",
+summarise_by_time <- function(.data, .date_var, ..., .by = "week",
                               .type = c("floor", "ceiling", "round")) {
     UseMethod("summarise_by_time")
 }
@@ -109,7 +109,7 @@ summarise_by_time <- function(.data, .date_var, ..., .time_unit = "week",
 summarize_by_time <- summarise_by_time
 
 #' @export
-summarise_by_time.default <- function(.data, .date_var, ..., .time_unit = "week",
+summarise_by_time.default <- function(.data, .date_var, ..., .by = "week",
                                       .type = c("floor", "ceiling", "round")) {
 
     stop("Object is not of class `data.frame`.", call. = FALSE)
@@ -117,7 +117,7 @@ summarise_by_time.default <- function(.data, .date_var, ..., .time_unit = "week"
 }
 
 #' @export
-summarise_by_time.data.frame <- function(.data, .date_var, ..., .time_unit = "week",
+summarise_by_time.data.frame <- function(.data, .date_var, ..., .by = "week",
                                          .type = c("floor", "ceiling", "round")) {
 
     data_groups_expr   <- rlang::syms(dplyr::group_vars(.data))
@@ -135,7 +135,7 @@ summarise_by_time.data.frame <- function(.data, .date_var, ..., .time_unit = "we
 
     # Time-based summarization logic
     ret_tbl <- .data %>%
-        dplyr::mutate(!! date_var_expr := .f(!! date_var_expr, unit = .time_unit)) %>%
+        dplyr::mutate(!! date_var_expr := .f(!! date_var_expr, unit = .by)) %>%
         dplyr::group_by_at(.vars = dplyr::vars(!!! data_groups_expr, !! date_var_expr)) %>%
         dplyr::arrange(!! date_var_expr, .by_group = TRUE) %>%
         dplyr::summarize(...)

@@ -9,7 +9,7 @@ summarise_by_time(
   .data,
   .date_var,
   ...,
-  .time_unit = "week",
+  .by = "week",
   .type = c("floor", "ceiling", "round")
 )
 
@@ -17,7 +17,7 @@ summarize_by_time(
   .data,
   .date_var,
   ...,
-  .time_unit = "week",
+  .by = "week",
   .type = c("floor", "ceiling", "round")
 )
 }
@@ -36,7 +36,7 @@ The value can be:
 \item A data frame, to add multiple columns from a single expression.
 }}
 
-\item{.time_unit}{A time unit to summarise by.
+\item{.by}{A time unit to summarise by.
 Time units are collapsed using \code{lubridate::floor_date()} or \code{lubridate::ceiling_date()}.
 
 The value can be:
@@ -107,7 +107,7 @@ FANG \%>\%
     group_by(symbol) \%>\%
     summarise_by_time(
         .date_var  = date,
-        .time_unit = "month",
+        .by         = "month",
         adjusted   = FIRST(adjusted)
     )
 
@@ -116,16 +116,16 @@ FANG \%>\%
     group_by(symbol) \%>\%
     summarise_by_time(
         .date_var  = date,
-        .time_unit = "month",
+        .by        = "month",
         adjusted   = LAST(adjusted),
         .type      = "ceiling")
 
-# Total Volume each year (.time_unit is set to "year" now)
+# Total Volume each year (.by is set to "year" now)
 FANG \%>\%
     group_by(symbol) \%>\%
     summarise_by_time(
         .date_var  = date,
-        .time_unit = "year",
+        .by        = "year",
         adjusted   = SUM(volume))
 
 

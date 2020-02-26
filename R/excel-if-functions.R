@@ -81,7 +81,7 @@
 #'     # Collapse from daily to FIRST value by month
 #'     summarise_by_time(
 #'         .date_var  = date,
-#'         .time_unit = "month",
+#'         .by        = "month",
 #'         adjusted   = FIRST(adjusted)
 #'     ) %>%
 #'
@@ -173,11 +173,12 @@ MAX_IFS <- function(x, ...) {
 
 #' @rdname excel_if_functions
 #' @export
-CREATE_IFS <- function(x, .f, .NAME = "_IFS", .validate_numericish = FALSE) {
+CREATE_IFS <- function(.f, ..., .NAME = "_IFS", .validate_numericish = FALSE) {
+
     function(x, ...) {
         if (.validate_numericish) validate_numericish(x, .NAME)
         meets_criteria <- eval_cases(x, ...)
-        .f(x[meets_criteria])
+        .f(x[meets_criteria], ...)
     }
 }
 

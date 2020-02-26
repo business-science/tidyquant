@@ -23,7 +23,7 @@ MIN_IFS(x, ...)
 
 MAX_IFS(x, ...)
 
-CREATE_IFS(x, .f, .NAME = "_IFS", .validate_numericish = FALSE)
+CREATE_IFS(.f, ..., .NAME = "_IFS", .validate_numericish = FALSE)
 }
 \arguments{
 \item{x}{A vector. Most functions are designed for numeric data.
@@ -117,7 +117,7 @@ FANG \%>\%
     # Collapse from daily to FIRST value by month
     summarise_by_time(
         .date_var  = date,
-        .time_unit = "month",
+        .by        = "month",
         adjusted   = FIRST(adjusted)
     ) \%>\%
 
