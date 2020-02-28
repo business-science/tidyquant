@@ -116,12 +116,8 @@ pivot_table <- function(.data, .rows, .columns, .values,
 
 apply_collapsing_summarise <- function(data, parsed_text_tbl) {
 
-    # Extract functions for mutation
-    function_text <- parsed_text_tbl %>%
-        dplyr::filter(is_function) %>%
-        dplyr::pull(var_text) %>%
-        stringr::str_replace("~", "")
-
+    # Extract functions & convert to symbols
+    function_text  <- extract_function_text(parsed_text_tbl)
     function_exprs <- rlang::syms(function_text)
 
     # Apply collapsing summarizations programmatically
@@ -143,12 +139,8 @@ apply_collapsing_summarise <- function(data, parsed_text_tbl) {
 
 apply_collapsing_mutation <- function(data, parsed_text_tbl) {
 
-    # Extract functions for mutation
-    function_text <- parsed_text_tbl %>%
-        dplyr::filter(is_function) %>%
-        dplyr::pull(var_text) %>%
-        stringr::str_replace("~", "")
-
+    # Extract functions & convert to symbols
+    function_text  <- extract_function_text(parsed_text_tbl)
     function_exprs <- rlang::syms(function_text)
 
     # Apply collapsing mutations programmatically
@@ -243,4 +235,12 @@ parse_multi_input <- function(text) {
         dplyr::mutate(is_function = stringr::str_detect(var_text, pattern = "~"))
 
     return(ret)
+}
+
+
+extract_function_text <- function(data) {
+    data %>%
+        dplyr::filter(is_function) %>%
+        dplyr::pull(var_text) %>%
+        stringr::str_replace("~", "")
 }
