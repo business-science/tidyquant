@@ -42,24 +42,25 @@ library(dplyr)
 library(ggplot2)
 
 # coord_x_date
-AAPL <- tq_get("AAPL")
+AAPL <- tq_get("AAPL", from = "2013-01-01", to = "2016-12-31")
 AAPL \%>\%
     ggplot(aes(x = date, y = adjusted)) +
     geom_line() +                         # Plot stock price
     geom_ma(n = 50) +                     # Plot 50-day Moving Average
     geom_ma(n = 200, color = "red") +     # Plot 200-day Moving Average
-    coord_x_date(xlim = c(today() - weeks(12), today()),
-               ylim = c(100, 130))        # Zoom in
+    # Zoom in
+    coord_x_date(xlim = c("2016-01-01", "2016-12-31"),
+                 ylim = c(75, 125))
 
 
 # coord_x_datetime
 time_index <- seq(from = as.POSIXct("2012-05-15 07:00"),
-                  to = as.POSIXct("2012-05-17 18:00"),
-                  by = "hour")
+                  to   = as.POSIXct("2012-05-17 18:00"),
+                  by   = "hour")
 set.seed(1)
 value <- rnorm(n = length(time_index))
 hourly_data <- tibble(time.index = time_index,
-                      value = value)
+                      value      = value)
 hourly_data \%>\%
     ggplot(aes(x = time.index, y = value)) +
     geom_point() +

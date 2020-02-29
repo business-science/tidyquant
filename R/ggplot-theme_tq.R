@@ -13,7 +13,7 @@
 #' library(ggplot2)
 #'
 #' # Get stock prices
-#' AAPL <- tq_get("AAPL")
+#' AAPL <- tq_get("AAPL", from = "2013-01-01", to = "2016-12-31")
 #'
 #' # Plot using ggplot with theme_tq
 #' AAPL %>% ggplot(aes(x = date, y = close)) +
@@ -23,8 +23,8 @@
 #'                    wilder = TRUE,
 #'                    ratio = NULL,
 #'                    n = 50) +
-#'        coord_x_date(xlim = c(today() - years(1), today()),
-#'                     ylim = c(80, 130)) +
+#'        coord_x_date(xlim = c("2016-01-01", "2016-12-31"),
+#'                  ylim = c(75, 125)) +
 #'        labs(title = "Apple BBands",
 #'             x = "Date",
 #'             y = "Price") +

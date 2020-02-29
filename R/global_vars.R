@@ -132,5 +132,10 @@ globalVariables(c("A",
                   "is_function",
                   "key",
                   "var_text",
-                  "weekday"
+                  "weekday",
+                  "adjClose",
+                  "high",
+                  "low",
+                  "ticker",
+                  "volume"
                   ))

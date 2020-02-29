@@ -10,9 +10,13 @@ navbar:
       href: index.html
     - text: "Function Reference"
       href: reference/index.html
-    - text: "Vignettes"
+    - text: "Tutorials"
       href: articles/index.html
       menu:
+        - text: "NEW: Excel in R"
+          href: articles/TQ06-excel-in-r.html
+        - text: '---'
+        - text: 'Financial Workflow'
         - text: "Introduction to tidyquant"
           href: articles/TQ00-introduction-to-tidyquant.html
         - text: "Core functions"

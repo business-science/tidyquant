@@ -108,6 +108,7 @@
 #'
 #'
 #' ## Not run:
+#' \dontrun{
 #'
 #' # --- Quandl ---
 #'
@@ -151,6 +152,7 @@
 #'
 #'
 #' ## End(Not run)
+#' }
 
 
 
@@ -721,20 +723,20 @@ tq_get_util_7 <- function(x, get, tiingo_fun, complete_cases, map, ...) {
     # Make columns consistent with Yahoo Finance!
     if (get == "tiingo") {
       ret <- ret %>%
-        select(ticker, date, open, high, low, close, volume, adjClose, dplyr::everything()) %>%
-        rename(adjusted = adjClose,
+        dplyr::select(ticker, date, open, high, low, close, volume, adjClose, dplyr::everything()) %>%
+        dplyr::rename(adjusted = adjClose,
                symbol   = ticker)
     }
 
     if (get == "tiingoiex") {
       ret <- ret %>%
-        select(ticker, date, open, high, low, close, dplyr::everything()) %>%
-        rename(symbol = ticker)
+        dplyr::select(ticker, date, open, high, low, close, dplyr::everything()) %>%
+        dplyr::rename(symbol = ticker)
     }
 
     if (get == "tiingocrypto") {
       ret <- ret %>%
-        rename(symbol = ticker)
+        dplyr::rename(symbol = ticker)
     }
 
   }, error = function(e) {

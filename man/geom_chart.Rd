@@ -120,23 +120,23 @@ library(tidyquant)
 library(dplyr)
 library(ggplot2)
 
-AAPL <- tq_get("AAPL")
+AAPL <- tq_get("AAPL", from = "2013-01-01", to = "2016-12-31")
 
 # Bar Chart
 AAPL \%>\%
     ggplot(aes(x = date, y = close)) +
     geom_barchart(aes(open = open, high = high, low = low, close = close)) +
     geom_ma(color = "darkgreen") +
-    coord_x_date(xlim = c(today() - weeks(6), today()),
-                 ylim = c(100, 130))
+    coord_x_date(xlim = c("2016-01-01", "2016-12-31"),
+                 ylim = c(75, 125))
 
 # Candlestick Chart
 AAPL \%>\%
     ggplot(aes(x = date, y = close)) +
     geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
     geom_ma(color = "darkgreen") +
-    coord_x_date(xlim = c(today() - weeks(6), today()),
-                 ylim = c(100, 130))
+    coord_x_date(xlim = c("2016-01-01", "2016-12-31"),
+                 ylim = c(75, 125))
 }
 \seealso{
 See individual modeling functions for underlying parameters:

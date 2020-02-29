@@ -107,6 +107,7 @@ mult_stocks <- tq_get(c("FB", "AMZN"),
 
 
 ## Not run:
+\dontrun{
 
 # --- Quandl ---
 
@@ -142,10 +143,15 @@ tq_get(c("btcusd", "btceur"),
 
 av_api_key('<your_api_key>')
 
+# Daily Time Series
+tq_get("AAPL", get = "alphavantager", av_fun = "TIME_SERIES_DAILY_ADJUSTED")
 
+# Intraday 15 Min Interval
+tq_get("AAPL", get = "alphavantage", av_fun = "TIME_SERIES_INTRADAY", interval = "15min")
 
 
 ## End(Not run)
+}
 }
 \seealso{
 \itemize{

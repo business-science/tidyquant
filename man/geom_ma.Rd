@@ -139,7 +139,7 @@ library(tidyquant)
 library(dplyr)
 library(ggplot2)
 
-AAPL <- tq_get("AAPL")
+AAPL <- tq_get("AAPL", from = "2013-01-01", to = "2016-12-31")
 
 # SMA
 AAPL \%>\%
@@ -147,16 +147,16 @@ AAPL \%>\%
     geom_line() +                         # Plot stock price
     geom_ma(ma_fun = SMA, n = 50) +                 # Plot 50-day SMA
     geom_ma(ma_fun = SMA, n = 200, color = "red") + # Plot 200-day SMA
-    coord_x_date(xlim = c(today() - weeks(12), today()),
-               ylim = c(100, 130))                     # Zoom in
+    coord_x_date(xlim = c("2016-01-01", "2016-12-31"),
+                 ylim = c(75, 125))                     # Zoom in
 
 # EVWMA
 AAPL \%>\%
     ggplot(aes(x = date, y = adjusted)) +
     geom_line() +                                                   # Plot stock price
     geom_ma(aes(volume = volume), ma_fun = EVWMA, n = 50) +   # Plot 50-day EVWMA
-    coord_x_date(xlim = c(today() - weeks(12), today()),
-               ylim = c(100, 130))                                  # Zoom in
+    coord_x_date(xlim = c("2016-01-01", "2016-12-31"),
+                 ylim = c(75, 125))                                  # Zoom in
 }
 \seealso{
 See individual modeling functions for underlying parameters:

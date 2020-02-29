@@ -24,9 +24,17 @@ library(tidyquant)
 # devtools::load_all() # Travis CI fails on load_all()
 ```
 
-> Bringing financial analysis to the tidyverse
+> Bringing financial and business analysis to the tidyverse
 
-# Overview
+# Bringing Excel to R in tidyquant 1.0.0
+
+>Tidyquant 1.0.0 is the _"R for Excel Users"_ release. My aim is to build functionality that helps users coming from an __Excel Background__ (background I came from). It's important to have these users feel at home. I have a full suite of functionality to accomplish your Excel-to-R transition. 
+>
+>-Matt
+
+This document describes the __Financial Workflow for stock and portfolio analysis.__ I have a separate blog tutorial for Excel users that want to implement the [__Excel functions in R.__](https://www.business-science.io/finance/2020/02/26/r-for-excel-users.html)
+
+# Financial Workflow Overview
 
 `tidyquant` integrates the best resources for collecting and analyzing financial data, `xts` and `zoo`, `quantmod`, `TTR`, and `PerformanceAnalytics` with the tidy data infrastructure of the `tidyverse` allowing for seamless interaction between each. 
 
