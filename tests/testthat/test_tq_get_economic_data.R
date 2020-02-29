@@ -24,7 +24,7 @@ test_that("Test returns tibble with correct rows and columns.", {
     # Rows
     expect_equal(nrow(test1), 6)
     # Columns
-    expect_equal(ncol(test1), 2)
+    expect_equal(ncol(test1), 3)
 })
 
 test_that("Test prints warning message on invalid x input.", {

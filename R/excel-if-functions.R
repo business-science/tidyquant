@@ -101,7 +101,7 @@
 #'
 #' @name excel_if_functions
 
-# MUTATING IFS ----
+# MUTATING IFS  (NOT IMPLEMENTED) ----
 #
 # #' @rdname excel_if_functions
 # #' @export

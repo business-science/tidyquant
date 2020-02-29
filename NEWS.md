@@ -32,10 +32,20 @@
     - Note: I will evaluate the need for `summarise_at_by_time()`, `summarise_all_by_time()`, and `summarise_if_by_time()` after the release of `dplyr` v1.0.0.
 
 * __NEW API Integrations__
-    - __Tingo API__ - A popular Open-Source for stock prices, cryptocurrencies, and intraday feeds from the IEX (Investors Exchange). This can serve as an alternate source of data to Yahoo Finance. Integrated via the `riingo` package.
+    - __Tiingo API__ - A popular Open-Source for stock prices, cryptocurrencies, and intraday feeds from the IEX (Investors Exchange). This can serve as an alternate source of data to Yahoo Finance. Integrated via the `riingo` package.
     
 * Bug Fixes
-    - `theme_tq()` - Fix issues with collisions with `margin()` in `dials` R package. 
+    - `theme_tq()` - Fix issues with collisions with `dials::margin()` and `ggplot2::margin()`. Similar potential `ggplot2` collisions have been fixed.  
+    
+* __Deprecation & Breaking Changes__
+
+    * __Potential Breaking Change__ - Single values now return the symbol column (i.e. `tq_get("AAPL")` returns symbol = "AAPL" for the 1st column).
+    * __Deprecated Sources:__ The following sources have been deprecated due to lack of support from the API:
+        - Google Finance
+        - Morningstar Key Ratios & Financials (Fundamentals) Data
+        - Yahoo Dividends and Splits
+        - Oanda FX and Metal Prices
+    * __Depricated Compound Getters__ - Stacking multiple get options (`tq_get("AAPL", get = c("stock.prices", "stock.prices.japan"))`) is no longer available. __Solution:__ Split these up into two calls to `tq_get()`. 
 
 ## tidyquant 0.5.10
 

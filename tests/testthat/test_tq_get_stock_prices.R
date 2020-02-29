@@ -18,7 +18,7 @@ test_that("Test 1 returns tibble with correct rows and columns.", {
     # Rows
     expect_equal(nrow(test1), 103)
     # Columns
-    expect_equal(ncol(test1), 7)
+    expect_equal(ncol(test1), 8)
 })
 
 test_that("Test 2 returns tibble with correct rows and columns.", {
@@ -30,9 +30,6 @@ test_that("Test 2 returns tibble with correct rows and columns.", {
     expect_equal(ncol(test2), 8)
 })
 
-test_that("Google finance is now defunct.", {
-    expect_warning(tq_get("AAPL", get = "stock.prices.google"))
-})
 
 test_that("Test prints warning message on invalid x input.", {
     expect_warning(tq_get("XYZ", get = get))

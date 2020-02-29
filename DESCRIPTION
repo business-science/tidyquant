@@ -33,6 +33,7 @@ Imports:
     magrittr,
     purrr,
     Quandl,
+    riingo,
     stringr,
     tibble,
     tidyr (>= 1.0.0),

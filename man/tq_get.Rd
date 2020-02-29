@@ -3,14 +3,11 @@
 \name{tq_get}
 \alias{tq_get}
 \alias{tq_get_options}
-\alias{tq_get_stock_index_options}
 \title{Get quantitative data in \code{tibble} format}
 \usage{
 tq_get(x, get = "stock.prices", complete_cases = TRUE, ...)
 
 tq_get_options()
-
-tq_get_stock_index_options()
 }
 \arguments{
 \item{x}{A single character string, a character vector or tibble representing a single (or multiple)
@@ -22,29 +19,26 @@ for \code{x}. Options include:
 \item \code{"stock.prices"}: Get the open, high, low, close, volume and adjusted
 stock prices for a stock symbol from
 \href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for \code{quantmod::getSymbols()}.
-\item \code{"stock.prices.google"}: DISCONTINUED.
 \item \code{"stock.prices.japan"}: Get the open, high, low, close, volume and adjusted
 stock prices for a stock symbol from
 \href{http://finance.yahoo.co.jp/}{Yahoo Finance Japan}. Wrapper for \code{quantmod::getSymbols.yahooj()}.
-\item \code{"financials"}: DISCONTINUED.
-\item \code{"key.ratios"}: DISCONTINUED.
-\item \code{"key.stats"}: DISCONTINUED.
-\item \code{"dividends"}: Get the dividends for a stock symbol
-from \href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for \code{quantmod::getDividends()}.
-\item \code{"splits"}: Get the splits for a stock symbol
-from \href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for \code{quantmod::getSplits()}.
 \item \code{"economic.data"}: Get economic data from
 \href{https://fred.stlouisfed.org/}{FRED}. rapper for \code{quantmod::getSymbols.FRED()}.
-\item \code{"metal.prices"}: Get the metal prices from
-\href{https://www.oanda.com/}{Oanda}. Wrapper for \code{quantmod::getMetals()}.
-\item \code{"exchange.rates"}: Get exchange rates from
-Oanda. Wrapper for \code{quantmod::getFX()}.
 \item \code{"quandl"}: Get data sets from
 \href{https://www.quandl.com/}{Quandl}. Wrapper for \code{Quandl::Quandl()}.
 See also \code{\link[=quandl_api_key]{quandl_api_key()}}.
 \item \code{"quandl.datatable"}: Get data tables from
 \href{https://www.quandl.com/}{Quandl}. Wrapper for \code{Quandl::Quandl.datatable()}.
 See also \code{\link[=quandl_api_key]{quandl_api_key()}}.
+\item \code{"tiingo"}: Get data sets from
+\href{https://api.tiingo.com/}{Tiingo}. Wrapper for \code{riingo::riingo_prices()}.
+See also \code{\link[=tiingo_api_key]{tiingo_api_key()}}.
+\item \code{"tiingo.iex"}: Get data sets from
+\href{https://api.tiingo.com/}{Tiingo}. Wrapper for \code{riingo::riingo_iex_prices()}.
+See also \code{\link[=tiingo_api_key]{tiingo_api_key()}}.
+\item \code{"tiingo.crypto"}: Get data sets from
+\href{https://api.tiingo.com/}{Tiingo}. Wrapper for \code{riingo::riingo_crypto_prices()}.
+See also \code{\link[=tiingo_api_key]{tiingo_api_key()}}.
 \item \code{"alphavantager"}: Get data sets from
 \href{https://www.alphavantage.co/}{Alpha Vantage}. Wrapper for \code{alphavantager::av_get()}.
 See also \code{\link[=av_api_key]{av_api_key()}}.
@@ -64,14 +58,12 @@ message is generated for any rows removed.}
 function. Investigate underlying functions to see full list of arguments.
 Common optional parameters include:
 \itemize{
-\item \code{from}: Optional for various time series functions in quantmod / quandl packages.
+\item \code{from}: Standardized for time series functions in \code{quantmod}, \code{quandl}, \code{tiingo}, \code{alphavantager} packages.
 A character string representing a start date in
-YYYY-MM-DD format. No effect on
-\code{"key.ratios"}, or \code{"key.stats"}.
-\item \code{to}: Optional for various time series functions in quantmod / quandl packages.
+YYYY-MM-DD format.
+\item \code{to}: Standardized for time series functions in \code{quantmod}, \code{quandl}, \code{tiingo}, \code{alphavantager} packages.
 A character string representing a end date in
-YYYY-MM-DD format. No effect on
-\code{get = "key.ratios"} or \code{"key.stats"}.
+YYYY-MM-DD format.
 }}
 }
 \value{
@@ -99,7 +91,7 @@ next version. Please use \code{tq_index_options()} instead.
 \examples{
 # Load libraries
 library(tidyquant)
-library(dplyr)
+library(tidyverse)
 
 # Get the list of `get` options
 tq_get_options()
@@ -113,17 +105,55 @@ mult_stocks <- tq_get(c("FB", "AMZN"),
                       from = "2016-01-01",
                       to   = "2017-01-01")
 
-# Multiple gets
-mult_gets <- tq_get("AAPL",
-                    get = c("stock.prices", "dividends"),
-                    from = "2016-01-01",
-                    to   = "2017-01-01")
+
+## Not run:
+
+# --- Quandl ---
+
+quandl_api_key('<your_api_key>')
+
+# Energy data from EIA
+tq_get("EIA/PET_MTTIMUS1_M", get = "quandl", from = "2010-01-01")
+
+
+# --- Tiingo ---
+
+tiingo_api_key('<your_api_key>')
+
+# Tiingo Prices (Free alternative to Yahoo Finance!)
+tq_get(c("AAPL", "GOOG"), get = "tiingo", from = "2010-01-01")
+
+# Sub-daily prices from IEX ----
+tq_get(c("AAPL", "GOOG"),
+       get = "tiingo.iex",
+       from   = "2020-01-01",
+       to     = "2020-01-15",
+       resample_frequency = "5min")
+
+# Tiingo Bitcoin Prices ----
+tq_get(c("btcusd", "btceur"),
+       get    = "tiingo.crypto",
+       from   = "2020-01-01",
+       to     = "2020-01-15",
+       resample_frequency = "5min")
+
+
+# --- Alpha Vantage ---
+
+av_api_key('<your_api_key>')
+
+
+
+
+## End(Not run)
 }
 \seealso{
 \itemize{
 \item \code{\link[=tq_index]{tq_index()}} to get a ful list of stocks in an index.
 \item \code{\link[=tq_exchange]{tq_exchange()}} to get a ful list of stocks in an exchange.
 \item \code{\link[=quandl_api_key]{quandl_api_key()}} to set the api key for collecting data via the \code{"quandl"}
+get option.
+\item \code{\link[=tiingo_api_key]{tiingo_api_key()}} to set the api key for collecting data via the \code{"tiingo"}
 get option.
 \item \code{\link[=av_api_key]{av_api_key()}} to set the api key for collecting data via the \code{"alphavantage"}
 get option.

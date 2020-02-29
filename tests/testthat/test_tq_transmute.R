@@ -9,14 +9,13 @@ test1 <- AAPL %>%
     tq_transmute(select = close, mutate_fun = to.period, period = "months")
 
 # Test 1.2: Grouped_df test
-grouped_df <- tibble(symbol = c("FB", "AMZN")) %>%
-    dplyr::mutate(stock.prices = purrr::map(.x = symbol,
-                                            .f = ~ tq_get(.x,
-                                                          get  = "stock.prices",
-                                                          from = "2015-01-01",
-                                                          to   = "2016-01-01"))) %>%
-    tidyr::unnest(cols = stock.prices) %>%
-    dplyr::group_by(symbol)
+grouped_df <- grouped_df <- tibble(symbol = c("FB", "AMZN")) %>%
+    tq_get(
+        get  = "stock.prices",
+        from = "2015-01-01",
+        to   = "2016-01-01"
+    ) %>%
+    group_by(symbol)
 
 test1.2a  <- mutate(grouped_df, V1 = runSD(adjusted)) %>%
     select(-(open:adjusted))
@@ -34,8 +33,8 @@ test2b <- grouped_df %>%
 
 # Test 3: Test transmute hourly data / Test transmute timezone data
 time_index <- seq(from = as.POSIXct("2012-05-15 07:00"),
-                  to = as.POSIXct("2012-05-17 18:00"),
-                  by = "hour")
+                  to   = as.POSIXct("2012-05-17 18:00"),
+                  by   = "hour")
 set.seed(1)
 value <- rnorm(n = length(time_index))
 tz <- "Zulu"

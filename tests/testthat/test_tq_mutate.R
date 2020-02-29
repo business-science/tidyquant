@@ -1,5 +1,5 @@
 library(tidyquant)
-context("Testing tq_mutate")
+context("Testing tq_mutate()")
 
 #### Setup ----
 AAPL <- tq_get("AAPL", get = "stock.prices", from = "2010-01-01", to = "2015-01-01")
@@ -19,19 +19,19 @@ test1.1 <- AAPL %>%
     tq_mutate(high:close, BBands, n = 20) %>%
     tq_mutate(high:close, BBands, n = 50)
 
-test1.1_names <- c("date", "open", "high", "low", "close", "volume", "adjusted",
+test1.1_names <- c("symbol", "date", "open", "high", "low", "close", "volume", "adjusted",
                    "rollapply", "SMA", "rollapply..1", "SMA..1", "dn", "mavg",
                    "up", "pctB", "dn..1", "mavg..1", "up..1", "pctB..1")
 
 # Test 1.2: Grouped_df test
 grouped_df <- tibble(symbol = c("FB", "AMZN")) %>%
-    dplyr::mutate(stock.prices = purrr::map(.x = symbol,
-                                            .f = ~ tq_get(.x,
-                                                          get  = "stock.prices",
-                                                          from = "2015-01-01",
-                                                          to   = "2016-01-01"))) %>%
-    tidyr::unnest(cols = stock.prices) %>%
-    dplyr::group_by(symbol)
+    tq_get(
+        get  = "stock.prices",
+        from = "2015-01-01",
+        to   = "2016-01-01"
+    ) %>%
+    group_by(symbol)
+
 
 test1.2a  <- mutate(grouped_df, V1 = runSD(adjusted))
 
@@ -81,7 +81,7 @@ test_that("Test 1 returns tibble with correct rows and columns.", {
     # Rows
     expect_equal(nrow(test1), 1258)
     # Columns
-    expect_equal(ncol(test1), 14)
+    expect_equal(ncol(test1), 15)
 })
 
 test_that("Test 1.1 returns correct column names", {
@@ -99,7 +99,7 @@ test_that("Test 2 returns tibble with correct rows and columns.", {
     # Rows
     expect_equal(nrow(test2), 1258)
     # Columns
-    expect_equal(ncol(test2), 13)
+    expect_equal(ncol(test2), 14)
 })
 
 test_that("Test 3 returns tibble with correct rows and columns.", {
