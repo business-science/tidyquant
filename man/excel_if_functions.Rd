@@ -73,7 +73,7 @@ value (scalar). See examples below.
 \itemize{
 \item Sum: \code{\link[=SUM_IFS]{SUM_IFS()}}
 \item Center: \code{\link[=AVERAGE_IFS]{AVERAGE_IFS()}}, \code{\link[=MEDIAN_IFS]{MEDIAN_IFS()}}
-\item Count: \code{\link[=COUNT_IFS]{COUNT_IFS()}}, \code{\link[=COUNT_UNIQUE]{COUNT_UNIQUE()}}
+\item Count: \code{\link[=COUNT_IFS]{COUNT_IFS()}}
 \item Range: \code{\link[=MIN_IFS]{MIN_IFS()}}, \code{\link[=MAX_IFS]{MAX_IFS()}}
 }
 

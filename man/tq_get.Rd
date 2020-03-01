@@ -106,7 +106,6 @@ mult_stocks <- tq_get(c("FB", "AMZN"),
                       to   = "2017-01-01")
 
 
-## Not run:
 \dontrun{
 
 # --- Quandl ---
@@ -149,8 +148,6 @@ tq_get("AAPL", get = "alphavantager", av_fun = "TIME_SERIES_DAILY_ADJUSTED")
 # Intraday 15 Min Interval
 tq_get("AAPL", get = "alphavantage", av_fun = "TIME_SERIES_INTRADAY", interval = "15min")
 
-
-## End(Not run)
 }
 }
 \seealso{

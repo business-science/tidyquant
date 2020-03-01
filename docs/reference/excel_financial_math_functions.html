@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get all stocks in a stock index or stock exchange in <code>tibble</code> format — tq_index • tidyquant</title>
+<title>Excel Financial Math Functions — excel_financial_math_functions • tidyquant</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,15 @@
 
 
 
-<meta property="og:title" content="Get all stocks in a stock index or stock exchange in <code>tibble</code> format — tq_index" />
-<meta property="og:description" content="Get all stocks in a stock index or stock exchange in tibble format" />
+<meta property="og:title" content="Excel Financial Math Functions — excel_financial_math_functions" />
+<meta property="og:description" content="Excel financial math functions are designed to easily calculate Net Present Value (NPV()),
+Future Value of cashflow (FV()), Present Value of future cashflow (PV()), and more.
+These functions are designed to help users coming from an Excel background.
+Most functions replicate the behavior of Excel:
+Names are similar to Excel function names
+By default, missing values are ignored (same as in Excel)
+
+" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -147,75 +154,112 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get all stocks in a stock index or stock exchange in <code>tibble</code> format</h1>
-    <small class="dont-index">Source: <a href='https://github.com/business-science/tidyquant/blob/master/R/tq_stock_list.R'><code>R/tq_stock_list.R</code></a></small>
-    <div class="hidden name"><code>tq_index.Rd</code></div>
+    <h1>Excel Financial Math Functions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/business-science/tidyquant/blob/master/R/excel-financial-math-functions.R'><code>R/excel-financial-math-functions.R</code></a></small>
+    <div class="hidden name"><code>excel_financial_math_functions.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get all stocks in a stock index or stock exchange in <code>tibble</code> format</p>
+    <p><strong>Excel financial math functions</strong> are designed to easily calculate Net Present Value (<code>NPV()</code>),
+Future Value of cashflow (<code>FV()</code>), Present Value of future cashflow (<code>PV()</code>), and more.</p>
+<p>These functions are designed to help users coming from an <strong>Excel background</strong>.
+Most functions replicate the behavior of Excel:</p><ul>
+<li><p>Names are similar to Excel function names</p></li>
+<li><p>By default, missing values are ignored (same as in Excel)</p></li>
+</ul>
+
     </div>
 
-    <pre class="usage"><span class='fu'>tq_index</span>(<span class='no'>x</span>, <span class='kw'>use_fallback</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>NPV</span>(<span class='no'>cashflow</span>, <span class='no'>rate</span>, <span class='kw'>nper</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>tq_exchange</span>(<span class='no'>x</span>)
+<span class='fu'>IRR</span>(<span class='no'>cashflow</span>)
 
-<span class='fu'>tq_index_options</span>()
+<span class='fu'>FV</span>(<span class='no'>rate</span>, <span class='no'>nper</span>, <span class='kw'>pv</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>pmt</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fl'>0</span>)
 
-<span class='fu'>tq_exchange_options</span>()</pre>
+<span class='fu'>PV</span>(<span class='no'>rate</span>, <span class='no'>nper</span>, <span class='kw'>fv</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>pmt</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='fu'>PMT</span>(<span class='no'>rate</span>, <span class='no'>nper</span>, <span class='no'>pv</span>, <span class='kw'>fv</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='fu'>RATE</span>(<span class='no'>nper</span>, <span class='no'>pmt</span>, <span class='no'>pv</span>, <span class='kw'>fv</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>A single character string, a character vector or tibble representing a
-single stock index or multiple stock indexes.</p></td>
+      <th>cashflow</th>
+      <td><p>Cash flow values. When one value is provided, it's assumed constant cash flow.</p></td>
     </tr>
     <tr>
-      <th>use_fallback</th>
-      <td><p>A boolean that can be used to return a fallback data set
-last downloaded when the package was updated. Useful if the website is down.
-Set to <code>FALSE</code> by default.</p></td>
+      <th>rate</th>
+      <td><p>One or more rate. When one rate is provided it's assumed constant rate.</p></td>
+    </tr>
+    <tr>
+      <th>nper</th>
+      <td><p>Number of periods. When `nper`` is provided, the cashflow values and rate are assumed constant.</p></td>
+    </tr>
+    <tr>
+      <th>pv</th>
+      <td><p>Present value. Initial investments (cash inflows) are typcially a negative value.</p></td>
+    </tr>
+    <tr>
+      <th>pmt</th>
+      <td><p>Number of payments per period.</p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p>Should payments (<code>pmt</code>) occur at the beginning (<code>type = 0</code>) or
+the end (<code>type = 1</code>) of each period.</p></td>
+    </tr>
+    <tr>
+      <th>fv</th>
+      <td><p>Future value. Cash outflows are typically a positive value.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns data in the form of a <code>tibble</code> object.</p>
+    
+<ul>
+<li><p>Summary functions return a single value</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>tq_index()</code> returns the stock symbol, company name, weight, and sector of every stock
-in an index. The source is
-<a href='https://us.spdrs.com/en/product/'>www.us.spdrs.com</a>.</p>
-<p><code>tq_index_options()</code> returns a list of stock indexes you can
-choose from.</p>
-<p><code>tq_exchange()</code> returns the stock symbol, company, last sale price,
-market capitalization, sector and industry of every stock
-in an exchange. Three stock exchanges are available (AMEX, NASDAQ, and NYSE).</p>
-<p><code>tq_exchange_options()</code> returns a list of stock exchanges you can
-choose from. The options are AMEX, NASDAQ and NYSE.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='tq_get.html'>tq_get()</a></code> to get stock prices, financials, key stats, etc using the stock symbols.</p></div>
+    <p><strong>Net Present Value (NPV)</strong>
+Net present value (NPV) is the difference between the present value of cash inflows and
+the present value of cash outflows over a period of time. NPV is used in capital budgeting
+and investment planning to analyze the profitability of a projected investment or project.
+For more information, see <a href='https://www.investopedia.com/terms/n/npv.asp'>Investopedia NPV</a>.</p>
+<p><strong>Internal Rate of Return (IRR)</strong>
+The internal rate of return (IRR) is a metric used in capital budgeting to estimate the
+profitability of potential investments. The internal rate of return is a discount rate
+that makes the net present value (NPV) of all cash flows from a particular project equal
+to zero. IRR calculations rely on the same formula as NPV does.
+For more information, see <a href='https://www.investopedia.com/terms/i/irr.asp'>Investopedia IRR</a>.</p>
+<p><strong>Future Value (FV)</strong>
+Future value (FV) is the value of a current asset at a future date based on an assumed
+rate of growth. The future value (FV) is important to investors and financial planners
+as they use it to estimate how much an investment made today will be worth in the future.
+Knowing the future value enables investors to make sound investment decisions based on
+their anticipated needs. However, external economic factors, such as inflation, can adversely
+affect the future value of the asset by eroding its value.
+For more information, see <a href='https://www.investopedia.com/terms/f/futurevalue.asp'>Investopedia FV</a>.</p>
+<p><strong>Present Value (PV)</strong>
+Present value (PV) is the current value of a future sum of money or stream of cash flows given a
+specified rate of return. Future cash flows are discounted at the discount rate, and the higher
+the discount rate, the lower the present value of the future cash flows. Determining the
+appropriate discount rate is the key to properly valuing future cash flows, whether they be earnings
+or obligations. For more information, see <a href='https://www.investopedia.com/terms/p/presentvalue.asp'>Investopedia PV</a>.</p>
+<p><strong>Payment (PMT)</strong>
+The Payment <code>PMT()</code> function calculates the payment for a loan based on constant payments and a constant interest rate.</p>
+<p><strong>Rate (RATE)</strong>
+Returns the interest rate per period of a loan or an investment.
+For example, use 6%/4 for quarterly payments at 6% APR.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Load libraries</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyquant</span>)
+    <pre class="examples"><div class='input'># TODO
 
-<span class='co'># Get the list of stock index options</span>
-<span class='fu'>tq_index_options</span>()</div><div class='output co'>#&gt; [1] "DOW"       "DOWGLOBAL" "SP400"     "SP500"     "SP600"    </div><div class='input'>
-<span class='co'># Get all stock symbols in a stock index</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>tq_index</span>(<span class='st'>"DOW"</span>)
-}
-
-<span class='co'># Get the list of stock exchange options</span>
-<span class='fu'>tq_exchange_options</span>()</div><div class='output co'>#&gt; [1] "AMEX"   "NASDAQ" "NYSE"  </div><div class='input'>
-<span class='co'># Get all stocks in a stock exchange</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>tq_exchange</span>(<span class='st'>"NYSE"</span>)
-}</div></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -223,7 +267,6 @@ choose from. The options are AMEX, NASDAQ and NYSE.</p>
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

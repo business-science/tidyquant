@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -51,12 +51,17 @@
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Vignettes
+    Tutorials
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/TQ06-excel-in-r.html">NEW: Excel in R</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Financial Workflow</li>
+    <li>
       <a href="../articles/TQ00-introduction-to-tidyquant.html">Introduction to tidyquant</a>
     </li>
     <li>
@@ -103,7 +108,7 @@
       <h1>Performance Analysis with tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2020-01-25</h4>
+            <h4 class="date">2020-02-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ05-performance-analysis-with-tidyquant.Rmd"><code>vignettes/TQ05-performance-analysis-with-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ05-performance-analysis-with-tidyquant.Rmd</code></div>
@@ -134,14 +139,14 @@
 </div>
 <div id="key-concepts" class="section level1">
 <h1 class="hasAnchor">
-<a href="#key-concepts" class="anchor"></a>Key Concepts</h1>
+<a href="#key-concepts" class="anchor"></a>1.0 Key Concepts</h1>
 <p>An important concept is that performance analysis is based on the statistical properties of <strong>returns</strong> (not prices). As a result, this package uses inputs of <strong>time-based returns as opposed to stock prices</strong>. The arguments change to <code>Ra</code> for the asset returns and <code>Rb</code> for the baseline returns. We’ll go over how to get returns in the <a href="#workflow">Workflow</a> section.</p>
 <p>Another important concept is the <strong>baseline</strong>. The baseline is what you are measuring performance against. A baseline can be anything, but in many cases it’s a representative average of how an investment might perform with little or no effort. Often indexes such as the S&amp;P500 are used for general market performance. Other times more specific Exchange Traded Funds (ETFs) are used such as the <a href="http://www.sectorspdr.com/sectorspdr/sector/xlk/holdings">SPDR Technology ETF (XLK)</a>. The important concept here is that you measure the asset performance (<code>Ra</code>) against the baseline (<code>Rb</code>).</p>
 <p>Now for a quick tutorial to show off the <code>PerformanceAnalytics</code> package integration.</p>
 </div>
 <div id="quick-example" class="section level1">
 <h1 class="hasAnchor">
-<a href="#quick-example" class="anchor"></a>Quick Example</h1>
+<a href="#quick-example" class="anchor"></a>2.0 Quick Example</h1>
 <p>One of the most widely used risk to return metrics is the <a href="http://www.investopedia.com/terms/c/capm.asp">Capital Asset Pricing Model (CAPM)</a>. According to Investopedia:</p>
 <blockquote>
 <p>The capital asset pricing model (CAPM) is a model that describes the relationship between systematic risk and expected return for assets, particularly stocks. CAPM is widely used throughout finance for the pricing of risky securities, generating expected returns for assets given the risk of those assets and calculating costs of capital.</p>
@@ -234,8 +239,7 @@
 ## # … with 5 more variables: `Correlationp-value` &lt;dbl&gt;, InformationRatio &lt;dbl&gt;,
 ## #   `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;, TreynorRatio &lt;dbl&gt;</code></pre>
 <p>We can quickly isolate attributes, such as alpha, the measure of growth, and beta, the measure of risk.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">RaRb_capm <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="st">    </span><span class="kw">select</span>(Alpha, Beta)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">RaRb_capm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(symbol, Alpha, Beta)</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ## # Groups:   symbol [3]
 ##   symbol  Alpha  Beta
@@ -248,18 +252,19 @@
 </div>
 <div id="workflow" class="section level1">
 <h1 class="hasAnchor">
-<a href="#workflow" class="anchor"></a>Workflow</h1>
+<a href="#workflow" class="anchor"></a>3.0 Workflow</h1>
 <p>The general workflow is shown in the diagram below. We’ll step through the workflow first with a group of individual assets (stocks) and then with portfolios of stocks.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span>(<span class="st">"perfomance_analysis_workflow.png"</span>)</a></code></pre></div>
 <p><img src="perfomance_analysis_workflow.png" width="95%" style="display: block; margin: auto;"></p>
 <div id="individual-assets" class="section level2">
 <h2 class="hasAnchor">
-<a href="#individual-assets" class="anchor"></a>Individual Assets</h2>
+<a href="#individual-assets" class="anchor"></a>3.1 Individual Assets</h2>
 <p>Individual assets are the simplest form of analysis because there is no portfolio aggregation (Step 3A). We’ll re-do the “Quick Example” this time getting the <strong>Sharpe Ratio</strong>, a measure of reward-to-risk.</p>
 <p>Before we get started let’s find the performance function we want to use from <code>PerformanceAnalytics</code>. Searching <code>tq_performance_fun_options</code>, we can see that <code>SharpeRatio</code> is available. Type <code>?SharpeRatio</code>, and we can see that the arguments are:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/args.html">args</a></span>(SharpeRatio)</a></code></pre></div>
 <pre><code>## function (R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR", "ES"), 
-##     weights = NULL, annualize = FALSE, ...) 
+##     weights = NULL, annualize = FALSE, SE = FALSE, SE.control = NULL, 
+##     ...) 
 ## NULL</code></pre>
 <p>We can actually skip the baseline path because the function does not require <code>Rb</code>. The function takes <code>R</code>, which is passed using <code>Ra</code> in <code><a href="../reference/tq_performance.html">tq_performance(Ra, Rb, performance_fun, ...)</a></code>. A little bit of foresight saves us some work.</p>
 <div id="step-1a-get-stock-prices" class="section level3">
@@ -274,16 +279,16 @@
 <pre><code>## # A tibble: 4,527 x 8
 ##    symbol date        open  high   low close    volume adjusted
 ##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1 AAPL   2010-01-04  30.5  30.6  30.3  30.6 123432400     26.6
+##  1 AAPL   2010-01-04  30.5  30.6  30.3  30.6 123432400     26.5
 ##  2 AAPL   2010-01-05  30.7  30.8  30.5  30.6 150476200     26.6
 ##  3 AAPL   2010-01-06  30.6  30.7  30.1  30.1 138040000     26.2
-##  4 AAPL   2010-01-07  30.2  30.3  29.9  30.1 119282800     26.2
+##  4 AAPL   2010-01-07  30.2  30.3  29.9  30.1 119282800     26.1
 ##  5 AAPL   2010-01-08  30.0  30.3  29.9  30.3 111902700     26.3
 ##  6 AAPL   2010-01-11  30.4  30.4  29.8  30.0 115557400     26.1
 ##  7 AAPL   2010-01-12  29.9  30.0  29.5  29.7 148614900     25.8
-##  8 AAPL   2010-01-13  29.7  30.1  29.2  30.1 151473000     26.2
+##  8 AAPL   2010-01-13  29.7  30.1  29.2  30.1 151473000     26.1
 ##  9 AAPL   2010-01-14  30.0  30.1  29.9  29.9 108223500     26.0
-## 10 AAPL   2010-01-15  30.1  30.2  29.4  29.4 148516900     25.6
+## 10 AAPL   2010-01-15  30.1  30.2  29.4  29.4 148516900     25.5
 ## # … with 4,517 more rows</code></pre>
 </div>
 <div id="step-2a-mutate-to-returns" class="section level3">
@@ -324,9 +329,11 @@
 <a href="#step-4-analyze-performance" class="anchor"></a>Step 4: Analyze Performance</h3>
 <p>The last step is to apply the <code>SharpeRatio</code> function to our groups of stock returns. We do this using <code><a href="../reference/tq_performance.html">tq_performance()</a></code> with the arguments <code>Ra = Ra</code>, <code>Rb = NULL</code> (not required), and <code>performance_fun = SharpeRatio</code>. We can also pass other arguments of the <code>SharpeRatio</code> function such as <code>Rf</code>, <code>p</code>, <code>FUN</code>, and <code>annualize</code>. We will just use the defaults for this example.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">stock_returns_monthly <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, </a>
-<a class="sourceLine" id="cb19-3" data-line-number="3">                   <span class="dt">Rb =</span> <span class="ot">NULL</span>, </a>
-<a class="sourceLine" id="cb19-4" data-line-number="4">                   <span class="dt">performance_fun =</span> SharpeRatio)</a></code></pre></div>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">        <span class="dt">Ra =</span> Ra, </a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">        <span class="dt">Rb =</span> <span class="ot">NULL</span>, </a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">        <span class="dt">performance_fun =</span> SharpeRatio</a>
+<a class="sourceLine" id="cb19-6" data-line-number="6">    )</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ## # Groups:   symbol [3]
 ##   symbol `ESSharpe(Rf=0%,p=95%… `StdDevSharpe(Rf=0%,p=95… `VaRSharpe(Rf=0%,p=95…
@@ -336,11 +343,13 @@
 ## 3 NFLX                    0.237                     0.284                  0.272</code></pre>
 <p>Now we have the Sharpe Ratio for each of the three stocks. What if we want to adjust the parameters of the function? We can just add on the arguments of the underlying function.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">stock_returns_monthly <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, </a>
-<a class="sourceLine" id="cb21-3" data-line-number="3">                   <span class="dt">Rb =</span> <span class="ot">NULL</span>, </a>
-<a class="sourceLine" id="cb21-4" data-line-number="4">                   <span class="dt">performance_fun =</span> SharpeRatio, </a>
-<a class="sourceLine" id="cb21-5" data-line-number="5">                   <span class="dt">Rf =</span> <span class="fl">0.03</span> <span class="op">/</span><span class="st"> </span><span class="dv">12</span>, </a>
-<a class="sourceLine" id="cb21-6" data-line-number="6">                   <span class="dt">p =</span> <span class="fl">0.99</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">        <span class="dt">Ra =</span> Ra, </a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">        <span class="dt">Rb =</span> <span class="ot">NULL</span>, </a>
+<a class="sourceLine" id="cb21-5" data-line-number="5">        <span class="dt">performance_fun =</span> SharpeRatio, </a>
+<a class="sourceLine" id="cb21-6" data-line-number="6">        <span class="dt">Rf =</span> <span class="fl">0.03</span> <span class="op">/</span><span class="st"> </span><span class="dv">12</span>, </a>
+<a class="sourceLine" id="cb21-7" data-line-number="7">        <span class="dt">p  =</span> <span class="fl">0.99</span></a>
+<a class="sourceLine" id="cb21-8" data-line-number="8">    )</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ## # Groups:   symbol [3]
 ##   symbol `ESSharpe(Rf=0.2%,p=9… `StdDevSharpe(Rf=0.2%,p=… `VaRSharpe(Rf=0.2%,p=…
@@ -352,7 +361,7 @@
 </div>
 <div id="portfolios-asset-groups" class="section level2">
 <h2 class="hasAnchor">
-<a href="#portfolios-asset-groups" class="anchor"></a>Portfolios (Asset Groups)</h2>
+<a href="#portfolios-asset-groups" class="anchor"></a>3.2 Portfolios (Asset Groups)</h2>
 <p>Portfolios are slightly more complicated because we are now dealing with groups of assets versus individual stocks, and we need to aggregate weighted returns. Fortunately, this is only one extra step with <code>tidyquant</code> using <code><a href="../reference/tq_portfolio.html">tq_portfolio()</a></code>.</p>
 <div id="single-portfolio" class="section level3">
 <h3 class="hasAnchor">
@@ -699,7 +708,7 @@
 </div>
 <div id="available-functions" class="section level1">
 <h1 class="hasAnchor">
-<a href="#available-functions" class="anchor"></a>Available Functions</h1>
+<a href="#available-functions" class="anchor"></a>4.0 Available Functions</h1>
 <p>We’ve only scratched the surface of the analysis functions available through <code>PerformanceAnalytics</code>. The list below includes all of the compatible functions grouped by function type. The table functions are the most useful to get a cross section of metrics. We’ll touch on a few. We’ll also go over <code>VaR</code> and <code>SharpeRatio</code> as these are very commonly used as performance measures.</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw"><a href="../reference/tq_performance.html">tq_performance_fun_options</a></span>()</a></code></pre></div>
 <pre><code>## $table.funs
@@ -775,7 +784,7 @@
 ## [1] "KellyRatio"   "Modigliani"   "UpDownRatios"</code></pre>
 <div id="table-stats" class="section level2">
 <h2 class="hasAnchor">
-<a href="#table-stats" class="anchor"></a>table.Stats</h2>
+<a href="#table-stats" class="anchor"></a>4.1 table.Stats</h2>
 <p>Returns a basic set of statistics that match the period of the data passed in (e.g., monthly returns will get monthly statistics, daily will be daily stats, and so on).</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">RaRb_multiple_portfolio <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb53-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, <span class="dt">Rb =</span> <span class="ot">NULL</span>, <span class="dt">performance_fun =</span> table.Stats)</a></code></pre></div>
@@ -792,7 +801,7 @@
 </div>
 <div id="table-capm" class="section level2">
 <h2 class="hasAnchor">
-<a href="#table-capm" class="anchor"></a>table.CAPM</h2>
+<a href="#table-capm" class="anchor"></a>4.2 table.CAPM</h2>
 <p>Takes a set of returns and relates them to a benchmark return. Provides a set of measures related to an excess return single factor model, or CAPM.</p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">RaRb_multiple_portfolio <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb55-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, <span class="dt">Rb =</span> Rb, <span class="dt">performance_fun =</span> table.CAPM)</a></code></pre></div>
@@ -809,7 +818,7 @@
 </div>
 <div id="table-annualizedreturns" class="section level2">
 <h2 class="hasAnchor">
-<a href="#table-annualizedreturns" class="anchor"></a>table.AnnualizedReturns</h2>
+<a href="#table-annualizedreturns" class="anchor"></a>4.3 table.AnnualizedReturns</h2>
 <p>Table of Annualized Return, Annualized Std Dev, and Annualized Sharpe.</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">RaRb_multiple_portfolio <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb57-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, <span class="dt">Rb =</span> <span class="ot">NULL</span>, <span class="dt">performance_fun =</span> table.AnnualizedReturns)</a></code></pre></div>
@@ -823,7 +832,7 @@
 </div>
 <div id="table-correlation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#table-correlation" class="anchor"></a>table.Correlation</h2>
+<a href="#table-correlation" class="anchor"></a>4.4 table.Correlation</h2>
 <p>This is a wrapper for calculating correlation and significance against each column of the data provided.</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">RaRb_multiple_portfolio <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb59-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, <span class="dt">Rb =</span> Rb, <span class="dt">performance_fun =</span> table.Correlation)</a></code></pre></div>
@@ -837,7 +846,7 @@
 </div>
 <div id="table-downsiderisk" class="section level2">
 <h2 class="hasAnchor">
-<a href="#table-downsiderisk" class="anchor"></a>table.DownsideRisk</h2>
+<a href="#table-downsiderisk" class="anchor"></a>4.5 table.DownsideRisk</h2>
 <p>Creates a table of estimates of downside risk measures for comparison across multiple instruments or funds.</p>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">RaRb_multiple_portfolio <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb61-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, <span class="dt">Rb =</span> <span class="ot">NULL</span>, <span class="dt">performance_fun =</span> table.DownsideRisk)</a></code></pre></div>
@@ -854,7 +863,7 @@
 </div>
 <div id="table-downsideriskratio" class="section level2">
 <h2 class="hasAnchor">
-<a href="#table-downsideriskratio" class="anchor"></a>table.DownsideRiskRatio</h2>
+<a href="#table-downsideriskratio" class="anchor"></a>4.6 table.DownsideRiskRatio</h2>
 <p>Table of Monthly downside risk, Annualized downside risk, Downside potential, Omega, Sortino ratio, Upside potential, Upside potential ratio and Omega-Sharpe ratio.</p>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">RaRb_multiple_portfolio <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb63-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, <span class="dt">Rb =</span> <span class="ot">NULL</span>, <span class="dt">performance_fun =</span> table.DownsideRiskRatio)</a></code></pre></div>
@@ -870,7 +879,7 @@
 </div>
 <div id="table-highermoments" class="section level2">
 <h2 class="hasAnchor">
-<a href="#table-highermoments" class="anchor"></a>table.HigherMoments</h2>
+<a href="#table-highermoments" class="anchor"></a>4.7 table.HigherMoments</h2>
 <p>Summary of the higher moments and Co-Moments of the return distribution. Used to determine diversification potential. Also called “systematic” moments by several papers.</p>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">RaRb_multiple_portfolio <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb65-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, <span class="dt">Rb =</span> Rb, <span class="dt">performance_fun =</span> table.HigherMoments)</a></code></pre></div>
@@ -884,7 +893,7 @@
 </div>
 <div id="table-informationratio" class="section level2">
 <h2 class="hasAnchor">
-<a href="#table-informationratio" class="anchor"></a>table.InformationRatio</h2>
+<a href="#table-informationratio" class="anchor"></a>4.8 table.InformationRatio</h2>
 <p>Table of Tracking error, Annualized tracking error and Information ratio.</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">RaRb_multiple_portfolio <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb67-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, <span class="dt">Rb =</span> Rb, <span class="dt">performance_fun =</span> table.InformationRatio)</a></code></pre></div>
@@ -898,7 +907,7 @@
 </div>
 <div id="table-variability" class="section level2">
 <h2 class="hasAnchor">
-<a href="#table-variability" class="anchor"></a>table.Variability</h2>
+<a href="#table-variability" class="anchor"></a>4.9 table.Variability</h2>
 <p>Table of Mean absolute difference, Monthly standard deviation and annualized standard deviation.</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1">RaRb_multiple_portfolio <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb69-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, <span class="dt">Rb =</span> <span class="ot">NULL</span>, <span class="dt">performance_fun =</span> table.Variability)</a></code></pre></div>
@@ -912,7 +921,7 @@
 </div>
 <div id="var" class="section level2">
 <h2 class="hasAnchor">
-<a href="#var" class="anchor"></a>VaR</h2>
+<a href="#var" class="anchor"></a>4.10 VaR</h2>
 <p>Calculates Value-at-Risk (VaR) for univariate, component, and marginal cases using a variety of analytical methods.</p>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1">RaRb_multiple_portfolio <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb71-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, <span class="dt">Rb =</span> <span class="ot">NULL</span>, <span class="dt">performance_fun =</span> VaR)</a></code></pre></div>
@@ -926,7 +935,7 @@
 </div>
 <div id="sharperatio" class="section level2">
 <h2 class="hasAnchor">
-<a href="#sharperatio" class="anchor"></a>SharpeRatio</h2>
+<a href="#sharperatio" class="anchor"></a>4.11 SharpeRatio</h2>
 <p>The Sharpe ratio is simply the return per unit of risk (represented by variability). In the classic case, the unit of risk is the standard deviation of the returns.</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1">RaRb_multiple_portfolio <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb73-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_performance.html">tq_performance</a></span>(<span class="dt">Ra =</span> Ra, <span class="dt">Rb =</span> <span class="ot">NULL</span>, <span class="dt">performance_fun =</span> SharpeRatio)</a></code></pre></div>
@@ -941,11 +950,11 @@
 </div>
 <div id="customizing-using-the" class="section level1">
 <h1 class="hasAnchor">
-<a href="#customizing-using-the" class="anchor"></a>Customizing using the …</h1>
+<a href="#customizing-using-the" class="anchor"></a>5.0 Customizing using the …</h1>
 <p>One of the best features of <code>tq_portfolio</code> and <code>tq_performance</code> is to be able to pass features through to the underlying functions. After all, these are just wrappers for <code>PerformanceAnalytics</code>, so you probably want to be able <strong>to make full use of the underlying functions</strong>. Passing through parameters using the <code>...</code> can be incredibly useful, so let’s see how.</p>
 <div id="customizing-tq_portfolio" class="section level2">
 <h2 class="hasAnchor">
-<a href="#customizing-tq_portfolio" class="anchor"></a>Customizing tq_portfolio</h2>
+<a href="#customizing-tq_portfolio" class="anchor"></a>5.1 Customizing tq_portfolio</h2>
 <p>The <code>tq_portfolio</code> function is a wrapper for <code>Return.portfolio</code>. This means that during the portfolio aggregation process, we can make use of most of the <code>Return.portfolio</code> arguments such as <code>wealth.index</code>, <code>contribution</code>, <code>geometric</code>, <code>rebalance_on</code>, and <code>value</code>. Here’s the arguments of the underlying function:</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/args.html">args</a></span>(Return.portfolio)</a></code></pre></div>
 <pre><code>## function (R, weights = NULL, wealth.index = FALSE, contribution = FALSE, 
@@ -1024,11 +1033,12 @@
 </div>
 <div id="customizing-tq_performance" class="section level2">
 <h2 class="hasAnchor">
-<a href="#customizing-tq_performance" class="anchor"></a>Customizing tq_performance</h2>
+<a href="#customizing-tq_performance" class="anchor"></a>5.2 Customizing tq_performance</h2>
 <p>Finally, the same concept of passing arguments works with all the <code>tidyquant</code> functions that are wrappers including <code>tq_transmute</code>, <code>tq_mutate</code>, <code>tq_performance</code>, etc. Let’s use a final example with the <code>SharpeRatio</code>, which has the following arguments.</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/args.html">args</a></span>(SharpeRatio)</a></code></pre></div>
 <pre><code>## function (R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR", "ES"), 
-##     weights = NULL, annualize = FALSE, ...) 
+##     weights = NULL, annualize = FALSE, SE = FALSE, SE.control = NULL, 
+##     ...) 
 ## NULL</code></pre>
 <p>We can see that the parameters <code>Rf</code> allows us to apply a risk-free rate and <code>p</code> allows us to vary the confidence interval. Let’s compare the Sharpe ratio with an annualized risk-free rate of 3% and a confidence interval of 0.99.</p>
 <p>Default:</p>
@@ -1078,33 +1088,33 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#overview">Overview</a></li>
-      <li><a href="#key-concepts">Key Concepts</a></li>
-      <li><a href="#quick-example">Quick Example</a></li>
+      <li><a href="#key-concepts">1.0 Key Concepts</a></li>
+      <li><a href="#quick-example">2.0 Quick Example</a></li>
       <li>
-<a href="#workflow">Workflow</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#individual-assets">Individual Assets</a></li>
-      <li><a href="#portfolios-asset-groups">Portfolios (Asset Groups)</a></li>
+<a href="#workflow">3.0 Workflow</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#individual-assets">3.1 Individual Assets</a></li>
+      <li><a href="#portfolios-asset-groups">3.2 Portfolios (Asset Groups)</a></li>
       </ul>
 </li>
       <li>
-<a href="#available-functions">Available Functions</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#table-stats">table.Stats</a></li>
-      <li><a href="#table-capm">table.CAPM</a></li>
-      <li><a href="#table-annualizedreturns">table.AnnualizedReturns</a></li>
-      <li><a href="#table-correlation">table.Correlation</a></li>
-      <li><a href="#table-downsiderisk">table.DownsideRisk</a></li>
-      <li><a href="#table-downsideriskratio">table.DownsideRiskRatio</a></li>
-      <li><a href="#table-highermoments">table.HigherMoments</a></li>
-      <li><a href="#table-informationratio">table.InformationRatio</a></li>
-      <li><a href="#table-variability">table.Variability</a></li>
-      <li><a href="#var">VaR</a></li>
-      <li><a href="#sharperatio">SharpeRatio</a></li>
+<a href="#available-functions">4.0 Available Functions</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#table-stats">4.1 table.Stats</a></li>
+      <li><a href="#table-capm">4.2 table.CAPM</a></li>
+      <li><a href="#table-annualizedreturns">4.3 table.AnnualizedReturns</a></li>
+      <li><a href="#table-correlation">4.4 table.Correlation</a></li>
+      <li><a href="#table-downsiderisk">4.5 table.DownsideRisk</a></li>
+      <li><a href="#table-downsideriskratio">4.6 table.DownsideRiskRatio</a></li>
+      <li><a href="#table-highermoments">4.7 table.HigherMoments</a></li>
+      <li><a href="#table-informationratio">4.8 table.InformationRatio</a></li>
+      <li><a href="#table-variability">4.9 table.Variability</a></li>
+      <li><a href="#var">4.10 VaR</a></li>
+      <li><a href="#sharperatio">4.11 SharpeRatio</a></li>
       </ul>
 </li>
       <li>
-<a href="#customizing-using-the">Customizing using the …</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#customizing-tq_portfolio">Customizing tq_portfolio</a></li>
-      <li><a href="#customizing-tq_performance">Customizing tq_performance</a></li>
+<a href="#customizing-using-the">5.0 Customizing using the …</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#customizing-tq_portfolio">5.1 Customizing tq_portfolio</a></li>
+      <li><a href="#customizing-tq_performance">5.2 Customizing tq_performance</a></li>
       </ul>
 </li>
       </ul>

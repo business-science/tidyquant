@@ -16,8 +16,8 @@ Status](https://travis-ci.org/business-science/tidyquant.svg?branch=master)](htt
 
 ### Bringing Excel to R in tidyquant 1.0.0
 
-> Tidyquant 1.0.0 is the *“R for Excel Users”* release. My aim is to
-> build functionality that helps users coming from an **Excel
+> NEW: Tidyquant 1.0.0 is the *“R for Excel Users”* release. My aim is
+> to build functionality that helps users coming from an **Excel
 > Background** (background I came from). It’s important to have these
 > users feel at home. I have a full suite of functionality to accomplish
 > your Excel-to-R transition.
@@ -26,9 +26,9 @@ Status](https://travis-ci.org/business-science/tidyquant.svg?branch=master)](htt
 
 Details on the **Excel integrations** are covered in the blog article,
 [*“Excel in R - Pivot Tables, VLOOKUPs, and
-more”*](https://www.business-science.io/finance/2020/02/26/r-for-excel-users.html)
+more”*](https://www.business-science.io/finance/2020/02/26/r-for-excel-users.html).
 
-### Financial Analysis
+### Bringing Financial Analysis to the tidyverse
 
 `tidyquant` integrates the best resources for collecting and analyzing
 financial data, `zoo`, `xts`, `quantmod`, `TTR`, and

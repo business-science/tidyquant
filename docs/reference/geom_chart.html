@@ -85,7 +85,7 @@ Candlestick Chart
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -99,11 +99,16 @@ Candlestick Chart
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Vignettes
+    Tutorials
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/TQ06-excel-in-r.html">NEW: Excel in R</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Financial Workflow</li>
     <li>
       <a href="../articles/TQ00-introduction-to-tidyquant.html">Introduction to tidyquant</a>
     </li>
@@ -149,7 +154,7 @@ Candlestick Chart
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plot Financial Charts in ggplot2</h1>
-    <small class="dont-index">Source: <a href='https://github.com/business-science/tidyquant/blob/master/R/geom_chart.R'><code>R/geom_chart.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/business-science/tidyquant/blob/master/R/ggplot-geom_chart.R'><code>R/ggplot-geom_chart.R</code></a></small>
     <div class="hidden name"><code>geom_chart.Rd</code></div>
     </div>
 
@@ -298,22 +303,22 @@ to the paired geom/stat.</p></td>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
 
-<span class='no'>AAPL</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tq_get.html'>tq_get</a></span>(<span class='st'>"AAPL"</span>)
+<span class='no'>AAPL</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tq_get.html'>tq_get</a></span>(<span class='st'>"AAPL"</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='st'>"2013-01-01"</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='st'>"2016-12-31"</span>)
 
 <span class='co'># Bar Chart</span>
 <span class='no'>AAPL</span> <span class='kw'>%&gt;%</span>
     <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
     <span class='fu'>geom_barchart</span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>open</span> <span class='kw'>=</span> <span class='no'>open</span>, <span class='kw'>high</span> <span class='kw'>=</span> <span class='no'>high</span>, <span class='kw'>low</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>close</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
     <span class='fu'><a href='geom_ma.html'>geom_ma</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
-    <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'>today</span>() - <span class='fu'>weeks</span>(<span class='fl'>6</span>), <span class='fu'>today</span>()),
-                 <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>130</span>))</div><div class='img'><img src='geom_chart-1.png' alt='' width='700' height='433' /></div><div class='input'>
+    <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2016-01-01"</span>, <span class='st'>"2016-12-31"</span>),
+                 <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>75</span>, <span class='fl'>125</span>))</div><div class='img'><img src='geom_chart-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Candlestick Chart</span>
 <span class='no'>AAPL</span> <span class='kw'>%&gt;%</span>
     <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
     <span class='fu'>geom_candlestick</span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>open</span> <span class='kw'>=</span> <span class='no'>open</span>, <span class='kw'>high</span> <span class='kw'>=</span> <span class='no'>high</span>, <span class='kw'>low</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>close</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
     <span class='fu'><a href='geom_ma.html'>geom_ma</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
-    <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'>today</span>() - <span class='fu'>weeks</span>(<span class='fl'>6</span>), <span class='fu'>today</span>()),
-                 <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>130</span>))</div><div class='img'><img src='geom_chart-2.png' alt='' width='700' height='433' /></div></pre>
+    <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2016-01-01"</span>, <span class='st'>"2016-12-31"</span>),
+                 <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>75</span>, <span class='fl'>125</span>))</div><div class='img'><img src='geom_chart-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

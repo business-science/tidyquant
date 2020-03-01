@@ -107,7 +107,6 @@
 #'                       to   = "2017-01-01")
 #'
 #'
-#' ## Not run:
 #' \dontrun{
 #'
 #' # --- Quandl ---
@@ -150,8 +149,6 @@
 #' # Intraday 15 Min Interval
 #' tq_get("AAPL", get = "alphavantage", av_fun = "TIME_SERIES_INTRADAY", interval = "15min")
 #'
-#'
-#' ## End(Not run)
 #' }
 
 

@@ -17,7 +17,7 @@
 #' __Summary Functions__ - Return a single value from a vector
 #' * Sum: [SUM_IFS()]
 #' * Center: [AVERAGE_IFS()], [MEDIAN_IFS()]
-#' * Count: [COUNT_IFS()], [COUNT_UNIQUE()]
+#' * Count: [COUNT_IFS()]
 #' * Range: [MIN_IFS()], [MAX_IFS()]
 #'
 #' __Create your own summary "_IF" function__

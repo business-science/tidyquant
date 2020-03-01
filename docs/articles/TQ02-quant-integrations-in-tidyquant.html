@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -51,12 +51,17 @@
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Vignettes
+    Tutorials
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/TQ06-excel-in-r.html">NEW: Excel in R</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Financial Workflow</li>
+    <li>
       <a href="../articles/TQ00-introduction-to-tidyquant.html">Introduction to tidyquant</a>
     </li>
     <li>
@@ -103,7 +108,7 @@
       <h1>R Quantitative Analysis Package Integrations in tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2020-01-25</h4>
+            <h4 class="date">2020-02-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ02-quant-integrations-in-tidyquant.Rmd"><code>vignettes/TQ02-quant-integrations-in-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ02-quant-integrations-in-tidyquant.Rmd</code></div>
@@ -135,7 +140,7 @@
 </div>
 <div id="function-compatibility" class="section level1">
 <h1 class="hasAnchor">
-<a href="#function-compatibility" class="anchor"></a>Function Compatibility</h1>
+<a href="#function-compatibility" class="anchor"></a>1.0 Function Compatibility</h1>
 <p><code><a href="../reference/tq_mutate.html">tq_transmute_fun_options()</a></code> returns a list the <strong>compatible mutate functions</strong> by each package. We’ll discuss these options by package briefly.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../reference/tq_mutate.html">tq_transmute_fun_options</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>()</a></code></pre></div>
 <pre><code>## List of 5
@@ -380,10 +385,9 @@
 </div>
 <div id="quantitative-power-in-action" class="section level1">
 <h1 class="hasAnchor">
-<a href="#quantitative-power-in-action" class="anchor"></a>Quantitative Power In Action</h1>
+<a href="#quantitative-power-in-action" class="anchor"></a>2.0 Quantitative Power In Action</h1>
 <p>We’ll go through some examples, but first let’s get some data. The <code>FANG</code> data set will be used which consists of stock prices for FB, AMZN, NFLX, and GOOG from the beginning of 2013 to the end of 2016.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(FANG)</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">FANG</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">FANG</a></code></pre></div>
 <pre><code>## # A tibble: 4,032 x 8
 ##    symbol date        open  high   low close    volume adjusted
 ##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -511,9 +515,9 @@
 <a class="sourceLine" id="cb23-12" data-line-number="12"><span class="st">    </span><span class="kw"><a href="../reference/scale_manual.html">scale_color_tq</a></span>()</a></code></pre></div>
 <p><img src="TQ02-quant-integrations-in-tidyquant_files/figure-html/unnamed-chunk-15-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
-<div id="with-periodicity-aggregation" class="section level3">
+<div id="with-monthly-periodicity-aggregation" class="section level3">
 <h3 class="hasAnchor">
-<a href="#with-periodicity-aggregation" class="anchor"></a>With Periodicity Aggregation</h3>
+<a href="#with-monthly-periodicity-aggregation" class="anchor"></a>With Monthly Periodicity Aggregation</h3>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">FANG_monthly &lt;-<span class="st"> </span>FANG <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb24-2" data-line-number="2"><span class="st">    </span><span class="kw">group_by</span>(symbol) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb24-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="../reference/tq_mutate.html">tq_transmute</a></span>(<span class="dt">select     =</span> adjusted, </a>
@@ -745,12 +749,12 @@
 ## 
 ## Residuals:
 ##        Min         1Q     Median         3Q        Max 
-## -0.0268887 -0.0039703  0.0002265  0.0039570  0.0289148 
+## -0.0268886 -0.0039706  0.0002265  0.0039569  0.0289150 
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(&gt;|t|)    
 ## (Intercept) 0.0001014  0.0003101   0.327    0.744    
-## V           0.8119850  0.0226457  35.856   &lt;2e-16 ***
+## V           0.8119859  0.0226457  35.856   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -849,7 +853,7 @@
 <li><a href="#overview">Overview</a></li>
       <li><a href="#prerequisites">Prerequisites</a></li>
       <li>
-<a href="#function-compatibility">Function Compatibility</a><ul class="nav nav-pills nav-stacked">
+<a href="#function-compatibility">1.0 Function Compatibility</a><ul class="nav nav-pills nav-stacked">
 <li><a href="#zoo-functionality">zoo Functionality</a></li>
       <li><a href="#xts-functionality">xts Functionality</a></li>
       <li><a href="#quantmod-functionality">quantmod Functionality</a></li>
@@ -858,7 +862,7 @@
       </ul>
 </li>
       <li>
-<a href="#quantitative-power-in-action">Quantitative Power In Action</a><ul class="nav nav-pills nav-stacked">
+<a href="#quantitative-power-in-action">2.0 Quantitative Power In Action</a><ul class="nav nav-pills nav-stacked">
 <li><a href="#example-1-use-quantmod-periodreturn-to-convert-prices-to-returns">Example 1: Use quantmod periodReturn to Convert Prices to Returns</a></li>
       <li><a href="#example-2-use-xts-to-period-to-change-the-periodicity-from-daily-to-monthly">Example 2: Use xts to.period to Change the Periodicity from Daily to Monthly</a></li>
       <li><a href="#example-3-use-ttr-runcor-to-visualize-rolling-correlations-of-returns">Example 3: Use TTR runCor to Visualize Rolling Correlations of Returns</a></li>
