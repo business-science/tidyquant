@@ -34,6 +34,7 @@ Imports:
     purrr,
     Quandl,
     riingo,
+    alphavantager (>= 0.1.2),
     stringr,
     tibble,
     tidyr (>= 1.0.0),
@@ -50,7 +51,6 @@ Imports:
 Suggests:
     tidyverse,
     forcats, 
-    alphavantager,
     broom,
     knitr,
     rmarkdown,
