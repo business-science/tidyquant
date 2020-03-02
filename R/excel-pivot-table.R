@@ -73,6 +73,8 @@ pivot_table <- function(.data, .rows, .columns, .values,
         stringr::str_trim() %>%
         paste0(collapse = " ") %>%
         stringr::str_remove("^~") %>%
+        stringr::str_remove_all("\"") %>%
+        stringr::str_remove_all("\\\\n") %>%
         parse_multi_input()
     mutated_rows_tbl     <- apply_collapsing_mutation(.data, parsed_rows_text_tbl)
 
@@ -84,6 +86,8 @@ pivot_table <- function(.data, .rows, .columns, .values,
         stringr::str_trim() %>%
         paste0(collapse = " ") %>%
         stringr::str_remove("^~") %>%
+        stringr::str_remove_all("\"") %>%
+        stringr::str_remove_all("\\\\n") %>%
         parse_multi_input()
     mutated_cols_tbl     <- apply_collapsing_mutation(mutated_rows_tbl, parsed_cols_text_tbl)
 
@@ -99,6 +103,8 @@ pivot_table <- function(.data, .rows, .columns, .values,
         stringr::str_trim() %>%
         paste0(collapse = " ") %>%
         stringr::str_remove("^~") %>%
+        stringr::str_remove_all("\"") %>%
+        stringr::str_remove_all("\\\\n") %>%
         parse_multi_input()
 
     summarized_tbl <- mutated_cols_tbl %>%
@@ -121,6 +127,9 @@ pivot_table <- function(.data, .rows, .columns, .values,
         tidyr::pivot_wider(names_from = tidyselect::all_of(.col_names), values_from = tidyselect::all_of(.val_names))
 
     pivoted_tbl[is.na(pivoted_tbl)] <- fill_na
+
+    pivoted_tbl <- pivoted_tbl %>%
+        purrr::set_names(nm = names(pivoted_tbl) %>% stringr::str_trim())
 
     return(pivoted_tbl)
 
