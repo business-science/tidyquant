@@ -68,13 +68,23 @@ pivot_table <- function(.data, .rows, .columns, .values,
     temp_col_quo <- rlang::enquo(.columns)
 
     # --- COLLAPSE ROW FUNCTIONS ---
-    parsed_rows_text_tbl <- temp_row_quo %>% rlang::quo_name() %>% parse_multi_input()
+    parsed_rows_text_tbl <- temp_row_quo %>%
+        deparse() %>%
+        stringr::str_trim() %>%
+        paste0(collapse = " ") %>%
+        stringr::str_remove("^~") %>%
+        parse_multi_input()
     mutated_rows_tbl     <- apply_collapsing_mutation(.data, parsed_rows_text_tbl)
 
     # mutated_rows_tbl
 
     # --- COLLAPSE COL FUNCTIONS ---
-    parsed_cols_text_tbl <- temp_col_quo %>% rlang::quo_name() %>% parse_multi_input()
+    parsed_cols_text_tbl <- temp_col_quo %>%
+        deparse() %>%
+        stringr::str_trim() %>%
+        paste0(collapse = " ") %>%
+        stringr::str_remove("^~") %>%
+        parse_multi_input()
     mutated_cols_tbl     <- apply_collapsing_mutation(mutated_rows_tbl, parsed_cols_text_tbl)
 
     # mutated_cols_tbl
@@ -84,7 +94,12 @@ pivot_table <- function(.data, .rows, .columns, .values,
     row_exprs <- parsed_rows_text_tbl %>% dplyr::pull(var_text) %>% stringr::str_remove("~") %>% rlang::syms()
     col_exprs <- parsed_cols_text_tbl %>% dplyr::pull(var_text) %>% stringr::str_remove("~") %>% rlang::syms()
 
-    parsed_vals_text_tbl <- temp_val_quo %>% rlang::quo_name() %>% parse_multi_input()
+    parsed_vals_text_tbl <- temp_val_quo %>%
+        deparse() %>%
+        stringr::str_trim() %>%
+        paste0(collapse = " ") %>%
+        stringr::str_remove("^~") %>%
+        parse_multi_input()
 
     summarized_tbl <- mutated_cols_tbl %>%
         dplyr::group_by_at(.vars = dplyr::vars(!!! row_exprs, !!! col_exprs)) %>%
