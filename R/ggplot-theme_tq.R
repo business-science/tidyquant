@@ -77,7 +77,7 @@ theme_tq <- function(base_size = 11, base_family = "") {
 
             # Strip (Used with multiple panels)
             strip.background   = ggplot2::element_rect(fill = blue, color = blue),
-            strip.text         = ggplot2::element_text(color = white, size = rel(0.8)),
+            strip.text         = ggplot2::element_text(color = white, size = ggplot2::rel(0.8), margin = ggplot2::margin(t = 5, b = 5)),
 
             # Plot
             plot.title         = ggplot2::element_text(size = rel(1.2), hjust = 0,

@@ -34,8 +34,9 @@
 * __NEW API Integrations__
     - __Tiingo API__ - A popular Open-Source for stock prices, cryptocurrencies, and intraday feeds from the IEX (Investors Exchange). This can serve as an alternate source of data to Yahoo Finance. Integrated via the `riingo` package.
     
-* Bug Fixes
+* __Bug Fixes & Improvements__
     - `theme_tq()` - Fix issues with collisions with `dials::margin()` and `ggplot2::margin()`. Similar potential `ggplot2` collisions have been fixed.  
+    - `theme_tq()` - Increased default top/bottom text margin on facet strips
     
 * __Deprecation & Breaking Changes__
 
@@ -45,7 +46,7 @@
         - Morningstar Key Ratios & Financials (Fundamentals) Data
         - Yahoo Dividends and Splits
         - Oanda FX and Metal Prices
-    * __Depricated Compound Getters__ - Stacking multiple get options (`tq_get("AAPL", get = c("stock.prices", "stock.prices.japan"))`) is no longer available. __Solution:__ Split these up into two calls to `tq_get()`. 
+    * __Deprecated Compound Getters__ - Stacking multiple get options (`tq_get("AAPL", get = c("stock.prices", "stock.prices.japan"))`) is no longer available. __Solution:__ Split these up into two calls to `tq_get()`. 
 
 ## tidyquant 0.5.10
 
