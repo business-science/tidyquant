@@ -50,11 +50,11 @@ Imports:
     cli
 Suggests:
     tidyverse,
-    forcats, 
+    forcats,
     broom,
     knitr,
     rmarkdown,
-    testthat,
+    testthat (>= 2.1.0),
     tibbletime,
     scales,
     Rblpapi,
