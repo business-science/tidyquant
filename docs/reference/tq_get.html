@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -316,10 +316,23 @@ get option.</p></li>
 <span class='fu'><a href='av_api_key.html'>av_api_key</a></span>(<span class='st'>'&lt;your_api_key&gt;'</span>)
 
 <span class='co'># Daily Time Series</span>
-<span class='fu'>tq_get</span>(<span class='st'>"AAPL"</span>, <span class='kw'>get</span> <span class='kw'>=</span> <span class='st'>"alphavantager"</span>, <span class='kw'>av_fun</span> <span class='kw'>=</span> <span class='st'>"TIME_SERIES_DAILY_ADJUSTED"</span>)
+<span class='fu'>tq_get</span>(<span class='st'>"AAPL"</span>,
+       <span class='kw'>get</span>        <span class='kw'>=</span> <span class='st'>"alphavantager"</span>,
+       <span class='kw'>av_fun</span>     <span class='kw'>=</span> <span class='st'>"TIME_SERIES_DAILY_ADJUSTED"</span>,
+       <span class='kw'>outputsize</span> <span class='kw'>=</span> <span class='st'>"full"</span>)
 
 <span class='co'># Intraday 15 Min Interval</span>
-<span class='fu'>tq_get</span>(<span class='st'>"AAPL"</span>, <span class='kw'>get</span> <span class='kw'>=</span> <span class='st'>"alphavantage"</span>, <span class='kw'>av_fun</span> <span class='kw'>=</span> <span class='st'>"TIME_SERIES_INTRADAY"</span>, <span class='kw'>interval</span> <span class='kw'>=</span> <span class='st'>"15min"</span>)
+<span class='fu'>tq_get</span>(<span class='st'>"AAPL"</span>,
+       <span class='kw'>get</span>        <span class='kw'>=</span> <span class='st'>"alphavantage"</span>,
+       <span class='kw'>av_fun</span>     <span class='kw'>=</span> <span class='st'>"TIME_SERIES_INTRADAY"</span>,
+       <span class='kw'>interval</span>   <span class='kw'>=</span> <span class='st'>"15min"</span>,
+       <span class='kw'>outputsize</span> <span class='kw'>=</span> <span class='st'>"full"</span>)
+
+<span class='co'># FX DAILY</span>
+<span class='fu'>tq_get</span>(<span class='st'>"USD/EUR"</span>, <span class='kw'>get</span> <span class='kw'>=</span> <span class='st'>"alphavantage"</span>, <span class='kw'>av_fun</span> <span class='kw'>=</span> <span class='st'>"FX_DAILY"</span>, <span class='kw'>outputsize</span> <span class='kw'>=</span> <span class='st'>"full"</span>)
+
+<span class='co'># FX REAL-TIME QUOTE</span>
+<span class='fu'>tq_get</span>(<span class='st'>"USD/EUR"</span>, <span class='kw'>get</span> <span class='kw'>=</span> <span class='st'>"alphavantage"</span>, <span class='kw'>av_fun</span> <span class='kw'>=</span> <span class='st'>"CURRENCY_EXCHANGE_RATE"</span>)
 
 }</div></pre>
   </div>

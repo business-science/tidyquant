@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -108,7 +108,7 @@
       <h1>Core Functions in tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2020-02-29</h4>
+            <h4 class="date">2020-03-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ01-core-functions-in-tidyquant.Rmd"><code>vignettes/TQ01-core-functions-in-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ01-core-functions-in-tidyquant.Rmd</code></div>
@@ -189,7 +189,7 @@
 <p>The stock prices can be retrieved succinctly using <code>get = "stock.prices"</code>. This returns stock price data from Yahoo Finance.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">aapl_prices  &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"AAPL"</span>, <span class="dt">get =</span> <span class="st">"stock.prices"</span>, <span class="dt">from =</span> <span class="st">" 1990-01-01"</span>)</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">aapl_prices </a></code></pre></div>
-<pre><code>## # A tibble: 7,599 x 8
+<pre><code>## # A tibble: 7,601 x 8
 ##    symbol date        open  high   low close   volume adjusted
 ##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ##  1 AAPL   1990-01-02  1.26  1.34  1.25  1.33 45799600    1.08 
@@ -202,7 +202,7 @@
 ##  8 AAPL   1990-01-11  1.29  1.29  1.23  1.23 52763200    0.999
 ##  9 AAPL   1990-01-12  1.22  1.24  1.21  1.23 42974400    0.999
 ## 10 AAPL   1990-01-15  1.23  1.28  1.22  1.22 40434800    0.992
-## # … with 7,589 more rows</code></pre>
+## # … with 7,591 more rows</code></pre>
 <p>Yahoo Japan stock prices can be retrieved using a similar call, <code>get = "stock.prices.japan"</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">x8411T &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"8411.T"</span>, <span class="dt">get =</span> <span class="st">"stock.prices.japan"</span>, <span class="dt">from =</span> <span class="st">"2016-01-01"</span>, <span class="dt">to  =</span> <span class="st">"2016-12-31"</span>)</a></code></pre></div>
 <p>The data source is <a href="https://finance.yahoo.com/">Yahoo Finance</a> and <a href="http://finance.yahoo.co.jp/">Yahoo Finance Japan</a>.</p>

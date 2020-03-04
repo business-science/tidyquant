@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -226,10 +226,14 @@
 <strong>Tiingo API</strong> - A popular Open-Source for stock prices, cryptocurrencies, and intraday feeds from the IEX (Investors Exchange). This can serve as an alternate source of data to Yahoo Finance. Integrated via the <code>riingo</code> package.</li>
 </ul>
 </li>
-<li>Bug Fixes
+<li>
+<strong>Bug Fixes &amp; Improvements</strong>
 <ul>
 <li>
-<code><a href="../reference/theme_tq.html">theme_tq()</a></code> - Fix issues with collisions with <code><a href="https://rdrr.io/pkg/dials/man/cost.html">dials::margin()</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/element.html">ggplot2::margin()</a></code>. Similar potential <code>ggplot2</code> collisions have been fixed.</li>
+<code><a href="../reference/theme_tq.html">theme_tq()</a></code> - Fix issues with collisions with <code><a href="https://rdrr.io/pkg/dials/man/cost.html">dials::margin()</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/element.html">ggplot2::margin()</a></code>. Similar potential <code>ggplot2</code> collisions have been fixed.<br>
+</li>
+<li>
+<code><a href="../reference/theme_tq.html">theme_tq()</a></code> - Increased default top/bottom text margin on facet strips</li>
 </ul>
 </li>
 <li>
@@ -247,7 +251,7 @@
 </ul>
 </li>
 <li>
-<strong>Depricated Compound Getters</strong> - Stacking multiple get options (<code><a href="../reference/tq_get.html">tq_get("AAPL", get = c("stock.prices", "stock.prices.japan"))</a></code>) is no longer available. <strong>Solution:</strong> Split these up into two calls to <code><a href="../reference/tq_get.html">tq_get()</a></code>.</li>
+<strong>Deprecated Compound Getters</strong> - Stacking multiple get options (<code><a href="../reference/tq_get.html">tq_get("AAPL", get = c("stock.prices", "stock.prices.japan"))</a></code>) is no longer available. <strong>Solution:</strong> Split these up into two calls to <code><a href="../reference/tq_get.html">tq_get()</a></code>.</li>
 </ul>
 </li>
 </ul>

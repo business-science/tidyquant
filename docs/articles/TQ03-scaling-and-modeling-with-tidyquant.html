@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -108,7 +108,7 @@
       <h1>Scaling and Modeling with tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2020-02-29</h4>
+            <h4 class="date">2020-03-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ03-scaling-and-modeling-with-tidyquant.Rmd"><code>vignettes/TQ03-scaling-and-modeling-with-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ03-scaling-and-modeling-with-tidyquant.Rmd</code></div>
@@ -211,16 +211,16 @@
 <pre><code>## # A tibble: 30 x 8
 ##    symbol company    identifier sedol  weight sector  shares_held local_currency
 ##    &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;         
-##  1 BA     Boeing Co… 09702310   21086… 0.0757 Indust…     5369089 USD           
-##  2 AAPL   Apple Inc. 03783310   20462… 0.0720 Inform…     5369089 USD           
-##  3 UNH    UnitedHea… 91324P10   29177… 0.0668 Health…     5369089 USD           
-##  4 HD     Home Depo… 43707610   24342… 0.0592 Consum…     5369089 USD           
-##  5 GS     Goldman S… 38141G10   24079… 0.0541 Financ…     5369089 USD           
-##  6 MCD    McDonald'… 58013510   25507… 0.0529 Consum…     5369089 USD           
-##  7 V      Visa Inc.… 92826C83   B2PZN… 0.0474 Inform…     5369089 USD           
-##  8 MSFT   Microsoft… 59491810   25881… 0.0416 Inform…     5369089 USD           
-##  9 MMM    3M Company 88579Y10   25957… 0.0395 Indust…     5369089 USD           
-## 10 JNJ    Johnson &amp;… 47816010   24758… 0.0366 Health…     5369089 USD           
+##  1 AAPL   Apple Inc. 03783310   20462… 0.0759 Inform…     5267389 USD           
+##  2 BA     Boeing Co… 09702310   21086… 0.0735 Indust…     5267389 USD           
+##  3 UNH    UnitedHea… 91324P10   29177… 0.0694 Health…     5267389 USD           
+##  4 HD     Home Depo… 43707610   24342… 0.0584 Consum…     5267389 USD           
+##  5 GS     Goldman S… 38141G10   24079… 0.0532 Financ…     5267389 USD           
+##  6 MCD    McDonald'… 58013510   25507… 0.0514 Consum…     5267389 USD           
+##  7 V      Visa Inc.… 92826C83   B2PZN… 0.0488 Inform…     5267389 USD           
+##  8 MSFT   Microsoft… 59491810   25881… 0.0439 Inform…     5267389 USD           
+##  9 MMM    3M Company 88579Y10   25957… 0.0389 Indust…     5267389 USD           
+## 10 JNJ    Johnson &amp;… 47816010   24758… 0.0356 Health…     5267389 USD           
 ## # … with 20 more rows</code></pre>
 <p>…or, get an exchange.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="../reference/tq_index.html">tq_exchange</a></span>(<span class="st">"NYSE"</span>)</a></code></pre></div>
@@ -228,20 +228,20 @@
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="../reference/tq_index.html">tq_index</a></span>(<span class="st">"DOW"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">    </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get =</span> <span class="st">"stock.prices"</span>)</a></code></pre></div>
-<pre><code>## # A tibble: 7,668 x 15
+<pre><code>## # A tibble: 7,674 x 15
 ##    symbol company identifier sedol weight sector shares_held local_currency
 ##    &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;         
-##  1 BA     Boeing… 09702310   2108… 0.0757 Indus…     5369089 USD           
-##  2 BA     Boeing… 09702310   2108… 0.0757 Indus…     5369089 USD           
-##  3 BA     Boeing… 09702310   2108… 0.0757 Indus…     5369089 USD           
-##  4 BA     Boeing… 09702310   2108… 0.0757 Indus…     5369089 USD           
-##  5 BA     Boeing… 09702310   2108… 0.0757 Indus…     5369089 USD           
-##  6 BA     Boeing… 09702310   2108… 0.0757 Indus…     5369089 USD           
-##  7 BA     Boeing… 09702310   2108… 0.0757 Indus…     5369089 USD           
-##  8 BA     Boeing… 09702310   2108… 0.0757 Indus…     5369089 USD           
-##  9 BA     Boeing… 09702310   2108… 0.0757 Indus…     5369089 USD           
-## 10 BA     Boeing… 09702310   2108… 0.0757 Indus…     5369089 USD           
-## # … with 7,658 more rows, and 7 more variables: date &lt;date&gt;, open &lt;dbl&gt;,
+##  1 AAPL   Apple … 03783310   2046… 0.0759 Infor…     5267389 USD           
+##  2 AAPL   Apple … 03783310   2046… 0.0759 Infor…     5267389 USD           
+##  3 AAPL   Apple … 03783310   2046… 0.0759 Infor…     5267389 USD           
+##  4 AAPL   Apple … 03783310   2046… 0.0759 Infor…     5267389 USD           
+##  5 AAPL   Apple … 03783310   2046… 0.0759 Infor…     5267389 USD           
+##  6 AAPL   Apple … 03783310   2046… 0.0759 Infor…     5267389 USD           
+##  7 AAPL   Apple … 03783310   2046… 0.0759 Infor…     5267389 USD           
+##  8 AAPL   Apple … 03783310   2046… 0.0759 Infor…     5267389 USD           
+##  9 AAPL   Apple … 03783310   2046… 0.0759 Infor…     5267389 USD           
+## 10 AAPL   Apple … 03783310   2046… 0.0759 Infor…     5267389 USD           
+## # … with 7,664 more rows, and 7 more variables: date &lt;date&gt;, open &lt;dbl&gt;,
 ## #   high &lt;dbl&gt;, low &lt;dbl&gt;, close &lt;dbl&gt;, volume &lt;dbl&gt;, adjusted &lt;dbl&gt;</code></pre>
 <p>You can use any applicable “getter” to get data for <strong>every stock in an index or an exchange</strong>! This includes: “stock.prices”, “key.ratios”, “key.stats”, and more.</p>
 </div>
@@ -406,13 +406,13 @@
 <a class="sourceLine" id="cb30-3" data-line-number="3"><span class="st">    </span><span class="kw">sample_n</span>(<span class="dv">5</span>) </a>
 <a class="sourceLine" id="cb30-4" data-line-number="4">stocks_tbl</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 8
-##   symbol company    identifier sedol   weight sector  shares_held local_currency
-##   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;         
-## 1 NWSA   News Corp… 65249B10   BBGVT… 1.81e-4 Commun…     3986371 USD           
-## 2 LRCX   Lam Resea… 51280710   25022… 1.67e-3 Inform…     1540698 USD           
-## 3 STE    STERIS Plc G8473T10   BFY8C… 5.63e-4 Health…      905466 USD           
-## 4 PFG    Principal… 74251V10   28030… 4.89e-4 Financ…     2753788 USD           
-## 5 NLSN   Nielsen H… G6518L10   BWFY5… 2.63e-4 Indust…     3732506 USD</code></pre>
+##   symbol company     identifier sedol  weight sector  shares_held local_currency
+##   &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;         
+## 1 HBI    Hanesbrand… 41034510   B1BJ… 1.89e-4 Consum…     3825956 USD           
+## 2 EL     Estee Laud… 51843910   2320… 1.68e-3 Consum…     2355031 USD           
+## 3 RF     Regions Fi… 7591EP10   B01R… 5.47e-4 Financ…    10208457 USD           
+## 4 EXPD   Expeditors… 30213010   2325… 4.81e-4 Indust…     1809468 USD           
+## 5 MRO    Marathon O… 56584910   2910… 2.62e-4 Energy      8492867 USD</code></pre>
 <p>We can now apply our analysis function to the stocks using <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate</a></code> and <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map</a></code>. The <code>mutate()</code> function adds a column to our tibble, and the <code>map()</code> function maps our custom <code>get_model</code> function to our tibble of stocks using the <code>symbol</code> column. The <code><a href="https://tidyr.tidyverse.org/reference/nest.html">tidyr::unnest</a></code> function unrolls the nested data frame so all of the model statistics are accessable in the top data frame level. The <code>filter</code>, <code>arrange</code> and <code>select</code> steps just manipulate the data frame to isolate and arrange the data for our viewing.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">stocks_model_stats &lt;-<span class="st"> </span>stocks_tbl <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb32-2" data-line-number="2"><span class="st">    </span><span class="kw">select</span>(symbol, company) <span class="op">%&gt;%</span></a>
@@ -434,13 +434,13 @@
 <a class="sourceLine" id="cb32-18" data-line-number="18">stocks_model_stats</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 7
 ## # Groups:   symbol, company [5]
-##   symbol company              data          estimate std.error statistic p.value
-##   &lt;chr&gt;  &lt;chr&gt;                &lt;list&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 PFG    Principal Financial… &lt;tibble [2,5…   0.0553    0.0492     1.12    0.294
-## 2 LRCX   Lam Research Corpor… &lt;tibble [2,5…   0.0519    0.0427     1.21    0.259
-## 3 STE    STERIS Plc           &lt;tibble [2,5…   0.0101    0.0227     0.447   0.666
-## 4 NLSN   Nielsen Holdings Plc &lt;tibble [1,4…  -0.0431    0.0425    -1.01    0.368
-## 5 NWSA   News Corporation Cl… &lt;tibble [892…  -0.0819    0.0480    -1.71    0.230</code></pre>
+##   symbol company                data        estimate std.error statistic p.value
+##   &lt;chr&gt;  &lt;chr&gt;                  &lt;list&gt;         &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 RF     Regions Financial Cor… &lt;tibble [2…   0.108     0.0433     2.49   0.0377
+## 2 HBI    Hanesbrands Inc.       &lt;tibble [2…   0.0250    0.0534     0.468  0.652 
+## 3 EXPD   Expeditors Internatio… &lt;tibble [2…   0.0134    0.0246     0.542  0.602 
+## 4 EL     Estee Lauder Companie… &lt;tibble [2…  -0.0126    0.0299    -0.422  0.684 
+## 5 MRO    Marathon Oil Corporat… &lt;tibble [2…  -0.0172    0.0502    -0.343  0.740</code></pre>
 <p>We’re done! We now have the coefficient of the linear regression that tracks the direction of the trend line. We can easily extend this type of analysis to larger lists or stock indexes. For example, the entire S&amp;P500 could be analyzed removing the <code>sample_n()</code> following the call to <code><a href="../reference/tq_index.html">tq_index("SP500")</a></code>.</p>
 </div>
 </div>
@@ -477,7 +477,7 @@
 ## BAD APPLE download failed after two attempts. Error message:
 ## HTTP error 400.
 ##  Removing BAD APPLE.</code></pre>
-<pre><code>## # A tibble: 5,112 x 8
+<pre><code>## # A tibble: 5,116 x 8
 ##    symbol date        open  high   low close    volume adjusted
 ##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 ##  1 AAPL   2010-01-04  30.5  30.6  30.3  30.6 123432400     26.5
@@ -490,7 +490,7 @@
 ##  8 AAPL   2010-01-13  29.7  30.1  29.2  30.1 151473000     26.1
 ##  9 AAPL   2010-01-14  30.0  30.1  29.9  29.9 108223500     26.0
 ## 10 AAPL   2010-01-15  30.1  30.2  29.4  29.4 148516900     25.5
-## # … with 5,102 more rows</code></pre>
+## # … with 5,106 more rows</code></pre>
 <p>Now switching <code>complete_cases = FALSE</code> will retain any errors as <code>NA</code> values in a nested data frame. Notice that the error message and output change. The error message now states that the <code>NA</code> values exist in the output and the return is a “nested” data structure.</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"BAD APPLE"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb39-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="dt">get =</span> <span class="st">"stock.prices"</span>, <span class="dt">complete_cases =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
@@ -501,8 +501,8 @@
 <pre><code>## # A tibble: 3 x 2
 ##   symbol    stock.prices        
 ##   &lt;chr&gt;     &lt;list&gt;              
-## 1 AAPL      &lt;tibble [2,556 × 7]&gt;
-## 2 GOOG      &lt;tibble [2,556 × 7]&gt;
+## 1 AAPL      &lt;tibble [2,558 × 7]&gt;
+## 2 GOOG      &lt;tibble [2,558 × 7]&gt;
 ## 3 BAD APPLE &lt;lgl [1]&gt;</code></pre>
 <p>In both cases, the prudent user will review the warnings to determine what happened and whether or not this is acceptable. In the <code>complete_cases = FALSE</code> example, if the user attempts to perform downstream computations at scale, the computations will likely fail grinding the analysis to a hault. But, the advantage is that the user will more easily be able to filter to the problem childs to determine what happened and decide whether this is acceptable or not.</p>
 </div>
