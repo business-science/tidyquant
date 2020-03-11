@@ -1,9 +1,16 @@
 ## tidyquant 1.1.0.9000 (Development Version)
 
-* `tq_get()` - Add `"dividends"` and `"splits"` get options, which have been fixed in `quantmod` 0.4-16.
+### Improvements
 
-* TODO LIST
+* `tq_get()` - Add `"dividends"` and `"splits"` get options, which have been fixed in `quantmod` 0.4-16. Issue 150.
+
+### Bug Fixes
+
+* Issue 157 - Error on package load with `rstudioapi::getThemeInfo()` returns `NULL`. 
+
+### TODO
   - Add tests for Excel Functionality
+  - Add tests for dividends and splits 
   - Add manual documentation for Excel Financial Functionality
   - Update vignettes
   - New book for Financial Modeling & Excel
