@@ -9,6 +9,7 @@
 * Issue 157 - Error on package load with `rstudioapi::getThemeInfo()` returns `NULL`. 
 
 ### TODO
+  - Tsibble compatability
   - Add tests for Excel Functionality
   - Add tests for dividends and splits 
   - Add manual documentation for Excel Financial Functionality
