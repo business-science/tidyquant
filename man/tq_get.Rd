@@ -19,6 +19,10 @@ for \code{x}. Options include:
 \item \code{"stock.prices"}: Get the open, high, low, close, volume and adjusted
 stock prices for a stock symbol from
 \href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for \code{quantmod::getSymbols()}.
+\item \code{"dividends"}: Get the dividends for a stock symbol from
+\href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for \code{quantmod::getDividends()}.
+\item \code{"splits"}: Get the split ratio for a stock symbol from
+\href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for \code{quantmod::getSplits()}.
 \item \code{"stock.prices.japan"}: Get the open, high, low, close, volume and adjusted
 stock prices for a stock symbol from
 \href{http://finance.yahoo.co.jp/}{Yahoo Finance Japan}. Wrapper for \code{quantmod::getSymbols.yahooj()}.

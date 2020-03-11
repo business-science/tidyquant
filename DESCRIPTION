@@ -1,8 +1,7 @@
 Package: tidyquant
 Type: Package
 Title: Tidy Quantitative Financial Analysis
-Version: 1.0.0
-Date: 2020-03-04
+Version: 1.1.0.9000
 Authors@R: c(
     person("Matt", "Dancho", email = "mdancho@business-science.io", role = c("aut", "cre")),
     person("Davis", "Vaughan", email = "dvaughan@business-science.io", role = c("aut"))
