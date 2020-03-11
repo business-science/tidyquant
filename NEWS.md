@@ -1,4 +1,4 @@
-## tidyquant 1.1.0.9000 (Development Version)
+## tidyquant 1.0.0.9000 (Development Version)
 
 ### Improvements
 
