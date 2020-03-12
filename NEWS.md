@@ -7,6 +7,7 @@
 ### Bug Fixes
 
 * Issue 157 - Error on package load with `rstudioapi::getThemeInfo()` returns `NULL`. 
+* `pivot_table` - Fix issues with `tidyverse` functions not being found.
 
 ### TODO
   - Tsibble compatability

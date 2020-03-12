@@ -155,7 +155,7 @@ apply_collapsing_summarise <- function(data, parsed_text_tbl) {
     }
 
     suppressMessages({
-        ret_tbl <- purrr::reduce(summarized_tibble_list, left_join)
+        ret_tbl <- purrr::reduce(summarized_tibble_list, dplyr::left_join)
     })
 
     return(ret_tbl)
@@ -182,7 +182,7 @@ parse_multi_input <- function(text) {
 
     # Remove c()
     parse_input_tbl <- text %>%
-        tibble(var_text = .) %>%
+        tibble::tibble(var_text = .) %>%
         dplyr::mutate(var_text = ifelse(
             stringr::str_detect(var_text, "^c\\("),
             stringr::str_remove(var_text, pattern = "^c\\(") %>% stringr::str_remove("\\)$"),
@@ -253,7 +253,7 @@ parse_multi_input <- function(text) {
         stringr::str_sub(string_replacement, start = pos, end = pos) <- "@"
     }
 
-    ret <- tibble(var_text = string_replacement) %>%
+    ret <- tibble::tibble(var_text = string_replacement) %>%
         tidyr::separate_rows(var_text, sep = "@") %>%
         dplyr::mutate(var_text    = stringr::str_trim(var_text)) %>%
         dplyr::mutate(is_function = stringr::str_detect(var_text, pattern = "~"))
