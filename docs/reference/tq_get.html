@@ -53,13 +53,13 @@
 
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-76139189-1"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-76139189-2"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-76139189-1');
+  gtag('config', 'UA-76139189-2');
 </script>
 
 
@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -175,6 +175,10 @@ for <code>x</code>. Options include:</p><ul>
 <li><p><code>"stock.prices"</code>: Get the open, high, low, close, volume and adjusted
 stock prices for a stock symbol from
 <a href='https://finance.yahoo.com/'>Yahoo Finance</a>. Wrapper for <code><a href='https://rdrr.io/pkg/quantmod/man/getSymbols.html'>quantmod::getSymbols()</a></code>.</p></li>
+<li><p><code>"dividends"</code>: Get the dividends for a stock symbol from
+<a href='https://finance.yahoo.com/'>Yahoo Finance</a>. Wrapper for <code><a href='https://rdrr.io/pkg/quantmod/man/getDividends.html'>quantmod::getDividends()</a></code>.</p></li>
+<li><p><code>"splits"</code>: Get the split ratio for a stock symbol from
+<a href='https://finance.yahoo.com/'>Yahoo Finance</a>. Wrapper for <code><a href='https://rdrr.io/pkg/quantmod/man/getSplits.html'>quantmod::getSplits()</a></code>.</p></li>
 <li><p><code>"stock.prices.japan"</code>: Get the open, high, low, close, volume and adjusted
 stock prices for a stock symbol from
 <a href='http://finance.yahoo.co.jp/'>Yahoo Finance Japan</a>. Wrapper for <code><a href='https://rdrr.io/pkg/quantmod/man/getSymbols.yahooj.html'>quantmod::getSymbols.yahooj()</a></code>.</p></li>
@@ -265,10 +269,11 @@ get option.</p></li>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>)
 
 <span class='co'># Get the list of `get` options</span>
-<span class='fu'>tq_get_options</span>()</div><div class='output co'>#&gt;  [1] "stock.prices"       "stock.prices.japan" "economic.data"     
-#&gt;  [4] "quandl"             "quandl.datatable"   "tiingo"            
-#&gt;  [7] "tiingo.iex"         "tiingo.crypto"      "alphavantager"     
-#&gt; [10] "alphavantage"       "rblpapi"           </div><div class='input'>
+<span class='fu'>tq_get_options</span>()</div><div class='output co'>#&gt;  [1] "stock.prices"       "stock.prices.japan" "dividends"         
+#&gt;  [4] "splits"             "economic.data"      "quandl"            
+#&gt;  [7] "quandl.datatable"   "tiingo"             "tiingo.iex"        
+#&gt; [10] "tiingo.crypto"      "alphavantager"      "alphavantage"      
+#&gt; [13] "rblpapi"           </div><div class='input'>
 <span class='co'># Get stock prices for a stock from Yahoo</span>
 <span class='no'>aapl_stock_prices</span> <span class='kw'>&lt;-</span> <span class='fu'>tq_get</span>(<span class='st'>"AAPL"</span>)
 

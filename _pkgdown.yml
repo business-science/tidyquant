@@ -1,7 +1,7 @@
 template:
   params:
     bootswatch: flatly
-    ganalytics: UA-76139189-1
+    ganalytics: UA-76139189-2
 
 navbar:
   title: "tidyquant"

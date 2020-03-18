@@ -16,12 +16,12 @@
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-76139189-1"></script><script>
+<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-76139189-2"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-76139189-1');
+  gtag('config', 'UA-76139189-2');
 </script>
 </head>
 <body>
@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -108,7 +108,7 @@
       <h1>Core Functions in tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2020-03-04</h4>
+            <h4 class="date">2020-03-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ01-core-functions-in-tidyquant.Rmd"><code>vignettes/TQ01-core-functions-in-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ01-core-functions-in-tidyquant.Rmd</code></div>
@@ -179,17 +179,18 @@
 </ol>
 <p>Use <code><a href="../reference/tq_get.html">tq_get_options()</a></code> to see the full list.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="../reference/tq_get.html">tq_get_options</a></span>()</a></code></pre></div>
-<pre><code>##  [1] "stock.prices"       "stock.prices.japan" "economic.data"     
-##  [4] "quandl"             "quandl.datatable"   "tiingo"            
-##  [7] "tiingo.iex"         "tiingo.crypto"      "alphavantager"     
-## [10] "alphavantage"       "rblpapi"</code></pre>
+<pre><code>##  [1] "stock.prices"       "stock.prices.japan" "dividends"         
+##  [4] "splits"             "economic.data"      "quandl"            
+##  [7] "quandl.datatable"   "tiingo"             "tiingo.iex"        
+## [10] "tiingo.crypto"      "alphavantager"      "alphavantage"      
+## [13] "rblpapi"</code></pre>
 <div id="yahoo-finance" class="section level2">
 <h2 class="hasAnchor">
 <a href="#yahoo-finance" class="anchor"></a>2.1 Yahoo! Finance</h2>
 <p>The stock prices can be retrieved succinctly using <code>get = "stock.prices"</code>. This returns stock price data from Yahoo Finance.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">aapl_prices  &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"AAPL"</span>, <span class="dt">get =</span> <span class="st">"stock.prices"</span>, <span class="dt">from =</span> <span class="st">" 1990-01-01"</span>)</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">aapl_prices </a></code></pre></div>
-<pre><code>## # A tibble: 7,601 x 8
+<pre><code>## # A tibble: 7,611 x 8
 ##    symbol date        open  high   low close   volume adjusted
 ##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ##  1 AAPL   1990-01-02  1.26  1.34  1.25  1.33 45799600    1.08 
@@ -202,7 +203,7 @@
 ##  8 AAPL   1990-01-11  1.29  1.29  1.23  1.23 52763200    0.999
 ##  9 AAPL   1990-01-12  1.22  1.24  1.21  1.23 42974400    0.999
 ## 10 AAPL   1990-01-15  1.23  1.28  1.22  1.22 40434800    0.992
-## # … with 7,591 more rows</code></pre>
+## # … with 7,601 more rows</code></pre>
 <p>Yahoo Japan stock prices can be retrieved using a similar call, <code>get = "stock.prices.japan"</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">x8411T &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"8411.T"</span>, <span class="dt">get =</span> <span class="st">"stock.prices.japan"</span>, <span class="dt">from =</span> <span class="st">"2016-01-01"</span>, <span class="dt">to  =</span> <span class="st">"2016-12-31"</span>)</a></code></pre></div>
 <p>The data source is <a href="https://finance.yahoo.com/">Yahoo Finance</a> and <a href="http://finance.yahoo.co.jp/">Yahoo Finance Japan</a>.</p>
@@ -213,7 +214,7 @@
 <p>A wealth of economic data can be extracted from the Federal Reserve Economic Data (FRED) database. The FRED contains over 10K data sets that are free to use. See the <a href="https://fred.stlouisfed.org/categories">FRED categories</a> to narrow down the data base and to get data codes. The <a href="https://fred.stlouisfed.org/series/DCOILWTICO">WTI Crude Oil Prices</a> are shown below.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">wti_price_usd &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"DCOILWTICO"</span>, <span class="dt">get =</span> <span class="st">"economic.data"</span>)</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2">wti_price_usd </a></code></pre></div>
-<pre><code>## # A tibble: 2,647 x 3
+<pre><code>## # A tibble: 2,656 x 3
 ##    symbol     date       price
 ##    &lt;chr&gt;      &lt;date&gt;     &lt;dbl&gt;
 ##  1 DCOILWTICO 2010-01-01  NA  
@@ -226,7 +227,7 @@
 ##  8 DCOILWTICO 2010-01-12  80.8
 ##  9 DCOILWTICO 2010-01-13  79.7
 ## 10 DCOILWTICO 2010-01-14  79.4
-## # … with 2,637 more rows</code></pre>
+## # … with 2,646 more rows</code></pre>
 </div>
 <div id="quandl-api" class="section level2">
 <h2 class="hasAnchor">
@@ -437,7 +438,7 @@
 <a class="sourceLine" id="cb28-4" data-line-number="4"><span class="st">    </span><span class="kw"><a href="../reference/tq_mutate.html">tq_transmute</a></span>(<span class="dt">mutate_fun =</span> to.period,</a>
 <a class="sourceLine" id="cb28-5" data-line-number="5">                 <span class="dt">period     =</span> <span class="st">"months"</span>, </a>
 <a class="sourceLine" id="cb28-6" data-line-number="6">                 <span class="dt">col_rename =</span> <span class="st">"WTI Price"</span>)</a></code></pre></div>
-<pre><code>## # A tibble: 122 x 2
+<pre><code>## # A tibble: 123 x 2
 ##    date       `WTI Price`
 ##    &lt;date&gt;           &lt;dbl&gt;
 ##  1 2010-01-29        72.8
@@ -450,7 +451,7 @@
 ##  8 2010-08-31        71.9
 ##  9 2010-09-30        80.0
 ## 10 2010-10-29        81.4
-## # … with 112 more rows</code></pre>
+## # … with 113 more rows</code></pre>
 </div>
 </div>
 <div id="mutate-quantitative-data-tq_mutate" class="section level2">

@@ -55,13 +55,13 @@ used when periodicity changes" />
 
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-76139189-1"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-76139189-2"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-76139189-1');
+  gtag('config', 'UA-76139189-2');
 </script>
 
 
@@ -81,7 +81,7 @@ used when periodicity changes" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -323,7 +323,7 @@ respectively.</p>
 #&gt; </span><span style='color: #555555;'># … with 242 more rows</span><span></div><div class='input'>
 <span class='co'># Example 3: Using tq_mutate to work with non-OHLC data</span>
 <span class='fu'><a href='tq_get.html'>tq_get</a></span>(<span class='st'>"DCOILWTICO"</span>, <span class='kw'>get</span> <span class='kw'>=</span> <span class='st'>"economic.data"</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'>tq_mutate</span>(<span class='kw'>select</span> <span class='kw'>=</span> <span class='no'>price</span>, <span class='kw'>mutate_fun</span> <span class='kw'>=</span> <span class='no'>lag.xts</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>na.pad</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2,647 x 4</span><span>
+    <span class='fu'>tq_mutate</span>(<span class='kw'>select</span> <span class='kw'>=</span> <span class='no'>price</span>, <span class='kw'>mutate_fun</span> <span class='kw'>=</span> <span class='no'>lag.xts</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>na.pad</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2,656 x 4</span><span>
 #&gt;    symbol     date       price lag.xts
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> DCOILWTICO 2010-01-01  </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>  
@@ -336,7 +336,7 @@ respectively.</p>
 #&gt; </span><span style='color: #555555;'> 8</span><span> DCOILWTICO 2010-01-12  80.8    82.5
 #&gt; </span><span style='color: #555555;'> 9</span><span> DCOILWTICO 2010-01-13  79.7    80.8
 #&gt; </span><span style='color: #555555;'>10</span><span> DCOILWTICO 2010-01-14  79.4    79.7
-#&gt; </span><span style='color: #555555;'># … with 2,637 more rows</span><span></div><div class='input'>
+#&gt; </span><span style='color: #555555;'># … with 2,646 more rows</span><span></div><div class='input'>
 <span class='co'># Example 4: Using tq_mutate to apply a rolling regression</span>
 <span class='no'>fb_returns</span> <span class='kw'>&lt;-</span> <span class='no'>fb_stock_prices</span> <span class='kw'>%&gt;%</span>
     <span class='fu'>tq_transmute</span>(<span class='no'>adjusted</span>, <span class='no'>periodReturn</span>, <span class='kw'>period</span> <span class='kw'>=</span> <span class='st'>"monthly"</span>, <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='st'>"fb.returns"</span>)
