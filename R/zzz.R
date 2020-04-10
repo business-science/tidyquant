@@ -7,6 +7,10 @@
     tryCatch({
         if (rstudioapi::isAvailable()) {
             theme <- rstudioapi::getThemeInfo()
+            if (is.null(theme)) {
+                bsu_rule_color <- "#2c3e50"
+                bsu_main_color <- "#1f78b4"
+            }
             if (theme$dark) {
                 bsu_rule_color <- "#7FD2FF"
                 bsu_main_color <- "#18bc9c"
