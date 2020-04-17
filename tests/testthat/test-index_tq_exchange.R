@@ -35,4 +35,7 @@ test_that("Test returns error on invalid x input.", {
     expect_error(tq_exchange("XYZ"))
 })
 
-
+test_that("Test parse_dollar can parse market cap strings", {
+    tst <- c("$3.2B", "$9M", "$944.43K", NA)
+    expect_equal(parse_dollar(tst), c(3.2e9, 9e6, 944430, NA))
+})
