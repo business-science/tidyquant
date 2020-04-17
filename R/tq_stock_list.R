@@ -149,7 +149,7 @@ tq_exchange <- function(x) {
                 symbol = as.character(symbol),
                 company = as.character(company),
                 last.sale.price = as.numeric(last.sale.price),
-                market.cap = as.character(market.cap),
+                market.cap = parse_dollar(as.character(market.cap)),
                 ipo.year = as.numeric(ipo.year),
                 sector = as.character(sector),
                 industry = as.character(industry)
@@ -330,4 +330,18 @@ index_fallback <- function(x) {
         tidyr::unnest(cols = index.components)
 
     stock_index
+}
+
+#' Parse a string such as 23B or 100M into a number
+#'
+#' @param x A string in the form \code{$(number)(B|M|K)}
+parse_dollar <- function(x) {
+    multiplier <- dplyr::case_when(stringr::str_detect(x, "B") ~ 1e9,
+                                   stringr::str_detect(x, "M") ~ 1e6,
+                                   stringr::str_detect(x, "K") ~ 1e3,
+                                   TRUE ~ 1)
+
+    number <- as.numeric(stringr::str_extract(x, "[\\d\\.]+"))
+
+    number * multiplier
 }
