@@ -50,7 +50,7 @@ library(tidyquant)
 ```
 
  
-# Scaling the Getting of Financial Data
+# 1.0 Scaling the Getting of Financial Data
 
 A very basic example is retrieving the stock prices for multiple stocks. There are three primary ways to do this:
 
@@ -90,7 +90,7 @@ stock_list %>%
 Get an index...
 
 ```{r}
-tq_index("DOW", use_fallback = TRUE)
+tq_index("DOW")
 ```
 
 ...or, get an exchange.
@@ -103,7 +103,7 @@ tq_exchange("NYSE")
 Send the index or exchange to `tq_get`. _Important Note: This can take several minutes depending on the size of the index or exchange, which is why only the first three stocks are evaluated in the vignette._
 
 ```{r}
-tq_index("DOW", use_fallback = TRUE) %>%
+tq_index("DOW") %>%
     slice(1:3) %>%
     tq_get(get = "stock.prices")
 ```
@@ -111,34 +111,12 @@ tq_index("DOW", use_fallback = TRUE) %>%
 You can use any applicable "getter" to get data for __every stock in an index or an exchange__! This includes: "stock.prices", "key.ratios", "key.stats", and more.
 
 
-## Method 3: Use purrr to map a function
 
-We can pipe a tibble of stock symbols to a mutation that maps the `tq_get(get = "stock.prices")` function. The result is all of the stock prices in nested format.
-
-```{r}
-tibble(symbol = c("AAPL", "GOOG", "AMZN", "FB")) %>%
-    mutate(stock.prices = map(.x = symbol, ~ tq_get(.x, get = "stock.prices")))
-```
-
-
-## Method 4: Compound Getters
-
-In financial analysis, it's very common to need data from various sources to combine in an analysis. For this reason multiple `get` options ("compound getters") can be used to return a "compound get". A quick example:
-
-```{r}
-c("AAPL", "GOOG") %>%
-    tq_get(get = c("stock.prices", "dividends"))
-```
-
-This returns the stock prices and dividends for each stock as one nested data frame! Any of the `get` options that accept stock symbols can be used in this manner: `"stock.prices"`, `"key.ratios"`, `"key.stats"`, `"dividends"`, and `"splits"`. 
-
-
-# Scaling the Mutation of Financial Data
+# 2.0 Scaling the Mutation of Financial Data
 
 Once you get the data, you typically want to do something with it. You can easily do this at scale. Let's get the yearly returns for multiple stocks using `tq_transmute`. First, get the prices. We'll use the `FANG` data set, but you typically will use `tq_get` to retrieve data in "tibble" format.
 
 ```{r}
-data("FANG")
 FANG
 ```
 
@@ -163,6 +141,7 @@ FANG_returns_yearly %>%
          subtitle = "Mutating at scale is quick and easy!",
          y = "Returns", x = "", color = "") +
     scale_y_continuous(labels = scales::percent) +
+    coord_flip() +
     theme_tq() +
     scale_fill_tq()
 ```
@@ -170,7 +149,7 @@ FANG_returns_yearly %>%
 
 <a class="anchor" id="purrr-function-mapping"></a>
 
-# Modeling Financial Data using purrr
+# 3.0 Modeling Financial Data using purrr
 
 Eventually you will want to begin modeling (or more generally applying functions) at scale! One of the __best__ features of the `tidyverse` is the ability to map functions to nested tibbles using `purrr`. From the Many Models chapter of "[R for Data Science](http://r4ds.had.co.nz/)", we can apply the same modeling workflow to financial analysis. Using a two step workflow:
 
@@ -185,14 +164,19 @@ In this example, we'll use a simple linear model to identify the trend in annual
 
 ### Analyze a Single Stock
 
-First, let's come up with a function to help us collect annual log returns. The function below performs three operations internally. It first gets the stock prices using `tq_get()`. Then, it mutates the stock prices to period returns using `tq_transmute()`. We add the `type = "log"` and `period = "monthly"` arguments to ensure we retrieve a tibble of monthly log returns. Last, we take the mean of the monthly returns to get MMLR.
+First, let's collect stock data with `tq_get()`
 
 ```{r}
-get_annual_returns <- function(stock.symbol) {
-    stock.symbol %>%
-        tq_get(get  = "stock.prices",
-               from = "2007-01-01",
-               to   = "2016-12-31") %>%
+AAPL <- tq_get("AAPL", from = "2007-01-01", to = "2016-12-31")
+AAPL
+```
+
+
+Next, come up with a function to help us collect annual log returns. The function below mutates the stock prices to period returns using `tq_transmute()`. We add the `type = "log"` and `period = "monthly"` arguments to ensure we retrieve a tibble of monthly log returns. Last, we take the mean of the monthly returns to get MMLR.
+
+```{r}
+get_annual_returns <- function(stock.returns) {
+    stock.returns %>%
         tq_transmute(select     = adjusted, 
                      mutate_fun = periodReturn, 
                      type       = "log", 
@@ -203,7 +187,7 @@ get_annual_returns <- function(stock.symbol) {
 Let's test `get_annual_returns` out. We now have the annual log returns over the past ten years.
 
 ```{r}
-AAPL_annual_log_returns <- get_annual_returns("AAPL")
+AAPL_annual_log_returns <- get_annual_returns(AAPL)
 AAPL_annual_log_returns
 ```
 
@@ -244,8 +228,8 @@ tidy(mod)
 Adding to our workflow, we have the following:
 
 ```{r}
-get_model <- function(stock.symbol) {
-    annual_returns <- get_annual_returns(stock.symbol)
+get_model <- function(stock_data) {
+    annual_returns <- get_annual_returns(stock_data)
     mod <- lm(yearly.returns ~ year(date), data = annual_returns)
     tidy(mod)
 }
@@ -254,7 +238,7 @@ get_model <- function(stock.symbol) {
 Testing it out on a single stock. We can see that the "term" that contains the direction of the trend (the slope) is "year(date)". The interpetation is that as year increases one unit, the annual returns decrease by 3%. 
 
 ```{r}
-get_model("AAPL")
+get_model(AAPL)
 ```
 
 Now that we have identified the trend direction, it looks like we are ready to scale.
@@ -265,26 +249,37 @@ Once the analysis for one stock is done scale to many stocks is simple. For brev
 
 ```{r}
 set.seed(10)
-stocks <- tq_index("SP500", use_fallback = TRUE) %>%
-    sample_n(5)
-stocks
+stocks_tbl <- tq_index("SP500") %>%
+    sample_n(5) 
+stocks_tbl
 ```
 
 We can now apply our analysis function to the stocks using `dplyr::mutate` and `purrr::map`. The `mutate()` function adds a column to our tibble, and the `map()` function maps our custom `get_model` function to our tibble of stocks using the `symbol` column. The `tidyr::unnest` function unrolls the nested data frame so all of the model statistics are accessable in the top data frame level. The `filter`, `arrange` and `select` steps just manipulate the data frame to isolate and arrange the data for our viewing. 
 
 ```{r}
-stocks_model_stats <- stocks %>%
-    mutate(model = map(symbol, get_model)) %>%
-    unnest() %>%
+stocks_model_stats <- stocks_tbl %>%
+    select(symbol, company) %>%
+    tq_get(from = "2007-01-01", to = "2016-12-31") %>%
+    
+    # Nest 
+    group_by(symbol, company) %>%
+    nest() %>%
+    
+    # Apply the get_model() function to the new "nested" data column
+    mutate(model = map(data, get_model)) %>%
+    
+    # Unnest and collect slope
+    unnest(model) %>%
     filter(term == "year(date)") %>%
     arrange(desc(estimate)) %>%
     select(-term)
+
 stocks_model_stats
 ```
 
 We're done! We now have the coefficient of the linear regression that tracks the direction of the trend line. We can easily extend this type of analysis to larger lists or stock indexes. For example, the entire S&amp;P500 could be analyzed removing the `sample_n()` following the call to `tq_index("SP500")`.
 
-# Error Handling when Scaling 
+# 4.0 Error Handling when Scaling 
 
 Eventually you will run into a stock index, stock symbol, FRED data code, etc that cannot be retrieved. Possible reasons are: 
 

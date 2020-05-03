@@ -6,9 +6,9 @@ context(paste0("Testing tq_portfolio"))
 
 # Get stock prices
 stock_prices <- c("AAPL", "GOOG", "NFLX") %>%
-    tq_get(get = "stock.prices",
-           from = "2010-01-01",
-           to = "2015-12-31")
+    tq_get(get   = "stock.prices",
+           from  = "2010-01-01",
+           to    = "2015-12-31")
 
 
 # Get returns for individual stock components

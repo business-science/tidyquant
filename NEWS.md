@@ -1,4 +1,23 @@
-## tidyquant 1.0.0.9000
+## tidyquant 1.0.0.9000 (Development Version)
+
+### Improvements
+
+* `tq_get()` - Add `"dividends"` and `"splits"` get options, which have been fixed in `quantmod` 0.4-16. Issue 150.
+
+### Bug Fixes
+
+* Issue 157 - Error on package load with `rstudioapi::getThemeInfo()` returns `NULL`. 
+* `pivot_table` - Fix issues with `tidyverse` functions not being found.
+
+### TODO
+  - Tsibble compatability
+  - Add tests for Excel Functionality
+  - Add tests for dividends and splits 
+  - Add manual documentation for Excel Financial Functionality
+  - Update vignettes
+  - New book for Financial Modeling & Excel
+
+## tidyquant 1.0.0
 
 > This is the _"R for Excel Users"_ release. My aim is to build functionality that helps users coming from an __Excel Background__ (background I came from). It's important to have these users feel at home. I have a full suite of functionality to accomplish your Excel-to-R transition. 
 >
@@ -32,10 +51,21 @@
     - Note: I will evaluate the need for `summarise_at_by_time()`, `summarise_all_by_time()`, and `summarise_if_by_time()` after the release of `dplyr` v1.0.0.
 
 * __NEW API Integrations__
-    - __Tingo API__ - A popular Open-Source for stock prices, cryptocurrencies, and intraday feeds from the IEX (Investors Exchange). This can serve as an alternate source of data to Yahoo Finance. Integrated via the `riingo` package.
+    - __Tiingo API__ - A popular Open-Source for stock prices, cryptocurrencies, and intraday feeds from the IEX (Investors Exchange). This can serve as an alternate source of data to Yahoo Finance. Integrated via the `riingo` package.
     
-* Bug Fixes
-    - `theme_tq()` - Fix issues with collisions with `margin()` in `dials` R package. 
+* __Bug Fixes & Improvements__
+    - `theme_tq()` - Fix issues with collisions with `dials::margin()` and `ggplot2::margin()`. Similar potential `ggplot2` collisions have been fixed.  
+    - `theme_tq()` - Increased default top/bottom text margin on facet strips
+    
+* __Deprecation & Breaking Changes__
+
+    * __Potential Breaking Change__ - Single values now return the symbol column (i.e. `tq_get("AAPL")` returns symbol = "AAPL" for the 1st column).
+    * __Deprecated Sources:__ The following sources have been deprecated due to lack of support from the API:
+        - Google Finance
+        - Morningstar Key Ratios & Financials (Fundamentals) Data
+        - Yahoo Dividends and Splits
+        - Oanda FX and Metal Prices
+    * __Deprecated Compound Getters__ - Stacking multiple get options (`tq_get("AAPL", get = c("stock.prices", "stock.prices.japan"))`) is no longer available. __Solution:__ Split these up into two calls to `tq_get()`. 
 
 ## tidyquant 0.5.10
 

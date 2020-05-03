@@ -4,7 +4,8 @@
 \name{FANG}
 \alias{FANG}
 \title{Stock prices for the "FANG" stocks.}
-\format{A "tibble" ("tidy" data frame) with 4,032 rows and 8 variables:
+\format{
+A "tibble" ("tidy" data frame) with 4,032 rows and 8 variables:
 \describe{
 \item{symbol}{stock ticker symbol}
 \item{date}{trade date}
@@ -14,7 +15,8 @@
 \item{close}{stock price at the close of trading, in USD}
 \item{volume}{number of shares traded}
 \item{adjusted}{stock price at the close of trading adjusted for stock splits, in USD}
-}}
+}
+}
 \source{
 \url{http://www.investopedia.com/terms/f/fang-stocks-fb-amzn.asp}
 }

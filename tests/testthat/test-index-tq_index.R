@@ -1,21 +1,18 @@
+context("Testing tq_index()")
+
 library(tidyquant)
 
 #### Setup
-context("Testing tq_index")
-
 options <- tq_index_options()
 
 #### Tests
 
-# test_that("Test returns list of 9 options when x = 'options'", {
-#     options %>%
-#         expect_is("character") %>%
-#         length() %>%
-#         expect_gte(9)
-# })
+test_that("Test returns list of 5 options", {
+    expect_equal(length(options), 5)
+})
 
 # Long running script: Collecting all stock lists
-test_that("Test all stock.index options to ensure no issues during fetch.", {
+test_that("Test all stock index options to ensure no issues during fetch.", {
 
     skip_on_cran()
     for (i in seq_along(options)) {

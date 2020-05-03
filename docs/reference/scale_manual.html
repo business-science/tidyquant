@@ -53,13 +53,13 @@
 
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-76139189-1"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-76139189-2"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-76139189-1');
+  gtag('config', 'UA-76139189-2');
 </script>
 
 
@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -93,11 +93,16 @@
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Vignettes
+    Tutorials
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/TQ06-excel-in-r.html">NEW: Excel in R</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Financial Workflow</li>
     <li>
       <a href="../articles/TQ00-introduction-to-tidyquant.html">Introduction to tidyquant</a>
     </li>
@@ -143,7 +148,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>tidyquant colors and fills for ggplot2.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/business-science/tidyquant/blob/master/R/scale_manual.R'><code>R/scale_manual.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/business-science/tidyquant/blob/master/R/ggplot-scale_manual.R'><code>R/ggplot-scale_manual.R</code></a></small>
     <div class="hidden name"><code>scale_manual.Rd</code></div>
     </div>
 
@@ -197,7 +202,7 @@
            <span class='kw'>to</span>   <span class='kw'>=</span> <span class='st'>"2017-01-01"</span>)
 
 <span class='co'># Plot for stocks</span>
-<span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='no'>stocks</span> <span class='kw'>%&gt;%</span>
+<span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='no'>stocks</span> <span class='kw'>%&gt;%</span>
     <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>date</span>, <span class='no'>adjusted</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>symbol</span>)) +
     <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() +
     <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Multi stock example"</span>,
@@ -205,7 +210,7 @@
          <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Adjusted Close"</span>)
 
 <span class='co'># Plot with tidyquant theme and colors</span>
-<span class='no'>a</span> +
+<span class='no'>g</span> +
     <span class='fu'><a href='theme_tq.html'>theme_tq</a></span>() +
     <span class='fu'>scale_color_tq</span>()</div><div class='img'><img src='scale_manual-1.png' alt='' width='700' height='433' /></div><div class='input'>
 

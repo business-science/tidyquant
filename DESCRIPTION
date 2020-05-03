@@ -2,7 +2,6 @@ Package: tidyquant
 Type: Package
 Title: Tidy Quantitative Financial Analysis
 Version: 1.0.0.9000
-Date: 2020-02-28
 Authors@R: c(
     person("Matt", "Dancho", email = "mdancho@business-science.io", role = c("aut", "cre")),
     person("Davis", "Vaughan", email = "dvaughan@business-science.io", role = c("aut"))
@@ -33,6 +32,8 @@ Imports:
     magrittr,
     purrr,
     Quandl,
+    riingo,
+    alphavantager (>= 0.1.2),
     stringr,
     tibble,
     tidyr (>= 1.0.0),
@@ -48,16 +49,15 @@ Imports:
     cli
 Suggests:
     tidyverse,
-    forcats, 
-    alphavantager,
+    forcats,
     broom,
     knitr,
     rmarkdown,
-    testthat,
+    testthat (>= 2.1.0),
     tibbletime,
     scales,
     Rblpapi,
     readxl
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr

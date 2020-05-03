@@ -17,7 +17,7 @@
 #' __Summary Functions__ - Return a single value from a vector
 #' * Sum: [SUM_IFS()]
 #' * Center: [AVERAGE_IFS()], [MEDIAN_IFS()]
-#' * Count: [COUNT_IFS()], [COUNT_UNIQUE()]
+#' * Count: [COUNT_IFS()]
 #' * Range: [MIN_IFS()], [MAX_IFS()]
 #'
 #' __Create your own summary "_IF" function__
@@ -26,11 +26,8 @@
 #' @param x A vector. Most functions are designed for numeric data.
 #' Some functions like [COUNT_IFS()] handle multiple data types.
 #' @param ... Add cases to evaluate. See Details.
-#' @param .f A function to convert to an "IFS" function
-#' @param .NAME The name for the new "IFS" function you create
-#' @param .validate_numericish Validate whether the input, `x`, should be numeric or logical.
-#' Some summary functions like [COUNT_IFS()] can more than just numeric and logical data types.
-#'
+#' @param .f A function to convert to an "IFS" function.
+#' Use `...` in this case to provide parameters to the `.f` like `na.rm = TRUE`.
 #'
 #' @return
 #' - __Summary functions__ return a single value
@@ -45,6 +42,8 @@
 #'
 #' __Creating New "Summarizing IFS" Functions:__
 #' Users can create new "IFS" functions using the [CREATE_IFS()] function factory.
+#' The only requirement is that the output of your function (`.f`) must be a single
+#' value (scalar). See examples below.
 #'
 #'
 #' @examples
@@ -60,6 +59,10 @@
 #' COUNT_IFS(x = letters, str_detect(x, "a|b|c"))
 #'
 #' SUM_IFS(-10:10, x > 8 | x < -5)
+#'
+#' # Create your own IFS function (Mind blowingly simple)!
+#' Q75_IFS <- CREATE_IFS(.f = quantile, probs = 0.75, na.rm = TRUE)
+#' Q75_IFS(1:10, x > 5)
 #'
 #' # --- Usage with tidyverse ---
 #'
@@ -98,7 +101,7 @@
 #'
 #' @name excel_if_functions
 
-# MUTATING IFS ----
+# MUTATING IFS  (NOT IMPLEMENTED) ----
 #
 # #' @rdname excel_if_functions
 # #' @export
@@ -173,12 +176,14 @@ MAX_IFS <- function(x, ...) {
 
 #' @rdname excel_if_functions
 #' @export
-CREATE_IFS <- function(.f, ..., .NAME = "_IFS", .validate_numericish = FALSE) {
+CREATE_IFS <- function(.f, ...) {
+
+    .dots <- list(...)
 
     function(x, ...) {
-        if (.validate_numericish) validate_numericish(x, .NAME)
+        # if (.validate_numericish) validate_numericish(x, .NAME)
         meets_criteria <- eval_cases(x, ...)
-        .f(x[meets_criteria], ...)
+        do.call(.f, append(list(x[meets_criteria]), .dots))
     }
 }
 

@@ -43,7 +43,7 @@ library(tidyverse)
 library(tidyquant)
 ```
 
-# Function Compatibility
+# 1.0 Function Compatibility
 
 `tq_transmute_fun_options()` returns a list the __compatible mutate functions__ by each package. We'll discuss these options by package briefly.
 
@@ -174,12 +174,11 @@ The `PerformanceAnalytics` mutation functions all deal with returns:
 
 
 
-# Quantitative Power In Action
+# 2.0 Quantitative Power In Action
 
 We'll go through some examples, but first let's get some data. The `FANG` data set will be used which consists of stock prices for FB, AMZN, NFLX, and GOOG from the beginning of 2013 to the end of 2016.
 
 ```{r}
-data(FANG)
 FANG
 ```
 
@@ -277,7 +276,7 @@ FANG_daily %>%
     scale_color_tq()
 ```
 
-### With Periodicity Aggregation
+### With Monthly Periodicity Aggregation
 
 ```{r}
 FANG_monthly <- FANG %>%

@@ -51,13 +51,13 @@
 
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-76139189-1"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-76139189-2"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-76139189-1');
+  gtag('config', 'UA-76139189-2');
 </script>
 
 
@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -91,11 +91,16 @@
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Vignettes
+    Tutorials
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/TQ06-excel-in-r.html">NEW: Excel in R</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Financial Workflow</li>
     <li>
       <a href="../articles/TQ00-introduction-to-tidyquant.html">Introduction to tidyquant</a>
     </li>
@@ -154,14 +159,14 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-getting-data" class="hasAnchor"><a href="#section-getting-data" class="anchor"></a>Getting data</h2>
-          <p class="section-desc"><p><strong>Functions for getting financial data from various sources.</strong></p></p>
+          <h2 id="section-financial-data-getting-from-apis" class="hasAnchor"><a href="#section-financial-data-getting-from-apis" class="anchor"></a>Financial Data - Getting from APIs</h2>
+          <p class="section-desc"><p>Functions for getting financial data from various API sources.</p></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="tq_get.html">tq_get()</a></code> <code><a href="tq_get.html">tq_get_options()</a></code> <code><a href="tq_get.html">tq_get_stock_index_options()</a></code> </p>
+          <p><code><a href="tq_get.html">tq_get()</a></code> <code><a href="tq_get.html">tq_get_options()</a></code> </p>
         </td>
         <td><p>Get quantitative data in <code>tibble</code> format</p></td>
       </tr><tr>
@@ -191,6 +196,12 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="tiingo_api_key.html">tiingo_api_key()</a></code> </p>
+        </td>
+        <td><p>Set Tiingo API Key</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="FANG.html">FANG</a></code> </p>
         </td>
         <td><p>Stock prices for the "FANG" stocks.</p></td>
@@ -198,8 +209,8 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-mutating-data" class="hasAnchor"><a href="#section-mutating-data" class="anchor"></a>Mutating data</h2>
-          <p class="section-desc"><p><strong>Functions for mutating quantitative data.</strong></p></p>
+          <h2 id="section-financial-analysis-quantitative-transformations" class="hasAnchor"><a href="#section-financial-analysis-quantitative-transformations" class="anchor"></a>Financial Analysis - Quantitative Transformations</h2>
+          <p class="section-desc"><p>Functions for mutating quantitative data.</p></p>
         </th>
       </tr>
       <tr>
@@ -212,22 +223,8 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-performance-analysis" class="hasAnchor"><a href="#section-performance-analysis" class="anchor"></a>Performance analysis</h2>
-          <p class="section-desc"><p><strong>Functions for performing various financial performance analyses.</strong></p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="tq_performance.html">tq_performance()</a></code> <code><a href="tq_performance.html">tq_performance_()</a></code> <code><a href="tq_performance.html">tq_performance_fun_options()</a></code> </p>
-        </td>
-        <td><p>Computes a wide variety of summary performance metrics from stock or portfolio returns</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-portfolio-analysis" class="hasAnchor"><a href="#section-portfolio-analysis" class="anchor"></a>Portfolio analysis</h2>
-          <p class="section-desc"><p><strong>Functions for aggregating and analyzing portfolios.</strong></p></p>
+          <h2 id="section-financial-analysis-portfolio-aggregation" class="hasAnchor"><a href="#section-financial-analysis-portfolio-aggregation" class="anchor"></a>Financial Analysis - Portfolio Aggregation</h2>
+          <p class="section-desc"><p>Functions for aggregating 1 or more portfolios.</p></p>
         </th>
       </tr>
       <tr>
@@ -240,8 +237,22 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-charting-financial-data" class="hasAnchor"><a href="#section-charting-financial-data" class="anchor"></a>Charting financial data</h2>
-          <p class="section-desc"><p><strong>Functions for creating ggplots of financial data.</strong></p></p>
+          <h2 id="section-financial-analysis-performance-analytics" class="hasAnchor"><a href="#section-financial-analysis-performance-analytics" class="anchor"></a>Financial Analysis - Performance Analytics</h2>
+          <p class="section-desc"><p>Functions for performing various financial performance analyses.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="tq_performance.html">tq_performance()</a></code> <code><a href="tq_performance.html">tq_performance_()</a></code> <code><a href="tq_performance.html">tq_performance_fun_options()</a></code> </p>
+        </td>
+        <td><p>Computes a wide variety of summary performance metrics from stock or portfolio returns</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-financial-analysis-charting-with-ggplot-" class="hasAnchor"><a href="#section-financial-analysis-charting-with-ggplot-" class="anchor"></a>Financial Analysis - Charting with `ggplot2`</h2>
+          <p class="section-desc"><p>Functions for creating <strong>ggplots</strong> for financial charting.</p></p>
         </th>
       </tr>
       <tr>
@@ -290,8 +301,104 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
+          <h2 id="section-excel-pivot-table-vlookup-sum-ifs" class="hasAnchor"><a href="#section-excel-pivot-table-vlookup-sum-ifs" class="anchor"></a>Excel - Pivot Table, VLOOKUP, &amp; Sum-Ifs</h2>
+          <p class="section-desc"><p>These <strong>Power-Excel Functions</strong> provide common functionality that power-users coming from Excel use frequently.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="excel_pivot_table.html">pivot_table()</a></code> </p>
+        </td>
+        <td><p>Excel Pivot Table</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="excel_ref_functions.html">VLOOKUP()</a></code> </p>
+        </td>
+        <td><p>Excel Reference Functions</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="excel_if_functions.html">SUM_IFS()</a></code> <code><a href="excel_if_functions.html">COUNT_IFS()</a></code> <code><a href="excel_if_functions.html">AVERAGE_IFS()</a></code> <code><a href="excel_if_functions.html">MEDIAN_IFS()</a></code> <code><a href="excel_if_functions.html">MIN_IFS()</a></code> <code><a href="excel_if_functions.html">MAX_IFS()</a></code> <code><a href="excel_if_functions.html">CREATE_IFS()</a></code> </p>
+        </td>
+        <td><p>Excel Summarising "If" Functions</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-excel-summary-functions" class="hasAnchor"><a href="#section-excel-summary-functions" class="anchor"></a>Excel - Summary Functions</h2>
+          <p class="section-desc"><p>These functions return a <strong>single value</strong> from a vector of values</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="excel_stat_summary_functions.html">SUM()</a></code> <code><a href="excel_stat_summary_functions.html">AVERAGE()</a></code> <code><a href="excel_stat_summary_functions.html">MEDIAN()</a></code> <code><a href="excel_stat_summary_functions.html">MIN()</a></code> <code><a href="excel_stat_summary_functions.html">MAX()</a></code> <code><a href="excel_stat_summary_functions.html">COUNT()</a></code> <code><a href="excel_stat_summary_functions.html">COUNT_UNIQUE()</a></code> <code><a href="excel_stat_summary_functions.html">STDEV()</a></code> <code><a href="excel_stat_summary_functions.html">VAR()</a></code> <code><a href="excel_stat_summary_functions.html">COR()</a></code> <code><a href="excel_stat_summary_functions.html">COV()</a></code> <code><a href="excel_stat_summary_functions.html">FIRST()</a></code> <code><a href="excel_stat_summary_functions.html">LAST()</a></code> <code><a href="excel_stat_summary_functions.html">NTH()</a></code> <code><a href="excel_stat_summary_functions.html">CHANGE_FIRSTLAST()</a></code> <code><a href="excel_stat_summary_functions.html">PCT_CHANGE_FIRSTLAST()</a></code> </p>
+        </td>
+        <td><p>Excel Statistical Summary Functions</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-excel-mutation-functions" class="hasAnchor"><a href="#section-excel-mutation-functions" class="anchor"></a>Excel - Mutation Functions</h2>
+          <p class="section-desc"><p>These functions return a vector of <strong>multiple values</strong> the length of the input vector</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="excel_stat_mutation_functions.html">ABS()</a></code> <code><a href="excel_stat_mutation_functions.html">SQRT()</a></code> <code><a href="excel_stat_mutation_functions.html">LOG()</a></code> <code><a href="excel_stat_mutation_functions.html">EXP()</a></code> <code><a href="excel_stat_mutation_functions.html">RETURN()</a></code> <code><a href="excel_stat_mutation_functions.html">PCT_CHANGE()</a></code> <code><a href="excel_stat_mutation_functions.html">CHANGE()</a></code> <code><a href="excel_stat_mutation_functions.html">LAG()</a></code> <code><a href="excel_stat_mutation_functions.html">LEAD()</a></code> <code><a href="excel_stat_mutation_functions.html">CUMULATIVE_SUM()</a></code> <code><a href="excel_stat_mutation_functions.html">CUMULATIVE_PRODUCT()</a></code> <code><a href="excel_stat_mutation_functions.html">CUMULATIVE_MAX()</a></code> <code><a href="excel_stat_mutation_functions.html">CUMULATIVE_MIN()</a></code> <code><a href="excel_stat_mutation_functions.html">CUMULATIVE_MEAN()</a></code> <code><a href="excel_stat_mutation_functions.html">CUMULATIVE_MEDIAN()</a></code> </p>
+        </td>
+        <td><p>Excel Statistical Mutation Functions</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-excel-date-functions" class="hasAnchor"><a href="#section-excel-date-functions" class="anchor"></a>Excel - Date Functions</h2>
+          <p class="section-desc"><p>These functions provide <code>lubridate</code> (<strong>date &amp; date-time</strong>) and <code>timeDate</code> (<strong>Business Calendar Holiday</strong>) functionality</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="excel_date_functions.html">AS_DATE()</a></code> <code><a href="excel_date_functions.html">AS_DATETIME()</a></code> <code><a href="excel_date_functions.html">DATE()</a></code> <code><a href="excel_date_functions.html">DATEVALUE()</a></code> <code><a href="excel_date_functions.html">YMD()</a></code> <code><a href="excel_date_functions.html">MDY()</a></code> <code><a href="excel_date_functions.html">DMY()</a></code> <code><a href="excel_date_functions.html">YMD_HMS()</a></code> <code><a href="excel_date_functions.html">MDY_HMS()</a></code> <code><a href="excel_date_functions.html">DMY_HMS()</a></code> <code><a href="excel_date_functions.html">YMD_HM()</a></code> <code><a href="excel_date_functions.html">MDY_HM()</a></code> <code><a href="excel_date_functions.html">DMY_HM()</a></code> <code><a href="excel_date_functions.html">YMD_H()</a></code> <code><a href="excel_date_functions.html">MDY_H()</a></code> <code><a href="excel_date_functions.html">DMY_H()</a></code> <code><a href="excel_date_functions.html">WEEKDAY()</a></code> <code><a href="excel_date_functions.html">WDAY()</a></code> <code><a href="excel_date_functions.html">DOW()</a></code> <code><a href="excel_date_functions.html">MONTHDAY()</a></code> <code><a href="excel_date_functions.html">MDAY()</a></code> <code><a href="excel_date_functions.html">DOM()</a></code> <code><a href="excel_date_functions.html">QUARTERDAY()</a></code> <code><a href="excel_date_functions.html">QDAY()</a></code> <code><a href="excel_date_functions.html">DAY()</a></code> <code><a href="excel_date_functions.html">WEEKNUM()</a></code> <code><a href="excel_date_functions.html">WEEK()</a></code> <code><a href="excel_date_functions.html">WEEKNUM_ISO()</a></code> <code><a href="excel_date_functions.html">MONTH()</a></code> <code><a href="excel_date_functions.html">QUARTER()</a></code> <code><a href="excel_date_functions.html">YEAR()</a></code> <code><a href="excel_date_functions.html">YEAR_ISO()</a></code> <code><a href="excel_date_functions.html">DATE_TO_NUMERIC()</a></code> <code><a href="excel_date_functions.html">DATE_TO_DECIMAL()</a></code> <code><a href="excel_date_functions.html">SECOND()</a></code> <code><a href="excel_date_functions.html">MINUTE()</a></code> <code><a href="excel_date_functions.html">HOUR()</a></code> <code><a href="excel_date_functions.html">NOW()</a></code> <code><a href="excel_date_functions.html">TODAY()</a></code> <code><a href="excel_date_functions.html">EOMONTH()</a></code> <code><a href="excel_date_functions.html">EDATE()</a></code> <code><a href="excel_date_functions.html">NET_WORKDAYS()</a></code> <code><a href="excel_date_functions.html">COUNT_DAYS()</a></code> <code><a href="excel_date_functions.html">YEARFRAC()</a></code> <code><a href="excel_date_functions.html">DATE_SEQUENCE()</a></code> <code><a href="excel_date_functions.html">WORKDAY_SEQUENCE()</a></code> <code><a href="excel_date_functions.html">HOLIDAY_SEQUENCE()</a></code> <code><a href="excel_date_functions.html">HOLIDAY_TABLE()</a></code> <code><a href="excel_date_functions.html">FLOOR_DATE()</a></code> <code><a href="excel_date_functions.html">FLOOR_DAY()</a></code> <code><a href="excel_date_functions.html">FLOOR_WEEK()</a></code> <code><a href="excel_date_functions.html">FLOOR_MONTH()</a></code> <code><a href="excel_date_functions.html">FLOOR_QUARTER()</a></code> <code><a href="excel_date_functions.html">FLOOR_YEAR()</a></code> <code><a href="excel_date_functions.html">CEILING_DATE()</a></code> <code><a href="excel_date_functions.html">CEILING_DAY()</a></code> <code><a href="excel_date_functions.html">CEILING_WEEK()</a></code> <code><a href="excel_date_functions.html">CEILING_MONTH()</a></code> <code><a href="excel_date_functions.html">CEILING_QUARTER()</a></code> <code><a href="excel_date_functions.html">CEILING_YEAR()</a></code> <code><a href="excel_date_functions.html">ROUND_DATE()</a></code> <code><a href="excel_date_functions.html">ROUND_DAY()</a></code> <code><a href="excel_date_functions.html">ROUND_WEEK()</a></code> <code><a href="excel_date_functions.html">ROUND_MONTH()</a></code> <code><a href="excel_date_functions.html">ROUND_QUARTER()</a></code> <code><a href="excel_date_functions.html">ROUND_YEAR()</a></code> </p>
+        </td>
+        <td><p>Excel Date and Time Functions</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-excel-financial-functions" class="hasAnchor"><a href="#section-excel-financial-functions" class="anchor"></a>Excel - Financial Functions</h2>
+          <p class="section-desc"><p>These functions provide common financial calcuations from Excel</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="excel_financial_math_functions.html">NPV()</a></code> <code><a href="excel_financial_math_functions.html">IRR()</a></code> <code><a href="excel_financial_math_functions.html">FV()</a></code> <code><a href="excel_financial_math_functions.html">PV()</a></code> <code><a href="excel_financial_math_functions.html">PMT()</a></code> <code><a href="excel_financial_math_functions.html">RATE()</a></code> </p>
+        </td>
+        <td><p>Excel Financial Math Functions</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-tidyverse-extensions" class="hasAnchor"><a href="#section-tidyverse-extensions" class="anchor"></a>Tidyverse - Extensions</h2>
+          <p class="section-desc"><p>Added functionality for <code>tidyverse</code> users</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="summarise_by_time.html">summarise_by_time()</a></code> <code><a href="summarise_by_time.html">summarize_by_time()</a></code> </p>
+        </td>
+        <td><p>Summarise each group by time</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
           <h2 id="section-tidyquant" class="hasAnchor"><a href="#section-tidyquant" class="anchor"></a>Tidyquant</h2>
-          <p class="section-desc"><p><strong>Package level information.</strong></p></p>
+          <p class="section-desc"><p>Package level information.</p></p>
         </th>
       </tr>
       <tr>
@@ -322,11 +429,17 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-getting-data">Getting data</a></li>
-      <li><a href="#section-mutating-data">Mutating data</a></li>
-      <li><a href="#section-performance-analysis">Performance analysis</a></li>
-      <li><a href="#section-portfolio-analysis">Portfolio analysis</a></li>
-      <li><a href="#section-charting-financial-data">Charting financial data</a></li>
+      <li><a href="#section-financial-data-getting-from-apis">Financial Data - Getting from APIs</a></li>
+      <li><a href="#section-financial-analysis-quantitative-transformations">Financial Analysis - Quantitative Transformations</a></li>
+      <li><a href="#section-financial-analysis-portfolio-aggregation">Financial Analysis - Portfolio Aggregation</a></li>
+      <li><a href="#section-financial-analysis-performance-analytics">Financial Analysis - Performance Analytics</a></li>
+      <li><a href="#section-financial-analysis-charting-with-ggplot-">Financial Analysis - Charting with `ggplot2`</a></li>
+      <li><a href="#section-excel-pivot-table-vlookup-sum-ifs">Excel - Pivot Table, VLOOKUP, &amp; Sum-Ifs</a></li>
+      <li><a href="#section-excel-summary-functions">Excel - Summary Functions</a></li>
+      <li><a href="#section-excel-mutation-functions">Excel - Mutation Functions</a></li>
+      <li><a href="#section-excel-date-functions">Excel - Date Functions</a></li>
+      <li><a href="#section-excel-financial-functions">Excel - Financial Functions</a></li>
+      <li><a href="#section-tidyverse-extensions">Tidyverse - Extensions</a></li>
       <li><a href="#section-tidyquant">Tidyquant</a></li>
       <li><a href="#section-deprecated">Deprecated</a></li>
     </ul>

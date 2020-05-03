@@ -5,5 +5,7 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 notes
 
+The note is because of the vignette folder size 5MB. The long-term plan is to move
+the vignettes to a bookdown book, which will fix the note. 

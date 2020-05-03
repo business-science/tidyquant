@@ -164,14 +164,15 @@ library(dplyr)
 library(ggplot2)
 
 
-AAPL <- tq_get("AAPL")
+AAPL <- tq_get("AAPL", from = "2013-01-01", to = "2016-12-31")
 
 # SMA
 AAPL \%>\%
     ggplot(aes(x = date, y = close)) +
     geom_line() +           # Plot stock price
     geom_bbands(aes(high = high, low = low, close = close), ma_fun = SMA, n = 50) +
-    coord_x_date(xlim = c(today() - years(1), today()), ylim = c(80, 130))
+    coord_x_date(xlim = c(as_date("2016-12-31") - dyears(1), as_date("2016-12-31")),
+                 ylim = c(75, 125))
 
 
 # EMA
@@ -180,7 +181,8 @@ AAPL \%>\%
    geom_line() +           # Plot stock price
    geom_bbands(aes(high = high, low = low, close = close),
                   ma_fun = EMA, wilder = TRUE, ratio = NULL, n = 50) +
-   coord_x_date(xlim = c(today() - years(1), today()), ylim = c(80, 130))
+   coord_x_date(xlim = c(as_date("2016-12-31") - dyears(1), as_date("2016-12-31")),
+                ylim = c(75, 125))
 
 
 # VWMA
@@ -189,7 +191,8 @@ AAPL \%>\%
     geom_line() +           # Plot stock price
     geom_bbands(aes(high = high, low = low, close = close, volume = volume),
                    ma_fun = VWMA, n = 50) +
-    coord_x_date(xlim = c(today() - years(1), today()), ylim = c(80, 130))
+    coord_x_date(xlim = c(as_date("2016-12-31") - dyears(1), as_date("2016-12-31")),
+                ylim = c(75, 125))
 }
 \seealso{
 See individual modeling functions for underlying parameters:

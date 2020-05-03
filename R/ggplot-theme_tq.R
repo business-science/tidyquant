@@ -13,7 +13,7 @@
 #' library(ggplot2)
 #'
 #' # Get stock prices
-#' AAPL <- tq_get("AAPL")
+#' AAPL <- tq_get("AAPL", from = "2013-01-01", to = "2016-12-31")
 #'
 #' # Plot using ggplot with theme_tq
 #' AAPL %>% ggplot(aes(x = date, y = close)) +
@@ -23,8 +23,8 @@
 #'                    wilder = TRUE,
 #'                    ratio = NULL,
 #'                    n = 50) +
-#'        coord_x_date(xlim = c(today() - years(1), today()),
-#'                     ylim = c(80, 130)) +
+#'        coord_x_date(xlim = c("2016-01-01", "2016-12-31"),
+#'                  ylim = c(75, 125)) +
 #'        labs(title = "Apple BBands",
 #'             x = "Date",
 #'             y = "Price") +
@@ -77,7 +77,7 @@ theme_tq <- function(base_size = 11, base_family = "") {
 
             # Strip (Used with multiple panels)
             strip.background   = ggplot2::element_rect(fill = blue, color = blue),
-            strip.text         = ggplot2::element_text(color = white, size = rel(0.8)),
+            strip.text         = ggplot2::element_text(color = white, size = ggplot2::rel(0.8), margin = ggplot2::margin(t = 5, b = 5)),
 
             # Plot
             plot.title         = ggplot2::element_text(size = rel(1.2), hjust = 0,

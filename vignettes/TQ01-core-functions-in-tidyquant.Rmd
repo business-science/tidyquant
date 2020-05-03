@@ -49,9 +49,9 @@ library(tidyquant)
 ```
 
 
-# Retrieve Consolidated Symbol Data
+# 1.0 Retrieve Consolidated Symbol Data
 
-## Stock Indexes
+## 1.1 Stock Indexes
 
 A wide range of stock index / exchange lists can be retrieved using `tq_index()`. To get a full list of the options, use `tq_index_options()`. 
 
@@ -67,7 +67,7 @@ tq_index("SP500")
 
 The data source is [State Street Global Advisors - US SPDRS ETFs](https://www.ssga.com/us/en/institutional/etfs).
 
-## Stock Exchanges
+## 1.2 Stock Exchanges
 
 Stock lists for three stock exchanges are available: NASDAQ, NYSE, and AMEX. If you forget, just use `tq_exchange_options()`. We can easily get the full list of stocks on the NASDAQ exchange.
 
@@ -75,15 +75,25 @@ Stock lists for three stock exchanges are available: NASDAQ, NYSE, and AMEX. If 
 tq_exchange("NASDAQ")
 ```
 
-# Get Quantitative Data
+# 1.0 Get Quantitative Data
 
-The `tq_get()` function is used to collect data by changing the `get` argument. The options include stock prices, key statistics, dividends and splits from Yahoo Finance, key ratios from Morningstar, financial statements from Google Finance, metal prices and exchange rates from Oanda, and economic data from the FRED database. Use `tq_get_options()` to see the full list.
+The `tq_get()` function is used to collect data by changing the `get` argument. The data sources:
+
+1. __Yahoo Finance__ - Daily stock data
+2. __FRED__ - Economic data
+3. __Quandl__ - Economic, Energy, & Financial Data API
+4. __Tiingo__ - Financial API with sub-daily stock data and crypto-currency
+5. __Alpha Vantage__ - Financial API with sub-daily, ForEx, and crypto-currency data
+6. __Bloomberg__ - Financial API. Paid account is required. 
+
+
+Use `tq_get_options()` to see the full list.
 
 ```{r}
 tq_get_options()
 ```
 
-## Stock Prices, Dividends and Splits
+## 2.1 Yahoo! Finance
 
 The stock prices can be retrieved succinctly using `get = "stock.prices"`. This returns stock price data from Yahoo Finance. 
 
@@ -99,110 +109,22 @@ x8411T <- tq_get("8411.T", get = "stock.prices.japan", from = "2016-01-01", to  
 ```
 
 
-Dividends are obtained using `get = "dividends"`. 
-
-```{r}
-aapl_divs <- tq_get("AAPL", get = "dividends", from = "1990-01-01")
-aapl_divs
-```
-
-Stock splits are obtained using `get = "splits"`. 
-
-```{r}
-aapl_splits <- tq_get("AAPL", get = "splits", from = "1990-01-01")
-aapl_splits
-```
-
 The data source is [Yahoo Finance](https://finance.yahoo.com/) and [Yahoo Finance Japan](http://finance.yahoo.co.jp/).
 
-## Financial Statements
+## 2.2 FRED Economic Data
 
-_Google Finance no longer provides access to financial statements_
 
-For any given stock, a total of six financials statements are retrieved as nested tibbles, one for each combination of statement type (Income Statement, Balance Sheet, and Cash Flow) and period (by annual and quarter). 
 
-```{r}
-# aapl_financials <- tq_get("AAPL", get = "financials")
-# aapl_financials
-```
+A wealth of economic data can be extracted from the Federal Reserve Economic Data (FRED) database. The FRED contains over 10K data sets that are free to use. See the [FRED categories](https://fred.stlouisfed.org/categories) to narrow down the data base and to get data codes. The [WTI Crude Oil Prices](https://fred.stlouisfed.org/series/DCOILWTICO) are shown below.
 
-The statement information can be extracted by selecting (`dplyr::select()`) and filtering (`dplyr::filter()`) to the desired statement and unnesting (`tidyr::unnest()`) the results.
 
-```{r}
-# aapl_financials %>%
-#     filter(type == "IS") %>%
-#     select(annual) %>%
-#     unnest()
-```
-
-A slightly more powerful example is looking at all quarterly statements together. This is easy to do with `unnest` and `spread` from the `tidyr` package.
-
-```{r}
-# aapl_financials %>%
-#     unnest(quarter) %>% 
-#     spread(key = date, value = value)
+```{r,}
+wti_price_usd <- tq_get("DCOILWTICO", get = "economic.data")
+wti_price_usd 
 ```
 
 
-The data source is [Google Finance](https://www.google.com/finance).
-
-
-## Key Ratios & Key Stats
-
-The next two getters, key ratios and key stats, work in tandem. Key ratios provide the _historical_ annual metrics on the stock / company for the last 10 years. Key stats provide the _real-time_ metrics on the stock / company.
-
-### Key Ratios
-
-_Key Ratios have been deprecated due to a change in Mornginstar's website._
-
-For any given stock, the historical key ratios are available for 10 years, and are classified into the following sections:
-
-* __Financials__: These ratios include gross margin %, operating margin %, EPS, book value per share, and more.
-* __Profitability__: These ratios include margin as a percentage of sales (gross margin, operating margin, EBT margin, etc) and profitability metrics such as tax rate %, asset turnover, ROA, financial leverage, ROE, return on invested capital, and more.
-* __Growth__: These ratios include year over year, 3-year average, 5-year average, and 10-year average growth rates for revenue, operating income, net income, and EPS.
-* __Cash Flow__: These ratios include operating cash flow growth % YOY, free cash flow growth % YOY, capital expenditure as a % of sales, and more.
-* __Financial Health__: These ratios include balance sheet items as a percentage of total assets and liabilities, and liquidity/financial health metrics such as current ratio, quick ratio, debt/equity, and financial leverage.
-* __Efficiency Ratios__: These ratios include days sales outstanding, days inventory, inventory turnover, asset turnover and more. 
-* __Valuation Ratios__: These ratios include price to earnings (P/E), price to sales (P/S), price to book (P/B), and price to operating cash flow. 
-
-To get the key ratios:
-
-```{r}
-# aapl_key_ratios <- tq_get("AAPL", get = "key.ratios")
-# aapl_key_ratios
-```
-
-The ratios can be filtered and unnested to peel away the hierarchical nesting layers and access the underlying data:
-
-```{r}
-# aapl_key_ratios %>%
-#     filter(section == "Valuation Ratios") %>%
-#     unnest()
-```
-
-Once we have a section, we can quickly visualize the ratios:
-
-```{r}
-# aapl_key_ratios %>%
-#     filter(section == "Valuation Ratios") %>%
-#     unnest() %>%
-#     ggplot(aes(x = date, y = value)) +
-#     geom_line(aes(col = factor(category, levels = c("Price to Earnings", "Price to Cash Flow", "Price to Book", "Price to Sales"))),
-#               size = 1)  +
-#     labs(title = "10-Year Historical Valuation Ratios for AAPL", x = "",
-#          y = "", col = "") +
-#     theme_tq() +
-#     scale_color_tq()
-```
-
-The data source is [Morningstar](http://www.morningstar.com/).
-
-
-### Key Stats
-
-The Key Statistics have been discontinued by [Yahoo Finance](https://finance.yahoo.com/). We are looking for an alternative solution for real-time finanical data.
-
-## Quandl
+## 2.3 Quandl API
 
 [Quandl](https://www.quandl.com/) provides access to a vast number of financial and economic databases. The `Quandl` package has been integrated into `tidyquant` as follows.
 
@@ -211,7 +133,7 @@ The Key Statistics have been discontinued by [Yahoo Finance](https://finance.yah
 To make full use of the integration we recommend you set your api key. To do this create or sign into your Quandl account and go to your account api key page.
 
 ```{r, eval = F}
-quandl_api_key("enter-your-api-key-here")
+quandl_api_key("<your-api-key>")
 ```
 
 ### Search
@@ -273,7 +195,48 @@ tq_get("ZACKS/MKTV", get = "quandl.datatable") # Zacks Market Value Supplement
 tq_get("ZACKS/SHRS", get = "quandl.datatable") # Zacks Shares Out Supplement
 ```
 
-## Alpha Vantage
+## 2.4 Tiingo API
+
+The [Tiingo API](https://www.tiingo.com/) is a free source for stock prices, cryptocurrencies, and intraday feeds from the IEX (Investors Exchange). This can serve as an alternate source of data to Yahoo! Finance.
+
+### Authentication
+
+To make full use of the integration you need to get an API key and then set your api key. If you don't have one already, go to [Tiingo](https://www.tiingo.com/) account and get your FREE API key. You can then set it as follows:
+
+```{r, eval=FALSE}
+tiingo_api_key('<your-api-key>')
+```
+
+### Getting Tiingo Data
+
+The `tidyquant` package provides convenient wrappers to the `riingo` package (R interface to Tiingo). Here's how `tq_get()` maps to `riingo`:
+
+- Tiingo Prices: `tq_get(get = "tiingo") = riingo::riingo_prices()`
+- Tiingo IEX Data: `tq_get(get = "tiingo.iex") = riingo::riingo_iex_prices()`
+- Tiingo Crypto Data: `tq_get(get = "tiingo.crypto") = riingo::riingo_crypto_prices()`
+
+```{r, eval=F}
+# Tiingo Prices (Free alternative to Yahoo Finance!)
+tq_get(c("AAPL", "GOOG"), get = "tiingo", from = "2010-01-01")
+
+# Sub-daily prices from IEX ----
+tq_get(c("AAPL", "GOOG"),
+       get = "tiingo.iex",
+       from   = "2020-01-01",
+       to     = "2020-01-15",
+       resample_frequency = "5min")
+
+# Tiingo Bitcoin in USD ----
+tq_get(c("btcusd"),
+       get    = "tiingo.crypto",
+       from   = "2020-01-01",
+       to     = "2020-01-15",
+       resample_frequency = "5min")
+```
+
+
+
+## 2.5 Alpha Vantage API
 
 [Alpha Vantage](https://www.alphavantage.co/) provides access to a real-time and historical financial data. The `alphavantager` package, a lightweight R interface, has been integrated into `tidyquant` as follows. The benefit of the integration is the __scalability since we can now get multiple symbols returned in a tidy format__. 
 
@@ -282,7 +245,7 @@ tq_get("ZACKS/SHRS", get = "quandl.datatable") # Zacks Shares Out Supplement
 To make full use of the integration you need to get an API key and then set your api key. If you don't have one already, go to [Alpha Vantage](https://www.alphavantage.co/) account and get your FREE API key. You can then set it as follows:
 
 ```{r, eval = F}
-av_api_key("enter-your-api-key-here")
+av_api_key("<your-api-key>")
 ```
 
 ### Getting Alpha Vantage Data
@@ -291,11 +254,11 @@ Getting data is simple as the structure follows the [Alpha Vantage API documenta
 
 ```{r, eval = F}
 # Scaling is as simple as supplying multiple symbols
-my_intraday_data <- c("FB", "MSFT") %>%
-    tq_get(get = "alphavantager", av_fun = "TIME_SERIES_INTRADAY", interval = "5min")
+c("FB", "MSFT") %>%
+    tq_get(get = "alphavantage", av_fun = "TIME_SERIES_INTRADAY", interval = "5min")
 ```
 
-## Bloomberg
+## 2.6 Bloomberg
 
 [Bloomberg](https://www.bloomberg.com/professional/solution/bloomberg-terminal/) provides access to arguably the most comprehensive financial data and is actively used by most major financial instutions that work with financial data. The `Rblpapi` package, an R interface to Bloomberg, has been integrated into `tidyquant` as follows. The benefit of the integration is the __scalability since we can now get multiple symbols returned in a tidy format__. 
 
@@ -330,57 +293,19 @@ my_bloomberg_data <- c('SPX Index','ODMAX Equity') %>%
 
 
 
-## Economic Data 
-
-A wealth of economic data can be extracted from the Federal Reserve Economic Data (FRED) database. The [WTI Crude Oil Prices](https://fred.stlouisfed.org/series/DCOILWTICO) are shown below.
-
-```{r,}
-wti_price_usd <- tq_get("DCOILWTICO", get = "economic.data")
-wti_price_usd 
-```
 
 
-The FRED contains literally over 10K data sets that are free to use. See the [FRED categories](https://fred.stlouisfed.org/categories) to narrow down the data base and to get data codes. 
-
-
-## Exchange Rates
-
-Exchange rates are entered as currency pairs using "/" notation (e.g `"EUR/USD"`), and by setting `get = "exchange.rates"`. 
-
-```{r}
-eur_usd <- tq_get("EUR/USD", 
-                  get = "exchange.rates", 
-                  from = Sys.Date() - lubridate::days(10))
-eur_usd 
-```
-
-The data source is [Oanda](https://www.oanda.com/), and list of currencies to compare can be found on Oanda's currency converter. It may make more sense to get this data from the FRED (See [Economic Data](#economic-data)) since the max period for Oanda is 180 days.
-
-## Metal Prices
-
-Metal prices are very similar to stock prices. Set `get = "metal.prices"` along with the appropriate commodity symbol (e.g. XAU (gold) , XAG (silver), XPD (palladium), or XPT (platinum)). 
-
-```{r}
-plat_price_eur <- tq_get("plat", get = "metal.prices", 
-                         from = Sys.Date() - lubridate::days(10),
-                         base.currency = "EUR")
-plat_price_eur 
-```
-
-The data source is [Oanda](https://www.oanda.com/). It may make more sense to get this data from the FRED (See [Economic Data](#economic-data)) since the max period for Oanda is 180 days.
-
-# Mutate Quantitative Data
+# 3.0 Mutate Quantitative Data
 
 Mutating functions enable the `xts`/`zoo`, `quantmod` and `TTR` functions to shine. We'll touch on the mutation functions briefly using the `FANG` data set, which consists of daily prices for FB, AMZN, GOOG, and NFLX from the beginning of 2013 to the end of 2016. We'll apply the functions to grouped data sets to get a feel for how each works
 
 ```{r}
-data(FANG)
 FANG
 ```
 
 For a detailed walkthrough of the compatible functions, see the next vignette in the series, [R Quantitative Analysis Package Integrations in tidyquant](TQ02-quant-integrations-in-tidyquant.html).
 
-## Transmute Quantitative Data, tq_transmute 
+## 3.1 Transmute Quantitative Data, tq_transmute 
 
 Transmute the results of `tq_get()`. Transmute here holds almost the same meaning as in `dplyr`, only the newly created columns will be returned, but with `tq_transmute()`, the number of rows returned can be different than the original data frame. This is important for changing periodicity. An example is periodicity aggregation from daily to monthly.
 
@@ -398,14 +323,15 @@ Returns from FRED, Oanda, and other sources do not have open, high, low, close (
 
 ```{r, message=FALSE, warning=FALSE}
 wti_prices <- tq_get("DCOILWTICO", get = "economic.data") 
+
 wti_prices %>%    
     tq_transmute(mutate_fun = to.period,
-                 period = "months", 
+                 period     = "months", 
                  col_rename = "WTI Price")
 ```
 
 
-## Mutate Quantitative Data, tq_mutate 
+## 3.2 Mutate Quantitative Data, tq_mutate 
 
 Adds a column or set of columns to the tibble with the calculated attributes (hence the original tibble is returned, mutated with the additional columns). An example is getting the `MACD` from `close`, which mutates the original input by adding MACD and Signal columns. Note that we can quickly rename the columns using the `col_rename` argument.
 
@@ -470,7 +396,7 @@ As shown above, the rolling regression coefficients were added to the data frame
 
 
 
-## _xy Variants, tq_mutate_xy and tq_transmute_xy
+## 3.3 _xy Variants, tq_mutate_xy and tq_transmute_xy
 
 Enables working with mutation functions that require two primary inputs (e.g. EVWMA, VWAP, etc).
 

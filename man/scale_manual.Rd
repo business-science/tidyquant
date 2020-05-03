@@ -43,7 +43,7 @@ stocks <- c("AAPL", "FB", "NFLX") \%>\%
            to   = "2017-01-01")
 
 # Plot for stocks
-a <- stocks \%>\%
+g <- stocks \%>\%
     ggplot(aes(date, adjusted, color = symbol)) +
     geom_line() +
     labs(title = "Multi stock example",
@@ -51,7 +51,7 @@ a <- stocks \%>\%
          ylab = "Adjusted Close")
 
 # Plot with tidyquant theme and colors
-a +
+g +
     theme_tq() +
     scale_color_tq()
 

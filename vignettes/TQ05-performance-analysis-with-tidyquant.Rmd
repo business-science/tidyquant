@@ -41,7 +41,7 @@ This vignette aims to cover three aspects of performance analysis:
 
 3. How to customize `tq_portfolio` and `tq_performance` using the `...` parameter
 
-# Key Concepts
+# 1.0 Key Concepts
 
 An important concept is that performance analysis is based on the statistical properties of __returns__ (not prices). As a result, this package uses inputs of __time-based returns as opposed to stock prices__. The arguments change to `Ra` for the asset returns and `Rb` for the baseline returns. We'll go over how to get returns in the [Workflow](#workflow) section.
 
@@ -49,7 +49,7 @@ Another important concept is the __baseline__. The baseline is what you are meas
 
 Now for a quick tutorial to show off the `PerformanceAnalytics` package integration.
 
-# Quick Example
+# 2.0 Quick Example
 
 One of the most widely used risk to return metrics is the [Capital Asset Pricing Model (CAPM)](http://www.investopedia.com/terms/c/capm.asp). According to Investopedia:
 
@@ -113,8 +113,7 @@ RaRb_capm
 We can quickly isolate attributes, such as alpha, the measure of growth, and beta, the measure of risk.
 
 ```{r}
-RaRb_capm %>%
-    select(Alpha, Beta)
+RaRb_capm %>% select(symbol, Alpha, Beta)
 ```
 
 With `tidyquant` it's efficient and easy to get the CAPM information! And, that's just one of `r tq_performance_fun_options() %>% unlist() %>% length()` available functions to analyze stock and portfolio return performance. Just use `tq_performance_fun_options()` to see the full list.
@@ -122,7 +121,7 @@ With `tidyquant` it's efficient and easy to get the CAPM information! And, that'
 
 <a class="anchor" id="workflow"></a>
 
-# Workflow
+# 3.0 Workflow
 
 The general workflow is shown in the diagram below. We'll step through the workflow first with a group of individual assets (stocks) and then with portfolios of stocks. 
 
@@ -132,7 +131,7 @@ knitr::include_graphics("perfomance_analysis_workflow.png")
 
 
 
-## Individual Assets
+## 3.1 Individual Assets
 
 Individual assets are the simplest form of analysis because there is no portfolio aggregation (Step 3A). We'll re-do the "Quick Example" this time getting the __Sharpe Ratio__, a measure of reward-to-risk. 
 
@@ -182,9 +181,11 @@ The last step is to apply the `SharpeRatio` function to our groups of stock retu
 
 ```{r}
 stock_returns_monthly %>%
-    tq_performance(Ra = Ra, 
-                   Rb = NULL, 
-                   performance_fun = SharpeRatio)
+    tq_performance(
+        Ra = Ra, 
+        Rb = NULL, 
+        performance_fun = SharpeRatio
+    )
 ```
 
 Now we have the Sharpe Ratio for each of the three stocks. What if we want to adjust the parameters of the function? We can just add on the arguments of the underlying function.
@@ -192,16 +193,18 @@ Now we have the Sharpe Ratio for each of the three stocks. What if we want to ad
 
 ```{r}
 stock_returns_monthly %>%
-    tq_performance(Ra = Ra, 
-                   Rb = NULL, 
-                   performance_fun = SharpeRatio, 
-                   Rf = 0.03 / 12, 
-                   p = 0.99)
+    tq_performance(
+        Ra = Ra, 
+        Rb = NULL, 
+        performance_fun = SharpeRatio, 
+        Rf = 0.03 / 12, 
+        p  = 0.99
+    )
 ```
 
 
 
-## Portfolios (Asset Groups)
+## 3.2 Portfolios (Asset Groups)
 
 Portfolios are slightly more complicated because we are now dealing with groups of assets versus individual stocks, and we need to aggregate weighted returns. Fortunately, this is only one extra step with `tidyquant` using `tq_portfolio()`.
 
@@ -449,7 +452,7 @@ RaRb_multiple_portfolio %>%
 ```
 
 
-# Available Functions
+# 4.0 Available Functions
 
 We've only scratched the surface of the analysis functions available through `PerformanceAnalytics`. The list below includes all of the compatible functions grouped by function type. The table functions are the most useful to get a cross section of metrics. We'll touch on a few. We'll also go over `VaR` and `SharpeRatio` as these are very commonly used as performance measures.
 
@@ -458,7 +461,7 @@ tq_performance_fun_options()
 ```
  
 
-## table.Stats
+## 4.1 table.Stats
 
 Returns a basic set of statistics that match the period of the data passed in (e.g., monthly returns will get monthly statistics, daily will be daily stats, and so on).
 
@@ -467,7 +470,7 @@ RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = NULL, performance_fun = table.Stats)
 ```
 
-## table.CAPM
+## 4.2 table.CAPM
 
 Takes a set of returns and relates them to a benchmark return. Provides a set of measures related to an excess return single factor model, or CAPM.
 
@@ -476,7 +479,7 @@ RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = Rb, performance_fun = table.CAPM)
 ```
 
-## table.AnnualizedReturns
+## 4.3 table.AnnualizedReturns
 
 Table of Annualized Return, Annualized Std Dev, and Annualized Sharpe.
 
@@ -485,7 +488,7 @@ RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = NULL, performance_fun = table.AnnualizedReturns)
 ```
 
-## table.Correlation
+## 4.4 table.Correlation
 
 This is a wrapper for calculating correlation and significance against each column of the data provided.
 
@@ -494,7 +497,7 @@ RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = Rb, performance_fun = table.Correlation)
 ```
 
-## table.DownsideRisk
+## 4.5 table.DownsideRisk
 
 Creates a table of estimates of downside risk measures for comparison across multiple instruments or funds.
 
@@ -503,7 +506,7 @@ RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = NULL, performance_fun = table.DownsideRisk)
 ```
 
-## table.DownsideRiskRatio
+## 4.6 table.DownsideRiskRatio
 
 Table of Monthly downside risk, Annualized downside risk, Downside potential, Omega, Sortino ratio, Upside potential, Upside potential ratio and Omega-Sharpe ratio.
 
@@ -512,7 +515,7 @@ RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = NULL, performance_fun = table.DownsideRiskRatio)
 ```
 
-## table.HigherMoments
+## 4.7 table.HigherMoments
 
 Summary of the higher moments and Co-Moments of the return distribution. Used to determine diversification potential. Also called "systematic" moments by several papers.
 
@@ -521,7 +524,7 @@ RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = Rb, performance_fun = table.HigherMoments)
 ```
 
-## table.InformationRatio
+## 4.8 table.InformationRatio
 
 Table of Tracking error, Annualized tracking error and Information ratio.
 
@@ -530,7 +533,7 @@ RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = Rb, performance_fun = table.InformationRatio)
 ```
 
-## table.Variability
+## 4.9 table.Variability
 
 Table of Mean absolute difference, Monthly standard deviation and annualized standard deviation.
 
@@ -539,7 +542,7 @@ RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = NULL, performance_fun = table.Variability)
 ```
 
-## VaR
+## 4.10 VaR
 
 Calculates Value-at-Risk (VaR) for univariate, component, and marginal cases using a variety of analytical methods.
 
@@ -549,7 +552,7 @@ RaRb_multiple_portfolio %>%
 ```
 
 
-## SharpeRatio
+## 4.11 SharpeRatio
 
 The Sharpe ratio is simply the return per unit of risk (represented by variability). In the classic case, the unit of risk is the standard deviation of the returns.
 
@@ -558,12 +561,12 @@ RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = NULL, performance_fun = SharpeRatio)
 ```
 
-# Customizing using the ...
+# 5.0 Customizing using the ...
 
 One of the best features of `tq_portfolio` and `tq_performance` is to be able to pass features through to the underlying functions. After all, these are just wrappers for `PerformanceAnalytics`, so you probably want to be able __to make full use of the underlying functions__. Passing through parameters using the `...` can be incredibly useful, so let's see how.
 
 
-## Customizing tq_portfolio
+## 5.1 Customizing tq_portfolio
 
 The `tq_portfolio` function is a wrapper for `Return.portfolio`. This means that during the portfolio aggregation process, we can make use of most of the `Return.portfolio` arguments such as `wealth.index`, `contribution`, `geometric`, `rebalance_on`, and `value`. Here's the arguments of the underlying function:
 
@@ -660,7 +663,7 @@ portfolio_growth_monthly_multi %>%
 ```
 
 
-## Customizing tq_performance
+## 5.2 Customizing tq_performance
 
 Finally, the same concept of passing arguments works with all the `tidyquant` functions that are wrappers including `tq_transmute`, `tq_mutate`, `tq_performance`, etc. Let's use a final example with the `SharpeRatio`, which has the following arguments.
 
