@@ -167,7 +167,7 @@ summarise_by_time() and summarize_by_time() are synonyms." />
 
     <pre class="usage"><span class='fu'>summarise_by_time</span>(
   <span class='no'>.data</span>,
-  <span class='kw'>.date_var</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>.date_var</span>,
   <span class='kw'>.by</span> <span class='kw'>=</span> <span class='st'>"day"</span>,
   <span class='no'>...</span>,
   <span class='kw'>.type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"floor"</span>, <span class='st'>"ceiling"</span>, <span class='st'>"round"</span>)
@@ -175,7 +175,7 @@ summarise_by_time() and summarize_by_time() are synonyms." />
 
 <span class='fu'>summarize_by_time</span>(
   <span class='no'>.data</span>,
-  <span class='kw'>.date_var</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>.date_var</span>,
   <span class='kw'>.by</span> <span class='kw'>=</span> <span class='st'>"day"</span>,
   <span class='no'>...</span>,
   <span class='kw'>.type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"floor"</span>, <span class='st'>"ceiling"</span>, <span class='st'>"round"</span>)
@@ -190,7 +190,8 @@ summarise_by_time() and summarize_by_time() are synonyms." />
     </tr>
     <tr>
       <th>.date_var</th>
-      <td><p>A column of date or date-time (e.g. POSIXct) data class</p></td>
+      <td><p>A column of date or date-time (e.g. POSIXct) data class.
+If missing, attempts to auto-detect date column.</p></td>
     </tr>
     <tr>
       <th>.by</th>
