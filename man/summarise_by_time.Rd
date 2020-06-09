@@ -3,21 +3,21 @@
 \name{summarise_by_time}
 \alias{summarise_by_time}
 \alias{summarize_by_time}
-\title{Summarise each group by time}
+\title{DEPRECATED - Summarise each group by time}
 \usage{
 summarise_by_time(
   .data,
-  .date_var,
+  .date_var = NULL,
+  .by = "day",
   ...,
-  .by = "week",
   .type = c("floor", "ceiling", "round")
 )
 
 summarize_by_time(
   .data,
-  .date_var,
+  .date_var = NULL,
+  .by = "day",
   ...,
-  .by = "week",
   .type = c("floor", "ceiling", "round")
 )
 }
@@ -25,16 +25,6 @@ summarize_by_time(
 \item{.data}{A \code{tbl} object or \code{data.frame}}
 
 \item{.date_var}{A column of date or date-time (e.g. POSIXct) data class}
-
-\item{...}{Name-value pairs of summary functions.
-The name will be the name of the variable in the result.
-
-The value can be:
-\itemize{
-\item A vector of length 1, e.g. \code{min(x)}, \code{n()}, or \code{sum(is.na(y))}.
-\item A vector of length \code{n}, e.g. \code{quantile()}.
-\item A data frame, to add multiple columns from a single expression.
-}}
 
 \item{.by}{A time unit to summarise by.
 Time units are collapsed using \code{lubridate::floor_date()} or \code{lubridate::ceiling_date()}.
@@ -56,6 +46,16 @@ The value can be:
 
 Arbitrary unique English abbreviations as in the \code{lubridate::period()} constructor are allowed.}
 
+\item{...}{Name-value pairs of summary functions.
+The name will be the name of the variable in the result.
+
+The value can be:
+\itemize{
+\item A vector of length 1, e.g. \code{min(x)}, \code{n()}, or \code{sum(is.na(y))}.
+\item A vector of length \code{n}, e.g. \code{quantile()}.
+\item A data frame, to add multiple columns from a single expression.
+}}
+
 \item{.type}{One of "floor", "ceiling", or "round. Defaults to "floor". See \code{lubridate::round_date}.}
 }
 \value{
@@ -73,6 +73,8 @@ fundamentally creates a new data frame.
 }
 }
 \description{
+\strong{Deprecation Instructions:} Please use \code{\link[timetk:summarise_by_time]{timetk::summarise_by_time()}} instead.
+
 \code{summarise_by_time()} Is a time-series variant of the popular \code{dplyr::summarise()} function.
 
 \code{summarise_by_time()} and \code{summarize_by_time()} are synonyms.

@@ -1,3 +1,14 @@
+<!--
+### TODO
+  - Tsibble compatability
+  - Add tests for Excel Functionality
+  - Add tests for dividends and splits 
+  - Add manual documentation for Excel Financial Functionality
+  - Update vignettes
+  - New book for Financial Modeling & Excel
+-->
+
+
 ## tidyquant 1.0.0.9000 (Development Version)
 
 ### Improvements
@@ -9,13 +20,11 @@
 * Issue 157 - Error on package load with `rstudioapi::getThemeInfo()` returns `NULL`. 
 * `pivot_table` - Fix issues with `tidyverse` functions not being found.
 
-### TODO
-  - Tsibble compatability
-  - Add tests for Excel Functionality
-  - Add tests for dividends and splits 
-  - Add manual documentation for Excel Financial Functionality
-  - Update vignettes
-  - New book for Financial Modeling & Excel
+### Deprecation
+
+* `summarise_by_time()` - This function has moved to `timetk`
+
+
 
 ## tidyquant 1.0.0
 

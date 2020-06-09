@@ -1,6 +1,10 @@
-#' Summarise each group by time
+#' DEPRECATED - Summarise each group by time
+#'
 #'
 #' @description
+#'
+#' __Deprecation Instructions:__ Please use [timetk::summarise_by_time()] instead.
+#'
 #' `summarise_by_time()` Is a time-series variant of the popular `dplyr::summarise()` function.
 #'
 #' `summarise_by_time()` and `summarize_by_time()` are synonyms.
@@ -99,9 +103,13 @@
 #'
 #'
 #' @export
-summarise_by_time <- function(.data, .date_var, ..., .by = "week",
+summarise_by_time <- function(.data, .date_var = NULL, .by = "day", ...,
                               .type = c("floor", "ceiling", "round")) {
-    UseMethod("summarise_by_time")
+
+    # Deprecation message
+    message("tidyquant::summarise_by_time() is deprecated. Don't fret! The timetk::summarise_by_time() replaces it.")
+
+    UseMethod("summarise_by_time", .data)
 }
 
 #' @rdname summarise_by_time
@@ -109,7 +117,7 @@ summarise_by_time <- function(.data, .date_var, ..., .by = "week",
 summarize_by_time <- summarise_by_time
 
 #' @export
-summarise_by_time.default <- function(.data, .date_var, ..., .by = "week",
+summarise_by_time.default <- function(.data, .date_var = NULL, .by = "day", ...,
                                       .type = c("floor", "ceiling", "round")) {
 
     stop("Object is not of class `data.frame`.", call. = FALSE)
@@ -117,11 +125,18 @@ summarise_by_time.default <- function(.data, .date_var, ..., .by = "week",
 }
 
 #' @export
-summarise_by_time.data.frame <- function(.data, .date_var, ..., .by = "week",
+summarise_by_time.data.frame <- function(.data, .date_var = NULL, .by = "day", ...,
                                          .type = c("floor", "ceiling", "round")) {
 
     data_groups_expr   <- rlang::syms(dplyr::group_vars(.data))
     date_var_expr      <- rlang::enquo(.date_var)
+
+    # Check date_var
+    if (rlang::quo_is_null(date_var_expr)) {
+        date_var_text <- timetk::tk_get_timeseries_variables(data)[1]
+        message("Using date_var: ", date_var_text)
+        date_var_expr <- rlang::sym(date_var_text)
+    }
 
     # Choose lubridate function
     fun_type <- tolower(.type[[1]])

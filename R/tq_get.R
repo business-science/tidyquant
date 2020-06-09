@@ -266,7 +266,7 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
     if (length(get) == 1 && (length(x) > 1 || is.data.frame(x))) {
         ret <- tryCatch({
             ret %>%
-                tidyr::unnest(cols = one_of(get))
+                tidyr::unnest(cols = dplyr::one_of(get))
         }, error = function(e) {
             warning("Returning as nested data frame.")
             ret
