@@ -132,8 +132,8 @@ summarise_by_time.data.frame <- function(.data, .date_var = NULL, .by = "day", .
 
     # Check date_var
     if (rlang::quo_is_null(date_var_expr)) {
-        date_var_text <- timetk::tk_get_timeseries_variables(data)[1]
-        message("Using date_var: ", date_var_text)
+        date_var_text <- timetk::tk_get_timeseries_variables(.data)[1]
+        message("Using .date_var: ", date_var_text)
         date_var_expr <- rlang::sym(date_var_text)
     }
 
