@@ -2,7 +2,7 @@
 
 language: r
 r:
-  - 3.5.0
+  - 3.6.0
   - release
   - devel
 warnings_are_errors: true
