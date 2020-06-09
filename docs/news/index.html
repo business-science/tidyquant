@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -34,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Changelog" />
 
@@ -63,7 +69,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -145,13 +151,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
+      <h1 data-toc-skip>Changelog <small></small></h1>
       <small>Source: <a href='https://github.com/business-science/tidyquant/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="tidyquant-1-0-0-9000-development-version" class="section level2">
+    <div id="tidyquant-1009000-development-version" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyquant-1-0-0-9000-development-version" class="anchor"></a>tidyquant 1.0.0.9000 (Development Version)</h2>
+<a href="#tidyquant-1009000-development-version" class="anchor"></a>tidyquant 1.0.0.9000 (Development Version)</h2>
 <div id="improvements" class="section level3">
 <h3 class="hasAnchor">
 <a href="#improvements" class="anchor"></a>Improvements</h3>
@@ -169,22 +175,19 @@
 <code>pivot_table</code> - Fix issues with <code>tidyverse</code> functions not being found.</li>
 </ul>
 </div>
-<div id="todo" class="section level3">
+<div id="deprecation" class="section level3">
 <h3 class="hasAnchor">
-<a href="#todo" class="anchor"></a>TODO</h3>
+<a href="#deprecation" class="anchor"></a>Deprecation</h3>
 <ul>
-<li>Tsibble compatability</li>
-<li>Add tests for Excel Functionality</li>
-<li>Add tests for dividends and splits</li>
-<li>Add manual documentation for Excel Financial Functionality</li>
-<li>Update vignettes</li>
-<li>New book for Financial Modeling &amp; Excel</li>
+<li>
+<code><a href="../reference/summarise_by_time.html">summarise_by_time()</a></code> - This function has moved to <code>timetk</code>
+</li>
 </ul>
 </div>
 </div>
-    <div id="tidyquant-1-0-0" class="section level2">
+    <div id="tidyquant-100" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyquant-1-0-0" class="anchor"></a>tidyquant 1.0.0</h2>
+<a href="#tidyquant-100" class="anchor"></a>tidyquant 1.0.0</h2>
 <blockquote>
 <p>This is the <em>“R for Excel Users”</em> release. My aim is to build functionality that helps users coming from an <strong>Excel Background</strong> (background I came from). It’s important to have these users feel at home. I have a full suite of functionality to accomplish your Excel-to-R transition.</p>
 <p>-Matt</p>
@@ -231,8 +234,8 @@
 <li>
 <strong>Date and Date Time Functions</strong>
 <ul>
-<li>Integrated date calculations with <code>lubridate()</code> (e.g. <code><a href="../reference/excel_date_functions.html">AS_DATE()</a></code>, <code><a href="../reference/excel_date_functions.html">YEAR()</a></code>)</li>
-<li>Holidays and business calendars with <code>timeDate</code> (e.g. <code><a href="../reference/excel_date_functions.html">HOLIDAY_SEQUENCE()</a></code>, <code>HOLIDAY_LIST()</code>)</li>
+<li>Integrated date calculations with <code>lubridate()</code> (e.g. <code><a href="../reference/excel_date_functions.html">AS_DATE()</a></code>, <code><a href="../reference/excel_date_functions.html">YEAR()</a></code>)</li>
+<li>Holidays and business calendars with <code>timeDate</code> (e.g. <code><a href="../reference/excel_date_functions.html">HOLIDAY_SEQUENCE()</a></code>, <code>HOLIDAY_LIST()</code>)</li>
 <li>Excel Date Math functions: <code><a href="../reference/excel_date_functions.html">NET_WORKDAYS()</a></code>, <code><a href="../reference/excel_date_functions.html">EOMONTH()</a></code>
 </li>
 </ul>
@@ -245,7 +248,7 @@
 </ul>
 </li>
 <li>
-<strong>NEW Tidyverse Functionality</strong>
+<p><strong>NEW Tidyverse Functionality</strong></p>
 <ul>
 <li>
 <code><a href="../reference/summarise_by_time.html">summarise_by_time()</a></code> - This is a new time-based variant of <code>summarise()</code> that allows collapsing the time-series by “day”, “week”, “month”, “quarter”, “year”, and more.</li>
@@ -253,17 +256,17 @@
 </ul>
 </li>
 <li>
-<strong>NEW API Integrations</strong>
+<p><strong>NEW API Integrations</strong></p>
 <ul>
 <li>
 <strong>Tiingo API</strong> - A popular Open-Source for stock prices, cryptocurrencies, and intraday feeds from the IEX (Investors Exchange). This can serve as an alternate source of data to Yahoo Finance. Integrated via the <code>riingo</code> package.</li>
 </ul>
 </li>
 <li>
-<strong>Bug Fixes &amp; Improvements</strong>
+<p><strong>Bug Fixes &amp; Improvements</strong></p>
 <ul>
 <li>
-<code><a href="../reference/theme_tq.html">theme_tq()</a></code> - Fix issues with collisions with <code><a href="https://rdrr.io/pkg/dials/man/cost.html">dials::margin()</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/element.html">ggplot2::margin()</a></code>. Similar potential <code>ggplot2</code> collisions have been fixed.<br>
+<code><a href="../reference/theme_tq.html">theme_tq()</a></code> - Fix issues with collisions with <code><a href="https://dials.tidymodels.org/reference/cost.html">dials::margin()</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/element.html">ggplot2::margin()</a></code>. Similar potential <code>ggplot2</code> collisions have been fixed.<br>
 </li>
 <li>
 <code><a href="../reference/theme_tq.html">theme_tq()</a></code> - Increased default top/bottom text margin on facet strips</li>
@@ -273,7 +276,7 @@
 <p><strong>Deprecation &amp; Breaking Changes</strong></p>
 <ul>
 <li>
-<strong>Potential Breaking Change</strong> - Single values now return the symbol column (i.e. <code><a href="../reference/tq_get.html">tq_get("AAPL")</a></code> returns symbol = “AAPL” for the 1st column).</li>
+<strong>Potential Breaking Change</strong> - Single values now return the symbol column (i.e. <code><a href="../reference/tq_get.html">tq_get("AAPL")</a></code> returns symbol = “AAPL” for the 1st column).</li>
 <li>
 <strong>Deprecated Sources:</strong> The following sources have been deprecated due to lack of support from the API:
 <ul>
@@ -289,18 +292,18 @@
 </li>
 </ul>
 </div>
-    <div id="tidyquant-0-5-10" class="section level2">
+    <div id="tidyquant-0510" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyquant-0-5-10" class="anchor"></a>tidyquant 0.5.10</h2>
+<a href="#tidyquant-0510" class="anchor"></a>tidyquant 0.5.10</h2>
 <ul>
 <li>
 <code><a href="../reference/tq_get.html">tq_get()</a></code> - Temporarily adjust tests for <code><a href="../reference/tq_get.html">tq_get(get = "dividends")</a></code> and <code><a href="../reference/tq_get.html">tq_get(get = "splits")</a></code> until API is stabilizes. Yahoo! Dividends and Splits intermitently returns errors.</li>
 <li>Fix documentation warnings during package build checks. Documentation moved from <code>tq_stocklist</code> to <code><a href="../reference/tq_index.html">?tq_index</a></code>.</li>
 </ul>
 </div>
-    <div id="tidyquant-0-5-9" class="section level2">
+    <div id="tidyquant-059" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyquant-0-5-9" class="anchor"></a>tidyquant 0.5.9</h2>
+<a href="#tidyquant-059" class="anchor"></a>tidyquant 0.5.9</h2>
 <ul>
 <li>
 <code><a href="../reference/tq_index.html">tq_index()</a></code>
@@ -311,17 +314,17 @@
 </li>
 </ul>
 </div>
-    <div id="tidyquant-0-5-8" class="section level2">
+    <div id="tidyquant-058" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyquant-0-5-8" class="anchor"></a>tidyquant 0.5.8</h2>
+<a href="#tidyquant-058" class="anchor"></a>tidyquant 0.5.8</h2>
 <ul>
 <li>
 <code><a href="../reference/tq_index.html">tq_index()</a></code> - Fix naming issue with stock index data downloaded from www.us.spdrs.com.</li>
 </ul>
 </div>
-    <div id="tidyquant-0-5-7" class="section level2">
+    <div id="tidyquant-057" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyquant-0-5-7" class="anchor"></a>tidyquant 0.5.7</h2>
+<a href="#tidyquant-057" class="anchor"></a>tidyquant 0.5.7</h2>
 <p><em>Stock Index &amp; Exchanges</em></p>
 <ul>
 <li>
@@ -342,17 +345,17 @@
 <li>This is actually potentially a “breaking change” (although most users will see no difference since you likely load <code>tidyverse</code> in your scripts) - if you do not load <code>tidyverse</code>, then you will now need to do so. Previously <code>tidyquant</code> loaded <code>tidyverse</code> behind the scenes.</li>
 </ul>
 </div>
-    <div id="tidyquant-0-5-6" class="section level2">
+    <div id="tidyquant-056" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyquant-0-5-6" class="anchor"></a>tidyquant 0.5.6</h2>
+<a href="#tidyquant-056" class="anchor"></a>tidyquant 0.5.6</h2>
 <ul>
 <li><p>Morningstar Key Ratios: The <code><a href="../reference/tq_get.html">tq_get()</a></code> argument <code>get = "key.ratios"</code> has been deprecated due to a change in Morningstar’s website. (Help Wanted - Ref. Issue <a href='https://github.com/business-science/tidyquant/issues/125'>#125</a>)</p></li>
 <li><p>Remove dependency on <code>XLConnect</code>. Replace with <code>readxl</code>. Issue <a href='https://github.com/business-science/tidyquant/issues/119'>#119</a>.</p></li>
 </ul>
 </div>
-    <div id="tidyquant-0-5-5" class="section level2">
+    <div id="tidyquant-055" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyquant-0-5-5" class="anchor"></a>tidyquant 0.5.5</h2>
+<a href="#tidyquant-055" class="anchor"></a>tidyquant 0.5.5</h2>
 <ul>
 <li>
 <p>Bux fix</p>
@@ -365,9 +368,9 @@
 </li>
 </ul>
 </div>
-    <div id="tidyquant-0-5-4" class="section level2">
+    <div id="tidyquant-054" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyquant-0-5-4" class="anchor"></a>tidyquant 0.5.4</h2>
+<a href="#tidyquant-054" class="anchor"></a>tidyquant 0.5.4</h2>
 <ul>
 <li>Features:
 <ul>
@@ -393,16 +396,16 @@
 </li>
 </ul>
 </div>
-    <div id="tidyquant-0-5-3" class="section level2">
+    <div id="tidyquant-053" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyquant-0-5-3" class="anchor"></a>tidyquant 0.5.3</h2>
+<a href="#tidyquant-053" class="anchor"></a>tidyquant 0.5.3</h2>
 <ul>
 <li>Fixes for compatibility with <code>purrr</code> v0.2.3.</li>
 </ul>
 </div>
-    <div id="tidyquant-0-5-2" class="section level2">
+    <div id="tidyquant-052" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyquant-0-5-2" class="anchor"></a>tidyquant 0.5.2</h2>
+<a href="#tidyquant-052" class="anchor"></a>tidyquant 0.5.2</h2>
 <ul>
 <li>Incorporated more robust <code>timetk</code> coercion functions. Deprecated <code>tidyquant::as_xts()</code> and <code>tidyquant::as_tibble()</code>. Use <code><a href="https://rdrr.io/pkg/timetk/man/tk_xts.html">timetk::tk_xts()</a></code> and <code><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html">timetk::tk_tbl()</a></code> instead.</li>
 <li>Fixes:
@@ -414,9 +417,9 @@
 </li>
 </ul>
 </div>
-    <div id="tidyquant-0-5-1" class="section level2">
+    <div id="tidyquant-051" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyquant-0-5-1" class="anchor"></a>tidyquant 0.5.1</h2>
+<a href="#tidyquant-051" class="anchor"></a>tidyquant 0.5.1</h2>
 <ul>
 <li>Improvements
 <ul>
@@ -434,9 +437,9 @@
 </li>
 </ul>
 </div>
-    <div id="tidyquant-0-5-0" class="section level2">
+    <div id="tidyquant-050" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyquant-0-5-0" class="anchor"></a>tidyquant 0.5.0</h2>
+<a href="#tidyquant-050" class="anchor"></a>tidyquant 0.5.0</h2>
 <ul>
 <li>New Data:
 <ul>
@@ -473,9 +476,9 @@
 </li>
 </ul>
 </div>
-    <div id="tidyquant-0-4-0" class="section level2">
+    <div id="tidyquant-040" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyquant-0-4-0" class="anchor"></a>tidyquant 0.4.0</h2>
+<a href="#tidyquant-040" class="anchor"></a>tidyquant 0.4.0</h2>
 <ul>
 <li>New Features:
 <ul>
@@ -521,17 +524,17 @@
 <li>Issue <a href='https://github.com/business-science/tidyquant/issues/11'>#11</a>: Part 2. Fix multiple stocks that only return 110 lines. Handle stocks that return csv with “We’re sorry” message.</li>
 <li>Issue <a href='https://github.com/business-science/tidyquant/issues/11'>#11</a>: Part 1. Fix instability with <code>get = key.ratios</code> failing with HTTP 500 error on download. Use httr RETRY in case of failure.</li>
 <li>Fixed issue with <code>get = "key.ratios"</code> where stocks listed on AMEX exchange were not able to return key ratios.</li>
-<li>Issue <a href='https://github.com/business-science/tidyquant/issues/9'>#9</a>: Fix problem with <code>get = "key.stats"</code> where NA’s in multiple <code>x</code> (e.g. <code><a href="https://rdrr.io/r/base/c.html">c("AAPL", "GOOG")</a></code>) cause call to fail during coercion.</li>
-<li>Issue <a href='https://github.com/business-science/tidyquant/issues/8'>#8</a>, Part 2: Enable compound gets (e.g. <code><a href="../reference/tq_get.html">tq_get("AAPL", get = c("stock.prices", "financials"))</a></code>).</li>
+<li>Issue <a href='https://github.com/business-science/tidyquant/issues/9'>#9</a>: Fix problem with <code>get = "key.stats"</code> where NA’s in multiple <code>x</code> (e.g. <code><a href="https://rdrr.io/r/base/c.html">c("AAPL", "GOOG")</a></code>) cause call to fail during coercion.</li>
+<li>Issue <a href='https://github.com/business-science/tidyquant/issues/8'>#8</a>, Part 2: Enable compound gets (e.g. <code><a href="../reference/tq_get.html">tq_get("AAPL", get = c("stock.prices", "financials"))</a></code>).</li>
 <li>Issue <a href='https://github.com/business-science/tidyquant/issues/8'>#8</a>, Part 1: Create <code><a href="../reference/tq_index.html">tq_index()</a></code> function to return a stock index. <code><a href="../reference/tq_get.html">tq_get(get = "stock.index")</a></code> is deprecated and will be removed during the next version after 0.4.0. Use <code><a href="../reference/tq_index.html">tq_index_options()</a></code> for index options.</li>
 <li>Issue <a href='https://github.com/business-science/tidyquant/issues/7'>#7</a>: Fixed issue with date column inadvertently being coerced to <code>dttm</code>.</li>
 </ul>
 </li>
 </ul>
 </div>
-    <div id="tidyquant-0-3-0" class="section level2">
+    <div id="tidyquant-030" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyquant-0-3-0" class="anchor"></a>tidyquant 0.3.0</h2>
+<a href="#tidyquant-030" class="anchor"></a>tidyquant 0.3.0</h2>
 <ul>
 <li>New data:
 <ul>
@@ -558,9 +561,9 @@
 <li>Removed support for deprecated arguments: <code>x_fun</code>, <code>.x</code>, and <code>.y</code> in the respective transform and mutate functions.</li>
 </ul>
 </div>
-    <div id="tidyquant-0-2-0" class="section level2">
+    <div id="tidyquant-020" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyquant-0-2-0" class="anchor"></a>tidyquant 0.2.0</h2>
+<a href="#tidyquant-020" class="anchor"></a>tidyquant 0.2.0</h2>
 <ul>
 <li>New <code>get = "key.ratios"</code> option for <code><a href="../reference/tq_get.html">tq_get()</a></code>, which retrieves 10-years of key performance ratios (89 total) from <a href="https://www.morningstar.com">www.morningstar.com</a>. These include various historical measures of financial performance including profitability, growth, cash flow, financial health, efficiency, and valuation ratios. Example: <code><a href="../reference/tq_get.html">tq_get("AAPL", get = "key.ratios")</a></code>.</li>
 <li>Added <code>zoo</code> <code>rollapply()</code> functions to list of compatible / integrated functions used with <code><a href="../reference/deprecated.html">tq_transform()</a></code> and <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code>. See <code>tq_transform_fun_options()</code> for the full list.</li>
@@ -577,38 +580,19 @@
 <li>Fixed duplication of column names during <code>tq_mutate</code>. Names are now sequentually indexed with duplicate names starting at <code>.1</code> suffix.</li>
 </ul>
 </div>
-    <div id="tidyquant-0-1-0" class="section level2">
+    <div id="tidyquant-010" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyquant-0-1-0" class="anchor"></a>tidyquant 0.1.0</h2>
+<a href="#tidyquant-010" class="anchor"></a>tidyquant 0.1.0</h2>
 <ul>
 <li>Initial release of <code>tidyquant</code>, for seamless quantitative financial analysis (<code>xts</code>, <code>quantmod</code>, <code>TTR</code>) package integration with the <code>tidyverse</code>.</li>
 </ul>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#tidyquant-1-0-0-9000-development-version">1.0.0.9000</a></li>
-        <li><a href="#tidyquant-1-0-0">1.0.0</a></li>
-        <li><a href="#tidyquant-0-5-10">0.5.10</a></li>
-        <li><a href="#tidyquant-0-5-9">0.5.9</a></li>
-        <li><a href="#tidyquant-0-5-8">0.5.8</a></li>
-        <li><a href="#tidyquant-0-5-7">0.5.7</a></li>
-        <li><a href="#tidyquant-0-5-6">0.5.6</a></li>
-        <li><a href="#tidyquant-0-5-5">0.5.5</a></li>
-        <li><a href="#tidyquant-0-5-4">0.5.4</a></li>
-        <li><a href="#tidyquant-0-5-3">0.5.3</a></li>
-        <li><a href="#tidyquant-0-5-2">0.5.2</a></li>
-        <li><a href="#tidyquant-0-5-1">0.5.1</a></li>
-        <li><a href="#tidyquant-0-5-0">0.5.0</a></li>
-        <li><a href="#tidyquant-0-4-0">0.4.0</a></li>
-        <li><a href="#tidyquant-0-3-0">0.3.0</a></li>
-        <li><a href="#tidyquant-0-2-0">0.2.0</a></li>
-        <li><a href="#tidyquant-0-1-0">0.1.0</a></li>
-      </ul>
-    </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
@@ -620,7 +604,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

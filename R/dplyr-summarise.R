@@ -20,7 +20,6 @@
 #' * Correlation: [COR()], [COV()]
 #'
 #'
-#' @export
 #' @param .data A `tbl` object or `data.frame`
 #' @param .date_var A column of date or date-time (e.g. POSIXct) data class
 #' @param ... Name-value pairs of summary functions.

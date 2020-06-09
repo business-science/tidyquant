@@ -6,13 +6,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Charting with tidyquant • tidyquant</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Charting with tidyquant">
-<meta property="og:description" content="">
-<meta name="twitter:card" content="summary">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<meta property="og:title" content="Charting with tidyquant">
+<meta property="og:description" content="tidyquant">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -24,7 +25,7 @@
   gtag('config', 'UA-76139189-2');
 </script>
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -102,13 +103,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="TQ04-charting-with-tidyquant_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Charting with tidyquant</h1>
+      <h1 data-toc-skip>Charting with tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2020-03-18</h4>
+            <h4 class="date">2020-06-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ04-charting-with-tidyquant.Rmd"><code>vignettes/TQ04-charting-with-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ04-charting-with-tidyquant.Rmd</code></div>
@@ -139,18 +140,18 @@
 <h1 class="hasAnchor">
 <a href="#prerequisites" class="anchor"></a>Prerequisites</h1>
 <p>Load the <code>tidyquant</code> package to get started.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Loads tidyquant, lubridate, xts, quantmod, TTR, and PerformanceAnalytics</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyverse)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyquant)  </a></code></pre></div>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># Loads tidyquant, lubridate, xts, quantmod, TTR, and PerformanceAnalytics</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyquant</span>)</pre></body></html></div>
 <p>The following stock data will be used for the examples. Use <code>tq_get</code> to get the stock prices.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Use FANG data set</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"FANG"</span>) </a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co"># Get AAPL and AMZN Stock Prices</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">AAPL &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"AAPL"</span>, <span class="dt">get =</span> <span class="st">"stock.prices"</span>, <span class="dt">from =</span> <span class="st">"2015-09-01"</span>, <span class="dt">to =</span> <span class="st">"2016-12-31"</span>)</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">AMZN &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"AMZN"</span>, <span class="dt">get =</span> <span class="st">"stock.prices"</span>, <span class="dt">from =</span> <span class="st">"2000-01-01"</span>, <span class="dt">to =</span> <span class="st">"2016-12-31"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># Use FANG data set</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"FANG"</span>)
+
+<span class="co"># Get AAPL and AMZN Stock Prices</span>
+<span class="no">AAPL</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"AAPL"</span>, <span class="kw">get</span> <span class="kw">=</span> <span class="st">"stock.prices"</span>, <span class="kw">from</span> <span class="kw">=</span> <span class="st">"2015-09-01"</span>, <span class="kw">to</span> <span class="kw">=</span> <span class="st">"2016-12-31"</span>)
+<span class="no">AMZN</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"AMZN"</span>, <span class="kw">get</span> <span class="kw">=</span> <span class="st">"stock.prices"</span>, <span class="kw">from</span> <span class="kw">=</span> <span class="st">"2000-01-01"</span>, <span class="kw">to</span> <span class="kw">=</span> <span class="st">"2016-12-31"</span>)</pre></body></html></div>
 <p>The <code>end</code> date parameter will be used when setting date limits throughout the examples.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">end &lt;-<span class="st"> </span><span class="kw">as_date</span>(<span class="st">"2016-12-31"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">end</span> <span class="kw">&lt;-</span> <span class="fu">as_date</span>(<span class="st">"2016-12-31"</span>)</pre></body></html></div>
 </div>
 <div id="chart-types" class="section level1">
 <h1 class="hasAnchor">
@@ -169,80 +170,80 @@
 <a href="#line-chart" class="anchor"></a>Line Chart</h2>
 <p>Before we visualize bar charts and candlestick charts using the <code>tidyquant</code> geoms, let’s visualize stock prices with a simple line chart to get a sense of the “grammar of graphics” workflow. This is done using the <code>geom_line</code> from the <code>ggplot2</code> package. The workflow begins with the stock data, and uses the pipe operator (<code><a href="../reference/pipe.html">%&gt;%</a></code>) to send to the <code>ggplot()</code> function.</p>
 <p>The primary features controlling the chart are the aesthetic arguments: these are used to add data to the chart by way of the <code>aes()</code> function. When added inside the <code>ggplot()</code> function, the aesthetic arguments are available to all underlying layers. Alternatively, the aesthetic arguments can be applied to each geom individually, but typically this is minimized in practice because it duplicates code. We set aesthetic arguments, <code>x = date</code> and <code>y = close</code>, to chart the closing price versus date. The <code>geom_line()</code> function inherits the aesthetic arguments from the <code>ggplot()</code> function and produces a line on the chart. Labels are added separately using the <code>labs()</code> function. Thus, the chart is built from the ground up by starting with data and progressively adding geoms, labels, coordinates / scales and other attributes to create a the final chart. This is enables maximum flexibility wherein the analyst can create very complex charts using the “grammar of graphics”.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">AAPL <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> close)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"AAPL Line Chart"</span>, <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">AAPL</span> <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">close</span>)) +
+    <span class="fu">geom_line</span>() +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"AAPL Line Chart"</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Closing Price"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>()</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-5-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="bar-chart" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bar-chart" class="anchor"></a>Bar Chart</h2>
 <p>Visualizing the bar chart is as simple as replacing <code>geom_line</code> with <code>geom_barchart</code> in the ggplot workflow. Because the bar chart uses open, high, low, and close prices in the visualization, we need to specify these as part of the aesthetic arguments, <code>aes()</code>. We can do so internal to the geom or in the <code>ggplot()</code> function.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">AAPL <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> close)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="../reference/geom_chart.html">geom_barchart</a></span>(<span class="kw">aes</span>(<span class="dt">open =</span> open, <span class="dt">high =</span> high, <span class="dt">low =</span> low, <span class="dt">close =</span> close)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"AAPL Bar Chart"</span>, <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">AAPL</span> <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">close</span>)) +
+    <span class="fu"><a href="../reference/geom_chart.html">geom_barchart</a></span>(<span class="fu">aes</span>(<span class="kw">open</span> <span class="kw">=</span> <span class="no">open</span>, <span class="kw">high</span> <span class="kw">=</span> <span class="no">high</span>, <span class="kw">low</span> <span class="kw">=</span> <span class="no">low</span>, <span class="kw">close</span> <span class="kw">=</span> <span class="no">close</span>)) +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"AAPL Bar Chart"</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Closing Price"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>()</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-6-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p>We zoom into specific sections using <code>coord_x_date</code>, which has <code>xlim</code> and <code>ylim</code> arguments specified as <code><a href="https://rdrr.io/r/base/c.html">c(start, end)</a></code> to focus on a specific region of the chart. For <code>xlim</code>, we’ll use <code>lubridate</code> to convert a character date to date class, and then subtract six weeks using the <code>weeks()</code> function. For <code>ylim</code> we zoom in on prices in the range from 100 to 120.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">AAPL <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> close)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="../reference/geom_chart.html">geom_barchart</a></span>(<span class="kw">aes</span>(<span class="dt">open =</span> open, <span class="dt">high =</span> high, <span class="dt">low =</span> low, <span class="dt">close =</span> close)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"AAPL Bar Chart"</span>, </a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">         <span class="dt">subtitle =</span> <span class="st">"Zoomed in using coord_x_date"</span>,</a>
-<a class="sourceLine" id="cb6-6" data-line-number="6">         <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(end <span class="op">-</span><span class="st"> </span><span class="kw">weeks</span>(<span class="dv">6</span>), end),</a>
-<a class="sourceLine" id="cb6-8" data-line-number="8">                 <span class="dt">ylim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">100</span>, <span class="dv">120</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">AAPL</span> <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">close</span>)) +
+    <span class="fu"><a href="../reference/geom_chart.html">geom_barchart</a></span>(<span class="fu">aes</span>(<span class="kw">open</span> <span class="kw">=</span> <span class="no">open</span>, <span class="kw">high</span> <span class="kw">=</span> <span class="no">high</span>, <span class="kw">low</span> <span class="kw">=</span> <span class="no">low</span>, <span class="kw">close</span> <span class="kw">=</span> <span class="no">close</span>)) +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"AAPL Bar Chart"</span>,
+         <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"Zoomed in using coord_x_date"</span>,
+         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Closing Price"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
+    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="kw">xlim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">end</span> - <span class="fu">weeks</span>(<span class="fl">6</span>), <span class="no">end</span>),
+                 <span class="kw">ylim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">100</span>, <span class="fl">120</span>)) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>()</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-7-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p>The colors can be modified using <code>colour_up</code> and <code>colour_down</code> arguments, and parameters such as <code>size</code> can be used to control the appearance.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">AAPL <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> close)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="../reference/geom_chart.html">geom_barchart</a></span>(<span class="kw">aes</span>(<span class="dt">open =</span> open, <span class="dt">high =</span> high, <span class="dt">low =</span> low, <span class="dt">close =</span> close),</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">                     <span class="dt">colour_up =</span> <span class="st">"darkgreen"</span>, <span class="dt">colour_down =</span> <span class="st">"darkred"</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"AAPL Bar Chart"</span>, </a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">         <span class="dt">subtitle =</span> <span class="st">"Zoomed in, Experimenting with Formatting"</span>,</a>
-<a class="sourceLine" id="cb7-7" data-line-number="7">         <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(end <span class="op">-</span><span class="st"> </span><span class="kw">weeks</span>(<span class="dv">6</span>), end),</a>
-<a class="sourceLine" id="cb7-9" data-line-number="9">                 <span class="dt">ylim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">100</span>, <span class="dv">120</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">AAPL</span> <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">close</span>)) +
+    <span class="fu"><a href="../reference/geom_chart.html">geom_barchart</a></span>(<span class="fu">aes</span>(<span class="kw">open</span> <span class="kw">=</span> <span class="no">open</span>, <span class="kw">high</span> <span class="kw">=</span> <span class="no">high</span>, <span class="kw">low</span> <span class="kw">=</span> <span class="no">low</span>, <span class="kw">close</span> <span class="kw">=</span> <span class="no">close</span>),
+                     <span class="kw">colour_up</span> <span class="kw">=</span> <span class="st">"darkgreen"</span>, <span class="kw">colour_down</span> <span class="kw">=</span> <span class="st">"darkred"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"AAPL Bar Chart"</span>,
+         <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"Zoomed in, Experimenting with Formatting"</span>,
+         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Closing Price"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
+    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="kw">xlim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">end</span> - <span class="fu">weeks</span>(<span class="fl">6</span>), <span class="no">end</span>),
+                 <span class="kw">ylim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">100</span>, <span class="fl">120</span>)) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>()</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-8-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="candlestick-chart" class="section level2">
 <h2 class="hasAnchor">
 <a href="#candlestick-chart" class="anchor"></a>Candlestick Chart</h2>
 <p>Creating a candlestick chart is very similar to the process with the bar chart. Using <code>geom_candlestick</code>, we can insert into the <code>ggplot</code> workflow.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">AAPL <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> close)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="../reference/geom_chart.html">geom_candlestick</a></span>(<span class="kw">aes</span>(<span class="dt">open =</span> open, <span class="dt">high =</span> high, <span class="dt">low =</span> low, <span class="dt">close =</span> close)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"AAPL Candlestick Chart"</span>, <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">AAPL</span> <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">close</span>)) +
+    <span class="fu"><a href="../reference/geom_chart.html">geom_candlestick</a></span>(<span class="fu">aes</span>(<span class="kw">open</span> <span class="kw">=</span> <span class="no">open</span>, <span class="kw">high</span> <span class="kw">=</span> <span class="no">high</span>, <span class="kw">low</span> <span class="kw">=</span> <span class="no">low</span>, <span class="kw">close</span> <span class="kw">=</span> <span class="no">close</span>)) +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"AAPL Candlestick Chart"</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Closing Price"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>()</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-9-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p>We zoom into specific sections using <code>coord_x_date</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">AAPL <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> close)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="../reference/geom_chart.html">geom_candlestick</a></span>(<span class="kw">aes</span>(<span class="dt">open =</span> open, <span class="dt">high =</span> high, <span class="dt">low =</span> low, <span class="dt">close =</span> close)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"AAPL Candlestick Chart"</span>, </a>
-<a class="sourceLine" id="cb9-5" data-line-number="5">         <span class="dt">subtitle =</span> <span class="st">"Zoomed in using coord_x_date"</span>,</a>
-<a class="sourceLine" id="cb9-6" data-line-number="6">         <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(end <span class="op">-</span><span class="st"> </span><span class="kw">weeks</span>(<span class="dv">6</span>), end),</a>
-<a class="sourceLine" id="cb9-8" data-line-number="8">                 <span class="dt">ylim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">100</span>, <span class="dv">120</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">AAPL</span> <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">close</span>)) +
+    <span class="fu"><a href="../reference/geom_chart.html">geom_candlestick</a></span>(<span class="fu">aes</span>(<span class="kw">open</span> <span class="kw">=</span> <span class="no">open</span>, <span class="kw">high</span> <span class="kw">=</span> <span class="no">high</span>, <span class="kw">low</span> <span class="kw">=</span> <span class="no">low</span>, <span class="kw">close</span> <span class="kw">=</span> <span class="no">close</span>)) +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"AAPL Candlestick Chart"</span>,
+         <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"Zoomed in using coord_x_date"</span>,
+         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Closing Price"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
+    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="kw">xlim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">end</span> - <span class="fu">weeks</span>(<span class="fl">6</span>), <span class="no">end</span>),
+                 <span class="kw">ylim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">100</span>, <span class="fl">120</span>)) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>()</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-10-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p>The colors can be modified using <code>colour_up</code> and <code>colour_down</code>, which control the line color, and <code>fill_up</code> and <code>fill_down</code>, which control the rectangle fills.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">AAPL <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> close)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="../reference/geom_chart.html">geom_candlestick</a></span>(<span class="kw">aes</span>(<span class="dt">open =</span> open, <span class="dt">high =</span> high, <span class="dt">low =</span> low, <span class="dt">close =</span> close),</a>
-<a class="sourceLine" id="cb10-4" data-line-number="4">                        <span class="dt">colour_up =</span> <span class="st">"darkgreen"</span>, <span class="dt">colour_down =</span> <span class="st">"darkred"</span>, </a>
-<a class="sourceLine" id="cb10-5" data-line-number="5">                        <span class="dt">fill_up  =</span> <span class="st">"darkgreen"</span>, <span class="dt">fill_down  =</span> <span class="st">"darkred"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"AAPL Candlestick Chart"</span>, </a>
-<a class="sourceLine" id="cb10-7" data-line-number="7">         <span class="dt">subtitle =</span> <span class="st">"Zoomed in, Experimenting with Formatting"</span>,</a>
-<a class="sourceLine" id="cb10-8" data-line-number="8">         <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(end <span class="op">-</span><span class="st"> </span><span class="kw">weeks</span>(<span class="dv">6</span>), end),</a>
-<a class="sourceLine" id="cb10-10" data-line-number="10">                 <span class="dt">ylim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">100</span>, <span class="dv">120</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">AAPL</span> <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">close</span>)) +
+    <span class="fu"><a href="../reference/geom_chart.html">geom_candlestick</a></span>(<span class="fu">aes</span>(<span class="kw">open</span> <span class="kw">=</span> <span class="no">open</span>, <span class="kw">high</span> <span class="kw">=</span> <span class="no">high</span>, <span class="kw">low</span> <span class="kw">=</span> <span class="no">low</span>, <span class="kw">close</span> <span class="kw">=</span> <span class="no">close</span>),
+                        <span class="kw">colour_up</span> <span class="kw">=</span> <span class="st">"darkgreen"</span>, <span class="kw">colour_down</span> <span class="kw">=</span> <span class="st">"darkred"</span>,
+                        <span class="kw">fill_up</span>  <span class="kw">=</span> <span class="st">"darkgreen"</span>, <span class="kw">fill_down</span>  <span class="kw">=</span> <span class="st">"darkred"</span>) +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"AAPL Candlestick Chart"</span>,
+         <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"Zoomed in, Experimenting with Formatting"</span>,
+         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Closing Price"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
+    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="kw">xlim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">end</span> - <span class="fu">weeks</span>(<span class="fl">6</span>), <span class="no">end</span>),
+                 <span class="kw">ylim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">100</span>, <span class="fl">120</span>)) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>()</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-11-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p><a class="anchor" id="mult-chart"></a></p>
 </div>
@@ -250,32 +251,32 @@
 <h2 class="hasAnchor">
 <a href="#charting-multiple-securities" class="anchor"></a>Charting Multiple Securities</h2>
 <p>We can use <code>facet_wrap</code> to visualize multiple stocks at the same time. By adding a <code>group</code> aesthetic in the main <code>ggplot()</code> function and combining with a <code>facet_wrap()</code> function at the end of the <code>ggplot</code> workflow, all four “FANG” stocks can be viewed simultaneously. You may notice an odd <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> call before the call to <code>ggplot()</code>. I’ll discuss this next.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">start &lt;-<span class="st"> </span>end <span class="op">-</span><span class="st"> </span><span class="kw">weeks</span>(<span class="dv">6</span>)</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">FANG <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(date <span class="op">&gt;=</span><span class="st"> </span>start <span class="op">-</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">15</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> close, <span class="dt">group =</span> symbol)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="st">    </span><span class="kw"><a href="../reference/geom_chart.html">geom_candlestick</a></span>(<span class="kw">aes</span>(<span class="dt">open =</span> open, <span class="dt">high =</span> high, <span class="dt">low =</span> low, <span class="dt">close =</span> close)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"FANG Candlestick Chart"</span>, </a>
-<a class="sourceLine" id="cb11-7" data-line-number="7">         <span class="dt">subtitle =</span> <span class="st">"Experimenting with Mulitple Stocks"</span>,</a>
-<a class="sourceLine" id="cb11-8" data-line-number="8">         <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(start, end)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>symbol, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">scale =</span> <span class="st">"free_y"</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">start</span> <span class="kw">&lt;-</span> <span class="no">end</span> - <span class="fu">weeks</span>(<span class="fl">6</span>)
+<span class="no">FANG</span> <span class="kw">%&gt;%</span>
+    <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">date</span> <span class="kw">&gt;=</span> <span class="no">start</span> - <span class="fu">days</span>(<span class="fl">2</span> * <span class="fl">15</span>)) <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">close</span>, <span class="kw">group</span> <span class="kw">=</span> <span class="no">symbol</span>)) +
+    <span class="fu"><a href="../reference/geom_chart.html">geom_candlestick</a></span>(<span class="fu">aes</span>(<span class="kw">open</span> <span class="kw">=</span> <span class="no">open</span>, <span class="kw">high</span> <span class="kw">=</span> <span class="no">high</span>, <span class="kw">low</span> <span class="kw">=</span> <span class="no">low</span>, <span class="kw">close</span> <span class="kw">=</span> <span class="no">close</span>)) +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"FANG Candlestick Chart"</span>,
+         <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"Experimenting with Mulitple Stocks"</span>,
+         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Closing Price"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
+    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="kw">xlim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">start</span>, <span class="no">end</span>)) +
+    <span class="fu">facet_wrap</span>(~ <span class="no">symbol</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">scale</span> <span class="kw">=</span> <span class="st">"free_y"</span>) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>()</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-12-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p><em>A note about out-of-bounds data (or “clipping”), which is particularly important with faceting and charting moving averages</em>:</p>
 <p>The <code>coord_x_date</code> coordinate function is designed to zoom into specific sections of a chart without “clipping” data that is outside of the view. This is in contrast to <code>scale_x_date</code>, which removes out-of-bounds data from the charting. Under normal circumstances clipping is not a big deal (and is actually helpful for scaling the y-axis), but with financial applications users want to chart rolling/moving averages, lags, etc that depend on data outside of the view port. Because of this need for out-of-bounds data, there is a trade-off when charting: <strong>Too much out-of-bounds data distorts the scale of the y-axis, and too little and we cannot get a moving average</strong>. The optimal method is to include “just enough” out-of-bounds data to get the chart we want. This is why below the FANG data is filtered by date from double the number of moving-average days (<code>2 * n</code>) previous to the start date. This yields a nice y-axis scale and still allows us to create a moving average line using <code>geom_ma</code>.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">start &lt;-<span class="st"> </span>end <span class="op">-</span><span class="st"> </span><span class="kw">weeks</span>(<span class="dv">6</span>)</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">FANG <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(date <span class="op">&gt;=</span><span class="st"> </span>start <span class="op">-</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">15</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> close, <span class="dt">group =</span> symbol)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="st">    </span><span class="kw"><a href="../reference/geom_chart.html">geom_candlestick</a></span>(<span class="kw">aes</span>(<span class="dt">open =</span> open, <span class="dt">high =</span> high, <span class="dt">low =</span> low, <span class="dt">close =</span> close)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="st">    </span><span class="kw"><a href="../reference/geom_ma.html">geom_ma</a></span>(<span class="dt">ma_fun =</span> SMA, <span class="dt">n =</span> <span class="dv">15</span>, <span class="dt">color =</span> <span class="st">"darkblue"</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"FANG Candlestick Chart"</span>, </a>
-<a class="sourceLine" id="cb12-8" data-line-number="8">         <span class="dt">subtitle =</span> <span class="st">"Experimenting with Mulitple Stocks"</span>,</a>
-<a class="sourceLine" id="cb12-9" data-line-number="9">         <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(start, end)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>symbol, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">scale =</span> <span class="st">"free_y"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb12-12" data-line-number="12"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">start</span> <span class="kw">&lt;-</span> <span class="no">end</span> - <span class="fu">weeks</span>(<span class="fl">6</span>)
+<span class="no">FANG</span> <span class="kw">%&gt;%</span>
+    <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">date</span> <span class="kw">&gt;=</span> <span class="no">start</span> - <span class="fu">days</span>(<span class="fl">2</span> * <span class="fl">15</span>)) <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">close</span>, <span class="kw">group</span> <span class="kw">=</span> <span class="no">symbol</span>)) +
+    <span class="fu"><a href="../reference/geom_chart.html">geom_candlestick</a></span>(<span class="fu">aes</span>(<span class="kw">open</span> <span class="kw">=</span> <span class="no">open</span>, <span class="kw">high</span> <span class="kw">=</span> <span class="no">high</span>, <span class="kw">low</span> <span class="kw">=</span> <span class="no">low</span>, <span class="kw">close</span> <span class="kw">=</span> <span class="no">close</span>)) +
+    <span class="fu"><a href="../reference/geom_ma.html">geom_ma</a></span>(<span class="kw">ma_fun</span> <span class="kw">=</span> <span class="no">SMA</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">15</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"darkblue"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"FANG Candlestick Chart"</span>,
+         <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"Experimenting with Mulitple Stocks"</span>,
+         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Closing Price"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
+    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="kw">xlim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">start</span>, <span class="no">end</span>)) +
+    <span class="fu">facet_wrap</span>(~ <span class="no">symbol</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">scale</span> <span class="kw">=</span> <span class="st">"free_y"</span>) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>()</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-13-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
@@ -311,53 +312,53 @@
 <h3 class="hasAnchor">
 <a href="#example-1-charting-the-50-day-and-200-day-simple-moving-average" class="anchor"></a>Example 1: Charting the 50-day and 200-day simple moving average</h3>
 <p>We want to apply a <code>SMA</code>, so we research the TTR function and we see that it accepts, <code>n</code>, the number of periods to average over. We see that the aesthetics required are <code>x</code>, a date, and <code>y</code>, a price. Since these are already in the main <code>ggplot()</code> function, we don’t need to add the aesthetics to the geom. We apply the moving average geoms after the candlestick geom to overlay the moving averages on top of the candlesticks. We add two moving average calls, one for the 50-day and the other for the 200-day. We add <code>color = "red"</code> and <code>linetype = 5</code> to distinguish the 200-day from the 50-day.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">AAPL <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> close)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="../reference/geom_chart.html">geom_candlestick</a></span>(<span class="kw">aes</span>(<span class="dt">open =</span> open, <span class="dt">high =</span> high, <span class="dt">low =</span> low, <span class="dt">close =</span> close)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="st">    </span><span class="kw"><a href="../reference/geom_ma.html">geom_ma</a></span>(<span class="dt">ma_fun =</span> SMA, <span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">linetype =</span> <span class="dv">5</span>, <span class="dt">size =</span> <span class="fl">1.25</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="st">    </span><span class="kw"><a href="../reference/geom_ma.html">geom_ma</a></span>(<span class="dt">ma_fun =</span> SMA, <span class="dt">n =</span> <span class="dv">200</span>, <span class="dt">color =</span> <span class="st">"red"</span>, <span class="dt">size =</span> <span class="fl">1.25</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"AAPL Candlestick Chart"</span>, </a>
-<a class="sourceLine" id="cb13-7" data-line-number="7">         <span class="dt">subtitle =</span> <span class="st">"50 and 200-Day SMA"</span>, </a>
-<a class="sourceLine" id="cb13-8" data-line-number="8">         <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(end <span class="op">-</span><span class="st"> </span><span class="kw">weeks</span>(<span class="dv">24</span>), end),</a>
-<a class="sourceLine" id="cb13-10" data-line-number="10">                 <span class="dt">ylim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">100</span>, <span class="dv">120</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">AAPL</span> <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">close</span>)) +
+    <span class="fu"><a href="../reference/geom_chart.html">geom_candlestick</a></span>(<span class="fu">aes</span>(<span class="kw">open</span> <span class="kw">=</span> <span class="no">open</span>, <span class="kw">high</span> <span class="kw">=</span> <span class="no">high</span>, <span class="kw">low</span> <span class="kw">=</span> <span class="no">low</span>, <span class="kw">close</span> <span class="kw">=</span> <span class="no">close</span>)) +
+    <span class="fu"><a href="../reference/geom_ma.html">geom_ma</a></span>(<span class="kw">ma_fun</span> <span class="kw">=</span> <span class="no">SMA</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">50</span>, <span class="kw">linetype</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">1.25</span>) +
+    <span class="fu"><a href="../reference/geom_ma.html">geom_ma</a></span>(<span class="kw">ma_fun</span> <span class="kw">=</span> <span class="no">SMA</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">200</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"red"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">1.25</span>) +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"AAPL Candlestick Chart"</span>,
+         <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"50 and 200-Day SMA"</span>,
+         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Closing Price"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
+    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="kw">xlim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">end</span> - <span class="fu">weeks</span>(<span class="fl">24</span>), <span class="no">end</span>),
+                 <span class="kw">ylim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">100</span>, <span class="fl">120</span>)) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>()</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-14-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="example-2-charting-exponential-moving-averages" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-2-charting-exponential-moving-averages" class="anchor"></a>Example 2: Charting exponential moving averages</h3>
 <p>We want an <code>EMA</code>, so we research the TTR function and we see that it accepts, <code>n</code>, the number of periods to average over, <code>wilder</code> a Boolean, and <code>ratio</code> arguments. We will use <code>wilder = TRUE</code> and go with the default for the <code>ratio</code> arg. We see that the aesthetics required are <code>x</code>, a date, and <code>y</code>, a price. Since these are already in the main <code>ggplot()</code> function, we don’t need to modify the geom. We are ready to apply after the bar chart geom.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">AAPL <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> close)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="../reference/geom_chart.html">geom_barchart</a></span>(<span class="kw">aes</span>(<span class="dt">open =</span> open, <span class="dt">high =</span> high, <span class="dt">low =</span> low, <span class="dt">close =</span> close)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="st">    </span><span class="kw"><a href="../reference/geom_ma.html">geom_ma</a></span>(<span class="dt">ma_fun =</span> EMA, <span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">wilder =</span> <span class="ot">TRUE</span>, <span class="dt">linetype =</span> <span class="dv">5</span>, <span class="dt">size =</span> <span class="fl">1.25</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="st">    </span><span class="kw"><a href="../reference/geom_ma.html">geom_ma</a></span>(<span class="dt">ma_fun =</span> EMA, <span class="dt">n =</span> <span class="dv">200</span>, <span class="dt">wilder =</span> <span class="ot">TRUE</span>, <span class="dt">color =</span> <span class="st">"red"</span>, <span class="dt">size =</span> <span class="fl">1.25</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"AAPL Bar Chart"</span>, </a>
-<a class="sourceLine" id="cb14-7" data-line-number="7">         <span class="dt">subtitle =</span> <span class="st">"50 and 200-Day EMA"</span>, </a>
-<a class="sourceLine" id="cb14-8" data-line-number="8">         <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(end <span class="op">-</span><span class="st"> </span><span class="kw">weeks</span>(<span class="dv">24</span>), end),</a>
-<a class="sourceLine" id="cb14-10" data-line-number="10">                 <span class="dt">ylim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">100</span>, <span class="dv">120</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb14-11" data-line-number="11"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">AAPL</span> <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">close</span>)) +
+    <span class="fu"><a href="../reference/geom_chart.html">geom_barchart</a></span>(<span class="fu">aes</span>(<span class="kw">open</span> <span class="kw">=</span> <span class="no">open</span>, <span class="kw">high</span> <span class="kw">=</span> <span class="no">high</span>, <span class="kw">low</span> <span class="kw">=</span> <span class="no">low</span>, <span class="kw">close</span> <span class="kw">=</span> <span class="no">close</span>)) +
+    <span class="fu"><a href="../reference/geom_ma.html">geom_ma</a></span>(<span class="kw">ma_fun</span> <span class="kw">=</span> <span class="no">EMA</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">50</span>, <span class="kw">wilder</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">linetype</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">1.25</span>) +
+    <span class="fu"><a href="../reference/geom_ma.html">geom_ma</a></span>(<span class="kw">ma_fun</span> <span class="kw">=</span> <span class="no">EMA</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">200</span>, <span class="kw">wilder</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"red"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">1.25</span>) +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"AAPL Bar Chart"</span>,
+         <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"50 and 200-Day EMA"</span>,
+         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Closing Price"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
+    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="kw">xlim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">end</span> - <span class="fu">weeks</span>(<span class="fl">24</span>), <span class="no">end</span>),
+                 <span class="kw">ylim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">100</span>, <span class="fl">120</span>)) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>()</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-15-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="example-3-charting-moving-averages-for-multiple-stocks-at-once" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-3-charting-moving-averages-for-multiple-stocks-at-once" class="anchor"></a>Example 3: Charting moving averages for multiple stocks at once</h3>
 <p>We’ll double up using a volume-weighted average (<code>VWMA</code>) and apply it to the FANG stocks at once. Since VWMA is a volume-weighted function, we need to add volume as an aesthetic. Because we are viewing multiple stocks, we add a group aesthetic setting it to the symbol column which contains the FANG stock symbols. The facet wrap is added at the end to create four charts instead of one overlayed chart.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">start &lt;-<span class="st"> </span>end <span class="op">-</span><span class="st"> </span><span class="kw">weeks</span>(<span class="dv">6</span>)</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">FANG <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(date <span class="op">&gt;=</span><span class="st"> </span>start <span class="op">-</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">50</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> close, <span class="dt">volume =</span> volume, <span class="dt">group =</span> symbol)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="st">    </span><span class="kw"><a href="../reference/geom_chart.html">geom_candlestick</a></span>(<span class="kw">aes</span>(<span class="dt">open =</span> open, <span class="dt">high =</span> high, <span class="dt">low =</span> low, <span class="dt">close =</span> close)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="st">    </span><span class="kw"><a href="../reference/geom_ma.html">geom_ma</a></span>(<span class="dt">ma_fun =</span> VWMA, <span class="dt">n =</span> <span class="dv">15</span>, <span class="dt">wilder =</span> <span class="ot">TRUE</span>, <span class="dt">linetype =</span> <span class="dv">5</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="st">    </span><span class="kw"><a href="../reference/geom_ma.html">geom_ma</a></span>(<span class="dt">ma_fun =</span> VWMA, <span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">wilder =</span> <span class="ot">TRUE</span>, <span class="dt">color =</span> <span class="st">"red"</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"FANG Bar Chart"</span>, </a>
-<a class="sourceLine" id="cb15-9" data-line-number="9">         <span class="dt">subtitle =</span> <span class="st">"50 and 200-Day EMA, Experimenting with Multiple Stocks"</span>, </a>
-<a class="sourceLine" id="cb15-10" data-line-number="10">         <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(start, end)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-12" data-line-number="12"><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>symbol, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">scales =</span> <span class="st">"free_y"</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb15-13" data-line-number="13"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">start</span> <span class="kw">&lt;-</span> <span class="no">end</span> - <span class="fu">weeks</span>(<span class="fl">6</span>)
+<span class="no">FANG</span> <span class="kw">%&gt;%</span>
+    <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">date</span> <span class="kw">&gt;=</span> <span class="no">start</span> - <span class="fu">days</span>(<span class="fl">2</span> * <span class="fl">50</span>)) <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">close</span>, <span class="kw">volume</span> <span class="kw">=</span> <span class="no">volume</span>, <span class="kw">group</span> <span class="kw">=</span> <span class="no">symbol</span>)) +
+    <span class="fu"><a href="../reference/geom_chart.html">geom_candlestick</a></span>(<span class="fu">aes</span>(<span class="kw">open</span> <span class="kw">=</span> <span class="no">open</span>, <span class="kw">high</span> <span class="kw">=</span> <span class="no">high</span>, <span class="kw">low</span> <span class="kw">=</span> <span class="no">low</span>, <span class="kw">close</span> <span class="kw">=</span> <span class="no">close</span>)) +
+    <span class="fu"><a href="../reference/geom_ma.html">geom_ma</a></span>(<span class="kw">ma_fun</span> <span class="kw">=</span> <span class="no">VWMA</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">15</span>, <span class="kw">wilder</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">linetype</span> <span class="kw">=</span> <span class="fl">5</span>) +
+    <span class="fu"><a href="../reference/geom_ma.html">geom_ma</a></span>(<span class="kw">ma_fun</span> <span class="kw">=</span> <span class="no">VWMA</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">50</span>, <span class="kw">wilder</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"red"</span>) +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"FANG Bar Chart"</span>,
+         <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"50 and 200-Day EMA, Experimenting with Multiple Stocks"</span>,
+         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Closing Price"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
+    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="kw">xlim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">start</span>, <span class="no">end</span>)) +
+    <span class="fu">facet_wrap</span>(~ <span class="no">symbol</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">scales</span> <span class="kw">=</span> <span class="st">"free_y"</span>) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>()</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-16-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
@@ -370,58 +371,58 @@
 <h3 class="hasAnchor">
 <a href="#example-1-applying-bbands-using-a-sma" class="anchor"></a>Example 1: Applying BBands using a SMA</h3>
 <p>Let’s do a basic example to add Bollinger Bands using a simple moving average. Because both the candlestick geom and the BBands geom use high, low and close prices, we move these aesthetics to the main <code>ggplot()</code> function to avoid duplication. We add BBands after the candlestick geom to overlay the BBands on top.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">AAPL <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> close, <span class="dt">open =</span> open,</a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">               <span class="dt">high =</span> high, <span class="dt">low =</span> low, <span class="dt">close =</span> close)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="st">    </span><span class="kw"><a href="../reference/geom_chart.html">geom_candlestick</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="st">    </span><span class="kw"><a href="../reference/geom_bbands.html">geom_bbands</a></span>(<span class="dt">ma_fun =</span> SMA, <span class="dt">sd =</span> <span class="dv">2</span>, <span class="dt">n =</span> <span class="dv">20</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"AAPL Candlestick Chart"</span>, </a>
-<a class="sourceLine" id="cb16-7" data-line-number="7">         <span class="dt">subtitle =</span> <span class="st">"BBands with SMA Applied"</span>, </a>
-<a class="sourceLine" id="cb16-8" data-line-number="8">         <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(end <span class="op">-</span><span class="st"> </span><span class="kw">weeks</span>(<span class="dv">24</span>), end),</a>
-<a class="sourceLine" id="cb16-10" data-line-number="10">                 <span class="dt">ylim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">100</span>, <span class="dv">120</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-11" data-line-number="11"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">AAPL</span> <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">close</span>, <span class="kw">open</span> <span class="kw">=</span> <span class="no">open</span>,
+               <span class="kw">high</span> <span class="kw">=</span> <span class="no">high</span>, <span class="kw">low</span> <span class="kw">=</span> <span class="no">low</span>, <span class="kw">close</span> <span class="kw">=</span> <span class="no">close</span>)) +
+    <span class="fu"><a href="../reference/geom_chart.html">geom_candlestick</a></span>() +
+    <span class="fu"><a href="../reference/geom_bbands.html">geom_bbands</a></span>(<span class="kw">ma_fun</span> <span class="kw">=</span> <span class="no">SMA</span>, <span class="kw">sd</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">20</span>) +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"AAPL Candlestick Chart"</span>,
+         <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"BBands with SMA Applied"</span>,
+         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Closing Price"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
+    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="kw">xlim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">end</span> - <span class="fu">weeks</span>(<span class="fl">24</span>), <span class="no">end</span>),
+                 <span class="kw">ylim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">100</span>, <span class="fl">120</span>)) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>()</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-17-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="example-2-modifying-the-appearance-of-bollinger-bands" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-2-modifying-the-appearance-of-bollinger-bands" class="anchor"></a>Example 2: Modifying the appearance of Bollinger Bands</h3>
 <p>The appearance can be modified using <code>color_ma</code>, <code>color_bands</code>, <code>alpha</code>, and <code>fill</code> arguments. Here’s the same plot from Example 1, with new formatting applied to the BBands.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">AAPL <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> close, <span class="dt">open =</span> open,</a>
-<a class="sourceLine" id="cb17-3" data-line-number="3">               <span class="dt">high =</span> high, <span class="dt">low =</span> low, <span class="dt">close =</span> close)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="st">    </span><span class="kw"><a href="../reference/geom_chart.html">geom_candlestick</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="st">    </span><span class="kw"><a href="../reference/geom_bbands.html">geom_bbands</a></span>(<span class="dt">ma_fun =</span> SMA, <span class="dt">sd =</span> <span class="dv">2</span>, <span class="dt">n =</span> <span class="dv">20</span>, </a>
-<a class="sourceLine" id="cb17-6" data-line-number="6">                <span class="dt">linetype =</span> <span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="fl">0.2</span>, </a>
-<a class="sourceLine" id="cb17-7" data-line-number="7">                <span class="dt">fill        =</span> <span class="kw"><a href="../reference/palette_tq.html">palette_light</a></span>()[[<span class="dv">1</span>]], </a>
-<a class="sourceLine" id="cb17-8" data-line-number="8">                <span class="dt">color_bands =</span> <span class="kw"><a href="../reference/palette_tq.html">palette_light</a></span>()[[<span class="dv">1</span>]], </a>
-<a class="sourceLine" id="cb17-9" data-line-number="9">                <span class="dt">color_ma    =</span> <span class="kw"><a href="../reference/palette_tq.html">palette_light</a></span>()[[<span class="dv">2</span>]]) <span class="op">+</span></a>
-<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"AAPL Candlestick Chart"</span>, </a>
-<a class="sourceLine" id="cb17-11" data-line-number="11">         <span class="dt">subtitle =</span> <span class="st">"BBands with SMA Applied, Experimenting with Formatting"</span>, </a>
-<a class="sourceLine" id="cb17-12" data-line-number="12">         <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb17-13" data-line-number="13"><span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(end <span class="op">-</span><span class="st"> </span><span class="kw">weeks</span>(<span class="dv">24</span>), end),</a>
-<a class="sourceLine" id="cb17-14" data-line-number="14">                 <span class="dt">ylim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">100</span>, <span class="dv">120</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb17-15" data-line-number="15"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">AAPL</span> <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">close</span>, <span class="kw">open</span> <span class="kw">=</span> <span class="no">open</span>,
+               <span class="kw">high</span> <span class="kw">=</span> <span class="no">high</span>, <span class="kw">low</span> <span class="kw">=</span> <span class="no">low</span>, <span class="kw">close</span> <span class="kw">=</span> <span class="no">close</span>)) +
+    <span class="fu"><a href="../reference/geom_chart.html">geom_candlestick</a></span>() +
+    <span class="fu"><a href="../reference/geom_bbands.html">geom_bbands</a></span>(<span class="kw">ma_fun</span> <span class="kw">=</span> <span class="no">SMA</span>, <span class="kw">sd</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">20</span>,
+                <span class="kw">linetype</span> <span class="kw">=</span> <span class="fl">4</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.2</span>,
+                <span class="kw">fill</span>        <span class="kw">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span>()<span class="kw">[[</span><span class="fl">1</span>]],
+                <span class="kw">color_bands</span> <span class="kw">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span>()<span class="kw">[[</span><span class="fl">1</span>]],
+                <span class="kw">color_ma</span>    <span class="kw">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span>()<span class="kw">[[</span><span class="fl">2</span>]]) +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"AAPL Candlestick Chart"</span>,
+         <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"BBands with SMA Applied, Experimenting with Formatting"</span>,
+         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Closing Price"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
+    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="kw">xlim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">end</span> - <span class="fu">weeks</span>(<span class="fl">24</span>), <span class="no">end</span>),
+                 <span class="kw">ylim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">100</span>, <span class="fl">120</span>)) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>()</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-18-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="example-3-adding-bbands-to-multiple-stocks" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-3-adding-bbands-to-multiple-stocks" class="anchor"></a>Example 3: Adding BBands to multiple stocks</h3>
 <p>The process is very similar to charting moving averages for multiple stocks.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">start &lt;-<span class="st"> </span>end <span class="op">-</span><span class="st"> </span><span class="kw">weeks</span>(<span class="dv">24</span>)</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2">FANG <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(date <span class="op">&gt;=</span><span class="st"> </span>start <span class="op">-</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">20</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> close, </a>
-<a class="sourceLine" id="cb18-5" data-line-number="5">               <span class="dt">open =</span> open, <span class="dt">high =</span> high, <span class="dt">low =</span> low, <span class="dt">close =</span> close, </a>
-<a class="sourceLine" id="cb18-6" data-line-number="6">               <span class="dt">group =</span> symbol)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="st">    </span><span class="kw"><a href="../reference/geom_chart.html">geom_barchart</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb18-8" data-line-number="8"><span class="st">    </span><span class="kw"><a href="../reference/geom_bbands.html">geom_bbands</a></span>(<span class="dt">ma_fun =</span> SMA, <span class="dt">sd =</span> <span class="dv">2</span>, <span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">linetype =</span> <span class="dv">5</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb18-9" data-line-number="9"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"FANG Bar Chart"</span>, </a>
-<a class="sourceLine" id="cb18-10" data-line-number="10">         <span class="dt">subtitle =</span> <span class="st">"BBands with SMA Applied, Experimenting with Multiple Stocks"</span>, </a>
-<a class="sourceLine" id="cb18-11" data-line-number="11">         <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-12" data-line-number="12"><span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(start, end)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb18-13" data-line-number="13"><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>symbol, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">scales =</span> <span class="st">"free_y"</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-14" data-line-number="14"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">start</span> <span class="kw">&lt;-</span> <span class="no">end</span> - <span class="fu">weeks</span>(<span class="fl">24</span>)
+<span class="no">FANG</span> <span class="kw">%&gt;%</span>
+    <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">date</span> <span class="kw">&gt;=</span> <span class="no">start</span> - <span class="fu">days</span>(<span class="fl">2</span> * <span class="fl">20</span>)) <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">close</span>,
+               <span class="kw">open</span> <span class="kw">=</span> <span class="no">open</span>, <span class="kw">high</span> <span class="kw">=</span> <span class="no">high</span>, <span class="kw">low</span> <span class="kw">=</span> <span class="no">low</span>, <span class="kw">close</span> <span class="kw">=</span> <span class="no">close</span>,
+               <span class="kw">group</span> <span class="kw">=</span> <span class="no">symbol</span>)) +
+    <span class="fu"><a href="../reference/geom_chart.html">geom_barchart</a></span>() +
+    <span class="fu"><a href="../reference/geom_bbands.html">geom_bbands</a></span>(<span class="kw">ma_fun</span> <span class="kw">=</span> <span class="no">SMA</span>, <span class="kw">sd</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">20</span>, <span class="kw">linetype</span> <span class="kw">=</span> <span class="fl">5</span>) +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"FANG Bar Chart"</span>,
+         <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"BBands with SMA Applied, Experimenting with Multiple Stocks"</span>,
+         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Closing Price"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
+    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="kw">xlim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">start</span>, <span class="no">end</span>)) +
+    <span class="fu">facet_wrap</span>(~ <span class="no">symbol</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">scales</span> <span class="kw">=</span> <span class="st">"free_y"</span>) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>()</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-19-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
@@ -435,24 +436,24 @@
 <a href="#example-1-log-scale-with-scale_y_log10" class="anchor"></a>Example 1: Log Scale with scale_y_log10</h2>
 <p><code>ggplot2</code> has the <code>scale_y_log10()</code> function to scale the y-axis on a logarithmic scale. This is extremely helpful as it tends to expose linear trends that can be analyzed.</p>
 <p><strong>Continuous Scale</strong>:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">AMZN <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> adjusted)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="kw"><a href="../reference/palette_tq.html">palette_light</a></span>()[[<span class="dv">1</span>]]) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="st">    </span><span class="kw">scale_y_continuous</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb19-5" data-line-number="5"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"AMZN Line Chart"</span>, </a>
-<a class="sourceLine" id="cb19-6" data-line-number="6">         <span class="dt">subtitle =</span> <span class="st">"Continuous Scale"</span>, </a>
-<a class="sourceLine" id="cb19-7" data-line-number="7">         <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb19-8" data-line-number="8"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="no">AMZN</span> <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">adjusted</span>)) +
+    <span class="fu">geom_line</span>(<span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span>()<span class="kw">[[</span><span class="fl">1</span>]]) +
+    <span class="fu">scale_y_continuous</span>() +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"AMZN Line Chart"</span>,
+         <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"Continuous Scale"</span>,
+         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Closing Price"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>()</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-20-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p><strong>Log Scale</strong>:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">AMZN <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> adjusted)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="kw"><a href="../reference/palette_tq.html">palette_light</a></span>()[[<span class="dv">1</span>]]) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="st">    </span><span class="kw">scale_y_log10</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"AMZN Line Chart"</span>, </a>
-<a class="sourceLine" id="cb20-6" data-line-number="6">         <span class="dt">subtitle =</span> <span class="st">"Log Scale"</span>, </a>
-<a class="sourceLine" id="cb20-7" data-line-number="7">         <span class="dt">y =</span> <span class="st">"Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb20-8" data-line-number="8"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="no">AMZN</span> <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">adjusted</span>)) +
+    <span class="fu">geom_line</span>(<span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span>()<span class="kw">[[</span><span class="fl">1</span>]]) +
+    <span class="fu">scale_y_log10</span>() +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"AMZN Line Chart"</span>,
+         <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"Log Scale"</span>,
+         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Closing Price"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>()</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-21-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="example-2-regression-trendlines-with-geom_smooth" class="section level2">
@@ -460,45 +461,45 @@
 <a href="#example-2-regression-trendlines-with-geom_smooth" class="anchor"></a>Example 2: Regression trendlines with geom_smooth</h2>
 <p>We can apply a trend line quickly adding the <code>geom_smooth()</code> function to our workflow. The function has several prediction methods including linear (<code>"lm"</code>) and loess (<code>"loess"</code>) to name a few.</p>
 <p><strong>Linear</strong>:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">AMZN <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> adjusted)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="kw"><a href="../reference/palette_tq.html">palette_light</a></span>()[[<span class="dv">1</span>]]) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="st">    </span><span class="kw">scale_y_log10</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">"lm"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"AMZN Line Chart"</span>, </a>
-<a class="sourceLine" id="cb21-7" data-line-number="7">         <span class="dt">subtitle =</span> <span class="st">"Log Scale, Applying Linear Trendline"</span>, </a>
-<a class="sourceLine" id="cb21-8" data-line-number="8">         <span class="dt">y =</span> <span class="st">"Adjusted Closing Price"</span>, <span class="dt">x =</span> <span class="st">""</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="no">AMZN</span> <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">adjusted</span>)) +
+    <span class="fu">geom_line</span>(<span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span>()<span class="kw">[[</span><span class="fl">1</span>]]) +
+    <span class="fu">scale_y_log10</span>() +
+    <span class="fu">geom_smooth</span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"lm"</span>) +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"AMZN Line Chart"</span>,
+         <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"Log Scale, Applying Linear Trendline"</span>,
+         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Adjusted Closing Price"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>()</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-22-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="example-3-charting-volume-with-geom_segment" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-3-charting-volume-with-geom_segment" class="anchor"></a>Example 3: Charting volume with geom_segment</h2>
 <p>We can use the <code>geom_segment()</code> function to chart daily volume, which uses xy points for the beginning and end of the line. Using the aesthetic color argument, we color based on the value of volume to make these data stick out.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">AMZN <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> volume)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="st">    </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">xend =</span> date, <span class="dt">yend =</span> <span class="dv">0</span>, <span class="dt">color =</span> volume)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb22-4" data-line-number="4"><span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">"loess"</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb22-5" data-line-number="5"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"AMZN Volume Chart"</span>, </a>
-<a class="sourceLine" id="cb22-6" data-line-number="6">         <span class="dt">subtitle =</span> <span class="st">"Charting Daily Volume"</span>, </a>
-<a class="sourceLine" id="cb22-7" data-line-number="7">         <span class="dt">y =</span> <span class="st">"Volume"</span>, <span class="dt">x =</span> <span class="st">""</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb22-8" data-line-number="8"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb22-9" data-line-number="9"><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="no">AMZN</span> <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">volume</span>)) +
+    <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="kw">xend</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">yend</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">volume</span>)) +
+    <span class="fu">geom_smooth</span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"loess"</span>, <span class="kw">se</span> <span class="kw">=</span> <span class="fl">FALSE</span>) +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"AMZN Volume Chart"</span>,
+         <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"Charting Daily Volume"</span>,
+         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Volume"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>() +
+    <span class="fu">theme</span>(<span class="kw">legend.position</span> <span class="kw">=</span> <span class="st">"none"</span>)</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-23-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p>And, we can zoom in on a specific region. Using <code>scale_color_gradient</code> we can quickly visualize the high and low points, and using <code>geom_smooth</code> we can see the trend.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">start &lt;-<span class="st"> </span>end <span class="op">-</span><span class="st"> </span><span class="kw">weeks</span>(<span class="dv">24</span>)</a>
-<a class="sourceLine" id="cb23-2" data-line-number="2">AMZN <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(date <span class="op">&gt;=</span><span class="st"> </span>start <span class="op">-</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">50</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb23-4" data-line-number="4"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> volume)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb23-5" data-line-number="5"><span class="st">    </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">xend =</span> date, <span class="dt">yend =</span> <span class="dv">0</span>, <span class="dt">color =</span> volume)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb23-6" data-line-number="6"><span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">"loess"</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb23-7" data-line-number="7"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"AMZN Bar Chart"</span>, </a>
-<a class="sourceLine" id="cb23-8" data-line-number="8">         <span class="dt">subtitle =</span> <span class="st">"Charting Daily Volume, Zooming In"</span>, </a>
-<a class="sourceLine" id="cb23-9" data-line-number="9">         <span class="dt">y =</span> <span class="st">"Volume"</span>, <span class="dt">x =</span> <span class="st">""</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-10" data-line-number="10"><span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(start, end)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb23-11" data-line-number="11"><span class="st">    </span><span class="kw">scale_color_gradient</span>(<span class="dt">low =</span> <span class="st">"red"</span>, <span class="dt">high =</span> <span class="st">"darkblue"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb23-12" data-line-number="12"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq</a></span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-13" data-line-number="13"><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="no">start</span> <span class="kw">&lt;-</span> <span class="no">end</span> - <span class="fu">weeks</span>(<span class="fl">24</span>)
+<span class="no">AMZN</span> <span class="kw">%&gt;%</span>
+    <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">date</span> <span class="kw">&gt;=</span> <span class="no">start</span> - <span class="fu">days</span>(<span class="fl">50</span>)) <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">volume</span>)) +
+    <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="kw">xend</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">yend</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">volume</span>)) +
+    <span class="fu">geom_smooth</span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"loess"</span>, <span class="kw">se</span> <span class="kw">=</span> <span class="fl">FALSE</span>) +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"AMZN Bar Chart"</span>,
+         <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"Charting Daily Volume, Zooming In"</span>,
+         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Volume"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
+    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="kw">xlim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">start</span>, <span class="no">end</span>)) +
+    <span class="fu">scale_color_gradient</span>(<span class="kw">low</span> <span class="kw">=</span> <span class="st">"red"</span>, <span class="kw">high</span> <span class="kw">=</span> <span class="st">"darkblue"</span>) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>() +
+    <span class="fu">theme</span>(<span class="kw">legend.position</span> <span class="kw">=</span> <span class="st">"none"</span>)</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-24-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
@@ -520,62 +521,30 @@
 <div id="dark" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dark" class="anchor"></a>Dark</h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">n_mavg &lt;-<span class="st"> </span><span class="dv">50</span> <span class="co"># Number of periods (days) for moving average</span></a>
-<a class="sourceLine" id="cb24-2" data-line-number="2">FANG <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(date <span class="op">&gt;=</span><span class="st"> </span>start <span class="op">-</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>n_mavg)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb24-4" data-line-number="4"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> close, <span class="dt">color =</span> symbol)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb24-5" data-line-number="5"><span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb24-6" data-line-number="6"><span class="st">    </span><span class="kw"><a href="../reference/geom_ma.html">geom_ma</a></span>(<span class="dt">n =</span> <span class="dv">15</span>, <span class="dt">color =</span> <span class="st">"darkblue"</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb24-7" data-line-number="7"><span class="st">    </span><span class="kw"><a href="../reference/geom_ma.html">geom_ma</a></span>(<span class="dt">n =</span> n_mavg, <span class="dt">color =</span> <span class="st">"red"</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb24-8" data-line-number="8"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"Dark Theme"</span>,</a>
-<a class="sourceLine" id="cb24-9" data-line-number="9">         <span class="dt">x =</span> <span class="st">""</span>, <span class="dt">y =</span> <span class="st">"Closing Price"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb24-10" data-line-number="10"><span class="st">    </span><span class="kw"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="dt">xlim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(start, end)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb24-11" data-line-number="11"><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>symbol, <span class="dt">scales =</span> <span class="st">"free_y"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb24-12" data-line-number="12"><span class="st">    </span><span class="kw"><a href="../reference/theme_tq.html">theme_tq_dark</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb24-13" data-line-number="13"><span class="st">    </span><span class="kw"><a href="../reference/scale_manual.html">scale_color_tq</a></span>(<span class="dt">theme =</span> <span class="st">"dark"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb24-14" data-line-number="14"><span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>dollar)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="no">n_mavg</span> <span class="kw">&lt;-</span> <span class="fl">50</span> <span class="co"># Number of periods (days) for moving average</span>
+<span class="no">FANG</span> <span class="kw">%&gt;%</span>
+    <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">date</span> <span class="kw">&gt;=</span> <span class="no">start</span> - <span class="fu">days</span>(<span class="fl">2</span> * <span class="no">n_mavg</span>)) <span class="kw">%&gt;%</span>
+    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">close</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">symbol</span>)) +
+    <span class="fu">geom_line</span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
+    <span class="fu"><a href="../reference/geom_ma.html">geom_ma</a></span>(<span class="kw">n</span> <span class="kw">=</span> <span class="fl">15</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"darkblue"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
+    <span class="fu"><a href="../reference/geom_ma.html">geom_ma</a></span>(<span class="kw">n</span> <span class="kw">=</span> <span class="no">n_mavg</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"red"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
+    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"Dark Theme"</span>,
+         <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Closing Price"</span>) +
+    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span>(<span class="kw">xlim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">start</span>, <span class="no">end</span>)) +
+    <span class="fu">facet_wrap</span>(~ <span class="no">symbol</span>, <span class="kw">scales</span> <span class="kw">=</span> <span class="st">"free_y"</span>) +
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq_dark</a></span>() +
+    <span class="fu"><a href="../reference/scale_manual.html">scale_color_tq</a></span>(<span class="kw">theme</span> <span class="kw">=</span> <span class="st">"dark"</span>) +
+    <span class="fu">scale_y_continuous</span>(<span class="kw">labels</span> <span class="kw">=</span> <span class="kw pkg">scales</span><span class="kw ns">::</span><span class="no"><a href="https://scales.r-lib.org//reference/label_dollar.html">dollar</a></span>)</pre></body></html></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-25-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#overview">Overview</a></li>
-      <li><a href="#prerequisites">Prerequisites</a></li>
-      <li>
-<a href="#chart-types">Chart Types</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#line-chart">Line Chart</a></li>
-      <li><a href="#bar-chart">Bar Chart</a></li>
-      <li><a href="#candlestick-chart">Candlestick Chart</a></li>
-      <li><a href="#charting-multiple-securities">Charting Multiple Securities</a></li>
-      </ul>
-</li>
-      <li>
-<a href="#visualizing-trends">Visualizing Trends</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#moving-averages">Moving Averages</a></li>
-      <li><a href="#bollinger-bands">Bollinger Bands</a></li>
-      </ul>
-</li>
-      <li>
-<a href="#ggplot2-functionality">ggplot2 Functionality</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#example-1-log-scale-with-scale_y_log10">Example 1: Log Scale with scale_y_log10</a></li>
-      <li><a href="#example-2-regression-trendlines-with-geom_smooth">Example 2: Regression trendlines with geom_smooth</a></li>
-      <li><a href="#example-3-charting-volume-with-geom_segment">Example 3: Charting volume with geom_segment</a></li>
-      </ul>
-</li>
-      <li>
-<a href="#themes">Themes</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#dark">Dark</a></li>
-      </ul>
-</li>
-      </ul>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
 
@@ -586,7 +555,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

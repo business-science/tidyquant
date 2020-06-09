@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -34,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Excel Date and Time Functions — excel_date_functions" />
 <meta property="og:description" content="50+ date and time functions familiar to users coming from an Excel Background.
@@ -50,7 +56,6 @@ Functionality replicates Excel
 By default, missing values are ignored (same as in Excel)
 
 " />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -78,7 +83,7 @@ By default, missing values are ignored (same as in Excel)
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -448,9 +453,9 @@ factor in workdays and <code>timeDate</code> holiday calendars for popular busin
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Libraries</span>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyquant</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>)</div><div class='output co'>#&gt; <span class='message'>── <span style='font-weight: bold;'>Attaching packages</span><span> ─────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> </span><span style='color: #0000BB;'>tibble </span><span> 2.1.3     </span><span style='color: #00BB00;'>✓</span><span> </span><span style='color: #0000BB;'>purrr  </span><span> 0.3.3</span>
-#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> </span><span style='color: #0000BB;'>tidyr  </span><span> 1.0.2     </span><span style='color: #00BB00;'>✓</span><span> </span><span style='color: #0000BB;'>stringr</span><span> 1.4.0</span>
-#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> </span><span style='color: #0000BB;'>readr  </span><span> 1.3.1     </span><span style='color: #00BB00;'>✓</span><span> </span><span style='color: #0000BB;'>forcats</span><span> 0.5.0</span></div><div class='output co'>#&gt; <span class='message'>── </span><span style='font-weight: bold;'>Conflicts</span><span> ────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>)</div><div class='output co'>#&gt; <span class='message'>── <span style='font-weight: bold;'>Attaching packages</span><span> ────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> </span><span style='color: #0000BB;'>tibble </span><span> 3.0.1     </span><span style='color: #00BB00;'>✓</span><span> </span><span style='color: #0000BB;'>purrr  </span><span> 0.3.4</span>
+#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> </span><span style='color: #0000BB;'>tidyr  </span><span> 1.1.0     </span><span style='color: #00BB00;'>✓</span><span> </span><span style='color: #0000BB;'>stringr</span><span> 1.4.0</span>
+#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> </span><span style='color: #0000BB;'>readr  </span><span> 1.3.1     </span><span style='color: #00BB00;'>✓</span><span> </span><span style='color: #0000BB;'>forcats</span><span> 0.5.0</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package ‘tibble’ was built under R version 3.6.2</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package ‘tidyr’ was built under R version 3.6.2</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package ‘purrr’ was built under R version 3.6.2</span></div><div class='output co'>#&gt; <span class='message'>── </span><span style='font-weight: bold;'>Conflicts</span><span> ───────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──</span>
 #&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>lubridate</span><span>::</span><span style='color: #00BB00;'>as.difftime()</span><span> masks </span><span style='color: #0000BB;'>base</span><span>::as.difftime()</span>
 #&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>lubridate</span><span>::</span><span style='color: #00BB00;'>date()</span><span>        masks </span><span style='color: #0000BB;'>base</span><span>::date()</span>
 #&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>filter()</span><span>          masks </span><span style='color: #0000BB;'>stats</span><span>::filter()</span>
@@ -468,7 +473,7 @@ factor in workdays and <code>timeDate</code> holiday calendars for popular busin
 <span class='co'># Extractors ---</span>
 <span class='fu'>WEEKDAY</span>(<span class='st'>"2020-01-01"</span>)                                  <span class='co'># Labelled Day</span></div><div class='output co'>#&gt; [1] 4</div><div class='input'><span class='fu'>WEEKDAY</span>(<span class='st'>"2020-01-01"</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)                   <span class='co'># Numeric Day</span></div><div class='output co'>#&gt; [1] 4</div><div class='input'><span class='fu'>WEEKDAY</span>(<span class='st'>"2020-01-01"</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>week_start</span> <span class='kw'>=</span> <span class='fl'>1</span>)   <span class='co'># Start at 1 (Monday) vs 7 (Sunday)</span></div><div class='output co'>#&gt; [1] 3</div><div class='input'><span class='fu'>MONTH</span>(<span class='st'>"2020-01-01"</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'>QUARTER</span>(<span class='st'>"2020-01-01"</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'>YEAR</span>(<span class='st'>"2020-01-01"</span>)</div><div class='output co'>#&gt; [1] 2020</div><div class='input'>
 <span class='co'># Current Date-Time ---</span>
-<span class='fu'>NOW</span>()</div><div class='output co'>#&gt; [1] "2020-03-18 06:21:47 EDT"</div><div class='input'><span class='fu'>TODAY</span>()</div><div class='output co'>#&gt; [1] "2020-03-18"</div><div class='input'>
+<span class='fu'>NOW</span>()</div><div class='output co'>#&gt; [1] "2020-06-09 14:49:33 EDT"</div><div class='input'><span class='fu'>TODAY</span>()</div><div class='output co'>#&gt; [1] "2020-06-09"</div><div class='input'>
 <span class='co'># Date Math ---</span>
 <span class='fu'>EOMONTH</span>(<span class='st'>"2020-01-01"</span>)</div><div class='output co'>#&gt; [1] "2020-01-31"</div><div class='input'><span class='fu'>EOMONTH</span>(<span class='st'>"2020-01-01"</span>, <span class='kw'>months</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] "2020-02-29"</div><div class='input'><span class='fu'>NET_WORKDAYS</span>(<span class='st'>"2020-01-01"</span>, <span class='st'>"2020-07-01"</span>) <span class='co'># 131 Skipping Weekends</span></div><div class='output co'>#&gt; [1] 131</div><div class='input'><span class='fu'>NET_WORKDAYS</span>(<span class='st'>"2020-01-01"</span>, <span class='st'>"2020-07-01"</span>,
              <span class='kw'>holidays</span> <span class='kw'>=</span> <span class='fu'>HOLIDAY_SEQUENCE</span>(<span class='st'>"2020-01-01"</span>, <span class='st'>"2020-07-01"</span>,
@@ -595,15 +600,10 @@ factor in workdays and <code>timeDate</code> holiday calendars for popular busin
 #&gt; </span><span style='color: #555555;'>16</span><span> NFLX                 4  0.134  -</span><span style='color: #BB0000;'>0.221</span><span>    0.079</span><span style='text-decoration: underline;'>3</span><span>  0.206   </div><div class='input'>
 </div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -614,7 +614,7 @@ factor in workdays and <code>timeDate</code> holiday calendars for popular busin
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

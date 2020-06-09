@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -34,12 +38,13 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Mutates quantitative data — tq_mutate" />
 <meta property="og:description" content="tq_mutate() adds new variables to an existing tibble;
 tq_transmute() returns only newly created columns and is typically
 used when periodicity changes" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -67,7 +72,7 @@ used when periodicity changes" />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -323,7 +328,7 @@ respectively.</p>
 #&gt; </span><span style='color: #555555;'># … with 242 more rows</span><span></div><div class='input'>
 <span class='co'># Example 3: Using tq_mutate to work with non-OHLC data</span>
 <span class='fu'><a href='tq_get.html'>tq_get</a></span>(<span class='st'>"DCOILWTICO"</span>, <span class='kw'>get</span> <span class='kw'>=</span> <span class='st'>"economic.data"</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'>tq_mutate</span>(<span class='kw'>select</span> <span class='kw'>=</span> <span class='no'>price</span>, <span class='kw'>mutate_fun</span> <span class='kw'>=</span> <span class='no'>lag.xts</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>na.pad</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2,656 x 4</span><span>
+    <span class='fu'>tq_mutate</span>(<span class='kw'>select</span> <span class='kw'>=</span> <span class='no'>price</span>, <span class='kw'>mutate_fun</span> <span class='kw'>=</span> <span class='no'>lag.xts</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>na.pad</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2,717 x 4</span><span>
 #&gt;    symbol     date       price lag.xts
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> DCOILWTICO 2010-01-01  </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>  
@@ -336,13 +341,13 @@ respectively.</p>
 #&gt; </span><span style='color: #555555;'> 8</span><span> DCOILWTICO 2010-01-12  80.8    82.5
 #&gt; </span><span style='color: #555555;'> 9</span><span> DCOILWTICO 2010-01-13  79.7    80.8
 #&gt; </span><span style='color: #555555;'>10</span><span> DCOILWTICO 2010-01-14  79.4    79.7
-#&gt; </span><span style='color: #555555;'># … with 2,646 more rows</span><span></div><div class='input'>
+#&gt; </span><span style='color: #555555;'># … with 2,707 more rows</span><span></div><div class='input'>
 <span class='co'># Example 4: Using tq_mutate to apply a rolling regression</span>
 <span class='no'>fb_returns</span> <span class='kw'>&lt;-</span> <span class='no'>fb_stock_prices</span> <span class='kw'>%&gt;%</span>
     <span class='fu'>tq_transmute</span>(<span class='no'>adjusted</span>, <span class='no'>periodReturn</span>, <span class='kw'>period</span> <span class='kw'>=</span> <span class='st'>"monthly"</span>, <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='st'>"fb.returns"</span>)
 <span class='no'>xlk_returns</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tq_get.html'>tq_get</a></span>(<span class='st'>"XLK"</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='st'>"2016-01-01"</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='st'>"2016-12-31"</span>) <span class='kw'>%&gt;%</span>
     <span class='fu'>tq_transmute</span>(<span class='no'>adjusted</span>, <span class='no'>periodReturn</span>, <span class='kw'>period</span> <span class='kw'>=</span> <span class='st'>"monthly"</span>, <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='st'>"xlk.returns"</span>)
-<span class='no'>returns_combined</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/join.html'>left_join</a></span>(<span class='no'>fb_returns</span>, <span class='no'>xlk_returns</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='st'>"date"</span>)
+<span class='no'>returns_combined</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>left_join</a></span>(<span class='no'>fb_returns</span>, <span class='no'>xlk_returns</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='st'>"date"</span>)
 <span class='no'>regr_fun</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>data</span>) {
     <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>fb.returns</span> ~ <span class='no'>xlk.returns</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/reexports.html'>as_tibble</a></span>(<span class='no'>data</span>)))
 }
@@ -351,8 +356,7 @@ respectively.</p>
               <span class='kw'>width</span>      <span class='kw'>=</span> <span class='fl'>6</span>,
               <span class='kw'>FUN</span>        <span class='kw'>=</span> <span class='no'>regr_fun</span>,
               <span class='kw'>by.column</span>  <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-              <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"coef.0"</span>, <span class='st'>"coef.1"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `tibble::enframe(name = NULL)` instead.</span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>This warning is displayed once per session.</span><span></span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 12 x 5</span><span>
+              <span class='kw'>col_rename</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"coef.0"</span>, <span class='st'>"coef.1"</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 12 x 5</span><span>
 #&gt;    date       fb.returns xlk.returns   coef.0 coef.1
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> 2016-01-29     0.097</span><span style='text-decoration: underline;'>7</span><span>    -</span><span style='color: #BB0000;'>0.024</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>  </span><span style='color: #BB0000;'>NA</span><span>       </span><span style='color: #BB0000;'>NA</span><span>    
@@ -386,16 +390,10 @@ respectively.</p>
 #&gt; </span><span style='color: #555555;'>10</span><span> FB     2016-01-15  94.0  96.4  93.5  95.0 46</span><span style='text-decoration: underline;'>132</span><span>800     95.0    </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
 #&gt; </span><span style='color: #555555;'># … with 242 more rows</span><span></div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -406,7 +404,7 @@ respectively.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

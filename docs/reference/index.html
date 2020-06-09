@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -34,6 +38,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 
 <meta property="og:title" content="Function reference" />
 
@@ -63,7 +69,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -159,10 +165,24 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-financial-data-getting-from-apis" class="hasAnchor"><a href="#section-financial-data-getting-from-apis" class="anchor"></a>Financial Data - Getting from APIs</h2>
+          <h2 id="section-financial-apis" class="hasAnchor"><a href="#section-financial-apis" class="anchor"></a>Financial APIs</h2>
           <p class="section-desc"><p>Functions for getting financial data from various API sources.</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-get-data-from-apis" class="hasAnchor"><a href="#section-get-data-from-apis" class="anchor"></a>Get Data from APIs</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -175,7 +195,20 @@
           <p><code><a href="tq_index.html">tq_index()</a></code> <code><a href="tq_index.html">tq_exchange()</a></code> <code><a href="tq_index.html">tq_index_options()</a></code> <code><a href="tq_index.html">tq_exchange_options()</a></code> </p>
         </td>
         <td><p>Get all stocks in a stock index or stock exchange in <code>tibble</code> format</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-api-keys" class="hasAnchor"><a href="#section-api-keys" class="anchor"></a>API Keys</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="quandl_api_key.html">quandl_api_key()</a></code> </p>
@@ -199,20 +232,28 @@
           <p><code><a href="tiingo_api_key.html">tiingo_api_key()</a></code> </p>
         </td>
         <td><p>Set Tiingo API Key</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="FANG.html">FANG</a></code> </p>
-        </td>
-        <td><p>Stock prices for the "FANG" stocks.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-financial-analysis-quantitative-transformations" class="hasAnchor"><a href="#section-financial-analysis-quantitative-transformations" class="anchor"></a>Financial Analysis - Quantitative Transformations</h2>
+          <h2 id="section-financial-analysis" class="hasAnchor"><a href="#section-financial-analysis" class="anchor"></a>Financial Analysis</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-quantitative-transformations" class="hasAnchor"><a href="#section-quantitative-transformations" class="anchor"></a>Quantitative Transformations</h3>
           <p class="section-desc"><p>Functions for mutating quantitative data.</p></p>
         </th>
       </tr>
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -221,12 +262,17 @@
         <td><p>Mutates quantitative data</p></td>
       </tr>
     </tbody><tbody>
+      
       <tr>
         <th colspan="2">
-          <h2 id="section-financial-analysis-portfolio-aggregation" class="hasAnchor"><a href="#section-financial-analysis-portfolio-aggregation" class="anchor"></a>Financial Analysis - Portfolio Aggregation</h2>
+          <h3 id="section-portfolio-aggregation" class="hasAnchor"><a href="#section-portfolio-aggregation" class="anchor"></a>Portfolio Aggregation</h3>
           <p class="section-desc"><p>Functions for aggregating 1 or more portfolios.</p></p>
         </th>
       </tr>
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -235,12 +281,17 @@
         <td><p>Aggregates a group of returns by asset into portfolio returns</p></td>
       </tr>
     </tbody><tbody>
+      
       <tr>
         <th colspan="2">
-          <h2 id="section-financial-analysis-performance-analytics" class="hasAnchor"><a href="#section-financial-analysis-performance-analytics" class="anchor"></a>Financial Analysis - Performance Analytics</h2>
+          <h3 id="section-performance-analytics" class="hasAnchor"><a href="#section-performance-analytics" class="anchor"></a>Performance Analytics</h3>
           <p class="section-desc"><p>Functions for performing various financial performance analyses.</p></p>
         </th>
       </tr>
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -249,12 +300,17 @@
         <td><p>Computes a wide variety of summary performance metrics from stock or portfolio returns</p></td>
       </tr>
     </tbody><tbody>
+      
       <tr>
         <th colspan="2">
-          <h2 id="section-financial-analysis-charting-with-ggplot-" class="hasAnchor"><a href="#section-financial-analysis-charting-with-ggplot-" class="anchor"></a>Financial Analysis - Charting with `ggplot2`</h2>
-          <p class="section-desc"><p>Functions for creating <strong>ggplots</strong> for financial charting.</p></p>
+          <h3 id="section-charting-with-ggplot-" class="hasAnchor"><a href="#section-charting-with-ggplot-" class="anchor"></a>Charting with ggplot2</h3>
+          <p class="section-desc"><p>Functions for creating <code>ggplots</code> for financial charting.</p></p>
         </th>
       </tr>
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -301,10 +357,24 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-excel-pivot-table-vlookup-sum-ifs" class="hasAnchor"><a href="#section-excel-pivot-table-vlookup-sum-ifs" class="anchor"></a>Excel - Pivot Table, VLOOKUP, &amp; Sum-Ifs</h2>
+          <h2 id="section-excel" class="hasAnchor"><a href="#section-excel" class="anchor"></a>Excel</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-pivot-table-vlookup-sum-ifs" class="hasAnchor"><a href="#section-pivot-table-vlookup-sum-ifs" class="anchor"></a>Pivot Table, VLOOKUP, &amp; Sum-Ifs</h3>
           <p class="section-desc"><p>These <strong>Power-Excel Functions</strong> provide common functionality that power-users coming from Excel use frequently.</p></p>
         </th>
       </tr>
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -325,12 +395,17 @@
         <td><p>Excel Summarising "If" Functions</p></td>
       </tr>
     </tbody><tbody>
+      
       <tr>
         <th colspan="2">
-          <h2 id="section-excel-summary-functions" class="hasAnchor"><a href="#section-excel-summary-functions" class="anchor"></a>Excel - Summary Functions</h2>
+          <h3 id="section-summary-functions" class="hasAnchor"><a href="#section-summary-functions" class="anchor"></a>Summary Functions</h3>
           <p class="section-desc"><p>These functions return a <strong>single value</strong> from a vector of values</p></p>
         </th>
       </tr>
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -339,12 +414,17 @@
         <td><p>Excel Statistical Summary Functions</p></td>
       </tr>
     </tbody><tbody>
+      
       <tr>
         <th colspan="2">
-          <h2 id="section-excel-mutation-functions" class="hasAnchor"><a href="#section-excel-mutation-functions" class="anchor"></a>Excel - Mutation Functions</h2>
+          <h3 id="section-mutation-functions" class="hasAnchor"><a href="#section-mutation-functions" class="anchor"></a>Mutation Functions</h3>
           <p class="section-desc"><p>These functions return a vector of <strong>multiple values</strong> the length of the input vector</p></p>
         </th>
       </tr>
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -353,12 +433,17 @@
         <td><p>Excel Statistical Mutation Functions</p></td>
       </tr>
     </tbody><tbody>
+      
       <tr>
         <th colspan="2">
-          <h2 id="section-excel-date-functions" class="hasAnchor"><a href="#section-excel-date-functions" class="anchor"></a>Excel - Date Functions</h2>
+          <h3 id="section-date-time-functions" class="hasAnchor"><a href="#section-date-time-functions" class="anchor"></a>Date &amp; Time Functions</h3>
           <p class="section-desc"><p>These functions provide <code>lubridate</code> (<strong>date &amp; date-time</strong>) and <code>timeDate</code> (<strong>Business Calendar Holiday</strong>) functionality</p></p>
         </th>
       </tr>
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -367,12 +452,17 @@
         <td><p>Excel Date and Time Functions</p></td>
       </tr>
     </tbody><tbody>
+      
       <tr>
         <th colspan="2">
-          <h2 id="section-excel-financial-functions" class="hasAnchor"><a href="#section-excel-financial-functions" class="anchor"></a>Excel - Financial Functions</h2>
+          <h3 id="section-financial-functions" class="hasAnchor"><a href="#section-financial-functions" class="anchor"></a>Financial Functions</h3>
           <p class="section-desc"><p>These functions provide common financial calcuations from Excel</p></p>
         </th>
       </tr>
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -383,16 +473,21 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-tidyverse-extensions" class="hasAnchor"><a href="#section-tidyverse-extensions" class="anchor"></a>Tidyverse - Extensions</h2>
-          <p class="section-desc"><p>Added functionality for <code>tidyverse</code> users</p></p>
+          <h2 id="section-data-sets" class="hasAnchor"><a href="#section-data-sets" class="anchor"></a>Data Sets</h2>
+          <p class="section-desc"></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
-          <p><code><a href="summarise_by_time.html">summarise_by_time()</a></code> <code><a href="summarise_by_time.html">summarize_by_time()</a></code> </p>
+          <p><code><a href="FANG.html">FANG</a></code> </p>
         </td>
-        <td><p>Summarise each group by time</p></td>
+        <td><p>Stock prices for the "FANG" stocks.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -401,6 +496,11 @@
           <p class="section-desc"><p>Package level information.</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -415,34 +515,32 @@
           <p class="section-desc"></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
           <p><code><a href="deprecated.html">tq_transform()</a></code> <code><a href="deprecated.html">tq_transform_xy()</a></code> </p>
         </td>
         <td><p>Deprecated functions</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="summarise_by_time.html">summarise_by_time()</a></code> <code><a href="summarise_by_time.html">summarize_by_time()</a></code> </p>
+        </td>
+        <td><p>DEPRECATED - Summarise each group by time</p></td>
       </tr>
     </tbody>
     </table>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-financial-data-getting-from-apis">Financial Data - Getting from APIs</a></li>
-      <li><a href="#section-financial-analysis-quantitative-transformations">Financial Analysis - Quantitative Transformations</a></li>
-      <li><a href="#section-financial-analysis-portfolio-aggregation">Financial Analysis - Portfolio Aggregation</a></li>
-      <li><a href="#section-financial-analysis-performance-analytics">Financial Analysis - Performance Analytics</a></li>
-      <li><a href="#section-financial-analysis-charting-with-ggplot-">Financial Analysis - Charting with `ggplot2`</a></li>
-      <li><a href="#section-excel-pivot-table-vlookup-sum-ifs">Excel - Pivot Table, VLOOKUP, &amp; Sum-Ifs</a></li>
-      <li><a href="#section-excel-summary-functions">Excel - Summary Functions</a></li>
-      <li><a href="#section-excel-mutation-functions">Excel - Mutation Functions</a></li>
-      <li><a href="#section-excel-date-functions">Excel - Date Functions</a></li>
-      <li><a href="#section-excel-financial-functions">Excel - Financial Functions</a></li>
-      <li><a href="#section-tidyverse-extensions">Tidyverse - Extensions</a></li>
-      <li><a href="#section-tidyquant">Tidyquant</a></li>
-      <li><a href="#section-deprecated">Deprecated</a></li>
-    </ul>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -453,7 +551,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

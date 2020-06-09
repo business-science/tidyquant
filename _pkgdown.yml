@@ -37,62 +37,70 @@ navbar:
       href: https://github.com/business-science/tidyquant
 
 reference:
-  - title: Financial Data - Getting from APIs
+
+  - title: Financial APIs
     desc: Functions for getting financial data from various API sources.
+  - subtitle: Get Data from APIs
     contents:
     - starts_with("tq_get")
     - starts_with("tq_index")
     - starts_with("tq_exchange")
+  - subtitle: API Keys
+    contents:
     - starts_with("quandl")
     - contains("api")
-    - FANG
-  - title: Financial Analysis - Quantitative Transformations
+
+  - title: Financial Analysis
+
+  - subtitle: Quantitative Transformations
     desc: Functions for mutating quantitative data.
     contents:
     - starts_with("tq_mutate")
     - starts_with("tq_transmute")
-  - title: Financial Analysis - Portfolio Aggregation
+  - subtitle: Portfolio Aggregation
     desc: Functions for aggregating 1 or more portfolios.
     contents:
     - starts_with("tq_portfolio")
-  - title: Financial Analysis - Performance Analytics
+  - subtitle: Performance Analytics
     desc: Functions for performing various financial performance analyses.
     contents:
     - starts_with("tq_performance")
-  - title: Financial Analysis - Charting with `ggplot2`
-    desc: Functions for creating __ggplots__ for financial charting.
+  - subtitle: Charting with ggplot2
+    desc: Functions for creating `ggplots` for financial charting.
     contents:
     - starts_with("geom_")
     - starts_with("theme_")
     - starts_with("palette_")
     - starts_with("scale_")
     - starts_with("coord_")
-  - title: Excel - Pivot Table, VLOOKUP, & Sum-Ifs
+
+  - title: Excel
+
+  - subtitle: Pivot Table, VLOOKUP, & Sum-Ifs
     desc: These __Power-Excel Functions__ provide common functionality that power-users coming from Excel use frequently.
     contents:
     - "pivot_table"
     - "VLOOKUP"
     - ends_with("_IFS")
-  - title: Excel - Summary Functions
+  - subtitle: Summary Functions
     desc: These functions return a __single value__ from a vector of values
     contents:
     - SUM
-  - title: Excel - Mutation Functions
+  - subtitle:  Mutation Functions
     desc: These functions return a vector of __multiple values__ the length of the input vector
     contents:
     - ABS
-  - title: Excel - Date Functions
+  - subtitle: Date & Time Functions
     desc: These functions provide `lubridate` (__date & date-time__) and `timeDate` (__Business Calendar Holiday__) functionality
     contents:
     - HOLIDAY_SEQUENCE
-  - title: Excel - Financial Functions
+  - subtitle: Financial Functions
     desc: These functions provide common financial calcuations from Excel
     contents:
     - NPV
-  - title: Tidyverse - Extensions
-    desc: Added functionality for `tidyverse` users
+  - title: Data Sets
     contents:
-    - "summarize_by_time"
+    - FANG
   - title: Tidyquant
     desc: Package level information.
     contents:
@@ -100,4 +108,5 @@ reference:
   - title: Deprecated
     contents:
     - starts_with("deprecated")
+    - summarise_by_time
 

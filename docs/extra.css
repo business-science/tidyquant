@@ -1,0 +1,28 @@
+
+div.comparison thead tr th:first-child,
+div.comparison tbody tr td:first-child {
+  width: 12em;
+  min-width: 12em;
+  max-width: 12em;
+  word-break: break-all;
+}
+
+div.comparison table {
+  border-collapse: collapse;
+}
+
+div.comparison tr {
+  border-color: #b4bcc2;
+  border: solid;
+  border-width: 1px 0;
+}
+
+div.comparison .header {
+  border-color: #b4bcc2;
+  border: solid;
+  border-width: 2px 0;
+}
+
+.ref-index h3 {
+  color: #18bc9c;
+}
