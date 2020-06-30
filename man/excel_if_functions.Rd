@@ -84,6 +84,7 @@ This is a function factory that generates summary "_IFS" functions.
 \examples{
 library(tidyverse)
 library(tidyquant)
+library(timetk)
 library(stringr)
 library(lubridate)
 

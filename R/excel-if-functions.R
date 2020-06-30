@@ -49,6 +49,7 @@
 #' @examples
 #' library(tidyverse)
 #' library(tidyquant)
+#' library(timetk)
 #' library(stringr)
 #' library(lubridate)
 #'
