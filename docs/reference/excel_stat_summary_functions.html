@@ -260,6 +260,7 @@ Some functions like <code>COUNT()</code> handle multiple data types.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Libraries</span>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyquant</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>timetk</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>forcats</span>)
 
@@ -272,16 +273,30 @@ Some functions like <code>COUNT()</code> handle multiple data types.</p></td>
 <span class='co'># Go from daily to monthly periodicity,</span>
 <span class='co'># then calculate returns and growth of $1 USD</span>
 <span class='no'>FANG</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>mutate</span>(<span class='kw'>symbol</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/forcats/man/as_factor.html'>as_factor</a></span>(<span class='no'>symbol</span>)) <span class='kw'>%&gt;%</span>
+    <span class='fu'>mutate</span>(<span class='kw'>symbol</span> <span class='kw'>=</span> <span class='fu'><a href='https://forcats.tidyverse.org/reference/as_factor.html'>as_factor</a></span>(<span class='no'>symbol</span>)) <span class='kw'>%&gt;%</span>
     <span class='fu'>group_by</span>(<span class='no'>symbol</span>) <span class='kw'>%&gt;%</span>
 
     <span class='co'># Summarization - Collapse from daily to FIRST value by month</span>
-    <span class='fu'>summarise_by_time</span>(
+    <span class='fu'><a href='https://rdrr.io/pkg/timetk/man/summarise_by_time.html'>summarise_by_time</a></span>(
         <span class='kw'>.date_var</span>  <span class='kw'>=</span> <span class='no'>date</span>,
-        <span class='kw'>.time_unit</span> <span class='kw'>=</span> <span class='st'>"month"</span>,
+        <span class='kw'>.by</span>        <span class='kw'>=</span> <span class='st'>"month"</span>,
         <span class='kw'>adjusted</span>   <span class='kw'>=</span> <span class='fu'>FIRST</span>(<span class='no'>adjusted</span>)
-    )</div><div class='output co'>#&gt; <span class='error'>Error in summarise_by_time(., .date_var = date, .time_unit = "month",     adjusted = FIRST(adjusted)): could not find function "summarise_by_time"</span></div><div class='input'>
-</div></pre>
+    )</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 192 x 3</span><span>
+#&gt; </span><span style='color: #555555;'># Groups:   symbol [4]</span><span>
+#&gt;    symbol date       adjusted
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> FB     2013-01-01     28  
+#&gt; </span><span style='color: #555555;'> 2</span><span> FB     2013-02-01     29.7
+#&gt; </span><span style='color: #555555;'> 3</span><span> FB     2013-03-01     27.8
+#&gt; </span><span style='color: #555555;'> 4</span><span> FB     2013-04-01     25.5
+#&gt; </span><span style='color: #555555;'> 5</span><span> FB     2013-05-01     27.4
+#&gt; </span><span style='color: #555555;'> 6</span><span> FB     2013-06-01     23.8
+#&gt; </span><span style='color: #555555;'> 7</span><span> FB     2013-07-01     24.8
+#&gt; </span><span style='color: #555555;'> 8</span><span> FB     2013-08-01     37.5
+#&gt; </span><span style='color: #555555;'> 9</span><span> FB     2013-09-01     41.9
+#&gt; </span><span style='color: #555555;'>10</span><span> FB     2013-10-01     50.4
+#&gt; </span><span style='color: #555555;'># ... with 182 more rows</span><span></div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

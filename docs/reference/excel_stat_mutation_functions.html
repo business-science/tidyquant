@@ -248,6 +248,7 @@ Most functions replicate the behavior of Excel:</p><ul>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Libraries</span>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyquant</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>timetk</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>forcats</span>)
 
@@ -260,13 +261,13 @@ Most functions replicate the behavior of Excel:</p><ul>
 <span class='co'># Go from daily to monthly periodicity,</span>
 <span class='co'># then calculate returns and growth of $1 USD</span>
 <span class='no'>FANG</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>mutate</span>(<span class='kw'>symbol</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/forcats/man/as_factor.html'>as_factor</a></span>(<span class='no'>symbol</span>)) <span class='kw'>%&gt;%</span>
+    <span class='fu'>mutate</span>(<span class='kw'>symbol</span> <span class='kw'>=</span> <span class='fu'><a href='https://forcats.tidyverse.org/reference/as_factor.html'>as_factor</a></span>(<span class='no'>symbol</span>)) <span class='kw'>%&gt;%</span>
     <span class='fu'>group_by</span>(<span class='no'>symbol</span>) <span class='kw'>%&gt;%</span>
 
     <span class='co'># Summarization - Collapse from daily to FIRST value by month</span>
-    <span class='fu'>summarise_by_time</span>(
+    <span class='fu'><a href='https://rdrr.io/pkg/timetk/man/summarise_by_time.html'>summarise_by_time</a></span>(
         <span class='kw'>.date_var</span>  <span class='kw'>=</span> <span class='no'>date</span>,
-        <span class='kw'>.time_unit</span> <span class='kw'>=</span> <span class='st'>"month"</span>,
+        <span class='kw'>.by</span>        <span class='kw'>=</span> <span class='st'>"month"</span>,
         <span class='kw'>adjusted</span>   <span class='kw'>=</span> <span class='fu'><a href='excel_stat_summary_functions.html'>FIRST</a></span>(<span class='no'>adjusted</span>)
     ) <span class='kw'>%&gt;%</span>
 
@@ -275,8 +276,22 @@ Most functions replicate the behavior of Excel:</p><ul>
     <span class='fu'>mutate</span>(
         <span class='kw'>returns</span> <span class='kw'>=</span> <span class='fu'>PCT_CHANGE</span>(<span class='no'>adjusted</span>, <span class='kw'>fill_na</span> <span class='kw'>=</span> <span class='fl'>0</span>),
         <span class='kw'>growth</span>  <span class='kw'>=</span> <span class='fu'>CUMULATIVE_SUM</span>(<span class='no'>returns</span>) + <span class='fl'>1</span>
-    )</div><div class='output co'>#&gt; <span class='error'>Error in summarise_by_time(., .date_var = date, .time_unit = "month",     adjusted = FIRST(adjusted)): could not find function "summarise_by_time"</span></div><div class='input'>
-</div></pre>
+    )</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 192 x 5</span><span>
+#&gt; </span><span style='color: #555555;'># Groups:   symbol [4]</span><span>
+#&gt;    symbol date       adjusted returns growth
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> FB     2013-01-01     28    0       1    
+#&gt; </span><span style='color: #555555;'> 2</span><span> FB     2013-02-01     29.7  0.061</span><span style='text-decoration: underline;'>8</span><span>  1.06 
+#&gt; </span><span style='color: #555555;'> 3</span><span> FB     2013-03-01     27.8 -</span><span style='color: #BB0000;'>0.065</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>  0.996
+#&gt; </span><span style='color: #555555;'> 4</span><span> FB     2013-04-01     25.5 -</span><span style='color: #BB0000;'>0.081</span><span style='color: #BB0000;text-decoration: underline;'>0</span><span>  0.915
+#&gt; </span><span style='color: #555555;'> 5</span><span> FB     2013-05-01     27.4  0.074</span><span style='text-decoration: underline;'>4</span><span>  0.990
+#&gt; </span><span style='color: #555555;'> 6</span><span> FB     2013-06-01     23.8 -</span><span style='color: #BB0000;'>0.131</span><span>   0.859
+#&gt; </span><span style='color: #555555;'> 7</span><span> FB     2013-07-01     24.8  0.040</span><span style='text-decoration: underline;'>3</span><span>  0.899
+#&gt; </span><span style='color: #555555;'> 8</span><span> FB     2013-08-01     37.5  0.511   1.41 
+#&gt; </span><span style='color: #555555;'> 9</span><span> FB     2013-09-01     41.9  0.117   1.53 
+#&gt; </span><span style='color: #555555;'>10</span><span> FB     2013-10-01     50.4  0.204   1.73 
+#&gt; </span><span style='color: #555555;'># ... with 182 more rows</span><span></div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

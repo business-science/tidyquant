@@ -103,13 +103,13 @@
 
       
 
-      </header><script src="TQ00-introduction-to-tidyquant_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2020-06-09</h4>
+            <h4 class="date">2020-06-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ00-introduction-to-tidyquant.Rmd"><code>vignettes/TQ00-introduction-to-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ00-introduction-to-tidyquant.Rmd</code></div>
@@ -118,41 +118,12 @@
 
     
     
-<blockquote>
-<p>Bringing financial and business analysis to the tidyverse</p>
-</blockquote>
-<div id="bringing-excel-to-r-in-tidyquant-1-0-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#bringing-excel-to-r-in-tidyquant-1-0-0" class="anchor"></a>Bringing Excel to R in tidyquant 1.0.0</h1>
-<blockquote>
-<p>Tidyquant 1.0.0 is the <em>“R for Excel Users”</em> release. My aim is to build functionality that helps users coming from an <strong>Excel Background</strong> (background I came from). It’s important to have these users feel at home. I have a full suite of functionality to accomplish your Excel-to-R transition.</p>
-<p>-Matt</p>
-</blockquote>
-<p>This document describes the <strong>Financial Workflow for stock and portfolio analysis.</strong> I have a separate blog tutorial for Excel users that want to implement the <a href="https://www.business-science.io/finance/2020/02/26/r-for-excel-users.html"><strong>Excel functions in R.</strong></a></p>
-</div>
-<div id="financial-workflow-overview" class="section level1">
-<h1 class="hasAnchor">
-<a href="#financial-workflow-overview" class="anchor"></a>Financial Workflow Overview</h1>
-<p><code>tidyquant</code> integrates the best resources for collecting and analyzing financial data, <code>xts</code> and <code>zoo</code>, <code>quantmod</code>, <code>TTR</code>, and <code>PerformanceAnalytics</code> with the tidy data infrastructure of the <code>tidyverse</code> allowing for seamless interaction between each.</p>
-<p>The four primary quantitative packages that are the backbone for financial analysis in <em>R programming</em> are:</p>
-<ul>
-<li>
-<a href="https://CRAN.R-project.org/package=xts">xts</a>, or <a href="http://joshuaulrich.github.io/xts/index.html">eXtensible time series</a>: The data structure for handling time-series data. The underlying time-series structure is <code>zoo</code>, which is also integrated.</li>
-<li>
-<a href="https://CRAN.R-project.org/package=quantmod">quantmod</a>, or Quantitative Financial Modelling &amp; Trading Framework for R: A package designed for retrieving, manipulating, and modeling quantitative data.</li>
-<li>
-<a href="https://CRAN.R-project.org/package=TTR">TTR</a>, or Technical Trading Rules: A package that includes various functions to compute technical trading equations for quantitative or trading data.</li>
-<li>
-<a href="https://CRAN.R-project.org/package=PerformanceAnalytics">PerformanceAnalytics</a>: A package that includes a collection of econometric functions for performance and risk analysis. The package analyzes returns (not prices).</li>
-</ul>
-<p>The <a href="https://www.jstatsoft.org/article/view/v059i10">tidy data principles</a> are a cornerstone of data management and the data modeling workflow. The foundation for tidy data management is the <code>tidyverse</code>, a collection of <em>R packages</em>: <code>ggplot2</code>, <code>dplyr</code>, <code>tidyr</code>, <code>purrr</code>, <code>readr</code>, <code>tibble</code>, that work in harmony, are built for scaleability, and are well documented in <a href="http://r4ds.had.co.nz/">R for Data Science</a>. Using this infrastructure and the core tidy concepts, we can apply the tidy data principles to financial analysis using the <em>R package</em>, <code>tidyquant</code>.</p>
 <div id="minutes-to-tidyquant" class="section level2">
 <h2 class="hasAnchor">
 <a href="#minutes-to-tidyquant" class="anchor"></a>2-Minutes To Tidyquant</h2>
 <p>Our short introduction to <code>tidyquant</code> on <a href="https://www.youtube.com/embed/woxJZTL2hok">YouTube</a>.</p>
 <p><a href="https://www.youtube.com/embed/woxJZTL2hok" target="_blank"><img src="http://img.youtube.com/vi/woxJZTL2hok/0.jpg" alt="Anomalize" width="100%" height="350"></a></p>
 <p>Check out our entire <a href="https://www.youtube.com/watch?v=Gk_HwjhlQJs&amp;list=PLo32uKohmrXsYNhpdwr15W143rX6uMAze">Software Intro Series</a> on YouTube!</p>
-</div>
 </div>
 <div id="benefits" class="section level1">
 <h1 class="hasAnchor">

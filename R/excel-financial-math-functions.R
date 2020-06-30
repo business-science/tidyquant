@@ -61,7 +61,18 @@
 #' For example, use 6%/4 for quarterly payments at 6% APR.
 #'
 #' @examples
-#' # TODO
+#'
+#' NPV(c(-1000, 250, 350, 450, 450), rate = 0.05)
+#'
+#' IRR(c(-1000, 250, 350, 450, 450))
+#'
+#' FV(rate = 0.05, nper = 5, pv = -100, pmt = 0, type = 0)
+#'
+#' PV(rate = 0.05, nper = 5, fv = -100, pmt = 0, type = 0)
+#'
+#' PMT(nper = 20, rate = 0.05, pv = -100, fv = 0, type = 0)
+#'
+#' RATE(nper = 20, pmt = 8, pv = -100, fv = 0, type = 0)
 #'
 #' @name excel_financial_math_functions
 

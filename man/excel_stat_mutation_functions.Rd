@@ -88,6 +88,7 @@ Most functions replicate the behavior of Excel:
 \examples{
 # Libraries
 library(tidyquant)
+library(timetk)
 library(tidyverse)
 library(forcats)
 
@@ -108,7 +109,7 @@ FANG \%>\%
     # Summarization - Collapse from daily to FIRST value by month
     summarise_by_time(
         .date_var  = date,
-        .time_unit = "month",
+        .by        = "month",
         adjusted   = FIRST(adjusted)
     ) \%>\%
 

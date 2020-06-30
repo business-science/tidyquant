@@ -185,9 +185,9 @@
     
 <dl'>
 
-<dt><code>scale_color_tq</code></dt><dd><p>For use when <code>color</code> is specified as an <code><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes()</a></code> in a ggplot.</p></dd>
+<dt><code>scale_color_tq</code></dt><dd><p>For use when <code>color</code> is specified as an <code><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes()</a></code> in a ggplot.</p></dd>
 
-<dt><code>scale_fill_tq</code></dt><dd><p>For use when <code>fill</code> is specified as an <code><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes()</a></code> in a ggplot.</p></dd>
+<dt><code>scale_fill_tq</code></dt><dd><p>For use when <code>fill</code> is specified as an <code><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes()</a></code> in a ggplot.</p></dd>
 
 </dl>
 
@@ -208,9 +208,9 @@
 
 <span class='co'># Plot for stocks</span>
 <span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='no'>stocks</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>date</span>, <span class='no'>adjusted</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>symbol</span>)) +
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() +
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Multi stock example"</span>,
+    <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes</a></span>(<span class='no'>date</span>, <span class='no'>adjusted</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>symbol</span>)) +
+    <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/geom_path.html'>geom_line</a></span>() +
+    <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/labs.html'>labs</a></span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Multi stock example"</span>,
          <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Date"</span>,
          <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Adjusted Close"</span>)
 

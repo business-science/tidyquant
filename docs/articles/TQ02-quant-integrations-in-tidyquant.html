@@ -103,13 +103,13 @@
 
       
 
-      </header><script src="TQ02-quant-integrations-in-tidyquant_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>R Quantitative Analysis Package Integrations in tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2020-06-09</h4>
+            <h4 class="date">2020-06-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ02-quant-integrations-in-tidyquant.Rmd"><code>vignettes/TQ02-quant-integrations-in-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ02-quant-integrations-in-tidyquant.Rmd</code></div>
@@ -179,10 +179,10 @@
 <pre><code>##  [1] "apply.daily"     "apply.monthly"   "apply.quarterly" "apply.weekly"   
 ##  [5] "apply.yearly"    "diff.xts"        "lag.xts"         "period.apply"   
 ##  [9] "period.max"      "period.min"      "period.prod"     "period.sum"     
-## [13] "periodicity"     "to_period"       "to.daily"        "to.hourly"      
-## [17] "to.minutes"      "to.minutes10"    "to.minutes15"    "to.minutes3"    
-## [21] "to.minutes30"    "to.minutes5"     "to.monthly"      "to.period"      
-## [25] "to.quarterly"    "to.weekly"       "to.yearly"</code></pre>
+## [13] "periodicity"     "to.daily"        "to.hourly"       "to.minutes"     
+## [17] "to.minutes10"    "to.minutes15"    "to.minutes3"     "to.minutes30"   
+## [21] "to.minutes5"     "to.monthly"      "to.period"       "to.quarterly"   
+## [25] "to.weekly"       "to.yearly"       "to_period"</code></pre>
 <p>The <code>xts</code> functions that are compatible are listed above. Generally speaking, these are the:</p>
 <ul>
 <li>Period Apply Functions:
@@ -388,7 +388,9 @@
 <h1 class="hasAnchor">
 <a href="#quantitative-power-in-action" class="anchor"></a>2.0 Quantitative Power In Action</h1>
 <p>We’ll go through some examples, but first let’s get some data. The <code>FANG</code> data set will be used which consists of stock prices for FB, AMZN, NFLX, and GOOG from the beginning of 2013 to the end of 2016.</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">FANG</span></pre></body></html></div>
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"FANG"</span>)
+
+<span class="no">FANG</span></pre></body></html></div>
 <pre><code>## # A tibble: 4,032 x 8
 ##    symbol date        open  high   low close    volume adjusted
 ##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -402,7 +404,7 @@
 ##  8 FB     2013-01-11  31.3  32.0  31.1  31.7  89598000     31.7
 ##  9 FB     2013-01-14  32.1  32.2  30.6  31.0  98892800     31.0
 ## 10 FB     2013-01-15  30.6  31.7  29.9  30.1 173242600     30.1
-## # … with 4,022 more rows</code></pre>
+## # ... with 4,022 more rows</code></pre>
 <div id="example-1-use-quantmod-periodreturn-to-convert-prices-to-returns" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-1-use-quantmod-periodreturn-to-convert-prices-to-returns" class="anchor"></a>Example 1: Use quantmod periodReturn to Convert Prices to Returns</h2>
@@ -497,7 +499,7 @@
 ##  8 FB     2013-08-30  42.0  42.3  41.1  41.3  67735100
 ##  9 FB     2013-09-30  50.1  51.6  49.8  50.2 100095000
 ## 10 FB     2013-10-31  47.2  52    46.5  50.2 248809000
-## # … with 182 more rows</code></pre>
+## # ... with 182 more rows</code></pre>
 <p>A common usage case is to reduce the number of points to smooth time series plots. Let’s check out difference between daily and monthly plots.</p>
 <div id="without-periodicity-aggregation" class="section level3">
 <h3 class="hasAnchor">
@@ -575,7 +577,7 @@
 ##  8 FB     2013-08-30          0.122             -0.0104 
 ##  9 FB     2013-09-30          0.217              0.0253 
 ## 10 FB     2013-10-31         -0.000398           0.0502 
-## # … with 182 more rows</code></pre>
+## # ... with 182 more rows</code></pre>
 <p>The <code><a href="https://rdrr.io/pkg/TTR/man/runFun.html">TTR::runCor</a></code> function can be used to evaluate rolling correlations using the xy pattern. Looking at the documentation (<code>?runCor</code>), we can see that the arguments include <code>x</code> and <code>y</code> along with a few additional arguments including <code>n</code> for the width of the rolling correlation. Because the scale is monthly, we’ll go with <code>n = 6</code> for a 6-month rolling correlation. The <code>col_rename</code> argument enables easy renaming of the output column(s).</p>
 <div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="no">FANG_rolling_corr</span> <span class="kw">&lt;-</span> <span class="no">returns_joined</span> <span class="kw">%&gt;%</span>
     <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute_xy</a></span>(<span class="kw">x</span>          <span class="kw">=</span> <span class="no">monthly.returns.x</span>,
@@ -624,7 +626,7 @@
 ##  8 FB     2013-01-11     31.7    NA     NA    NA
 ##  9 FB     2013-01-14     31.0    NA     NA    NA
 ## 10 FB     2013-01-15     30.1    NA     NA    NA
-## # … with 4,022 more rows</code></pre>
+## # ... with 4,022 more rows</code></pre>
 <p>And, we can visualize the data like so.</p>
 <div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="no">FANG_macd</span> <span class="kw">%&gt;%</span>
     <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">date</span> <span class="kw">&gt;=</span> <span class="fu">as_date</span>(<span class="st">"2016-10-01"</span>)) <span class="kw">%&gt;%</span>
@@ -667,7 +669,7 @@
 ##  8 FB          81.4 2014-Q4 
 ##  9 FB          85.3 2015-Q1 
 ## 10 FB          88.9 2015-Q2 
-## # … with 54 more rows</code></pre>
+## # ... with 54 more rows</code></pre>
 <p>The minimum each quarter can be retrieved in much the same way. The data frames can be joined using <code>left_join</code> to get the max and min by quarter.</p>
 <div class="sourceCode" id="cb35"><html><body><pre class="r"><span class="no">FANG_min_by_qtr</span> <span class="kw">&lt;-</span> <span class="no">FANG</span> <span class="kw">%&gt;%</span>
     <span class="fu">group_by</span>(<span class="no">symbol</span>) <span class="kw">%&gt;%</span>
@@ -696,7 +698,7 @@
 ##  8 FB          81.4 2014-Q4       72.6
 ##  9 FB          85.3 2015-Q1       74.1
 ## 10 FB          88.9 2015-Q2       77.5
-## # … with 54 more rows</code></pre>
+## # ... with 54 more rows</code></pre>
 <p>And, we can visualize the data like so.</p>
 <div class="sourceCode" id="cb37"><html><body><pre class="r"><span class="no">FANG_by_qtr</span> <span class="kw">%&gt;%</span>
     <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">year.qtr</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">symbol</span>)) +
@@ -793,7 +795,7 @@
 ##  8 2015-01-13  0.00228  0.00292     NA     NA
 ##  9 2015-01-14 -0.00108 -0.0202      NA     NA
 ## 10 2015-01-15 -0.0146  -0.00955     NA     NA
-## # … with 494 more rows</code></pre>
+## # ... with 494 more rows</code></pre>
 <p>Finally, we can visualize the first coefficient like so. A horizontal line is added using the full data set model. This gives us insight as to points in time where the relationship deviates significantly from the long run trend which can be explored for potential pair trade opportunities.</p>
 <div class="sourceCode" id="cb45"><html><body><pre class="r"><span class="no">stock_pairs</span> <span class="kw">%&gt;%</span>
     <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">coef.1</span>)) +
@@ -840,7 +842,7 @@
 ##  8 FB     2013-01-11             0.0133  
 ##  9 FB     2013-01-14            -0.0244  
 ## 10 FB     2013-01-15            -0.0276  
-## # … with 4,022 more rows</code></pre>
+## # ... with 4,022 more rows</code></pre>
 </div>
 </div>
   </div>

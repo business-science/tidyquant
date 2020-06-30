@@ -7,12 +7,13 @@
 #' @inheritParams tq_mutate
 #'
 #' @details
-#' \itemize{
-#'   \item `tq_transform()` - use [tq_transmute()]
-#'   \item `tq_transform_xy()` - use [tq_transmute_xy()]
-#'   \item `as_xts()` - use [timetk::tk_xts()]
-#'   \item `as_tibble()` - use [timetk::tk_tbl()]
-#' }
+#'
+#'   - `tq_transform()` - use [tq_transmute()]
+#'   - `tq_transform_xy()` - use [tq_transmute_xy()]
+#'   - `as_xts()` - use [timetk::tk_xts()]
+#'   - `as_tibble()` - use [timetk::tk_tbl()]
+#'   - `summarise_by_time()` - Moved to `timetk` package. Use [timetk::summarise_by_time()]
+#'
 #'
 NULL
 

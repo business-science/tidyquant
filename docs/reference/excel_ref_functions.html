@@ -228,20 +228,20 @@ Most functions replicate the behavior of Excel:</p><ul>
 
 <span class='co'># Add company names to the stock data</span>
 <span class='no'>FANG</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>mutate</span>(<span class='kw'>company</span> <span class='kw'>=</span> <span class='fu'>VLOOKUP</span>(<span class='no'>symbol</span>, <span class='no'>lookup_table</span>, <span class='no'>stock</span>, <span class='no'>company</span>))</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4,032 x 9</span><span>
+    <span class='fu'>mutate</span>(<span class='kw'>company</span> <span class='kw'>=</span> <span class='fu'>VLOOKUP</span>(<span class='no'>symbol</span>, <span class='no'>lookup_table</span>, <span class='no'>stock</span>, <span class='no'>company</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4,032 x 9</span><span>
 #&gt;    symbol date        open  high   low close    volume adjusted company 
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> FB     2013-01-02  27.4  28.2  27.4  28    69</span><span style='text-decoration: underline;'>846</span><span>400     28   Facebook
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> FB     2013-01-03  27.9  28.5  27.6  27.8  63</span><span style='text-decoration: underline;'>140</span><span>600     27.8 Facebook
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> FB     2013-01-04  28.0  28.9  27.8  28.8  72</span><span style='text-decoration: underline;'>715</span><span>400     28.8 Facebook
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> FB     2013-01-07  28.7  29.8  28.6  29.4  83</span><span style='text-decoration: underline;'>781</span><span>800     29.4 Facebook
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> FB     2013-01-08  29.5  29.6  28.9  29.1  45</span><span style='text-decoration: underline;'>871</span><span>300     29.1 Facebook
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> FB     2013-01-09  29.7  30.6  29.5  30.6 104</span><span style='text-decoration: underline;'>787</span><span>700     30.6 Facebook
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> FB     2013-01-10  30.6  31.5  30.3  31.3  95</span><span style='text-decoration: underline;'>316</span><span>400     31.3 Facebook
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> FB     2013-01-11  31.3  32.0  31.1  31.7  89</span><span style='text-decoration: underline;'>598</span><span>000     31.7 Facebook
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> FB     2013-01-14  32.1  32.2  30.6  31.0  98</span><span style='text-decoration: underline;'>892</span><span>800     31.0 Facebook
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> FB     2013-01-15  30.6  31.7  29.9  30.1 173</span><span style='text-decoration: underline;'>242</span><span>600     30.1 Facebook
-#&gt; </span><span style='color: #949494;'># ... with 4,022 more rows</span><span></div><div class='input'>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 1</span><span> FB     2013-01-02  27.4  28.2  27.4  28    69</span><span style='text-decoration: underline;'>846</span><span>400     28   Facebook
+#&gt; </span><span style='color: #555555;'> 2</span><span> FB     2013-01-03  27.9  28.5  27.6  27.8  63</span><span style='text-decoration: underline;'>140</span><span>600     27.8 Facebook
+#&gt; </span><span style='color: #555555;'> 3</span><span> FB     2013-01-04  28.0  28.9  27.8  28.8  72</span><span style='text-decoration: underline;'>715</span><span>400     28.8 Facebook
+#&gt; </span><span style='color: #555555;'> 4</span><span> FB     2013-01-07  28.7  29.8  28.6  29.4  83</span><span style='text-decoration: underline;'>781</span><span>800     29.4 Facebook
+#&gt; </span><span style='color: #555555;'> 5</span><span> FB     2013-01-08  29.5  29.6  28.9  29.1  45</span><span style='text-decoration: underline;'>871</span><span>300     29.1 Facebook
+#&gt; </span><span style='color: #555555;'> 6</span><span> FB     2013-01-09  29.7  30.6  29.5  30.6 104</span><span style='text-decoration: underline;'>787</span><span>700     30.6 Facebook
+#&gt; </span><span style='color: #555555;'> 7</span><span> FB     2013-01-10  30.6  31.5  30.3  31.3  95</span><span style='text-decoration: underline;'>316</span><span>400     31.3 Facebook
+#&gt; </span><span style='color: #555555;'> 8</span><span> FB     2013-01-11  31.3  32.0  31.1  31.7  89</span><span style='text-decoration: underline;'>598</span><span>000     31.7 Facebook
+#&gt; </span><span style='color: #555555;'> 9</span><span> FB     2013-01-14  32.1  32.2  30.6  31.0  98</span><span style='text-decoration: underline;'>892</span><span>800     31.0 Facebook
+#&gt; </span><span style='color: #555555;'>10</span><span> FB     2013-01-15  30.6  31.7  29.9  30.1 173</span><span style='text-decoration: underline;'>242</span><span>600     30.1 Facebook
+#&gt; </span><span style='color: #555555;'># ... with 4,022 more rows</span><span></div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

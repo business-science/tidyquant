@@ -103,13 +103,13 @@
 
       
 
-      </header><script src="TQ01-core-functions-in-tidyquant_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Core Functions in tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2020-06-09</h4>
+            <h4 class="date">2020-06-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ01-core-functions-in-tidyquant.Rmd"><code>vignettes/TQ01-core-functions-in-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ01-core-functions-in-tidyquant.Rmd</code></div>
@@ -191,7 +191,7 @@
 <p>The stock prices can be retrieved succinctly using <code>get = "stock.prices"</code>. This returns stock price data from Yahoo Finance.</p>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">aapl_prices</span>  <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"AAPL"</span>, <span class="kw">get</span> <span class="kw">=</span> <span class="st">"stock.prices"</span>, <span class="kw">from</span> <span class="kw">=</span> <span class="st">" 1990-01-01"</span>)
 <span class="no">aapl_prices</span></pre></body></html></div>
-<pre><code>## # A tibble: 7,668 x 8
+<pre><code>## # A tibble: 7,683 x 8
 ##    symbol date        open  high   low close   volume adjusted
 ##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ##  1 AAPL   1990-01-02  1.26  1.34  1.25  1.33 45799600    1.08 
@@ -204,7 +204,7 @@
 ##  8 AAPL   1990-01-11  1.29  1.29  1.23  1.23 52763200    0.997
 ##  9 AAPL   1990-01-12  1.22  1.24  1.21  1.23 42974400    0.997
 ## 10 AAPL   1990-01-15  1.23  1.28  1.22  1.22 40434800    0.989
-## # … with 7,658 more rows</code></pre>
+## # ... with 7,673 more rows</code></pre>
 <p>Yahoo Japan stock prices can be retrieved using a similar call, <code>get = "stock.prices.japan"</code>.</p>
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">x8411T</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"8411.T"</span>, <span class="kw">get</span> <span class="kw">=</span> <span class="st">"stock.prices.japan"</span>, <span class="kw">from</span> <span class="kw">=</span> <span class="st">"2016-01-01"</span>, <span class="kw">to</span>  <span class="kw">=</span> <span class="st">"2016-12-31"</span>)</pre></body></html></div>
 <p>The data source is <a href="https://finance.yahoo.com/">Yahoo Finance</a> and <a href="http://finance.yahoo.co.jp/">Yahoo Finance Japan</a>.</p>
@@ -215,7 +215,7 @@
 <p>A wealth of economic data can be extracted from the Federal Reserve Economic Data (FRED) database. The FRED contains over 10K data sets that are free to use. See the <a href="https://fred.stlouisfed.org/categories">FRED categories</a> to narrow down the data base and to get data codes. The <a href="https://fred.stlouisfed.org/series/DCOILWTICO">WTI Crude Oil Prices</a> are shown below.</p>
 <div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">wti_price_usd</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"DCOILWTICO"</span>, <span class="kw">get</span> <span class="kw">=</span> <span class="st">"economic.data"</span>)
 <span class="no">wti_price_usd</span></pre></body></html></div>
-<pre><code>## # A tibble: 2,717 x 3
+<pre><code>## # A tibble: 2,732 x 3
 ##    symbol     date       price
 ##    &lt;chr&gt;      &lt;date&gt;     &lt;dbl&gt;
 ##  1 DCOILWTICO 2010-01-01  NA  
@@ -228,7 +228,7 @@
 ##  8 DCOILWTICO 2010-01-12  80.8
 ##  9 DCOILWTICO 2010-01-13  79.7
 ## 10 DCOILWTICO 2010-01-14  79.4
-## # … with 2,707 more rows</code></pre>
+## # ... with 2,722 more rows</code></pre>
 </div>
 <div id="quandl-api" class="section level2">
 <h2 class="hasAnchor">
@@ -390,7 +390,9 @@
 <h1 class="hasAnchor">
 <a href="#mutate-quantitative-data" class="anchor"></a>3.0 Mutate Quantitative Data</h1>
 <p>Mutating functions enable the <code>xts</code>/<code>zoo</code>, <code>quantmod</code> and <code>TTR</code> functions to shine. We’ll touch on the mutation functions briefly using the <code>FANG</code> data set, which consists of daily prices for FB, AMZN, GOOG, and NFLX from the beginning of 2013 to the end of 2016. We’ll apply the functions to grouped data sets to get a feel for how each works</p>
-<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="no">FANG</span></pre></body></html></div>
+<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"FANG"</span>)
+
+<span class="no">FANG</span></pre></body></html></div>
 <pre><code>## # A tibble: 4,032 x 8
 ##    symbol date        open  high   low close    volume adjusted
 ##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -404,7 +406,7 @@
 ##  8 FB     2013-01-11  31.3  32.0  31.1  31.7  89598000     31.7
 ##  9 FB     2013-01-14  32.1  32.2  30.6  31.0  98892800     31.0
 ## 10 FB     2013-01-15  30.6  31.7  29.9  30.1 173242600     30.1
-## # … with 4,022 more rows</code></pre>
+## # ... with 4,022 more rows</code></pre>
 <p>For a detailed walkthrough of the compatible functions, see the next vignette in the series, <a href="TQ02-quant-integrations-in-tidyquant.html">R Quantitative Analysis Package Integrations in tidyquant</a>.</p>
 <div id="transmute-quantitative-data-tq_transmute" class="section level2">
 <h2 class="hasAnchor">
@@ -427,7 +429,7 @@
 ##  8 FB     2013-08-31     41.3
 ##  9 FB     2013-09-30     50.2
 ## 10 FB     2013-10-31     50.2
-## # … with 182 more rows</code></pre>
+## # ... with 182 more rows</code></pre>
 <p>Let’s go through what happened. <code>select</code> allows you to easily choose what columns get passed to <code>mutate_fun</code>. In example above, <code>adjusted</code> selects the “adjusted” column from <code>data</code>, and sends it to the mutate function, <code>to.monthly</code>, which mutates the periodicity from daily to monthly. Additional arguments can be passed to the <code>mutate_fun</code> by way of <code>...</code>. We are passing the <code>indexAt</code> argument to return a date that matches the first date in the period.</p>
 <div id="working-with-non-ohlc-data" class="section level3">
 <h3 class="hasAnchor">
@@ -452,7 +454,7 @@
 ##  8 2010-08-31        71.9
 ##  9 2010-09-30        80.0
 ## 10 2010-10-29        81.4
-## # … with 116 more rows</code></pre>
+## # ... with 116 more rows</code></pre>
 </div>
 </div>
 <div id="mutate-quantitative-data-tq_mutate" class="section level2">
@@ -478,7 +480,7 @@
 ##  8 FB     2013-01-11  31.3  32.0  31.1  31.7  89598000     31.7    NA     NA
 ##  9 FB     2013-01-14  32.1  32.2  30.6  31.0  98892800     31.0    NA     NA
 ## 10 FB     2013-01-15  30.6  31.7  29.9  30.1 173242600     30.1    NA     NA
-## # … with 4,022 more rows</code></pre>
+## # ... with 4,022 more rows</code></pre>
 <p>Note that a mutation can occur if, and only if, the mutation has the same structure of the original tibble. In other words, the calculation must have the same number of rows and row.names (or date fields), otherwise the mutation cannot be performed.</p>
 <div id="mutate-rolling-regressions-with-rollapply" class="section level3">
 <h3 class="hasAnchor">
@@ -513,7 +515,7 @@
 ##  8 2016-02-26    0.0320      0.0148 
 ##  9 2016-03-04    0.00436     0.0281 
 ## 10 2016-03-11    0.00941     0.0106 
-## # … with 42 more rows</code></pre>
+## # ... with 42 more rows</code></pre>
 <p><em>Step 2: Create a custom function</em></p>
 <p>Next, create a custom regression function, which will be used to apply over the rolling window in Step 3. An important point is that the “data” will be passed to the regression function as an <code>xts</code> object. The <code><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html">timetk::tk_tbl</a></code> function takes care of converting to a data frame for the <code>lm</code> function to work properly with the columns “fb.returns” and “xlk.returns”.</p>
 <div class="sourceCode" id="cb34"><html><body><pre class="r"><span class="no">regr_fun</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">data</span>) {
@@ -540,7 +542,7 @@
 ##  8 2016-02-26    0.0320      0.0148      NA     NA
 ##  9 2016-03-04    0.00436     0.0281      NA     NA
 ## 10 2016-03-11    0.00941     0.0106      NA     NA
-## # … with 42 more rows</code></pre>
+## # ... with 42 more rows</code></pre>
 <div class="sourceCode" id="cb37"><html><body><pre class="r"><span class="no">returns_combined</span></pre></body></html></div>
 <pre><code>## # A tibble: 52 x 3
 ##    date       fb.returns xlk.returns
@@ -555,7 +557,7 @@
 ##  8 2016-02-26    0.0320      0.0148 
 ##  9 2016-03-04    0.00436     0.0281 
 ## 10 2016-03-11    0.00941     0.0106 
-## # … with 42 more rows</code></pre>
+## # ... with 42 more rows</code></pre>
 <p>As shown above, the rolling regression coefficients were added to the data frame.</p>
 </div>
 </div>
@@ -585,7 +587,7 @@
 ##  8 FB     2013-01-11  31.3  32.0  31.1  31.7  89598000     31.7  NA  
 ##  9 FB     2013-01-14  32.1  32.2  30.6  31.0  98892800     31.0  NA  
 ## 10 FB     2013-01-15  30.6  31.7  29.9  30.1 173242600     30.1  30.1
-## # … with 4,022 more rows</code></pre>
+## # ... with 4,022 more rows</code></pre>
 </div>
 </div>
 </div>

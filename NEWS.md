@@ -22,7 +22,7 @@
 
 ### Deprecation
 
-* `summarise_by_time()` - This function has moved to `timetk`
+* `summarise_by_time()` - This function has moved to `timetk::summarise_by_time()`
 
 
 

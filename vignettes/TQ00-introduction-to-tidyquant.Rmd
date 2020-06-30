@@ -21,31 +21,11 @@ knitr::opts_chunk$set(message = FALSE,
                       out.width='95%', 
                       dpi = 200)
 
+library(tidyquant)
 # devtools::load_all() # Travis CI fails on load_all()
 ```
 
-> Bringing financial and business analysis to the tidyverse
 
-# Bringing Excel to R in tidyquant 1.0.0
-
->Tidyquant 1.0.0 is the _"R for Excel Users"_ release. My aim is to build functionality that helps users coming from an __Excel Background__ (background I came from). It's important to have these users feel at home. I have a full suite of functionality to accomplish your Excel-to-R transition. 
->
->-Matt
-
-This document describes the __Financial Workflow for stock and portfolio analysis.__ I have a separate blog tutorial for Excel users that want to implement the [__Excel functions in R.__](https://www.business-science.io/finance/2020/02/26/r-for-excel-users.html)
-
-# Financial Workflow Overview
-
-`tidyquant` integrates the best resources for collecting and analyzing financial data, `xts` and `zoo`, `quantmod`, `TTR`, and `PerformanceAnalytics` with the tidy data infrastructure of the `tidyverse` allowing for seamless interaction between each. 
-
-The four primary quantitative packages that are the backbone for financial analysis in _R programming_ are: 
-
-* [xts](https://CRAN.R-project.org/package=xts), or [eXtensible time series](http://joshuaulrich.github.io/xts/index.html): The data structure for handling time-series data. The underlying time-series structure is `zoo`, which is also integrated.
-* [quantmod](https://CRAN.R-project.org/package=quantmod), or Quantitative Financial Modelling & Trading Framework for R: A package designed for retrieving, manipulating, and modeling quantitative data.
-* [TTR](https://CRAN.R-project.org/package=TTR), or Technical Trading Rules: A package that includes various functions to compute technical trading equations for quantitative or trading data.
-* [PerformanceAnalytics](https://CRAN.R-project.org/package=PerformanceAnalytics): A package that includes a collection of econometric functions for performance and risk analysis. The package analyzes returns (not prices).
-
-The [tidy data principles](https://www.jstatsoft.org/article/view/v059i10) are a cornerstone of data management and the data modeling workflow. The foundation for tidy data management is the `tidyverse`, a collection of _R packages_: `ggplot2`, `dplyr`, `tidyr`, `purrr`, `readr`, `tibble`, that work in harmony, are built for scaleability, and are well documented in [R for Data Science](http://r4ds.had.co.nz/). Using this infrastructure and the core tidy concepts, we can apply the tidy data principles to financial analysis using the _R package_, `tidyquant`. 
 
 ## 2-Minutes To Tidyquant
 
