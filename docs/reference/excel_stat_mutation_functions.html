@@ -260,11 +260,11 @@ Most functions replicate the behavior of Excel:</p><ul>
 <span class='co'># Go from daily to monthly periodicity,</span>
 <span class='co'># then calculate returns and growth of $1 USD</span>
 <span class='no'>FANG</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>mutate</span>(<span class='kw'>symbol</span> <span class='kw'>=</span> <span class='fu'><a href='https://forcats.tidyverse.org/reference/as_factor.html'>as_factor</a></span>(<span class='no'>symbol</span>)) <span class='kw'>%&gt;%</span>
+    <span class='fu'>mutate</span>(<span class='kw'>symbol</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/forcats/man/as_factor.html'>as_factor</a></span>(<span class='no'>symbol</span>)) <span class='kw'>%&gt;%</span>
     <span class='fu'>group_by</span>(<span class='no'>symbol</span>) <span class='kw'>%&gt;%</span>
 
     <span class='co'># Summarization - Collapse from daily to FIRST value by month</span>
-    <span class='fu'><a href='summarise_by_time.html'>summarise_by_time</a></span>(
+    <span class='fu'>summarise_by_time</span>(
         <span class='kw'>.date_var</span>  <span class='kw'>=</span> <span class='no'>date</span>,
         <span class='kw'>.time_unit</span> <span class='kw'>=</span> <span class='st'>"month"</span>,
         <span class='kw'>adjusted</span>   <span class='kw'>=</span> <span class='fu'><a href='excel_stat_summary_functions.html'>FIRST</a></span>(<span class='no'>adjusted</span>)
@@ -275,22 +275,8 @@ Most functions replicate the behavior of Excel:</p><ul>
     <span class='fu'>mutate</span>(
         <span class='kw'>returns</span> <span class='kw'>=</span> <span class='fu'>PCT_CHANGE</span>(<span class='no'>adjusted</span>, <span class='kw'>fill_na</span> <span class='kw'>=</span> <span class='fl'>0</span>),
         <span class='kw'>growth</span>  <span class='kw'>=</span> <span class='fu'>CUMULATIVE_SUM</span>(<span class='no'>returns</span>) + <span class='fl'>1</span>
-    )</div><div class='output co'>#&gt; <span class='message'>tidyquant::summarise_by_time() is deprecated. Don't fret! The timetk::summarise_by_time() replaces it.</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4,032 x 6</span><span>
-#&gt; </span><span style='color: #555555;'># Groups:   symbol [4]</span><span>
-#&gt;    symbol date       .time_unit adjusted  returns growth
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> FB     2013-01-02 month          28    0        1    
-#&gt; </span><span style='color: #555555;'> 2</span><span> FB     2013-01-03 month          27.8 -</span><span style='color: #BB0000;'>0.008</span><span style='color: #BB0000;text-decoration: underline;'>21</span><span>  0.992
-#&gt; </span><span style='color: #555555;'> 3</span><span> FB     2013-01-04 month          28.8  0.035</span><span style='text-decoration: underline;'>6</span><span>   1.03 
-#&gt; </span><span style='color: #555555;'> 4</span><span> FB     2013-01-07 month          29.4  0.022</span><span style='text-decoration: underline;'>9</span><span>   1.05 
-#&gt; </span><span style='color: #555555;'> 5</span><span> FB     2013-01-08 month          29.1 -</span><span style='color: #BB0000;'>0.012</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>   1.04 
-#&gt; </span><span style='color: #555555;'> 6</span><span> FB     2013-01-09 month          30.6  0.052</span><span style='text-decoration: underline;'>6</span><span>   1.09 
-#&gt; </span><span style='color: #555555;'> 7</span><span> FB     2013-01-10 month          31.3  0.023</span><span style='text-decoration: underline;'>2</span><span>   1.11 
-#&gt; </span><span style='color: #555555;'> 8</span><span> FB     2013-01-11 month          31.7  0.013</span><span style='text-decoration: underline;'>4</span><span>   1.13 
-#&gt; </span><span style='color: #555555;'> 9</span><span> FB     2013-01-14 month          31.0 -</span><span style='color: #BB0000;'>0.024</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span>   1.10 
-#&gt; </span><span style='color: #555555;'>10</span><span> FB     2013-01-15 month          30.1 -</span><span style='color: #BB0000;'>0.027</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>   1.08 
-#&gt; </span><span style='color: #555555;'># … with 4,022 more rows</span><span></div><div class='input'>
-</div></span></pre>
+    )</div><div class='output co'>#&gt; <span class='error'>Error in summarise_by_time(., .date_var = date, .time_unit = "month",     adjusted = FIRST(adjusted)): could not find function "summarise_by_time"</span></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

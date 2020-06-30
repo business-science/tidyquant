@@ -13,7 +13,7 @@ theme_tq_dark(base_size = 11, base_family = "")
 theme_tq_green(base_size = 11, base_family = "")
 }
 \arguments{
-\item{base_size}{base font size}
+\item{base_size}{base font size, given in pts.}
 
 \item{base_family}{base font family}
 }

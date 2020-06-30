@@ -179,6 +179,8 @@ The `PerformanceAnalytics` mutation functions all deal with returns:
 We'll go through some examples, but first let's get some data. The `FANG` data set will be used which consists of stock prices for FB, AMZN, NFLX, and GOOG from the beginning of 2013 to the end of 2016.
 
 ```{r}
+data("FANG")
+
 FANG
 ```
 

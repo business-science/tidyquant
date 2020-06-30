@@ -300,6 +300,8 @@ my_bloomberg_data <- c('SPX Index','ODMAX Equity') %>%
 Mutating functions enable the `xts`/`zoo`, `quantmod` and `TTR` functions to shine. We'll touch on the mutation functions briefly using the `FANG` data set, which consists of daily prices for FB, AMZN, GOOG, and NFLX from the beginning of 2013 to the end of 2016. We'll apply the functions to grouped data sets to get a feel for how each works
 
 ```{r}
+data("FANG")
+
 FANG
 ```
 

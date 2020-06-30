@@ -117,6 +117,8 @@ You can use any applicable "getter" to get data for __every stock in an index or
 Once you get the data, you typically want to do something with it. You can easily do this at scale. Let's get the yearly returns for multiple stocks using `tq_transmute`. First, get the prices. We'll use the `FANG` data set, but you typically will use `tq_get` to retrieve data in "tibble" format.
 
 ```{r}
+data("FANG")
+
 FANG
 ```
 

@@ -108,5 +108,4 @@ reference:
   - title: Deprecated
     contents:
     - starts_with("deprecated")
-    - summarise_by_time
 
