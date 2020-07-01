@@ -197,13 +197,13 @@ AAPL \%>\%
 \seealso{
 See individual modeling functions for underlying parameters:
 \itemize{
-\item \code{\link[TTR:SMA]{TTR::SMA()}} for simple moving averages
-\item \code{\link[TTR:EMA]{TTR::EMA()}} for exponential moving averages
-\item \code{\link[TTR:WMA]{TTR::WMA()}} for weighted moving averages
-\item \code{\link[TTR:DEMA]{TTR::DEMA()}} for double exponential moving averages
-\item \code{\link[TTR:ZLEMA]{TTR::ZLEMA()}} for zero-lag exponential moving averages
-\item \code{\link[TTR:VWMA]{TTR::VWMA()}} for volume-weighted moving averages
-\item \code{\link[TTR:EVWMA]{TTR::EVWMA()}} for elastic, volume-weighted moving averages
+\item \code{TTR::SMA()} for simple moving averages
+\item \code{TTR::EMA()} for exponential moving averages
+\item \code{TTR::WMA()} for weighted moving averages
+\item \code{TTR::DEMA()} for double exponential moving averages
+\item \code{TTR::ZLEMA()} for zero-lag exponential moving averages
+\item \code{TTR::VWMA()} for volume-weighted moving averages
+\item \code{TTR::EVWMA()} for elastic, volume-weighted moving averages
 \item \code{\link[=coord_x_date]{coord_x_date()}} for zooming into specific regions of a plot
 }
 }
