@@ -1,6 +1,6 @@
 #' Plot moving averages
 #'
-#' The underlying moving average functions used are specified in [TTR::SMA()]
+#' The underlying moving average functions used are specified in `TTR::SMA()`
 #' from the TTR package. Use [coord_x_date()] to zoom into specific plot regions.
 #' The following moving averages are available:
 #' \itemize{

@@ -118,7 +118,7 @@ to the paired geom/stat.}
 \description{
 Bollinger Bands plot a range around a moving average typically two standard deviations up and down.
 The \code{geom_bbands()} function enables plotting Bollinger Bands quickly using various moving average functions.
-The moving average functions used are specified in \code{\link[TTR:SMA]{TTR::SMA()}}
+The moving average functions used are specified in \code{TTR::SMA()}
 from the TTR package. Use \code{\link[=coord_x_date]{coord_x_date()}} to zoom into specific plot regions.
 The following moving averages are available:
 \itemize{

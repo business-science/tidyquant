@@ -2,7 +2,7 @@
 #'
 #' Bollinger Bands plot a range around a moving average typically two standard deviations up and down.
 #' The `geom_bbands()` function enables plotting Bollinger Bands quickly using various moving average functions.
-#' The moving average functions used are specified in [TTR::SMA()]
+#' The moving average functions used are specified in `TTR::SMA()`
 #' from the TTR package. Use [coord_x_date()] to zoom into specific plot regions.
 #' The following moving averages are available:
 #' \itemize{

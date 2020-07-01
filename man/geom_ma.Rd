@@ -97,7 +97,7 @@ often aesthetics, used to set an aesthetic to a fixed value, like
 to the paired geom/stat.}
 }
 \description{
-The underlying moving average functions used are specified in \code{\link[TTR:SMA]{TTR::SMA()}}
+The underlying moving average functions used are specified in \code{TTR::SMA()}
 from the TTR package. Use \code{\link[=coord_x_date]{coord_x_date()}} to zoom into specific plot regions.
 The following moving averages are available:
 \itemize{
