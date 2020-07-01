@@ -125,9 +125,7 @@ With `tidyquant` it's efficient and easy to get the CAPM information! And, that'
 
 The general workflow is shown in the diagram below. We'll step through the workflow first with a group of individual assets (stocks) and then with portfolios of stocks. 
 
-```{r}
-knitr::include_graphics("perfomance_analysis_workflow.png")
-```
+![Performance Analysis Workflow](perfomance_analysis_workflow.png)
 
 
 
