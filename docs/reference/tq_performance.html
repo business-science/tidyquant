@@ -89,7 +89,7 @@ analysis using the split, apply, combine framework." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
       </span>
     </div>
 
@@ -338,7 +338,7 @@ for the <code>performance_fun</code> argument. Additional parameters can be pass
 <span class='no'>RaRb</span> <span class='kw'>%&gt;%</span>
     <span class='fu'>tq_performance</span>(<span class='kw'>Ra</span> <span class='kw'>=</span> <span class='no'>Ra</span>, <span class='kw'>performance_fun</span> <span class='kw'>=</span> <span class='no'>SharpeRatio</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fl'>0.95</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 4</span><span>
 #&gt; </span><span style='color: #555555;'># Groups:   symbol [4]</span><span>
-#&gt;   symbol `ESSharpe(Rf=0%,p=95%~ `StdDevSharpe(Rf=0%,p=95~ `VaRSharpe(Rf=0%,p=95~
+#&gt;   symbol `ESSharpe(Rf=0%,p=95%… `StdDevSharpe(Rf=0%,p=95… `VaRSharpe(Rf=0%,p=95…
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>                     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>                  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> FB                      0.193                     0.345                  0.605
 #&gt; </span><span style='color: #555555;'>2</span><span> AMZN                    0.215                     0.314                  0.265
@@ -353,9 +353,8 @@ for the <code>performance_fun</code> argument. Additional parameters can be pass
 #&gt; </span><span style='color: #555555;'>2</span><span> AMZN           0.246 0.014</span><span style='text-decoration: underline;'>4</span><span>           0.187 1.46  -</span><span style='color: #BB0000;'>0.044</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>    2.04       0.524
 #&gt; </span><span style='color: #555555;'>3</span><span> NFLX           1.02  0.063</span><span style='text-decoration: underline;'>2</span><span>           1.09  1.35  -</span><span style='color: #BB0000;'>2.78</span><span>      1.90       0.234
 #&gt; </span><span style='color: #555555;'>4</span><span> GOOG           0.142 0.012</span><span style='text-decoration: underline;'>3</span><span>           0.158 0.901 -</span><span style='color: #BB0000;'>0.247</span><span>     1.56       0.451
-#&gt; </span><span style='color: #555555;'># ... with 5 more variables: `Correlationp-value` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   InformationRatio </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `R-squared` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, TrackingError </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   TreynorRatio </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
+#&gt; </span><span style='color: #555555;'># … with 5 more variables: `Correlationp-value` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, InformationRatio </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   `R-squared` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, TrackingError </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, TreynorRatio </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

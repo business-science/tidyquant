@@ -103,7 +103,7 @@ Requires volume aesthetic.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
       </span>
     </div>
 
@@ -236,8 +236,8 @@ Requires <code>volume</code> aesthetic.</p></li>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>mapping</th>
-      <td><p>Set of aesthetic mappings created by <code><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>ggplot2::aes()</a></code> or
-<code><a href='https://rdrr.io/pkg/ggplot2/man/aes_.html'>ggplot2::aes_()</a></code>. If specified and <code>inherit.aes = TRUE</code> (the
+      <td><p>Set of aesthetic mappings created by <code><a href='https://ggplot2.tidyverse.org/reference/aes.html'>ggplot2::aes()</a></code> or
+<code><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>ggplot2::aes_()</a></code>. If specified and <code>inherit.aes = TRUE</code> (the
 default), it is combined with the default mapping at the top level of the
 plot. You must supply <code>mapping</code> if there is no plot mapping.</p></td>
     </tr>
@@ -245,10 +245,10 @@ plot. You must supply <code>mapping</code> if there is no plot mapping.</p></td>
       <th>data</th>
       <td><p>The data to be displayed in this layer. There are three options:</p>
 <p>If <code>NULL</code>, the default, the data is inherited from the plot
-data as specified in the call to <code><a href='https://rdrr.io/pkg/ggplot2/man/ggplot.html'>ggplot2::ggplot()</a></code>.</p>
+data as specified in the call to <code><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot2::ggplot()</a></code>.</p>
 <p>A <code>data.frame</code>, or other object, will override the plot
 data. All objects will be fortified to produce a data frame. See
-<code><a href='https://rdrr.io/pkg/ggplot2/man/fortify.html'>ggplot2::fortify()</a></code> for which variables will be created.</p>
+<code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>ggplot2::fortify()</a></code> for which variables will be created.</p>
 <p>A <code>function</code> will be called with a single argument,
 the plot data. The return value must be a <code>data.frame.</code>, and
 will be used as the layer data.</p></td>
@@ -276,7 +276,7 @@ display.</p></td>
       <td><p>If <code>FALSE</code>, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. <code><a href='https://rdrr.io/pkg/ggplot2/man/borders.html'>ggplot2::borders()</a></code>.</p></td>
+the default plot specification, e.g. <code><a href='https://ggplot2.tidyverse.org/reference/borders.html'>ggplot2::borders()</a></code>.</p></td>
     </tr>
     <tr>
       <th>ma_fun</th>
@@ -310,7 +310,7 @@ length of <code>x</code>, or <code>n</code> (the default).</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Other arguments passed on to <code><a href='https://rdrr.io/pkg/ggplot2/man/layer.html'>ggplot2::layer()</a></code>. These are
+      <td><p>Other arguments passed on to <code><a href='https://ggplot2.tidyverse.org/reference/layer.html'>ggplot2::layer()</a></code>. These are
 often aesthetics, used to set an aesthetic to a fixed value, like
 <code>color = "red"</code> or <code>size = 3</code>. They may also be parameters
 to the paired geom/stat.</p></td>
@@ -356,17 +356,17 @@ to the paired geom/stat.</p></td>
 
 <span class='co'># SMA</span>
 <span class='no'>AAPL</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>adjusted</span>)) +
-    <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/geom_path.html'>geom_line</a></span>() +                         <span class='co'># Plot stock price</span>
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>adjusted</span>)) +
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() +                         <span class='co'># Plot stock price</span>
     <span class='fu'>geom_ma</span>(<span class='kw'>ma_fun</span> <span class='kw'>=</span> <span class='no'>SMA</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>50</span>) +                 <span class='co'># Plot 50-day SMA</span>
     <span class='fu'>geom_ma</span>(<span class='kw'>ma_fun</span> <span class='kw'>=</span> <span class='no'>SMA</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>200</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>) + <span class='co'># Plot 200-day SMA</span>
     <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2016-01-01"</span>, <span class='st'>"2016-12-31"</span>),
                  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>75</span>, <span class='fl'>125</span>))                     <span class='co'># Zoom in</span></div><div class='img'><img src='geom_ma-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># EVWMA</span>
 <span class='no'>AAPL</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>adjusted</span>)) +
-    <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/geom_path.html'>geom_line</a></span>() +                                                   <span class='co'># Plot stock price</span>
-    <span class='fu'>geom_ma</span>(<span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes</a></span>(<span class='kw'>volume</span> <span class='kw'>=</span> <span class='no'>volume</span>), <span class='kw'>ma_fun</span> <span class='kw'>=</span> <span class='no'>EVWMA</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>50</span>) +   <span class='co'># Plot 50-day EVWMA</span>
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>adjusted</span>)) +
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() +                                                   <span class='co'># Plot stock price</span>
+    <span class='fu'>geom_ma</span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>volume</span> <span class='kw'>=</span> <span class='no'>volume</span>), <span class='kw'>ma_fun</span> <span class='kw'>=</span> <span class='no'>EVWMA</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>50</span>) +   <span class='co'># Plot 50-day EVWMA</span>
     <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2016-01-01"</span>, <span class='st'>"2016-12-31"</span>),
                  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>75</span>, <span class='fl'>125</span>))                                  <span class='co'># Zoom in</span></div><div class='img'><img src='geom_ma-2.png' alt='' width='700' height='433' /></div></pre>
   </div>

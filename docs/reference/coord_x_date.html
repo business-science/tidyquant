@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
       </span>
     </div>
 
@@ -198,25 +198,24 @@ that enables quickly zooming in on plot regions using a date range.</p>
 that enables quickly zooming in on plot regions using a date-time range.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/ggplot2/man/coord_cartesian.html'>ggplot2::coord_cartesian()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://ggplot2.tidyverse.org/reference/coord_cartesian.html'>ggplot2::coord_cartesian()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Load libraries</span>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyquant</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: 'dplyr'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:xts':</span>
+#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:xts’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    first, last</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:stats':</span>
+#&gt; <span class='message'>    first, last</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:base':</span>
+#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
-
+#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: package ‘ggplot2’ was built under R version 3.6.2</span></div><div class='input'>
 <span class='co'># coord_x_date</span>
 <span class='no'>AAPL</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tq_get.html'>tq_get</a></span>(<span class='st'>"AAPL"</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='st'>"2013-01-01"</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='st'>"2016-12-31"</span>)
 <span class='no'>AAPL</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>adjusted</span>)) +
-    <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/geom_path.html'>geom_line</a></span>() +                         <span class='co'># Plot stock price</span>
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>adjusted</span>)) +
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() +                         <span class='co'># Plot stock price</span>
     <span class='fu'><a href='geom_ma.html'>geom_ma</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>50</span>) +                     <span class='co'># Plot 50-day Moving Average</span>
     <span class='fu'><a href='geom_ma.html'>geom_ma</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>200</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>) +     <span class='co'># Plot 200-day Moving Average</span>
     <span class='co'># Zoom in</span>
@@ -232,8 +231,8 @@ that enables quickly zooming in on plot regions using a date-time range.</p>
 <span class='no'>hourly_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/reexports.html'>tibble</a></span>(<span class='kw'>time.index</span> <span class='kw'>=</span> <span class='no'>time_index</span>,
                       <span class='kw'>value</span>      <span class='kw'>=</span> <span class='no'>value</span>)
 <span class='no'>hourly_data</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>time.index</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>value</span>)) +
-    <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/geom_point.html'>geom_point</a></span>() +
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>time.index</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>value</span>)) +
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
     <span class='fu'>coord_x_datetime</span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2012-05-15 07:00:00"</span>, <span class='st'>"2012-05-15 16:00:00"</span>))</div><div class='img'><img src='coord_x_date-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

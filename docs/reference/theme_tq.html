@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
       </span>
     </div>
 
@@ -194,16 +194,16 @@
 <span class='no'>AAPL</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tq_get.html'>tq_get</a></span>(<span class='st'>"AAPL"</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='st'>"2013-01-01"</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='st'>"2016-12-31"</span>)
 
 <span class='co'># Plot using ggplot with theme_tq</span>
-<span class='no'>AAPL</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
-       <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/geom_path.html'>geom_line</a></span>() +
-       <span class='fu'><a href='geom_bbands.html'>geom_bbands</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes</a></span>(<span class='kw'>high</span> <span class='kw'>=</span> <span class='no'>high</span>, <span class='kw'>low</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>close</span> <span class='kw'>=</span> <span class='no'>close</span>),
+<span class='no'>AAPL</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
+       <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() +
+       <span class='fu'><a href='geom_bbands.html'>geom_bbands</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>high</span> <span class='kw'>=</span> <span class='no'>high</span>, <span class='kw'>low</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>close</span> <span class='kw'>=</span> <span class='no'>close</span>),
                    <span class='kw'>ma_fun</span> <span class='kw'>=</span> <span class='no'>EMA</span>,
                    <span class='kw'>wilder</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
                    <span class='kw'>ratio</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
                    <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>50</span>) +
        <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2016-01-01"</span>, <span class='st'>"2016-12-31"</span>),
                  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>75</span>, <span class='fl'>125</span>)) +
-       <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/labs.html'>labs</a></span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Apple BBands"</span>,
+       <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Apple BBands"</span>,
             <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"Date"</span>,
             <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"Price"</span>) +
        <span class='fu'>theme_tq</span>()</div><div class='img'><img src='theme_tq-1.png' alt='' width='700' height='433' /></div><div class='input'>

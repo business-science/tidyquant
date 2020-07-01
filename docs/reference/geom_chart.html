@@ -90,7 +90,7 @@ Candlestick Chart
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
       </span>
     </div>
 
@@ -208,8 +208,8 @@ The following financial chart geoms are available:</p><ul>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>mapping</th>
-      <td><p>Set of aesthetic mappings created by <code><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>ggplot2::aes()</a></code> or
-<code><a href='https://rdrr.io/pkg/ggplot2/man/aes_.html'>ggplot2::aes_()</a></code>. If specified and <code>inherit.aes = TRUE</code> (the
+      <td><p>Set of aesthetic mappings created by <code><a href='https://ggplot2.tidyverse.org/reference/aes.html'>ggplot2::aes()</a></code> or
+<code><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>ggplot2::aes_()</a></code>. If specified and <code>inherit.aes = TRUE</code> (the
 default), it is combined with the default mapping at the top level of the
 plot. You must supply <code>mapping</code> if there is no plot mapping.</p></td>
     </tr>
@@ -217,10 +217,10 @@ plot. You must supply <code>mapping</code> if there is no plot mapping.</p></td>
       <th>data</th>
       <td><p>The data to be displayed in this layer. There are three options:</p>
 <p>If <code>NULL</code>, the default, the data is inherited from the plot
-data as specified in the call to <code><a href='https://rdrr.io/pkg/ggplot2/man/ggplot.html'>ggplot2::ggplot()</a></code>.</p>
+data as specified in the call to <code><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot2::ggplot()</a></code>.</p>
 <p>A <code>data.frame</code>, or other object, will override the plot
 data. All objects will be fortified to produce a data frame. See
-<code><a href='https://rdrr.io/pkg/ggplot2/man/fortify.html'>ggplot2::fortify()</a></code> for which variables will be created.</p>
+<code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>ggplot2::fortify()</a></code> for which variables will be created.</p>
 <p>A <code>function</code> will be called with a single argument,
 the plot data. The return value must be a <code>data.frame.</code>, and
 will be used as the layer data.</p></td>
@@ -253,7 +253,7 @@ display.</p></td>
       <td><p>If <code>FALSE</code>, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. <code><a href='https://rdrr.io/pkg/ggplot2/man/borders.html'>ggplot2::borders()</a></code>.</p></td>
+the default plot specification, e.g. <code><a href='https://ggplot2.tidyverse.org/reference/borders.html'>ggplot2::borders()</a></code>.</p></td>
     </tr>
     <tr>
       <th>colour_up, colour_down</th>
@@ -270,7 +270,7 @@ Only affects <code>geom_candlestick</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Other arguments passed on to <code><a href='https://rdrr.io/pkg/ggplot2/man/layer.html'>ggplot2::layer()</a></code>. These are
+      <td><p>Other arguments passed on to <code><a href='https://ggplot2.tidyverse.org/reference/layer.html'>ggplot2::layer()</a></code>. These are
 often aesthetics, used to set an aesthetic to a fixed value, like
 <code>color = "red"</code> or <code>size = 3</code>. They may also be parameters
 to the paired geom/stat.</p></td>
@@ -312,15 +312,15 @@ to the paired geom/stat.</p></td>
 
 <span class='co'># Bar Chart</span>
 <span class='no'>AAPL</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
-    <span class='fu'>geom_barchart</span>(<span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes</a></span>(<span class='kw'>open</span> <span class='kw'>=</span> <span class='no'>open</span>, <span class='kw'>high</span> <span class='kw'>=</span> <span class='no'>high</span>, <span class='kw'>low</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>close</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
+    <span class='fu'>geom_barchart</span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>open</span> <span class='kw'>=</span> <span class='no'>open</span>, <span class='kw'>high</span> <span class='kw'>=</span> <span class='no'>high</span>, <span class='kw'>low</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>close</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
     <span class='fu'><a href='geom_ma.html'>geom_ma</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
     <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2016-01-01"</span>, <span class='st'>"2016-12-31"</span>),
                  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>75</span>, <span class='fl'>125</span>))</div><div class='img'><img src='geom_chart-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Candlestick Chart</span>
 <span class='no'>AAPL</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
-    <span class='fu'>geom_candlestick</span>(<span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes</a></span>(<span class='kw'>open</span> <span class='kw'>=</span> <span class='no'>open</span>, <span class='kw'>high</span> <span class='kw'>=</span> <span class='no'>high</span>, <span class='kw'>low</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>close</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
+    <span class='fu'>geom_candlestick</span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>open</span> <span class='kw'>=</span> <span class='no'>open</span>, <span class='kw'>high</span> <span class='kw'>=</span> <span class='no'>high</span>, <span class='kw'>low</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>close</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
     <span class='fu'><a href='geom_ma.html'>geom_ma</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
     <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2016-01-01"</span>, <span class='st'>"2016-12-31"</span>),
                  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>75</span>, <span class='fl'>125</span>))</div><div class='img'><img src='geom_chart-2.png' alt='' width='700' height='433' /></div></pre>
