@@ -1,15 +1,7 @@
-<!--
-### TODO
-  - Tsibble compatability
-  - Add tests for Excel Functionality
-  - Add tests for dividends and splits 
-  - Add manual documentation for Excel Financial Functionality
-  - Update vignettes
-  - New book for Financial Modeling & Excel
--->
 
+## tidyquant 1.0.1.9000 (Development Version)
 
-## tidyquant 1.0.0.9000 (Development Version)
+## tidyquant 1.0.1
 
 ### Improvements
 
