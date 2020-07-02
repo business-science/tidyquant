@@ -54,7 +54,7 @@
 #'
 #' @param ma_fun The function used to calculate the moving average. Seven options are
 #' available including: SMA, EMA, WMA, DEMA, ZLEMA, VWMA, and EVWMA. The default is
-#' `SMA`. See [TTR::SMA()] for underlying functions.
+#' `SMA`. See `TTR::SMA()` for underlying functions.
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_line

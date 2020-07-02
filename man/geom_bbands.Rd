@@ -85,7 +85,7 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{ggplot2::borde
 
 \item{ma_fun}{The function used to calculate the moving average. Seven options are
 available including: SMA, EMA, WMA, DEMA, ZLEMA, VWMA, and EVWMA. The default is
-\code{SMA}. See \code{\link[TTR:SMA]{TTR::SMA()}} for underlying functions.}
+\code{SMA}. See \code{TTR::SMA()} for underlying functions.}
 
 \item{n}{Number of periods to average over. Must be between 1 and
 \code{nrow(x)}, inclusive.}
