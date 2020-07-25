@@ -36,6 +36,8 @@ Imports:
     alphavantager (>= 0.1.2),
     stringr,
     tibble,
+    readr,
+    janitor,
     tidyr (>= 1.0.0),
     timetk (>= 2.0.0),
     timeDate,

@@ -92,6 +92,8 @@ tq_index <- function(x, use_fallback = FALSE) {
 # tq_exchange ----
 
 #' @rdname tq_index
+#' @importFrom janitor clean_names
+#' @importFrom readr read_csv
 #' @export
 tq_exchange <- function(x) {
 
@@ -116,45 +118,25 @@ tq_exchange <- function(x) {
         message("Getting data...\n")
 
         # Download File
-        tmp <- tempfile()
-        # base_path_1 <- "http://www.nasdaq.com/screening/companies-by-name.aspx?letter=0&exchange="
         base_path_1 <- "https://old.nasdaq.com/screening/companies-by-name.aspx?letter=0&exchange="
         base_path_2 <- "&render=download"
         url <- paste0(base_path_1, x, base_path_2)
-        download.file(url, destfile = tmp, quiet = TRUE)
-
-        # Read data
-        exchange_raw <- suppressMessages(
-            suppressWarnings(
-                read.csv(tmp, na.strings = c("", "NA", "N/A", "<NA>", "n/a"), stringsAsFactors = FALSE)[1:7]
-            )
-        )
-
-        # Unlink tmp
-        unlink(tmp)
+        exchange_raw <- suppressWarnings(suppressMessages(readr::read_csv(url)))
 
         # Format df
-        exchange <- exchange_raw %>%
-            dplyr::mutate_if(is.character, stringr::str_trim) %>%
-            dplyr::as_tibble() %>%
-            dplyr::rename(
-                symbol = Symbol,
-                company = Name,
-                last.sale.price = LastSale,
-                market.cap = MarketCap,
-                ipo.year = IPOyear,
-                sector = Sector
-            ) %>%
-            dplyr::mutate(
-                symbol = as.character(symbol),
-                company = as.character(company),
-                last.sale.price = as.numeric(last.sale.price),
-                market.cap = as.character(market.cap),
-                ipo.year = as.numeric(ipo.year),
-                sector = as.character(sector),
-                industry = as.character(industry)
-            )
-
+        exchange <- suppressWarnings(
+            exchange_raw %>%
+            dplyr::select(Symbol, Name, LastSale,
+                          MarketCap, IPOyear, Sector, industry) %>%
+            dplyr::transmute(symbol = as.character(Symbol),
+                             company = as.character(Name),
+                             last.sale.price = as.numeric(LastSale),
+                             market.cap = dplyr::na_if(as.character(MarketCap), "n/a"),
+                             ipo.year = as.numeric(IPOyear),
+                             sector = dplyr::na_if(as.character(Sector), "n/a"),
+                             industry = dplyr::na_if(as.character(industry), "n/a")) %>%
+            dplyr::arrange(symbol)
+        )
         return(exchange)
 
     }, error = function(e) {
