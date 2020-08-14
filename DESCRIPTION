@@ -28,11 +28,13 @@ Imports:
     dplyr (>= 0.8.3),
     ggplot2,
     httr,
+    curl, 
     lazyeval,
     magrittr,
     purrr,
     Quandl,
     riingo,
+    readr, 
     alphavantager (>= 0.1.2),
     stringr,
     tibble,
@@ -45,7 +47,8 @@ Imports:
     tidyselect, 
     rstudioapi,
     crayon,
-    cli
+    cli,
+    janitor
 Suggests:
     tidyverse,
     forcats,
@@ -57,6 +60,6 @@ Suggests:
     scales,
     Rblpapi,
     readxl
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr

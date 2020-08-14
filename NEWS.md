@@ -1,6 +1,14 @@
 
 ## tidyquant 1.0.1.9000 (Development Version)
 
+
+### Fixes
+
+- `tq_exchange()`
+
+
+
+
 ## tidyquant 1.0.1
 
 ### Improvements

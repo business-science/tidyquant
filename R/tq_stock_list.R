@@ -103,6 +103,7 @@ tq_exchange <- function(x) {
     # Check if x is a valid exchange
     exchange_list <- tq_exchange_options() %>%
         stringr::str_to_lower()
+
     if (!(x %in% c(exchange_list))) {
         err <- paste0("Error: x must be a character string in the form of a valid exchange.",
                       " The following are valid options:\n",
@@ -111,59 +112,49 @@ tq_exchange <- function(x) {
         stop(err)
     }
 
-    tryCatch({
+    # Download
+    message("Getting data...\n")
+    base_path_1 <- "https://old.nasdaq.com/screening/companies-by-name.aspx?letter=0&exchange="
+    base_path_2 <- "&render=download"
+    url         <- paste0(base_path_1, x, base_path_2)
+    res         <- csv_downloader(path = url)
 
-        message("Getting data...\n")
+    # Evaluate Response / Clean & Return
+    if (is.null(res$err)) {
+        exchange_raw <- res$df
 
-        # Download File
-        tmp <- tempfile()
-        # base_path_1 <- "http://www.nasdaq.com/screening/companies-by-name.aspx?letter=0&exchange="
-        base_path_1 <- "https://old.nasdaq.com/screening/companies-by-name.aspx?letter=0&exchange="
-        base_path_2 <- "&render=download"
-        url <- paste0(base_path_1, x, base_path_2)
-        download.file(url, destfile = tmp, quiet = TRUE)
-
-        # Read data
-        exchange_raw <- suppressMessages(
-            suppressWarnings(
-                read.csv(tmp, na.strings = c("", "NA", "N/A", "<NA>", "n/a"), stringsAsFactors = FALSE)[1:7]
-            )
-        )
-
-        # Unlink tmp
-        unlink(tmp)
-
-        # Format df
-        exchange <- exchange_raw %>%
+        # Post-process response
+        suppressWarnings({
+          exchange <- exchange_raw %>%
             dplyr::mutate_if(is.character, stringr::str_trim) %>%
             dplyr::as_tibble() %>%
             dplyr::rename(
-                symbol = Symbol,
-                company = Name,
-                last.sale.price = LastSale,
-                market.cap = MarketCap,
-                ipo.year = IPOyear,
-                sector = Sector
+              symbol = Symbol,
+              company = Name,
+              last.sale.price = LastSale,
+              market.cap = MarketCap,
+              ipo.year = IPOyear,
+              sector = Sector
             ) %>%
             dplyr::mutate(
-                symbol = as.character(symbol),
-                company = as.character(company),
-                last.sale.price = as.numeric(last.sale.price),
-                market.cap = as.character(market.cap),
-                ipo.year = as.numeric(ipo.year),
-                sector = as.character(sector),
-                industry = as.character(industry)
-            )
+              symbol = as.character(symbol),
+              company = as.character(company),
+              last.sale.price = as.numeric(last.sale.price),
+              market.cap = as.character(market.cap),
+              ipo.year = as.numeric(ipo.year),
+              sector = as.character(sector),
+              industry = as.character(industry)
+            ) %>%
+            dplyr::select(symbol:industry)
+        })
 
         return(exchange)
 
-    }, error = function(e) {
-
-        warn <- paste0("Error at ", x, " during call to tq_exchange.")
+    } else {
+        warn <- paste0("Error at ", x, " during call to tq_exchange.\n\n", res$err)
         warning(warn)
         return(NA) # Return NA on error
-
-    })
+    }
 
 }
 
@@ -254,11 +245,6 @@ index_download <- function(x, index_name) {
 
         # Read the xls file
         suppressMessages({
-            # res$df <- gdata::read.xls(tf, skip = 3, stringsAsFactors = FALSE)
-            # res$df <- readxl::read_xls(tf, skip = 3)
-            # wb     <- XLConnect::loadWorkbook(filename = tf)
-            # res$df <- XLConnect::readWorksheet(wb, sheet = 1, startRow = 4)
-
             res$df <- readxl::read_xlsx(tf, skip = 3)
         })
 
