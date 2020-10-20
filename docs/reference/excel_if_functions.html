@@ -94,7 +94,7 @@ By default, missing values are ignored (same as in Excel)
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
       </span>
     </div>
 
@@ -171,7 +171,7 @@ By default, missing values are ignored (same as in Excel)
     <p><strong>"IFS" functions</strong> are filtering versions of their summarization counterparts.
 Simply add "cases" that filter if a condition is true.
 Multiple cases are evaluated as "AND" filtering operations.
-A single case with <code>|</code> ("OR") bars can be created to accomplish an "OR".
+A single case with <code><a href='https://rdrr.io/r/base/Logic.html'>|</a></code> ("OR") bars can be created to accomplish an "OR".
 See details below.</p>
 <p>These functions are designed to help users coming from an <strong>Excel background</strong>.
 Most functions replicate the behavior of Excel:</p><ul>
@@ -181,19 +181,19 @@ Most functions replicate the behavior of Excel:</p><ul>
 
     </div>
 
-    <pre class="usage"><span class='fu'>SUM_IFS</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>SUM_IFS</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>COUNT_IFS</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>COUNT_IFS</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>AVERAGE_IFS</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>AVERAGE_IFS</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>MEDIAN_IFS</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>MEDIAN_IFS</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>MIN_IFS</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>MIN_IFS</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>MAX_IFS</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>MAX_IFS</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>CREATE_IFS</span>(<span class='no'>.f</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>CREATE_IFS</span><span class='op'>(</span><span class='va'>.f</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -226,7 +226,7 @@ Use <code>...</code> in this case to provide parameters to the <code>.f</code> l
     <p><strong>"AND" Filtering:</strong>
 Multiple cases are evaluated as "AND" filtering operations.</p>
 <p><strong>"OR" Filtering:</strong>
-Compound single cases with <code>|</code> ("OR") bars can be created to accomplish an "OR".
+Compound single cases with <code><a href='https://rdrr.io/r/base/Logic.html'>|</a></code> ("OR") bars can be created to accomplish an "OR".
 Simply use a statement like <code>x &gt; 10 | x &lt; -10</code> to perform an "OR" if-statement.</p>
 <p><strong>Creating New "Summarizing IFS" Functions:</strong>
 Users can create new "IFS" functions using the <code>CREATE_IFS()</code> function factory.
@@ -248,32 +248,37 @@ value (scalar). See examples below.</p>
 This is a function factory that generates summary "_IFS" functions.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyquant</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>timetk</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>stringr</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>lubridate</span>)
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/tidyquant'>tidyquant</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/timetk'>timetk</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://stringr.tidyverse.org'>stringr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://lubridate.tidyverse.org'>lubridate</a></span><span class='op'>)</span>
 
 <span class='co'># --- Basic Usage ---</span>
 
-<span class='fu'>SUM_IFS</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>, <span class='no'>x</span> <span class='kw'>&gt;</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt; [1] 40</div><div class='input'>
-<span class='fu'>COUNT_IFS</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>letters</span>, <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_detect.html'>str_detect</a></span>(<span class='no'>x</span>, <span class='st'>"a|b|c"</span>))</div><div class='output co'>#&gt; [1] 3</div><div class='input'>
-<span class='fu'>SUM_IFS</span>(-<span class='fl'>10</span>:<span class='fl'>10</span>, <span class='no'>x</span> <span class='kw'>&gt;</span> <span class='fl'>8</span> <span class='kw'>|</span> <span class='no'>x</span> <span class='kw'>&lt;</span> -<span class='fl'>5</span>)</div><div class='output co'>#&gt; [1] -21</div><div class='input'>
+<span class='fu'>SUM_IFS</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='va'>x</span> <span class='op'>&gt;</span> <span class='fl'>5</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 40</div><div class='input'>
+<span class='fu'>COUNT_IFS</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>letters</span>, <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_detect.html'>str_detect</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='st'>"a|b|c"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 3</div><div class='input'>
+<span class='fu'>SUM_IFS</span><span class='op'>(</span><span class='op'>-</span><span class='fl'>10</span><span class='op'>:</span><span class='fl'>10</span>, <span class='va'>x</span> <span class='op'>&gt;</span> <span class='fl'>8</span> <span class='op'>|</span> <span class='va'>x</span> <span class='op'>&lt;</span> <span class='op'>-</span><span class='fl'>5</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] -21</div><div class='input'>
 <span class='co'># Create your own IFS function (Mind blowingly simple)!</span>
-<span class='no'>Q75_IFS</span> <span class='kw'>&lt;-</span> <span class='fu'>CREATE_IFS</span>(<span class='kw'>.f</span> <span class='kw'>=</span> <span class='no'>quantile</span>, <span class='kw'>probs</span> <span class='kw'>=</span> <span class='fl'>0.75</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'>Q75_IFS</span>(<span class='fl'>1</span>:<span class='fl'>10</span>, <span class='no'>x</span> <span class='kw'>&gt;</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt; 75% 
+<span class='va'>Q75_IFS</span> <span class='op'>&lt;-</span> <span class='fu'>CREATE_IFS</span><span class='op'>(</span>.f <span class='op'>=</span> <span class='va'>quantile</span>, probs <span class='op'>=</span> <span class='fl'>0.75</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'>Q75_IFS</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='va'>x</span> <span class='op'>&gt;</span> <span class='fl'>5</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 75% 
 #&gt;   9 </div><div class='input'>
 <span class='co'># --- Usage with tidyverse ---</span>
 
 <span class='co'># Using multiple cases IFS cases to count the frequency of days with</span>
 <span class='co'># high trade volume in a given year</span>
-<span class='no'>FANG</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>group_by</span>(<span class='no'>symbol</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'>summarise</span>(
-        <span class='kw'>high_volume_in_2015</span> <span class='kw'>=</span> <span class='fu'>COUNT_IFS</span>(<span class='no'>volume</span>,
-                                        <span class='fu'><a href='http://lubridate.tidyverse.org/reference/year.html'>year</a></span>(<span class='no'>date</span>) <span class='kw'>==</span> <span class='fl'>2015</span>,
-                                        <span class='no'>volume</span> <span class='kw'>&gt;</span> <span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span>(<span class='no'>volume</span>, <span class='fl'>0.75</span>))
-    )</div><div class='output co'>#&gt; <span class='message'>`summarise()` ungrouping output (override with `.groups` argument)</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 2</span><span>
+<span class='va'>FANG</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>symbol</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span>
+        high_volume_in_2015 <span class='op'>=</span> <span class='fu'>COUNT_IFS</span><span class='op'>(</span><span class='va'>volume</span>,
+                                        <span class='fu'><a href='http://lubridate.tidyverse.org/reference/year.html'>year</a></span><span class='op'>(</span><span class='va'>date</span><span class='op'>)</span> <span class='op'>==</span> <span class='fl'>2015</span>,
+                                        <span class='va'>volume</span> <span class='op'>&gt;</span> <span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span><span class='op'>(</span><span class='va'>volume</span>, <span class='fl'>0.75</span><span class='op'>)</span><span class='op'>)</span>
+    <span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>`summarise()` ungrouping output (override with `.groups` argument)</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 2</span><span>
 #&gt;   symbol high_volume_in_2015
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> AMZN                    62
@@ -281,27 +286,28 @@ This is a function factory that generates summary "_IFS" functions.</p>
 #&gt; </span><span style='color: #555555;'>3</span><span> GOOG                    19
 #&gt; </span><span style='color: #555555;'>4</span><span> NFLX                    54</div><div class='input'>
 <span class='co'># Count negative returns by month</span>
-<span class='no'>FANG</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>mutate</span>(<span class='kw'>symbol</span> <span class='kw'>=</span> <span class='fu'>as_factor</span>(<span class='no'>symbol</span>)) <span class='kw'>%&gt;%</span>
-    <span class='fu'>group_by</span>(<span class='no'>symbol</span>) <span class='kw'>%&gt;%</span>
+<span class='va'>FANG</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>symbol <span class='op'>=</span> <span class='fu'>as_factor</span><span class='op'>(</span><span class='va'>symbol</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>symbol</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
 
     <span class='co'># Collapse from daily to FIRST value by month</span>
-    <span class='fu'><a href='https://rdrr.io/pkg/timetk/man/summarise_by_time.html'>summarise_by_time</a></span>(
-        <span class='kw'>.date_var</span>  <span class='kw'>=</span> <span class='no'>date</span>,
-        <span class='kw'>.by</span>        <span class='kw'>=</span> <span class='st'>"month"</span>,
-        <span class='kw'>adjusted</span>   <span class='kw'>=</span> <span class='fu'><a href='excel_stat_summary_functions.html'>FIRST</a></span>(<span class='no'>adjusted</span>)
-    ) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/timetk/man/summarise_by_time.html'>summarise_by_time</a></span><span class='op'>(</span>
+        .date_var  <span class='op'>=</span> <span class='va'>date</span>,
+        .by        <span class='op'>=</span> <span class='st'>"month"</span>,
+        adjusted   <span class='op'>=</span> <span class='fu'><a href='excel_stat_summary_functions.html'>FIRST</a></span><span class='op'>(</span><span class='va'>adjusted</span><span class='op'>)</span>
+    <span class='op'>)</span> <span class='op'>%&gt;%</span>
 
     <span class='co'># Calculate monthly returns</span>
-    <span class='fu'>group_by</span>(<span class='no'>symbol</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'>mutate</span>(
-        <span class='kw'>returns</span> <span class='kw'>=</span> <span class='fu'><a href='excel_stat_mutation_functions.html'>PCT_CHANGE</a></span>(<span class='no'>adjusted</span>, <span class='kw'>fill_na</span> <span class='kw'>=</span> <span class='fl'>0</span>)
-    ) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>symbol</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>
+        returns <span class='op'>=</span> <span class='fu'><a href='excel_stat_mutation_functions.html'>PCT_CHANGE</a></span><span class='op'>(</span><span class='va'>adjusted</span>, fill_na <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
+    <span class='op'>)</span> <span class='op'>%&gt;%</span>
 
     <span class='co'># Find returns less than zero and count the frequency</span>
-    <span class='fu'>summarise</span>(
-        <span class='kw'>negative_monthly_returns</span> <span class='kw'>=</span> <span class='fu'>COUNT_IFS</span>(<span class='no'>returns</span>, <span class='no'>returns</span> <span class='kw'>&lt;</span> <span class='fl'>0</span>)
-    )</div><div class='output co'>#&gt; <span class='message'>`summarise()` ungrouping output (override with `.groups` argument)</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 2</span><span>
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span>
+        negative_monthly_returns <span class='op'>=</span> <span class='fu'>COUNT_IFS</span><span class='op'>(</span><span class='va'>returns</span>, <span class='va'>returns</span> <span class='op'>&lt;</span> <span class='fl'>0</span><span class='op'>)</span>
+    <span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>`summarise()` ungrouping output (override with `.groups` argument)</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 2</span><span>
 #&gt;   symbol negative_monthly_returns
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>                     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> FB                           16
@@ -324,7 +330,7 @@ This is a function factory that generates summary "_IFS" functions.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

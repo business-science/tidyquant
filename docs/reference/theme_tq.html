@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
       </span>
     </div>
 
@@ -161,11 +161,11 @@
     <p>The <code>theme_tq()</code> function creates a custom theme using tidyquant colors.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>theme_tq</span>(<span class='kw'>base_size</span> <span class='kw'>=</span> <span class='fl'>11</span>, <span class='kw'>base_family</span> <span class='kw'>=</span> <span class='st'>""</span>)
+    <pre class="usage"><span class='fu'>theme_tq</span><span class='op'>(</span>base_size <span class='op'>=</span> <span class='fl'>11</span>, base_family <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span>
 
-<span class='fu'>theme_tq_dark</span>(<span class='kw'>base_size</span> <span class='kw'>=</span> <span class='fl'>11</span>, <span class='kw'>base_family</span> <span class='kw'>=</span> <span class='st'>""</span>)
+<span class='fu'>theme_tq_dark</span><span class='op'>(</span>base_size <span class='op'>=</span> <span class='fl'>11</span>, base_family <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span>
 
-<span class='fu'>theme_tq_green</span>(<span class='kw'>base_size</span> <span class='kw'>=</span> <span class='fl'>11</span>, <span class='kw'>base_family</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
+<span class='fu'>theme_tq_green</span><span class='op'>(</span>base_size <span class='op'>=</span> <span class='fl'>11</span>, base_family <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -186,27 +186,28 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Load libraries</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyquant</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/tidyquant'>tidyquant</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
 
 <span class='co'># Get stock prices</span>
-<span class='no'>AAPL</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tq_get.html'>tq_get</a></span>(<span class='st'>"AAPL"</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='st'>"2013-01-01"</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='st'>"2016-12-31"</span>)
+<span class='va'>AAPL</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tq_get.html'>tq_get</a></span><span class='op'>(</span><span class='st'>"AAPL"</span>, from <span class='op'>=</span> <span class='st'>"2013-01-01"</span>, to <span class='op'>=</span> <span class='st'>"2016-12-31"</span><span class='op'>)</span>
 
 <span class='co'># Plot using ggplot with theme_tq</span>
-<span class='no'>AAPL</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>date</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>close</span>)) +
-       <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() +
-       <span class='fu'><a href='geom_bbands.html'>geom_bbands</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>high</span> <span class='kw'>=</span> <span class='no'>high</span>, <span class='kw'>low</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>close</span> <span class='kw'>=</span> <span class='no'>close</span>),
-                   <span class='kw'>ma_fun</span> <span class='kw'>=</span> <span class='no'>EMA</span>,
-                   <span class='kw'>wilder</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-                   <span class='kw'>ratio</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-                   <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>50</span>) +
-       <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2016-01-01"</span>, <span class='st'>"2016-12-31"</span>),
-                 <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>75</span>, <span class='fl'>125</span>)) +
-       <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Apple BBands"</span>,
-            <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"Date"</span>,
-            <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"Price"</span>) +
-       <span class='fu'>theme_tq</span>()</div><div class='img'><img src='theme_tq-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='va'>AAPL</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>date</span>, y <span class='op'>=</span> <span class='va'>close</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+       <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+       <span class='fu'><a href='geom_bbands.html'>geom_bbands</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>high <span class='op'>=</span> <span class='va'>high</span>, low <span class='op'>=</span> <span class='va'>low</span>, close <span class='op'>=</span> <span class='va'>close</span><span class='op'>)</span>,
+                   ma_fun <span class='op'>=</span> <span class='va'>EMA</span>,
+                   wilder <span class='op'>=</span> <span class='cn'>TRUE</span>,
+                   ratio <span class='op'>=</span> <span class='cn'>NULL</span>,
+                   n <span class='op'>=</span> <span class='fl'>50</span><span class='op'>)</span> <span class='op'>+</span>
+       <span class='fu'><a href='coord_x_date.html'>coord_x_date</a></span><span class='op'>(</span>xlim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"2016-01-01"</span>, <span class='st'>"2016-12-31"</span><span class='op'>)</span>,
+                 ylim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>75</span>, <span class='fl'>125</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+       <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Apple BBands"</span>,
+            x <span class='op'>=</span> <span class='st'>"Date"</span>,
+            y <span class='op'>=</span> <span class='st'>"Price"</span><span class='op'>)</span> <span class='op'>+</span>
+       <span class='fu'>theme_tq</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='img'><img src='theme_tq-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -223,7 +224,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

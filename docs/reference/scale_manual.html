@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
       </span>
     </div>
 
@@ -161,18 +161,18 @@
     <p>The tidyquant scales add colors that work nicely with <code><a href='theme_tq.html'>theme_tq()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>scale_color_tq</span>(<span class='no'>...</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='st'>"light"</span>)
+    <pre class="usage"><span class='fu'>scale_color_tq</span><span class='op'>(</span><span class='va'>...</span>, theme <span class='op'>=</span> <span class='st'>"light"</span><span class='op'>)</span>
 
-<span class='fu'>scale_colour_tq</span>(<span class='no'>...</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='st'>"light"</span>)
+<span class='fu'>scale_colour_tq</span><span class='op'>(</span><span class='va'>...</span>, theme <span class='op'>=</span> <span class='st'>"light"</span><span class='op'>)</span>
 
-<span class='fu'>scale_fill_tq</span>(<span class='no'>...</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='st'>"light"</span>)</pre>
+<span class='fu'>scale_fill_tq</span><span class='op'>(</span><span class='va'>...</span>, theme <span class='op'>=</span> <span class='st'>"light"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>...</th>
-      <td><p>common discrete scale parameters: <code>name</code>, <code>breaks</code>, <code>labels</code>, <code>na.value</code>, <code>limits</code> and <code>guide</code>. See <code>discrete_scale()</code> for more details</p></td>
+      <td><p>common discrete scale parameters: <code>name</code>, <code>breaks</code>, <code>labels</code>, <code>na.value</code>, <code>limits</code> and <code>guide</code>. See <code><a href='https://ggplot2.tidyverse.org/reference/discrete_scale.html'>discrete_scale()</a></code> for more details</p></td>
     </tr>
     <tr>
       <th>theme</th>
@@ -183,7 +183,7 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     
-<dl'>
+<dl>
 
 <dt><code>scale_color_tq</code></dt><dd><p>For use when <code>color</code> is specified as an <code><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes()</a></code> in a ggplot.</p></dd>
 
@@ -197,27 +197,28 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Load libraries</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyquant</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/tidyquant'>tidyquant</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
 
 <span class='co'># Get stock prices</span>
-<span class='no'>stocks</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"AAPL"</span>, <span class='st'>"FB"</span>, <span class='st'>"NFLX"</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='tq_get.html'>tq_get</a></span>(<span class='kw'>from</span> <span class='kw'>=</span> <span class='st'>"2013-01-01"</span>,
-           <span class='kw'>to</span>   <span class='kw'>=</span> <span class='st'>"2017-01-01"</span>)
+<span class='va'>stocks</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"AAPL"</span>, <span class='st'>"FB"</span>, <span class='st'>"NFLX"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='tq_get.html'>tq_get</a></span><span class='op'>(</span>from <span class='op'>=</span> <span class='st'>"2013-01-01"</span>,
+           to   <span class='op'>=</span> <span class='st'>"2017-01-01"</span><span class='op'>)</span>
 
 <span class='co'># Plot for stocks</span>
-<span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='no'>stocks</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>date</span>, <span class='no'>adjusted</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>symbol</span>)) +
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() +
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Multi stock example"</span>,
-         <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Date"</span>,
-         <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Adjusted Close"</span>)
+<span class='va'>g</span> <span class='op'>&lt;-</span> <span class='va'>stocks</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>date</span>, <span class='va'>adjusted</span>, color <span class='op'>=</span> <span class='va'>symbol</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Multi stock example"</span>,
+         xlab <span class='op'>=</span> <span class='st'>"Date"</span>,
+         ylab <span class='op'>=</span> <span class='st'>"Adjusted Close"</span><span class='op'>)</span>
 
 <span class='co'># Plot with tidyquant theme and colors</span>
-<span class='no'>g</span> +
-    <span class='fu'><a href='theme_tq.html'>theme_tq</a></span>() +
-    <span class='fu'>scale_color_tq</span>()</div><div class='img'><img src='scale_manual-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='va'>g</span> <span class='op'>+</span>
+    <span class='fu'><a href='theme_tq.html'>theme_tq</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+    <span class='fu'>scale_color_tq</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='img'><img src='scale_manual-1.png' alt='' width='700' height='433' /></div><div class='input'>
 
 </div></pre>
   </div>
@@ -235,7 +236,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

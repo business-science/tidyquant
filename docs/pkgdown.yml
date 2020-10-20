@@ -1,5 +1,5 @@
 pandoc: 2.9.2.1
-pkgdown: 1.5.1
+pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   TQ00-introduction-to-tidyquant: TQ00-introduction-to-tidyquant.html
@@ -9,5 +9,5 @@ articles:
   TQ04-charting-with-tidyquant: TQ04-charting-with-tidyquant.html
   TQ05-performance-analysis-with-tidyquant: TQ05-performance-analysis-with-tidyquant.html
   TQ06-excel-in-r: TQ06-excel-in-r.html
-last_built: 2020-07-02T12:59Z
+last_built: 2020-10-20T15:01Z
 

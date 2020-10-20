@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get quantitative data in <code>tibble</code> format — tq_get • tidyquant</title>
+<title>Get quantitative data in tibble format — tq_get • tidyquant</title>
 
 
 <!-- jquery -->
@@ -41,7 +41,7 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Get quantitative data in <code>tibble</code> format — tq_get" />
+<meta property="og:title" content="Get quantitative data in tibble format — tq_get" />
 <meta property="og:description" content="Get quantitative data in tibble format" />
 
 
@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
       </span>
     </div>
 
@@ -161,9 +161,9 @@
     <p>Get quantitative data in <code>tibble</code> format</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tq_get</span>(<span class='no'>x</span>, <span class='kw'>get</span> <span class='kw'>=</span> <span class='st'>"stock.prices"</span>, <span class='kw'>complete_cases</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>tq_get</span><span class='op'>(</span><span class='va'>x</span>, get <span class='op'>=</span> <span class='st'>"stock.prices"</span>, complete_cases <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>tq_get_options</span>()</pre>
+<span class='fu'>tq_get_options</span><span class='op'>(</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -270,81 +270,83 @@ get option.</p></li>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Load libraries</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyquant</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>)
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/tidyquant'>tidyquant</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
 
 <span class='co'># Get the list of `get` options</span>
-<span class='fu'>tq_get_options</span>()</div><div class='output co'>#&gt;  [1] "stock.prices"       "stock.prices.japan" "dividends"         
+<span class='fu'>tq_get_options</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] "stock.prices"       "stock.prices.japan" "dividends"         
 #&gt;  [4] "splits"             "economic.data"      "quandl"            
 #&gt;  [7] "quandl.datatable"   "tiingo"             "tiingo.iex"        
 #&gt; [10] "tiingo.crypto"      "alphavantager"      "alphavantage"      
 #&gt; [13] "rblpapi"           </div><div class='input'>
 <span class='co'># Get stock prices for a stock from Yahoo</span>
-<span class='no'>aapl_stock_prices</span> <span class='kw'>&lt;-</span> <span class='fu'>tq_get</span>(<span class='st'>"AAPL"</span>)
+<span class='va'>aapl_stock_prices</span> <span class='op'>&lt;-</span> <span class='fu'>tq_get</span><span class='op'>(</span><span class='st'>"AAPL"</span><span class='op'>)</span>
 
 <span class='co'># Get stock prices for multiple stocks</span>
-<span class='no'>mult_stocks</span> <span class='kw'>&lt;-</span> <span class='fu'>tq_get</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"FB"</span>, <span class='st'>"AMZN"</span>),
-                      <span class='kw'>get</span>  <span class='kw'>=</span> <span class='st'>"stock.prices"</span>,
-                      <span class='kw'>from</span> <span class='kw'>=</span> <span class='st'>"2016-01-01"</span>,
-                      <span class='kw'>to</span>   <span class='kw'>=</span> <span class='st'>"2017-01-01"</span>)
+<span class='va'>mult_stocks</span> <span class='op'>&lt;-</span> <span class='fu'>tq_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"FB"</span>, <span class='st'>"AMZN"</span><span class='op'>)</span>,
+                      get  <span class='op'>=</span> <span class='st'>"stock.prices"</span>,
+                      from <span class='op'>=</span> <span class='st'>"2016-01-01"</span>,
+                      to   <span class='op'>=</span> <span class='st'>"2017-01-01"</span><span class='op'>)</span>
 
 
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 
 <span class='co'># --- Quandl ---</span>
 
-<span class='fu'><a href='quandl_api_key.html'>quandl_api_key</a></span>(<span class='st'>'&lt;your_api_key&gt;'</span>)
+<span class='fu'><a href='quandl_api_key.html'>quandl_api_key</a></span><span class='op'>(</span><span class='st'>'&lt;your_api_key&gt;'</span><span class='op'>)</span>
 
 <span class='co'># Energy data from EIA</span>
-<span class='fu'>tq_get</span>(<span class='st'>"EIA/PET_MTTIMUS1_M"</span>, <span class='kw'>get</span> <span class='kw'>=</span> <span class='st'>"quandl"</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='st'>"2010-01-01"</span>)
+<span class='fu'>tq_get</span><span class='op'>(</span><span class='st'>"EIA/PET_MTTIMUS1_M"</span>, get <span class='op'>=</span> <span class='st'>"quandl"</span>, from <span class='op'>=</span> <span class='st'>"2010-01-01"</span><span class='op'>)</span>
 
 
 <span class='co'># --- Tiingo ---</span>
 
-<span class='fu'><a href='tiingo_api_key.html'>tiingo_api_key</a></span>(<span class='st'>'&lt;your_api_key&gt;'</span>)
+<span class='fu'><a href='tiingo_api_key.html'>tiingo_api_key</a></span><span class='op'>(</span><span class='st'>'&lt;your_api_key&gt;'</span><span class='op'>)</span>
 
 <span class='co'># Tiingo Prices (Free alternative to Yahoo Finance!)</span>
-<span class='fu'>tq_get</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"AAPL"</span>, <span class='st'>"GOOG"</span>), <span class='kw'>get</span> <span class='kw'>=</span> <span class='st'>"tiingo"</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='st'>"2010-01-01"</span>)
+<span class='fu'>tq_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"AAPL"</span>, <span class='st'>"GOOG"</span><span class='op'>)</span>, get <span class='op'>=</span> <span class='st'>"tiingo"</span>, from <span class='op'>=</span> <span class='st'>"2010-01-01"</span><span class='op'>)</span>
 
 <span class='co'># Sub-daily prices from IEX ----</span>
-<span class='fu'>tq_get</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"AAPL"</span>, <span class='st'>"GOOG"</span>),
-       <span class='kw'>get</span> <span class='kw'>=</span> <span class='st'>"tiingo.iex"</span>,
-       <span class='kw'>from</span>   <span class='kw'>=</span> <span class='st'>"2020-01-01"</span>,
-       <span class='kw'>to</span>     <span class='kw'>=</span> <span class='st'>"2020-01-15"</span>,
-       <span class='kw'>resample_frequency</span> <span class='kw'>=</span> <span class='st'>"5min"</span>)
+<span class='fu'>tq_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"AAPL"</span>, <span class='st'>"GOOG"</span><span class='op'>)</span>,
+       get <span class='op'>=</span> <span class='st'>"tiingo.iex"</span>,
+       from   <span class='op'>=</span> <span class='st'>"2020-01-01"</span>,
+       to     <span class='op'>=</span> <span class='st'>"2020-01-15"</span>,
+       resample_frequency <span class='op'>=</span> <span class='st'>"5min"</span><span class='op'>)</span>
 
 <span class='co'># Tiingo Bitcoin Prices ----</span>
-<span class='fu'>tq_get</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"btcusd"</span>, <span class='st'>"btceur"</span>),
-       <span class='kw'>get</span>    <span class='kw'>=</span> <span class='st'>"tiingo.crypto"</span>,
-       <span class='kw'>from</span>   <span class='kw'>=</span> <span class='st'>"2020-01-01"</span>,
-       <span class='kw'>to</span>     <span class='kw'>=</span> <span class='st'>"2020-01-15"</span>,
-       <span class='kw'>resample_frequency</span> <span class='kw'>=</span> <span class='st'>"5min"</span>)
+<span class='fu'>tq_get</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"btcusd"</span>, <span class='st'>"btceur"</span><span class='op'>)</span>,
+       get    <span class='op'>=</span> <span class='st'>"tiingo.crypto"</span>,
+       from   <span class='op'>=</span> <span class='st'>"2020-01-01"</span>,
+       to     <span class='op'>=</span> <span class='st'>"2020-01-15"</span>,
+       resample_frequency <span class='op'>=</span> <span class='st'>"5min"</span><span class='op'>)</span>
 
 
 <span class='co'># --- Alpha Vantage ---</span>
 
-<span class='fu'><a href='av_api_key.html'>av_api_key</a></span>(<span class='st'>'&lt;your_api_key&gt;'</span>)
+<span class='fu'><a href='av_api_key.html'>av_api_key</a></span><span class='op'>(</span><span class='st'>'&lt;your_api_key&gt;'</span><span class='op'>)</span>
 
 <span class='co'># Daily Time Series</span>
-<span class='fu'>tq_get</span>(<span class='st'>"AAPL"</span>,
-       <span class='kw'>get</span>        <span class='kw'>=</span> <span class='st'>"alphavantager"</span>,
-       <span class='kw'>av_fun</span>     <span class='kw'>=</span> <span class='st'>"TIME_SERIES_DAILY_ADJUSTED"</span>,
-       <span class='kw'>outputsize</span> <span class='kw'>=</span> <span class='st'>"full"</span>)
+<span class='fu'>tq_get</span><span class='op'>(</span><span class='st'>"AAPL"</span>,
+       get        <span class='op'>=</span> <span class='st'>"alphavantager"</span>,
+       av_fun     <span class='op'>=</span> <span class='st'>"TIME_SERIES_DAILY_ADJUSTED"</span>,
+       outputsize <span class='op'>=</span> <span class='st'>"full"</span><span class='op'>)</span>
 
 <span class='co'># Intraday 15 Min Interval</span>
-<span class='fu'>tq_get</span>(<span class='st'>"AAPL"</span>,
-       <span class='kw'>get</span>        <span class='kw'>=</span> <span class='st'>"alphavantage"</span>,
-       <span class='kw'>av_fun</span>     <span class='kw'>=</span> <span class='st'>"TIME_SERIES_INTRADAY"</span>,
-       <span class='kw'>interval</span>   <span class='kw'>=</span> <span class='st'>"15min"</span>,
-       <span class='kw'>outputsize</span> <span class='kw'>=</span> <span class='st'>"full"</span>)
+<span class='fu'>tq_get</span><span class='op'>(</span><span class='st'>"AAPL"</span>,
+       get        <span class='op'>=</span> <span class='st'>"alphavantage"</span>,
+       av_fun     <span class='op'>=</span> <span class='st'>"TIME_SERIES_INTRADAY"</span>,
+       interval   <span class='op'>=</span> <span class='st'>"15min"</span>,
+       outputsize <span class='op'>=</span> <span class='st'>"full"</span><span class='op'>)</span>
 
 <span class='co'># FX DAILY</span>
-<span class='fu'>tq_get</span>(<span class='st'>"USD/EUR"</span>, <span class='kw'>get</span> <span class='kw'>=</span> <span class='st'>"alphavantage"</span>, <span class='kw'>av_fun</span> <span class='kw'>=</span> <span class='st'>"FX_DAILY"</span>, <span class='kw'>outputsize</span> <span class='kw'>=</span> <span class='st'>"full"</span>)
+<span class='fu'>tq_get</span><span class='op'>(</span><span class='st'>"USD/EUR"</span>, get <span class='op'>=</span> <span class='st'>"alphavantage"</span>, av_fun <span class='op'>=</span> <span class='st'>"FX_DAILY"</span>, outputsize <span class='op'>=</span> <span class='st'>"full"</span><span class='op'>)</span>
 
 <span class='co'># FX REAL-TIME QUOTE</span>
-<span class='fu'>tq_get</span>(<span class='st'>"USD/EUR"</span>, <span class='kw'>get</span> <span class='kw'>=</span> <span class='st'>"alphavantage"</span>, <span class='kw'>av_fun</span> <span class='kw'>=</span> <span class='st'>"CURRENCY_EXCHANGE_RATE"</span>)
+<span class='fu'>tq_get</span><span class='op'>(</span><span class='st'>"USD/EUR"</span>, get <span class='op'>=</span> <span class='st'>"alphavantage"</span>, av_fun <span class='op'>=</span> <span class='st'>"CURRENCY_EXCHANGE_RATE"</span><span class='op'>)</span>
 
-}</div></pre>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -360,7 +362,7 @@ get option.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

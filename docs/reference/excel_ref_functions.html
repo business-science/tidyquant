@@ -91,7 +91,7 @@ Functionality replicates Excel
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
       </span>
     </div>
 
@@ -175,7 +175,7 @@ Most functions replicate the behavior of Excel:</p><ul>
 
     </div>
 
-    <pre class="usage"><span class='fu'>VLOOKUP</span>(<span class='no'>.lookup_values</span>, <span class='no'>.data</span>, <span class='no'>.lookup_column</span>, <span class='no'>.return_column</span>)</pre>
+    <pre class="usage"><span class='fu'>VLOOKUP</span><span class='op'>(</span><span class='va'>.lookup_values</span>, <span class='va'>.data</span>, <span class='va'>.lookup_column</span>, <span class='va'>.return_column</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -210,25 +210,27 @@ Most functions replicate the behavior of Excel:</p><ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyquant</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>)
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/tidyquant'>tidyquant</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
 
-<span class='no'>lookup_table</span> <span class='kw'>&lt;-</span> <span class='fu'>tibble</span>(
-    <span class='kw'>stock</span>   <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"FB"</span>, <span class='st'>"AMZN"</span>, <span class='st'>"NFLX"</span>, <span class='st'>"GOOG"</span>),
-    <span class='kw'>company</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Facebook"</span>, <span class='st'>"Amazon"</span>, <span class='st'>"Netflix"</span>, <span class='st'>"Google"</span>)
-)
+<span class='va'>lookup_table</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span>
+    stock   <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"FB"</span>, <span class='st'>"AMZN"</span>, <span class='st'>"NFLX"</span>, <span class='st'>"GOOG"</span><span class='op'>)</span>,
+    company <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Facebook"</span>, <span class='st'>"Amazon"</span>, <span class='st'>"Netflix"</span>, <span class='st'>"Google"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
 <span class='co'># --- Basic Usage ---</span>
 
-<span class='fu'>VLOOKUP</span>(<span class='st'>"NFLX"</span>,
-        <span class='kw'>.data</span> <span class='kw'>=</span> <span class='no'>lookup_table</span>,
-        <span class='kw'>.lookup_column</span> <span class='kw'>=</span> <span class='no'>stock</span>,
-        <span class='kw'>.return_column</span> <span class='kw'>=</span> <span class='no'>company</span>)</div><div class='output co'>#&gt; [1] "Netflix"</div><div class='input'>
+<span class='fu'>VLOOKUP</span><span class='op'>(</span><span class='st'>"NFLX"</span>,
+        .data <span class='op'>=</span> <span class='va'>lookup_table</span>,
+        .lookup_column <span class='op'>=</span> <span class='va'>stock</span>,
+        .return_column <span class='op'>=</span> <span class='va'>company</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "Netflix"</div><div class='input'>
 <span class='co'># --- Usage with tidyverse ---</span>
 
 <span class='co'># Add company names to the stock data</span>
-<span class='no'>FANG</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>mutate</span>(<span class='kw'>company</span> <span class='kw'>=</span> <span class='fu'>VLOOKUP</span>(<span class='no'>symbol</span>, <span class='no'>lookup_table</span>, <span class='no'>stock</span>, <span class='no'>company</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4,032 x 9</span><span>
+<span class='va'>FANG</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>company <span class='op'>=</span> <span class='fu'>VLOOKUP</span><span class='op'>(</span><span class='va'>symbol</span>, <span class='va'>lookup_table</span>, <span class='va'>stock</span>, <span class='va'>company</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4,032 x 9</span><span>
 #&gt;    symbol date        open  high   low close    volume adjusted company 
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   
 #&gt; </span><span style='color: #555555;'> 1</span><span> FB     2013-01-02  27.4  28.2  27.4  28    69</span><span style='text-decoration: underline;'>846</span><span>400     28   Facebook
@@ -258,7 +260,7 @@ Most functions replicate the behavior of Excel:</p><ul>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

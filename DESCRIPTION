@@ -20,7 +20,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
-    R (>= 3.0.0),
+    R (>= 3.5.0),
     lubridate,
     PerformanceAnalytics,
     quantmod (>= 0.4-13)
@@ -51,6 +51,7 @@ Imports:
     janitor
 Suggests:
     tidyverse,
+    tibbletime, 
     forcats,
     broom,
     knitr,

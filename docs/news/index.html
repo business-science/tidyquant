@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
       </span>
     </div>
 
@@ -155,9 +155,19 @@
       <small>Source: <a href='https://github.com/business-science/tidyquant/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="tidyquant-1019000-development-version" class="section level2">
+    <div id="tidyquant-102" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyquant-1019000-development-version" class="anchor"></a>tidyquant 1.0.1.9000 (Development Version)</h2>
+<a href="#tidyquant-102" class="anchor"></a>tidyquant 1.0.2</h2>
+<div id="fixes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#fixes" class="anchor"></a>Fixes</h3>
+<ul>
+<li>
+<code><a href="../reference/tq_index.html">tq_exchange()</a></code>: Fix issue with NASDAQ changes to website.</li>
+<li>
+<code><a href="../reference/theme_tq.html">theme_tq()</a></code>: Fix issues with <code><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">%+replace%</a></code>, <code>theme_gray</code>, and <code>rel</code> not found.</li>
+</ul>
+</div>
 </div>
     <div id="tidyquant-101" class="section level2">
 <h2 class="hasAnchor">
@@ -184,7 +194,7 @@
 <a href="#deprecation" class="anchor"></a>Deprecation</h3>
 <ul>
 <li>
-<code>summarise_by_time()</code> - This function has moved to <code><a href="https://rdrr.io/pkg/timetk/man/summarise_by_time.html">timetk::summarise_by_time()</a></code>
+<code><a href="https://rdrr.io/pkg/timetk/man/summarise_by_time.html">summarise_by_time()</a></code> - This function has moved to <code><a href="https://rdrr.io/pkg/timetk/man/summarise_by_time.html">timetk::summarise_by_time()</a></code>
 </li>
 </ul>
 </div>
@@ -238,7 +248,7 @@
 <li>
 <strong>Date and Date Time Functions</strong>
 <ul>
-<li>Integrated date calculations with <code>lubridate()</code> (e.g. <code><a href="../reference/excel_date_functions.html">AS_DATE()</a></code>, <code><a href="../reference/excel_date_functions.html">YEAR()</a></code>)</li>
+<li>Integrated date calculations with <code><a href="http://lubridate.tidyverse.org/reference/lubridate-package.html">lubridate()</a></code> (e.g. <code><a href="../reference/excel_date_functions.html">AS_DATE()</a></code>, <code><a href="../reference/excel_date_functions.html">YEAR()</a></code>)</li>
 <li>Holidays and business calendars with <code>timeDate</code> (e.g. <code><a href="../reference/excel_date_functions.html">HOLIDAY_SEQUENCE()</a></code>, <code>HOLIDAY_LIST()</code>)</li>
 <li>Excel Date Math functions: <code><a href="../reference/excel_date_functions.html">NET_WORKDAYS()</a></code>, <code><a href="../reference/excel_date_functions.html">EOMONTH()</a></code>
 </li>
@@ -255,7 +265,7 @@
 <p><strong>NEW Tidyverse Functionality</strong></p>
 <ul>
 <li>
-<code>summarise_by_time()</code> - This is a new time-based variant of <code>summarise()</code> that allows collapsing the time-series by “day”, “week”, “month”, “quarter”, “year”, and more.</li>
+<code><a href="https://rdrr.io/pkg/timetk/man/summarise_by_time.html">summarise_by_time()</a></code> - This is a new time-based variant of <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> that allows collapsing the time-series by “day”, “week”, “month”, “quarter”, “year”, and more.</li>
 <li>Note: I will evaluate the need for <code>summarise_at_by_time()</code>, <code>summarise_all_by_time()</code>, and <code>summarise_if_by_time()</code> after the release of <code>dplyr</code> v1.0.0.</li>
 </ul>
 </li>
@@ -387,7 +397,7 @@
 <li>Important Changes:
 <ul>
 <li>Remove Key Statistics from <code><a href="../reference/tq_get.html">tq_get(get = "key.stats")</a></code>. Yahoo Finance no longer supports the Key Statistics CSV API.</li>
-<li>Completed deprecation of <code>tidyquant::as_tibble()</code> and <code>tidyquant::as_xts()</code>. Use <code><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html">timetk::tk_tbl()</a></code> and <code><a href="https://rdrr.io/pkg/timetk/man/tk_xts.html">timetk::tk_xts()</a></code> instead.</li>
+<li>Completed deprecation of <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html">tidyquant::as_tibble()</a></code> and <code>tidyquant::as_xts()</code>. Use <code><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html">timetk::tk_tbl()</a></code> and <code><a href="https://rdrr.io/pkg/timetk/man/tk_xts.html">timetk::tk_xts()</a></code> instead.</li>
 <li>
 <code>tibbletime</code> support was added so that all <code>tidyquant</code> functions play nicely with <code>tbl_time</code> objects.</li>
 <li>A hard dependency on <code>XLConnect</code> was removed. This should ease the use of the package, especially for Mac users.</li>
@@ -411,7 +421,7 @@
 <h2 class="hasAnchor">
 <a href="#tidyquant-052" class="anchor"></a>tidyquant 0.5.2</h2>
 <ul>
-<li>Incorporated more robust <code>timetk</code> coercion functions. Deprecated <code>tidyquant::as_xts()</code> and <code>tidyquant::as_tibble()</code>. Use <code><a href="https://rdrr.io/pkg/timetk/man/tk_xts.html">timetk::tk_xts()</a></code> and <code><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html">timetk::tk_tbl()</a></code> instead.</li>
+<li>Incorporated more robust <code>timetk</code> coercion functions. Deprecated <code>tidyquant::as_xts()</code> and <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html">tidyquant::as_tibble()</a></code>. Use <code><a href="https://rdrr.io/pkg/timetk/man/tk_xts.html">timetk::tk_xts()</a></code> and <code><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html">timetk::tk_tbl()</a></code> instead.</li>
 <li>Fixes:
 <ul>
 <li>
@@ -608,7 +618,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

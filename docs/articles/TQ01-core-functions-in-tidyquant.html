@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
       </span>
     </div>
 
@@ -103,13 +103,13 @@
 
       
 
-      </header><script src="TQ01-core-functions-in-tidyquant_files/header-attrs-2.3/header-attrs.js"></script><script src="TQ01-core-functions-in-tidyquant_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="TQ01-core-functions-in-tidyquant_files/header-attrs-2.4/header-attrs.js"></script><script src="TQ01-core-functions-in-tidyquant_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Core Functions in tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2020-07-02</h4>
+            <h4 class="date">2020-10-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ01-core-functions-in-tidyquant.Rmd"><code>vignettes/TQ01-core-functions-in-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ01-core-functions-in-tidyquant.Rmd</code></div>
@@ -136,9 +136,10 @@
 <h1 class="hasAnchor">
 <a href="#prerequisites" class="anchor"></a>Prerequisites</h1>
 <p>Load the <code>tidyquant</code> package to get started.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># Loads tidyquant, lubridate, xts, quantmod, TTR </span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyquant</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="co"># Loads tidyquant, lubridate, xts, quantmod, TTR </span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/business-science/tidyquant">tidyquant</a></span><span class="op">)</span></pre></div>
 </div>
 <div id="retrieve-consolidated-symbol-data" class="section level1">
 <h1 class="hasAnchor">
@@ -147,17 +148,20 @@
 <h2 class="hasAnchor">
 <a href="#stock-indexes" class="anchor"></a>1.1 Stock Indexes</h2>
 <p>A wide range of stock index / exchange lists can be retrieved using <code><a href="../reference/tq_index.html">tq_index()</a></code>. To get a full list of the options, use <code><a href="../reference/tq_index.html">tq_index_options()</a></code>.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/tq_index.html">tq_index_options</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="../reference/tq_index.html">tq_index_options</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <pre><code>## [1] "DOW"       "DOWGLOBAL" "SP400"     "SP500"     "SP600"</code></pre>
 <p>Set <code>x</code> as one of the options in the list of options above to get the desired stock index / exchange.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/tq_index.html">tq_index</a></span>(<span class="st">"SP500"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="../reference/tq_index.html">tq_index</a></span><span class="op">(</span><span class="st">"SP500"</span><span class="op">)</span></pre></div>
 <p>The data source is <a href="https://www.ssga.com/us/en/institutional/etfs">State Street Global Advisors - US SPDRS ETFs</a>.</p>
 </div>
 <div id="stock-exchanges" class="section level2">
 <h2 class="hasAnchor">
 <a href="#stock-exchanges" class="anchor"></a>1.2 Stock Exchanges</h2>
 <p>Stock lists for three stock exchanges are available: NASDAQ, NYSE, and AMEX. If you forget, just use <code><a href="../reference/tq_index.html">tq_exchange_options()</a></code>. We can easily get the full list of stocks on the NASDAQ exchange.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/tq_index.html">tq_exchange</a></span>(<span class="st">"NASDAQ"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="../reference/tq_index.html">tq_exchange</a></span><span class="op">(</span><span class="st">"NASDAQ"</span><span class="op">)</span></pre></div>
 </div>
 </div>
 <div id="get-quantitative-data" class="section level1">
@@ -179,7 +183,8 @@
 <strong>Bloomberg</strong> - Financial API. Paid account is required.</li>
 </ol>
 <p>Use <code><a href="../reference/tq_get.html">tq_get_options()</a></code> to see the full list.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/tq_get.html">tq_get_options</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu"><a href="../reference/tq_get.html">tq_get_options</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <pre><code>##  [1] "stock.prices"       "stock.prices.japan" "dividends"         
 ##  [4] "splits"             "economic.data"      "quandl"            
 ##  [7] "quandl.datatable"   "tiingo"             "tiingo.iex"        
@@ -189,33 +194,36 @@
 <h2 class="hasAnchor">
 <a href="#yahoo-finance" class="anchor"></a>2.1 Yahoo! Finance</h2>
 <p>The stock prices can be retrieved succinctly using <code>get = "stock.prices"</code>. This returns stock price data from Yahoo Finance.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">aapl_prices</span>  <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"AAPL"</span>, <span class="kw">get</span> <span class="kw">=</span> <span class="st">"stock.prices"</span>, <span class="kw">from</span> <span class="kw">=</span> <span class="st">" 1990-01-01"</span>)
-<span class="no">aapl_prices</span></pre></body></html></div>
-<pre><code>## # A tibble: 7,685 x 8
-##    symbol date        open  high   low close   volume adjusted
-##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-##  1 AAPL   1990-01-02  1.26  1.34  1.25  1.33 45799600    1.08 
-##  2 AAPL   1990-01-03  1.36  1.36  1.34  1.34 51998800    1.08 
-##  3 AAPL   1990-01-04  1.37  1.38  1.33  1.34 55378400    1.09 
-##  4 AAPL   1990-01-05  1.35  1.37  1.32  1.35 30828000    1.09 
-##  5 AAPL   1990-01-08  1.34  1.36  1.32  1.36 25393200    1.10 
-##  6 AAPL   1990-01-09  1.36  1.36  1.32  1.34 21534800    1.09 
-##  7 AAPL   1990-01-10  1.34  1.34  1.28  1.29 49929600    1.04 
-##  8 AAPL   1990-01-11  1.29  1.29  1.23  1.23 52763200    0.997
-##  9 AAPL   1990-01-12  1.22  1.24  1.21  1.23 42974400    0.997
-## 10 AAPL   1990-01-15  1.23  1.28  1.22  1.22 40434800    0.989
-## # … with 7,675 more rows</code></pre>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="va">aapl_prices</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"AAPL"</span>, get <span class="op">=</span> <span class="st">"stock.prices"</span>, from <span class="op">=</span> <span class="st">" 1990-01-01"</span><span class="op">)</span>
+<span class="va">aapl_prices</span> </pre></div>
+<pre><code>## # A tibble: 7,761 x 8
+##    symbol date        open  high   low close    volume adjusted
+##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+##  1 AAPL   1990-01-02 0.315 0.335 0.312 0.333 183198400    0.269
+##  2 AAPL   1990-01-03 0.339 0.339 0.335 0.335 207995200    0.270
+##  3 AAPL   1990-01-04 0.342 0.346 0.333 0.336 221513600    0.271
+##  4 AAPL   1990-01-05 0.337 0.342 0.330 0.337 123312000    0.272
+##  5 AAPL   1990-01-08 0.335 0.339 0.330 0.339 101572800    0.274
+##  6 AAPL   1990-01-09 0.339 0.339 0.330 0.336  86139200    0.271
+##  7 AAPL   1990-01-10 0.336 0.336 0.319 0.321 199718400    0.260
+##  8 AAPL   1990-01-11 0.324 0.324 0.308 0.308 211052800    0.249
+##  9 AAPL   1990-01-12 0.306 0.310 0.301 0.308 171897600    0.249
+## 10 AAPL   1990-01-15 0.308 0.319 0.306 0.306 161739200    0.247
+## # … with 7,751 more rows</code></pre>
 <p>Yahoo Japan stock prices can be retrieved using a similar call, <code>get = "stock.prices.japan"</code>.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">x8411T</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"8411.T"</span>, <span class="kw">get</span> <span class="kw">=</span> <span class="st">"stock.prices.japan"</span>, <span class="kw">from</span> <span class="kw">=</span> <span class="st">"2016-01-01"</span>, <span class="kw">to</span>  <span class="kw">=</span> <span class="st">"2016-12-31"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="va">x8411T</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"8411.T"</span>, get <span class="op">=</span> <span class="st">"stock.prices.japan"</span>, from <span class="op">=</span> <span class="st">"2016-01-01"</span>, to  <span class="op">=</span> <span class="st">"2016-12-31"</span><span class="op">)</span></pre></div>
 <p>The data source is <a href="https://finance.yahoo.com/">Yahoo Finance</a> and <a href="http://finance.yahoo.co.jp/">Yahoo Finance Japan</a>.</p>
 </div>
 <div id="fred-economic-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#fred-economic-data" class="anchor"></a>2.2 FRED Economic Data</h2>
 <p>A wealth of economic data can be extracted from the Federal Reserve Economic Data (FRED) database. The FRED contains over 10K data sets that are free to use. See the <a href="https://fred.stlouisfed.org/categories">FRED categories</a> to narrow down the data base and to get data codes. The <a href="https://fred.stlouisfed.org/series/DCOILWTICO">WTI Crude Oil Prices</a> are shown below.</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">wti_price_usd</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"DCOILWTICO"</span>, <span class="kw">get</span> <span class="kw">=</span> <span class="st">"economic.data"</span>)
-<span class="no">wti_price_usd</span></pre></body></html></div>
-<pre><code>## # A tibble: 2,737 x 3
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="va">wti_price_usd</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"DCOILWTICO"</span>, get <span class="op">=</span> <span class="st">"economic.data"</span><span class="op">)</span>
+<span class="va">wti_price_usd</span> </pre></div>
+<pre><code>## # A tibble: 2,813 x 3
 ##    symbol     date       price
 ##    &lt;chr&gt;      &lt;date&gt;     &lt;dbl&gt;
 ##  1 DCOILWTICO 2010-01-01  NA  
@@ -228,7 +236,7 @@
 ##  8 DCOILWTICO 2010-01-12  80.8
 ##  9 DCOILWTICO 2010-01-13  79.7
 ## 10 DCOILWTICO 2010-01-14  79.4
-## # … with 2,727 more rows</code></pre>
+## # … with 2,803 more rows</code></pre>
 </div>
 <div id="quandl-api" class="section level2">
 <h2 class="hasAnchor">
@@ -238,13 +246,15 @@
 <h3 class="hasAnchor">
 <a href="#authentication" class="anchor"></a>Authentication</h3>
 <p>To make full use of the integration we recommend you set your api key. To do this create or sign into your Quandl account and go to your account api key page.</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="../reference/quandl_api_key.html">quandl_api_key</a></span>(<span class="st">"&lt;your-api-key&gt;"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb13"><pre class="downlit">
+<span class="fu"><a href="../reference/quandl_api_key.html">quandl_api_key</a></span><span class="op">(</span><span class="st">"&lt;your-api-key&gt;"</span><span class="op">)</span></pre></div>
 </div>
 <div id="search" class="section level3">
 <h3 class="hasAnchor">
 <a href="#search" class="anchor"></a>Search</h3>
 <p>Searching Quandl from within the R console is possible with <code><a href="../reference/quandl_search.html">quandl_search()</a></code>, a wrapper for <code><a href="https://rdrr.io/pkg/Quandl/man/Quandl.search.html">Quandl::Quandl.search()</a></code>. An example search is shown below. The only required argument is <code>query</code>. You can also visit the <a href="https://www.quandl.com/search">Quandl Search</a> webpage to search for available database codes.</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="../reference/quandl_search.html">quandl_search</a></span>(<span class="kw">query</span> <span class="kw">=</span> <span class="st">"Oil"</span>, <span class="kw">database_code</span> <span class="kw">=</span> <span class="st">"NSE"</span>, <span class="kw">per_page</span> <span class="kw">=</span> <span class="fl">3</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb14"><pre class="downlit">
+<span class="fu"><a href="../reference/quandl_search.html">quandl_search</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">"Oil"</span>, database_code <span class="op">=</span> <span class="st">"NSE"</span>, per_page <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></pre></div>
 </div>
 <div id="getting-quandl-data" class="section level3">
 <h3 class="hasAnchor">
@@ -258,10 +268,11 @@
 </ol>
 <p>Getting data from Quandl can be achieved in much the same way as the other “get” options. Just pass the “codes” for the data along with desired arguments for the underlying function.</p>
 <p>The following uses <code>get = "quandl"</code> and the “WIKI” database to download daily stock prices for FB and AAPL in 2016. The output is a tidy data frame.</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"WIKI/FB"</span>, <span class="st">"WIKI/AAPL"</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="kw">get</span>  <span class="kw">=</span> <span class="st">"quandl"</span>,
-           <span class="kw">from</span> <span class="kw">=</span> <span class="st">"2016-01-01"</span>,
-           <span class="kw">to</span>   <span class="kw">=</span> <span class="st">"2016-12-31"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb15"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WIKI/FB"</span>, <span class="st">"WIKI/AAPL"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get  <span class="op">=</span> <span class="st">"quandl"</span>,
+           from <span class="op">=</span> <span class="st">"2016-01-01"</span>,
+           to   <span class="op">=</span> <span class="st">"2016-12-31"</span><span class="op">)</span></pre></div>
 <p>The following time series options are available to be passed to the underlying <code>Quandl()</code> function:</p>
 <ul>
 <li>
@@ -276,21 +287,23 @@
 <code>transform</code> = “none”, “diff”, “rdiff”, “cumul”, “normalize”</li>
 </ul>
 <p>Here’s an example to get period returns of the adj.close (column index 11) using the <code>column_index</code>, <code>collapse</code> and <code>transform</code> arguments.</p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"WIKI/FB"</span>, <span class="st">"WIKI/AAPL"</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="kw">get</span>          <span class="kw">=</span> <span class="st">"quandl"</span>,
-           <span class="kw">from</span>         <span class="kw">=</span> <span class="st">"2007-01-01"</span>,
-           <span class="kw">to</span>           <span class="kw">=</span> <span class="st">"2016-12-31"</span>,
-           <span class="kw">column_index</span> <span class="kw">=</span> <span class="fl">11</span>,
-           <span class="kw">collapse</span>     <span class="kw">=</span> <span class="st">"annual"</span>,
-           <span class="kw">transform</span>    <span class="kw">=</span> <span class="st">"rdiff"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb16"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WIKI/FB"</span>, <span class="st">"WIKI/AAPL"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get          <span class="op">=</span> <span class="st">"quandl"</span>,
+           from         <span class="op">=</span> <span class="st">"2007-01-01"</span>,
+           to           <span class="op">=</span> <span class="st">"2016-12-31"</span>,
+           column_index <span class="op">=</span> <span class="fl">11</span>, 
+           collapse     <span class="op">=</span> <span class="st">"annual"</span>,      
+           transform    <span class="op">=</span> <span class="st">"rdiff"</span><span class="op">)</span>       </pre></div>
 <p>Datatables are larger data sets. These can be downloaded using <code>get = "quandl.datatable"</code>. Note that the time series arguments do not work with data tables.</p>
 <p>Here’s several examples of <a href="https://www.quandl.com/databases/ZFB/documentation/about">Zacks Fundamentals Collection B</a></p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="co"># Zacks Fundamentals Collection B (DOW 30 Available to non subscribers)</span>
-<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"ZACKS/FC"</span>, <span class="kw">get</span> <span class="kw">=</span> <span class="st">"quandl.datatable"</span>)   <span class="co"># Zacks Fundamentals Condensed</span>
-<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"ZACKS/FR"</span>, <span class="kw">get</span> <span class="kw">=</span> <span class="st">"quandl.datatable"</span>)   <span class="co"># Zacks Fundamental Ratios</span>
-<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"ZACKS/MT"</span>, <span class="kw">get</span> <span class="kw">=</span> <span class="st">"quandl.datatable"</span>)   <span class="co"># Zacks Master Table</span>
-<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"ZACKS/MKTV"</span>, <span class="kw">get</span> <span class="kw">=</span> <span class="st">"quandl.datatable"</span>) <span class="co"># Zacks Market Value Supplement</span>
-<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"ZACKS/SHRS"</span>, <span class="kw">get</span> <span class="kw">=</span> <span class="st">"quandl.datatable"</span>) <span class="co"># Zacks Shares Out Supplement</span></pre></body></html></div>
+<div class="sourceCode" id="cb17"><pre class="downlit">
+<span class="co"># Zacks Fundamentals Collection B (DOW 30 Available to non subscribers)</span>
+<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"ZACKS/FC"</span>, get <span class="op">=</span> <span class="st">"quandl.datatable"</span><span class="op">)</span>   <span class="co"># Zacks Fundamentals Condensed</span>
+<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"ZACKS/FR"</span>, get <span class="op">=</span> <span class="st">"quandl.datatable"</span><span class="op">)</span>   <span class="co"># Zacks Fundamental Ratios</span>
+<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"ZACKS/MT"</span>, get <span class="op">=</span> <span class="st">"quandl.datatable"</span><span class="op">)</span>   <span class="co"># Zacks Master Table</span>
+<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"ZACKS/MKTV"</span>, get <span class="op">=</span> <span class="st">"quandl.datatable"</span><span class="op">)</span> <span class="co"># Zacks Market Value Supplement</span>
+<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"ZACKS/SHRS"</span>, get <span class="op">=</span> <span class="st">"quandl.datatable"</span><span class="op">)</span> <span class="co"># Zacks Shares Out Supplement</span></pre></div>
 </div>
 </div>
 <div id="tiingo-api" class="section level2">
@@ -301,7 +314,8 @@
 <h3 class="hasAnchor">
 <a href="#authentication-1" class="anchor"></a>Authentication</h3>
 <p>To make full use of the integration you need to get an API key and then set your api key. If you don’t have one already, go to <a href="https://www.tiingo.com/">Tiingo</a> account and get your FREE API key. You can then set it as follows:</p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="../reference/tiingo_api_key.html">tiingo_api_key</a></span>(<span class="st">'&lt;your-api-key&gt;'</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb18"><pre class="downlit">
+<span class="fu"><a href="../reference/tiingo_api_key.html">tiingo_api_key</a></span><span class="op">(</span><span class="st">'&lt;your-api-key&gt;'</span><span class="op">)</span></pre></div>
 </div>
 <div id="getting-tiingo-data" class="section level3">
 <h3 class="hasAnchor">
@@ -315,22 +329,23 @@
 <li>Tiingo Crypto Data: <code>tq_get(get = "tiingo.crypto") = riingo::riingo_crypto_prices()</code>
 </li>
 </ul>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="co"># Tiingo Prices (Free alternative to Yahoo Finance!)</span>
-<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>), <span class="kw">get</span> <span class="kw">=</span> <span class="st">"tiingo"</span>, <span class="kw">from</span> <span class="kw">=</span> <span class="st">"2010-01-01"</span>)
+<div class="sourceCode" id="cb19"><pre class="downlit">
+<span class="co"># Tiingo Prices (Free alternative to Yahoo Finance!)</span>
+<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AAPL"</span>, <span class="st">"GOOG"</span><span class="op">)</span>, get <span class="op">=</span> <span class="st">"tiingo"</span>, from <span class="op">=</span> <span class="st">"2010-01-01"</span><span class="op">)</span>
 
 <span class="co"># Sub-daily prices from IEX ----</span>
-<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>),
-       <span class="kw">get</span> <span class="kw">=</span> <span class="st">"tiingo.iex"</span>,
-       <span class="kw">from</span>   <span class="kw">=</span> <span class="st">"2020-01-01"</span>,
-       <span class="kw">to</span>     <span class="kw">=</span> <span class="st">"2020-01-15"</span>,
-       <span class="kw">resample_frequency</span> <span class="kw">=</span> <span class="st">"5min"</span>)
+<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AAPL"</span>, <span class="st">"GOOG"</span><span class="op">)</span>,
+       get <span class="op">=</span> <span class="st">"tiingo.iex"</span>,
+       from   <span class="op">=</span> <span class="st">"2020-01-01"</span>,
+       to     <span class="op">=</span> <span class="st">"2020-01-15"</span>,
+       resample_frequency <span class="op">=</span> <span class="st">"5min"</span><span class="op">)</span>
 
 <span class="co"># Tiingo Bitcoin in USD ----</span>
-<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"btcusd"</span>),
-       <span class="kw">get</span>    <span class="kw">=</span> <span class="st">"tiingo.crypto"</span>,
-       <span class="kw">from</span>   <span class="kw">=</span> <span class="st">"2020-01-01"</span>,
-       <span class="kw">to</span>     <span class="kw">=</span> <span class="st">"2020-01-15"</span>,
-       <span class="kw">resample_frequency</span> <span class="kw">=</span> <span class="st">"5min"</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"btcusd"</span><span class="op">)</span>,
+       get    <span class="op">=</span> <span class="st">"tiingo.crypto"</span>,
+       from   <span class="op">=</span> <span class="st">"2020-01-01"</span>,
+       to     <span class="op">=</span> <span class="st">"2020-01-15"</span>,
+       resample_frequency <span class="op">=</span> <span class="st">"5min"</span><span class="op">)</span></pre></div>
 </div>
 </div>
 <div id="alpha-vantage-api" class="section level2">
@@ -341,15 +356,17 @@
 <h3 class="hasAnchor">
 <a href="#authentication-2" class="anchor"></a>Authentication</h3>
 <p>To make full use of the integration you need to get an API key and then set your api key. If you don’t have one already, go to <a href="https://www.alphavantage.co/">Alpha Vantage</a> account and get your FREE API key. You can then set it as follows:</p>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu"><a href="../reference/av_api_key.html">av_api_key</a></span>(<span class="st">"&lt;your-api-key&gt;"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb20"><pre class="downlit">
+<span class="fu"><a href="../reference/av_api_key.html">av_api_key</a></span><span class="op">(</span><span class="st">"&lt;your-api-key&gt;"</span><span class="op">)</span></pre></div>
 </div>
 <div id="getting-alpha-vantage-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#getting-alpha-vantage-data" class="anchor"></a>Getting Alpha Vantage Data</h3>
 <p>Getting data is simple as the structure follows the <a href="https://www.alphavantage.co/documentation/">Alpha Vantage API documentation</a>. For example, if you wish to retrieve intraday data at 5 minute intervals for FB and MSFT, you can build the parameters <code>x = c("FB", "MSFT"), get = "alphavantager", av_fun = "TIME_SERIES_INTRADAY", interval = "5min"</code>. The familiar <code>x</code> and <code>get</code> are the same as you always use. The <code>av_fun</code> argument comes from <code><a href="https://rdrr.io/pkg/alphavantager/man/av_get.html">alphavantager::av_get()</a></code> and the Alpha Vantage documentation. The <code>interval</code> argument comes from the docs as well.</p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="co"># Scaling is as simple as supplying multiple symbols</span>
-<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"FB"</span>, <span class="st">"MSFT"</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="kw">get</span> <span class="kw">=</span> <span class="st">"alphavantage"</span>, <span class="kw">av_fun</span> <span class="kw">=</span> <span class="st">"TIME_SERIES_INTRADAY"</span>, <span class="kw">interval</span> <span class="kw">=</span> <span class="st">"5min"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb21"><pre class="downlit">
+<span class="co"># Scaling is as simple as supplying multiple symbols</span>
+<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FB"</span>, <span class="st">"MSFT"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get <span class="op">=</span> <span class="st">"alphavantage"</span>, av_fun <span class="op">=</span> <span class="st">"TIME_SERIES_INTRADAY"</span>, interval <span class="op">=</span> <span class="st">"5min"</span><span class="op">)</span></pre></div>
 </div>
 </div>
 <div id="bloomberg" class="section level2">
@@ -360,7 +377,8 @@
 <h3 class="hasAnchor">
 <a href="#authentication-3" class="anchor"></a>Authentication</h3>
 <p>To make full use of the integration you need to have a Bloomberg Terminal account (Note this is not a free service). If you have Bloomberg Terminal running on your machine, you can connect as follows:</p>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu">blpConnect</span>()</pre></body></html></div>
+<div class="sourceCode" id="cb22"><pre class="downlit">
+<span class="fu">blpConnect</span><span class="op">(</span><span class="op">)</span></pre></div>
 </div>
 <div id="getting-bloomberg-data" class="section level3">
 <h3 class="hasAnchor">
@@ -375,14 +393,15 @@
 <code>from / to</code> These get passed to <code>start.date</code> and <code>end.date</code> and can be provided in “YYYY-MM-DD” character format. Note that <code>start.date</code> and <code>end.date</code> from <code>Rblpapi</code> can be used but must be converted to date or datetime.</li>
 <li>Other arguments: These are options that depend on the <code>rblpapi_fun</code>. See <code>Rblpapi</code> documentation.</li>
 </ul>
-<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="co"># Get Bloomberg data in a tidy data frame</span>
-<span class="no">my_bloomberg_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'SPX Index'</span>,<span class="st">'ODMAX Equity'</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="kw">get</span>         <span class="kw">=</span> <span class="st">"Rblpapi"</span>,
-           <span class="kw">rblpapi_fun</span> <span class="kw">=</span> <span class="st">"bdh"</span>,
-           <span class="kw">fields</span>      <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"PX_LAST"</span>),
-           <span class="kw">options</span>     <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"periodicitySelection"</span> <span class="kw">=</span> <span class="st">"WEEKLY"</span>),
-           <span class="kw">from</span>        <span class="kw">=</span> <span class="st">"2016-01-01"</span>,
-           <span class="kw">to</span>          <span class="kw">=</span> <span class="st">"2016-12-31"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb23"><pre class="downlit">
+<span class="co"># Get Bloomberg data in a tidy data frame</span>
+<span class="va">my_bloomberg_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'SPX Index'</span>,<span class="st">'ODMAX Equity'</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get         <span class="op">=</span> <span class="st">"Rblpapi"</span>,
+           rblpapi_fun <span class="op">=</span> <span class="st">"bdh"</span>,
+           fields      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PX_LAST"</span><span class="op">)</span>,
+           options     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"periodicitySelection"</span> <span class="op">=</span> <span class="st">"WEEKLY"</span><span class="op">)</span>,
+           from        <span class="op">=</span> <span class="st">"2016-01-01"</span>,
+           to          <span class="op">=</span> <span class="st">"2016-12-31"</span><span class="op">)</span></pre></div>
 </div>
 </div>
 </div>
@@ -390,9 +409,10 @@
 <h1 class="hasAnchor">
 <a href="#mutate-quantitative-data" class="anchor"></a>3.0 Mutate Quantitative Data</h1>
 <p>Mutating functions enable the <code>xts</code>/<code>zoo</code>, <code>quantmod</code> and <code>TTR</code> functions to shine. We’ll touch on the mutation functions briefly using the <code>FANG</code> data set, which consists of daily prices for FB, AMZN, GOOG, and NFLX from the beginning of 2013 to the end of 2016. We’ll apply the functions to grouped data sets to get a feel for how each works</p>
-<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"FANG"</span>)
+<div class="sourceCode" id="cb24"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"FANG"</span><span class="op">)</span>
 
-<span class="no">FANG</span></pre></body></html></div>
+<span class="va">FANG</span></pre></div>
 <pre><code>## # A tibble: 4,032 x 8
 ##    symbol date        open  high   low close    volume adjusted
 ##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -412,9 +432,10 @@
 <h2 class="hasAnchor">
 <a href="#transmute-quantitative-data-tq_transmute" class="anchor"></a>3.1 Transmute Quantitative Data, tq_transmute</h2>
 <p>Transmute the results of <code><a href="../reference/tq_get.html">tq_get()</a></code>. Transmute here holds almost the same meaning as in <code>dplyr</code>, only the newly created columns will be returned, but with <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code>, the number of rows returned can be different than the original data frame. This is important for changing periodicity. An example is periodicity aggregation from daily to monthly.</p>
-<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="no">FANG</span> <span class="kw">%&gt;%</span>
-    <span class="fu">group_by</span>(<span class="no">symbol</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span>(<span class="kw">select</span> <span class="kw">=</span> <span class="no">adjusted</span>, <span class="kw">mutate_fun</span> <span class="kw">=</span> <span class="no">to.monthly</span>, <span class="kw">indexAt</span> <span class="kw">=</span> <span class="st">"lastof"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb26"><pre class="downlit">
+<span class="va">FANG</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span>select <span class="op">=</span> <span class="va">adjusted</span>, mutate_fun <span class="op">=</span> <span class="va">to.monthly</span>, indexAt <span class="op">=</span> <span class="st">"lastof"</span><span class="op">)</span></pre></div>
 <pre><code>## # A tibble: 192 x 3
 ## # Groups:   symbol [4]
 ##    symbol date       adjusted
@@ -435,13 +456,14 @@
 <h3 class="hasAnchor">
 <a href="#working-with-non-ohlc-data" class="anchor"></a>Working with non-OHLC data</h3>
 <p>Returns from FRED, Oanda, and other sources do not have open, high, low, close (OHLC) format. However, this is not a problem with <code>select</code>. The following example shows how to transmute WTI Crude daily prices to monthly prices. Since we only have a single column to pass, we can leave the <code>select</code> argument as <code>NULL</code> which selects all columns by default. This sends the price column to the <code>to.period</code> mutate function.</p>
-<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="no">wti_prices</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"DCOILWTICO"</span>, <span class="kw">get</span> <span class="kw">=</span> <span class="st">"economic.data"</span>)
+<div class="sourceCode" id="cb28"><pre class="downlit">
+<span class="va">wti_prices</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"DCOILWTICO"</span>, get <span class="op">=</span> <span class="st">"economic.data"</span><span class="op">)</span> 
 
-<span class="no">wti_prices</span> <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span>(<span class="kw">mutate_fun</span> <span class="kw">=</span> <span class="no">to.period</span>,
-                 <span class="kw">period</span>     <span class="kw">=</span> <span class="st">"months"</span>,
-                 <span class="kw">col_rename</span> <span class="kw">=</span> <span class="st">"WTI Price"</span>)</pre></body></html></div>
-<pre><code>## # A tibble: 126 x 2
+<span class="va">wti_prices</span> <span class="op">%&gt;%</span>    
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span>mutate_fun <span class="op">=</span> <span class="va">to.period</span>,
+                 period     <span class="op">=</span> <span class="st">"months"</span>, 
+                 col_rename <span class="op">=</span> <span class="st">"WTI Price"</span><span class="op">)</span></pre></div>
+<pre><code>## # A tibble: 130 x 2
 ##    date       `WTI Price`
 ##    &lt;date&gt;           &lt;dbl&gt;
 ##  1 2010-01-29        72.8
@@ -454,18 +476,19 @@
 ##  8 2010-08-31        71.9
 ##  9 2010-09-30        80.0
 ## 10 2010-10-29        81.4
-## # … with 116 more rows</code></pre>
+## # … with 120 more rows</code></pre>
 </div>
 </div>
 <div id="mutate-quantitative-data-tq_mutate" class="section level2">
 <h2 class="hasAnchor">
 <a href="#mutate-quantitative-data-tq_mutate" class="anchor"></a>3.2 Mutate Quantitative Data, tq_mutate</h2>
 <p>Adds a column or set of columns to the tibble with the calculated attributes (hence the original tibble is returned, mutated with the additional columns). An example is getting the <code>MACD</code> from <code>close</code>, which mutates the original input by adding MACD and Signal columns. Note that we can quickly rename the columns using the <code>col_rename</code> argument.</p>
-<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="no">FANG</span> <span class="kw">%&gt;%</span>
-    <span class="fu">group_by</span>(<span class="no">symbol</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_mutate</a></span>(<span class="kw">select</span>     <span class="kw">=</span> <span class="no">close</span>,
-              <span class="kw">mutate_fun</span> <span class="kw">=</span> <span class="no">MACD</span>,
-              <span class="kw">col_rename</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"MACD"</span>, <span class="st">"Signal"</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb30"><pre class="downlit">
+<span class="va">FANG</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_mutate</a></span><span class="op">(</span>select     <span class="op">=</span> <span class="va">close</span>, 
+              mutate_fun <span class="op">=</span> <span class="va">MACD</span>, 
+              col_rename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MACD"</span>, <span class="st">"Signal"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <pre><code>## # A tibble: 4,032 x 10
 ## # Groups:   symbol [4]
 ##    symbol date        open  high   low close    volume adjusted  MACD Signal
@@ -494,14 +517,15 @@
 </ol>
 <p><em>Step 1: Get Returns</em></p>
 <p>First, get combined returns. The asset and baseline returns should be in wide format, which is needed for the <code>lm</code> function in the next step.</p>
-<div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="no">fb_returns</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"FB"</span>, <span class="kw">get</span>  <span class="kw">=</span> <span class="st">"stock.prices"</span>, <span class="kw">from</span> <span class="kw">=</span> <span class="st">"2016-01-01"</span>, <span class="kw">to</span>   <span class="kw">=</span> <span class="st">"2016-12-31"</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span>(<span class="no">adjusted</span>, <span class="no">periodReturn</span>, <span class="kw">period</span> <span class="kw">=</span> <span class="st">"weekly"</span>, <span class="kw">col_rename</span> <span class="kw">=</span> <span class="st">"fb.returns"</span>)
+<div class="sourceCode" id="cb32"><pre class="downlit">
+<span class="va">fb_returns</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"FB"</span>, get  <span class="op">=</span> <span class="st">"stock.prices"</span>, from <span class="op">=</span> <span class="st">"2016-01-01"</span>, to   <span class="op">=</span> <span class="st">"2016-12-31"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span><span class="va">adjusted</span>, <span class="va">periodReturn</span>, period <span class="op">=</span> <span class="st">"weekly"</span>, col_rename <span class="op">=</span> <span class="st">"fb.returns"</span><span class="op">)</span>
 
-<span class="no">xlk_returns</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="st">"XLK"</span>, <span class="kw">from</span> <span class="kw">=</span> <span class="st">"2016-01-01"</span>, <span class="kw">to</span> <span class="kw">=</span> <span class="st">"2016-12-31"</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span>(<span class="no">adjusted</span>, <span class="no">periodReturn</span>, <span class="kw">period</span> <span class="kw">=</span> <span class="st">"weekly"</span>, <span class="kw">col_rename</span> <span class="kw">=</span> <span class="st">"xlk.returns"</span>)
+<span class="va">xlk_returns</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"XLK"</span>, from <span class="op">=</span> <span class="st">"2016-01-01"</span>, to <span class="op">=</span> <span class="st">"2016-12-31"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span><span class="va">adjusted</span>, <span class="va">periodReturn</span>, period <span class="op">=</span> <span class="st">"weekly"</span>, col_rename <span class="op">=</span> <span class="st">"xlk.returns"</span><span class="op">)</span>
 
-<span class="no">returns_combined</span> <span class="kw">&lt;-</span> <span class="fu">left_join</span>(<span class="no">fb_returns</span>, <span class="no">xlk_returns</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="st">"date"</span>)
-<span class="no">returns_combined</span></pre></body></html></div>
+<span class="va">returns_combined</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">fb_returns</span>, <span class="va">xlk_returns</span>, by <span class="op">=</span> <span class="st">"date"</span><span class="op">)</span>
+<span class="va">returns_combined</span></pre></div>
 <pre><code>## # A tibble: 52 x 3
 ##    date       fb.returns xlk.returns
 ##    &lt;date&gt;          &lt;dbl&gt;       &lt;dbl&gt;
@@ -518,17 +542,19 @@
 ## # … with 42 more rows</code></pre>
 <p><em>Step 2: Create a custom function</em></p>
 <p>Next, create a custom regression function, which will be used to apply over the rolling window in Step 3. An important point is that the “data” will be passed to the regression function as an <code>xts</code> object. The <code><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html">timetk::tk_tbl</a></code> function takes care of converting to a data frame for the <code>lm</code> function to work properly with the columns “fb.returns” and “xlk.returns”.</p>
-<div class="sourceCode" id="cb34"><html><body><pre class="r"><span class="no">regr_fun</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">data</span>) {
-    <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">fb.returns</span> ~ <span class="no">xlk.returns</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="kw pkg">timetk</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html">tk_tbl</a></span>(<span class="no">data</span>, <span class="kw">silent</span> <span class="kw">=</span> <span class="fl">TRUE</span>)))
-}</pre></body></html></div>
+<div class="sourceCode" id="cb34"><pre class="downlit">
+<span class="va">regr_fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">fb.returns</span> <span class="op">~</span> <span class="va">xlk.returns</span>, data <span class="op">=</span> <span class="fu">timetk</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html">tk_tbl</a></span><span class="op">(</span><span class="va">data</span>, silent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span></pre></div>
 <p><em>Step 3: Apply the custom function</em></p>
 <p>Now we can use <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code> to apply the custom regression function over a rolling window using <code>rollapply</code> from the <code>zoo</code> package. Internally, since we left <code>select = NULL</code>, the <code>returns_combined</code> data frame is being passed automatically to the <code>data</code> argument of the <code>rollapply</code> function. All you need to specify is the <code>mutate_fun = rollapply</code> and any additional arguments necessary to apply the <code>rollapply</code> function. We’ll specify a 12 week window via <code>width = 12</code>. The <code>FUN</code> argument is our custom regression function, <code>regr_fun</code>. It’s extremely important to specify <code>by.column = FALSE</code>, which tells <code>rollapply</code> to perform the computation using the data as a whole rather than apply the function to each column independently. The <code>col_rename</code> argument is used to rename the added columns.</p>
-<div class="sourceCode" id="cb35"><html><body><pre class="r"><span class="no">returns_combined</span> <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_mutate</a></span>(<span class="kw">mutate_fun</span> <span class="kw">=</span> <span class="no">rollapply</span>,
-              <span class="kw">width</span>      <span class="kw">=</span> <span class="fl">12</span>,
-              <span class="kw">FUN</span>        <span class="kw">=</span> <span class="no">regr_fun</span>,
-              <span class="kw">by.column</span>  <span class="kw">=</span> <span class="fl">FALSE</span>,
-              <span class="kw">col_rename</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"coef.0"</span>, <span class="st">"coef.1"</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb35"><pre class="downlit">
+<span class="va">returns_combined</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_mutate</a></span><span class="op">(</span>mutate_fun <span class="op">=</span> <span class="va">rollapply</span>,
+              width      <span class="op">=</span> <span class="fl">12</span>,
+              FUN        <span class="op">=</span> <span class="va">regr_fun</span>,
+              by.column  <span class="op">=</span> <span class="cn">FALSE</span>,
+              col_rename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"coef.0"</span>, <span class="st">"coef.1"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <pre><code>## # A tibble: 52 x 5
 ##    date       fb.returns xlk.returns coef.0 coef.1
 ##    &lt;date&gt;          &lt;dbl&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
@@ -543,7 +569,8 @@
 ##  9 2016-03-04    0.00436     0.0281      NA     NA
 ## 10 2016-03-11    0.00941     0.0106      NA     NA
 ## # … with 42 more rows</code></pre>
-<div class="sourceCode" id="cb37"><html><body><pre class="r"><span class="no">returns_combined</span></pre></body></html></div>
+<div class="sourceCode" id="cb37"><pre class="downlit">
+<span class="va">returns_combined</span></pre></div>
 <pre><code>## # A tibble: 52 x 3
 ##    date       fb.returns xlk.returns
 ##    &lt;date&gt;          &lt;dbl&gt;       &lt;dbl&gt;
@@ -569,10 +596,11 @@
 <h3 class="hasAnchor">
 <a href="#mutate-with-two-primary-inputs" class="anchor"></a>Mutate with two primary inputs</h3>
 <p>EVWMA (exponential volume-weighted moving average) requires two inputs, price and volume. To work with these columns, we can switch to the xy variants, <code><a href="../reference/tq_mutate.html">tq_transmute_xy()</a></code> and <code><a href="../reference/tq_mutate.html">tq_mutate_xy()</a></code>. The only difference is instead of the <code>select</code> argument, you use <code>x</code> and <code>y</code> arguments to pass the columns needed based on the <code>mutate_fun</code> documentation.</p>
-<div class="sourceCode" id="cb39"><html><body><pre class="r"><span class="no">FANG</span> <span class="kw">%&gt;%</span>
-    <span class="fu">group_by</span>(<span class="no">symbol</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_mutate_xy</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">close</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">volume</span>,
-                 <span class="kw">mutate_fun</span> <span class="kw">=</span> <span class="no">EVWMA</span>, <span class="kw">col_rename</span> <span class="kw">=</span> <span class="st">"EVWMA"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb39"><pre class="downlit">
+<span class="va">FANG</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_mutate_xy</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">close</span>, y <span class="op">=</span> <span class="va">volume</span>, 
+                 mutate_fun <span class="op">=</span> <span class="va">EVWMA</span>, col_rename <span class="op">=</span> <span class="st">"EVWMA"</span><span class="op">)</span></pre></div>
 <pre><code>## # A tibble: 4,032 x 9
 ## # Groups:   symbol [4]
 ##    symbol date        open  high   low close    volume adjusted EVWMA
@@ -608,7 +636,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

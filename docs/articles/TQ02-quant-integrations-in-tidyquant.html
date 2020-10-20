@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
       </span>
     </div>
 
@@ -103,13 +103,13 @@
 
       
 
-      </header><script src="TQ02-quant-integrations-in-tidyquant_files/header-attrs-2.3/header-attrs.js"></script><script src="TQ02-quant-integrations-in-tidyquant_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="TQ02-quant-integrations-in-tidyquant_files/header-attrs-2.4/header-attrs.js"></script><script src="TQ02-quant-integrations-in-tidyquant_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>R Quantitative Analysis Package Integrations in tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2020-07-02</h4>
+            <h4 class="date">2020-10-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ02-quant-integrations-in-tidyquant.Rmd"><code>vignettes/TQ02-quant-integrations-in-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ02-quant-integrations-in-tidyquant.Rmd</code></div>
@@ -135,26 +135,29 @@
 <h1 class="hasAnchor">
 <a href="#prerequisites" class="anchor"></a>Prerequisites</h1>
 <p>Load the <code>tidyquant</code> package to get started.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># Loads tidyquant, lubridate, xts, quantmod, TTR </span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyquant</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="co"># Loads tidyquant, lubridate, xts, quantmod, TTR </span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/business-science/tidyquant">tidyquant</a></span><span class="op">)</span></pre></div>
 </div>
 <div id="function-compatibility" class="section level1">
 <h1 class="hasAnchor">
 <a href="#function-compatibility" class="anchor"></a>1.0 Function Compatibility</h1>
 <p><code><a href="../reference/tq_mutate.html">tq_transmute_fun_options()</a></code> returns a list the <strong>compatible mutate functions</strong> by each package. We’ll discuss these options by package briefly.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/tq_mutate.html">tq_transmute_fun_options</a></span>() <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="../reference/tq_mutate.html">tq_transmute_fun_options</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <pre><code>## List of 5
 ##  $ zoo                 : chr [1:14] "rollapply" "rollapplyr" "rollmax" "rollmax.default" ...
 ##  $ xts                 : chr [1:27] "apply.daily" "apply.monthly" "apply.quarterly" "apply.weekly" ...
 ##  $ quantmod            : chr [1:25] "allReturns" "annualReturn" "ClCl" "dailyReturn" ...
-##  $ TTR                 : chr [1:62] "adjRatios" "ADX" "ALMA" "aroon" ...
+##  $ TTR                 : chr [1:63] "adjRatios" "ADX" "ALMA" "aroon" ...
 ##  $ PerformanceAnalytics: chr [1:7] "Return.annualized" "Return.annualized.excess" "Return.clean" "Return.cumulative" ...</code></pre>
 <div id="zoo-functionality" class="section level2">
 <h2 class="hasAnchor">
 <a href="#zoo-functionality" class="anchor"></a>zoo Functionality</h2>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co"># Get zoo functions that work with tq_transmute and tq_mutate</span>
-<span class="fu"><a href="../reference/tq_mutate.html">tq_transmute_fun_options</a></span>()$<span class="no">zoo</span></pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="co"># Get zoo functions that work with tq_transmute and tq_mutate</span>
+<span class="fu"><a href="../reference/tq_mutate.html">tq_transmute_fun_options</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">zoo</span></pre></div>
 <pre><code>##  [1] "rollapply"          "rollapplyr"         "rollmax"           
 ##  [4] "rollmax.default"    "rollmaxr"           "rollmean"          
 ##  [7] "rollmean.default"   "rollmeanr"          "rollmedian"        
@@ -174,8 +177,9 @@
 <div id="xts-functionality" class="section level2">
 <h2 class="hasAnchor">
 <a href="#xts-functionality" class="anchor"></a>xts Functionality</h2>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="co"># Get xts functions that work with tq_transmute and tq_mutate</span>
-<span class="fu"><a href="../reference/tq_mutate.html">tq_transmute_fun_options</a></span>()$<span class="no">xts</span></pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="co"># Get xts functions that work with tq_transmute and tq_mutate</span>
+<span class="fu"><a href="../reference/tq_mutate.html">tq_transmute_fun_options</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">xts</span></pre></div>
 <pre><code>##  [1] "apply.daily"     "apply.monthly"   "apply.quarterly" "apply.weekly"   
 ##  [5] "apply.yearly"    "diff.xts"        "lag.xts"         "period.apply"   
 ##  [9] "period.max"      "period.min"      "period.prod"     "period.sum"     
@@ -206,8 +210,9 @@
 <div id="quantmod-functionality" class="section level2">
 <h2 class="hasAnchor">
 <a href="#quantmod-functionality" class="anchor"></a>quantmod Functionality</h2>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="co"># Get quantmod functions that work with tq_transmute and tq_mutate</span>
-<span class="fu"><a href="../reference/tq_mutate.html">tq_transmute_fun_options</a></span>()$<span class="no">quantmod</span></pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="co"># Get quantmod functions that work with tq_transmute and tq_mutate</span>
+<span class="fu"><a href="../reference/tq_mutate.html">tq_transmute_fun_options</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">quantmod</span></pre></div>
 <pre><code>##  [1] "allReturns"      "annualReturn"    "ClCl"            "dailyReturn"    
 ##  [5] "Delt"            "HiCl"            "Lag"             "LoCl"           
 ##  [9] "LoHi"            "monthlyReturn"   "Next"            "OpCl"           
@@ -248,29 +253,30 @@
 <div id="ttr-functionality" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ttr-functionality" class="anchor"></a>TTR Functionality</h2>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="co"># Get TTR functions that work with tq_transmute and tq_mutate</span>
-<span class="fu"><a href="../reference/tq_mutate.html">tq_transmute_fun_options</a></span>()$<span class="no">TTR</span></pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="co"># Get TTR functions that work with tq_transmute and tq_mutate</span>
+<span class="fu"><a href="../reference/tq_mutate.html">tq_transmute_fun_options</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">TTR</span></pre></div>
 <pre><code>##  [1] "adjRatios"          "ADX"                "ALMA"              
 ##  [4] "aroon"              "ATR"                "BBands"            
 ##  [7] "CCI"                "chaikinAD"          "chaikinVolatility" 
 ## [10] "CLV"                "CMF"                "CMO"               
-## [13] "DEMA"               "DonchianChannel"    "DPO"               
-## [16] "DVI"                "EMA"                "EMV"               
-## [19] "EVWMA"              "GMMA"               "growth"            
-## [22] "HMA"                "KST"                "lags"              
-## [25] "MACD"               "MFI"                "momentum"          
-## [28] "OBV"                "PBands"             "ROC"               
-## [31] "rollSFM"            "RSI"                "runCor"            
-## [34] "runCov"             "runMAD"             "runMax"            
-## [37] "runMean"            "runMedian"          "runMin"            
-## [40] "runPercentRank"     "runSD"              "runSum"            
-## [43] "runVar"             "SAR"                "SMA"               
-## [46] "SMI"                "SNR"                "stoch"             
-## [49] "TDI"                "TRIX"               "ultimateOscillator"
-## [52] "VHF"                "VMA"                "volatility"        
-## [55] "VWAP"               "VWMA"               "wilderSum"         
-## [58] "williamsAD"         "WMA"                "WPR"               
-## [61] "ZigZag"             "ZLEMA"</code></pre>
+## [13] "CTI"                "DEMA"               "DonchianChannel"   
+## [16] "DPO"                "DVI"                "EMA"               
+## [19] "EMV"                "EVWMA"              "GMMA"              
+## [22] "growth"             "HMA"                "KST"               
+## [25] "lags"               "MACD"               "MFI"               
+## [28] "momentum"           "OBV"                "PBands"            
+## [31] "ROC"                "rollSFM"            "RSI"               
+## [34] "runCor"             "runCov"             "runMAD"            
+## [37] "runMax"             "runMean"            "runMedian"         
+## [40] "runMin"             "runPercentRank"     "runSD"             
+## [43] "runSum"             "runVar"             "SAR"               
+## [46] "SMA"                "SMI"                "SNR"               
+## [49] "stoch"              "TDI"                "TRIX"              
+## [52] "ultimateOscillator" "VHF"                "VMA"               
+## [55] "volatility"         "VWAP"               "VWMA"              
+## [58] "wilderSum"          "williamsAD"         "WMA"               
+## [61] "WPR"                "ZigZag"             "ZLEMA"</code></pre>
 <p>Here’ a brief description of the most popular functions from <code>TTR</code>:</p>
 <ul>
 <li>Welles Wilder’s Directional Movement Index:
@@ -365,8 +371,9 @@
 <div id="performanceanalytics-functionality" class="section level2">
 <h2 class="hasAnchor">
 <a href="#performanceanalytics-functionality" class="anchor"></a>PerformanceAnalytics Functionality</h2>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="co"># Get PerformanceAnalytics functions that work with tq_transmute and tq_mutate</span>
-<span class="fu"><a href="../reference/tq_mutate.html">tq_transmute_fun_options</a></span>()$<span class="no">PerformanceAnalytics</span></pre></body></html></div>
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="co"># Get PerformanceAnalytics functions that work with tq_transmute and tq_mutate</span>
+<span class="fu"><a href="../reference/tq_mutate.html">tq_transmute_fun_options</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">PerformanceAnalytics</span></pre></div>
 <pre><code>## [1] "Return.annualized"        "Return.annualized.excess"
 ## [3] "Return.clean"             "Return.cumulative"       
 ## [5] "Return.excess"            "Return.Geltner"          
@@ -388,9 +395,10 @@
 <h1 class="hasAnchor">
 <a href="#quantitative-power-in-action" class="anchor"></a>2.0 Quantitative Power In Action</h1>
 <p>We’ll go through some examples, but first let’s get some data. The <code>FANG</code> data set will be used which consists of stock prices for FB, AMZN, NFLX, and GOOG from the beginning of 2013 to the end of 2016.</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"FANG"</span>)
+<div class="sourceCode" id="cb14"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"FANG"</span><span class="op">)</span>
 
-<span class="no">FANG</span></pre></body></html></div>
+<span class="va">FANG</span></pre></div>
 <pre><code>## # A tibble: 4,032 x 8
 ##    symbol date        open  high   low close    volume adjusted
 ##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -413,13 +421,14 @@
 <h3 class="hasAnchor">
 <a href="#example-1a-getting-and-charting-annual-returns" class="anchor"></a>Example 1A: Getting and Charting Annual Returns</h3>
 <p>We want to use the adjusted closing prices column (adjusted for stock splits, which can make it appear that a stock is performing poorly if a split is included). We set <code>select = adjusted</code>. We research the <code>periodReturn</code> function, and we found that it accepts <code>type = "arithmetic"</code> and <code>period = "yearly"</code>, which returns the annual returns.</p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">FANG_annual_returns</span> <span class="kw">&lt;-</span> <span class="no">FANG</span> <span class="kw">%&gt;%</span>
-    <span class="fu">group_by</span>(<span class="no">symbol</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span>(<span class="kw">select</span>     <span class="kw">=</span> <span class="no">adjusted</span>,
-                 <span class="kw">mutate_fun</span> <span class="kw">=</span> <span class="no">periodReturn</span>,
-                 <span class="kw">period</span>     <span class="kw">=</span> <span class="st">"yearly"</span>,
-                 <span class="kw">type</span>       <span class="kw">=</span> <span class="st">"arithmetic"</span>)
-<span class="no">FANG_annual_returns</span></pre></body></html></div>
+<div class="sourceCode" id="cb16"><pre class="downlit">
+<span class="va">FANG_annual_returns</span> <span class="op">&lt;-</span> <span class="va">FANG</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span>select     <span class="op">=</span> <span class="va">adjusted</span>, 
+                 mutate_fun <span class="op">=</span> <span class="va">periodReturn</span>, 
+                 period     <span class="op">=</span> <span class="st">"yearly"</span>, 
+                 type       <span class="op">=</span> <span class="st">"arithmetic"</span><span class="op">)</span>
+<span class="va">FANG_annual_returns</span></pre></div>
 <pre><code>## # A tibble: 16 x 3
 ## # Groups:   symbol [4]
 ##    symbol date       yearly.returns
@@ -441,38 +450,41 @@
 ## 15 GOOG   2015-12-31         0.442 
 ## 16 GOOG   2016-12-30         0.0171</code></pre>
 <p>Charting annual returns is just a quick use of the <code>ggplot2</code> package.</p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">FANG_annual_returns</span> <span class="kw">%&gt;%</span>
-    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">yearly.returns</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">symbol</span>)) +
-    <span class="fu">geom_col</span>() +
-    <span class="fu">geom_hline</span>(<span class="kw">yintercept</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span>()<span class="kw">[[</span><span class="fl">1</span>]]) +
-    <span class="fu">scale_y_continuous</span>(<span class="kw">labels</span> <span class="kw">=</span> <span class="kw pkg">scales</span><span class="kw ns">::</span><span class="no"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>) +
-    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"FANG: Annual Returns"</span>,
-         <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"Get annual returns quickly with tq_transmute!"</span>,
-         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Annual Returns"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
-    <span class="fu">facet_wrap</span>(~ <span class="no">symbol</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">scales</span> <span class="kw">=</span> <span class="st">"free_y"</span>) +
-    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>() +
-    <span class="fu"><a href="../reference/scale_manual.html">scale_fill_tq</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb18"><pre class="downlit">
+<span class="va">FANG_annual_returns</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">yearly.returns</span>, fill <span class="op">=</span> <span class="va">symbol</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"FANG: Annual Returns"</span>,
+         subtitle <span class="op">=</span> <span class="st">"Get annual returns quickly with tq_transmute!"</span>,
+         y <span class="op">=</span> <span class="st">"Annual Returns"</span>, x <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span> 
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">symbol</span>, ncol <span class="op">=</span> <span class="fl">2</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+    <span class="fu"><a href="../reference/scale_manual.html">scale_fill_tq</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <p><img src="TQ02-quant-integrations-in-tidyquant_files/figure-html/unnamed-chunk-11-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="example-1b-getting-daily-log-returns" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-1b-getting-daily-log-returns" class="anchor"></a>Example 1B: Getting Daily Log Returns</h3>
 <p>Daily log returns follows a similar approach. Normally I go with a transmute function, <code>tq_transmute</code>, because the <code>periodReturn</code> function accepts different periodicity options, and anything other than daily will blow up a mutation. But, in our situation the period returns periodicity is the same as the stock prices periodicity (both daily), so we can use either. We want to use the adjusted closing prices column (adjusted for stock splits, which can make it appear that a stock is performing poorly if a split is included), so we set <code>select = adjusted</code>. We researched the <code>periodReturn</code> function, and we found that it accepts <code>type = "log"</code> and <code>period = "daily"</code>, which returns the daily log returns.</p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="no">FANG_daily_log_returns</span> <span class="kw">&lt;-</span> <span class="no">FANG</span> <span class="kw">%&gt;%</span>
-    <span class="fu">group_by</span>(<span class="no">symbol</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span>(<span class="kw">select</span>     <span class="kw">=</span> <span class="no">adjusted</span>,
-                 <span class="kw">mutate_fun</span> <span class="kw">=</span> <span class="no">periodReturn</span>,
-                 <span class="kw">period</span>     <span class="kw">=</span> <span class="st">"daily"</span>,
-                 <span class="kw">type</span>       <span class="kw">=</span> <span class="st">"log"</span>,
-                 <span class="kw">col_rename</span> <span class="kw">=</span> <span class="st">"monthly.returns"</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="no">FANG_daily_log_returns</span> <span class="kw">%&gt;%</span>
-    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">monthly.returns</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">symbol</span>)) +
-    <span class="fu">geom_density</span>(<span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.5</span>) +
-    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"FANG: Charting the Daily Log Returns"</span>,
-         <span class="kw">x</span> <span class="kw">=</span> <span class="st">"Monthly Returns"</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Density"</span>) +
-    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>() +
-    <span class="fu"><a href="../reference/scale_manual.html">scale_fill_tq</a></span>() +
-    <span class="fu">facet_wrap</span>(~ <span class="no">symbol</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">2</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb19"><pre class="downlit">
+<span class="va">FANG_daily_log_returns</span> <span class="op">&lt;-</span> <span class="va">FANG</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span>select     <span class="op">=</span> <span class="va">adjusted</span>, 
+                 mutate_fun <span class="op">=</span> <span class="va">periodReturn</span>, 
+                 period     <span class="op">=</span> <span class="st">"daily"</span>, 
+                 type       <span class="op">=</span> <span class="st">"log"</span>,
+                 col_rename <span class="op">=</span> <span class="st">"monthly.returns"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit">
+<span class="va">FANG_daily_log_returns</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">monthly.returns</span>, fill <span class="op">=</span> <span class="va">symbol</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"FANG: Charting the Daily Log Returns"</span>,
+         x <span class="op">=</span> <span class="st">"Monthly Returns"</span>, y <span class="op">=</span> <span class="st">"Density"</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="../reference/scale_manual.html">scale_fill_tq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">symbol</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></pre></div>
 <p><img src="TQ02-quant-integrations-in-tidyquant_files/figure-html/unnamed-chunk-13-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
@@ -480,11 +492,12 @@
 <h2 class="hasAnchor">
 <a href="#example-2-use-xts-to-period-to-change-the-periodicity-from-daily-to-monthly" class="anchor"></a>Example 2: Use xts to.period to Change the Periodicity from Daily to Monthly</h2>
 <p>The <code><a href="https://rdrr.io/pkg/xts/man/to.period.html">xts::to.period</a></code> function is used for periodicity aggregation (converting from a lower level periodicity to a higher level such as minutes to hours or months to years). Because we are seeking a return structure that is on a different time scale than the input (daily versus weekly), we need to use a transmute function. We select <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code> and pass the open, high, low, close and volume columns via <code>select = open:volume</code>. Looking at the documentation for <code>to.period</code>, we see that it accepts a <code>period</code> argument that we can set to <code>"weeks"</code>. The result is the OHLCV data returned with the dates changed to one day per week.</p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="no">FANG</span> <span class="kw">%&gt;%</span>
-    <span class="fu">group_by</span>(<span class="no">symbol</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span>(<span class="kw">select</span>     <span class="kw">=</span> <span class="no">open</span>:<span class="no">volume</span>,
-                 <span class="kw">mutate_fun</span> <span class="kw">=</span> <span class="no">to.period</span>,
-                 <span class="kw">period</span>     <span class="kw">=</span> <span class="st">"months"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb21"><pre class="downlit">
+<span class="va">FANG</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span>select     <span class="op">=</span> <span class="va">open</span><span class="op">:</span><span class="va">volume</span>, 
+                 mutate_fun <span class="op">=</span> <span class="va">to.period</span>, 
+                 period     <span class="op">=</span> <span class="st">"months"</span><span class="op">)</span></pre></div>
 <pre><code>## # A tibble: 192 x 7
 ## # Groups:   symbol [4]
 ##    symbol date        open  high   low close    volume
@@ -504,38 +517,40 @@
 <div id="without-periodicity-aggregation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#without-periodicity-aggregation" class="anchor"></a>Without Periodicity Aggregation</h3>
-<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="no">FANG_daily</span> <span class="kw">&lt;-</span> <span class="no">FANG</span> <span class="kw">%&gt;%</span>
-    <span class="fu">group_by</span>(<span class="no">symbol</span>)
+<div class="sourceCode" id="cb23"><pre class="downlit">
+<span class="va">FANG_daily</span> <span class="op">&lt;-</span> <span class="va">FANG</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span>
 
-<span class="no">FANG_daily</span> <span class="kw">%&gt;%</span>
-    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">adjusted</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">symbol</span>)) +
-    <span class="fu">geom_line</span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
-    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"Daily Stock Prices"</span>,
-         <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Adjusted Prices"</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">""</span>) +
-    <span class="fu">facet_wrap</span>(~ <span class="no">symbol</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">scales</span> <span class="kw">=</span> <span class="st">"free_y"</span>) +
-    <span class="fu">scale_y_continuous</span>(<span class="kw">labels</span> <span class="kw">=</span> <span class="kw pkg">scales</span><span class="kw ns">::</span><span class="no"><a href="https://scales.r-lib.org//reference/label_dollar.html">dollar</a></span>) +
-    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>() +
-    <span class="fu"><a href="../reference/scale_manual.html">scale_color_tq</a></span>()</pre></body></html></div>
+<span class="va">FANG_daily</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">adjusted</span>, color <span class="op">=</span> <span class="va">symbol</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Daily Stock Prices"</span>,
+         x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">"Adjusted Prices"</span>, color <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">symbol</span>, ncol <span class="op">=</span> <span class="fl">2</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_dollar.html">dollar</a></span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+    <span class="fu"><a href="../reference/scale_manual.html">scale_color_tq</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <p><img src="TQ02-quant-integrations-in-tidyquant_files/figure-html/unnamed-chunk-15-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="with-monthly-periodicity-aggregation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#with-monthly-periodicity-aggregation" class="anchor"></a>With Monthly Periodicity Aggregation</h3>
-<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="no">FANG_monthly</span> <span class="kw">&lt;-</span> <span class="no">FANG</span> <span class="kw">%&gt;%</span>
-    <span class="fu">group_by</span>(<span class="no">symbol</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span>(<span class="kw">select</span>     <span class="kw">=</span> <span class="no">adjusted</span>,
-                 <span class="kw">mutate_fun</span> <span class="kw">=</span> <span class="no">to.period</span>,
-                 <span class="kw">period</span>     <span class="kw">=</span> <span class="st">"months"</span>)
+<div class="sourceCode" id="cb24"><pre class="downlit">
+<span class="va">FANG_monthly</span> <span class="op">&lt;-</span> <span class="va">FANG</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span>select     <span class="op">=</span> <span class="va">adjusted</span>, 
+                 mutate_fun <span class="op">=</span> <span class="va">to.period</span>, 
+                 period     <span class="op">=</span> <span class="st">"months"</span><span class="op">)</span>
 
-<span class="no">FANG_monthly</span> <span class="kw">%&gt;%</span>
-    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">adjusted</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">symbol</span>)) +
-    <span class="fu">geom_line</span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
-    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"Monthly Stock Prices"</span>,
-         <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Adjusted Prices"</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">""</span>) +
-    <span class="fu">facet_wrap</span>(~ <span class="no">symbol</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">scales</span> <span class="kw">=</span> <span class="st">"free_y"</span>) +
-    <span class="fu">scale_y_continuous</span>(<span class="kw">labels</span> <span class="kw">=</span> <span class="kw pkg">scales</span><span class="kw ns">::</span><span class="no"><a href="https://scales.r-lib.org//reference/label_dollar.html">dollar</a></span>) +
-    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>() +
-    <span class="fu"><a href="../reference/scale_manual.html">scale_color_tq</a></span>()</pre></body></html></div>
+<span class="va">FANG_monthly</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">adjusted</span>, color <span class="op">=</span> <span class="va">symbol</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Monthly Stock Prices"</span>,
+         x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">"Adjusted Prices"</span>, color <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">symbol</span>, ncol <span class="op">=</span> <span class="fl">2</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_dollar.html">dollar</a></span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+    <span class="fu"><a href="../reference/scale_manual.html">scale_color_tq</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <p><img src="TQ02-quant-integrations-in-tidyquant_files/figure-html/unnamed-chunk-16-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
@@ -543,26 +558,28 @@
 <h2 class="hasAnchor">
 <a href="#example-3-use-ttr-runcor-to-visualize-rolling-correlations-of-returns" class="anchor"></a>Example 3: Use TTR runCor to Visualize Rolling Correlations of Returns</h2>
 <p>Return correlations are a common way to analyze how closely an asset or portfolio mimics a baseline index or fund. We will need a set of returns for both the stocks and baseline. The stock will be the <code>FANG</code> data set and the baseline will be the Spdr XLK technology sector. We have the prices for the “FANG” stocks, so we use <code>tq_get</code> to retrieve the “XLK” prices. The returns can be calculated from the “adjusted” prices using the process in Example 1.</p>
-<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="co"># Asset Returns</span>
-<span class="no">FANG_returns_monthly</span> <span class="kw">&lt;-</span> <span class="no">FANG</span> <span class="kw">%&gt;%</span>
-    <span class="fu">group_by</span>(<span class="no">symbol</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span>(<span class="kw">select</span>     <span class="kw">=</span> <span class="no">adjusted</span>,
-                 <span class="kw">mutate_fun</span> <span class="kw">=</span> <span class="no">periodReturn</span>,
-                 <span class="kw">period</span>     <span class="kw">=</span> <span class="st">"monthly"</span>)
+<div class="sourceCode" id="cb25"><pre class="downlit">
+<span class="co"># Asset Returns</span>
+<span class="va">FANG_returns_monthly</span> <span class="op">&lt;-</span> <span class="va">FANG</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span>select     <span class="op">=</span> <span class="va">adjusted</span>, 
+                 mutate_fun <span class="op">=</span> <span class="va">periodReturn</span>,
+                 period     <span class="op">=</span> <span class="st">"monthly"</span><span class="op">)</span>
 
 <span class="co"># Baseline Returns</span>
-<span class="no">baseline_returns_monthly</span> <span class="kw">&lt;-</span> <span class="st">"XLK"</span> <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="kw">get</span>  <span class="kw">=</span> <span class="st">"stock.prices"</span>,
-           <span class="kw">from</span> <span class="kw">=</span> <span class="st">"2013-01-01"</span>,
-           <span class="kw">to</span>   <span class="kw">=</span> <span class="st">"2016-12-31"</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span>(<span class="kw">select</span>     <span class="kw">=</span> <span class="no">adjusted</span>,
-                 <span class="kw">mutate_fun</span> <span class="kw">=</span> <span class="no">periodReturn</span>,
-                 <span class="kw">period</span>     <span class="kw">=</span> <span class="st">"monthly"</span>)</pre></body></html></div>
+<span class="va">baseline_returns_monthly</span> <span class="op">&lt;-</span> <span class="st">"XLK"</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get  <span class="op">=</span> <span class="st">"stock.prices"</span>,
+           from <span class="op">=</span> <span class="st">"2013-01-01"</span>, 
+           to   <span class="op">=</span> <span class="st">"2016-12-31"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span>select     <span class="op">=</span> <span class="va">adjusted</span>, 
+                 mutate_fun <span class="op">=</span> <span class="va">periodReturn</span>,
+                 period     <span class="op">=</span> <span class="st">"monthly"</span><span class="op">)</span></pre></div>
 <p>Next, join the asset returns with the baseline returns by date.</p>
-<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="no">returns_joined</span> <span class="kw">&lt;-</span> <span class="fu">left_join</span>(<span class="no">FANG_returns_monthly</span>,
-                            <span class="no">baseline_returns_monthly</span>,
-                            <span class="kw">by</span> <span class="kw">=</span> <span class="st">"date"</span>)
-<span class="no">returns_joined</span></pre></body></html></div>
+<div class="sourceCode" id="cb26"><pre class="downlit">
+<span class="va">returns_joined</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">FANG_returns_monthly</span>, 
+                            <span class="va">baseline_returns_monthly</span>,
+                            by <span class="op">=</span> <span class="st">"date"</span><span class="op">)</span>
+<span class="va">returns_joined</span></pre></div>
 <pre><code>## # A tibble: 192 x 4
 ## # Groups:   symbol [4]
 ##    symbol date       monthly.returns.x monthly.returns.y
@@ -579,39 +596,42 @@
 ## 10 FB     2013-10-31         -0.000398           0.0502 
 ## # … with 182 more rows</code></pre>
 <p>The <code><a href="https://rdrr.io/pkg/TTR/man/runFun.html">TTR::runCor</a></code> function can be used to evaluate rolling correlations using the xy pattern. Looking at the documentation (<code>?runCor</code>), we can see that the arguments include <code>x</code> and <code>y</code> along with a few additional arguments including <code>n</code> for the width of the rolling correlation. Because the scale is monthly, we’ll go with <code>n = 6</code> for a 6-month rolling correlation. The <code>col_rename</code> argument enables easy renaming of the output column(s).</p>
-<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="no">FANG_rolling_corr</span> <span class="kw">&lt;-</span> <span class="no">returns_joined</span> <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute_xy</a></span>(<span class="kw">x</span>          <span class="kw">=</span> <span class="no">monthly.returns.x</span>,
-                    <span class="kw">y</span>          <span class="kw">=</span> <span class="no">monthly.returns.y</span>,
-                    <span class="kw">mutate_fun</span> <span class="kw">=</span> <span class="no">runCor</span>,
-                    <span class="kw">n</span>          <span class="kw">=</span> <span class="fl">6</span>,
-                    <span class="kw">col_rename</span> <span class="kw">=</span> <span class="st">"rolling.corr.6"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb28"><pre class="downlit">
+<span class="va">FANG_rolling_corr</span> <span class="op">&lt;-</span> <span class="va">returns_joined</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute_xy</a></span><span class="op">(</span>x          <span class="op">=</span> <span class="va">monthly.returns.x</span>, 
+                    y          <span class="op">=</span> <span class="va">monthly.returns.y</span>,
+                    mutate_fun <span class="op">=</span> <span class="va">runCor</span>,
+                    n          <span class="op">=</span> <span class="fl">6</span>,
+                    col_rename <span class="op">=</span> <span class="st">"rolling.corr.6"</span><span class="op">)</span></pre></div>
 <p>And, we can plot the rolling correlations for the FANG stocks.</p>
-<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="no">FANG_rolling_corr</span> <span class="kw">%&gt;%</span>
-    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">rolling.corr.6</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">symbol</span>)) +
-    <span class="fu">geom_hline</span>(<span class="kw">yintercept</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span>()<span class="kw">[[</span><span class="fl">1</span>]]) +
-    <span class="fu">geom_line</span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
-    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"FANG: Six Month Rolling Correlation to XLK"</span>,
-         <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Correlation"</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">""</span>) +
-    <span class="fu">facet_wrap</span>(~ <span class="no">symbol</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">2</span>) +
-    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>() +
-    <span class="fu"><a href="../reference/scale_manual.html">scale_color_tq</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb29"><pre class="downlit">
+<span class="va">FANG_rolling_corr</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">rolling.corr.6</span>, color <span class="op">=</span> <span class="va">symbol</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"FANG: Six Month Rolling Correlation to XLK"</span>,
+         x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">"Correlation"</span>, color <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">symbol</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+    <span class="fu"><a href="../reference/scale_manual.html">scale_color_tq</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <p><img src="TQ02-quant-integrations-in-tidyquant_files/figure-html/unnamed-chunk-20-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="example-4-use-ttr-macd-to-visualize-moving-average-convergence-divergence" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-4-use-ttr-macd-to-visualize-moving-average-convergence-divergence" class="anchor"></a>Example 4: Use TTR MACD to Visualize Moving Average Convergence Divergence</h2>
 <p>In reviewing the available options in the <code>TTR</code> package, we see that <code>MACD</code> will get us the Moving Average Convergence Divergence (MACD). In researching the documentation, the return is in the same periodicity as the input and the functions work with OHLC functions, so we can use <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code>. MACD requires a price, so we select <code>close</code>.</p>
-<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="no">FANG_macd</span> <span class="kw">&lt;-</span> <span class="no">FANG</span> <span class="kw">%&gt;%</span>
-    <span class="fu">group_by</span>(<span class="no">symbol</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_mutate</a></span>(<span class="kw">select</span>     <span class="kw">=</span> <span class="no">close</span>,
-              <span class="kw">mutate_fun</span> <span class="kw">=</span> <span class="no">MACD</span>,
-              <span class="kw">nFast</span>      <span class="kw">=</span> <span class="fl">12</span>,
-              <span class="kw">nSlow</span>      <span class="kw">=</span> <span class="fl">26</span>,
-              <span class="kw">nSig</span>       <span class="kw">=</span> <span class="fl">9</span>,
-              <span class="kw">maType</span>     <span class="kw">=</span> <span class="no">SMA</span>) <span class="kw">%&gt;%</span>
-    <span class="fu">mutate</span>(<span class="kw">diff</span> <span class="kw">=</span> <span class="no">macd</span> - <span class="no">signal</span>) <span class="kw">%&gt;%</span>
-    <span class="fu">select</span>(-(<span class="no">open</span>:<span class="no">volume</span>))
-<span class="no">FANG_macd</span></pre></body></html></div>
+<div class="sourceCode" id="cb30"><pre class="downlit">
+<span class="va">FANG_macd</span> <span class="op">&lt;-</span> <span class="va">FANG</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_mutate</a></span><span class="op">(</span>select     <span class="op">=</span> <span class="va">close</span>, 
+              mutate_fun <span class="op">=</span> <span class="va">MACD</span>, 
+              nFast      <span class="op">=</span> <span class="fl">12</span>, 
+              nSlow      <span class="op">=</span> <span class="fl">26</span>, 
+              nSig       <span class="op">=</span> <span class="fl">9</span>, 
+              maType     <span class="op">=</span> <span class="va">SMA</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>diff <span class="op">=</span> <span class="va">macd</span> <span class="op">-</span> <span class="va">signal</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="op">(</span><span class="va">open</span><span class="op">:</span><span class="va">volume</span><span class="op">)</span><span class="op">)</span>
+<span class="va">FANG_macd</span></pre></div>
 <pre><code>## # A tibble: 4,032 x 6
 ## # Groups:   symbol [4]
 ##    symbol date       adjusted  macd signal  diff
@@ -628,33 +648,35 @@
 ## 10 FB     2013-01-15     30.1    NA     NA    NA
 ## # … with 4,022 more rows</code></pre>
 <p>And, we can visualize the data like so.</p>
-<div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="no">FANG_macd</span> <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">date</span> <span class="kw">&gt;=</span> <span class="fu">as_date</span>(<span class="st">"2016-10-01"</span>)) <span class="kw">%&gt;%</span>
-    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>)) +
-    <span class="fu">geom_hline</span>(<span class="kw">yintercept</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span>()<span class="kw">[[</span><span class="fl">1</span>]]) +
-    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="kw">y</span> <span class="kw">=</span> <span class="no">macd</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="no">symbol</span>)) +
-    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="kw">y</span> <span class="kw">=</span> <span class="no">signal</span>), <span class="kw">color</span> <span class="kw">=</span> <span class="st">"blue"</span>, <span class="kw">linetype</span> <span class="kw">=</span> <span class="fl">2</span>) +
-    <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="kw">y</span> <span class="kw">=</span> <span class="no">diff</span>), <span class="kw">stat</span> <span class="kw">=</span> <span class="st">"identity"</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span>()<span class="kw">[[</span><span class="fl">1</span>]]) +
-    <span class="fu">facet_wrap</span>(~ <span class="no">symbol</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">scale</span> <span class="kw">=</span> <span class="st">"free_y"</span>) +
-    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"FANG: Moving Average Convergence Divergence"</span>,
-         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"MACD"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">""</span>) +
-    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>() +
-    <span class="fu"><a href="../reference/scale_manual.html">scale_color_tq</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb32"><pre class="downlit">
+<span class="va">FANG_macd</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">date</span> <span class="op">&gt;=</span> <span class="fu"><a href="http://lubridate.tidyverse.org/reference/as_date.html">as_date</a></span><span class="op">(</span><span class="st">"2016-10-01"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">macd</span>, col <span class="op">=</span> <span class="va">symbol</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">signal</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"blue"</span>, linetype <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">diff</span><span class="op">)</span>, stat <span class="op">=</span> <span class="st">"identity"</span>, color <span class="op">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">symbol</span>, ncol <span class="op">=</span> <span class="fl">2</span>, scale <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"FANG: Moving Average Convergence Divergence"</span>,
+         y <span class="op">=</span> <span class="st">"MACD"</span>, x <span class="op">=</span> <span class="st">""</span>, color <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="../reference/scale_manual.html">scale_color_tq</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <p><img src="TQ02-quant-integrations-in-tidyquant_files/figure-html/unnamed-chunk-22-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="example-5-use-xts-apply-quarterly-to-get-the-max-and-min-price-for-each-quarter" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-5-use-xts-apply-quarterly-to-get-the-max-and-min-price-for-each-quarter" class="anchor"></a>Example 5: Use xts apply.quarterly to Get the Max and Min Price for Each Quarter</h2>
 <p>The <code><a href="https://rdrr.io/pkg/xts/man/apply.monthly.html">xts::apply.quarterly()</a></code> function that is part of the period apply group can be used to apply functions by quarterly time segments. Because we are seeking a return structure that is on a different time scale than the input (quarterly versus daily), we need to use a transmute function. We select <code>tq_transmute</code> and pass the close price using <code>select</code>, and we send this subset of the data to the <code>apply.quarterly</code> function via the <code>mutate_fun</code> argument. Looking at the documentation for <code>apply.quarterly</code>, we see that we can pass a function to the argument, <code>FUN</code>. We want the maximum values, so we set <code>FUN = max</code>. The result is the quarters returned as a date and the maximum closing price during the quarter returned as a double.</p>
-<div class="sourceCode" id="cb33"><html><body><pre class="r"><span class="no">FANG_max_by_qtr</span> <span class="kw">&lt;-</span> <span class="no">FANG</span> <span class="kw">%&gt;%</span>
-    <span class="fu">group_by</span>(<span class="no">symbol</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span>(<span class="kw">select</span>     <span class="kw">=</span> <span class="no">adjusted</span>,
-                 <span class="kw">mutate_fun</span> <span class="kw">=</span> <span class="no">apply.quarterly</span>,
-                 <span class="kw">FUN</span>        <span class="kw">=</span> <span class="no">max</span>,
-                 <span class="kw">col_rename</span> <span class="kw">=</span> <span class="st">"max.close"</span>) <span class="kw">%&gt;%</span>
-    <span class="fu">mutate</span>(<span class="kw">year.qtr</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="fu">year</span>(<span class="no">date</span>), <span class="st">"-Q"</span>, <span class="fu">quarter</span>(<span class="no">date</span>))) <span class="kw">%&gt;%</span>
-    <span class="fu">select</span>(-<span class="no">date</span>)
-<span class="no">FANG_max_by_qtr</span></pre></body></html></div>
+<div class="sourceCode" id="cb33"><pre class="downlit">
+<span class="va">FANG_max_by_qtr</span> <span class="op">&lt;-</span> <span class="va">FANG</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span>select     <span class="op">=</span> <span class="va">adjusted</span>, 
+                 mutate_fun <span class="op">=</span> <span class="va">apply.quarterly</span>, 
+                 FUN        <span class="op">=</span> <span class="va">max</span>, 
+                 col_rename <span class="op">=</span> <span class="st">"max.close"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year.qtr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="http://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>, <span class="st">"-Q"</span>, <span class="fu"><a href="http://lubridate.tidyverse.org/reference/quarter.html">quarter</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">date</span><span class="op">)</span>
+<span class="va">FANG_max_by_qtr</span></pre></div>
 <pre><code>## # A tibble: 64 x 3
 ## # Groups:   symbol [4]
 ##    symbol max.close year.qtr
@@ -671,19 +693,20 @@
 ## 10 FB          88.9 2015-Q2 
 ## # … with 54 more rows</code></pre>
 <p>The minimum each quarter can be retrieved in much the same way. The data frames can be joined using <code>left_join</code> to get the max and min by quarter.</p>
-<div class="sourceCode" id="cb35"><html><body><pre class="r"><span class="no">FANG_min_by_qtr</span> <span class="kw">&lt;-</span> <span class="no">FANG</span> <span class="kw">%&gt;%</span>
-    <span class="fu">group_by</span>(<span class="no">symbol</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span>(<span class="kw">select</span>     <span class="kw">=</span> <span class="no">adjusted</span>,
-                 <span class="kw">mutate_fun</span> <span class="kw">=</span> <span class="no">apply.quarterly</span>,
-                 <span class="kw">FUN</span>        <span class="kw">=</span> <span class="no">min</span>,
-                 <span class="kw">col_rename</span> <span class="kw">=</span> <span class="st">"min.close"</span>) <span class="kw">%&gt;%</span>
-    <span class="fu">mutate</span>(<span class="kw">year.qtr</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="fu">year</span>(<span class="no">date</span>), <span class="st">"-Q"</span>, <span class="fu">quarter</span>(<span class="no">date</span>))) <span class="kw">%&gt;%</span>
-    <span class="fu">select</span>(-<span class="no">date</span>)
+<div class="sourceCode" id="cb35"><pre class="downlit">
+<span class="va">FANG_min_by_qtr</span> <span class="op">&lt;-</span> <span class="va">FANG</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span>select     <span class="op">=</span> <span class="va">adjusted</span>, 
+                 mutate_fun <span class="op">=</span> <span class="va">apply.quarterly</span>, 
+                 FUN        <span class="op">=</span> <span class="va">min</span>, 
+                 col_rename <span class="op">=</span> <span class="st">"min.close"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year.qtr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="http://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>, <span class="st">"-Q"</span>, <span class="fu"><a href="http://lubridate.tidyverse.org/reference/quarter.html">quarter</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">date</span><span class="op">)</span>
 
-<span class="no">FANG_by_qtr</span> <span class="kw">&lt;-</span> <span class="fu">left_join</span>(<span class="no">FANG_max_by_qtr</span>, <span class="no">FANG_min_by_qtr</span>,
-                         <span class="kw">by</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"symbol"</span>   <span class="kw">=</span> <span class="st">"symbol"</span>,
-                                <span class="st">"year.qtr"</span> <span class="kw">=</span> <span class="st">"year.qtr"</span>))
-<span class="no">FANG_by_qtr</span></pre></body></html></div>
+<span class="va">FANG_by_qtr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">FANG_max_by_qtr</span>, <span class="va">FANG_min_by_qtr</span>,
+                         by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"symbol"</span>   <span class="op">=</span> <span class="st">"symbol"</span>,
+                                <span class="st">"year.qtr"</span> <span class="op">=</span> <span class="st">"year.qtr"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">FANG_by_qtr</span></pre></div>
 <pre><code>## # A tibble: 64 x 4
 ## # Groups:   symbol [4]
 ##    symbol max.close year.qtr min.close
@@ -700,20 +723,21 @@
 ## 10 FB          88.9 2015-Q2       77.5
 ## # … with 54 more rows</code></pre>
 <p>And, we can visualize the data like so.</p>
-<div class="sourceCode" id="cb37"><html><body><pre class="r"><span class="no">FANG_by_qtr</span> <span class="kw">%&gt;%</span>
-    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">year.qtr</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">symbol</span>)) +
-    <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="kw">xend</span> <span class="kw">=</span> <span class="no">year.qtr</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">min.close</span>, <span class="kw">yend</span> <span class="kw">=</span> <span class="no">max.close</span>),
-                 <span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
-    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="kw">y</span> <span class="kw">=</span> <span class="no">max.close</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fl">2</span>) +
-    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="kw">y</span> <span class="kw">=</span> <span class="no">min.close</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fl">2</span>) +
-    <span class="fu">facet_wrap</span>(~ <span class="no">symbol</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">scale</span> <span class="kw">=</span> <span class="st">"free_y"</span>) +
-    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"FANG: Min/Max Price By Quarter"</span>,
-         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Stock Price"</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">""</span>) +
-    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>() +
-    <span class="fu"><a href="../reference/scale_manual.html">scale_color_tq</a></span>() +
-    <span class="fu">scale_y_continuous</span>(<span class="kw">labels</span> <span class="kw">=</span> <span class="kw pkg">scales</span><span class="kw ns">::</span><span class="no"><a href="https://scales.r-lib.org//reference/label_dollar.html">dollar</a></span>) +
-    <span class="fu">theme</span>(<span class="kw">axis.text.x</span> <span class="kw">=</span> <span class="fu">element_text</span>(<span class="kw">angle</span> <span class="kw">=</span> <span class="fl">90</span>, <span class="kw">hjust</span> <span class="kw">=</span> <span class="fl">1</span>),
-          <span class="kw">axis.title.x</span> <span class="kw">=</span> <span class="fu">element_blank</span>())</pre></body></html></div>
+<div class="sourceCode" id="cb37"><pre class="downlit">
+<span class="va">FANG_by_qtr</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year.qtr</span>, color <span class="op">=</span> <span class="va">symbol</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">geom_segment</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>xend <span class="op">=</span> <span class="va">year.qtr</span>, y <span class="op">=</span> <span class="va">min.close</span>, yend <span class="op">=</span> <span class="va">max.close</span><span class="op">)</span>,
+                 size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">max.close</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">min.close</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">symbol</span>, ncol <span class="op">=</span> <span class="fl">2</span>, scale <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"FANG: Min/Max Price By Quarter"</span>,
+         y <span class="op">=</span> <span class="st">"Stock Price"</span>, color <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="../reference/scale_manual.html">scale_color_tq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_dollar.html">dollar</a></span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
+          axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></pre></div>
 <p><img src="TQ02-quant-integrations-in-tidyquant_files/figure-html/unnamed-chunk-25-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="example-6-use-zoo-rollapply-to-visualize-a-rolling-regression" class="section level2">
@@ -721,43 +745,46 @@
 <a href="#example-6-use-zoo-rollapply-to-visualize-a-rolling-regression" class="anchor"></a>Example 6: Use zoo rollapply to visualize a rolling regression</h2>
 <p>A good way to analyze relationships over time is using rolling calculations that compare two assets. Pairs trading is a common mechanism for similar assets. While we will not go into a pairs trade analysis, we will analyze the relationship between two similar assets as a precursor to a pairs trade. In this example we will analyze two similar assets, Mastercard (MA) and Visa (V) to show the relationship via regression.</p>
 <p>Before we analyze a rolling regression, it’s helpful to view the overall trend in returns. To do this, we use <code><a href="../reference/tq_get.html">tq_get()</a></code> to get stock prices for the assets and <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code> to transform the daily prices to daily returns. We’ll collect the data and visualize via a scatter plot.</p>
-<div class="sourceCode" id="cb38"><html><body><pre class="r"><span class="co"># Get stock pairs</span>
-<span class="no">stock_prices</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"MA"</span>, <span class="st">"V"</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span>(<span class="kw">get</span>  <span class="kw">=</span> <span class="st">"stock.prices"</span>,
-           <span class="kw">from</span> <span class="kw">=</span> <span class="st">"2015-01-01"</span>,
-           <span class="kw">to</span>   <span class="kw">=</span> <span class="st">"2016-12-31"</span>) <span class="kw">%&gt;%</span>
-    <span class="fu">group_by</span>(<span class="no">symbol</span>)
+<div class="sourceCode" id="cb38"><pre class="downlit">
+<span class="co"># Get stock pairs</span>
+<span class="va">stock_prices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MA"</span>, <span class="st">"V"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get  <span class="op">=</span> <span class="st">"stock.prices"</span>,
+           from <span class="op">=</span> <span class="st">"2015-01-01"</span>,
+           to   <span class="op">=</span> <span class="st">"2016-12-31"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> 
 
-<span class="no">stock_pairs</span> <span class="kw">&lt;-</span> <span class="no">stock_prices</span> <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span>(<span class="kw">select</span>     <span class="kw">=</span> <span class="no">adjusted</span>,
-                 <span class="kw">mutate_fun</span> <span class="kw">=</span> <span class="no">periodReturn</span>,
-                 <span class="kw">period</span>     <span class="kw">=</span> <span class="st">"daily"</span>,
-                 <span class="kw">type</span>       <span class="kw">=</span> <span class="st">"log"</span>,
-                 <span class="kw">col_rename</span> <span class="kw">=</span> <span class="st">"returns"</span>) <span class="kw">%&gt;%</span>
-    <span class="fu">spread</span>(<span class="kw">key</span> <span class="kw">=</span> <span class="no">symbol</span>, <span class="kw">value</span> <span class="kw">=</span> <span class="no">returns</span>)</pre></body></html></div>
+<span class="va">stock_pairs</span> <span class="op">&lt;-</span> <span class="va">stock_prices</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span>select     <span class="op">=</span> <span class="va">adjusted</span>,
+                 mutate_fun <span class="op">=</span> <span class="va">periodReturn</span>,
+                 period     <span class="op">=</span> <span class="st">"daily"</span>,
+                 type       <span class="op">=</span> <span class="st">"log"</span>,
+                 col_rename <span class="op">=</span> <span class="st">"returns"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu">spread</span><span class="op">(</span>key <span class="op">=</span> <span class="va">symbol</span>, value <span class="op">=</span> <span class="va">returns</span><span class="op">)</span></pre></div>
 <p>We can visualize the relationship between the returns of the stock pairs like so.</p>
-<div class="sourceCode" id="cb39"><html><body><pre class="r"><span class="no">stock_pairs</span> <span class="kw">%&gt;%</span>
-    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">V</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">MA</span>)) +
-    <span class="fu">geom_point</span>(<span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span>()<span class="kw">[[</span><span class="fl">1</span>]], <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.5</span>) +
-    <span class="fu">geom_smooth</span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"lm"</span>) +
-    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"Visualizing Returns Relationship of Stock Pairs"</span>) +
-    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb39"><pre class="downlit">
+<span class="va">stock_pairs</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">V</span>, y <span class="op">=</span> <span class="va">MA</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>color <span class="op">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Visualizing Returns Relationship of Stock Pairs"</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <p><img src="TQ02-quant-integrations-in-tidyquant_files/figure-html/unnamed-chunk-27-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p>We can get statistcs on the relationship from the <code>lm</code> function. The model is highly correlated with a p-value of essential zero. The coefficient estimate for V (Coefficient 1) is 0.8134 indicating a positive relationship, meaning as V increases MA also tends to increase.</p>
-<div class="sourceCode" id="cb40"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">MA</span> ~ <span class="no">V</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">stock_pairs</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb40"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">MA</span> <span class="op">~</span> <span class="va">V</span>, data <span class="op">=</span> <span class="va">stock_pairs</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = MA ~ V, data = stock_pairs)
 ## 
 ## Residuals:
 ##        Min         1Q     Median         3Q        Max 
-## -0.0268888 -0.0039709  0.0002264  0.0039568  0.0289151 
+## -0.0268888 -0.0039708  0.0002264  0.0039568  0.0289149 
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(&gt;|t|)    
 ## (Intercept) 0.0001014  0.0003101   0.327    0.744    
-## V           0.8119859  0.0226456  35.856   &lt;2e-16 ***
+## V           0.8119876  0.0226457  35.856   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -771,17 +798,19 @@
 </li>
 </ol>
 <p>First, create a custom regression function. An important point is that the “data” will be passed to the regression function as an <code>xts</code> object. The <code><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html">timetk::tk_tbl</a></code> function takes care of converting to a data frame.</p>
-<div class="sourceCode" id="cb42"><html><body><pre class="r"><span class="no">regr_fun</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">data</span>) {
-    <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">MA</span> ~ <span class="no">V</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="kw pkg">timetk</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html">tk_tbl</a></span>(<span class="no">data</span>, <span class="kw">silent</span> <span class="kw">=</span> <span class="fl">TRUE</span>)))
-}</pre></body></html></div>
+<div class="sourceCode" id="cb42"><pre class="downlit">
+<span class="va">regr_fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">MA</span> <span class="op">~</span> <span class="va">V</span>, data <span class="op">=</span> <span class="fu">timetk</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html">tk_tbl</a></span><span class="op">(</span><span class="va">data</span>, silent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span></pre></div>
 <p>Now we can use <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code> to apply the custom regression function over a rolling window using <code>rollapply</code> from the <code>zoo</code> package. Internally, the <code>returns_combined</code> data frame is being passed automatically to the <code>data</code> argument of the <code>rollapply</code> function. All you need to specify is the <code>mutate_fun = rollapply</code> and any additional arguments necessary to apply the <code>rollapply</code> function. We’ll specify a 90 day window via <code>width = 90</code>. The <code>FUN</code> argument is our custom regression function, <code>regr_fun</code>. It’s extremely important to specify <code>by.column = FALSE</code>, which tells <code>rollapply</code> to perform the computation using the data as a whole rather than apply the function to each column independently. The <code>col_rename</code> argument is used to rename the added columns.</p>
-<div class="sourceCode" id="cb43"><html><body><pre class="r"><span class="no">stock_pairs</span> <span class="kw">&lt;-</span> <span class="no">stock_pairs</span> <span class="kw">%&gt;%</span>
-         <span class="fu"><a href="../reference/tq_mutate.html">tq_mutate</a></span>(<span class="kw">mutate_fun</span> <span class="kw">=</span> <span class="no">rollapply</span>,
-                   <span class="kw">width</span>      <span class="kw">=</span> <span class="fl">90</span>,
-                   <span class="kw">FUN</span>        <span class="kw">=</span> <span class="no">regr_fun</span>,
-                   <span class="kw">by.column</span>  <span class="kw">=</span> <span class="fl">FALSE</span>,
-                   <span class="kw">col_rename</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"coef.0"</span>, <span class="st">"coef.1"</span>))
-<span class="no">stock_pairs</span></pre></body></html></div>
+<div class="sourceCode" id="cb43"><pre class="downlit">
+<span class="va">stock_pairs</span> <span class="op">&lt;-</span> <span class="va">stock_pairs</span> <span class="op">%&gt;%</span>
+         <span class="fu"><a href="../reference/tq_mutate.html">tq_mutate</a></span><span class="op">(</span>mutate_fun <span class="op">=</span> <span class="va">rollapply</span>,
+                   width      <span class="op">=</span> <span class="fl">90</span>,
+                   FUN        <span class="op">=</span> <span class="va">regr_fun</span>,
+                   by.column  <span class="op">=</span> <span class="cn">FALSE</span>,
+                   col_rename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"coef.0"</span>, <span class="st">"coef.1"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">stock_pairs</span></pre></div>
 <pre><code>## # A tibble: 504 x 5
 ##    date             MA        V coef.0 coef.1
 ##    &lt;date&gt;        &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
@@ -797,37 +826,40 @@
 ## 10 2015-01-15 -0.0146  -0.00955     NA     NA
 ## # … with 494 more rows</code></pre>
 <p>Finally, we can visualize the first coefficient like so. A horizontal line is added using the full data set model. This gives us insight as to points in time where the relationship deviates significantly from the long run trend which can be explored for potential pair trade opportunities.</p>
-<div class="sourceCode" id="cb45"><html><body><pre class="r"><span class="no">stock_pairs</span> <span class="kw">%&gt;%</span>
-    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">coef.1</span>)) +
-    <span class="fu">geom_line</span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span>()<span class="kw">[[</span><span class="fl">1</span>]]) +
-    <span class="fu">geom_hline</span>(<span class="kw">yintercept</span> <span class="kw">=</span> <span class="fl">0.8134</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span>()<span class="kw">[[</span><span class="fl">2</span>]]) +
-    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"MA ~ V: Visualizing Rolling Regression Coefficient"</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>) +
-    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb45"><pre class="downlit">
+<span class="va">stock_pairs</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">coef.1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span>, color <span class="op">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0.8134</span>, size <span class="op">=</span> <span class="fl">1</span>, color <span class="op">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"MA ~ V: Visualizing Rolling Regression Coefficient"</span>, x <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <p><img src="TQ02-quant-integrations-in-tidyquant_files/figure-html/unnamed-chunk-31-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p>Stock returns during this time period.</p>
-<div class="sourceCode" id="cb46"><html><body><pre class="r"><span class="no">stock_prices</span> <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span>(<span class="no">adjusted</span>,
-                 <span class="no">periodReturn</span>,
-                 <span class="kw">period</span> <span class="kw">=</span> <span class="st">"daily"</span>,
-                 <span class="kw">type</span> <span class="kw">=</span> <span class="st">"log"</span>,
-                 <span class="kw">col_rename</span> <span class="kw">=</span> <span class="st">"returns"</span>) <span class="kw">%&gt;%</span>
-    <span class="fu">mutate</span>(<span class="kw">wealth.index</span> <span class="kw">=</span> <span class="fl">100</span> * <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumprod</a></span>(<span class="fl">1</span> + <span class="no">returns</span>)) <span class="kw">%&gt;%</span>
-    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">date</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">wealth.index</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">symbol</span>)) +
-    <span class="fu">geom_line</span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
-    <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"MA and V: Stock Prices"</span>) +
-    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span>() +
-    <span class="fu"><a href="../reference/scale_manual.html">scale_color_tq</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb46"><pre class="downlit">
+<span class="va">stock_prices</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span><span class="va">adjusted</span>, 
+                 <span class="va">periodReturn</span>, 
+                 period <span class="op">=</span> <span class="st">"daily"</span>, 
+                 type <span class="op">=</span> <span class="st">"log"</span>, 
+                 col_rename <span class="op">=</span> <span class="st">"returns"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>wealth.index <span class="op">=</span> <span class="fl">100</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumprod</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">returns</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">wealth.index</span>, color <span class="op">=</span> <span class="va">symbol</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"MA and V: Stock Prices"</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+    <span class="fu"><a href="../reference/scale_manual.html">scale_color_tq</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <p><img src="TQ02-quant-integrations-in-tidyquant_files/figure-html/unnamed-chunk-32-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div id="example-7-use-return-clean-and-return-excess-to-clean-and-calculate-excess-returns" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-7-use-return-clean-and-return-excess-to-clean-and-calculate-excess-returns" class="anchor"></a>Example 7: Use Return.clean and Return.excess to clean and calculate excess returns</h2>
 <p>In this example we use several of the <code>PerformanceAnalytics</code> functions to clean and format returns. The example uses three progressive applications of <code>tq_transmute</code> to apply various quant functions to the grouped stock prices from the <code>FANG</code> data set. First, we calculate daily returns using <code><a href="https://rdrr.io/pkg/quantmod/man/periodReturn.html">quantmod::periodReturn</a></code>. Next, we use <code>Return.clean</code> to clean outliers from the return data. The <code>alpha</code> parameter is the percentage of oultiers to be cleaned. Finally, the excess returns are calculated using a risk-free rate of 3% (divided by 252 for 252 trade days in one year).</p>
-<div class="sourceCode" id="cb47"><html><body><pre class="r"><span class="no">FANG</span> <span class="kw">%&gt;%</span>
-    <span class="fu">group_by</span>(<span class="no">symbol</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span>(<span class="no">adjusted</span>, <span class="no">periodReturn</span>, <span class="kw">period</span> <span class="kw">=</span> <span class="st">"daily"</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span>(<span class="no">daily.returns</span>, <span class="no">Return.clean</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.05</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span>(<span class="no">daily.returns</span>, <span class="no">Return.excess</span>, <span class="kw">Rf</span> <span class="kw">=</span> <span class="fl">0.03</span> / <span class="fl">252</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb47"><pre class="downlit">
+<span class="va">FANG</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span><span class="va">adjusted</span>, <span class="va">periodReturn</span>, period <span class="op">=</span> <span class="st">"daily"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span><span class="va">daily.returns</span>, <span class="va">Return.clean</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span><span class="va">daily.returns</span>, <span class="va">Return.excess</span>, Rf <span class="op">=</span> <span class="fl">0.03</span> <span class="op">/</span> <span class="fl">252</span><span class="op">)</span></pre></div>
 <pre><code>## # A tibble: 4,032 x 3
 ## # Groups:   symbol [4]
 ##    symbol date       `daily.returns &gt; Rf`
@@ -862,7 +894,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

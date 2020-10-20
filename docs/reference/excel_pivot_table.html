@@ -92,7 +92,7 @@ Functionality replicates Excel
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
       </span>
     </div>
 
@@ -177,15 +177,15 @@ Most functions replicate the behavior of Excel:</p><ul>
 
     </div>
 
-    <pre class="usage"><span class='fu'>pivot_table</span>(
-  <span class='no'>.data</span>,
-  <span class='no'>.rows</span>,
-  <span class='no'>.columns</span>,
-  <span class='no'>.values</span>,
-  <span class='kw'>.filters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>.sort</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>fill_na</span> <span class='kw'>=</span> <span class='fl'>NA</span>
-)</pre>
+    <pre class="usage"><span class='fu'>pivot_table</span><span class='op'>(</span>
+  <span class='va'>.data</span>,
+  <span class='va'>.rows</span>,
+  <span class='va'>.columns</span>,
+  <span class='va'>.values</span>,
+  .filters <span class='op'>=</span> <span class='cn'>NULL</span>,
+  .sort <span class='op'>=</span> <span class='cn'>NULL</span>,
+  fill_na <span class='op'>=</span> <span class='cn'>NA</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -239,24 +239,25 @@ Most functions replicate the behavior of Excel:</p><ul>
 <li><p>Rows and Column Groupings can be collapsed. Example: <code>.columns = ~ YEAR(order_date)</code></p></li>
 <li><p>Values can be summarized provided a single value is returned. Example: <code>.values = ~ SUM_IFS(order_volume &gt;= quantile(order_volume, probs = 0.75))</code></p></li>
 <li><p>Summarizations and Row/Column Groupings can be stacked (combined) with <code><a href='https://rdrr.io/r/base/c.html'>c()</a></code>. Example: <code>.rows = c(~ YEAR(order_date), company)</code></p></li>
-<li><p>Bare columns (e.g. <code>company</code>) don not need to be prefixed with the <code>~</code>.</p></li>
-<li><p><strong>All grouping and summarizing functions MUST BE prefixed with <code>~</code></strong>. Example: <code>.rows = ~ YEAR(order_date)</code></p></li>
+<li><p>Bare columns (e.g. <code>company</code>) don not need to be prefixed with the <code><a href='https://rdrr.io/r/base/tilde.html'>~</a></code>.</p></li>
+<li><p><strong>All grouping and summarizing functions MUST BE prefixed with <code><a href='https://rdrr.io/r/base/tilde.html'>~</a></code></strong>. Example: <code>.rows = ~ YEAR(order_date)</code></p></li>
 </ul></li>
 </ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyquant</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>)
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/tidyquant'>tidyquant</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
 
 <span class='co'># PIVOT TABLE ----</span>
 <span class='co'># Calculate returns by year/quarter</span>
-<span class='no'>FANG</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>pivot_table</span>(
-        <span class='kw'>.rows</span>       <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>symbol</span>, ~ <span class='fu'><a href='excel_date_functions.html'>QUARTER</a></span>(<span class='no'>date</span>)),
-        <span class='kw'>.columns</span>    <span class='kw'>=</span> ~ <span class='fu'><a href='excel_date_functions.html'>YEAR</a></span>(<span class='no'>date</span>),
-        <span class='kw'>.values</span>     <span class='kw'>=</span> ~ <span class='fu'><a href='excel_stat_summary_functions.html'>PCT_CHANGE_FIRSTLAST</a></span>(<span class='no'>adjusted</span>)
-    )</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 16 x 6</span><span>
+<span class='va'>FANG</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>pivot_table</span><span class='op'>(</span>
+        .rows       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>symbol</span>, <span class='op'>~</span> <span class='fu'><a href='excel_date_functions.html'>QUARTER</a></span><span class='op'>(</span><span class='va'>date</span><span class='op'>)</span><span class='op'>)</span>,
+        .columns    <span class='op'>=</span> <span class='op'>~</span> <span class='fu'><a href='excel_date_functions.html'>YEAR</a></span><span class='op'>(</span><span class='va'>date</span><span class='op'>)</span>,
+        .values     <span class='op'>=</span> <span class='op'>~</span> <span class='fu'><a href='excel_stat_summary_functions.html'>PCT_CHANGE_FIRSTLAST</a></span><span class='op'>(</span><span class='va'>adjusted</span><span class='op'>)</span>
+    <span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 16 x 6</span><span>
 #&gt;    symbol `QUARTER(date)`  `2013`   `2014`  `2015`    `2016`
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> AMZN                 1  0.035</span><span style='text-decoration: underline;'>7</span><span> -</span><span style='color: #BB0000;'>0.155</span><span>    0.206  -</span><span style='color: #BB0000;'>0.068</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>  
@@ -291,7 +292,7 @@ Most functions replicate the behavior of Excel:</p><ul>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
