@@ -1,10 +1,10 @@
 
-## tidyquant 1.0.1.9000 (Development Version)
-
+## tidyquant 1.0.2 
 
 ### Fixes
 
 - `tq_exchange()`: Fix issue with NASDAQ changes to website. 
+- `theme_tq()`: Fix issues with `%+replace%`, `theme_gray`, and `rel` not found. 
 
 
 ## tidyquant 1.0.1
