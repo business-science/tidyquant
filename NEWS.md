@@ -4,9 +4,7 @@
 
 ### Fixes
 
-- `tq_exchange()`
-
-
+- `tq_exchange()`: Fix issue with NASDAQ changes to website. 
 
 
 ## tidyquant 1.0.1
