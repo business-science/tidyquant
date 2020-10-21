@@ -109,7 +109,7 @@
       <h1 data-toc-skip>Charting with tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2020-10-20</h4>
+            <h4 class="date">2020-10-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ04-charting-with-tidyquant.Rmd"><code>vignettes/TQ04-charting-with-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ04-charting-with-tidyquant.Rmd</code></div>
@@ -162,10 +162,10 @@
 <p>Financial charts provide visual cues to open, high, low, and close prices. The following chart geoms are available:</p>
 <ul>
 <li>
-<a href="http://www.investopedia.com/terms/b/barchart.asp">Bar Chart</a>: Use <code>geom_barchart</code>
+<a href="https://www.investopedia.com/terms/b/barchart.asp">Bar Chart</a>: Use <code>geom_barchart</code>
 </li>
 <li>
-<a href="http://www.investopedia.com/terms/c/candlestick.asp">Candlestick Chart</a>: Use <code>geom_candlestick</code>
+<a href="https://www.investopedia.com/terms/c/candlestick.asp">Candlestick Chart</a>: Use <code>geom_candlestick</code>
 </li>
 </ul>
 <div id="line-chart" class="section level2">
@@ -295,22 +295,22 @@
 <div id="visualizing-trends" class="section level1">
 <h1 class="hasAnchor">
 <a href="#visualizing-trends" class="anchor"></a>Visualizing Trends</h1>
-<p><a href="http://www.investopedia.com/terms/m/movingaverage.asp">Moving averages</a> are critical to evaluating time-series trends. <code>tidyquant</code> includes geoms to enable “rapid prototyping” to quickly visualize signals using moving averages and Bollinger bands.</p>
+<p><a href="https://www.investopedia.com/terms/m/movingaverage.asp">Moving averages</a> are critical to evaluating time-series trends. <code>tidyquant</code> includes geoms to enable “rapid prototyping” to quickly visualize signals using moving averages and Bollinger bands.</p>
 <p><a class="anchor" id="mavg"></a></p>
 <div id="moving-averages" class="section level2">
 <h2 class="hasAnchor">
 <a href="#moving-averages" class="anchor"></a>Moving Averages</h2>
 <p>The following moving averages are available:</p>
 <ul>
-<li><strong><a href="http://www.investopedia.com/terms/s/sma.asp">Simple moving averages (SMA)</a></strong></li>
-<li><strong><a href="http://www.investopedia.com/terms/e/ema.asp">Exponential moving averages (EMA)</a></strong></li>
-<li><strong><a href="http://www.investopedia.com/ask/answers/071414/whats-difference-between-moving-average-and-weighted-moving-average.asp">Weighted moving averages (WMA)</a></strong></li>
-<li><strong><a href="http://www.investopedia.com/articles/trading/10/double-exponential-moving-average.asp">Double exponential moving averages (DEMA)</a></strong></li>
+<li><strong><a href="https://www.investopedia.com/terms/s/sma.asp">Simple moving averages (SMA)</a></strong></li>
+<li><strong><a href="https://www.investopedia.com/terms/e/ema.asp">Exponential moving averages (EMA)</a></strong></li>
+<li><strong><a href="https://www.investopedia.com/ask/answers/071414/whats-difference-between-moving-average-and-weighted-moving-average.asp">Weighted moving averages (WMA)</a></strong></li>
+<li><strong><a href="https://www.investopedia.com/articles/trading/10/double-exponential-moving-average.asp">Double exponential moving averages (DEMA)</a></strong></li>
 <li><strong><a href="https://en.wikipedia.org/wiki/Zero_lag_exponential_moving_average">Zero-lag exponential moving averages (ZLEMA)</a></strong></li>
 <li>
-<strong><a href="http://www.investopedia.com/articles/trading/11/trading-with-vwap-mvwap.asp">Volume-weighted moving averages (VWMA)</a></strong> (also known as VWAP)</li>
+<strong><a href="https://www.investopedia.com/articles/trading/11/trading-with-vwap-mvwap.asp">Volume-weighted moving averages (VWMA)</a></strong> (also known as VWAP)</li>
 <li>
-<strong><a href="http://www.investopedia.com/articles/trading/11/trading-with-vwap-mvwap.asp">Elastic, volume-weighted moving averages (EVWMA)</a></strong> (also known as MVWAP)</li>
+<strong><a href="https://www.investopedia.com/articles/trading/11/trading-with-vwap-mvwap.asp">Elastic, volume-weighted moving averages (EVWMA)</a></strong> (also known as MVWAP)</li>
 </ul>
 <p>Moving averages are applied as an added layer to a chart with the <code>geom_ma</code> function. The geom is a wrapper for the underlying moving average functions from the <code>TTR</code> package: <code>SMA</code>, <code>EMA</code>, <code>WMA</code>, <code>DEMA</code>, <code>ZLEMA</code>, <code>VWMA</code>, and <code>EVWMA</code>. Here’s how to use the geom:</p>
 <ol style="list-style-type: decimal">

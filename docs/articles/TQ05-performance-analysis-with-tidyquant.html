@@ -109,7 +109,7 @@
       <h1 data-toc-skip>Performance Analysis with tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2020-10-20</h4>
+            <h4 class="date">2020-10-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ05-performance-analysis-with-tidyquant.Rmd"><code>vignettes/TQ05-performance-analysis-with-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ05-performance-analysis-with-tidyquant.Rmd</code></div>
@@ -142,13 +142,13 @@
 <h1 class="hasAnchor">
 <a href="#key-concepts" class="anchor"></a>1.0 Key Concepts</h1>
 <p>An important concept is that performance analysis is based on the statistical properties of <strong>returns</strong> (not prices). As a result, this package uses inputs of <strong>time-based returns as opposed to stock prices</strong>. The arguments change to <code>Ra</code> for the asset returns and <code>Rb</code> for the baseline returns. We’ll go over how to get returns in the <a href="#workflow">Workflow</a> section.</p>
-<p>Another important concept is the <strong>baseline</strong>. The baseline is what you are measuring performance against. A baseline can be anything, but in many cases it’s a representative average of how an investment might perform with little or no effort. Often indexes such as the S&amp;P500 are used for general market performance. Other times more specific Exchange Traded Funds (ETFs) are used such as the <a href="http://www.sectorspdr.com/sectorspdr/sector/xlk/holdings">SPDR Technology ETF (XLK)</a>. The important concept here is that you measure the asset performance (<code>Ra</code>) against the baseline (<code>Rb</code>).</p>
+<p>Another important concept is the <strong>baseline</strong>. The baseline is what you are measuring performance against. A baseline can be anything, but in many cases it’s a representative average of how an investment might perform with little or no effort. Often indexes such as the S&amp;P500 are used for general market performance. Other times more specific Exchange Traded Funds (ETFs) are used such as the <a href="https://www.sectorspdr.com/sectorspdr/sector/xlk/holdings">SPDR Technology ETF (XLK)</a>. The important concept here is that you measure the asset performance (<code>Ra</code>) against the baseline (<code>Rb</code>).</p>
 <p>Now for a quick tutorial to show off the <code>PerformanceAnalytics</code> package integration.</p>
 </div>
 <div id="quick-example" class="section level1">
 <h1 class="hasAnchor">
 <a href="#quick-example" class="anchor"></a>2.0 Quick Example</h1>
-<p>One of the most widely used risk to return metrics is the <a href="http://www.investopedia.com/terms/c/capm.asp">Capital Asset Pricing Model (CAPM)</a>. According to Investopedia:</p>
+<p>One of the most widely used risk to return metrics is the <a href="https://www.investopedia.com/terms/c/capm.asp">Capital Asset Pricing Model (CAPM)</a>. According to Investopedia:</p>
 <blockquote>
 <p>The capital asset pricing model (CAPM) is a model that describes the relationship between systematic risk and expected return for assets, particularly stocks. CAPM is widely used throughout finance for the pricing of risky securities, generating expected returns for assets given the risk of those assets and calculating costs of capital.</p>
 </blockquote>

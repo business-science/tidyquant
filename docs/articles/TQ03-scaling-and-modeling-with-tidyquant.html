@@ -109,7 +109,7 @@
       <h1 data-toc-skip>Scaling and Modeling with tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2020-10-20</h4>
+            <h4 class="date">2020-10-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ03-scaling-and-modeling-with-tidyquant.Rmd"><code>vignettes/TQ03-scaling-and-modeling-with-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ03-scaling-and-modeling-with-tidyquant.Rmd</code></div>
@@ -124,7 +124,7 @@
 <div id="overview" class="section level1">
 <h1 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h1>
-<p>The greatest benefit to <code>tidyquant</code> is the ability to apply the data science workflow to easily model and scale your financial analysis as described in <a href="http://r4ds.had.co.nz/"><em>R for Data Science</em></a>. Scaling is the process of creating an analysis for one asset and then extending it to multiple groups. This idea of scaling is incredibly useful to financial analysts because typically one wants to compare many assets to make informed decisions. Fortunately, the <code>tidyquant</code> package integrates with the <code>tidyverse</code> making scaling super simple!</p>
+<p>The greatest benefit to <code>tidyquant</code> is the ability to apply the data science workflow to easily model and scale your financial analysis as described in <a href="https://r4ds.had.co.nz/"><em>R for Data Science</em></a>. Scaling is the process of creating an analysis for one asset and then extending it to multiple groups. This idea of scaling is incredibly useful to financial analysts because typically one wants to compare many assets to make informed decisions. Fortunately, the <code>tidyquant</code> package integrates with the <code>tidyverse</code> making scaling super simple!</p>
 <p>All <code>tidyquant</code> functions return data in the <code>tibble</code> (tidy data frame) format, which allows for interaction within the <code>tidyverse</code>. This means we can:</p>
 <ul>
 <li>Seamlessly scale data retrieval and mutations</li>
@@ -132,7 +132,7 @@
 <li>Use <code>dplyr</code> and <code>tidyr</code>: <code>select</code>, <code>filter</code>, <code>group_by</code>, <code>nest</code>/<code>unnest</code>, <code>spread</code>/<code>gather</code>, etc</li>
 <li>Use <code>purrr</code>: mapping functions with <code>map</code>
 </li>
-<li>Model financial analysis using the data science workflow in <a href="http://r4ds.had.co.nz/"><em>R for Data Science</em></a>
+<li>Model financial analysis using the data science workflow in <a href="https://r4ds.had.co.nz/"><em>R for Data Science</em></a>
 </li>
 </ul>
 <p>We’ll go through some useful techniques for getting and manipulating groups of data.</p>
@@ -217,16 +217,16 @@
 <pre><code>## # A tibble: 30 x 8
 ##    symbol company    identifier sedol  weight sector  shares_held local_currency
 ##    &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;         
-##  1 UNH    UnitedHea… 91324P10   29177… 0.0757 Health…     5559548 USD           
-##  2 HD     Home Depo… 43707610   24342… 0.0662 Consum…     5559548 USD           
-##  3 CRM    salesforc… 79466L30   23105… 0.0595 Inform…     5559548 USD           
-##  4 AMGN   Amgen Inc. 03116210   20236… 0.0538 Health…     5559548 USD           
-##  5 MCD    McDonald'… 58013510   25507… 0.0527 Consum…     5559548 USD           
-##  6 MSFT   Microsoft… 59491810   25881… 0.0500 Inform…     5559548 USD           
-##  7 GS     Goldman S… 38141G10   24079… 0.0480 Financ…     5559548 USD           
-##  8 V      Visa Inc.… 92826C83   B2PZN… 0.0460 Inform…     5559548 USD           
-##  9 HON    Honeywell… 43851610   20204… 0.0400 Indust…     5559548 USD           
-## 10 MMM    3M Company 88579Y10   25957… 0.0396 Indust…     5559548 USD           
+##  1 UNH    UnitedHea… 91324P10   29177… 0.0752 Health…     5464167 USD           
+##  2 HD     Home Depo… 43707610   24342… 0.0665 Consum…     5464167 USD           
+##  3 CRM    salesforc… 79466L30   23105… 0.0595 Inform…     5464167 USD           
+##  4 AMGN   Amgen Inc. 03116210   20236… 0.0537 Health…     5464167 USD           
+##  5 MCD    McDonald'… 58013510   25507… 0.0529 Consum…     5464167 USD           
+##  6 MSFT   Microsoft… 59491810   25881… 0.0499 Inform…     5464167 USD           
+##  7 GS     Goldman S… 38141G10   24079… 0.0484 Financ…     5464167 USD           
+##  8 V      Visa Inc.… 92826C83   B2PZN… 0.0459 Inform…     5464167 USD           
+##  9 HON    Honeywell… 43851610   20204… 0.0403 Indust…     5464167 USD           
+## 10 MMM    3M Company 88579Y10   25957… 0.0397 Indust…     5464167 USD           
 ## # … with 20 more rows</code></pre>
 <p>…or, get an exchange.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
@@ -236,20 +236,20 @@
 <span class="fu"><a href="../reference/tq_index.html">tq_index</a></span><span class="op">(</span><span class="st">"DOW"</span><span class="op">)</span> <span class="op">%&gt;%</span>
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span>
     <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get <span class="op">=</span> <span class="st">"stock.prices"</span><span class="op">)</span></pre></div>
-<pre><code>## # A tibble: 8,154 x 15
+<pre><code>## # A tibble: 8,157 x 15
 ##    symbol company identifier sedol weight sector shares_held local_currency
 ##    &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;         
-##  1 UNH    United… 91324P10   2917… 0.0757 Healt…     5559548 USD           
-##  2 UNH    United… 91324P10   2917… 0.0757 Healt…     5559548 USD           
-##  3 UNH    United… 91324P10   2917… 0.0757 Healt…     5559548 USD           
-##  4 UNH    United… 91324P10   2917… 0.0757 Healt…     5559548 USD           
-##  5 UNH    United… 91324P10   2917… 0.0757 Healt…     5559548 USD           
-##  6 UNH    United… 91324P10   2917… 0.0757 Healt…     5559548 USD           
-##  7 UNH    United… 91324P10   2917… 0.0757 Healt…     5559548 USD           
-##  8 UNH    United… 91324P10   2917… 0.0757 Healt…     5559548 USD           
-##  9 UNH    United… 91324P10   2917… 0.0757 Healt…     5559548 USD           
-## 10 UNH    United… 91324P10   2917… 0.0757 Healt…     5559548 USD           
-## # … with 8,144 more rows, and 7 more variables: date &lt;date&gt;, open &lt;dbl&gt;,
+##  1 UNH    United… 91324P10   2917… 0.0752 Healt…     5464167 USD           
+##  2 UNH    United… 91324P10   2917… 0.0752 Healt…     5464167 USD           
+##  3 UNH    United… 91324P10   2917… 0.0752 Healt…     5464167 USD           
+##  4 UNH    United… 91324P10   2917… 0.0752 Healt…     5464167 USD           
+##  5 UNH    United… 91324P10   2917… 0.0752 Healt…     5464167 USD           
+##  6 UNH    United… 91324P10   2917… 0.0752 Healt…     5464167 USD           
+##  7 UNH    United… 91324P10   2917… 0.0752 Healt…     5464167 USD           
+##  8 UNH    United… 91324P10   2917… 0.0752 Healt…     5464167 USD           
+##  9 UNH    United… 91324P10   2917… 0.0752 Healt…     5464167 USD           
+## 10 UNH    United… 91324P10   2917… 0.0752 Healt…     5464167 USD           
+## # … with 8,147 more rows, and 7 more variables: date &lt;date&gt;, open &lt;dbl&gt;,
 ## #   high &lt;dbl&gt;, low &lt;dbl&gt;, close &lt;dbl&gt;, volume &lt;dbl&gt;, adjusted &lt;dbl&gt;</code></pre>
 <p>You can use any applicable “getter” to get data for <strong>every stock in an index or an exchange</strong>! This includes: “stock.prices”, “key.ratios”, “key.stats”, and more.</p>
 </div>
@@ -303,7 +303,7 @@
 <div id="modeling-financial-data-using-purrr" class="section level1">
 <h1 class="hasAnchor">
 <a href="#modeling-financial-data-using-purrr" class="anchor"></a>3.0 Modeling Financial Data using purrr</h1>
-<p>Eventually you will want to begin modeling (or more generally applying functions) at scale! One of the <strong>best</strong> features of the <code>tidyverse</code> is the ability to map functions to nested tibbles using <code>purrr</code>. From the Many Models chapter of “<a href="http://r4ds.had.co.nz/">R for Data Science</a>”, we can apply the same modeling workflow to financial analysis. Using a two step workflow:</p>
+<p>Eventually you will want to begin modeling (or more generally applying functions) at scale! One of the <strong>best</strong> features of the <code>tidyverse</code> is the ability to map functions to nested tibbles using <code>purrr</code>. From the Many Models chapter of “<a href="https://r4ds.had.co.nz/">R for Data Science</a>”, we can apply the same modeling workflow to financial analysis. Using a two step workflow:</p>
 <ol style="list-style-type: decimal">
 <li>Model a single stock</li>
 <li>Scale to many stocks</li>
@@ -430,11 +430,11 @@
 <pre><code>## # A tibble: 5 x 8
 ##   symbol company    identifier sedol  weight sector   shares_held local_currency
 ##   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;         
-## 1 VNT    Vontier C… 92888110   BH4G… 1.34e-4 Informa…     1423123 USD           
-## 2 ADI    Analog De… 03265410   2032… 1.59e-3 Informa…     3878406 USD           
-## 3 NUE    Nucor Cor… 67034610   2651… 5.21e-4 Materia…     3190738 USD           
-## 4 OKE    ONEOK Inc. 68268010   2130… 4.43e-4 Energy       4688928 USD           
-## 5 AAL    American … 02376R10   BCV7… 2.20e-4 Industr…     5255452 USD</code></pre>
+## 1 VNT    Vontier C… 92888110   BH4G… 1.34e-4 Informa…     1420288 USD           
+## 2 ADI    Analog De… 03265410   2032… 1.59e-3 Informa…     3870636 USD           
+## 3 SYF    Synchrony… 87165B10   BP96… 5.21e-4 Financi…     5673466 USD           
+## 4 EVRG   Evergy In… 30034W10   BFMX… 4.44e-4 Utiliti…     2403514 USD           
+## 5 AAL    American … 02376R10   BCV7… 2.23e-4 Industr…     5244777 USD</code></pre>
 <p>We can now apply our analysis function to the stocks using <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate</a></code> and <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map</a></code>. The <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> function adds a column to our tibble, and the <code>map()</code> function maps our custom <code>get_model</code> function to our tibble of stocks using the <code>symbol</code> column. The <code><a href="https://tidyr.tidyverse.org/reference/nest.html">tidyr::unnest</a></code> function unrolls the nested data frame so all of the model statistics are accessable in the top data frame level. The <code>filter</code>, <code>arrange</code> and <code>select</code> steps just manipulate the data frame to isolate and arrange the data for our viewing.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit">
 <span class="va">stocks_model_stats</span> <span class="op">&lt;-</span> <span class="va">stocks_tbl</span> <span class="op">%&gt;%</span>
@@ -460,9 +460,9 @@
 ##   symbol company              data          estimate std.error statistic p.value
 ##   &lt;chr&gt;  &lt;chr&gt;                &lt;list&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
 ## 1 AAL    American Airlines G… &lt;tibble [2,5…   0.142     0.0753     1.89   0.0958
-## 2 ADI    Analog Devices Inc.  &lt;tibble [2,5…   0.0272    0.0295     0.920  0.385 
-## 3 NUE    Nucor Corporation    &lt;tibble [2,5…   0.0231    0.0208     1.11   0.300 
-## 4 OKE    ONEOK Inc.           &lt;tibble [2,5…   0.0120    0.0533     0.226  0.827</code></pre>
+## 2 EVRG   Evergy Inc.          &lt;tibble [2,5…   0.0299    0.0131     2.28   0.0522
+## 3 ADI    Analog Devices Inc.  &lt;tibble [2,5…   0.0272    0.0295     0.920  0.385 
+## 4 SYF    Synchrony Financial  &lt;tibble [611…  -0.0359    0.115     -0.312  0.807</code></pre>
 <p>We’re done! We now have the coefficient of the linear regression that tracks the direction of the trend line. We can easily extend this type of analysis to larger lists or stock indexes. For example, the entire S&amp;P500 could be analyzed removing the <code><a href="https://dplyr.tidyverse.org/reference/sample_n.html">sample_n()</a></code> following the call to <code><a href="../reference/tq_index.html">tq_index("SP500")</a></code>.</p>
 </div>
 </div>
@@ -507,7 +507,7 @@
 ## BAD APPLE download failed after two attempts. Error message:
 ## HTTP error 400.
 ##  Removing BAD APPLE.</code></pre>
-<pre><code>## # A tibble: 5,436 x 8
+<pre><code>## # A tibble: 5,438 x 8
 ##    symbol date        open  high   low close    volume adjusted
 ##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 ##  1 AAPL   2010-01-04  7.62  7.66  7.58  7.64 493729600     6.60
@@ -520,7 +520,7 @@
 ##  8 AAPL   2010-01-13  7.42  7.53  7.29  7.52 605892000     6.50
 ##  9 AAPL   2010-01-14  7.50  7.52  7.46  7.48 432894000     6.46
 ## 10 AAPL   2010-01-15  7.53  7.56  7.35  7.35 594067600     6.36
-## # … with 5,426 more rows</code></pre>
+## # … with 5,428 more rows</code></pre>
 <p>Now switching <code>complete_cases = FALSE</code> will retain any errors as <code>NA</code> values in a nested data frame. Notice that the error message and output change. The error message now states that the <code>NA</code> values exist in the output and the return is a “nested” data structure.</p>
 <div class="sourceCode" id="cb40"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"BAD APPLE"</span><span class="op">)</span> <span class="op">%&gt;%</span>
@@ -534,7 +534,7 @@
 <pre><code>## Warning: x = 'BAD APPLE', get = 'stock.prices': Error in getSymbols.yahoo(Symbols = "BAD APPLE", env = &lt;environment&gt;, : Unable to import "BAD APPLE".
 ## BAD APPLE download failed after two attempts. Error message:
 ## HTTP error 400.</code></pre>
-<pre><code>## # A tibble: 5,437 x 9
+<pre><code>## # A tibble: 5,439 x 9
 ##    symbol date        open  high   low close    volume adjusted stock.prices
 ##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;lgl&gt;       
 ##  1 AAPL   2010-01-04  7.62  7.66  7.58  7.64 493729600     6.60 NA          
@@ -547,7 +547,7 @@
 ##  8 AAPL   2010-01-13  7.42  7.53  7.29  7.52 605892000     6.50 NA          
 ##  9 AAPL   2010-01-14  7.50  7.52  7.46  7.48 432894000     6.46 NA          
 ## 10 AAPL   2010-01-15  7.53  7.56  7.35  7.35 594067600     6.36 NA          
-## # … with 5,427 more rows</code></pre>
+## # … with 5,429 more rows</code></pre>
 <p>In both cases, the prudent user will review the warnings to determine what happened and whether or not this is acceptable. In the <code>complete_cases = FALSE</code> example, if the user attempts to perform downstream computations at scale, the computations will likely fail grinding the analysis to a hault. But, the advantage is that the user will more easily be able to filter to the problem childs to determine what happened and decide whether this is acceptable or not.</p>
 </div>
 </div>
