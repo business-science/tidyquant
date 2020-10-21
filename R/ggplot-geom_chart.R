@@ -4,8 +4,8 @@
 #' Use [coord_x_date()] to zoom into specific plot regions.
 #' The following financial chart geoms are available:
 #' \itemize{
-#'    \item \strong{\href{http://www.investopedia.com/terms/b/barchart.asp}{Bar Chart}}
-#'    \item \strong{\href{http://www.investopedia.com/terms/c/candlestick.asp}{Candlestick Chart}}
+#'    \item \strong{\href{https://www.investopedia.com/terms/b/barchart.asp}{Bar Chart}}
+#'    \item \strong{\href{https://www.investopedia.com/terms/c/candlestick.asp}{Candlestick Chart}}
 #' }
 #'
 #' @inheritParams geom_ma

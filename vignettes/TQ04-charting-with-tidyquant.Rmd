@@ -66,8 +66,8 @@ end <- as_date("2016-12-31")
 
 Financial charts provide visual cues to open, high, low, and close prices. The following chart geoms are available:
 
-* [Bar Chart](http://www.investopedia.com/terms/b/barchart.asp): Use `geom_barchart`
-* [Candlestick Chart](http://www.investopedia.com/terms/c/candlestick.asp): Use `geom_candlestick`
+* [Bar Chart](https://www.investopedia.com/terms/b/barchart.asp): Use `geom_barchart`
+* [Candlestick Chart](https://www.investopedia.com/terms/c/candlestick.asp): Use `geom_candlestick`
 
 ## Line Chart
 
@@ -211,7 +211,7 @@ FANG %>%
 
 # Visualizing Trends
 
-[Moving averages](http://www.investopedia.com/terms/m/movingaverage.asp) are critical to evaluating time-series trends. `tidyquant` includes geoms to enable "rapid prototyping" to quickly visualize signals using moving averages and Bollinger bands.
+[Moving averages](https://www.investopedia.com/terms/m/movingaverage.asp) are critical to evaluating time-series trends. `tidyquant` includes geoms to enable "rapid prototyping" to quickly visualize signals using moving averages and Bollinger bands.
 
 
 <a class="anchor" id="mavg"></a>
@@ -220,13 +220,13 @@ FANG %>%
 
 The following moving averages are available:
 
-* __[Simple moving averages (SMA)](http://www.investopedia.com/terms/s/sma.asp)__
-* __[Exponential moving averages (EMA)](http://www.investopedia.com/terms/e/ema.asp)__
-* __[Weighted moving averages (WMA)](http://www.investopedia.com/ask/answers/071414/whats-difference-between-moving-average-and-weighted-moving-average.asp)__
-* __[Double exponential moving averages (DEMA)](http://www.investopedia.com/articles/trading/10/double-exponential-moving-average.asp)__
+* __[Simple moving averages (SMA)](https://www.investopedia.com/terms/s/sma.asp)__
+* __[Exponential moving averages (EMA)](https://www.investopedia.com/terms/e/ema.asp)__
+* __[Weighted moving averages (WMA)](https://www.investopedia.com/ask/answers/071414/whats-difference-between-moving-average-and-weighted-moving-average.asp)__
+* __[Double exponential moving averages (DEMA)](https://www.investopedia.com/articles/trading/10/double-exponential-moving-average.asp)__
 * __[Zero-lag exponential moving averages (ZLEMA)](https://en.wikipedia.org/wiki/Zero_lag_exponential_moving_average)__
-* __[Volume-weighted moving averages (VWMA)](http://www.investopedia.com/articles/trading/11/trading-with-vwap-mvwap.asp)__ (also known as VWAP)
-* __[Elastic, volume-weighted moving averages (EVWMA)](http://www.investopedia.com/articles/trading/11/trading-with-vwap-mvwap.asp)__ (also known as MVWAP)
+* __[Volume-weighted moving averages (VWMA)](https://www.investopedia.com/articles/trading/11/trading-with-vwap-mvwap.asp)__ (also known as VWAP)
+* __[Elastic, volume-weighted moving averages (EVWMA)](https://www.investopedia.com/articles/trading/11/trading-with-vwap-mvwap.asp)__ (also known as MVWAP)
 
 Moving averages are applied as an added layer to a chart with the `geom_ma` function. The geom is a wrapper for the underlying moving average functions from the `TTR` package: `SMA`, `EMA`, `WMA`, `DEMA`, `ZLEMA`, `VWMA`, and `EVWMA`. Here's how to use the geom:
 

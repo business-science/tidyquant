@@ -4,20 +4,20 @@
 #' from the TTR package. Use [coord_x_date()] to zoom into specific plot regions.
 #' The following moving averages are available:
 #' \itemize{
-#'    \item \strong{\href{http://www.investopedia.com/terms/s/sma.asp}{Simple moving averages (SMA)}}:
+#'    \item \strong{\href{https://www.investopedia.com/terms/s/sma.asp}{Simple moving averages (SMA)}}:
 #'    Rolling mean over a period defined by `n`.
-#'    \item \strong{\href{http://www.investopedia.com/terms/e/ema.asp}{Exponential moving averages (EMA)}}: Includes
+#'    \item \strong{\href{https://www.investopedia.com/terms/e/ema.asp}{Exponential moving averages (EMA)}}: Includes
 #'    exponentially-weighted mean that gives more weight to recent observations.
 #'    Uses `wilder` and `ratio` args.
-#'    \item \strong{\href{http://www.investopedia.com/ask/answers/071414/whats-difference-between-moving-average-and-weighted-moving-average.asp}{Weighted moving averages (WMA)}}:
+#'    \item \strong{\href{https://www.investopedia.com/ask/answers/071414/whats-difference-between-moving-average-and-weighted-moving-average.asp}{Weighted moving averages (WMA)}}:
 #'    Uses a set of weights, `wts`, to weight observations in the moving average.
-#'    \item \strong{\href{http://www.investopedia.com/articles/trading/10/double-exponential-moving-average.asp}{Double exponential moving averages (DEMA)}}:
+#'    \item \strong{\href{https://www.investopedia.com/articles/trading/10/double-exponential-moving-average.asp}{Double exponential moving averages (DEMA)}}:
 #'    Uses `v` volume factor, `wilder` and `ratio` args.
 #'    \item \strong{\href{https://en.wikipedia.org/wiki/Zero_lag_exponential_moving_average}{Zero-lag exponential moving averages (ZLEMA)}}:
 #'    Uses `wilder` and `ratio` args.
-#'    \item \strong{\href{http://www.investopedia.com/articles/trading/11/trading-with-vwap-mvwap.asp}{Volume-weighted moving averages (VWMA)}}:
+#'    \item \strong{\href{https://www.investopedia.com/articles/trading/11/trading-with-vwap-mvwap.asp}{Volume-weighted moving averages (VWMA)}}:
 #'    Requires `volume` aesthetic.
-#'    \item \strong{\href{http://www.motivewave.com/studies/elastic_volume_weighted_moving_average.htm}{Elastic, volume-weighted moving averages (EVWMA)}}:
+#'    \item \strong{\href{https://www.motivewave.com/studies/elastic_volume_weighted_moving_average.htm}{Elastic, volume-weighted moving averages (EVWMA)}}:
 #'    Requires `volume` aesthetic.
 #' }
 #'

@@ -18,7 +18,7 @@ A "tibble" ("tidy" data frame) with 4,032 rows and 8 variables:
 }
 }
 \source{
-\url{http://www.investopedia.com/terms/f/fang-stocks-fb-amzn.asp}
+\url{https://www.investopedia.com/terms/f/fang-stocks-fb-amzn.asp}
 }
 \usage{
 FANG

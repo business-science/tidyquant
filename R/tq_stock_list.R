@@ -11,7 +11,7 @@
 #' @details
 #' `tq_index()` returns the stock symbol, company name, weight, and sector of every stock
 #' in an index. The source is
-#' \href{https://us.spdrs.com/en/product/}{www.us.spdrs.com}.
+#' \href{https://www.ssga.com/us/en/individual/etfs/fund-finder}{www.ssga.com}.
 #'
 #' `tq_index_options()` returns a list of stock indexes you can
 #' choose from.
