@@ -32,7 +32,7 @@ perform complete financial analyses in the `tidyverse`.
     `xts`, `quantmod`, `TTR`, and *now* `PerformanceAnalytics`**
   - **Designed for modeling and scaling analyses using the the
     `tidyverse` tools in [*R for Data
-    Science*](http://r4ds.had.co.nz/)**
+    Science*](https://r4ds.had.co.nz/)**
   - **Implements `ggplot2` functionality for beautiful and meaningful
     financial visualizations**
   - **User-friendly documentation to get you up to speed quickly\!**
