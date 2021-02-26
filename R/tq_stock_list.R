@@ -114,14 +114,15 @@ tq_exchange <- function(x) {
 
     # Download
     message("Getting data...\n")
-    base_path_1 <- "https://old.nasdaq.com/screening/companies-by-name.aspx?letter=0&exchange="
-    base_path_2 <- "&render=download"
+    base_path_1 <- "https://api.nasdaq.com/api/screener/stocks?tableonly=true&exchange="
+    base_path_2 <- "&download=true"
     url         <- paste0(base_path_1, x, base_path_2)
-    res         <- csv_downloader(path = url)
+    # res         <- csv_downloader(path = url)
+    res         <- jsonlite::fromJSON(url)
 
     # Evaluate Response / Clean & Return
     if (is.null(res$err)) {
-        exchange_raw <- res$df
+        exchange_raw <- res$data$rows
 
         # Post-process response
         suppressWarnings({
@@ -129,23 +130,27 @@ tq_exchange <- function(x) {
             dplyr::mutate_if(is.character, stringr::str_trim) %>%
             dplyr::as_tibble() %>%
             dplyr::rename(
-              symbol = Symbol,
-              company = Name,
-              last.sale.price = LastSale,
-              market.cap = MarketCap,
-              ipo.year = IPOyear,
-              sector = Sector
+              symbol = symbol,
+              company = name,
+              last.sale.price = lastsale,
+              market.cap = marketCap,
+              country = country,
+              ipo.year = ipoyear,
+              sector = sector,
+              industry = industry
             ) %>%
             dplyr::mutate(
               symbol = as.character(symbol),
               company = as.character(company),
-              last.sale.price = as.numeric(last.sale.price),
-              market.cap = as.character(market.cap),
-              ipo.year = as.numeric(ipo.year),
+              last.sale.price = as.numeric(stringr::str_remove(last.sale.price, "\\$")),
+              market.cap = as.numeric(market.cap),
+              country = as.character(country),
+              ipo.year = as.integer(ipo.year),
               sector = as.character(sector),
               industry = as.character(industry)
             ) %>%
-            dplyr::select(symbol:industry)
+            dplyr::select(symbol:industry) %>% 
+            dplyr::select(-c(netchange, pctchange, volume))
         })
 
         return(exchange)
