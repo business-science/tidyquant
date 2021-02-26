@@ -82,3 +82,7 @@ excel_downloader <- function(path, ...) {
 
     })
 }
+
+json_downloader_stocklist <- function(path) {
+    
+}
