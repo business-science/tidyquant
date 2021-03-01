@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.3</span>
       </span>
     </div>
 
@@ -135,7 +135,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/business-science/tidyquant">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -283,20 +283,20 @@ that specifies which parameters can be passed via <code>...</code></p></li>
              weights <span class='op'>=</span> <span class='va'>weights</span>,
              col_rename <span class='op'>=</span> <span class='cn'>NULL</span>,
              wealth.index <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 48 x 2</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 48 x 2</span><span>
 #&gt;    date       portfolio.returns
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>                 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> 2013-01-31           0.260  
-#&gt; </span><span style='color: #555555;'> 2</span><span> 2013-02-28          -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>56</span><span>
-#&gt; </span><span style='color: #555555;'> 3</span><span> 2013-03-28          -</span><span style='color: #BB0000;'>0.019</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> 
-#&gt; </span><span style='color: #555555;'> 4</span><span> 2013-04-30           0.081</span><span style='text-decoration: underline;'>0</span><span> 
-#&gt; </span><span style='color: #555555;'> 5</span><span> 2013-05-31          -</span><span style='color: #BB0000;'>0.013</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> 
-#&gt; </span><span style='color: #555555;'> 6</span><span> 2013-06-28          -</span><span style='color: #BB0000;'>0.017</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> 
-#&gt; </span><span style='color: #555555;'> 7</span><span> 2013-07-31           0.254  
-#&gt; </span><span style='color: #555555;'> 8</span><span> 2013-08-30           0.104  
-#&gt; </span><span style='color: #555555;'> 9</span><span> 2013-09-30           0.145  
-#&gt; </span><span style='color: #555555;'>10</span><span> 2013-10-31           0.042</span><span style='text-decoration: underline;'>0</span><span> 
-#&gt; </span><span style='color: #555555;'># … with 38 more rows</span><span></div><div class='input'>
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>                 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 2013-01-31           0.260  
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 2013-02-28          -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>56</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 2013-03-28          -</span><span style='color: #BB0000;'>0.019</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 2013-04-30           0.081</span><span style='text-decoration: underline;'>0</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 2013-05-31          -</span><span style='color: #BB0000;'>0.013</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 2013-06-28          -</span><span style='color: #BB0000;'>0.017</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 2013-07-31           0.254  
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 2013-08-30           0.104  
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 2013-09-30           0.145  
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 2013-10-31           0.042</span><span style='text-decoration: underline;'>0</span><span> 
+#&gt; </span><span style='color: #949494;'># … with 38 more rows</span><span></div><div class='input'>
 <span class='co'># Method 2: Use tq_portfolio with two column tibble and map weights</span>
 
 <span class='co'># Note that GOOG's weighting is zero in Method 1. In Method 2,</span>
@@ -309,20 +309,20 @@ that specifies which parameters can be passed via <code>...</code></p></li>
              weights <span class='op'>=</span> <span class='va'>weights_df</span>,
              col_rename <span class='op'>=</span> <span class='cn'>NULL</span>,
              wealth.index <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 48 x 2</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 48 x 2</span><span>
 #&gt;    date       portfolio.returns
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>                 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> 2013-01-31           0.260  
-#&gt; </span><span style='color: #555555;'> 2</span><span> 2013-02-28          -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>56</span><span>
-#&gt; </span><span style='color: #555555;'> 3</span><span> 2013-03-28          -</span><span style='color: #BB0000;'>0.019</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> 
-#&gt; </span><span style='color: #555555;'> 4</span><span> 2013-04-30           0.081</span><span style='text-decoration: underline;'>0</span><span> 
-#&gt; </span><span style='color: #555555;'> 5</span><span> 2013-05-31          -</span><span style='color: #BB0000;'>0.013</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> 
-#&gt; </span><span style='color: #555555;'> 6</span><span> 2013-06-28          -</span><span style='color: #BB0000;'>0.017</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> 
-#&gt; </span><span style='color: #555555;'> 7</span><span> 2013-07-31           0.254  
-#&gt; </span><span style='color: #555555;'> 8</span><span> 2013-08-30           0.104  
-#&gt; </span><span style='color: #555555;'> 9</span><span> 2013-09-30           0.145  
-#&gt; </span><span style='color: #555555;'>10</span><span> 2013-10-31           0.042</span><span style='text-decoration: underline;'>0</span><span> 
-#&gt; </span><span style='color: #555555;'># … with 38 more rows</span><span></div><div class='input'>
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>                 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 2013-01-31           0.260  
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 2013-02-28          -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>56</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 2013-03-28          -</span><span style='color: #BB0000;'>0.019</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 2013-04-30           0.081</span><span style='text-decoration: underline;'>0</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 2013-05-31          -</span><span style='color: #BB0000;'>0.013</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 2013-06-28          -</span><span style='color: #BB0000;'>0.017</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 2013-07-31           0.254  
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 2013-08-30           0.104  
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 2013-09-30           0.145  
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 2013-10-31           0.042</span><span style='text-decoration: underline;'>0</span><span> 
+#&gt; </span><span style='color: #949494;'># … with 38 more rows</span><span></div><div class='input'>
 <span class='co'># Method 3: Working with multiple portfolios</span>
 
 <span class='co'># 3A: Duplicate monthly_returns_stocks multiple times</span>
@@ -346,21 +346,21 @@ that specifies which parameters can be passed via <code>...</code></p></li>
              weights <span class='op'>=</span> <span class='va'>weights_table</span>,
              col_rename <span class='op'>=</span> <span class='cn'>NULL</span>,
              wealth.index <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 192 x 3</span><span>
-#&gt; </span><span style='color: #555555;'># Groups:   portfolio [4]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 192 x 3</span><span>
+#&gt; </span><span style='color: #949494;'># Groups:   portfolio [4]</span><span>
 #&gt;    portfolio date       portfolio.returns
-#&gt;        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>                 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span>         1 2013-01-31           0.260  
-#&gt; </span><span style='color: #555555;'> 2</span><span>         1 2013-02-28          -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>56</span><span>
-#&gt; </span><span style='color: #555555;'> 3</span><span>         1 2013-03-28          -</span><span style='color: #BB0000;'>0.019</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> 
-#&gt; </span><span style='color: #555555;'> 4</span><span>         1 2013-04-30           0.081</span><span style='text-decoration: underline;'>0</span><span> 
-#&gt; </span><span style='color: #555555;'> 5</span><span>         1 2013-05-31          -</span><span style='color: #BB0000;'>0.013</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> 
-#&gt; </span><span style='color: #555555;'> 6</span><span>         1 2013-06-28          -</span><span style='color: #BB0000;'>0.017</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> 
-#&gt; </span><span style='color: #555555;'> 7</span><span>         1 2013-07-31           0.254  
-#&gt; </span><span style='color: #555555;'> 8</span><span>         1 2013-08-30           0.104  
-#&gt; </span><span style='color: #555555;'> 9</span><span>         1 2013-09-30           0.145  
-#&gt; </span><span style='color: #555555;'>10</span><span>         1 2013-10-31           0.042</span><span style='text-decoration: underline;'>0</span><span> 
-#&gt; </span><span style='color: #555555;'># … with 182 more rows</span><span></div></span></pre>
+#&gt;        </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>                 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>         1 2013-01-31           0.260  
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>         1 2013-02-28          -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>56</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>         1 2013-03-28          -</span><span style='color: #BB0000;'>0.019</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>         1 2013-04-30           0.081</span><span style='text-decoration: underline;'>0</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>         1 2013-05-31          -</span><span style='color: #BB0000;'>0.013</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>         1 2013-06-28          -</span><span style='color: #BB0000;'>0.017</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>         1 2013-07-31           0.254  
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>         1 2013-08-30           0.104  
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>         1 2013-09-30           0.145  
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>         1 2013-10-31           0.042</span><span style='text-decoration: underline;'>0</span><span> 
+#&gt; </span><span style='color: #949494;'># … with 182 more rows</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

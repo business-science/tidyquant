@@ -94,7 +94,7 @@ By default, missing values are ignored (same as in Excel)
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.3</span>
       </span>
     </div>
 
@@ -145,7 +145,7 @@ By default, missing values are ignored (same as in Excel)
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/business-science/tidyquant">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -252,7 +252,7 @@ This is a function factory that generates summary "_IFS" functions.</p>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/tidyquant'>tidyquant</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/timetk'>timetk</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://stringr.tidyverse.org'>stringr</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://lubridate.tidyverse.org'>lubridate</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://lubridate.tidyverse.org'>lubridate</a></span><span class='op'>)</span>
 
 <span class='co'># --- Basic Usage ---</span>
 
@@ -278,13 +278,13 @@ This is a function factory that generates summary "_IFS" functions.</p>
                                         <span class='fu'><a href='http://lubridate.tidyverse.org/reference/year.html'>year</a></span><span class='op'>(</span><span class='va'>date</span><span class='op'>)</span> <span class='op'>==</span> <span class='fl'>2015</span>,
                                         <span class='va'>volume</span> <span class='op'>&gt;</span> <span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span><span class='op'>(</span><span class='va'>volume</span>, <span class='fl'>0.75</span><span class='op'>)</span><span class='op'>)</span>
     <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>`summarise()` ungrouping output (override with `.groups` argument)</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 2</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 2</span><span>
 #&gt;   symbol high_volume_in_2015
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> AMZN                    62
-#&gt; </span><span style='color: #555555;'>2</span><span> FB                      15
-#&gt; </span><span style='color: #555555;'>3</span><span> GOOG                    19
-#&gt; </span><span style='color: #555555;'>4</span><span> NFLX                    54</div><div class='input'>
+#&gt; </span><span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> AMZN                    62
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> FB                      15
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> GOOG                    19
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> NFLX                    54</div><div class='input'>
 <span class='co'># Count negative returns by month</span>
 <span class='va'>FANG</span> <span class='op'>%&gt;%</span>
     <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>symbol <span class='op'>=</span> <span class='fu'>as_factor</span><span class='op'>(</span><span class='va'>symbol</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -307,13 +307,13 @@ This is a function factory that generates summary "_IFS" functions.</p>
     <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span>
         negative_monthly_returns <span class='op'>=</span> <span class='fu'>COUNT_IFS</span><span class='op'>(</span><span class='va'>returns</span>, <span class='va'>returns</span> <span class='op'>&lt;</span> <span class='fl'>0</span><span class='op'>)</span>
     <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>`summarise()` ungrouping output (override with `.groups` argument)</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 2</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 4 x 2</span><span>
 #&gt;   symbol negative_monthly_returns
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>                     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> FB                           16
-#&gt; </span><span style='color: #555555;'>2</span><span> AMZN                         16
-#&gt; </span><span style='color: #555555;'>3</span><span> NFLX                         16
-#&gt; </span><span style='color: #555555;'>4</span><span> GOOG                         20</div><div class='input'>
+#&gt; </span><span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>                     </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> FB                           16
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> AMZN                         16
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> NFLX                         16
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> GOOG                         20</div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
