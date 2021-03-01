@@ -137,5 +137,12 @@ globalVariables(c("A",
                   "high",
                   "low",
                   "ticker",
-                  "volume"
+                  "volume",
+                  "name",
+                  "lastsale",
+                  "marketCap",
+                  "country",
+                  "ipoyear",
+                  "netchange",
+                  "pctchange"
                   ))

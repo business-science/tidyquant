@@ -27,6 +27,7 @@ Depends:
 Imports:
     dplyr (>= 1.0.0),
     ggplot2,
+    jsonlite, 
     httr,
     curl, 
     lazyeval,
