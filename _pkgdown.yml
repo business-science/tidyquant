@@ -33,7 +33,7 @@ navbar:
       href: news/index.html
 
   right:
-    - icon: fa-github
+    - icon: fab fa-github
       href: https://github.com/business-science/tidyquant
 
 reference:
