@@ -1,5 +1,5 @@
 
-## tidyquant 1.0.2.9000
+## tidyquant 1.0.3
 
 ### Fixes
 
