@@ -47,7 +47,7 @@ See also \code{\link[=tiingo_api_key]{tiingo_api_key()}}.
 \href{https://www.alphavantage.co/}{Alpha Vantage}. Wrapper for \code{alphavantager::av_get()}.
 See also \code{\link[=av_api_key]{av_api_key()}}.
 \item \code{"rblpapi"}: Get data sets from
-\href{https://www.bloomberg.com/professional/solution/bloomberg-terminal}{Bloomberg}. Wrapper for \code{Rblpapi}.
+\href{https://www.bloomberg.com/professional/solution/bloomberg-terminal/}{Bloomberg}. Wrapper for \code{Rblpapi}.
 See also \code{\link[Rblpapi:blpConnect]{Rblpapi::blpConnect()}} to connect to Bloomberg terminal (required).
 Use the argument \code{rblpapi_fun} to set the function such as "bdh" (default), "bds", or "bdp".
 }}

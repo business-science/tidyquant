@@ -45,7 +45,7 @@ This vignette aims to cover three aspects of performance analysis:
 
 An important concept is that performance analysis is based on the statistical properties of __returns__ (not prices). As a result, this package uses inputs of __time-based returns as opposed to stock prices__. The arguments change to `Ra` for the asset returns and `Rb` for the baseline returns. We'll go over how to get returns in the [Workflow](#workflow) section.
 
-Another important concept is the __baseline__. The baseline is what you are measuring performance against. A baseline can be anything, but in many cases it's a representative average of how an investment might perform with little or no effort. Often indexes such as the S&amp;P500 are used for general market performance. Other times more specific Exchange Traded Funds (ETFs) are used such as the [SPDR Technology ETF (XLK)](https://www.sectorspdr.com/sectorspdr/sector/xlk/holdings). The important concept here is that you measure the asset performance (`Ra`) against the baseline (`Rb`).
+Another important concept is the __baseline__. The baseline is what you are measuring performance against. A baseline can be anything, but in many cases it's a representative average of how an investment might perform with little or no effort. Often indexes such as the S&amp;P500 are used for general market performance. Other times more specific Exchange Traded Funds (ETFs) are used such as the [SPDR Technology ETF (XLK)](https://www.sectorspdr.com/sectorspdr/sector/xlk). The important concept here is that you measure the asset performance (`Ra`) against the baseline (`Rb`).
 
 Now for a quick tutorial to show off the `PerformanceAnalytics` package integration.
 

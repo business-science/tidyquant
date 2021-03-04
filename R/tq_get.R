@@ -36,7 +36,7 @@
 #'   \href{https://www.alphavantage.co/}{Alpha Vantage}. Wrapper for `alphavantager::av_get()`.
 #'   See also [av_api_key()].
 #'   \item `"rblpapi"`: Get data sets from
-#'   \href{https://www.bloomberg.com/professional/solution/bloomberg-terminal}{Bloomberg}. Wrapper for `Rblpapi`.
+#'   \href{https://www.bloomberg.com/professional/solution/bloomberg-terminal/}{Bloomberg}. Wrapper for `Rblpapi`.
 #'   See also [Rblpapi::blpConnect()] to connect to Bloomberg terminal (required).
 #'   Use the argument `rblpapi_fun` to set the function such as "bdh" (default), "bds", or "bdp".
 #' }

@@ -109,7 +109,7 @@
       <h1 data-toc-skip>Performance Analysis with tidyquant</h1>
                         <h4 class="author">Matt Dancho</h4>
             
-            <h4 class="date">2021-03-01</h4>
+            <h4 class="date">2021-03-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ05-performance-analysis-with-tidyquant.Rmd"><code>vignettes/TQ05-performance-analysis-with-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ05-performance-analysis-with-tidyquant.Rmd</code></div>
@@ -142,7 +142,7 @@
 <h1 class="hasAnchor">
 <a href="#key-concepts" class="anchor"></a>1.0 Key Concepts</h1>
 <p>An important concept is that performance analysis is based on the statistical properties of <strong>returns</strong> (not prices). As a result, this package uses inputs of <strong>time-based returns as opposed to stock prices</strong>. The arguments change to <code>Ra</code> for the asset returns and <code>Rb</code> for the baseline returns. We’ll go over how to get returns in the <a href="#workflow">Workflow</a> section.</p>
-<p>Another important concept is the <strong>baseline</strong>. The baseline is what you are measuring performance against. A baseline can be anything, but in many cases it’s a representative average of how an investment might perform with little or no effort. Often indexes such as the S&amp;P500 are used for general market performance. Other times more specific Exchange Traded Funds (ETFs) are used such as the <a href="https://www.sectorspdr.com/sectorspdr/sector/xlk/holdings">SPDR Technology ETF (XLK)</a>. The important concept here is that you measure the asset performance (<code>Ra</code>) against the baseline (<code>Rb</code>).</p>
+<p>Another important concept is the <strong>baseline</strong>. The baseline is what you are measuring performance against. A baseline can be anything, but in many cases it’s a representative average of how an investment might perform with little or no effort. Often indexes such as the S&amp;P500 are used for general market performance. Other times more specific Exchange Traded Funds (ETFs) are used such as the <a href="https://www.sectorspdr.com/sectorspdr/sector/xlk">SPDR Technology ETF (XLK)</a>. The important concept here is that you measure the asset performance (<code>Ra</code>) against the baseline (<code>Rb</code>).</p>
 <p>Now for a quick tutorial to show off the <code>PerformanceAnalytics</code> package integration.</p>
 </div>
 <div id="quick-example" class="section level1">
@@ -242,8 +242,8 @@
 ## 1 AAPL           0.119 0.0089           0.112 1.11    0.578  1.04        0.659 
 ## 2 GOOG           0.034 0.0028           0.034 1.14    1.39   1.16        0.644 
 ## 3 NFLX           0.447 0.053            0.859 0.384  -1.52   0.0045      0.0817
-## # … with 5 more variables: `Correlationp-value` &lt;dbl&gt;, InformationRatio &lt;dbl&gt;,
-## #   `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;, TreynorRatio &lt;dbl&gt;</code></pre>
+## # … with 5 more variables: Correlationp-value &lt;dbl&gt;, InformationRatio &lt;dbl&gt;,
+## #   R-squared &lt;dbl&gt;, TrackingError &lt;dbl&gt;, TreynorRatio &lt;dbl&gt;</code></pre>
 <p>We can quickly isolate attributes, such as alpha, the measure of growth, and beta, the measure of risk.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">RaRb_capm</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">symbol</span>, <span class="va">Alpha</span>, <span class="va">Beta</span><span class="op">)</span></code></pre></div>
@@ -553,8 +553,8 @@
 ##   ActivePremium  Alpha AnnualizedAlpha  Beta `Beta-` `Beta+` Correlation
 ##           &lt;dbl&gt;  &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;
 ## 1         0.327 0.0299           0.425 0.754  -0.243   0.503       0.283
-## # … with 5 more variables: `Correlationp-value` &lt;dbl&gt;, InformationRatio &lt;dbl&gt;,
-## #   `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;, TreynorRatio &lt;dbl&gt;</code></pre>
+## # … with 5 more variables: Correlationp-value &lt;dbl&gt;, InformationRatio &lt;dbl&gt;,
+## #   R-squared &lt;dbl&gt;, TrackingError &lt;dbl&gt;, TreynorRatio &lt;dbl&gt;</code></pre>
 <p>Now we have the CAPM performance metrics for a portfolio! While this is cool, it’s cooler to do multiple portfolios. Let’s see how.</p>
 </div>
 </div>
@@ -716,8 +716,8 @@
 ## 1         1         0.231 0.0193           0.258 0.908   0.312   0.741
 ## 2         2         0.219 0.0192           0.256 0.886   0.436   0.660
 ## 3         3         0.319 0.0308           0.439 0.721  -0.179   0.394
-## # … with 6 more variables: Correlation &lt;dbl&gt;, `Correlationp-value` &lt;dbl&gt;,
-## #   InformationRatio &lt;dbl&gt;, `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;,
+## # … with 6 more variables: Correlation &lt;dbl&gt;, Correlationp-value &lt;dbl&gt;,
+## #   InformationRatio &lt;dbl&gt;, R-squared &lt;dbl&gt;, TrackingError &lt;dbl&gt;,
 ## #   TreynorRatio &lt;dbl&gt;</code></pre>
 <p>Inspecting the results, we now have a multiple portfolio comparison of the CAPM table from <code>PerformanceAnalytics</code>. We can do the same thing with <code>SharpeRatio</code> as well.</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
@@ -827,7 +827,7 @@
 ## 3         3         0.0388        0.0313     1.81          0.01     0.370 0.046 
 ## # … with 10 more variables: Minimum &lt;dbl&gt;, NAs &lt;dbl&gt;, Observations &lt;dbl&gt;,
 ## #   Quartile1 &lt;dbl&gt;, Quartile3 &lt;dbl&gt;, SEMean &lt;dbl&gt;, Skewness &lt;dbl&gt;,
-## #   Stdev &lt;dbl&gt;, `UCLMean(0.95)` &lt;dbl&gt;, Variance &lt;dbl&gt;</code></pre>
+## #   Stdev &lt;dbl&gt;, UCLMean(0.95) &lt;dbl&gt;, Variance &lt;dbl&gt;</code></pre>
 </div>
 <div id="table-capm" class="section level2">
 <h2 class="hasAnchor">
@@ -843,8 +843,8 @@
 ## 1         1         0.231 0.0193           0.258 0.908   0.312   0.741
 ## 2         2         0.219 0.0192           0.256 0.886   0.436   0.660
 ## 3         3         0.319 0.0308           0.439 0.721  -0.179   0.394
-## # … with 6 more variables: Correlation &lt;dbl&gt;, `Correlationp-value` &lt;dbl&gt;,
-## #   InformationRatio &lt;dbl&gt;, `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;,
+## # … with 6 more variables: Correlation &lt;dbl&gt;, Correlationp-value &lt;dbl&gt;,
+## #   InformationRatio &lt;dbl&gt;, R-squared &lt;dbl&gt;, TrackingError &lt;dbl&gt;,
 ## #   TreynorRatio &lt;dbl&gt;</code></pre>
 </div>
 <div id="table-annualizedreturns" class="section level2">
@@ -886,14 +886,14 @@
     <span class="fu"><a href="../reference/tq_performance.html">tq_performance</a></span><span class="op">(</span>Ra <span class="op">=</span> <span class="va">Ra</span>, Rb <span class="op">=</span> <span class="cn">NULL</span>, performance_fun <span class="op">=</span> <span class="va">table.DownsideRisk</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 12
 ## # Groups:   portfolio [3]
-##   portfolio `DownsideDeviat… `DownsideDeviat… `DownsideDeviat… GainDeviation
-##       &lt;int&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;         &lt;dbl&gt;
-## 1         1           0.045            0.0488           0.045         0.0538
-## 2         2           0.0501           0.0538           0.0501        0.0528
-## 3         3           0.0684           0.0721           0.0684        0.0831
-## # … with 7 more variables: `HistoricalES(95%)` &lt;dbl&gt;,
-## #   `HistoricalVaR(95%)` &lt;dbl&gt;, LossDeviation &lt;dbl&gt;, MaximumDrawdown &lt;dbl&gt;,
-## #   `ModifiedES(95%)` &lt;dbl&gt;, `ModifiedVaR(95%)` &lt;dbl&gt;, SemiDeviation &lt;dbl&gt;</code></pre>
+##   portfolio `DownsideDeviati… `DownsideDeviatio… `DownsideDeviati… GainDeviation
+##       &lt;int&gt;             &lt;dbl&gt;              &lt;dbl&gt;             &lt;dbl&gt;         &lt;dbl&gt;
+## 1         1            0.045              0.0488            0.045         0.0538
+## 2         2            0.0501             0.0538            0.0501        0.0528
+## 3         3            0.0684             0.0721            0.0684        0.0831
+## # … with 7 more variables: HistoricalES(95%) &lt;dbl&gt;, HistoricalVaR(95%) &lt;dbl&gt;,
+## #   LossDeviation &lt;dbl&gt;, MaximumDrawdown &lt;dbl&gt;, ModifiedES(95%) &lt;dbl&gt;,
+## #   ModifiedVaR(95%) &lt;dbl&gt;, SemiDeviation &lt;dbl&gt;</code></pre>
 </div>
 <div id="table-downsideriskratio" class="section level2">
 <h2 class="hasAnchor">
@@ -904,12 +904,12 @@
     <span class="fu"><a href="../reference/tq_performance.html">tq_performance</a></span><span class="op">(</span>Ra <span class="op">=</span> <span class="va">Ra</span>, Rb <span class="op">=</span> <span class="cn">NULL</span>, performance_fun <span class="op">=</span> <span class="va">table.DownsideRiskRatio</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 9
 ## # Groups:   portfolio [3]
-##   portfolio Annualiseddowns… Downsidepotenti… monthlydownside… Omega
-##       &lt;int&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt; &lt;dbl&gt;
-## 1         1            0.156           0.0198           0.045   2.48
-## 2         2            0.173           0.0217           0.0501  2.34
-## 3         3            0.237           0.0294           0.0684  2.32
-## # … with 4 more variables: `Omega-sharperatio` &lt;dbl&gt;, Sortinoratio &lt;dbl&gt;,
+##   portfolio Annualiseddownsiderisk Downsidepotential monthlydownsiderisk Omega
+##       &lt;int&gt;                  &lt;dbl&gt;             &lt;dbl&gt;               &lt;dbl&gt; &lt;dbl&gt;
+## 1         1                  0.156            0.0198              0.045   2.48
+## 2         2                  0.173            0.0217              0.0501  2.34
+## 3         3                  0.237            0.0294              0.0684  2.32
+## # … with 4 more variables: Omega-sharperatio &lt;dbl&gt;, Sortinoratio &lt;dbl&gt;,
 ## #   Upsidepotential &lt;dbl&gt;, Upsidepotentialratio &lt;dbl&gt;</code></pre>
 </div>
 <div id="table-highermoments" class="section level2">
