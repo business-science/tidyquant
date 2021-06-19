@@ -339,7 +339,7 @@ detect_duplicates <- function(name_list) {
 # bad / restricted names are names that get selected unintetionally by OHLC functions
 replace_bad_names <- function(tib, fun_name) {
 
-    bad_names_regex <- "open|high|low|close|volume|adjusted|price"
+    bad_names_regex <- "^(open|high|low|close|volume|adjusted|price)$"
 
     name_list_tib <- colnames(tib)
     name_list_tib_lower <- stringr::str_to_lower(name_list_tib)
