@@ -1,7 +1,7 @@
 Package: tidyquant
 Type: Package
 Title: Tidy Quantitative Financial Analysis
-Version: 1.0.3
+Version: 1.0.3.9000
 Authors@R: c(
     person("Matt", "Dancho", email = "mdancho@business-science.io", role = c("aut", "cre")),
     person("Davis", "Vaughan", email = "dvaughan@business-science.io", role = c("aut"))
@@ -52,7 +52,7 @@ Imports:
     janitor
 Suggests:
     tidyverse,
-    tibbletime, 
+    tibbletime,
     forcats,
     broom,
     knitr,
@@ -60,7 +60,8 @@ Suggests:
     testthat (>= 2.1.0),
     scales,
     Rblpapi,
-    readxl
-RoxygenNote: 7.1.1
+    readxl,
+    covr
+RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr

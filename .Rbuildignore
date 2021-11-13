@@ -16,3 +16,5 @@ img
 ^Meta$
 ^CRAN-RELEASE$
 ^pkgdown$
+^codecov\.yml$
+^\.github$
