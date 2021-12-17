@@ -4,14 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="tidyquant">
 <title>Introduction to tidyquant • tidyquant</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Roboto-0.4.0/font.css" rel="stylesheet">
+<link href="../deps/_Montserrat-0.4.0/font.css" rel="stylesheet">
+<!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Introduction to tidyquant">
 <meta property="og:description" content="tidyquant">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -25,121 +27,100 @@
   gtag('config', 'UA-76139189-2');
 </script>
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.3</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">Home</a>
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">tidyquant</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3.9000</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-2">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="../index.html">Home</a>
 </li>
-<li>
-  <a href="../reference/index.html">Function Reference</a>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Function Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Tutorials
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/TQ06-excel-in-r.html">NEW: Excel in R</a>
-    </li>
-    <li class="divider">
-    <li class="dropdown-header">Financial Workflow</li>
-    <li>
-      <a href="../articles/TQ00-introduction-to-tidyquant.html">Introduction to tidyquant</a>
-    </li>
-    <li>
-      <a href="../articles/TQ01-core-functions-in-tidyquant.html">Core functions</a>
-    </li>
-    <li>
-      <a href="../articles/TQ02-quant-integrations-in-tidyquant.html">Quantitative integrations</a>
-    </li>
-    <li>
-      <a href="../articles/TQ03-scaling-and-modeling-with-tidyquant.html">Scaling and modeling</a>
-    </li>
-    <li>
-      <a href="../articles/TQ04-charting-with-tidyquant.html">Charting</a>
-    </li>
-    <li>
-      <a href="../articles/TQ05-performance-analysis-with-tidyquant.html">Performance analysis</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="../news/index.html">News</a>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/business-science/tidyquant">
-    <span class="fab fa-github"></span>
-     
-  </a>
-</li>
-      </ul>
-</div>
-<!--/.nav-collapse -->
+<li class="active nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
+    <a class="dropdown-item" href="../articles/TQ06-excel-in-r.html">NEW: Excel in R</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Financial Workflow</h6>
+    <a class="dropdown-item" href="../articles/TQ00-introduction-to-tidyquant.html">Introduction to tidyquant</a>
+    <a class="dropdown-item" href="../articles/TQ01-core-functions-in-tidyquant.html">Core functions</a>
+    <a class="dropdown-item" href="../articles/TQ02-quant-integrations-in-tidyquant.html">Quantitative integrations</a>
+    <a class="dropdown-item" href="../articles/TQ03-scaling-and-modeling-with-tidyquant.html">Scaling and modeling</a>
+    <a class="dropdown-item" href="../articles/TQ04-charting-with-tidyquant.html">Charting</a>
+    <a class="dropdown-item" href="../articles/TQ05-performance-analysis-with-tidyquant.html">Performance analysis</a>
   </div>
-<!--/.container -->
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">News</a>
+</li>
+      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/business-science/tidyquant">
+    <span class="fab fa fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.navbar -->
 
-      
+    
+  </div>
+</nav><div class="container template-article">
 
-      </header><script src="TQ00-introduction-to-tidyquant_files/header-attrs-2.6.6/header-attrs.js"></script><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Introduction to tidyquant</h1>
-                        <h4 class="author">Matt Dancho</h4>
+<div class="row">
+  <main id="main"><div class="page-header">
+      <img src="" class="logo" alt=""><h1>Introduction to tidyquant</h1>
+                        <h4 data-toc-skip class="author">Matt Dancho</h4>
             
-            <h4 class="date">2021-03-04</h4>
+            <h4 data-toc-skip class="date">2021-12-16</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ00-introduction-to-tidyquant.Rmd"><code>vignettes/TQ00-introduction-to-tidyquant.Rmd</code></a></small>
-      <div class="hidden name"><code>TQ00-introduction-to-tidyquant.Rmd</code></div>
-
+      <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/HEAD/vignettes/TQ00-introduction-to-tidyquant.Rmd" class="external-link"><code>vignettes/TQ00-introduction-to-tidyquant.Rmd</code></a></small>
+      <div class="d-none name"><code>TQ00-introduction-to-tidyquant.Rmd</code></div>
     </div>
 
     
     
-<div id="minutes-to-tidyquant" class="section level2">
-<h2 class="hasAnchor">
-<a href="#minutes-to-tidyquant" class="anchor"></a>2-Minutes To Tidyquant</h2>
-<p>Our short introduction to <code>tidyquant</code> on <a href="https://www.youtube.com/embed/woxJZTL2hok">YouTube</a>.</p>
-<p><a href="https://www.youtube.com/embed/woxJZTL2hok" target="_blank"><img src="http://img.youtube.com/vi/woxJZTL2hok/0.jpg" alt="Anomalize" width="100%" height="350"></a></p>
-<p>Check out our entire <a href="https://www.youtube.com/watch?v=Gk_HwjhlQJs&amp;list=PLo32uKohmrXsYNhpdwr15W143rX6uMAze">Software Intro Series</a> on YouTube!</p>
+<div class="section level2">
+<h2 id="minutes-to-tidyquant">2-Minutes To Tidyquant<a class="anchor" aria-label="anchor" href="#minutes-to-tidyquant"></a>
+</h2>
+<p>Our short introduction to <code>tidyquant</code> on <a href="https://www.youtube.com/embed/woxJZTL2hok" class="external-link">YouTube</a>.</p>
+<p><a href="https://www.youtube.com/embed/woxJZTL2hok" target="_blank" class="external-link"><img src="http://img.youtube.com/vi/woxJZTL2hok/0.jpg" alt="Anomalize" width="100%" height="350"></a></p>
+<p>Check out our entire <a href="https://www.youtube.com/watch?v=Gk_HwjhlQJs&amp;list=PLo32uKohmrXsYNhpdwr15W143rX6uMAze" class="external-link">Software Intro Series</a> on YouTube!</p>
 </div>
-<div id="benefits" class="section level1">
-<h1 class="hasAnchor">
-<a href="#benefits" class="anchor"></a>Benefits</h1>
+<div class="section level1">
+<h1 id="benefits">Benefits<a class="anchor" aria-label="anchor" href="#benefits"></a>
+</h1>
 <ul>
 <li>A few core functions with a lot of power</li>
 <li>Integrates the quantitative analysis functionality of <code>zoo</code>, <code>xts</code>, <code>quantmod</code>, <code>TTR</code>, and <code>PerformanceAnalytics</code>
 </li>
-<li>Designed for modeling and scaling analyses using the the <code>tidyverse</code> tools in <a href="https://r4ds.had.co.nz/"><em>R for Data Science</em></a>
+<li>Designed for modeling and scaling analyses using the the <code>tidyverse</code> tools in <a href="https://r4ds.had.co.nz/" class="external-link"><em>R for Data Science</em></a>
 </li>
 <li>Implements <code>ggplot2</code> functionality for beautiful and meaningful financial visualizations</li>
 <li>User-friendly documentation to get you up to speed quickly!</li>
 </ul>
-<div id="a-few-core-functions-with-a-lot-of-power" class="section level2">
-<h2 class="hasAnchor">
-<a href="#a-few-core-functions-with-a-lot-of-power" class="anchor"></a>A Few Core Functions with A Lot of Power</h2>
+<div class="section level2">
+<h2 id="a-few-core-functions-with-a-lot-of-power">A Few Core Functions with A Lot of Power<a class="anchor" aria-label="anchor" href="#a-few-core-functions-with-a-lot-of-power"></a>
+</h2>
 <p>Minimizing the number of functions reduces the learning curve. What we’ve done is group the core functions into four categories:</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Get a Stock Index, <code><a href="../reference/tq_index.html">tq_index()</a></code>, or a Stock Exchange, <code><a href="../reference/tq_index.html">tq_exchange()</a></code></strong>: Returns the stock symbols and various attributes for every stock in an index or exchange. Eighteen indexes and three exchanges are available.</p></li>
@@ -149,37 +130,37 @@
 </ol>
 <p>For more information, refer to the first topic-specific vignette, <a href="TQ01-core-functions-in-tidyquant.html">Core Functions in tidyquant</a>.</p>
 </div>
-<div id="integrates-the-quantitative-analysis-functionality-of-xtszoo-quantmod-ttr-and-performance-analytics" class="section level2">
-<h2 class="hasAnchor">
-<a href="#integrates-the-quantitative-analysis-functionality-of-xtszoo-quantmod-ttr-and-performance-analytics" class="anchor"></a>Integrates the Quantitative Analysis Functionality of xts/zoo, quantmod TTR and Performance Analytics</h2>
+<div class="section level2">
+<h2 id="integrates-the-quantitative-analysis-functionality-of-xtszoo-quantmod-ttr-and-performance-analytics">Integrates the Quantitative Analysis Functionality of xts/zoo, quantmod TTR and Performance Analytics<a class="anchor" aria-label="anchor" href="#integrates-the-quantitative-analysis-functionality-of-xtszoo-quantmod-ttr-and-performance-analytics"></a>
+</h2>
 <p>There’s a wide range of useful quantitative analysis functions (QAF) that work with time-series objects. The problem is that many of these <em>wonderful</em> functions don’t work with data frames or the <code>tidyverse</code> workflow. That is until now. The <code>tidyquant</code> package integrates the most useful functions from the <code>xts</code>, <code>zoo</code>, <code>quantmod</code>, <code>TTR</code>, and <code>PerformanceAnalytics</code> packages, enabling seamless usage within the <code>tidyverse</code> workflow.</p>
 <p>Refer below for information on the performance analysis and portfolio attribution with the <code>PerformanceAnalytics</code> integration.</p>
 <p>For more information, refer to the second topic-specific vignette, <a href="TQ02-quant-integrations-in-tidyquant.html">R Quantitative Analysis Package Integrations in tidyquant</a>.</p>
 </div>
-<div id="designed-for-the-data-science-workflow-of-the-tidyverse" class="section level2">
-<h2 class="hasAnchor">
-<a href="#designed-for-the-data-science-workflow-of-the-tidyverse" class="anchor"></a>Designed for the data science workflow of the tidyverse</h2>
+<div class="section level2">
+<h2 id="designed-for-the-data-science-workflow-of-the-tidyverse">Designed for the data science workflow of the tidyverse<a class="anchor" aria-label="anchor" href="#designed-for-the-data-science-workflow-of-the-tidyverse"></a>
+</h2>
 <p>The greatest benefit to <code>tidyquant</code> is the ability to easily model and scale your financial analysis. Scaling is the process of creating an analysis for one security and then extending it to multiple groups. This idea of scaling is incredibly useful to financial analysts because typically one wants to compare many securities to make informed decisions. Fortunately, the <code>tidyquant</code> package integrates with the <code>tidyverse</code> making scaling super simple!</p>
 <p>All <code>tidyquant</code> functions return data in the <code>tibble</code> (tidy data frame) format, which allows for interaction within the <code>tidyverse</code>. This means we can:</p>
 <ul>
 <li>Seamlessly scale data retrieval and mutations</li>
-<li>Use the pipe (<code><a href="../reference/%&gt;%.html">%&gt;%</a></code>) for chaining operations</li>
+<li>Use the pipe (<code>%&gt;%</code>) for chaining operations</li>
 <li>Use <code>dplyr</code> and <code>tidyr</code>: <code>select</code>, <code>filter</code>, <code>group_by</code>, <code>nest</code>/<code>unnest</code>, <code>spread</code>/<code>gather</code>, etc</li>
 <li>Use <code>purrr</code>: mapping functions with <code>map</code>
 </li>
 </ul>
 <p>For more information, refer to the third topic-specific vignette, <a href="TQ03-scaling-and-modeling-with-tidyquant.html">Scaling and Modeling with tidyquant</a>.</p>
 </div>
-<div id="implements-ggplot2-functionality-for-financial-visualizations" class="section level2">
-<h2 class="hasAnchor">
-<a href="#implements-ggplot2-functionality-for-financial-visualizations" class="anchor"></a>Implements ggplot2 Functionality for Financial Visualizations</h2>
+<div class="section level2">
+<h2 id="implements-ggplot2-functionality-for-financial-visualizations">Implements ggplot2 Functionality for Financial Visualizations<a class="anchor" aria-label="anchor" href="#implements-ggplot2-functionality-for-financial-visualizations"></a>
+</h2>
 <p>The <code>tidyquant</code> package includes charting tools to assist users in developing quick visualizations in <code>ggplot2</code> using the grammar of graphics format and workflow.</p>
 <p><img src="TQ00-introduction-to-tidyquant_files/figure-html/unnamed-chunk-2-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p>For more information, refer to the fourth topic-specific vignette, <a href="TQ04-charting-with-tidyquant.html">Charting with tidyquant</a>.</p>
 </div>
-<div id="performance-analysis-of-asset-and-portfolio-returns" class="section level2">
-<h2 class="hasAnchor">
-<a href="#performance-analysis-of-asset-and-portfolio-returns" class="anchor"></a>Performance Analysis of Asset and Portfolio Returns</h2>
+<div class="section level2">
+<h2 id="performance-analysis-of-asset-and-portfolio-returns">Performance Analysis of Asset and Portfolio Returns<a class="anchor" aria-label="anchor" href="#performance-analysis-of-asset-and-portfolio-returns"></a>
+</h2>
 <p>Asset and portfolio performance analysis is a deep field with a wide range of theories and methods for analyzing risk versus reward. The <code>PerformanceAnalytics</code> package consolidates many of the most widely used performance metrics as functions that can be applied to stock or portfolio returns. <code>tidquant</code> implements the functionality with two primary functions:</p>
 <ul>
 <li>
@@ -191,31 +172,28 @@
 <p>For more information, refer to the fifth topic-specific vignette, <a href="TQ05-performance-analysis-with-tidyquant.html">Performance Analysis with tidyquant</a>.</p>
 </div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p>Developed by Matt Dancho, Davis Vaughan.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by Matt Dancho, Davis Vaughan.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
 
+  
 
   </body>
 </html>

@@ -4,14 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="tidyquant">
 <title>Scaling and Modeling with tidyquant • tidyquant</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Roboto-0.4.0/font.css" rel="stylesheet">
+<link href="../deps/_Montserrat-0.4.0/font.css" rel="stylesheet">
+<!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Scaling and Modeling with tidyquant">
 <meta property="og:description" content="tidyquant">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -25,95 +27,74 @@
   gtag('config', 'UA-76139189-2');
 </script>
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.3</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">Home</a>
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">tidyquant</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3.9000</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-2">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="../index.html">Home</a>
 </li>
-<li>
-  <a href="../reference/index.html">Function Reference</a>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Function Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Tutorials
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/TQ06-excel-in-r.html">NEW: Excel in R</a>
-    </li>
-    <li class="divider">
-    <li class="dropdown-header">Financial Workflow</li>
-    <li>
-      <a href="../articles/TQ00-introduction-to-tidyquant.html">Introduction to tidyquant</a>
-    </li>
-    <li>
-      <a href="../articles/TQ01-core-functions-in-tidyquant.html">Core functions</a>
-    </li>
-    <li>
-      <a href="../articles/TQ02-quant-integrations-in-tidyquant.html">Quantitative integrations</a>
-    </li>
-    <li>
-      <a href="../articles/TQ03-scaling-and-modeling-with-tidyquant.html">Scaling and modeling</a>
-    </li>
-    <li>
-      <a href="../articles/TQ04-charting-with-tidyquant.html">Charting</a>
-    </li>
-    <li>
-      <a href="../articles/TQ05-performance-analysis-with-tidyquant.html">Performance analysis</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="../news/index.html">News</a>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/business-science/tidyquant">
-    <span class="fab fa-github"></span>
-     
-  </a>
-</li>
-      </ul>
-</div>
-<!--/.nav-collapse -->
+<li class="active nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
+    <a class="dropdown-item" href="../articles/TQ06-excel-in-r.html">NEW: Excel in R</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Financial Workflow</h6>
+    <a class="dropdown-item" href="../articles/TQ00-introduction-to-tidyquant.html">Introduction to tidyquant</a>
+    <a class="dropdown-item" href="../articles/TQ01-core-functions-in-tidyquant.html">Core functions</a>
+    <a class="dropdown-item" href="../articles/TQ02-quant-integrations-in-tidyquant.html">Quantitative integrations</a>
+    <a class="dropdown-item" href="../articles/TQ03-scaling-and-modeling-with-tidyquant.html">Scaling and modeling</a>
+    <a class="dropdown-item" href="../articles/TQ04-charting-with-tidyquant.html">Charting</a>
+    <a class="dropdown-item" href="../articles/TQ05-performance-analysis-with-tidyquant.html">Performance analysis</a>
   </div>
-<!--/.container -->
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">News</a>
+</li>
+      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/business-science/tidyquant">
+    <span class="fab fa fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.navbar -->
 
-      
+    
+  </div>
+</nav><div class="container template-article">
 
-      </header><script src="TQ03-scaling-and-modeling-with-tidyquant_files/header-attrs-2.6.6/header-attrs.js"></script><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Scaling and Modeling with tidyquant</h1>
-                        <h4 class="author">Matt Dancho</h4>
+<div class="row">
+  <main id="main"><div class="page-header">
+      <img src="" class="logo" alt=""><h1>Scaling and Modeling with tidyquant</h1>
+                        <h4 data-toc-skip class="author">Matt Dancho</h4>
             
-            <h4 class="date">2021-03-04</h4>
+            <h4 data-toc-skip class="date">2021-12-16</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ03-scaling-and-modeling-with-tidyquant.Rmd"><code>vignettes/TQ03-scaling-and-modeling-with-tidyquant.Rmd</code></a></small>
-      <div class="hidden name"><code>TQ03-scaling-and-modeling-with-tidyquant.Rmd</code></div>
-
+      <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/HEAD/vignettes/TQ03-scaling-and-modeling-with-tidyquant.Rmd" class="external-link"><code>vignettes/TQ03-scaling-and-modeling-with-tidyquant.Rmd</code></a></small>
+      <div class="d-none name"><code>TQ03-scaling-and-modeling-with-tidyquant.Rmd</code></div>
     </div>
 
     
@@ -121,223 +102,223 @@
 <blockquote>
 <p>Designed for the data science workflow of the <code>tidyverse</code></p>
 </blockquote>
-<div id="overview" class="section level1">
-<h1 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h1>
-<p>The greatest benefit to <code>tidyquant</code> is the ability to apply the data science workflow to easily model and scale your financial analysis as described in <a href="https://r4ds.had.co.nz/"><em>R for Data Science</em></a>. Scaling is the process of creating an analysis for one asset and then extending it to multiple groups. This idea of scaling is incredibly useful to financial analysts because typically one wants to compare many assets to make informed decisions. Fortunately, the <code>tidyquant</code> package integrates with the <code>tidyverse</code> making scaling super simple!</p>
+<div class="section level1">
+<h1 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h1>
+<p>The greatest benefit to <code>tidyquant</code> is the ability to apply the data science workflow to easily model and scale your financial analysis as described in <a href="https://r4ds.had.co.nz/" class="external-link"><em>R for Data Science</em></a>. Scaling is the process of creating an analysis for one asset and then extending it to multiple groups. This idea of scaling is incredibly useful to financial analysts because typically one wants to compare many assets to make informed decisions. Fortunately, the <code>tidyquant</code> package integrates with the <code>tidyverse</code> making scaling super simple!</p>
 <p>All <code>tidyquant</code> functions return data in the <code>tibble</code> (tidy data frame) format, which allows for interaction within the <code>tidyverse</code>. This means we can:</p>
 <ul>
 <li>Seamlessly scale data retrieval and mutations</li>
-<li>Use the pipe (<code><a href="../reference/%&gt;%.html">%&gt;%</a></code>) for chaining operations</li>
+<li>Use the pipe (<code>%&gt;%</code>) for chaining operations</li>
 <li>Use <code>dplyr</code> and <code>tidyr</code>: <code>select</code>, <code>filter</code>, <code>group_by</code>, <code>nest</code>/<code>unnest</code>, <code>spread</code>/<code>gather</code>, etc</li>
 <li>Use <code>purrr</code>: mapping functions with <code>map</code>
 </li>
-<li>Model financial analysis using the data science workflow in <a href="https://r4ds.had.co.nz/"><em>R for Data Science</em></a>
+<li>Model financial analysis using the data science workflow in <a href="https://r4ds.had.co.nz/" class="external-link"><em>R for Data Science</em></a>
 </li>
 </ul>
 <p>We’ll go through some useful techniques for getting and manipulating groups of data.</p>
 </div>
-<div id="prerequisites" class="section level1">
-<h1 class="hasAnchor">
-<a href="#prerequisites" class="anchor"></a>Prerequisites</h1>
+<div class="section level1">
+<h1 id="prerequisites">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
+</h1>
 <p>Load the <code>tidyquant</code> package to get started.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Loads tidyquant, lubridate, xts, quantmod, TTR, and PerformanceAnalytics</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/business-science/tidyquant">tidyquant</a></span><span class="op">)</span>  </code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/business-science/tidyquant" class="external-link">tidyquant</a></span><span class="op">)</span>  </code></pre></div>
 </div>
-<div id="scaling-the-getting-of-financial-data" class="section level1">
-<h1 class="hasAnchor">
-<a href="#scaling-the-getting-of-financial-data" class="anchor"></a>1.0 Scaling the Getting of Financial Data</h1>
+<div class="section level1">
+<h1 id="scaling-the-getting-of-financial-data">1.0 Scaling the Getting of Financial Data<a class="anchor" aria-label="anchor" href="#scaling-the-getting-of-financial-data"></a>
+</h1>
 <p>A very basic example is retrieving the stock prices for multiple stocks. There are three primary ways to do this:</p>
-<div id="method-1-map-a-character-vector-with-multiple-stock-symbols" class="section level2">
-<h2 class="hasAnchor">
-<a href="#method-1-map-a-character-vector-with-multiple-stock-symbols" class="anchor"></a>Method 1: Map a character vector with multiple stock symbols</h2>
+<div class="section level2">
+<h2 id="method-1-map-a-character-vector-with-multiple-stock-symbols">Method 1: Map a character vector with multiple stock symbols<a class="anchor" aria-label="anchor" href="#method-1-map-a-character-vector-with-multiple-stock-symbols"></a>
+</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"FB"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"FB"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get <span class="op">=</span> <span class="st">"stock.prices"</span>, from <span class="op">=</span> <span class="st">"2016-01-01"</span>, to <span class="op">=</span> <span class="st">"2017-01-01"</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 756 x 8
-##    symbol date        open  high   low close    volume adjusted
-##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1 AAPL   2016-01-04  25.7  26.3  25.5  26.3 270597600     24.4
-##  2 AAPL   2016-01-05  26.4  26.5  25.6  25.7 223164000     23.8
-##  3 AAPL   2016-01-06  25.1  25.6  25.0  25.2 273829600     23.3
-##  4 AAPL   2016-01-07  24.7  25.0  24.1  24.1 324377600     22.3
-##  5 AAPL   2016-01-08  24.6  24.8  24.2  24.2 283192000     22.4
-##  6 AAPL   2016-01-11  24.7  24.8  24.3  24.6 198957600     22.8
-##  7 AAPL   2016-01-12  25.1  25.2  24.7  25.0 196616800     23.1
-##  8 AAPL   2016-01-13  25.1  25.3  24.3  24.3 249758400     22.5
-##  9 AAPL   2016-01-14  24.5  25.1  23.9  24.9 252680400     23.0
-## 10 AAPL   2016-01-15  24.0  24.4  23.8  24.3 319335600     22.5
-## # … with 746 more rows</code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 756 × 8</span></span>
+<span class="co">##    symbol date        open  high   low close    volume adjusted</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   2016-01-04  25.7  26.3  25.5  26.3 270<span style="text-decoration: underline;">597</span>600     24.3</span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> AAPL   2016-01-05  26.4  26.5  25.6  25.7 223<span style="text-decoration: underline;">164</span>000     23.6</span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> AAPL   2016-01-06  25.1  25.6  25.0  25.2 273<span style="text-decoration: underline;">829</span>600     23.2</span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> AAPL   2016-01-07  24.7  25.0  24.1  24.1 324<span style="text-decoration: underline;">377</span>600     22.2</span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> AAPL   2016-01-08  24.6  24.8  24.2  24.2 283<span style="text-decoration: underline;">192</span>000     22.3</span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> AAPL   2016-01-11  24.7  24.8  24.3  24.6 198<span style="text-decoration: underline;">957</span>600     22.7</span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> AAPL   2016-01-12  25.1  25.2  24.7  25.0 196<span style="text-decoration: underline;">616</span>800     23.0</span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   2016-01-13  25.1  25.3  24.3  24.3 249<span style="text-decoration: underline;">758</span>400     22.4</span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   2016-01-14  24.5  25.1  23.9  24.9 252<span style="text-decoration: underline;">680</span>400     22.9</span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   2016-01-15  24.0  24.4  23.8  24.3 319<span style="text-decoration: underline;">335</span>600     22.4</span>
+<span class="co">## <span style="color: #949494;"># … with 746 more rows</span></span></code></pre>
 <p>The output is a single level tibble with all or the stock prices in one tibble. The auto-generated column name is “symbol”, which can be pre-emptively renamed by giving the vector a name (e.g. <code>stocks &lt;- c("AAPL", "GOOG", "FB")</code>) and then piping to <code>tq_get</code>.</p>
 </div>
-<div id="method-2-map-a-tibble-with-stocks-in-first-column" class="section level2">
-<h2 class="hasAnchor">
-<a href="#method-2-map-a-tibble-with-stocks-in-first-column" class="anchor"></a>Method 2: Map a tibble with stocks in first column</h2>
+<div class="section level2">
+<h2 id="method-2-map-a-tibble-with-stocks-in-first-column">Method 2: Map a tibble with stocks in first column<a class="anchor" aria-label="anchor" href="#method-2-map-a-tibble-with-stocks-in-first-column"></a>
+</h2>
 <p>First, get a stock list in data frame format either by making the tibble or retrieving from <code>tq_index</code> / <code>tq_exchange</code>. The stock symbols must be in the first column.</p>
-<div id="method-2a-make-a-tibble" class="section level3">
-<h3 class="hasAnchor">
-<a href="#method-2a-make-a-tibble" class="anchor"></a>Method 2A: Make a tibble</h3>
+<div class="section level3">
+<h3 id="method-2a-make-a-tibble">Method 2A: Make a tibble<a class="anchor" aria-label="anchor" href="#method-2a-make-a-tibble"></a>
+</h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">stock_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>stocks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AAPL"</span>, <span class="st">"JPM"</span>, <span class="st">"CVX"</span><span class="op">)</span>,
-                     industry <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Technology"</span>, <span class="st">"Financial"</span>, <span class="st">"Energy"</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">stock_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>stocks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AAPL"</span>, <span class="st">"JPM"</span>, <span class="st">"CVX"</span><span class="op">)</span>,
+                     industry <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Technology"</span>, <span class="st">"Financial"</span>, <span class="st">"Energy"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">stock_list</span></code></pre></div>
-<pre><code>## # A tibble: 3 x 2
-##   stocks industry  
-##   &lt;chr&gt;  &lt;chr&gt;     
-## 1 AAPL   Technology
-## 2 JPM    Financial 
-## 3 CVX    Energy</code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 3 × 2</span></span>
+<span class="co">##   stocks industry  </span>
+<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="co">## <span style="color: #BCBCBC;">1</span> AAPL   Technology</span>
+<span class="co">## <span style="color: #BCBCBC;">2</span> JPM    Financial </span>
+<span class="co">## <span style="color: #BCBCBC;">3</span> CVX    Energy</span></code></pre>
 <p>Second, send the stock list to <code>tq_get</code>. Notice how the symbol and industry columns are automatically expanded the length of the stock prices.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">stock_list</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">stock_list</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get <span class="op">=</span> <span class="st">"stock.prices"</span>, from <span class="op">=</span> <span class="st">"2016-01-01"</span>, to <span class="op">=</span> <span class="st">"2017-01-01"</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 756 x 9
-##    stocks industry   date        open  high   low close    volume adjusted
-##    &lt;chr&gt;  &lt;chr&gt;      &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1 AAPL   Technology 2016-01-04  25.7  26.3  25.5  26.3 270597600     24.4
-##  2 AAPL   Technology 2016-01-05  26.4  26.5  25.6  25.7 223164000     23.8
-##  3 AAPL   Technology 2016-01-06  25.1  25.6  25.0  25.2 273829600     23.3
-##  4 AAPL   Technology 2016-01-07  24.7  25.0  24.1  24.1 324377600     22.3
-##  5 AAPL   Technology 2016-01-08  24.6  24.8  24.2  24.2 283192000     22.4
-##  6 AAPL   Technology 2016-01-11  24.7  24.8  24.3  24.6 198957600     22.8
-##  7 AAPL   Technology 2016-01-12  25.1  25.2  24.7  25.0 196616800     23.1
-##  8 AAPL   Technology 2016-01-13  25.1  25.3  24.3  24.3 249758400     22.5
-##  9 AAPL   Technology 2016-01-14  24.5  25.1  23.9  24.9 252680400     23.0
-## 10 AAPL   Technology 2016-01-15  24.0  24.4  23.8  24.3 319335600     22.5
-## # … with 746 more rows</code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 756 × 9</span></span>
+<span class="co">##    stocks industry   date        open  high   low close    volume adjusted</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   Technology 2016-01-04  25.7  26.3  25.5  26.3 270<span style="text-decoration: underline;">597</span>600     24.3</span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> AAPL   Technology 2016-01-05  26.4  26.5  25.6  25.7 223<span style="text-decoration: underline;">164</span>000     23.6</span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> AAPL   Technology 2016-01-06  25.1  25.6  25.0  25.2 273<span style="text-decoration: underline;">829</span>600     23.2</span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> AAPL   Technology 2016-01-07  24.7  25.0  24.1  24.1 324<span style="text-decoration: underline;">377</span>600     22.2</span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> AAPL   Technology 2016-01-08  24.6  24.8  24.2  24.2 283<span style="text-decoration: underline;">192</span>000     22.3</span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> AAPL   Technology 2016-01-11  24.7  24.8  24.3  24.6 198<span style="text-decoration: underline;">957</span>600     22.7</span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> AAPL   Technology 2016-01-12  25.1  25.2  24.7  25.0 196<span style="text-decoration: underline;">616</span>800     23.0</span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   Technology 2016-01-13  25.1  25.3  24.3  24.3 249<span style="text-decoration: underline;">758</span>400     22.4</span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   Technology 2016-01-14  24.5  25.1  23.9  24.9 252<span style="text-decoration: underline;">680</span>400     22.9</span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   Technology 2016-01-15  24.0  24.4  23.8  24.3 319<span style="text-decoration: underline;">335</span>600     22.4</span>
+<span class="co">## <span style="color: #949494;"># … with 746 more rows</span></span></code></pre>
 </div>
-<div id="method-2b-use-index-or-exchange" class="section level3">
-<h3 class="hasAnchor">
-<a href="#method-2b-use-index-or-exchange" class="anchor"></a>Method 2B: Use index or exchange</h3>
+<div class="section level3">
+<h3 id="method-2b-use-index-or-exchange">Method 2B: Use index or exchange<a class="anchor" aria-label="anchor" href="#method-2b-use-index-or-exchange"></a>
+</h3>
 <p>Get an index…</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tq_index.html">tq_index</a></span><span class="op">(</span><span class="st">"DOW"</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 30 x 8
-##    symbol company    identifier sedol  weight sector  shares_held local_currency
-##    &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;         
-##  1 GS     Goldman S… 38141G10   24079… 0.0704 Financ…     5454300 USD           
-##  2 UNH    UnitedHea… 91324P10   29177… 0.0700 Health…     5454300 USD           
-##  3 HD     Home Depo… 43707610   24342… 0.0542 Consum…     5454300 USD           
-##  4 BA     Boeing Co… 09702310   21086… 0.0481 Indust…     5454300 USD           
-##  5 MSFT   Microsoft… 59491810   25881… 0.0479 Inform…     5454300 USD           
-##  6 AMGN   Amgen Inc. 03116210   20236… 0.0471 Health…     5454300 USD           
-##  7 CAT    Caterpill… 14912310   21802… 0.0452 Indust…     5454300 USD           
-##  8 V      Visa Inc.… 92826C83   B2PZN… 0.0452 Inform…     5454300 USD           
-##  9 HON    Honeywell… 43851610   20204… 0.0436 Indust…     5454300 USD           
-## 10 CRM    salesforc… 79466L30   23105… 0.0433 Inform…     5454300 USD           
-## # … with 20 more rows</code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 31 × 8</span></span>
+<span class="co">##    symbol company    identifier sedol  weight sector  shares_held local_currency</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> UNH    UnitedHea… 91324P10   29177… 0.090<span style="text-decoration: underline;">7</span> Health…     5<span style="text-decoration: underline;">409</span>729 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> HD     Home Depo… 43707610   24342… 0.074<span style="text-decoration: underline;">8</span> Consum…     5<span style="text-decoration: underline;">409</span>729 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> GS     Goldman S… 38141G10   24079… 0.071<span style="text-decoration: underline;">5</span> Financ…     5<span style="text-decoration: underline;">409</span>729 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> MSFT   Microsoft… 59491810   25881… 0.061<span style="text-decoration: underline;">4</span> Inform…     5<span style="text-decoration: underline;">409</span>729 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> MCD    McDonald'… 58013510   25507… 0.048<span style="text-decoration: underline;">5</span> Consum…     5<span style="text-decoration: underline;">409</span>729 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> CRM    salesforc… 79466L30   23105… 0.047<span style="text-decoration: underline;">7</span> Inform…     5<span style="text-decoration: underline;">409</span>729 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> AMGN   Amgen Inc. 03116210   20236… 0.040<span style="text-decoration: underline;">2</span> Health…     5<span style="text-decoration: underline;">409</span>729 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> V      Visa Inc.… 92826C83   B2PZN… 0.038<span style="text-decoration: underline;">9</span> Inform…     5<span style="text-decoration: underline;">409</span>729 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> HON    Honeywell… 43851610   20204… 0.038<span style="text-decoration: underline;">5</span> Indust…     5<span style="text-decoration: underline;">409</span>729 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> CAT    Caterpill… 14912310   21802… 0.037<span style="text-decoration: underline;">2</span> Indust…     5<span style="text-decoration: underline;">409</span>729 USD           </span>
+<span class="co">## <span style="color: #949494;"># … with 21 more rows</span></span></code></pre>
 <p>…or, get an exchange.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tq_index.html">tq_exchange</a></span><span class="op">(</span><span class="st">"NYSE"</span><span class="op">)</span></code></pre></div>
 <p>Send the index or exchange to <code>tq_get</code>. <em>Important Note: This can take several minutes depending on the size of the index or exchange, which is why only the first three stocks are evaluated in the vignette.</em></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/tq_index.html">tq_index</a></span><span class="op">(</span><span class="st">"DOW"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/tq_index.html">tq_index</a></span><span class="op">(</span><span class="st">"DOW"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get <span class="op">=</span> <span class="st">"stock.prices"</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 7,674 x 15
-##    symbol company     identifier sedol  weight sector shares_held local_currency
-##    &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;         
-##  1 GS     Goldman Sa… 38141G10   24079… 0.0704 Finan…     5454300 USD           
-##  2 GS     Goldman Sa… 38141G10   24079… 0.0704 Finan…     5454300 USD           
-##  3 GS     Goldman Sa… 38141G10   24079… 0.0704 Finan…     5454300 USD           
-##  4 GS     Goldman Sa… 38141G10   24079… 0.0704 Finan…     5454300 USD           
-##  5 GS     Goldman Sa… 38141G10   24079… 0.0704 Finan…     5454300 USD           
-##  6 GS     Goldman Sa… 38141G10   24079… 0.0704 Finan…     5454300 USD           
-##  7 GS     Goldman Sa… 38141G10   24079… 0.0704 Finan…     5454300 USD           
-##  8 GS     Goldman Sa… 38141G10   24079… 0.0704 Finan…     5454300 USD           
-##  9 GS     Goldman Sa… 38141G10   24079… 0.0704 Finan…     5454300 USD           
-## 10 GS     Goldman Sa… 38141G10   24079… 0.0704 Finan…     5454300 USD           
-## # … with 7,664 more rows, and 7 more variables: date &lt;date&gt;, open &lt;dbl&gt;,
-## #   high &lt;dbl&gt;, low &lt;dbl&gt;, close &lt;dbl&gt;, volume &lt;dbl&gt;, adjusted &lt;dbl&gt;</code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 8,274 × 15</span></span>
+<span class="co">##    symbol company     identifier sedol  weight sector shares_held local_currency</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> UNH    UnitedHeal… 91324P10   29177… 0.090<span style="text-decoration: underline;">7</span> Healt…     5<span style="text-decoration: underline;">409</span>729 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> UNH    UnitedHeal… 91324P10   29177… 0.090<span style="text-decoration: underline;">7</span> Healt…     5<span style="text-decoration: underline;">409</span>729 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> UNH    UnitedHeal… 91324P10   29177… 0.090<span style="text-decoration: underline;">7</span> Healt…     5<span style="text-decoration: underline;">409</span>729 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> UNH    UnitedHeal… 91324P10   29177… 0.090<span style="text-decoration: underline;">7</span> Healt…     5<span style="text-decoration: underline;">409</span>729 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> UNH    UnitedHeal… 91324P10   29177… 0.090<span style="text-decoration: underline;">7</span> Healt…     5<span style="text-decoration: underline;">409</span>729 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> UNH    UnitedHeal… 91324P10   29177… 0.090<span style="text-decoration: underline;">7</span> Healt…     5<span style="text-decoration: underline;">409</span>729 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> UNH    UnitedHeal… 91324P10   29177… 0.090<span style="text-decoration: underline;">7</span> Healt…     5<span style="text-decoration: underline;">409</span>729 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> UNH    UnitedHeal… 91324P10   29177… 0.090<span style="text-decoration: underline;">7</span> Healt…     5<span style="text-decoration: underline;">409</span>729 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> UNH    UnitedHeal… 91324P10   29177… 0.090<span style="text-decoration: underline;">7</span> Healt…     5<span style="text-decoration: underline;">409</span>729 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> UNH    UnitedHeal… 91324P10   29177… 0.090<span style="text-decoration: underline;">7</span> Healt…     5<span style="text-decoration: underline;">409</span>729 USD           </span>
+<span class="co">## <span style="color: #949494;"># … with 8,264 more rows, and 7 more variables: date &lt;date&gt;, open &lt;dbl&gt;,</span></span>
+<span class="co">## <span style="color: #949494;">#   high &lt;dbl&gt;, low &lt;dbl&gt;, close &lt;dbl&gt;, volume &lt;dbl&gt;, adjusted &lt;dbl&gt;</span></span></code></pre>
 <p>You can use any applicable “getter” to get data for <strong>every stock in an index or an exchange</strong>! This includes: “stock.prices”, “key.ratios”, “key.stats”, and more.</p>
 </div>
 </div>
 </div>
-<div id="scaling-the-mutation-of-financial-data" class="section level1">
-<h1 class="hasAnchor">
-<a href="#scaling-the-mutation-of-financial-data" class="anchor"></a>2.0 Scaling the Mutation of Financial Data</h1>
+<div class="section level1">
+<h1 id="scaling-the-mutation-of-financial-data">2.0 Scaling the Mutation of Financial Data<a class="anchor" aria-label="anchor" href="#scaling-the-mutation-of-financial-data"></a>
+</h1>
 <p>Once you get the data, you typically want to do something with it. You can easily do this at scale. Let’s get the yearly returns for multiple stocks using <code>tq_transmute</code>. First, get the prices. We’ll use the <code>FANG</code> data set, but you typically will use <code>tq_get</code> to retrieve data in “tibble” format.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"FANG"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"FANG"</span><span class="op">)</span>
 
 <span class="va">FANG</span></code></pre></div>
-<pre><code>## # A tibble: 4,032 x 8
-##    symbol date        open  high   low close    volume adjusted
-##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1 FB     2013-01-02  27.4  28.2  27.4  28    69846400     28  
-##  2 FB     2013-01-03  27.9  28.5  27.6  27.8  63140600     27.8
-##  3 FB     2013-01-04  28.0  28.9  27.8  28.8  72715400     28.8
-##  4 FB     2013-01-07  28.7  29.8  28.6  29.4  83781800     29.4
-##  5 FB     2013-01-08  29.5  29.6  28.9  29.1  45871300     29.1
-##  6 FB     2013-01-09  29.7  30.6  29.5  30.6 104787700     30.6
-##  7 FB     2013-01-10  30.6  31.5  30.3  31.3  95316400     31.3
-##  8 FB     2013-01-11  31.3  32.0  31.1  31.7  89598000     31.7
-##  9 FB     2013-01-14  32.1  32.2  30.6  31.0  98892800     31.0
-## 10 FB     2013-01-15  30.6  31.7  29.9  30.1 173242600     30.1
-## # … with 4,022 more rows</code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 4,032 × 8</span></span>
+<span class="co">##    symbol date        open  high   low close    volume adjusted</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> FB     2013-01-02  27.4  28.2  27.4  28    69<span style="text-decoration: underline;">846</span>400     28  </span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> FB     2013-01-03  27.9  28.5  27.6  27.8  63<span style="text-decoration: underline;">140</span>600     27.8</span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> FB     2013-01-04  28.0  28.9  27.8  28.8  72<span style="text-decoration: underline;">715</span>400     28.8</span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> FB     2013-01-07  28.7  29.8  28.6  29.4  83<span style="text-decoration: underline;">781</span>800     29.4</span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> FB     2013-01-08  29.5  29.6  28.9  29.1  45<span style="text-decoration: underline;">871</span>300     29.1</span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> FB     2013-01-09  29.7  30.6  29.5  30.6 104<span style="text-decoration: underline;">787</span>700     30.6</span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> FB     2013-01-10  30.6  31.5  30.3  31.3  95<span style="text-decoration: underline;">316</span>400     31.3</span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> FB     2013-01-11  31.3  32.0  31.1  31.7  89<span style="text-decoration: underline;">598</span>000     31.7</span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> FB     2013-01-14  32.1  32.2  30.6  31.0  98<span style="text-decoration: underline;">892</span>800     31.0</span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> FB     2013-01-15  30.6  31.7  29.9  30.1 173<span style="text-decoration: underline;">242</span>600     30.1</span>
+<span class="co">## <span style="color: #949494;"># … with 4,022 more rows</span></span></code></pre>
 <p>Second, use <code>group_by</code> to group by stock symbol. Third, apply the mutation. We can do this in one easy workflow. The <code>periodReturns</code> function is applied to each group of stock prices, and a new data frame was returned with the annual returns in the correct periodicity.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">FANG_returns_yearly</span> <span class="op">&lt;-</span> <span class="va">FANG</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">FANG_returns_yearly</span> <span class="op">&lt;-</span> <span class="va">FANG</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span>select     <span class="op">=</span> <span class="va">adjusted</span>, 
                  mutate_fun <span class="op">=</span> <span class="va">periodReturn</span>, 
                  period     <span class="op">=</span> <span class="st">"yearly"</span>, 
                  col_rename <span class="op">=</span> <span class="st">"yearly.returns"</span><span class="op">)</span> </code></pre></div>
 <p>Last, we can visualize the returns.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">FANG_returns_yearly</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="http://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">yearly.returns</span>, fill <span class="op">=</span> <span class="va">symbol</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"dodge"</span>, stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"FANG: Annual Returns"</span>, 
+<code class="sourceCode R"><span class="va">FANG_returns_yearly</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html" class="external-link">year</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">yearly.returns</span>, fill <span class="op">=</span> <span class="va">symbol</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"dodge"</span>, stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"FANG: Annual Returns"</span>, 
          subtitle <span class="op">=</span> <span class="st">"Mutating at scale is quick and easy!"</span>,
          y <span class="op">=</span> <span class="st">"Returns"</span>, x <span class="op">=</span> <span class="st">""</span>, color <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">percent</a></span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html" class="external-link">coord_flip</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="../reference/scale_manual.html">scale_fill_tq</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="TQ03-scaling-and-modeling-with-tidyquant_files/figure-html/unnamed-chunk-11-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p><a class="anchor" id="purrr-function-mapping"></a></p>
 </div>
-<div id="modeling-financial-data-using-purrr" class="section level1">
-<h1 class="hasAnchor">
-<a href="#modeling-financial-data-using-purrr" class="anchor"></a>3.0 Modeling Financial Data using purrr</h1>
-<p>Eventually you will want to begin modeling (or more generally applying functions) at scale! One of the <strong>best</strong> features of the <code>tidyverse</code> is the ability to map functions to nested tibbles using <code>purrr</code>. From the Many Models chapter of “<a href="https://r4ds.had.co.nz/">R for Data Science</a>”, we can apply the same modeling workflow to financial analysis. Using a two step workflow:</p>
+<div class="section level1">
+<h1 id="modeling-financial-data-using-purrr">3.0 Modeling Financial Data using purrr<a class="anchor" aria-label="anchor" href="#modeling-financial-data-using-purrr"></a>
+</h1>
+<p>Eventually you will want to begin modeling (or more generally applying functions) at scale! One of the <strong>best</strong> features of the <code>tidyverse</code> is the ability to map functions to nested tibbles using <code>purrr</code>. From the Many Models chapter of “<a href="https://r4ds.had.co.nz/" class="external-link">R for Data Science</a>”, we can apply the same modeling workflow to financial analysis. Using a two step workflow:</p>
 <ol style="list-style-type: decimal">
 <li>Model a single stock</li>
 <li>Scale to many stocks</li>
 </ol>
 <p>Let’s go through an example to illustrate.</p>
-<div id="example-applying-a-regression-model-to-detect-a-positive-trend" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example-applying-a-regression-model-to-detect-a-positive-trend" class="anchor"></a>Example: Applying a Regression Model to Detect a Positive Trend</h2>
+<div class="section level2">
+<h2 id="example-applying-a-regression-model-to-detect-a-positive-trend">Example: Applying a Regression Model to Detect a Positive Trend<a class="anchor" aria-label="anchor" href="#example-applying-a-regression-model-to-detect-a-positive-trend"></a>
+</h2>
 <p>In this example, we’ll use a simple linear model to identify the trend in annual returns to determine if the stock returns are decreasing or increasing over time.</p>
-<div id="analyze-a-single-stock" class="section level3">
-<h3 class="hasAnchor">
-<a href="#analyze-a-single-stock" class="anchor"></a>Analyze a Single Stock</h3>
+<div class="section level3">
+<h3 id="analyze-a-single-stock">Analyze a Single Stock<a class="anchor" aria-label="anchor" href="#analyze-a-single-stock"></a>
+</h3>
 <p>First, let’s collect stock data with <code><a href="../reference/tq_get.html">tq_get()</a></code></p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">AAPL</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"AAPL"</span>, from <span class="op">=</span> <span class="st">"2007-01-01"</span>, to <span class="op">=</span> <span class="st">"2016-12-31"</span><span class="op">)</span>
 <span class="va">AAPL</span></code></pre></div>
-<pre><code>## # A tibble: 2,518 x 8
-##    symbol date        open  high   low close     volume adjusted
-##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;
-##  1 AAPL   2007-01-03  3.08  3.09  2.92  2.99 1238319600     2.58
-##  2 AAPL   2007-01-04  3.00  3.07  2.99  3.06  847260400     2.64
-##  3 AAPL   2007-01-05  3.06  3.08  3.01  3.04  834741600     2.62
-##  4 AAPL   2007-01-08  3.07  3.09  3.05  3.05  797106800     2.63
-##  5 AAPL   2007-01-09  3.09  3.32  3.04  3.31 3349298400     2.85
-##  6 AAPL   2007-01-10  3.38  3.49  3.34  3.46 2952880000     2.98
-##  7 AAPL   2007-01-11  3.43  3.46  3.40  3.42 1440252800     2.95
-##  8 AAPL   2007-01-12  3.38  3.40  3.33  3.38 1312690400     2.91
-##  9 AAPL   2007-01-16  3.42  3.47  3.41  3.47 1244076400     2.99
-## 10 AAPL   2007-01-17  3.48  3.49  3.39  3.39 1646260000     2.92
-## # … with 2,508 more rows</code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 2,518 × 8</span></span>
+<span class="co">##    symbol date        open  high   low close     volume adjusted</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   2007-01-03  3.08  3.09  2.92  2.99 <span style="text-decoration: underline;">1</span>238<span style="text-decoration: underline;">319</span>600     2.57</span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> AAPL   2007-01-04  3.00  3.07  2.99  3.06  847<span style="text-decoration: underline;">260</span>400     2.62</span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> AAPL   2007-01-05  3.06  3.08  3.01  3.04  834<span style="text-decoration: underline;">741</span>600     2.60</span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> AAPL   2007-01-08  3.07  3.09  3.05  3.05  797<span style="text-decoration: underline;">106</span>800     2.62</span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> AAPL   2007-01-09  3.09  3.32  3.04  3.31 <span style="text-decoration: underline;">3</span>349<span style="text-decoration: underline;">298</span>400     2.83</span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> AAPL   2007-01-10  3.38  3.49  3.34  3.46 <span style="text-decoration: underline;">2</span>952<span style="text-decoration: underline;">880</span>000     2.97</span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> AAPL   2007-01-11  3.43  3.46  3.40  3.42 <span style="text-decoration: underline;">1</span>440<span style="text-decoration: underline;">252</span>800     2.93</span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   2007-01-12  3.38  3.40  3.33  3.38 <span style="text-decoration: underline;">1</span>312<span style="text-decoration: underline;">690</span>400     2.90</span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   2007-01-16  3.42  3.47  3.41  3.47 <span style="text-decoration: underline;">1</span>244<span style="text-decoration: underline;">076</span>400     2.97</span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   2007-01-17  3.48  3.49  3.39  3.39 <span style="text-decoration: underline;">1</span>646<span style="text-decoration: underline;">260</span>000     2.91</span>
+<span class="co">## <span style="color: #949494;"># … with 2,508 more rows</span></span></code></pre>
 <p>Next, come up with a function to help us collect annual log returns. The function below mutates the stock prices to period returns using <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code>. We add the <code>type = "log"</code> and <code>period = "monthly"</code> arguments to ensure we retrieve a tibble of monthly log returns. Last, we take the mean of the monthly returns to get MMLR.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">get_annual_returns</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">stock.returns</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">stock.returns</span> <span class="op">%&gt;%</span>
+    <span class="va">stock.returns</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
         <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span>select     <span class="op">=</span> <span class="va">adjusted</span>, 
                      mutate_fun <span class="op">=</span> <span class="va">periodReturn</span>, 
                      type       <span class="op">=</span> <span class="st">"log"</span>, 
@@ -347,42 +328,42 @@
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">AAPL_annual_log_returns</span> <span class="op">&lt;-</span> <span class="fu">get_annual_returns</span><span class="op">(</span><span class="va">AAPL</span><span class="op">)</span>
 <span class="va">AAPL_annual_log_returns</span></code></pre></div>
-<pre><code>## # A tibble: 10 x 2
-##    date       yearly.returns
-##    &lt;date&gt;              &lt;dbl&gt;
-##  1 2007-12-31         0.860 
-##  2 2008-12-31        -0.842 
-##  3 2009-12-31         0.904 
-##  4 2010-12-31         0.426 
-##  5 2011-12-30         0.228 
-##  6 2012-12-31         0.282 
-##  7 2013-12-31         0.0776
-##  8 2014-12-31         0.341 
-##  9 2015-12-31        -0.0306
-## 10 2016-12-30         0.118</code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 10 × 2</span></span>
+<span class="co">##    date       yearly.returns</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> 2007-12-31         0.860 </span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> 2008-12-31        -<span style="color: #BB0000;">0.842</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> 2009-12-31         0.904 </span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> 2010-12-31         0.426 </span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> 2011-12-30         0.228 </span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> 2012-12-31         0.282 </span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> 2013-12-31         0.077<span style="text-decoration: underline;">6</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> 2014-12-31         0.341 </span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> 2015-12-31        -<span style="color: #BB0000;">0.030</span><span style="color: #BB0000; text-decoration: underline;">6</span></span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> 2016-12-30         0.118</span></code></pre>
 <p>Let’s visualize to identify trends. We can see from the linear trend line that AAPL’s stock returns are declining.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">AAPL_annual_log_returns</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="http://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">yearly.returns</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span>, color <span class="op">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span>, color <span class="op">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span> 
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"AAPL: Visualizing Trends in Annual Returns"</span>,
+<code class="sourceCode R"><span class="va">AAPL_annual_log_returns</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html" class="external-link">year</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">yearly.returns</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span>, color <span class="op">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span>, color <span class="op">=</span> <span class="fu"><a href="../reference/palette_tq.html">palette_light</a></span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span> 
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"AAPL: Visualizing Trends in Annual Returns"</span>,
          x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">"Annual Returns"</span>, color <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="TQ03-scaling-and-modeling-with-tidyquant_files/figure-html/unnamed-chunk-15-1.png" width="95%" style="display: block; margin: auto;"></p>
-<p>Now, we can get the linear model using the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function. However, there is one problem: the output is not “tidy”.</p>
+<p>Now, we can get the linear model using the <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> function. However, there is one problem: the output is not “tidy”.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">yearly.returns</span> <span class="op">~</span> <span class="fu"><a href="http://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">AAPL_annual_log_returns</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">yearly.returns</span> <span class="op">~</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html" class="external-link">year</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">AAPL_annual_log_returns</span><span class="op">)</span>
 <span class="va">mod</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = yearly.returns ~ year(date), data = AAPL_annual_log_returns)
-## 
-## Coefficients:
-## (Intercept)   year(date)  
-##    58.86283     -0.02915</code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## Call:</span>
+<span class="co">## lm(formula = yearly.returns ~ year(date), data = AAPL_annual_log_returns)</span>
+<span class="co">## </span>
+<span class="co">## Coefficients:</span>
+<span class="co">## (Intercept)   year(date)  </span>
+<span class="co">##    58.86278     -0.02915</span></code></pre>
 <p>We can utilize the <code>broom</code> package to get “tidy” data from the model. There’s three primary functions:</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -394,83 +375,83 @@
 </ol>
 <p>We’ll use <code>tidy</code> to retrieve the model coefficients.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span>
-<span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 2 x 5
-##   term        estimate std.error statistic p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept)  58.9     113.         0.520   0.617
-## 2 year(date)   -0.0291    0.0562    -0.518   0.618</code></pre>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/" class="external-link">broom</a></span><span class="op">)</span>
+<span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 2 × 5</span></span>
+<span class="co">##   term        estimate std.error statistic p.value</span>
+<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span> (Intercept)  58.9     113.         0.520   0.617</span>
+<span class="co">## <span style="color: #BCBCBC;">2</span> year(date)   -<span style="color: #BB0000;">0.029</span><span style="color: #BB0000; text-decoration: underline;">1</span>    0.056<span style="text-decoration: underline;">2</span>    -<span style="color: #BB0000;">0.518</span>   0.618</span></code></pre>
 <p>Adding to our workflow, we have the following:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">get_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">stock_data</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">annual_returns</span> <span class="op">&lt;-</span> <span class="fu">get_annual_returns</span><span class="op">(</span><span class="va">stock_data</span><span class="op">)</span>
-    <span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">yearly.returns</span> <span class="op">~</span> <span class="fu"><a href="http://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">annual_returns</span><span class="op">)</span>
-    <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span>
+    <span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">yearly.returns</span> <span class="op">~</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html" class="external-link">year</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">annual_returns</span><span class="op">)</span>
+    <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p>Testing it out on a single stock. We can see that the “term” that contains the direction of the trend (the slope) is “year(date)”. The interpetation is that as year increases one unit, the annual returns decrease by 3%.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">get_model</span><span class="op">(</span><span class="va">AAPL</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 2 x 5
-##   term        estimate std.error statistic p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept)  58.9     113.         0.520   0.617
-## 2 year(date)   -0.0291    0.0562    -0.518   0.618</code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 2 × 5</span></span>
+<span class="co">##   term        estimate std.error statistic p.value</span>
+<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span> (Intercept)  58.9     113.         0.520   0.617</span>
+<span class="co">## <span style="color: #BCBCBC;">2</span> year(date)   -<span style="color: #BB0000;">0.029</span><span style="color: #BB0000; text-decoration: underline;">1</span>    0.056<span style="text-decoration: underline;">2</span>    -<span style="color: #BB0000;">0.518</span>   0.618</span></code></pre>
 <p>Now that we have identified the trend direction, it looks like we are ready to scale.</p>
 </div>
-<div id="scale-to-many-stocks" class="section level3">
-<h3 class="hasAnchor">
-<a href="#scale-to-many-stocks" class="anchor"></a>Scale to Many Stocks</h3>
-<p>Once the analysis for one stock is done scale to many stocks is simple. For brevity, we’ll randomly sample ten stocks from the S&amp;P500 with a call to <code><a href="https://dplyr.tidyverse.org/reference/sample_n.html">dplyr::sample_n()</a></code>.</p>
+<div class="section level3">
+<h3 id="scale-to-many-stocks">Scale to Many Stocks<a class="anchor" aria-label="anchor" href="#scale-to-many-stocks"></a>
+</h3>
+<p>Once the analysis for one stock is done scale to many stocks is simple. For brevity, we’ll randomly sample ten stocks from the S&amp;P500 with a call to <code><a href="https://dplyr.tidyverse.org/reference/sample_n.html" class="external-link">dplyr::sample_n()</a></code>.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
-<span class="va">stocks_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_index.html">tq_index</a></span><span class="op">(</span><span class="st">"SP500"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html">sample_n</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> 
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
+<span class="va">stocks_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_index.html">tq_index</a></span><span class="op">(</span><span class="st">"SP500"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html" class="external-link">sample_n</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> 
 <span class="va">stocks_tbl</span></code></pre></div>
-<pre><code>## # A tibble: 5 x 8
-##   symbol company    identifier sedol  weight sector   shares_held local_currency
-##   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;         
-## 1 LEG    Leggett &amp;… 52466010   2510… 1.89e-4 Consume…     1359861 USD           
-## 2 ECL    Ecolab In… 27886510   2304… 1.60e-3 Materia…     2542874 USD           
-## 3 HOLX   Hologic I… 43644010   2433… 5.74e-4 Health …     2633340 USD           
-## 4 NVR    NVR Inc.   62944T10   2637… 4.86e-4 Consume…       35800 USD           
-## 5 MRO    Marathon … 56584910   2910… 2.85e-4 Energy       8106363 USD</code></pre>
-<p>We can now apply our analysis function to the stocks using <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate</a></code> and <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map</a></code>. The <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> function adds a column to our tibble, and the <code>map()</code> function maps our custom <code>get_model</code> function to our tibble of stocks using the <code>symbol</code> column. The <code><a href="https://tidyr.tidyverse.org/reference/nest.html">tidyr::unnest</a></code> function unrolls the nested data frame so all of the model statistics are accessable in the top data frame level. The <code>filter</code>, <code>arrange</code> and <code>select</code> steps just manipulate the data frame to isolate and arrange the data for our viewing.</p>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 5 × 8</span></span>
+<span class="co">##   symbol company    identifier sedol  weight sector   shares_held local_currency</span>
+<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
+<span class="co">## <span style="color: #BCBCBC;">1</span> PVH    PVH Corp.  69365610   B3V9… 1.75<span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span> Consume…      <span style="text-decoration: underline;">786</span>824 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;">2</span> HUM    Humana In… 44485910   2445… 1.49<span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span> Health …     1<span style="text-decoration: underline;">411</span>511 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;">3</span> FE     FirstEner… 33793210   2100… 5.44<span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span> Utiliti…     5<span style="text-decoration: underline;">976</span>587 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;">4</span> CZR    Caesars E… 12769G10   BMWW… 4.58<span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span> Consume…     2<span style="text-decoration: underline;">306</span>406 USD           </span>
+<span class="co">## <span style="color: #BCBCBC;">5</span> CTXS   Citrix Sy… 17737610   2182… 2.60<span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span> Informa…     1<span style="text-decoration: underline;">361</span>854 USD</span></code></pre>
+<p>We can now apply our analysis function to the stocks using <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate</a></code> and <code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">purrr::map</a></code>. The <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code> function adds a column to our tibble, and the <code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map()</a></code> function maps our custom <code>get_model</code> function to our tibble of stocks using the <code>symbol</code> column. The <code><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">tidyr::unnest</a></code> function unrolls the nested data frame so all of the model statistics are accessable in the top data frame level. The <code>filter</code>, <code>arrange</code> and <code>select</code> steps just manipulate the data frame to isolate and arrange the data for our viewing.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">stocks_model_stats</span> <span class="op">&lt;-</span> <span class="va">stocks_tbl</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">symbol</span>, <span class="va">company</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>from <span class="op">=</span> <span class="st">"2007-01-01"</span>, to <span class="op">=</span> <span class="st">"2016-12-31"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">stocks_model_stats</span> <span class="op">&lt;-</span> <span class="va">stocks_tbl</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">symbol</span>, <span class="va">company</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>from <span class="op">=</span> <span class="st">"2007-01-01"</span>, to <span class="op">=</span> <span class="st">"2016-12-31"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     
     <span class="co"># Nest </span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">symbol</span>, <span class="va">company</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu">nest</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">symbol</span>, <span class="va">company</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">nest</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     
     <span class="co"># Apply the get_model() function to the new "nested" data column</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>model <span class="op">=</span> <span class="fu">map</span><span class="op">(</span><span class="va">data</span>, <span class="va">get_model</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>model <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">get_model</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     
     <span class="co"># Unnest and collect slope</span>
-    <span class="fu">unnest</span><span class="op">(</span><span class="va">model</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">term</span> <span class="op">==</span> <span class="st">"year(date)"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">estimate</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">term</span><span class="op">)</span>
+    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">term</span> <span class="op">==</span> <span class="st">"year(date)"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">estimate</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">term</span><span class="op">)</span>
 
 <span class="va">stocks_model_stats</span></code></pre></div>
-<pre><code>## # A tibble: 5 x 7
-## # Groups:   symbol, company [5]
-##   symbol company              data          estimate std.error statistic p.value
-##   &lt;chr&gt;  &lt;chr&gt;                &lt;list&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 HOLX   Hologic Inc.         &lt;tibble [2,5…   0.0397    0.0425     0.935   0.377
-## 2 LEG    Leggett &amp; Platt Inc… &lt;tibble [2,5…   0.0292    0.0199     1.46    0.181
-## 3 NVR    NVR Inc.             &lt;tibble [2,5…   0.0229    0.0214     1.07    0.315
-## 4 ECL    Ecolab Inc.          &lt;tibble [2,5…   0.0112    0.0228     0.493   0.635
-## 5 MRO    Marathon Oil Corpor… &lt;tibble [2,5…  -0.0140    0.0501    -0.280   0.787</code></pre>
-<p>We’re done! We now have the coefficient of the linear regression that tracks the direction of the trend line. We can easily extend this type of analysis to larger lists or stock indexes. For example, the entire S&amp;P500 could be analyzed removing the <code><a href="https://dplyr.tidyverse.org/reference/sample_n.html">sample_n()</a></code> following the call to <code><a href="../reference/tq_index.html">tq_index("SP500")</a></code>.</p>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 5 × 7</span></span>
+<span class="co">## <span style="color: #949494;"># Groups:   symbol, company [5]</span></span>
+<span class="co">##   symbol company                   data     estimate std.error statistic p.value</span>
+<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span> CZR    Caesars Entertainment Inc <span style="color: #949494;">&lt;tibble</span>…  0.252      0.473      0.533   0.688</span>
+<span class="co">## <span style="color: #BCBCBC;">2</span> HUM    Humana Inc.               <span style="color: #949494;">&lt;tibble</span>…  0.035<span style="text-decoration: underline;">4</span>     0.039<span style="text-decoration: underline;">2</span>     0.902   0.394</span>
+<span class="co">## <span style="color: #BCBCBC;">3</span> PVH    PVH Corp.                 <span style="color: #949494;">&lt;tibble</span>…  0.005<span style="text-decoration: underline;">59</span>    0.051<span style="text-decoration: underline;">3</span>     0.109   0.916</span>
+<span class="co">## <span style="color: #BCBCBC;">4</span> FE     FirstEnergy Corp.         <span style="color: #949494;">&lt;tibble</span>…  0.002<span style="text-decoration: underline;">62</span>    0.023<span style="text-decoration: underline;">6</span>     0.111   0.914</span>
+<span class="co">## <span style="color: #BCBCBC;">5</span> CTXS   Citrix Systems Inc.       <span style="color: #949494;">&lt;tibble</span>… -<span style="color: #BB0000;">0.007</span><span style="color: #BB0000; text-decoration: underline;">92</span>    0.035<span style="text-decoration: underline;">9</span>    -<span style="color: #BB0000;">0.221</span>   0.831</span></code></pre>
+<p>We’re done! We now have the coefficient of the linear regression that tracks the direction of the trend line. We can easily extend this type of analysis to larger lists or stock indexes. For example, the entire S&amp;P500 could be analyzed removing the <code><a href="https://dplyr.tidyverse.org/reference/sample_n.html" class="external-link">sample_n()</a></code> following the call to <code>tq_index("SP500")</code>.</p>
 </div>
 </div>
 </div>
-<div id="error-handling-when-scaling" class="section level1">
-<h1 class="hasAnchor">
-<a href="#error-handling-when-scaling" class="anchor"></a>4.0 Error Handling when Scaling</h1>
+<div class="section level1">
+<h1 id="error-handling-when-scaling">4.0 Error Handling when Scaling<a class="anchor" aria-label="anchor" href="#error-handling-when-scaling"></a>
+</h1>
 <p>Eventually you will run into a stock index, stock symbol, FRED data code, etc that cannot be retrieved. Possible reasons are:</p>
 <ul>
 <li>An index becomes out of date</li>
@@ -481,88 +462,85 @@
 <p>This becomes painful when scaling if the functions return errors. So, the <code><a href="../reference/tq_get.html">tq_get()</a></code> function is designed to handle errors <em>gracefully</em>. What this means is an <code>NA</code> value is returned when an error is generated along with a <em>gentle error warning</em>.</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"XYZ"</span>, <span class="st">"stock.prices"</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] NA</code></pre>
-<div id="pros-and-cons-to-built-in-error-handling" class="section level2">
-<h2 class="hasAnchor">
-<a href="#pros-and-cons-to-built-in-error-handling" class="anchor"></a>Pros and Cons to Built-In Error-Handling</h2>
+<pre><code><span class="co">## [1] NA</span></code></pre>
+<div class="section level2">
+<h2 id="pros-and-cons-to-built-in-error-handling">Pros and Cons to Built-In Error-Handling<a class="anchor" aria-label="anchor" href="#pros-and-cons-to-built-in-error-handling"></a>
+</h2>
 <p>There are pros and cons to this approach that you may not agree with, but I believe helps in the long run. Just be aware of what happens:</p>
 <ul>
 <li><p><strong>Pros</strong>: Long running scripts are not interrupted because of one error</p></li>
 <li><p><strong>Cons</strong>: Errors can be inadvertently handled or flow downstream if the users does not read the warnings</p></li>
 </ul>
 </div>
-<div id="bad-apples-fail-gracefully-tq_get" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bad-apples-fail-gracefully-tq_get" class="anchor"></a>Bad Apples Fail Gracefully, tq_get</h2>
+<div class="section level2">
+<h2 id="bad-apples-fail-gracefully-tq_get">Bad Apples Fail Gracefully, tq_get<a class="anchor" aria-label="anchor" href="#bad-apples-fail-gracefully-tq_get"></a>
+</h2>
 <p>Let’s see an example when using <code><a href="../reference/tq_get.html">tq_get()</a></code> to get the stock prices for a long list of stocks with one <code>BAD APPLE</code>. The argument <code>complete_cases</code> comes in handy. The default is <code>TRUE</code>, which removes “bad apples” so future analysis have complete cases to compute on. Note that a gentle warning stating that an error occurred and was dealt with by removing the rows from the results.</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"BAD APPLE"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"BAD APPLE"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get <span class="op">=</span> <span class="st">"stock.prices"</span>, complete_cases <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<pre><code>## Warning: x = 'BAD APPLE', get = 'stock.prices': Error in getSymbols.yahoo(Symbols = "BAD APPLE", env = &lt;environment&gt;, : Unable to import "BAD APPLE".
-## argument "conn" is missing, with no default
-##  Removing BAD APPLE.</code></pre>
-<pre><code>## # A tibble: 5,116 x 8
-##    symbol date        open  high   low close    volume adjusted
-##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1 AAPL   2011-01-03  11.6  11.8  11.6  11.8 445138400     10.1
-##  2 AAPL   2011-01-04  11.9  11.9  11.7  11.8 309080800     10.2
-##  3 AAPL   2011-01-05  11.8  11.9  11.8  11.9 255519600     10.3
-##  4 AAPL   2011-01-06  12.0  12.0  11.9  11.9 300428800     10.3
-##  5 AAPL   2011-01-07  11.9  12.0  11.9  12.0 311931200     10.3
-##  6 AAPL   2011-01-10  12.1  12.3  12.0  12.2 448560000     10.5
-##  7 AAPL   2011-01-11  12.3  12.3  12.1  12.2 444108000     10.5
-##  8 AAPL   2011-01-12  12.3  12.3  12.2  12.3 302590400     10.6
-##  9 AAPL   2011-01-13  12.3  12.4  12.3  12.3 296780400     10.6
-## 10 AAPL   2011-01-14  12.4  12.4  12.3  12.4 308840000     10.7
-## # … with 5,106 more rows</code></pre>
+<pre><code><span class="co">## Warning: x = 'BAD APPLE', get = 'stock.prices': Error in getSymbols.yahoo(Symbols = "BAD APPLE", env = &lt;environment&gt;, : Unable to import "BAD APPLE".</span>
+<span class="co">## argument "conn" is missing, with no default</span>
+<span class="co">##  Removing BAD APPLE.</span></code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 5,516 × 8</span></span>
+<span class="co">##    symbol date        open  high   low close    volume adjusted</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   2011-01-03  11.6  11.8  11.6  11.8 445<span style="text-decoration: underline;">138</span>400     10.1</span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> AAPL   2011-01-04  11.9  11.9  11.7  11.8 309<span style="text-decoration: underline;">080</span>800     10.1</span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> AAPL   2011-01-05  11.8  11.9  11.8  11.9 255<span style="text-decoration: underline;">519</span>600     10.2</span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> AAPL   2011-01-06  12.0  12.0  11.9  11.9 300<span style="text-decoration: underline;">428</span>800     10.2</span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> AAPL   2011-01-07  11.9  12.0  11.9  12.0 311<span style="text-decoration: underline;">931</span>200     10.3</span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> AAPL   2011-01-10  12.1  12.3  12.0  12.2 448<span style="text-decoration: underline;">560</span>000     10.5</span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> AAPL   2011-01-11  12.3  12.3  12.1  12.2 444<span style="text-decoration: underline;">108</span>000     10.5</span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   2011-01-12  12.3  12.3  12.2  12.3 302<span style="text-decoration: underline;">590</span>400     10.5</span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   2011-01-13  12.3  12.4  12.3  12.3 296<span style="text-decoration: underline;">780</span>400     10.6</span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   2011-01-14  12.4  12.4  12.3  12.4 308<span style="text-decoration: underline;">840</span>000     10.7</span>
+<span class="co">## <span style="color: #949494;"># … with 5,506 more rows</span></span></code></pre>
 <p>Now switching <code>complete_cases = FALSE</code> will retain any errors as <code>NA</code> values in a nested data frame. Notice that the error message and output change. The error message now states that the <code>NA</code> values exist in the output and the return is a “nested” data structure.</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"BAD APPLE"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"BAD APPLE"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get <span class="op">=</span> <span class="st">"stock.prices"</span>, complete_cases <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<pre><code>## Warning: x = 'BAD APPLE', get = 'stock.prices': Error in getSymbols.yahoo(Symbols = "BAD APPLE", env = &lt;environment&gt;, : Unable to import "BAD APPLE".
-## argument "conn" is missing, with no default</code></pre>
-<pre><code>## # A tibble: 5,117 x 9
-##    symbol date        open  high   low close    volume adjusted stock.prices
-##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;lgl&gt;       
-##  1 AAPL   2011-01-03  11.6  11.8  11.6  11.8 445138400     10.1 NA          
-##  2 AAPL   2011-01-04  11.9  11.9  11.7  11.8 309080800     10.2 NA          
-##  3 AAPL   2011-01-05  11.8  11.9  11.8  11.9 255519600     10.3 NA          
-##  4 AAPL   2011-01-06  12.0  12.0  11.9  11.9 300428800     10.3 NA          
-##  5 AAPL   2011-01-07  11.9  12.0  11.9  12.0 311931200     10.3 NA          
-##  6 AAPL   2011-01-10  12.1  12.3  12.0  12.2 448560000     10.5 NA          
-##  7 AAPL   2011-01-11  12.3  12.3  12.1  12.2 444108000     10.5 NA          
-##  8 AAPL   2011-01-12  12.3  12.3  12.2  12.3 302590400     10.6 NA          
-##  9 AAPL   2011-01-13  12.3  12.4  12.3  12.3 296780400     10.6 NA          
-## 10 AAPL   2011-01-14  12.4  12.4  12.3  12.4 308840000     10.7 NA          
-## # … with 5,107 more rows</code></pre>
+<pre><code><span class="co">## Warning: x = 'BAD APPLE', get = 'stock.prices': Error in getSymbols.yahoo(Symbols = "BAD APPLE", env = &lt;environment&gt;, : Unable to import "BAD APPLE".</span>
+<span class="co">## argument "conn" is missing, with no default</span></code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 5,517 × 8</span></span>
+<span class="co">##    symbol date        open  high   low close    volume adjusted</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   2011-01-03  11.6  11.8  11.6  11.8 445<span style="text-decoration: underline;">138</span>400     10.1</span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> AAPL   2011-01-04  11.9  11.9  11.7  11.8 309<span style="text-decoration: underline;">080</span>800     10.1</span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> AAPL   2011-01-05  11.8  11.9  11.8  11.9 255<span style="text-decoration: underline;">519</span>600     10.2</span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> AAPL   2011-01-06  12.0  12.0  11.9  11.9 300<span style="text-decoration: underline;">428</span>800     10.2</span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> AAPL   2011-01-07  11.9  12.0  11.9  12.0 311<span style="text-decoration: underline;">931</span>200     10.3</span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> AAPL   2011-01-10  12.1  12.3  12.0  12.2 448<span style="text-decoration: underline;">560</span>000     10.5</span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> AAPL   2011-01-11  12.3  12.3  12.1  12.2 444<span style="text-decoration: underline;">108</span>000     10.5</span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   2011-01-12  12.3  12.3  12.2  12.3 302<span style="text-decoration: underline;">590</span>400     10.5</span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   2011-01-13  12.3  12.4  12.3  12.3 296<span style="text-decoration: underline;">780</span>400     10.6</span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   2011-01-14  12.4  12.4  12.3  12.4 308<span style="text-decoration: underline;">840</span>000     10.7</span>
+<span class="co">## <span style="color: #949494;"># … with 5,507 more rows</span></span></code></pre>
 <p>In both cases, the prudent user will review the warnings to determine what happened and whether or not this is acceptable. In the <code>complete_cases = FALSE</code> example, if the user attempts to perform downstream computations at scale, the computations will likely fail grinding the analysis to a hault. But, the advantage is that the user will more easily be able to filter to the problem childs to determine what happened and decide whether this is acceptable or not.</p>
 </div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p>Developed by Matt Dancho, Davis Vaughan.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by Matt Dancho, Davis Vaughan.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
 
+  
 
   </body>
 </html>

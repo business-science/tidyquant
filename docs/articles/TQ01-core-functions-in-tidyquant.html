@@ -4,14 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="tidyquant">
 <title>Core Functions in tidyquant • tidyquant</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Roboto-0.4.0/font.css" rel="stylesheet">
+<link href="../deps/_Montserrat-0.4.0/font.css" rel="stylesheet">
+<!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Core Functions in tidyquant">
 <meta property="og:description" content="tidyquant">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -25,95 +27,74 @@
   gtag('config', 'UA-76139189-2');
 </script>
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.3</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">Home</a>
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">tidyquant</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3.9000</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-2">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="../index.html">Home</a>
 </li>
-<li>
-  <a href="../reference/index.html">Function Reference</a>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Function Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Tutorials
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/TQ06-excel-in-r.html">NEW: Excel in R</a>
-    </li>
-    <li class="divider">
-    <li class="dropdown-header">Financial Workflow</li>
-    <li>
-      <a href="../articles/TQ00-introduction-to-tidyquant.html">Introduction to tidyquant</a>
-    </li>
-    <li>
-      <a href="../articles/TQ01-core-functions-in-tidyquant.html">Core functions</a>
-    </li>
-    <li>
-      <a href="../articles/TQ02-quant-integrations-in-tidyquant.html">Quantitative integrations</a>
-    </li>
-    <li>
-      <a href="../articles/TQ03-scaling-and-modeling-with-tidyquant.html">Scaling and modeling</a>
-    </li>
-    <li>
-      <a href="../articles/TQ04-charting-with-tidyquant.html">Charting</a>
-    </li>
-    <li>
-      <a href="../articles/TQ05-performance-analysis-with-tidyquant.html">Performance analysis</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="../news/index.html">News</a>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/business-science/tidyquant">
-    <span class="fab fa-github"></span>
-     
-  </a>
-</li>
-      </ul>
-</div>
-<!--/.nav-collapse -->
+<li class="active nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
+    <a class="dropdown-item" href="../articles/TQ06-excel-in-r.html">NEW: Excel in R</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Financial Workflow</h6>
+    <a class="dropdown-item" href="../articles/TQ00-introduction-to-tidyquant.html">Introduction to tidyquant</a>
+    <a class="dropdown-item" href="../articles/TQ01-core-functions-in-tidyquant.html">Core functions</a>
+    <a class="dropdown-item" href="../articles/TQ02-quant-integrations-in-tidyquant.html">Quantitative integrations</a>
+    <a class="dropdown-item" href="../articles/TQ03-scaling-and-modeling-with-tidyquant.html">Scaling and modeling</a>
+    <a class="dropdown-item" href="../articles/TQ04-charting-with-tidyquant.html">Charting</a>
+    <a class="dropdown-item" href="../articles/TQ05-performance-analysis-with-tidyquant.html">Performance analysis</a>
   </div>
-<!--/.container -->
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">News</a>
+</li>
+      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/business-science/tidyquant">
+    <span class="fab fa fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.navbar -->
 
-      
+    
+  </div>
+</nav><div class="container template-article">
 
-      </header><script src="TQ01-core-functions-in-tidyquant_files/header-attrs-2.6.6/header-attrs.js"></script><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Core Functions in tidyquant</h1>
-                        <h4 class="author">Matt Dancho</h4>
+<div class="row">
+  <main id="main"><div class="page-header">
+      <img src="" class="logo" alt=""><h1>Core Functions in tidyquant</h1>
+                        <h4 data-toc-skip class="author">Matt Dancho</h4>
             
-            <h4 class="date">2021-03-04</h4>
+            <h4 data-toc-skip class="date">2021-12-16</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ01-core-functions-in-tidyquant.Rmd"><code>vignettes/TQ01-core-functions-in-tidyquant.Rmd</code></a></small>
-      <div class="hidden name"><code>TQ01-core-functions-in-tidyquant.Rmd</code></div>
-
+      <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/HEAD/vignettes/TQ01-core-functions-in-tidyquant.Rmd" class="external-link"><code>vignettes/TQ01-core-functions-in-tidyquant.Rmd</code></a></small>
+      <div class="d-none name"><code>TQ01-core-functions-in-tidyquant.Rmd</code></div>
     </div>
 
     
@@ -121,9 +102,9 @@
 <blockquote>
 <p>A few core functions with a lot of power</p>
 </blockquote>
-<div id="overview" class="section level1">
-<h1 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h1>
+<div class="section level1">
+<h1 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h1>
 <p>The <code>tidyquant</code> package has a <strong>core functions with a lot of power</strong>. Few functions means less of a learning curve for the user, which is why there are only a handful of functions the user needs to learn to perform the vast majority of financial analysis tasks. The main functions are:</p>
 <ul>
 <li><p><strong>Get a Stock Index, <code><a href="../reference/tq_index.html">tq_index()</a></code>, or a Stock Exchange, <code><a href="../reference/tq_index.html">tq_exchange()</a></code></strong>: Returns the stock symbols and various attributes for every stock in an index or exchange. Eighteen indexes and three exchanges are available.</p></li>
@@ -132,41 +113,41 @@
 <li><p><strong>Performance analysis, <code><a href="../reference/tq_performance.html">tq_performance()</a></code>, and portfolio aggregation, <code><a href="../reference/tq_portfolio.html">tq_portfolio()</a></code></strong>: The <code>PerformanceAnalytics</code> integration enables analyzing performance of assets and portfolios. Because of the breadth of this topic, refer to <a href="TQ05-performance-analysis-with-tidyquant.html">Performance Analysis with tidyquant</a> for a tutorial on these functions.</p></li>
 </ul>
 </div>
-<div id="prerequisites" class="section level1">
-<h1 class="hasAnchor">
-<a href="#prerequisites" class="anchor"></a>Prerequisites</h1>
+<div class="section level1">
+<h1 id="prerequisites">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
+</h1>
 <p>Load the <code>tidyquant</code> package to get started.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Loads tidyquant, lubridate, xts, quantmod, TTR </span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/business-science/tidyquant">tidyquant</a></span><span class="op">)</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/business-science/tidyquant" class="external-link">tidyquant</a></span><span class="op">)</span></code></pre></div>
 </div>
-<div id="retrieve-consolidated-symbol-data" class="section level1">
-<h1 class="hasAnchor">
-<a href="#retrieve-consolidated-symbol-data" class="anchor"></a>1.0 Retrieve Consolidated Symbol Data</h1>
-<div id="stock-indexes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#stock-indexes" class="anchor"></a>1.1 Stock Indexes</h2>
+<div class="section level1">
+<h1 id="retrieve-consolidated-symbol-data">1.0 Retrieve Consolidated Symbol Data<a class="anchor" aria-label="anchor" href="#retrieve-consolidated-symbol-data"></a>
+</h1>
+<div class="section level2">
+<h2 id="stock-indexes">1.1 Stock Indexes<a class="anchor" aria-label="anchor" href="#stock-indexes"></a>
+</h2>
 <p>A wide range of stock index / exchange lists can be retrieved using <code><a href="../reference/tq_index.html">tq_index()</a></code>. To get a full list of the options, use <code><a href="../reference/tq_index.html">tq_index_options()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tq_index.html">tq_index_options</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "DOW"       "DOWGLOBAL" "SP400"     "SP500"     "SP600"</code></pre>
+<pre><code><span class="co">## [1] "DOW"       "DOWGLOBAL" "SP400"     "SP500"     "SP600"</span></code></pre>
 <p>Set <code>x</code> as one of the options in the list of options above to get the desired stock index / exchange.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tq_index.html">tq_index</a></span><span class="op">(</span><span class="st">"SP500"</span><span class="op">)</span></code></pre></div>
-<p>The data source is <a href="https://www.ssga.com/us/en/institutional/etfs">State Street Global Advisors - US SPDRS ETFs</a>.</p>
+<p>The data source is <a href="https://www.ssga.com/us/en/institutional/etfs" class="external-link">State Street Global Advisors - US SPDRS ETFs</a>.</p>
 </div>
-<div id="stock-exchanges" class="section level2">
-<h2 class="hasAnchor">
-<a href="#stock-exchanges" class="anchor"></a>1.2 Stock Exchanges</h2>
+<div class="section level2">
+<h2 id="stock-exchanges">1.2 Stock Exchanges<a class="anchor" aria-label="anchor" href="#stock-exchanges"></a>
+</h2>
 <p>Stock lists for three stock exchanges are available: NASDAQ, NYSE, and AMEX. If you forget, just use <code><a href="../reference/tq_index.html">tq_exchange_options()</a></code>. We can easily get the full list of stocks on the NASDAQ exchange.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tq_index.html">tq_exchange</a></span><span class="op">(</span><span class="st">"NASDAQ"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="get-quantitative-data" class="section level1">
-<h1 class="hasAnchor">
-<a href="#get-quantitative-data" class="anchor"></a>1.0 Get Quantitative Data</h1>
+<div class="section level1">
+<h1 id="get-quantitative-data">1.0 Get Quantitative Data<a class="anchor" aria-label="anchor" href="#get-quantitative-data"></a>
+</h1>
 <p>The <code><a href="../reference/tq_get.html">tq_get()</a></code> function is used to collect data by changing the <code>get</code> argument. The data sources:</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -185,80 +166,80 @@
 <p>Use <code><a href="../reference/tq_get.html">tq_get_options()</a></code> to see the full list.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tq_get.html">tq_get_options</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>##  [1] "stock.prices"       "stock.prices.japan" "dividends"         
-##  [4] "splits"             "economic.data"      "quandl"            
-##  [7] "quandl.datatable"   "tiingo"             "tiingo.iex"        
-## [10] "tiingo.crypto"      "alphavantager"      "alphavantage"      
-## [13] "rblpapi"</code></pre>
-<div id="yahoo-finance" class="section level2">
-<h2 class="hasAnchor">
-<a href="#yahoo-finance" class="anchor"></a>2.1 Yahoo! Finance</h2>
+<pre><code><span class="co">##  [1] "stock.prices"       "stock.prices.japan" "dividends"         </span>
+<span class="co">##  [4] "splits"             "economic.data"      "quandl"            </span>
+<span class="co">##  [7] "quandl.datatable"   "tiingo"             "tiingo.iex"        </span>
+<span class="co">## [10] "tiingo.crypto"      "alphavantager"      "alphavantage"      </span>
+<span class="co">## [13] "rblpapi"</span></code></pre>
+<div class="section level2">
+<h2 id="yahoo-finance">2.1 Yahoo! Finance<a class="anchor" aria-label="anchor" href="#yahoo-finance"></a>
+</h2>
 <p>The stock prices can be retrieved succinctly using <code>get = "stock.prices"</code>. This returns stock price data from Yahoo Finance.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">aapl_prices</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"AAPL"</span>, get <span class="op">=</span> <span class="st">"stock.prices"</span>, from <span class="op">=</span> <span class="st">" 1990-01-01"</span><span class="op">)</span>
 <span class="va">aapl_prices</span> </code></pre></div>
-<pre><code>## # A tibble: 7,853 x 8
-##    symbol date        open  high   low close    volume adjusted
-##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1 AAPL   1990-01-02 0.315 0.335 0.312 0.333 183198400    0.268
-##  2 AAPL   1990-01-03 0.339 0.339 0.335 0.335 207995200    0.269
-##  3 AAPL   1990-01-04 0.342 0.346 0.333 0.336 221513600    0.270
-##  4 AAPL   1990-01-05 0.337 0.342 0.330 0.337 123312000    0.271
-##  5 AAPL   1990-01-08 0.335 0.339 0.330 0.339 101572800    0.273
-##  6 AAPL   1990-01-09 0.339 0.339 0.330 0.336  86139200    0.270
-##  7 AAPL   1990-01-10 0.336 0.336 0.319 0.321 199718400    0.259
-##  8 AAPL   1990-01-11 0.324 0.324 0.308 0.308 211052800    0.248
-##  9 AAPL   1990-01-12 0.306 0.310 0.301 0.308 171897600    0.248
-## 10 AAPL   1990-01-15 0.308 0.319 0.306 0.306 161739200    0.246
-## # … with 7,843 more rows</code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 8,053 × 8</span></span>
+<span class="co">##    symbol date        open  high   low close    volume adjusted</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   1990-01-02 0.315 0.335 0.312 0.333 183<span style="text-decoration: underline;">198</span>400    0.266</span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> AAPL   1990-01-03 0.339 0.339 0.335 0.335 207<span style="text-decoration: underline;">995</span>200    0.268</span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> AAPL   1990-01-04 0.342 0.346 0.333 0.336 221<span style="text-decoration: underline;">513</span>600    0.269</span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> AAPL   1990-01-05 0.337 0.342 0.330 0.337 123<span style="text-decoration: underline;">312</span>000    0.27 </span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> AAPL   1990-01-08 0.335 0.339 0.330 0.339 101<span style="text-decoration: underline;">572</span>800    0.272</span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> AAPL   1990-01-09 0.339 0.339 0.330 0.336  86<span style="text-decoration: underline;">139</span>200    0.269</span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> AAPL   1990-01-10 0.336 0.336 0.319 0.321 199<span style="text-decoration: underline;">718</span>400    0.257</span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   1990-01-11 0.324 0.324 0.308 0.308 211<span style="text-decoration: underline;">052</span>800    0.247</span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   1990-01-12 0.306 0.310 0.301 0.308 171<span style="text-decoration: underline;">897</span>600    0.247</span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   1990-01-15 0.308 0.319 0.306 0.306 161<span style="text-decoration: underline;">739</span>200    0.245</span>
+<span class="co">## <span style="color: #949494;"># … with 8,043 more rows</span></span></code></pre>
 <p>Yahoo Japan stock prices can be retrieved using a similar call, <code>get = "stock.prices.japan"</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x8411T</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"8411.T"</span>, get <span class="op">=</span> <span class="st">"stock.prices.japan"</span>, from <span class="op">=</span> <span class="st">"2016-01-01"</span>, to  <span class="op">=</span> <span class="st">"2016-12-31"</span><span class="op">)</span></code></pre></div>
-<p>The data source is <a href="https://finance.yahoo.com/">Yahoo Finance</a> and <a href="https://finance.yahoo.co.jp/">Yahoo Finance Japan</a>.</p>
+<p>The data source is <a href="https://finance.yahoo.com/" class="external-link">Yahoo Finance</a> and <a href="https://finance.yahoo.co.jp/" class="external-link">Yahoo Finance Japan</a>.</p>
 </div>
-<div id="fred-economic-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#fred-economic-data" class="anchor"></a>2.2 FRED Economic Data</h2>
-<p>A wealth of economic data can be extracted from the Federal Reserve Economic Data (FRED) database. The FRED contains over 10K data sets that are free to use. See the <a href="https://fred.stlouisfed.org/categories">FRED categories</a> to narrow down the data base and to get data codes. The <a href="https://fred.stlouisfed.org/series/DCOILWTICO">WTI Crude Oil Prices</a> are shown below.</p>
+<div class="section level2">
+<h2 id="fred-economic-data">2.2 FRED Economic Data<a class="anchor" aria-label="anchor" href="#fred-economic-data"></a>
+</h2>
+<p>A wealth of economic data can be extracted from the Federal Reserve Economic Data (FRED) database. The FRED contains over 10K data sets that are free to use. See the <a href="https://fred.stlouisfed.org/categories" class="external-link">FRED categories</a> to narrow down the data base and to get data codes. The <a href="https://fred.stlouisfed.org/series/DCOILWTICO" class="external-link">WTI Crude Oil Prices</a> are shown below.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wti_price_usd</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"DCOILWTICO"</span>, get <span class="op">=</span> <span class="st">"economic.data"</span><span class="op">)</span>
 <span class="va">wti_price_usd</span> </code></pre></div>
-<pre><code>## # A tibble: 2,651 x 3
-##    symbol     date       price
-##    &lt;chr&gt;      &lt;date&gt;     &lt;dbl&gt;
-##  1 DCOILWTICO 2011-01-03  91.6
-##  2 DCOILWTICO 2011-01-04  89.4
-##  3 DCOILWTICO 2011-01-05  90.3
-##  4 DCOILWTICO 2011-01-06  88.4
-##  5 DCOILWTICO 2011-01-07  88.1
-##  6 DCOILWTICO 2011-01-10  89.2
-##  7 DCOILWTICO 2011-01-11  91.1
-##  8 DCOILWTICO 2011-01-12  91.8
-##  9 DCOILWTICO 2011-01-13  91.4
-## 10 DCOILWTICO 2011-01-14  91.5
-## # … with 2,641 more rows</code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 2,856 × 3</span></span>
+<span class="co">##    symbol     date       price</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> DCOILWTICO 2011-01-03  91.6</span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> DCOILWTICO 2011-01-04  89.4</span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> DCOILWTICO 2011-01-05  90.3</span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> DCOILWTICO 2011-01-06  88.4</span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> DCOILWTICO 2011-01-07  88.1</span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> DCOILWTICO 2011-01-10  89.2</span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> DCOILWTICO 2011-01-11  91.1</span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> DCOILWTICO 2011-01-12  91.8</span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> DCOILWTICO 2011-01-13  91.4</span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> DCOILWTICO 2011-01-14  91.5</span>
+<span class="co">## <span style="color: #949494;"># … with 2,846 more rows</span></span></code></pre>
 </div>
-<div id="quandl-api" class="section level2">
-<h2 class="hasAnchor">
-<a href="#quandl-api" class="anchor"></a>2.3 Quandl API</h2>
-<p><a href="https://www.quandl.com/">Quandl</a> provides access to a vast number of financial and economic databases. The <code>Quandl</code> package has been integrated into <code>tidyquant</code> as follows.</p>
-<div id="authentication" class="section level3">
-<h3 class="hasAnchor">
-<a href="#authentication" class="anchor"></a>Authentication</h3>
+<div class="section level2">
+<h2 id="quandl-api">2.3 Quandl API<a class="anchor" aria-label="anchor" href="#quandl-api"></a>
+</h2>
+<p><a href="https://www.quandl.com/" class="external-link">Quandl</a> provides access to a vast number of financial and economic databases. The <code>Quandl</code> package has been integrated into <code>tidyquant</code> as follows.</p>
+<div class="section level3">
+<h3 id="authentication">Authentication<a class="anchor" aria-label="anchor" href="#authentication"></a>
+</h3>
 <p>To make full use of the integration we recommend you set your api key. To do this create or sign into your Quandl account and go to your account api key page.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/quandl_api_key.html">quandl_api_key</a></span><span class="op">(</span><span class="st">"&lt;your-api-key&gt;"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="search" class="section level3">
-<h3 class="hasAnchor">
-<a href="#search" class="anchor"></a>Search</h3>
-<p>Searching Quandl from within the R console is possible with <code><a href="../reference/quandl_search.html">quandl_search()</a></code>, a wrapper for <code><a href="https://rdrr.io/pkg/Quandl/man/Quandl.search.html">Quandl::Quandl.search()</a></code>. An example search is shown below. The only required argument is <code>query</code>. You can also visit the <a href="https://www.quandl.com/search">Quandl Search</a> webpage to search for available database codes.</p>
+<div class="section level3">
+<h3 id="search">Search<a class="anchor" aria-label="anchor" href="#search"></a>
+</h3>
+<p>Searching Quandl from within the R console is possible with <code><a href="../reference/quandl_search.html">quandl_search()</a></code>, a wrapper for <code><a href="https://rdrr.io/pkg/Quandl/man/Quandl.search.html" class="external-link">Quandl::Quandl.search()</a></code>. An example search is shown below. The only required argument is <code>query</code>. You can also visit the <a href="https://www.quandl.com/search" class="external-link">Quandl Search</a> webpage to search for available database codes.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/quandl_search.html">quandl_search</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">"Oil"</span>, database_code <span class="op">=</span> <span class="st">"NSE"</span>, per_page <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="getting-quandl-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#getting-quandl-data" class="anchor"></a>Getting Quandl Data</h3>
+<div class="section level3">
+<h3 id="getting-quandl-data">Getting Quandl Data<a class="anchor" aria-label="anchor" href="#getting-quandl-data"></a>
+</h3>
 <p>Getting data is integrated into <code><a href="../reference/tq_get.html">tq_get()</a></code>. Two get options exist to retrieve Quandl data:</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -269,7 +250,7 @@
 <p>Getting data from Quandl can be achieved in much the same way as the other “get” options. Just pass the “codes” for the data along with desired arguments for the underlying function.</p>
 <p>The following uses <code>get = "quandl"</code> and the “WIKI” database to download daily stock prices for FB and AAPL in 2016. The output is a tidy data frame.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WIKI/FB"</span>, <span class="st">"WIKI/AAPL"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"WIKI/FB"</span>, <span class="st">"WIKI/AAPL"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get  <span class="op">=</span> <span class="st">"quandl"</span>,
            from <span class="op">=</span> <span class="st">"2016-01-01"</span>,
            to   <span class="op">=</span> <span class="st">"2016-12-31"</span><span class="op">)</span></code></pre></div>
@@ -288,7 +269,7 @@
 </ul>
 <p>Here’s an example to get period returns of the adj.close (column index 11) using the <code>column_index</code>, <code>collapse</code> and <code>transform</code> arguments.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WIKI/FB"</span>, <span class="st">"WIKI/AAPL"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"WIKI/FB"</span>, <span class="st">"WIKI/AAPL"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get          <span class="op">=</span> <span class="st">"quandl"</span>,
            from         <span class="op">=</span> <span class="st">"2007-01-01"</span>,
            to           <span class="op">=</span> <span class="st">"2016-12-31"</span>,
@@ -296,7 +277,7 @@
            collapse     <span class="op">=</span> <span class="st">"annual"</span>,      
            transform    <span class="op">=</span> <span class="st">"rdiff"</span><span class="op">)</span>       </code></pre></div>
 <p>Datatables are larger data sets. These can be downloaded using <code>get = "quandl.datatable"</code>. Note that the time series arguments do not work with data tables.</p>
-<p>Here’s several examples of <a href="https://www.quandl.com/databases/ZFB/documentation/about">Zacks Fundamentals Collection B</a></p>
+<p>Here’s several examples of <a href="https://www.quandl.com/databases/ZFB/documentation/about" class="external-link">Zacks Fundamentals Collection B</a></p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Zacks Fundamentals Collection B (DOW 30 Available to non subscribers)</span>
 <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"ZACKS/FC"</span>, get <span class="op">=</span> <span class="st">"quandl.datatable"</span><span class="op">)</span>   <span class="co"># Zacks Fundamentals Condensed</span>
@@ -306,20 +287,20 @@
 <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"ZACKS/SHRS"</span>, get <span class="op">=</span> <span class="st">"quandl.datatable"</span><span class="op">)</span> <span class="co"># Zacks Shares Out Supplement</span></code></pre></div>
 </div>
 </div>
-<div id="tiingo-api" class="section level2">
-<h2 class="hasAnchor">
-<a href="#tiingo-api" class="anchor"></a>2.4 Tiingo API</h2>
-<p>The <a href="https://www.tiingo.com/">Tiingo API</a> is a free source for stock prices, cryptocurrencies, and intraday feeds from the IEX (Investors Exchange). This can serve as an alternate source of data to Yahoo! Finance.</p>
-<div id="authentication-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#authentication-1" class="anchor"></a>Authentication</h3>
-<p>To make full use of the integration you need to get an API key and then set your api key. If you don’t have one already, go to <a href="https://www.tiingo.com/">Tiingo</a> account and get your FREE API key. You can then set it as follows:</p>
+<div class="section level2">
+<h2 id="tiingo-api">2.4 Tiingo API<a class="anchor" aria-label="anchor" href="#tiingo-api"></a>
+</h2>
+<p>The <a href="https://www.tiingo.com/" class="external-link">Tiingo API</a> is a free source for stock prices, cryptocurrencies, and intraday feeds from the IEX (Investors Exchange). This can serve as an alternate source of data to Yahoo! Finance.</p>
+<div class="section level3">
+<h3 id="authentication-1">Authentication<a class="anchor" aria-label="anchor" href="#authentication-1"></a>
+</h3>
+<p>To make full use of the integration you need to get an API key and then set your api key. If you don’t have one already, go to <a href="https://www.tiingo.com/" class="external-link">Tiingo</a> account and get your FREE API key. You can then set it as follows:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tiingo_api_key.html">tiingo_api_key</a></span><span class="op">(</span><span class="st">'&lt;your-api-key&gt;'</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="getting-tiingo-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#getting-tiingo-data" class="anchor"></a>Getting Tiingo Data</h3>
+<div class="section level3">
+<h3 id="getting-tiingo-data">Getting Tiingo Data<a class="anchor" aria-label="anchor" href="#getting-tiingo-data"></a>
+</h3>
 <p>The <code>tidyquant</code> package provides convenient wrappers to the <code>riingo</code> package (R interface to Tiingo). Here’s how <code><a href="../reference/tq_get.html">tq_get()</a></code> maps to <code>riingo</code>:</p>
 <ul>
 <li>Tiingo Prices: <code>tq_get(get = "tiingo") = riingo::riingo_prices()</code>
@@ -331,59 +312,59 @@
 </ul>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Tiingo Prices (Free alternative to Yahoo Finance!)</span>
-<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AAPL"</span>, <span class="st">"GOOG"</span><span class="op">)</span>, get <span class="op">=</span> <span class="st">"tiingo"</span>, from <span class="op">=</span> <span class="st">"2010-01-01"</span><span class="op">)</span>
+<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AAPL"</span>, <span class="st">"GOOG"</span><span class="op">)</span>, get <span class="op">=</span> <span class="st">"tiingo"</span>, from <span class="op">=</span> <span class="st">"2010-01-01"</span><span class="op">)</span>
 
 <span class="co"># Sub-daily prices from IEX ----</span>
-<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AAPL"</span>, <span class="st">"GOOG"</span><span class="op">)</span>,
+<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AAPL"</span>, <span class="st">"GOOG"</span><span class="op">)</span>,
        get <span class="op">=</span> <span class="st">"tiingo.iex"</span>,
        from   <span class="op">=</span> <span class="st">"2020-01-01"</span>,
        to     <span class="op">=</span> <span class="st">"2020-01-15"</span>,
        resample_frequency <span class="op">=</span> <span class="st">"5min"</span><span class="op">)</span>
 
 <span class="co"># Tiingo Bitcoin in USD ----</span>
-<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"btcusd"</span><span class="op">)</span>,
+<span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"btcusd"</span><span class="op">)</span>,
        get    <span class="op">=</span> <span class="st">"tiingo.crypto"</span>,
        from   <span class="op">=</span> <span class="st">"2020-01-01"</span>,
        to     <span class="op">=</span> <span class="st">"2020-01-15"</span>,
        resample_frequency <span class="op">=</span> <span class="st">"5min"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="alpha-vantage-api" class="section level2">
-<h2 class="hasAnchor">
-<a href="#alpha-vantage-api" class="anchor"></a>2.5 Alpha Vantage API</h2>
-<p><a href="https://www.alphavantage.co/">Alpha Vantage</a> provides access to a real-time and historical financial data. The <code>alphavantager</code> package, a lightweight R interface, has been integrated into <code>tidyquant</code> as follows. The benefit of the integration is the <strong>scalability since we can now get multiple symbols returned in a tidy format</strong>.</p>
-<div id="authentication-2" class="section level3">
-<h3 class="hasAnchor">
-<a href="#authentication-2" class="anchor"></a>Authentication</h3>
-<p>To make full use of the integration you need to get an API key and then set your api key. If you don’t have one already, go to <a href="https://www.alphavantage.co/">Alpha Vantage</a> account and get your FREE API key. You can then set it as follows:</p>
+<div class="section level2">
+<h2 id="alpha-vantage-api">2.5 Alpha Vantage API<a class="anchor" aria-label="anchor" href="#alpha-vantage-api"></a>
+</h2>
+<p><a href="https://www.alphavantage.co/" class="external-link">Alpha Vantage</a> provides access to a real-time and historical financial data. The <code>alphavantager</code> package, a lightweight R interface, has been integrated into <code>tidyquant</code> as follows. The benefit of the integration is the <strong>scalability since we can now get multiple symbols returned in a tidy format</strong>.</p>
+<div class="section level3">
+<h3 id="authentication-2">Authentication<a class="anchor" aria-label="anchor" href="#authentication-2"></a>
+</h3>
+<p>To make full use of the integration you need to get an API key and then set your api key. If you don’t have one already, go to <a href="https://www.alphavantage.co/" class="external-link">Alpha Vantage</a> account and get your FREE API key. You can then set it as follows:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/av_api_key.html">av_api_key</a></span><span class="op">(</span><span class="st">"&lt;your-api-key&gt;"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="getting-alpha-vantage-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#getting-alpha-vantage-data" class="anchor"></a>Getting Alpha Vantage Data</h3>
-<p>Getting data is simple as the structure follows the <a href="https://www.alphavantage.co/documentation/">Alpha Vantage API documentation</a>. For example, if you wish to retrieve intraday data at 5 minute intervals for FB and MSFT, you can build the parameters <code>x = c("FB", "MSFT"), get = "alphavantager", av_fun = "TIME_SERIES_INTRADAY", interval = "5min"</code>. The familiar <code>x</code> and <code>get</code> are the same as you always use. The <code>av_fun</code> argument comes from <code><a href="https://rdrr.io/pkg/alphavantager/man/av_get.html">alphavantager::av_get()</a></code> and the Alpha Vantage documentation. The <code>interval</code> argument comes from the docs as well.</p>
+<div class="section level3">
+<h3 id="getting-alpha-vantage-data">Getting Alpha Vantage Data<a class="anchor" aria-label="anchor" href="#getting-alpha-vantage-data"></a>
+</h3>
+<p>Getting data is simple as the structure follows the <a href="https://www.alphavantage.co/documentation/" class="external-link">Alpha Vantage API documentation</a>. For example, if you wish to retrieve intraday data at 5 minute intervals for FB and MSFT, you can build the parameters <code>x = c("FB", "MSFT"), get = "alphavantager", av_fun = "TIME_SERIES_INTRADAY", interval = "5min"</code>. The familiar <code>x</code> and <code>get</code> are the same as you always use. The <code>av_fun</code> argument comes from <code><a href="https://rdrr.io/pkg/alphavantager/man/av_get.html" class="external-link">alphavantager::av_get()</a></code> and the Alpha Vantage documentation. The <code>interval</code> argument comes from the docs as well.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Scaling is as simple as supplying multiple symbols</span>
-<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FB"</span>, <span class="st">"MSFT"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FB"</span>, <span class="st">"MSFT"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get <span class="op">=</span> <span class="st">"alphavantage"</span>, av_fun <span class="op">=</span> <span class="st">"TIME_SERIES_INTRADAY"</span>, interval <span class="op">=</span> <span class="st">"5min"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="bloomberg" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bloomberg" class="anchor"></a>2.6 Bloomberg</h2>
-<p><a href="https://www.bloomberg.com/professional/solution/bloomberg-terminal/">Bloomberg</a> provides access to arguably the most comprehensive financial data and is actively used by most major financial instutions that work with financial data. The <code>Rblpapi</code> package, an R interface to Bloomberg, has been integrated into <code>tidyquant</code> as follows. The benefit of the integration is the <strong>scalability since we can now get multiple symbols returned in a tidy format</strong>.</p>
-<div id="authentication-3" class="section level3">
-<h3 class="hasAnchor">
-<a href="#authentication-3" class="anchor"></a>Authentication</h3>
+<div class="section level2">
+<h2 id="bloomberg">2.6 Bloomberg<a class="anchor" aria-label="anchor" href="#bloomberg"></a>
+</h2>
+<p><a href="https://www.bloomberg.com/professional/solution/bloomberg-terminal/" class="external-link">Bloomberg</a> provides access to arguably the most comprehensive financial data and is actively used by most major financial instutions that work with financial data. The <code>Rblpapi</code> package, an R interface to Bloomberg, has been integrated into <code>tidyquant</code> as follows. The benefit of the integration is the <strong>scalability since we can now get multiple symbols returned in a tidy format</strong>.</p>
+<div class="section level3">
+<h3 id="authentication-3">Authentication<a class="anchor" aria-label="anchor" href="#authentication-3"></a>
+</h3>
 <p>To make full use of the integration you need to have a Bloomberg Terminal account (Note this is not a free service). If you have Bloomberg Terminal running on your machine, you can connect as follows:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">blpConnect</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="getting-bloomberg-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#getting-bloomberg-data" class="anchor"></a>Getting Bloomberg Data</h3>
-<p>Getting data is simple as the structure follows the <a href="https://CRAN.R-project.org/package=Rblpapi">Rblpapi API documentation</a>. For example, if you wish to retrieve monthly data for SPX Index and AGTHX Equity, you can build the <code>tq_get</code> parameters as follows:</p>
+<div class="section level3">
+<h3 id="getting-bloomberg-data">Getting Bloomberg Data<a class="anchor" aria-label="anchor" href="#getting-bloomberg-data"></a>
+</h3>
+<p>Getting data is simple as the structure follows the <a href="https://CRAN.R-project.org/package=Rblpapi" class="external-link">Rblpapi API documentation</a>. For example, if you wish to retrieve monthly data for SPX Index and AGTHX Equity, you can build the <code>tq_get</code> parameters as follows:</p>
 <ul>
 <li><code>x = c('SPX Index','ODMAX Equity')</code></li>
 <li><code>get = "rblpapi"</code></li>
@@ -395,255 +376,252 @@
 </ul>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Get Bloomberg data in a tidy data frame</span>
-<span class="va">my_bloomberg_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'SPX Index'</span>,<span class="st">'ODMAX Equity'</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="va">my_bloomberg_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'SPX Index'</span>,<span class="st">'ODMAX Equity'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get         <span class="op">=</span> <span class="st">"Rblpapi"</span>,
            rblpapi_fun <span class="op">=</span> <span class="st">"bdh"</span>,
-           fields      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PX_LAST"</span><span class="op">)</span>,
-           options     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"periodicitySelection"</span> <span class="op">=</span> <span class="st">"WEEKLY"</span><span class="op">)</span>,
+           fields      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"PX_LAST"</span><span class="op">)</span>,
+           options     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"periodicitySelection"</span> <span class="op">=</span> <span class="st">"WEEKLY"</span><span class="op">)</span>,
            from        <span class="op">=</span> <span class="st">"2016-01-01"</span>,
            to          <span class="op">=</span> <span class="st">"2016-12-31"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 </div>
-<div id="mutate-quantitative-data" class="section level1">
-<h1 class="hasAnchor">
-<a href="#mutate-quantitative-data" class="anchor"></a>3.0 Mutate Quantitative Data</h1>
+<div class="section level1">
+<h1 id="mutate-quantitative-data">3.0 Mutate Quantitative Data<a class="anchor" aria-label="anchor" href="#mutate-quantitative-data"></a>
+</h1>
 <p>Mutating functions enable the <code>xts</code>/<code>zoo</code>, <code>quantmod</code> and <code>TTR</code> functions to shine. We’ll touch on the mutation functions briefly using the <code>FANG</code> data set, which consists of daily prices for FB, AMZN, GOOG, and NFLX from the beginning of 2013 to the end of 2016. We’ll apply the functions to grouped data sets to get a feel for how each works</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"FANG"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"FANG"</span><span class="op">)</span>
 
 <span class="va">FANG</span></code></pre></div>
-<pre><code>## # A tibble: 4,032 x 8
-##    symbol date        open  high   low close    volume adjusted
-##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1 FB     2013-01-02  27.4  28.2  27.4  28    69846400     28  
-##  2 FB     2013-01-03  27.9  28.5  27.6  27.8  63140600     27.8
-##  3 FB     2013-01-04  28.0  28.9  27.8  28.8  72715400     28.8
-##  4 FB     2013-01-07  28.7  29.8  28.6  29.4  83781800     29.4
-##  5 FB     2013-01-08  29.5  29.6  28.9  29.1  45871300     29.1
-##  6 FB     2013-01-09  29.7  30.6  29.5  30.6 104787700     30.6
-##  7 FB     2013-01-10  30.6  31.5  30.3  31.3  95316400     31.3
-##  8 FB     2013-01-11  31.3  32.0  31.1  31.7  89598000     31.7
-##  9 FB     2013-01-14  32.1  32.2  30.6  31.0  98892800     31.0
-## 10 FB     2013-01-15  30.6  31.7  29.9  30.1 173242600     30.1
-## # … with 4,022 more rows</code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 4,032 × 8</span></span>
+<span class="co">##    symbol date        open  high   low close    volume adjusted</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> FB     2013-01-02  27.4  28.2  27.4  28    69<span style="text-decoration: underline;">846</span>400     28  </span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> FB     2013-01-03  27.9  28.5  27.6  27.8  63<span style="text-decoration: underline;">140</span>600     27.8</span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> FB     2013-01-04  28.0  28.9  27.8  28.8  72<span style="text-decoration: underline;">715</span>400     28.8</span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> FB     2013-01-07  28.7  29.8  28.6  29.4  83<span style="text-decoration: underline;">781</span>800     29.4</span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> FB     2013-01-08  29.5  29.6  28.9  29.1  45<span style="text-decoration: underline;">871</span>300     29.1</span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> FB     2013-01-09  29.7  30.6  29.5  30.6 104<span style="text-decoration: underline;">787</span>700     30.6</span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> FB     2013-01-10  30.6  31.5  30.3  31.3  95<span style="text-decoration: underline;">316</span>400     31.3</span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> FB     2013-01-11  31.3  32.0  31.1  31.7  89<span style="text-decoration: underline;">598</span>000     31.7</span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> FB     2013-01-14  32.1  32.2  30.6  31.0  98<span style="text-decoration: underline;">892</span>800     31.0</span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> FB     2013-01-15  30.6  31.7  29.9  30.1 173<span style="text-decoration: underline;">242</span>600     30.1</span>
+<span class="co">## <span style="color: #949494;"># … with 4,022 more rows</span></span></code></pre>
 <p>For a detailed walkthrough of the compatible functions, see the next vignette in the series, <a href="TQ02-quant-integrations-in-tidyquant.html">R Quantitative Analysis Package Integrations in tidyquant</a>.</p>
-<div id="transmute-quantitative-data-tq_transmute" class="section level2">
-<h2 class="hasAnchor">
-<a href="#transmute-quantitative-data-tq_transmute" class="anchor"></a>3.1 Transmute Quantitative Data, tq_transmute</h2>
+<div class="section level2">
+<h2 id="transmute-quantitative-data-tq_transmute">3.1 Transmute Quantitative Data, tq_transmute<a class="anchor" aria-label="anchor" href="#transmute-quantitative-data-tq_transmute"></a>
+</h2>
 <p>Transmute the results of <code><a href="../reference/tq_get.html">tq_get()</a></code>. Transmute here holds almost the same meaning as in <code>dplyr</code>, only the newly created columns will be returned, but with <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code>, the number of rows returned can be different than the original data frame. This is important for changing periodicity. An example is periodicity aggregation from daily to monthly.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">FANG</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">FANG</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span>select <span class="op">=</span> <span class="va">adjusted</span>, mutate_fun <span class="op">=</span> <span class="va">to.monthly</span>, indexAt <span class="op">=</span> <span class="st">"lastof"</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 192 x 3
-## # Groups:   symbol [4]
-##    symbol date       adjusted
-##    &lt;chr&gt;  &lt;date&gt;        &lt;dbl&gt;
-##  1 FB     2013-01-31     31.0
-##  2 FB     2013-02-28     27.2
-##  3 FB     2013-03-31     25.6
-##  4 FB     2013-04-30     27.8
-##  5 FB     2013-05-31     24.4
-##  6 FB     2013-06-30     24.9
-##  7 FB     2013-07-31     36.8
-##  8 FB     2013-08-31     41.3
-##  9 FB     2013-09-30     50.2
-## 10 FB     2013-10-31     50.2
-## # … with 182 more rows</code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 192 × 3</span></span>
+<span class="co">## <span style="color: #949494;"># Groups:   symbol [4]</span></span>
+<span class="co">##    symbol date       adjusted</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> FB     2013-01-31     31.0</span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> FB     2013-02-28     27.2</span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> FB     2013-03-31     25.6</span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> FB     2013-04-30     27.8</span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> FB     2013-05-31     24.4</span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> FB     2013-06-30     24.9</span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> FB     2013-07-31     36.8</span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> FB     2013-08-31     41.3</span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> FB     2013-09-30     50.2</span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> FB     2013-10-31     50.2</span>
+<span class="co">## <span style="color: #949494;"># … with 182 more rows</span></span></code></pre>
 <p>Let’s go through what happened. <code>select</code> allows you to easily choose what columns get passed to <code>mutate_fun</code>. In example above, <code>adjusted</code> selects the “adjusted” column from <code>data</code>, and sends it to the mutate function, <code>to.monthly</code>, which mutates the periodicity from daily to monthly. Additional arguments can be passed to the <code>mutate_fun</code> by way of <code>...</code>. We are passing the <code>indexAt</code> argument to return a date that matches the first date in the period.</p>
-<div id="working-with-non-ohlc-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#working-with-non-ohlc-data" class="anchor"></a>Working with non-OHLC data</h3>
+<div class="section level3">
+<h3 id="working-with-non-ohlc-data">Working with non-OHLC data<a class="anchor" aria-label="anchor" href="#working-with-non-ohlc-data"></a>
+</h3>
 <p>Returns from FRED, Oanda, and other sources do not have open, high, low, close (OHLC) format. However, this is not a problem with <code>select</code>. The following example shows how to transmute WTI Crude daily prices to monthly prices. Since we only have a single column to pass, we can leave the <code>select</code> argument as <code>NULL</code> which selects all columns by default. This sends the price column to the <code>to.period</code> mutate function.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wti_prices</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"DCOILWTICO"</span>, get <span class="op">=</span> <span class="st">"economic.data"</span><span class="op">)</span> 
 
-<span class="va">wti_prices</span> <span class="op">%&gt;%</span>    
+<span class="va">wti_prices</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>    
     <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span>mutate_fun <span class="op">=</span> <span class="va">to.period</span>,
                  period     <span class="op">=</span> <span class="st">"months"</span>, 
                  col_rename <span class="op">=</span> <span class="st">"WTI Price"</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 123 x 2
-##    date       `WTI Price`
-##    &lt;date&gt;           &lt;dbl&gt;
-##  1 2011-01-31        91.0
-##  2 2011-02-28        97.1
-##  3 2011-03-31       106. 
-##  4 2011-04-29       113. 
-##  5 2011-05-31       103. 
-##  6 2011-06-30        95.3
-##  7 2011-07-29        95.7
-##  8 2011-08-31        88.8
-##  9 2011-09-30        78.9
-## 10 2011-10-31        93.2
-## # … with 113 more rows</code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 132 × 2</span></span>
+<span class="co">##    date       `WTI Price`</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> 2011-01-31        91.0</span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> 2011-02-28        97.1</span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> 2011-03-31       106. </span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> 2011-04-29       113. </span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> 2011-05-31       103. </span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> 2011-06-30        95.3</span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> 2011-07-29        95.7</span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> 2011-08-31        88.8</span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> 2011-09-30        78.9</span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> 2011-10-31        93.2</span>
+<span class="co">## <span style="color: #949494;"># … with 122 more rows</span></span></code></pre>
 </div>
 </div>
-<div id="mutate-quantitative-data-tq_mutate" class="section level2">
-<h2 class="hasAnchor">
-<a href="#mutate-quantitative-data-tq_mutate" class="anchor"></a>3.2 Mutate Quantitative Data, tq_mutate</h2>
+<div class="section level2">
+<h2 id="mutate-quantitative-data-tq_mutate">3.2 Mutate Quantitative Data, tq_mutate<a class="anchor" aria-label="anchor" href="#mutate-quantitative-data-tq_mutate"></a>
+</h2>
 <p>Adds a column or set of columns to the tibble with the calculated attributes (hence the original tibble is returned, mutated with the additional columns). An example is getting the <code>MACD</code> from <code>close</code>, which mutates the original input by adding MACD and Signal columns. Note that we can quickly rename the columns using the <code>col_rename</code> argument.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">FANG</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">FANG</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="../reference/tq_mutate.html">tq_mutate</a></span><span class="op">(</span>select     <span class="op">=</span> <span class="va">close</span>, 
               mutate_fun <span class="op">=</span> <span class="va">MACD</span>, 
-              col_rename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MACD"</span>, <span class="st">"Signal"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 4,032 x 10
-## # Groups:   symbol [4]
-##    symbol date        open  high   low close    volume adjusted  MACD Signal
-##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-##  1 FB     2013-01-02  27.4  28.2  27.4  28    69846400     28      NA     NA
-##  2 FB     2013-01-03  27.9  28.5  27.6  27.8  63140600     27.8    NA     NA
-##  3 FB     2013-01-04  28.0  28.9  27.8  28.8  72715400     28.8    NA     NA
-##  4 FB     2013-01-07  28.7  29.8  28.6  29.4  83781800     29.4    NA     NA
-##  5 FB     2013-01-08  29.5  29.6  28.9  29.1  45871300     29.1    NA     NA
-##  6 FB     2013-01-09  29.7  30.6  29.5  30.6 104787700     30.6    NA     NA
-##  7 FB     2013-01-10  30.6  31.5  30.3  31.3  95316400     31.3    NA     NA
-##  8 FB     2013-01-11  31.3  32.0  31.1  31.7  89598000     31.7    NA     NA
-##  9 FB     2013-01-14  32.1  32.2  30.6  31.0  98892800     31.0    NA     NA
-## 10 FB     2013-01-15  30.6  31.7  29.9  30.1 173242600     30.1    NA     NA
-## # … with 4,022 more rows</code></pre>
+              col_rename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MACD"</span>, <span class="st">"Signal"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 4,032 × 10</span></span>
+<span class="co">## <span style="color: #949494;"># Groups:   symbol [4]</span></span>
+<span class="co">##    symbol date        open  high   low close    volume adjusted  MACD Signal</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> FB     2013-01-02  27.4  28.2  27.4  28    69<span style="text-decoration: underline;">846</span>400     28      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> FB     2013-01-03  27.9  28.5  27.6  27.8  63<span style="text-decoration: underline;">140</span>600     27.8    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> FB     2013-01-04  28.0  28.9  27.8  28.8  72<span style="text-decoration: underline;">715</span>400     28.8    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> FB     2013-01-07  28.7  29.8  28.6  29.4  83<span style="text-decoration: underline;">781</span>800     29.4    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> FB     2013-01-08  29.5  29.6  28.9  29.1  45<span style="text-decoration: underline;">871</span>300     29.1    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> FB     2013-01-09  29.7  30.6  29.5  30.6 104<span style="text-decoration: underline;">787</span>700     30.6    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> FB     2013-01-10  30.6  31.5  30.3  31.3  95<span style="text-decoration: underline;">316</span>400     31.3    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> FB     2013-01-11  31.3  32.0  31.1  31.7  89<span style="text-decoration: underline;">598</span>000     31.7    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> FB     2013-01-14  32.1  32.2  30.6  31.0  98<span style="text-decoration: underline;">892</span>800     31.0    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> FB     2013-01-15  30.6  31.7  29.9  30.1 173<span style="text-decoration: underline;">242</span>600     30.1    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="co">## <span style="color: #949494;"># … with 4,022 more rows</span></span></code></pre>
 <p>Note that a mutation can occur if, and only if, the mutation has the same structure of the original tibble. In other words, the calculation must have the same number of rows and row.names (or date fields), otherwise the mutation cannot be performed.</p>
-<div id="mutate-rolling-regressions-with-rollapply" class="section level3">
-<h3 class="hasAnchor">
-<a href="#mutate-rolling-regressions-with-rollapply" class="anchor"></a>Mutate rolling regressions with rollapply</h3>
+<div class="section level3">
+<h3 id="mutate-rolling-regressions-with-rollapply">Mutate rolling regressions with rollapply<a class="anchor" aria-label="anchor" href="#mutate-rolling-regressions-with-rollapply"></a>
+</h3>
 <p>A very powerful example is applying <strong>custom functions</strong> across a rolling window using <code>rollapply</code>. A specific example is using the <code>rollapply</code> function to compute a rolling regression. This example is slightly more complicated so it will be broken down into three steps:</p>
 <ol style="list-style-type: decimal">
 <li>Get returns</li>
 <li>Create a custom function</li>
-<li>Apply the custom function accross a rolling window using <code><a href="../reference/tq_mutate.html">tq_mutate(mutate_fun = rollapply)</a></code>
+<li>Apply the custom function accross a rolling window using <code>tq_mutate(mutate_fun = rollapply)</code>
 </li>
 </ol>
 <p><em>Step 1: Get Returns</em></p>
 <p>First, get combined returns. The asset and baseline returns should be in wide format, which is needed for the <code>lm</code> function in the next step.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fb_returns</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"FB"</span>, get  <span class="op">=</span> <span class="st">"stock.prices"</span>, from <span class="op">=</span> <span class="st">"2016-01-01"</span>, to   <span class="op">=</span> <span class="st">"2016-12-31"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">fb_returns</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"FB"</span>, get  <span class="op">=</span> <span class="st">"stock.prices"</span>, from <span class="op">=</span> <span class="st">"2016-01-01"</span>, to   <span class="op">=</span> <span class="st">"2016-12-31"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span><span class="va">adjusted</span>, <span class="va">periodReturn</span>, period <span class="op">=</span> <span class="st">"weekly"</span>, col_rename <span class="op">=</span> <span class="st">"fb.returns"</span><span class="op">)</span>
 
-<span class="va">xlk_returns</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"XLK"</span>, from <span class="op">=</span> <span class="st">"2016-01-01"</span>, to <span class="op">=</span> <span class="st">"2016-12-31"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="va">xlk_returns</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"XLK"</span>, from <span class="op">=</span> <span class="st">"2016-01-01"</span>, to <span class="op">=</span> <span class="st">"2016-12-31"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span><span class="va">adjusted</span>, <span class="va">periodReturn</span>, period <span class="op">=</span> <span class="st">"weekly"</span>, col_rename <span class="op">=</span> <span class="st">"xlk.returns"</span><span class="op">)</span>
 
-<span class="va">returns_combined</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">fb_returns</span>, <span class="va">xlk_returns</span>, by <span class="op">=</span> <span class="st">"date"</span><span class="op">)</span>
+<span class="va">returns_combined</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">fb_returns</span>, <span class="va">xlk_returns</span>, by <span class="op">=</span> <span class="st">"date"</span><span class="op">)</span>
 <span class="va">returns_combined</span></code></pre></div>
-<pre><code>## # A tibble: 52 x 3
-##    date       fb.returns xlk.returns
-##    &lt;date&gt;          &lt;dbl&gt;       &lt;dbl&gt;
-##  1 2016-01-08   -0.0478     -0.0516 
-##  2 2016-01-15   -0.0242     -0.0187 
-##  3 2016-01-22    0.0313      0.0264 
-##  4 2016-01-29    0.146       0.0213 
-##  5 2016-02-05   -0.0725     -0.0422 
-##  6 2016-02-12   -0.0198     -0.00582
-##  7 2016-02-19    0.0251      0.0354 
-##  8 2016-02-26    0.0320      0.0148 
-##  9 2016-03-04    0.00436     0.0281 
-## 10 2016-03-11    0.00941     0.0106 
-## # … with 42 more rows</code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 52 × 3</span></span>
+<span class="co">##    date       fb.returns xlk.returns</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> 2016-01-08   -<span style="color: #BB0000;">0.047</span><span style="color: #BB0000; text-decoration: underline;">8</span>     -<span style="color: #BB0000;">0.051</span><span style="color: #BB0000; text-decoration: underline;">6</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> 2016-01-15   -<span style="color: #BB0000;">0.024</span><span style="color: #BB0000; text-decoration: underline;">2</span>     -<span style="color: #BB0000;">0.018</span><span style="color: #BB0000; text-decoration: underline;">7</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> 2016-01-22    0.031<span style="text-decoration: underline;">3</span>      0.026<span style="text-decoration: underline;">4</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> 2016-01-29    0.146       0.021<span style="text-decoration: underline;">3</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> 2016-02-05   -<span style="color: #BB0000;">0.072</span><span style="color: #BB0000; text-decoration: underline;">5</span>     -<span style="color: #BB0000;">0.042</span><span style="color: #BB0000; text-decoration: underline;">2</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> 2016-02-12   -<span style="color: #BB0000;">0.019</span><span style="color: #BB0000; text-decoration: underline;">8</span>     -<span style="color: #BB0000;">0.005</span><span style="color: #BB0000; text-decoration: underline;">82</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> 2016-02-19    0.025<span style="text-decoration: underline;">1</span>      0.035<span style="text-decoration: underline;">4</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> 2016-02-26    0.032<span style="text-decoration: underline;">0</span>      0.014<span style="text-decoration: underline;">8</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> 2016-03-04    0.004<span style="text-decoration: underline;">36</span>     0.028<span style="text-decoration: underline;">1</span> </span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> 2016-03-11    0.009<span style="text-decoration: underline;">41</span>     0.010<span style="text-decoration: underline;">6</span> </span>
+<span class="co">## <span style="color: #949494;"># … with 42 more rows</span></span></code></pre>
 <p><em>Step 2: Create a custom function</em></p>
-<p>Next, create a custom regression function, which will be used to apply over the rolling window in Step 3. An important point is that the “data” will be passed to the regression function as an <code>xts</code> object. The <code><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html">timetk::tk_tbl</a></code> function takes care of converting to a data frame for the <code>lm</code> function to work properly with the columns “fb.returns” and “xlk.returns”.</p>
+<p>Next, create a custom regression function, which will be used to apply over the rolling window in Step 3. An important point is that the “data” will be passed to the regression function as an <code>xts</code> object. The <code><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html" class="external-link">timetk::tk_tbl</a></code> function takes care of converting to a data frame for the <code>lm</code> function to work properly with the columns “fb.returns” and “xlk.returns”.</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">regr_fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">fb.returns</span> <span class="op">~</span> <span class="va">xlk.returns</span>, data <span class="op">=</span> <span class="fu">timetk</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html">tk_tbl</a></span><span class="op">(</span><span class="va">data</span>, silent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">fb.returns</span> <span class="op">~</span> <span class="va">xlk.returns</span>, data <span class="op">=</span> <span class="fu">timetk</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html" class="external-link">tk_tbl</a></span><span class="op">(</span><span class="va">data</span>, silent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p><em>Step 3: Apply the custom function</em></p>
 <p>Now we can use <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code> to apply the custom regression function over a rolling window using <code>rollapply</code> from the <code>zoo</code> package. Internally, since we left <code>select = NULL</code>, the <code>returns_combined</code> data frame is being passed automatically to the <code>data</code> argument of the <code>rollapply</code> function. All you need to specify is the <code>mutate_fun = rollapply</code> and any additional arguments necessary to apply the <code>rollapply</code> function. We’ll specify a 12 week window via <code>width = 12</code>. The <code>FUN</code> argument is our custom regression function, <code>regr_fun</code>. It’s extremely important to specify <code>by.column = FALSE</code>, which tells <code>rollapply</code> to perform the computation using the data as a whole rather than apply the function to each column independently. The <code>col_rename</code> argument is used to rename the added columns.</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">returns_combined</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">returns_combined</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="../reference/tq_mutate.html">tq_mutate</a></span><span class="op">(</span>mutate_fun <span class="op">=</span> <span class="va">rollapply</span>,
               width      <span class="op">=</span> <span class="fl">12</span>,
               FUN        <span class="op">=</span> <span class="va">regr_fun</span>,
               by.column  <span class="op">=</span> <span class="cn">FALSE</span>,
-              col_rename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"coef.0"</span>, <span class="st">"coef.1"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 52 x 5
-##    date       fb.returns xlk.returns coef.0 coef.1
-##    &lt;date&gt;          &lt;dbl&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-##  1 2016-01-08   -0.0478     -0.0516      NA     NA
-##  2 2016-01-15   -0.0242     -0.0187      NA     NA
-##  3 2016-01-22    0.0313      0.0264      NA     NA
-##  4 2016-01-29    0.146       0.0213      NA     NA
-##  5 2016-02-05   -0.0725     -0.0422      NA     NA
-##  6 2016-02-12   -0.0198     -0.00582     NA     NA
-##  7 2016-02-19    0.0251      0.0354      NA     NA
-##  8 2016-02-26    0.0320      0.0148      NA     NA
-##  9 2016-03-04    0.00436     0.0281      NA     NA
-## 10 2016-03-11    0.00941     0.0106      NA     NA
-## # … with 42 more rows</code></pre>
+              col_rename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"coef.0"</span>, <span class="st">"coef.1"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 52 × 5</span></span>
+<span class="co">##    date       fb.returns xlk.returns coef.0 coef.1</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> 2016-01-08   -<span style="color: #BB0000;">0.047</span><span style="color: #BB0000; text-decoration: underline;">8</span>     -<span style="color: #BB0000;">0.051</span><span style="color: #BB0000; text-decoration: underline;">6</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> 2016-01-15   -<span style="color: #BB0000;">0.024</span><span style="color: #BB0000; text-decoration: underline;">2</span>     -<span style="color: #BB0000;">0.018</span><span style="color: #BB0000; text-decoration: underline;">7</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> 2016-01-22    0.031<span style="text-decoration: underline;">3</span>      0.026<span style="text-decoration: underline;">4</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> 2016-01-29    0.146       0.021<span style="text-decoration: underline;">3</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> 2016-02-05   -<span style="color: #BB0000;">0.072</span><span style="color: #BB0000; text-decoration: underline;">5</span>     -<span style="color: #BB0000;">0.042</span><span style="color: #BB0000; text-decoration: underline;">2</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> 2016-02-12   -<span style="color: #BB0000;">0.019</span><span style="color: #BB0000; text-decoration: underline;">8</span>     -<span style="color: #BB0000;">0.005</span><span style="color: #BB0000; text-decoration: underline;">82</span>     <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> 2016-02-19    0.025<span style="text-decoration: underline;">1</span>      0.035<span style="text-decoration: underline;">4</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> 2016-02-26    0.032<span style="text-decoration: underline;">0</span>      0.014<span style="text-decoration: underline;">8</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> 2016-03-04    0.004<span style="text-decoration: underline;">36</span>     0.028<span style="text-decoration: underline;">1</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> 2016-03-11    0.009<span style="text-decoration: underline;">41</span>     0.010<span style="text-decoration: underline;">6</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="co">## <span style="color: #949494;"># … with 42 more rows</span></span></code></pre>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">returns_combined</span></code></pre></div>
-<pre><code>## # A tibble: 52 x 3
-##    date       fb.returns xlk.returns
-##    &lt;date&gt;          &lt;dbl&gt;       &lt;dbl&gt;
-##  1 2016-01-08   -0.0478     -0.0516 
-##  2 2016-01-15   -0.0242     -0.0187 
-##  3 2016-01-22    0.0313      0.0264 
-##  4 2016-01-29    0.146       0.0213 
-##  5 2016-02-05   -0.0725     -0.0422 
-##  6 2016-02-12   -0.0198     -0.00582
-##  7 2016-02-19    0.0251      0.0354 
-##  8 2016-02-26    0.0320      0.0148 
-##  9 2016-03-04    0.00436     0.0281 
-## 10 2016-03-11    0.00941     0.0106 
-## # … with 42 more rows</code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 52 × 3</span></span>
+<span class="co">##    date       fb.returns xlk.returns</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> 2016-01-08   -<span style="color: #BB0000;">0.047</span><span style="color: #BB0000; text-decoration: underline;">8</span>     -<span style="color: #BB0000;">0.051</span><span style="color: #BB0000; text-decoration: underline;">6</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> 2016-01-15   -<span style="color: #BB0000;">0.024</span><span style="color: #BB0000; text-decoration: underline;">2</span>     -<span style="color: #BB0000;">0.018</span><span style="color: #BB0000; text-decoration: underline;">7</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> 2016-01-22    0.031<span style="text-decoration: underline;">3</span>      0.026<span style="text-decoration: underline;">4</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> 2016-01-29    0.146       0.021<span style="text-decoration: underline;">3</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> 2016-02-05   -<span style="color: #BB0000;">0.072</span><span style="color: #BB0000; text-decoration: underline;">5</span>     -<span style="color: #BB0000;">0.042</span><span style="color: #BB0000; text-decoration: underline;">2</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> 2016-02-12   -<span style="color: #BB0000;">0.019</span><span style="color: #BB0000; text-decoration: underline;">8</span>     -<span style="color: #BB0000;">0.005</span><span style="color: #BB0000; text-decoration: underline;">82</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> 2016-02-19    0.025<span style="text-decoration: underline;">1</span>      0.035<span style="text-decoration: underline;">4</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> 2016-02-26    0.032<span style="text-decoration: underline;">0</span>      0.014<span style="text-decoration: underline;">8</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> 2016-03-04    0.004<span style="text-decoration: underline;">36</span>     0.028<span style="text-decoration: underline;">1</span> </span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> 2016-03-11    0.009<span style="text-decoration: underline;">41</span>     0.010<span style="text-decoration: underline;">6</span> </span>
+<span class="co">## <span style="color: #949494;"># … with 42 more rows</span></span></code></pre>
 <p>As shown above, the rolling regression coefficients were added to the data frame.</p>
 </div>
 </div>
-<div id="xy-variants-tq_mutate_xy-and-tq_transmute_xy" class="section level2">
-<h2 class="hasAnchor">
-<a href="#xy-variants-tq_mutate_xy-and-tq_transmute_xy" class="anchor"></a>3.3 _xy Variants, tq_mutate_xy and tq_transmute_xy</h2>
+<div class="section level2">
+<h2 id="xy-variants-tq_mutate_xy-and-tq_transmute_xy">3.3 _xy Variants, tq_mutate_xy and tq_transmute_xy<a class="anchor" aria-label="anchor" href="#xy-variants-tq_mutate_xy-and-tq_transmute_xy"></a>
+</h2>
 <p>Enables working with mutation functions that require two primary inputs (e.g. EVWMA, VWAP, etc).</p>
-<div id="mutate-with-two-primary-inputs" class="section level3">
-<h3 class="hasAnchor">
-<a href="#mutate-with-two-primary-inputs" class="anchor"></a>Mutate with two primary inputs</h3>
+<div class="section level3">
+<h3 id="mutate-with-two-primary-inputs">Mutate with two primary inputs<a class="anchor" aria-label="anchor" href="#mutate-with-two-primary-inputs"></a>
+</h3>
 <p>EVWMA (exponential volume-weighted moving average) requires two inputs, price and volume. To work with these columns, we can switch to the xy variants, <code><a href="../reference/tq_mutate.html">tq_transmute_xy()</a></code> and <code><a href="../reference/tq_mutate.html">tq_mutate_xy()</a></code>. The only difference is instead of the <code>select</code> argument, you use <code>x</code> and <code>y</code> arguments to pass the columns needed based on the <code>mutate_fun</code> documentation.</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">FANG</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">FANG</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="../reference/tq_mutate.html">tq_mutate_xy</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">close</span>, y <span class="op">=</span> <span class="va">volume</span>, 
                  mutate_fun <span class="op">=</span> <span class="va">EVWMA</span>, col_rename <span class="op">=</span> <span class="st">"EVWMA"</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 4,032 x 9
-## # Groups:   symbol [4]
-##    symbol date        open  high   low close    volume adjusted EVWMA
-##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
-##  1 FB     2013-01-02  27.4  28.2  27.4  28    69846400     28    NA  
-##  2 FB     2013-01-03  27.9  28.5  27.6  27.8  63140600     27.8  NA  
-##  3 FB     2013-01-04  28.0  28.9  27.8  28.8  72715400     28.8  NA  
-##  4 FB     2013-01-07  28.7  29.8  28.6  29.4  83781800     29.4  NA  
-##  5 FB     2013-01-08  29.5  29.6  28.9  29.1  45871300     29.1  NA  
-##  6 FB     2013-01-09  29.7  30.6  29.5  30.6 104787700     30.6  NA  
-##  7 FB     2013-01-10  30.6  31.5  30.3  31.3  95316400     31.3  NA  
-##  8 FB     2013-01-11  31.3  32.0  31.1  31.7  89598000     31.7  NA  
-##  9 FB     2013-01-14  32.1  32.2  30.6  31.0  98892800     31.0  NA  
-## 10 FB     2013-01-15  30.6  31.7  29.9  30.1 173242600     30.1  30.1
-## # … with 4,022 more rows</code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 4,032 × 9</span></span>
+<span class="co">## <span style="color: #949494;"># Groups:   symbol [4]</span></span>
+<span class="co">##    symbol date        open  high   low close    volume adjusted EVWMA</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> FB     2013-01-02  27.4  28.2  27.4  28    69<span style="text-decoration: underline;">846</span>400     28    <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> FB     2013-01-03  27.9  28.5  27.6  27.8  63<span style="text-decoration: underline;">140</span>600     27.8  <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> FB     2013-01-04  28.0  28.9  27.8  28.8  72<span style="text-decoration: underline;">715</span>400     28.8  <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> FB     2013-01-07  28.7  29.8  28.6  29.4  83<span style="text-decoration: underline;">781</span>800     29.4  <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> FB     2013-01-08  29.5  29.6  28.9  29.1  45<span style="text-decoration: underline;">871</span>300     29.1  <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> FB     2013-01-09  29.7  30.6  29.5  30.6 104<span style="text-decoration: underline;">787</span>700     30.6  <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> FB     2013-01-10  30.6  31.5  30.3  31.3  95<span style="text-decoration: underline;">316</span>400     31.3  <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> FB     2013-01-11  31.3  32.0  31.1  31.7  89<span style="text-decoration: underline;">598</span>000     31.7  <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> FB     2013-01-14  32.1  32.2  30.6  31.0  98<span style="text-decoration: underline;">892</span>800     31.0  <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> FB     2013-01-15  30.6  31.7  29.9  30.1 173<span style="text-decoration: underline;">242</span>600     30.1  30.1</span>
+<span class="co">## <span style="color: #949494;"># … with 4,022 more rows</span></span></code></pre>
 </div>
 </div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p>Developed by Matt Dancho, Davis Vaughan.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by Matt Dancho, Davis Vaughan.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
 
+  
 
   </body>
 </html>

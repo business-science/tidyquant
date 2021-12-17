@@ -1,3 +1,6 @@
+h1, h2, h3, h4 {
+    padding-top:20px;
+}
 
 div.comparison thead tr th:first-child,
 div.comparison tbody tr td:first-child {
