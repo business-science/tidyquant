@@ -9,9 +9,7 @@
 <title>Core Functions in tidyquant • tidyquant</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Roboto-0.4.0/font.css" rel="stylesheet">
-<link href="../deps/_Montserrat-0.4.0/font.css" rel="stylesheet">
-<!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Core Functions in tidyquant">
@@ -91,7 +89,7 @@
       <img src="" class="logo" alt=""><h1>Core Functions in tidyquant</h1>
                         <h4 data-toc-skip class="author">Matt Dancho</h4>
             
-            <h4 data-toc-skip class="date">2021-12-16</h4>
+            <h4 data-toc-skip class="date">2021-12-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/HEAD/vignettes/TQ01-core-functions-in-tidyquant.Rmd" class="external-link"><code>vignettes/TQ01-core-functions-in-tidyquant.Rmd</code></a></small>
       <div class="d-none name"><code>TQ01-core-functions-in-tidyquant.Rmd</code></div>
@@ -178,7 +176,7 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">aapl_prices</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"AAPL"</span>, get <span class="op">=</span> <span class="st">"stock.prices"</span>, from <span class="op">=</span> <span class="st">" 1990-01-01"</span><span class="op">)</span>
 <span class="va">aapl_prices</span> </code></pre></div>
-<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 8,053 × 8</span></span>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 8,062 × 8</span></span>
 <span class="co">##    symbol date        open  high   low close    volume adjusted</span>
 <span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   1990-01-02 0.315 0.335 0.312 0.333 183<span style="text-decoration: underline;">198</span>400    0.266</span>
@@ -191,7 +189,7 @@
 <span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   1990-01-11 0.324 0.324 0.308 0.308 211<span style="text-decoration: underline;">052</span>800    0.247</span>
 <span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   1990-01-12 0.306 0.310 0.301 0.308 171<span style="text-decoration: underline;">897</span>600    0.247</span>
 <span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   1990-01-15 0.308 0.319 0.306 0.306 161<span style="text-decoration: underline;">739</span>200    0.245</span>
-<span class="co">## <span style="color: #949494;"># … with 8,043 more rows</span></span></code></pre>
+<span class="co">## <span style="color: #949494;"># … with 8,052 more rows</span></span></code></pre>
 <p>Yahoo Japan stock prices can be retrieved using a similar call, <code>get = "stock.prices.japan"</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x8411T</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"8411.T"</span>, get <span class="op">=</span> <span class="st">"stock.prices.japan"</span>, from <span class="op">=</span> <span class="st">"2016-01-01"</span>, to  <span class="op">=</span> <span class="st">"2016-12-31"</span><span class="op">)</span></code></pre></div>
@@ -204,7 +202,7 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wti_price_usd</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"DCOILWTICO"</span>, get <span class="op">=</span> <span class="st">"economic.data"</span><span class="op">)</span>
 <span class="va">wti_price_usd</span> </code></pre></div>
-<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 2,856 × 3</span></span>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 2,866 × 3</span></span>
 <span class="co">##    symbol     date       price</span>
 <span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="co">## <span style="color: #BCBCBC;"> 1</span> DCOILWTICO 2011-01-03  91.6</span>
@@ -217,7 +215,7 @@
 <span class="co">## <span style="color: #BCBCBC;"> 8</span> DCOILWTICO 2011-01-12  91.8</span>
 <span class="co">## <span style="color: #BCBCBC;"> 9</span> DCOILWTICO 2011-01-13  91.4</span>
 <span class="co">## <span style="color: #BCBCBC;">10</span> DCOILWTICO 2011-01-14  91.5</span>
-<span class="co">## <span style="color: #949494;"># … with 2,846 more rows</span></span></code></pre>
+<span class="co">## <span style="color: #949494;"># … with 2,856 more rows</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="quandl-api">2.3 Quandl API<a class="anchor" aria-label="anchor" href="#quandl-api"></a>

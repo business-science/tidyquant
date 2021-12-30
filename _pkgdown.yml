@@ -1,10 +1,10 @@
 template:
   bootstrap: 5
-  bslib:
-    base_font:
-      google: Roboto
-    heading_font:
-      google: Montserrat
+  # bslib:
+  #   base_font:
+  #     google: Roboto
+  #   heading_font:
+  #     google: Montserrat
     # code_font:
     #   google: "JetBrains Mono"
   params:

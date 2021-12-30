@@ -9,9 +9,7 @@
 <title>Performance Analysis with tidyquant • tidyquant</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Roboto-0.4.0/font.css" rel="stylesheet">
-<link href="../deps/_Montserrat-0.4.0/font.css" rel="stylesheet">
-<!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Performance Analysis with tidyquant">
@@ -91,7 +89,7 @@
       <img src="" class="logo" alt=""><h1>Performance Analysis with tidyquant</h1>
                         <h4 data-toc-skip class="author">Matt Dancho</h4>
             
-            <h4 data-toc-skip class="date">2021-12-16</h4>
+            <h4 data-toc-skip class="date">2021-12-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/HEAD/vignettes/TQ05-performance-analysis-with-tidyquant.Rmd" class="external-link"><code>vignettes/TQ05-performance-analysis-with-tidyquant.Rmd</code></a></small>
       <div class="d-none name"><code>TQ05-performance-analysis-with-tidyquant.Rmd</code></div>
@@ -267,20 +265,20 @@
            from <span class="op">=</span> <span class="st">"2010-01-01"</span>,
            to   <span class="op">=</span> <span class="st">"2015-12-31"</span><span class="op">)</span>
 <span class="va">stock_prices</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 4,527 × 8</span></span>
-<span class="co">##    symbol date        open  high   low close    volume adjusted</span>
-<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   2010-01-04  7.62  7.66  7.58  7.64 493<span style="text-decoration: underline;">729</span>600     6.55</span>
-<span class="co">## <span style="color: #BCBCBC;"> 2</span> AAPL   2010-01-05  7.66  7.70  7.62  7.66 601<span style="text-decoration: underline;">904</span>800     6.56</span>
-<span class="co">## <span style="color: #BCBCBC;"> 3</span> AAPL   2010-01-06  7.66  7.69  7.53  7.53 552<span style="text-decoration: underline;">160</span>000     6.46</span>
-<span class="co">## <span style="color: #BCBCBC;"> 4</span> AAPL   2010-01-07  7.56  7.57  7.47  7.52 477<span style="text-decoration: underline;">131</span>200     6.45</span>
-<span class="co">## <span style="color: #BCBCBC;"> 5</span> AAPL   2010-01-08  7.51  7.57  7.47  7.57 447<span style="text-decoration: underline;">610</span>800     6.49</span>
-<span class="co">## <span style="color: #BCBCBC;"> 6</span> AAPL   2010-01-11  7.6   7.61  7.44  7.50 462<span style="text-decoration: underline;">229</span>600     6.43</span>
-<span class="co">## <span style="color: #BCBCBC;"> 7</span> AAPL   2010-01-12  7.47  7.49  7.37  7.42 594<span style="text-decoration: underline;">459</span>600     6.36</span>
-<span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   2010-01-13  7.42  7.53  7.29  7.52 605<span style="text-decoration: underline;">892</span>000     6.45</span>
-<span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   2010-01-14  7.50  7.52  7.46  7.48 432<span style="text-decoration: underline;">894</span>000     6.41</span>
-<span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   2010-01-15  7.53  7.56  7.35  7.35 594<span style="text-decoration: underline;">067</span>600     6.31</span>
-<span class="co">## <span style="color: #949494;"># … with 4,517 more rows</span></span></code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 3,018 × 8</span></span>
+<span class="co">##    symbol date        open  high   low close   volume adjusted</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> GOOG   2010-01-04  312.  314.  311.  312.  3<span style="text-decoration: underline;">927</span>065     312.</span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> GOOG   2010-01-05  312.  313.  310.  311.  6<span style="text-decoration: underline;">031</span>925     311.</span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> GOOG   2010-01-06  312.  312.  302.  303.  7<span style="text-decoration: underline;">987</span>226     303.</span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> GOOG   2010-01-07  304.  304.  295.  296. 12<span style="text-decoration: underline;">876</span>685     296.</span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> GOOG   2010-01-08  295.  300.  293.  300.  9<span style="text-decoration: underline;">484</span>016     300.</span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> GOOG   2010-01-11  301.  301.  296.  299. 14<span style="text-decoration: underline;">479</span>871     299.</span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> GOOG   2010-01-12  298.  298.  293.  294.  9<span style="text-decoration: underline;">742</span>983     294.</span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> GOOG   2010-01-13  287.  293.  286.  292. 13<span style="text-decoration: underline;">041</span>902     292.</span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> GOOG   2010-01-14  291.  296.  290.  294.  8<span style="text-decoration: underline;">511</span>986     294.</span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> GOOG   2010-01-15  296.  296.  288.  289. 10<span style="text-decoration: underline;">909</span>740     289.</span>
+<span class="co">## <span style="color: #949494;"># … with 3,008 more rows</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="step-2a-mutate-to-returns">Step 2A: Mutate to returns<a class="anchor" aria-label="anchor" href="#step-2a-mutate-to-returns"></a>
@@ -294,21 +292,21 @@
                  period     <span class="op">=</span> <span class="st">"monthly"</span>, 
                  col_rename <span class="op">=</span> <span class="st">"Ra"</span><span class="op">)</span>
 <span class="va">stock_returns_monthly</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 216 × 3</span></span>
-<span class="co">## <span style="color: #949494;"># Groups:   symbol [3]</span></span>
-<span class="co">##    symbol date            Ra</span>
-<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   2010-01-29 -<span style="color: #BB0000;">0.103</span> </span>
-<span class="co">## <span style="color: #BCBCBC;"> 2</span> AAPL   2010-02-26  0.065<span style="text-decoration: underline;">4</span></span>
-<span class="co">## <span style="color: #BCBCBC;"> 3</span> AAPL   2010-03-31  0.148 </span>
-<span class="co">## <span style="color: #BCBCBC;"> 4</span> AAPL   2010-04-30  0.111 </span>
-<span class="co">## <span style="color: #BCBCBC;"> 5</span> AAPL   2010-05-28 -<span style="color: #BB0000;">0.016</span><span style="color: #BB0000; text-decoration: underline;">1</span></span>
-<span class="co">## <span style="color: #BCBCBC;"> 6</span> AAPL   2010-06-30 -<span style="color: #BB0000;">0.020</span><span style="color: #BB0000; text-decoration: underline;">8</span></span>
-<span class="co">## <span style="color: #BCBCBC;"> 7</span> AAPL   2010-07-30  0.022<span style="text-decoration: underline;">7</span></span>
-<span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   2010-08-31 -<span style="color: #BB0000;">0.055</span><span style="color: #BB0000; text-decoration: underline;">0</span></span>
-<span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   2010-09-30  0.167 </span>
-<span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   2010-10-29  0.060<span style="text-decoration: underline;">7</span></span>
-<span class="co">## <span style="color: #949494;"># … with 206 more rows</span></span></code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 144 × 3</span></span>
+<span class="co">## <span style="color: #949494;"># Groups:   symbol [2]</span></span>
+<span class="co">##    symbol date             Ra</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> GOOG   2010-01-29 -<span style="color: #BB0000;">0.154</span>  </span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> GOOG   2010-02-26 -<span style="color: #BB0000;">0.005</span><span style="color: #BB0000; text-decoration: underline;">93</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> GOOG   2010-03-31  0.076<span style="text-decoration: underline;">5</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> GOOG   2010-04-30 -<span style="color: #BB0000;">0.073</span><span style="color: #BB0000; text-decoration: underline;">0</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> GOOG   2010-05-28 -<span style="color: #BB0000;">0.076</span><span style="color: #BB0000; text-decoration: underline;">2</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> GOOG   2010-06-30 -<span style="color: #BB0000;">0.083</span><span style="color: #BB0000; text-decoration: underline;">8</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> GOOG   2010-07-30  0.089<span style="text-decoration: underline;">7</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> GOOG   2010-08-31 -<span style="color: #BB0000;">0.071</span><span style="color: #BB0000; text-decoration: underline;">8</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> GOOG   2010-09-30  0.168  </span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> GOOG   2010-10-29  0.167  </span>
+<span class="co">## <span style="color: #949494;"># … with 134 more rows</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="step-3a-aggregate-to-portfolio-returns-skipped">Step 3A: Aggregate to Portfolio Returns (Skipped)<a class="anchor" aria-label="anchor" href="#step-3a-aggregate-to-portfolio-returns-skipped"></a>
@@ -327,13 +325,12 @@
         Rb <span class="op">=</span> <span class="cn">NULL</span>, 
         performance_fun <span class="op">=</span> <span class="va">SharpeRatio</span>
     <span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 3 × 4</span></span>
-<span class="co">## <span style="color: #949494;"># Groups:   symbol [3]</span></span>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 2 × 4</span></span>
+<span class="co">## <span style="color: #949494;"># Groups:   symbol [2]</span></span>
 <span class="co">##   symbol `ESSharpe(Rf=0%,p=95%)` `StdDevSharpe(Rf=0%,p=95%)` `VaRSharpe(Rf=0%,p…</span>
 <span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> AAPL                     0.173                       0.292               0.218</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span> GOOG                     0.129                       0.203               0.157</span>
-<span class="co">## <span style="color: #BCBCBC;">3</span> NFLX                     0.237                       0.284               0.272</span></code></pre>
+<span class="co">## <span style="color: #BCBCBC;">1</span> GOOG                     0.129                       0.203               0.157</span>
+<span class="co">## <span style="color: #BCBCBC;">2</span> NFLX                     0.237                       0.284               0.272</span></code></pre>
 <p>Now we have the Sharpe Ratio for each of the three stocks. What if we want to adjust the parameters of the function? We can just add on the arguments of the underlying function.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">stock_returns_monthly</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -344,13 +341,12 @@
         Rf <span class="op">=</span> <span class="fl">0.03</span> <span class="op">/</span> <span class="fl">12</span>, 
         p  <span class="op">=</span> <span class="fl">0.99</span>
     <span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 3 × 4</span></span>
-<span class="co">## <span style="color: #949494;"># Groups:   symbol [3]</span></span>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 2 × 4</span></span>
+<span class="co">## <span style="color: #949494;"># Groups:   symbol [2]</span></span>
 <span class="co">##   symbol `ESSharpe(Rf=0.2%,p=99%)` `StdDevSharpe(Rf=0.2%,… `VaRSharpe(Rf=0.2%,p…</span>
 <span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> AAPL                      0.116                    0.258                0.134 </span>
-<span class="co">## <span style="color: #BCBCBC;">2</span> GOOG                      0.082<span style="text-decoration: underline;">6</span>                   0.170                0.099<span style="text-decoration: underline;">8</span></span>
-<span class="co">## <span style="color: #BCBCBC;">3</span> NFLX                      0.115                    0.272                0.142</span></code></pre>
+<span class="co">## <span style="color: #BCBCBC;">1</span> GOOG                      0.082<span style="text-decoration: underline;">6</span>                   0.170                0.099<span style="text-decoration: underline;">8</span></span>
+<span class="co">## <span style="color: #BCBCBC;">2</span> NFLX                      0.115                    0.272                0.142</span></code></pre>
 </div>
 </div>
 <div class="section level2">
