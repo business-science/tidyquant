@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.4</span>
       </span>
     </div>
 
@@ -53,7 +53,7 @@
   <a href="../reference/index.html">Function Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -112,7 +112,7 @@
       <h1 data-toc-skip>Performance Analysis with tidyquant</h1>
                         <h4 data-toc-skip class="author">Matt Dancho</h4>
             
-            <h4 data-toc-skip class="date">2021-12-30</h4>
+            <h4 data-toc-skip class="date">2022-05-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/HEAD/vignettes/TQ05-performance-analysis-with-tidyquant.Rmd" class="external-link"><code>vignettes/TQ05-performance-analysis-with-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ05-performance-analysis-with-tidyquant.Rmd</code></div>
@@ -124,9 +124,9 @@
 <blockquote>
 <p>Tidy analysis of stock and portfolio return performance with <code>PerformanceAnalytics</code></p>
 </blockquote>
-<div class="section level1">
-<h1 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
-</h1>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p>Financial asset (individual stocks, securities, etc) and portfolio (groups of stocks, securities, etc) performance analysis is a deep field with a wide range of theories and methods for analyzing risk versus reward. The <code>PerformanceAnalytics</code> package consolidates functions to compute many of the most widely used performance metrics. <code>tidquant</code> integrates this functionality so it can be used at scale using the split, apply, combine framework within the <code>tidyverse</code>. Two primary functions integrate the performance analysis functionality:</p>
 <ul>
 <li>
@@ -141,16 +141,16 @@
 <li><p>How to customize <code>tq_portfolio</code> and <code>tq_performance</code> using the <code>...</code> parameter</p></li>
 </ol>
 </div>
-<div class="section level1">
-<h1 id="key-concepts">1.0 Key Concepts<a class="anchor" aria-label="anchor" href="#key-concepts"></a>
-</h1>
+<div class="section level2">
+<h2 id="key-concepts">1.0 Key Concepts<a class="anchor" aria-label="anchor" href="#key-concepts"></a>
+</h2>
 <p>An important concept is that performance analysis is based on the statistical properties of <strong>returns</strong> (not prices). As a result, this package uses inputs of <strong>time-based returns as opposed to stock prices</strong>. The arguments change to <code>Ra</code> for the asset returns and <code>Rb</code> for the baseline returns. We’ll go over how to get returns in the <a href="#workflow">Workflow</a> section.</p>
 <p>Another important concept is the <strong>baseline</strong>. The baseline is what you are measuring performance against. A baseline can be anything, but in many cases it’s a representative average of how an investment might perform with little or no effort. Often indexes such as the S&amp;P500 are used for general market performance. Other times more specific Exchange Traded Funds (ETFs) are used such as the <a href="https://www.sectorspdr.com/sectorspdr/sector/xlk" class="external-link">SPDR Technology ETF (XLK)</a>. The important concept here is that you measure the asset performance (<code>Ra</code>) against the baseline (<code>Rb</code>).</p>
 <p>Now for a quick tutorial to show off the <code>PerformanceAnalytics</code> package integration.</p>
 </div>
-<div class="section level1">
-<h1 id="quick-example">2.0 Quick Example<a class="anchor" aria-label="anchor" href="#quick-example"></a>
-</h1>
+<div class="section level2">
+<h2 id="quick-example">2.0 Quick Example<a class="anchor" aria-label="anchor" href="#quick-example"></a>
+</h2>
 <p>One of the most widely used risk to return metrics is the <a href="https://www.investopedia.com/terms/c/capm.asp" class="external-link">Capital Asset Pricing Model (CAPM)</a>. According to Investopedia:</p>
 <blockquote>
 <p>The capital asset pricing model (CAPM) is a model that describes the relationship between systematic risk and expected return for assets, particularly stocks. CAPM is widely used throughout finance for the pricing of risky securities, generating expected returns for assets given the risk of those assets and calculating costs of capital.</p>
@@ -245,8 +245,8 @@
 <span class="co">## <span style="color: #BCBCBC;">1</span> AAPL           0.119 0.008<span style="text-decoration: underline;">9</span>           0.112 1.11    0.578  1.04        0.659 </span>
 <span class="co">## <span style="color: #BCBCBC;">2</span> GOOG           0.034 0.002<span style="text-decoration: underline;">8</span>           0.034 1.14    1.39   1.16        0.644 </span>
 <span class="co">## <span style="color: #BCBCBC;">3</span> NFLX           0.447 0.053            0.859 0.384  -<span style="color: #BB0000;">1.52</span>   0.004<span style="text-decoration: underline;">5</span>      0.081<span style="text-decoration: underline;">7</span></span>
-<span class="co">## <span style="color: #949494;"># … with 5 more variables: Correlationp-value &lt;dbl&gt;, InformationRatio &lt;dbl&gt;,</span></span>
-<span class="co">## <span style="color: #949494;">#   R-squared &lt;dbl&gt;, TrackingError &lt;dbl&gt;, TreynorRatio &lt;dbl&gt;</span></span></code></pre>
+<span class="co">## <span style="color: #949494;"># … with 5 more variables: `Correlationp-value` &lt;dbl&gt;, InformationRatio &lt;dbl&gt;,</span></span>
+<span class="co">## <span style="color: #949494;">#   `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;, TreynorRatio &lt;dbl&gt;</span></span></code></pre>
 <p>We can quickly isolate attributes, such as alpha, the measure of growth, and beta, the measure of risk.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">RaRb_capm</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">symbol</span>, <span class="va">Alpha</span>, <span class="va">Beta</span><span class="op">)</span></code></pre></div>
@@ -260,16 +260,16 @@
 <p>With <code>tidyquant</code> it’s efficient and easy to get the CAPM information! And, that’s just one of 129 available functions to analyze stock and portfolio return performance. Just use <code><a href="../reference/tq_performance.html">tq_performance_fun_options()</a></code> to see the full list.</p>
 <p><a class="anchor" id="workflow"></a></p>
 </div>
-<div class="section level1">
-<h1 id="workflow">3.0 Workflow<a class="anchor" aria-label="anchor" href="#workflow"></a>
-</h1>
+<div class="section level2">
+<h2 id="workflow">3.0 Workflow<a class="anchor" aria-label="anchor" href="#workflow"></a>
+</h2>
 <p>The general workflow is shown in the diagram below. We’ll step through the workflow first with a group of individual assets (stocks) and then with portfolios of stocks.</p>
 <div class="figure">
 <img src="perfomance_analysis_workflow.png" alt=""><p class="caption">Performance Analysis Workflow</p>
 </div>
-<div class="section level2">
-<h2 id="individual-assets">3.1 Individual Assets<a class="anchor" aria-label="anchor" href="#individual-assets"></a>
-</h2>
+<div class="section level3">
+<h3 id="individual-assets">3.1 Individual Assets<a class="anchor" aria-label="anchor" href="#individual-assets"></a>
+</h3>
 <p>Individual assets are the simplest form of analysis because there is no portfolio aggregation (Step 3A). We’ll re-do the “Quick Example” this time getting the <strong>Sharpe Ratio</strong>, a measure of reward-to-risk.</p>
 <p>Before we get started let’s find the performance function we want to use from <code>PerformanceAnalytics</code>. Searching <code>tq_performance_fun_options</code>, we can see that <code>SharpeRatio</code> is available. Type <code><a href="https://rdrr.io/pkg/PerformanceAnalytics/man/SharpeRatio.html" class="external-link">?SharpeRatio</a></code>, and we can see that the arguments are:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -279,9 +279,9 @@
 <span class="co">##     ...) </span>
 <span class="co">## NULL</span></code></pre>
 <p>We can actually skip the baseline path because the function does not require <code>Rb</code>. The function takes <code>R</code>, which is passed using <code>Ra</code> in <code>tq_performance(Ra, Rb, performance_fun, ...)</code>. A little bit of foresight saves us some work.</p>
-<div class="section level3">
-<h3 id="step-1a-get-stock-prices">Step 1A: Get stock prices<a class="anchor" aria-label="anchor" href="#step-1a-get-stock-prices"></a>
-</h3>
+<div class="section level4">
+<h4 id="step-1a-get-stock-prices">Step 1A: Get stock prices<a class="anchor" aria-label="anchor" href="#step-1a-get-stock-prices"></a>
+</h4>
 <p>Use <code><a href="../reference/tq_get.html">tq_get()</a></code> to get stock prices.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">stock_prices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"NFLX"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -292,21 +292,21 @@
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 4,527 × 8</span></span>
 <span class="co">##    symbol date        open  high   low close    volume adjusted</span>
 <span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   2010-01-04  7.62  7.66  7.58  7.64 493<span style="text-decoration: underline;">729</span>600     6.55</span>
-<span class="co">## <span style="color: #BCBCBC;"> 2</span> AAPL   2010-01-05  7.66  7.70  7.62  7.66 601<span style="text-decoration: underline;">904</span>800     6.56</span>
-<span class="co">## <span style="color: #BCBCBC;"> 3</span> AAPL   2010-01-06  7.66  7.69  7.53  7.53 552<span style="text-decoration: underline;">160</span>000     6.46</span>
-<span class="co">## <span style="color: #BCBCBC;"> 4</span> AAPL   2010-01-07  7.56  7.57  7.47  7.52 477<span style="text-decoration: underline;">131</span>200     6.45</span>
-<span class="co">## <span style="color: #BCBCBC;"> 5</span> AAPL   2010-01-08  7.51  7.57  7.47  7.57 447<span style="text-decoration: underline;">610</span>800     6.49</span>
-<span class="co">## <span style="color: #BCBCBC;"> 6</span> AAPL   2010-01-11  7.6   7.61  7.44  7.50 462<span style="text-decoration: underline;">229</span>600     6.43</span>
-<span class="co">## <span style="color: #BCBCBC;"> 7</span> AAPL   2010-01-12  7.47  7.49  7.37  7.42 594<span style="text-decoration: underline;">459</span>600     6.36</span>
-<span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   2010-01-13  7.42  7.53  7.29  7.52 605<span style="text-decoration: underline;">892</span>000     6.45</span>
-<span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   2010-01-14  7.50  7.52  7.46  7.48 432<span style="text-decoration: underline;">894</span>000     6.41</span>
-<span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   2010-01-15  7.53  7.56  7.35  7.35 594<span style="text-decoration: underline;">067</span>600     6.31</span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   2010-01-04  7.62  7.66  7.58  7.64 493<span style="text-decoration: underline;">729</span>600     6.54</span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> AAPL   2010-01-05  7.66  7.70  7.62  7.66 601<span style="text-decoration: underline;">904</span>800     6.55</span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> AAPL   2010-01-06  7.66  7.69  7.53  7.53 552<span style="text-decoration: underline;">160</span>000     6.44</span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> AAPL   2010-01-07  7.56  7.57  7.47  7.52 477<span style="text-decoration: underline;">131</span>200     6.43</span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> AAPL   2010-01-08  7.51  7.57  7.47  7.57 447<span style="text-decoration: underline;">610</span>800     6.47</span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> AAPL   2010-01-11  7.6   7.61  7.44  7.50 462<span style="text-decoration: underline;">229</span>600     6.42</span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> AAPL   2010-01-12  7.47  7.49  7.37  7.42 594<span style="text-decoration: underline;">459</span>600     6.34</span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   2010-01-13  7.42  7.53  7.29  7.52 605<span style="text-decoration: underline;">892</span>000     6.43</span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   2010-01-14  7.50  7.52  7.46  7.48 432<span style="text-decoration: underline;">894</span>000     6.40</span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   2010-01-15  7.53  7.56  7.35  7.35 594<span style="text-decoration: underline;">067</span>600     6.29</span>
 <span class="co">## <span style="color: #949494;"># … with 4,517 more rows</span></span></code></pre>
 </div>
-<div class="section level3">
-<h3 id="step-2a-mutate-to-returns">Step 2A: Mutate to returns<a class="anchor" aria-label="anchor" href="#step-2a-mutate-to-returns"></a>
-</h3>
+<div class="section level4">
+<h4 id="step-2a-mutate-to-returns">Step 2A: Mutate to returns<a class="anchor" aria-label="anchor" href="#step-2a-mutate-to-returns"></a>
+</h4>
 <p>Using the <code>tidyverse</code> split, apply, combine framework, we can mutate groups of stocks by first “grouping” with <code>group_by</code> and then applying a mutating function using <code>tq_transmute</code>. We use the <code>quantmod</code> function <code>periodReturn</code> as the mutating function. We pass along the arguments <code>period = "monthly"</code> to return the results in monthly periodicity. Last, we use the <code>col_rename</code> argument to rename the output column.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">stock_returns_monthly</span> <span class="op">&lt;-</span> <span class="va">stock_prices</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -332,15 +332,15 @@
 <span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   2010-10-29  0.060<span style="text-decoration: underline;">7</span></span>
 <span class="co">## <span style="color: #949494;"># … with 206 more rows</span></span></code></pre>
 </div>
-<div class="section level3">
-<h3 id="step-3a-aggregate-to-portfolio-returns-skipped">Step 3A: Aggregate to Portfolio Returns (Skipped)<a class="anchor" aria-label="anchor" href="#step-3a-aggregate-to-portfolio-returns-skipped"></a>
-</h3>
+<div class="section level4">
+<h4 id="step-3a-aggregate-to-portfolio-returns-skipped">Step 3A: Aggregate to Portfolio Returns (Skipped)<a class="anchor" aria-label="anchor" href="#step-3a-aggregate-to-portfolio-returns-skipped"></a>
+</h4>
 <p>Step 3A can be skipped because we are only interested in the Sharpe Ratio for <em>individual stocks</em> (not a portfolio).</p>
 <p>Step 3B can also be skipped because the <code>SharpeRatio</code> function from <code>PerformanceAnalytics</code> does not require a baseline.</p>
 </div>
-<div class="section level3">
-<h3 id="step-4-analyze-performance">Step 4: Analyze Performance<a class="anchor" aria-label="anchor" href="#step-4-analyze-performance"></a>
-</h3>
+<div class="section level4">
+<h4 id="step-4-analyze-performance">Step 4: Analyze Performance<a class="anchor" aria-label="anchor" href="#step-4-analyze-performance"></a>
+</h4>
 <p>The last step is to apply the <code>SharpeRatio</code> function to our groups of stock returns. We do this using <code><a href="../reference/tq_performance.html">tq_performance()</a></code> with the arguments <code>Ra = Ra</code>, <code>Rb = NULL</code> (not required), and <code>performance_fun = SharpeRatio</code>. We can also pass other arguments of the <code>SharpeRatio</code> function such as <code>Rf</code>, <code>p</code>, <code>FUN</code>, and <code>annualize</code>. We will just use the defaults for this example.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">stock_returns_monthly</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -351,7 +351,7 @@
     <span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 3 × 4</span></span>
 <span class="co">## <span style="color: #949494;"># Groups:   symbol [3]</span></span>
-<span class="co">##   symbol `ESSharpe(Rf=0%,p=95%)` `StdDevSharpe(Rf=0%,p=95%)` `VaRSharpe(Rf=0%,p…</span>
+<span class="co">##   symbol `ESSharpe(Rf=0%,p=95%)` `StdDevSharpe(Rf=0%,p=95%)` `VaRSharpe(Rf=0%,…`</span>
 <span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="co">## <span style="color: #BCBCBC;">1</span> AAPL                     0.173                       0.292               0.218</span>
 <span class="co">## <span style="color: #BCBCBC;">2</span> GOOG                     0.129                       0.203               0.157</span>
@@ -368,24 +368,24 @@
     <span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 3 × 4</span></span>
 <span class="co">## <span style="color: #949494;"># Groups:   symbol [3]</span></span>
-<span class="co">##   symbol `ESSharpe(Rf=0.2%,p=99%)` `StdDevSharpe(Rf=0.2%,… `VaRSharpe(Rf=0.2%,p…</span>
-<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> AAPL                      0.116                    0.258                0.134 </span>
-<span class="co">## <span style="color: #BCBCBC;">2</span> GOOG                      0.082<span style="text-decoration: underline;">6</span>                   0.170                0.099<span style="text-decoration: underline;">8</span></span>
-<span class="co">## <span style="color: #BCBCBC;">3</span> NFLX                      0.115                    0.272                0.142</span></code></pre>
+<span class="co">##   symbol `ESSharpe(Rf=0.2%,p=99%)` `StdDevSharpe(Rf=0.2%,p=99…` `VaRSharpe(Rf=…`</span>
+<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span> AAPL                      0.116                         0.258           0.134 </span>
+<span class="co">## <span style="color: #BCBCBC;">2</span> GOOG                      0.082<span style="text-decoration: underline;">6</span>                        0.170           0.099<span style="text-decoration: underline;">8</span></span>
+<span class="co">## <span style="color: #BCBCBC;">3</span> NFLX                      0.115                         0.272           0.142</span></code></pre>
 </div>
 </div>
-<div class="section level2">
-<h2 id="portfolios-asset-groups">3.2 Portfolios (Asset Groups)<a class="anchor" aria-label="anchor" href="#portfolios-asset-groups"></a>
-</h2>
-<p>Portfolios are slightly more complicated because we are now dealing with groups of assets versus individual stocks, and we need to aggregate weighted returns. Fortunately, this is only one extra step with <code>tidyquant</code> using <code><a href="../reference/tq_portfolio.html">tq_portfolio()</a></code>.</p>
 <div class="section level3">
-<h3 id="single-portfolio">Single Portfolio<a class="anchor" aria-label="anchor" href="#single-portfolio"></a>
+<h3 id="portfolios-asset-groups">3.2 Portfolios (Asset Groups)<a class="anchor" aria-label="anchor" href="#portfolios-asset-groups"></a>
 </h3>
-<p>Let’s recreate the CAPM analysis in the “Quick Example” this time comparing a portfolio of technology stocks to the SPDR Technology ETF (XLK).</p>
+<p>Portfolios are slightly more complicated because we are now dealing with groups of assets versus individual stocks, and we need to aggregate weighted returns. Fortunately, this is only one extra step with <code>tidyquant</code> using <code><a href="../reference/tq_portfolio.html">tq_portfolio()</a></code>.</p>
 <div class="section level4">
-<h4 id="steps-1a-and-2a-asset-period-returns">Steps 1A and 2A: Asset Period Returns<a class="anchor" aria-label="anchor" href="#steps-1a-and-2a-asset-period-returns"></a>
+<h4 id="single-portfolio">Single Portfolio<a class="anchor" aria-label="anchor" href="#single-portfolio"></a>
 </h4>
+<p>Let’s recreate the CAPM analysis in the “Quick Example” this time comparing a portfolio of technology stocks to the SPDR Technology ETF (XLK).</p>
+<div class="section level5">
+<h5 id="steps-1a-and-2a-asset-period-returns">Steps 1A and 2A: Asset Period Returns<a class="anchor" aria-label="anchor" href="#steps-1a-and-2a-asset-period-returns"></a>
+</h5>
 <p>This is the same as what we did previously to get the monthly returns for groups of individual stock prices. We use the split, apply, combine framework using the workflow of <code>tq_get</code>, <code>group_by</code>, and <code>tq_transmute</code>.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">stock_returns_monthly</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"NFLX"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -414,9 +414,9 @@
 <span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   2010-10-29  0.060<span style="text-decoration: underline;">7</span></span>
 <span class="co">## <span style="color: #949494;"># … with 206 more rows</span></span></code></pre>
 </div>
-<div class="section level4">
-<h4 id="steps-1b-and-2b-baseline-period-returns">Steps 1B and 2B: Baseline Period Returns<a class="anchor" aria-label="anchor" href="#steps-1b-and-2b-baseline-period-returns"></a>
-</h4>
+<div class="section level5">
+<h5 id="steps-1b-and-2b-baseline-period-returns">Steps 1B and 2B: Baseline Period Returns<a class="anchor" aria-label="anchor" href="#steps-1b-and-2b-baseline-period-returns"></a>
+</h5>
 <p>This was also done previously.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">baseline_returns_monthly</span> <span class="op">&lt;-</span> <span class="st">"XLK"</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -443,18 +443,18 @@
 <span class="co">## <span style="color: #BCBCBC;">10</span> 2010-10-29  0.057<span style="text-decoration: underline;">8</span></span>
 <span class="co">## <span style="color: #949494;"># … with 62 more rows</span></span></code></pre>
 </div>
-<div class="section level4">
-<h4 id="step-3a-aggregate-to-portfolio-period-returns">Step 3A: Aggregate to Portfolio Period Returns<a class="anchor" aria-label="anchor" href="#step-3a-aggregate-to-portfolio-period-returns"></a>
-</h4>
+<div class="section level5">
+<h5 id="step-3a-aggregate-to-portfolio-period-returns">Step 3A: Aggregate to Portfolio Period Returns<a class="anchor" aria-label="anchor" href="#step-3a-aggregate-to-portfolio-period-returns"></a>
+</h5>
 <p>The <code>tidyquant</code> function, <code><a href="../reference/tq_portfolio.html">tq_portfolio()</a></code> aggregates a group of individual assets into a single return using a weighted composition of the underlying assets. To do this we need to first develop portfolio weights. There are two ways to do this for a single portfolio:</p>
 <ol style="list-style-type: decimal">
 <li>Supplying a vector of weights</li>
 <li>Supplying a two column tidy data frame (tibble) with stock symbols in the first column and weights to map in the second.</li>
 </ol>
 <p>Suppose we want to split our portfolio evenly between AAPL and NFLX. We’ll show this using both methods.</p>
-<div class="section level5">
-<h5 id="method-1-aggregating-a-portfolio-using-vector-of-weights">Method 1: Aggregating a Portfolio using Vector of Weights<a class="anchor" aria-label="anchor" href="#method-1-aggregating-a-portfolio-using-vector-of-weights"></a>
-</h5>
+<div class="section level6">
+<h6 id="method-1-aggregating-a-portfolio-using-vector-of-weights">Method 1: Aggregating a Portfolio using Vector of Weights<a class="anchor" aria-label="anchor" href="#method-1-aggregating-a-portfolio-using-vector-of-weights"></a>
+</h6>
 <p>We’ll use the weight vector, <code>c(0.5, 0, 0.5)</code>. Two important aspects to supplying a numeric vector of weights: First, notice that the length (3) is equal to the number of assets (3). This is a requirement. Second, notice that the sum of the weighting vector is equal to 1. This is not “required”, but is best practice. If the sum is not 1, the weights will be distributed accordingly by scaling the vector to 1, and a warning message will appear.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.0</span>, <span class="fl">0.5</span><span class="op">)</span>
@@ -481,9 +481,9 @@
 <p>We now have an aggregated portfolio that is a 50/50 blend of AAPL and NFLX.</p>
 <p>You may be asking why didn’t we use GOOG? <strong>The important thing to understand is that all of the assets from the asset returns don’t need to be used when creating the portfolio!</strong> This enables us to scale individual stock returns and then vary weights to optimize the portfolio (this will be a further subject that we address in the future!)</p>
 </div>
-<div class="section level5">
-<h5 id="method-2-aggregating-a-portfolio-using-two-column-tibble-with-symbols-and-weights">Method 2: Aggregating a Portfolio using Two Column Tibble with Symbols and Weights<a class="anchor" aria-label="anchor" href="#method-2-aggregating-a-portfolio-using-two-column-tibble-with-symbols-and-weights"></a>
-</h5>
+<div class="section level6">
+<h6 id="method-2-aggregating-a-portfolio-using-two-column-tibble-with-symbols-and-weights">Method 2: Aggregating a Portfolio using Two Column Tibble with Symbols and Weights<a class="anchor" aria-label="anchor" href="#method-2-aggregating-a-portfolio-using-two-column-tibble-with-symbols-and-weights"></a>
+</h6>
 <p>A possibly more useful method of aggregating returns is using a tibble of symbols and weights that are mapped to the portfolio. We’ll recreate the previous portfolio example using mapped weights.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wts_map</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>
@@ -521,9 +521,9 @@
 <p>Now, imagine if you had an entire index, such as the Russell 2000, of 2000 individual stock returns in a nice tidy data frame. It would be very easy to adjust portfolios and compute blended returns, and you only need to supply the symbols that you want to blend. All other symbols default to zero!</p>
 </div>
 </div>
-<div class="section level4">
-<h4 id="step-3b-merging-ra-and-rb">Step 3B: Merging Ra and Rb<a class="anchor" aria-label="anchor" href="#step-3b-merging-ra-and-rb"></a>
-</h4>
+<div class="section level5">
+<h5 id="step-3b-merging-ra-and-rb">Step 3B: Merging Ra and Rb<a class="anchor" aria-label="anchor" href="#step-3b-merging-ra-and-rb"></a>
+</h5>
 <p>Now that we have the aggregated portfolio returns (“Ra”) from Step 3A and the baseline returns (“Rb”) from Step 2B, we can merge to get our consolidated table of asset and baseline returns. Nothing new here.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">RaRb_single_portfolio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">portfolio_returns_monthly</span>, 
@@ -545,9 +545,9 @@
 <span class="co">## <span style="color: #BCBCBC;">10</span> 2010-10-29  0.067<span style="text-decoration: underline;">4</span>  0.057<span style="text-decoration: underline;">8</span></span>
 <span class="co">## <span style="color: #949494;"># … with 62 more rows</span></span></code></pre>
 </div>
-<div class="section level4">
-<h4 id="step-4-computing-the-capm-table">Step 4: Computing the CAPM Table<a class="anchor" aria-label="anchor" href="#step-4-computing-the-capm-table"></a>
-</h4>
+<div class="section level5">
+<h5 id="step-4-computing-the-capm-table">Step 4: Computing the CAPM Table<a class="anchor" aria-label="anchor" href="#step-4-computing-the-capm-table"></a>
+</h5>
 <p>The CAPM table is computed with the function <code>table.CAPM</code> from <code>PerformanceAnalytics</code>. We just perform the same task that we performed in the “Quick Example”.</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">RaRb_single_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -556,23 +556,23 @@
 <span class="co">##   ActivePremium  Alpha AnnualizedAlpha  Beta `Beta-` `Beta+` Correlation</span>
 <span class="co">##           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="co">## <span style="color: #BCBCBC;">1</span>         0.327 0.029<span style="text-decoration: underline;">9</span>           0.425 0.754  -<span style="color: #BB0000;">0.243</span>   0.503       0.283</span>
-<span class="co">## <span style="color: #949494;"># … with 5 more variables: Correlationp-value &lt;dbl&gt;, InformationRatio &lt;dbl&gt;,</span></span>
-<span class="co">## <span style="color: #949494;">#   R-squared &lt;dbl&gt;, TrackingError &lt;dbl&gt;, TreynorRatio &lt;dbl&gt;</span></span></code></pre>
+<span class="co">## <span style="color: #949494;"># … with 5 more variables: `Correlationp-value` &lt;dbl&gt;, InformationRatio &lt;dbl&gt;,</span></span>
+<span class="co">## <span style="color: #949494;">#   `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;, TreynorRatio &lt;dbl&gt;</span></span></code></pre>
 <p>Now we have the CAPM performance metrics for a portfolio! While this is cool, it’s cooler to do multiple portfolios. Let’s see how.</p>
 </div>
 </div>
-<div class="section level3">
-<h3 id="multiple-portfolios">Multiple Portfolios<a class="anchor" aria-label="anchor" href="#multiple-portfolios"></a>
-</h3>
+<div class="section level4">
+<h4 id="multiple-portfolios">Multiple Portfolios<a class="anchor" aria-label="anchor" href="#multiple-portfolios"></a>
+</h4>
 <p>Once you understand the process for a single portfolio using Step 3A, Method 2 (aggregating weights by mapping), scaling to multiple portfolios is just building on this concept. Let’s recreate the same example from the “Single Portfolio” Example this time with three portfolios:</p>
 <ol style="list-style-type: decimal">
 <li>50% AAPL, 25% GOOG, 25% NFLX</li>
 <li>25% AAPL, 50% GOOG, 25% NFLX</li>
 <li>25% AAPL, 25% GOOG, 50% NFLX</li>
 </ol>
-<div class="section level4">
-<h4 id="steps-1-and-2-are-the-exact-same-as-the-single-portfolio-example">Steps 1 and 2 are the Exact Same as the Single Portfolio Example<a class="anchor" aria-label="anchor" href="#steps-1-and-2-are-the-exact-same-as-the-single-portfolio-example"></a>
-</h4>
+<div class="section level5">
+<h5 id="steps-1-and-2-are-the-exact-same-as-the-single-portfolio-example">Steps 1 and 2 are the Exact Same as the Single Portfolio Example<a class="anchor" aria-label="anchor" href="#steps-1-and-2-are-the-exact-same-as-the-single-portfolio-example"></a>
+</h5>
 <p>First, get individual asset returns grouped by asset, which is the exact same as Steps 1A and 1B from the Single Portfolio example.</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">stock_returns_monthly</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AAPL"</span>, <span class="st">"GOOG"</span>, <span class="st">"NFLX"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -595,9 +595,9 @@
                  period     <span class="op">=</span> <span class="st">"monthly"</span>, 
                  col_rename <span class="op">=</span> <span class="st">"Rb"</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 id="step-3a-aggregate-portfolio-returns-for-multiple-portfolios">Step 3A: Aggregate Portfolio Returns for Multiple Portfolios<a class="anchor" aria-label="anchor" href="#step-3a-aggregate-portfolio-returns-for-multiple-portfolios"></a>
-</h4>
+<div class="section level5">
+<h5 id="step-3a-aggregate-portfolio-returns-for-multiple-portfolios">Step 3A: Aggregate Portfolio Returns for Multiple Portfolios<a class="anchor" aria-label="anchor" href="#step-3a-aggregate-portfolio-returns-for-multiple-portfolios"></a>
+</h5>
 <p>This is where it gets fun. If you picked up on Single Portfolio, Step3A, Method 2 (mapping weights), this is just an extension for multiple portfolios.</p>
 <p>First, we need to grow our portfolios. <code>tidyquant</code> has a handy, albeit simple, function, <code><a href="../reference/tq_portfolio.html">tq_repeat_df()</a></code>, for scaling a single portfolio to many. It takes a data frame, and the number of repeats, <code>n</code>, and the <code>index_col_name</code>, which adds a sequential index. Let’s see how it works for our example. We need three portfolios:</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
@@ -683,9 +683,9 @@
 <span class="co">## <span style="color: #949494;"># … with 206 more rows</span></span></code></pre>
 <p>Let’s assess the output. We now have a single, “long” format data frame of portfolio returns. It has three groups with the aggregated portfolios blended by mapping the <code>weight_table</code>.</p>
 </div>
-<div class="section level4">
-<h4 id="steps-3b-and-4-merging-and-assessing-performance">Steps 3B and 4: Merging and Assessing Performance<a class="anchor" aria-label="anchor" href="#steps-3b-and-4-merging-and-assessing-performance"></a>
-</h4>
+<div class="section level5">
+<h5 id="steps-3b-and-4-merging-and-assessing-performance">Steps 3B and 4: Merging and Assessing Performance<a class="anchor" aria-label="anchor" href="#steps-3b-and-4-merging-and-assessing-performance"></a>
+</h5>
 <p>These steps are the exact same as the Single Portfolio example.</p>
 <p>First, we merge with the baseline using “date” as the key.</p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
@@ -719,8 +719,8 @@
 <span class="co">## <span style="color: #BCBCBC;">1</span>         1         0.231 0.019<span style="text-decoration: underline;">3</span>           0.258 0.908   0.312   0.741</span>
 <span class="co">## <span style="color: #BCBCBC;">2</span>         2         0.219 0.019<span style="text-decoration: underline;">2</span>           0.256 0.886   0.436   0.660</span>
 <span class="co">## <span style="color: #BCBCBC;">3</span>         3         0.319 0.030<span style="text-decoration: underline;">8</span>           0.439 0.721  -<span style="color: #BB0000;">0.179</span>   0.394</span>
-<span class="co">## <span style="color: #949494;"># … with 6 more variables: Correlation &lt;dbl&gt;, Correlationp-value &lt;dbl&gt;,</span></span>
-<span class="co">## <span style="color: #949494;">#   InformationRatio &lt;dbl&gt;, R-squared &lt;dbl&gt;, TrackingError &lt;dbl&gt;,</span></span>
+<span class="co">## <span style="color: #949494;"># … with 6 more variables: Correlation &lt;dbl&gt;, `Correlationp-value` &lt;dbl&gt;,</span></span>
+<span class="co">## <span style="color: #949494;">#   InformationRatio &lt;dbl&gt;, `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;,</span></span>
 <span class="co">## <span style="color: #949494;">#   TreynorRatio &lt;dbl&gt;</span></span></code></pre>
 <p>Inspecting the results, we now have a multiple portfolio comparison of the CAPM table from <code>PerformanceAnalytics</code>. We can do the same thing with <code>SharpeRatio</code> as well.</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
@@ -728,7 +728,7 @@
     <span class="fu"><a href="../reference/tq_performance.html">tq_performance</a></span><span class="op">(</span>Ra <span class="op">=</span> <span class="va">Ra</span>, Rb <span class="op">=</span> <span class="cn">NULL</span>, performance_fun <span class="op">=</span> <span class="va">SharpeRatio</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 3 × 4</span></span>
 <span class="co">## <span style="color: #949494;"># Groups:   portfolio [3]</span></span>
-<span class="co">##   portfolio `ESSharpe(Rf=0%,p=95%)` `StdDevSharpe(Rf=0%,p=95%)` `VaRSharpe(Rf=0…</span>
+<span class="co">##   portfolio `ESSharpe(Rf=0%,p=95%)` `StdDevSharpe(Rf=0%,p=95%)` `VaRSharpe(Rf=…`</span>
 <span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="co">## <span style="color: #BCBCBC;">1</span>         1                   0.172                       0.355            0.263</span>
 <span class="co">## <span style="color: #BCBCBC;">2</span>         2                   0.146                       0.334            0.236</span>
@@ -737,9 +737,9 @@
 </div>
 </div>
 </div>
-<div class="section level1">
-<h1 id="available-functions">4.0 Available Functions<a class="anchor" aria-label="anchor" href="#available-functions"></a>
-</h1>
+<div class="section level2">
+<h2 id="available-functions">4.0 Available Functions<a class="anchor" aria-label="anchor" href="#available-functions"></a>
+</h2>
 <p>We’ve only scratched the surface of the analysis functions available through <code>PerformanceAnalytics</code>. The list below includes all of the compatible functions grouped by function type. The table functions are the most useful to get a cross section of metrics. We’ll touch on a few. We’ll also go over <code>VaR</code> and <code>SharpeRatio</code> as these are very commonly used as performance measures.</p>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tq_performance.html">tq_performance_fun_options</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -814,9 +814,9 @@
 <span class="co">## </span>
 <span class="co">## $misc.funs</span>
 <span class="co">## [1] "KellyRatio"   "Modigliani"   "UpDownRatios"</span></code></pre>
-<div class="section level2">
-<h2 id="table-stats">4.1 table.Stats<a class="anchor" aria-label="anchor" href="#table-stats"></a>
-</h2>
+<div class="section level3">
+<h3 id="table-stats">4.1 table.Stats<a class="anchor" aria-label="anchor" href="#table-stats"></a>
+</h3>
 <p>Returns a basic set of statistics that match the period of the data passed in (e.g., monthly returns will get monthly statistics, daily will be daily stats, and so on).</p>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">RaRb_multiple_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -830,11 +830,11 @@
 <span class="co">## <span style="color: #BCBCBC;">3</span>         3         0.038<span style="text-decoration: underline;">8</span>        0.031<span style="text-decoration: underline;">3</span>     1.81          0.01     0.370 0.046 </span>
 <span class="co">## <span style="color: #949494;"># … with 10 more variables: Minimum &lt;dbl&gt;, NAs &lt;dbl&gt;, Observations &lt;dbl&gt;,</span></span>
 <span class="co">## <span style="color: #949494;">#   Quartile1 &lt;dbl&gt;, Quartile3 &lt;dbl&gt;, SEMean &lt;dbl&gt;, Skewness &lt;dbl&gt;,</span></span>
-<span class="co">## <span style="color: #949494;">#   Stdev &lt;dbl&gt;, UCLMean(0.95) &lt;dbl&gt;, Variance &lt;dbl&gt;</span></span></code></pre>
+<span class="co">## <span style="color: #949494;">#   Stdev &lt;dbl&gt;, `UCLMean(0.95)` &lt;dbl&gt;, Variance &lt;dbl&gt;</span></span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="table-capm">4.2 table.CAPM<a class="anchor" aria-label="anchor" href="#table-capm"></a>
-</h2>
+<div class="section level3">
+<h3 id="table-capm">4.2 table.CAPM<a class="anchor" aria-label="anchor" href="#table-capm"></a>
+</h3>
 <p>Takes a set of returns and relates them to a benchmark return. Provides a set of measures related to an excess return single factor model, or CAPM.</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">RaRb_multiple_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -846,13 +846,13 @@
 <span class="co">## <span style="color: #BCBCBC;">1</span>         1         0.231 0.019<span style="text-decoration: underline;">3</span>           0.258 0.908   0.312   0.741</span>
 <span class="co">## <span style="color: #BCBCBC;">2</span>         2         0.219 0.019<span style="text-decoration: underline;">2</span>           0.256 0.886   0.436   0.660</span>
 <span class="co">## <span style="color: #BCBCBC;">3</span>         3         0.319 0.030<span style="text-decoration: underline;">8</span>           0.439 0.721  -<span style="color: #BB0000;">0.179</span>   0.394</span>
-<span class="co">## <span style="color: #949494;"># … with 6 more variables: Correlation &lt;dbl&gt;, Correlationp-value &lt;dbl&gt;,</span></span>
-<span class="co">## <span style="color: #949494;">#   InformationRatio &lt;dbl&gt;, R-squared &lt;dbl&gt;, TrackingError &lt;dbl&gt;,</span></span>
+<span class="co">## <span style="color: #949494;"># … with 6 more variables: Correlation &lt;dbl&gt;, `Correlationp-value` &lt;dbl&gt;,</span></span>
+<span class="co">## <span style="color: #949494;">#   InformationRatio &lt;dbl&gt;, `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;,</span></span>
 <span class="co">## <span style="color: #949494;">#   TreynorRatio &lt;dbl&gt;</span></span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="table-annualizedreturns">4.3 table.AnnualizedReturns<a class="anchor" aria-label="anchor" href="#table-annualizedreturns"></a>
-</h2>
+<div class="section level3">
+<h3 id="table-annualizedreturns">4.3 table.AnnualizedReturns<a class="anchor" aria-label="anchor" href="#table-annualizedreturns"></a>
+</h3>
 <p>Table of Annualized Return, Annualized Std Dev, and Annualized Sharpe.</p>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">RaRb_multiple_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -865,9 +865,9 @@
 <span class="co">## <span style="color: #BCBCBC;">2</span>         2            0.348                      1.16            0.301</span>
 <span class="co">## <span style="color: #BCBCBC;">3</span>         3            0.448                      1.06            0.424</span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="table-correlation">4.4 table.Correlation<a class="anchor" aria-label="anchor" href="#table-correlation"></a>
-</h2>
+<div class="section level3">
+<h3 id="table-correlation">4.4 table.Correlation<a class="anchor" aria-label="anchor" href="#table-correlation"></a>
+</h3>
 <p>This is a wrapper for calculating correlation and significance against each column of the data provided.</p>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">RaRb_multiple_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -880,27 +880,27 @@
 <span class="co">## <span style="color: #BCBCBC;">2</span>         2 0.000<span style="text-decoration: underline;">122</span>      0.229       0.608 0.438</span>
 <span class="co">## <span style="color: #BCBCBC;">3</span>         3 0.032<span style="text-decoration: underline;">5</span>        0.022<span style="text-decoration: underline;">0</span>      0.457 0.252</span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="table-downsiderisk">4.5 table.DownsideRisk<a class="anchor" aria-label="anchor" href="#table-downsiderisk"></a>
-</h2>
+<div class="section level3">
+<h3 id="table-downsiderisk">4.5 table.DownsideRisk<a class="anchor" aria-label="anchor" href="#table-downsiderisk"></a>
+</h3>
 <p>Creates a table of estimates of downside risk measures for comparison across multiple instruments or funds.</p>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">RaRb_multiple_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="../reference/tq_performance.html">tq_performance</a></span><span class="op">(</span>Ra <span class="op">=</span> <span class="va">Ra</span>, Rb <span class="op">=</span> <span class="cn">NULL</span>, performance_fun <span class="op">=</span> <span class="va">table.DownsideRisk</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 3 × 12</span></span>
 <span class="co">## <span style="color: #949494;"># Groups:   portfolio [3]</span></span>
-<span class="co">##   portfolio `DownsideDeviati… `DownsideDeviatio… `DownsideDeviati… GainDeviation</span>
-<span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;">1</span>         1            0.045              0.048<span style="text-decoration: underline;">8</span>            0.045         0.053<span style="text-decoration: underline;">8</span></span>
-<span class="co">## <span style="color: #BCBCBC;">2</span>         2            0.050<span style="text-decoration: underline;">1</span>             0.053<span style="text-decoration: underline;">8</span>            0.050<span style="text-decoration: underline;">1</span>        0.052<span style="text-decoration: underline;">8</span></span>
-<span class="co">## <span style="color: #BCBCBC;">3</span>         3            0.068<span style="text-decoration: underline;">4</span>             0.072<span style="text-decoration: underline;">1</span>            0.068<span style="text-decoration: underline;">4</span>        0.083<span style="text-decoration: underline;">1</span></span>
-<span class="co">## <span style="color: #949494;"># … with 7 more variables: HistoricalES(95%) &lt;dbl&gt;, HistoricalVaR(95%) &lt;dbl&gt;,</span></span>
-<span class="co">## <span style="color: #949494;">#   LossDeviation &lt;dbl&gt;, MaximumDrawdown &lt;dbl&gt;, ModifiedES(95%) &lt;dbl&gt;,</span></span>
-<span class="co">## <span style="color: #949494;">#   ModifiedVaR(95%) &lt;dbl&gt;, SemiDeviation &lt;dbl&gt;</span></span></code></pre>
+<span class="co">##   portfolio `DownsideDeviation…` `DownsideDevia…` `DownsideDevia…` GainDeviation</span>
+<span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span>         1               0.045            0.048<span style="text-decoration: underline;">8</span>           0.045         0.053<span style="text-decoration: underline;">8</span></span>
+<span class="co">## <span style="color: #BCBCBC;">2</span>         2               0.050<span style="text-decoration: underline;">1</span>           0.053<span style="text-decoration: underline;">8</span>           0.050<span style="text-decoration: underline;">1</span>        0.052<span style="text-decoration: underline;">8</span></span>
+<span class="co">## <span style="color: #BCBCBC;">3</span>         3               0.068<span style="text-decoration: underline;">4</span>           0.072<span style="text-decoration: underline;">1</span>           0.068<span style="text-decoration: underline;">4</span>        0.083<span style="text-decoration: underline;">1</span></span>
+<span class="co">## <span style="color: #949494;"># … with 7 more variables: `HistoricalES(95%)` &lt;dbl&gt;,</span></span>
+<span class="co">## <span style="color: #949494;">#   `HistoricalVaR(95%)` &lt;dbl&gt;, LossDeviation &lt;dbl&gt;, MaximumDrawdown &lt;dbl&gt;,</span></span>
+<span class="co">## <span style="color: #949494;">#   `ModifiedES(95%)` &lt;dbl&gt;, `ModifiedVaR(95%)` &lt;dbl&gt;, SemiDeviation &lt;dbl&gt;</span></span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="table-downsideriskratio">4.6 table.DownsideRiskRatio<a class="anchor" aria-label="anchor" href="#table-downsideriskratio"></a>
-</h2>
+<div class="section level3">
+<h3 id="table-downsideriskratio">4.6 table.DownsideRiskRatio<a class="anchor" aria-label="anchor" href="#table-downsideriskratio"></a>
+</h3>
 <p>Table of Monthly downside risk, Annualized downside risk, Downside potential, Omega, Sortino ratio, Upside potential, Upside potential ratio and Omega-Sharpe ratio.</p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">RaRb_multiple_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -912,12 +912,12 @@
 <span class="co">## <span style="color: #BCBCBC;">1</span>         1                  0.156            0.019<span style="text-decoration: underline;">8</span>              0.045   2.48</span>
 <span class="co">## <span style="color: #BCBCBC;">2</span>         2                  0.173            0.021<span style="text-decoration: underline;">7</span>              0.050<span style="text-decoration: underline;">1</span>  2.34</span>
 <span class="co">## <span style="color: #BCBCBC;">3</span>         3                  0.237            0.029<span style="text-decoration: underline;">4</span>              0.068<span style="text-decoration: underline;">4</span>  2.32</span>
-<span class="co">## <span style="color: #949494;"># … with 4 more variables: Omega-sharperatio &lt;dbl&gt;, Sortinoratio &lt;dbl&gt;,</span></span>
+<span class="co">## <span style="color: #949494;"># … with 4 more variables: `Omega-sharperatio` &lt;dbl&gt;, Sortinoratio &lt;dbl&gt;,</span></span>
 <span class="co">## <span style="color: #949494;">#   Upsidepotential &lt;dbl&gt;, Upsidepotentialratio &lt;dbl&gt;</span></span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="table-highermoments">4.7 table.HigherMoments<a class="anchor" aria-label="anchor" href="#table-highermoments"></a>
-</h2>
+<div class="section level3">
+<h3 id="table-highermoments">4.7 table.HigherMoments<a class="anchor" aria-label="anchor" href="#table-highermoments"></a>
+</h3>
 <p>Summary of the higher moments and Co-Moments of the return distribution. Used to determine diversification potential. Also called “systematic” moments by several papers.</p>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">RaRb_multiple_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -930,9 +930,9 @@
 <span class="co">## <span style="color: #BCBCBC;">2</span>         2          0.772          1.71           0.886          0          0</span>
 <span class="co">## <span style="color: #BCBCBC;">3</span>         3          0.455          0.369          0.721          0          0</span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="table-informationratio">4.8 table.InformationRatio<a class="anchor" aria-label="anchor" href="#table-informationratio"></a>
-</h2>
+<div class="section level3">
+<h3 id="table-informationratio">4.8 table.InformationRatio<a class="anchor" aria-label="anchor" href="#table-informationratio"></a>
+</h3>
 <p>Table of Tracking error, Annualized tracking error and Information ratio.</p>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">RaRb_multiple_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -945,9 +945,9 @@
 <span class="co">## <span style="color: #BCBCBC;">2</span>         2                   0.271            0.809        0.078<span style="text-decoration: underline;">2</span></span>
 <span class="co">## <span style="color: #BCBCBC;">3</span>         3                   0.412            0.774        0.119</span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="table-variability">4.9 table.Variability<a class="anchor" aria-label="anchor" href="#table-variability"></a>
-</h2>
+<div class="section level3">
+<h3 id="table-variability">4.9 table.Variability<a class="anchor" aria-label="anchor" href="#table-variability"></a>
+</h3>
 <p>Table of Mean absolute difference, Monthly standard deviation and annualized standard deviation.</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">RaRb_multiple_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -960,9 +960,9 @@
 <span class="co">## <span style="color: #BCBCBC;">2</span>         2            0.301                0.067<span style="text-decoration: underline;">9</span>        0.086<span style="text-decoration: underline;">8</span></span>
 <span class="co">## <span style="color: #BCBCBC;">3</span>         3            0.424                0.091         0.122</span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="var">4.10 VaR<a class="anchor" aria-label="anchor" href="#var"></a>
-</h2>
+<div class="section level3">
+<h3 id="var">4.10 VaR<a class="anchor" aria-label="anchor" href="#var"></a>
+</h3>
 <p>Calculates Value-at-Risk (VaR) for univariate, component, and marginal cases using a variety of analytical methods.</p>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">RaRb_multiple_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -975,29 +975,29 @@
 <span class="co">## <span style="color: #BCBCBC;">2</span>         2 -<span style="color: #BB0000;">0.123</span></span>
 <span class="co">## <span style="color: #BCBCBC;">3</span>         3 -<span style="color: #BB0000;">0.163</span></span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="sharperatio">4.11 SharpeRatio<a class="anchor" aria-label="anchor" href="#sharperatio"></a>
-</h2>
+<div class="section level3">
+<h3 id="sharperatio">4.11 SharpeRatio<a class="anchor" aria-label="anchor" href="#sharperatio"></a>
+</h3>
 <p>The Sharpe ratio is simply the return per unit of risk (represented by variability). In the classic case, the unit of risk is the standard deviation of the returns.</p>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">RaRb_multiple_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="../reference/tq_performance.html">tq_performance</a></span><span class="op">(</span>Ra <span class="op">=</span> <span class="va">Ra</span>, Rb <span class="op">=</span> <span class="cn">NULL</span>, performance_fun <span class="op">=</span> <span class="va">SharpeRatio</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 3 × 4</span></span>
 <span class="co">## <span style="color: #949494;"># Groups:   portfolio [3]</span></span>
-<span class="co">##   portfolio `ESSharpe(Rf=0%,p=95%)` `StdDevSharpe(Rf=0%,p=95%)` `VaRSharpe(Rf=0…</span>
+<span class="co">##   portfolio `ESSharpe(Rf=0%,p=95%)` `StdDevSharpe(Rf=0%,p=95%)` `VaRSharpe(Rf=…`</span>
 <span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="co">## <span style="color: #BCBCBC;">1</span>         1                   0.172                       0.355            0.263</span>
 <span class="co">## <span style="color: #BCBCBC;">2</span>         2                   0.146                       0.334            0.236</span>
 <span class="co">## <span style="color: #BCBCBC;">3</span>         3                   0.150                       0.317            0.238</span></code></pre>
 </div>
 </div>
-<div class="section level1">
-<h1 id="customizing-using-the">5.0 Customizing using the …<a class="anchor" aria-label="anchor" href="#customizing-using-the"></a>
-</h1>
-<p>One of the best features of <code>tq_portfolio</code> and <code>tq_performance</code> is to be able to pass features through to the underlying functions. After all, these are just wrappers for <code>PerformanceAnalytics</code>, so you probably want to be able <strong>to make full use of the underlying functions</strong>. Passing through parameters using the <code>...</code> can be incredibly useful, so let’s see how.</p>
 <div class="section level2">
-<h2 id="customizing-tq_portfolio">5.1 Customizing tq_portfolio<a class="anchor" aria-label="anchor" href="#customizing-tq_portfolio"></a>
+<h2 id="customizing-using-the">5.0 Customizing using the …<a class="anchor" aria-label="anchor" href="#customizing-using-the"></a>
 </h2>
+<p>One of the best features of <code>tq_portfolio</code> and <code>tq_performance</code> is to be able to pass features through to the underlying functions. After all, these are just wrappers for <code>PerformanceAnalytics</code>, so you probably want to be able <strong>to make full use of the underlying functions</strong>. Passing through parameters using the <code>...</code> can be incredibly useful, so let’s see how.</p>
+<div class="section level3">
+<h3 id="customizing-tq_portfolio">5.1 Customizing tq_portfolio<a class="anchor" aria-label="anchor" href="#customizing-tq_portfolio"></a>
+</h3>
 <p>The <code>tq_portfolio</code> function is a wrapper for <code>Return.portfolio</code>. This means that during the portfolio aggregation process, we can make use of most of the <code>Return.portfolio</code> arguments such as <code>wealth.index</code>, <code>contribution</code>, <code>geometric</code>, <code>rebalance_on</code>, and <code>value</code>. Here’s the arguments of the underlying function:</p>
 <div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/args.html" class="external-link">args</a></span><span class="op">(</span><span class="va">Return.portfolio</span><span class="op">)</span></code></pre></div>
@@ -1027,7 +1027,7 @@
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="../reference/scale_manual.html">scale_color_tq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">percent</a></span><span class="op">)</span></code></pre></div>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html" class="external-link">percent</a></span><span class="op">)</span></code></pre></div>
 <p><img src="TQ05-performance-analysis-with-tidyquant_files/figure-html/unnamed-chunk-44-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p>This is good, but we want to see how our $10,000 initial investment is growing. This is simple with the underlying <code>Return.portfolio</code> argument, <code>wealth.index = TRUE</code>. All we need to do is add these as additional parameters to <code>tq_portfolio</code>!</p>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
@@ -1050,7 +1050,7 @@
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"loess"</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="../reference/scale_manual.html">scale_color_tq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/label_dollar.html" class="external-link">dollar</a></span><span class="op">)</span></code></pre></div>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/dollar_format.html" class="external-link">dollar</a></span><span class="op">)</span></code></pre></div>
 <p><img src="TQ05-performance-analysis-with-tidyquant_files/figure-html/unnamed-chunk-46-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p>Finally, taking this one step further, we apply the same process to the “Multiple Portfolio” example:</p>
 <ol style="list-style-type: decimal">
@@ -1078,12 +1078,12 @@
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"loess"</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="../reference/scale_manual.html">scale_color_tq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/label_dollar.html" class="external-link">dollar</a></span><span class="op">)</span></code></pre></div>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/dollar_format.html" class="external-link">dollar</a></span><span class="op">)</span></code></pre></div>
 <p><img src="TQ05-performance-analysis-with-tidyquant_files/figure-html/unnamed-chunk-48-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level2">
-<h2 id="customizing-tq_performance">5.2 Customizing tq_performance<a class="anchor" aria-label="anchor" href="#customizing-tq_performance"></a>
-</h2>
+<div class="section level3">
+<h3 id="customizing-tq_performance">5.2 Customizing tq_performance<a class="anchor" aria-label="anchor" href="#customizing-tq_performance"></a>
+</h3>
 <p>Finally, the same concept of passing arguments works with all the <code>tidyquant</code> functions that are wrappers including <code>tq_transmute</code>, <code>tq_mutate</code>, <code>tq_performance</code>, etc. Let’s use a final example with the <code>SharpeRatio</code>, which has the following arguments.</p>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/args.html" class="external-link">args</a></span><span class="op">(</span><span class="va">SharpeRatio</span><span class="op">)</span></code></pre></div>
@@ -1099,7 +1099,7 @@
                    performance_fun <span class="op">=</span> <span class="va">SharpeRatio</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 3 × 4</span></span>
 <span class="co">## <span style="color: #949494;"># Groups:   portfolio [3]</span></span>
-<span class="co">##   portfolio `ESSharpe(Rf=0%,p=95%)` `StdDevSharpe(Rf=0%,p=95%)` `VaRSharpe(Rf=0…</span>
+<span class="co">##   portfolio `ESSharpe(Rf=0%,p=95%)` `StdDevSharpe(Rf=0%,p=95%)` `VaRSharpe(Rf=…`</span>
 <span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="co">## <span style="color: #BCBCBC;">1</span>         1                   0.172                       0.355            0.263</span>
 <span class="co">## <span style="color: #BCBCBC;">2</span>         2                   0.146                       0.334            0.236</span>
@@ -1112,11 +1112,11 @@
                    Rf              <span class="op">=</span> <span class="fl">0.03</span> <span class="op">/</span> <span class="fl">12</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 3 × 4</span></span>
 <span class="co">## <span style="color: #949494;"># Groups:   portfolio [3]</span></span>
-<span class="co">##   portfolio `ESSharpe(Rf=0.2%,p=95%)` `StdDevSharpe(Rf=0.2%… `VaRSharpe(Rf=0.2%…</span>
-<span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;">1</span>         1                     0.157                  0.325               0.241</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span>         2                     0.134                  0.305               0.216</span>
-<span class="co">## <span style="color: #BCBCBC;">3</span>         3                     0.141                  0.296               0.222</span></code></pre>
+<span class="co">##   portfolio `ESSharpe(Rf=0.2%,p=95%)` `StdDevSharpe(Rf=0.2%,p…` `VaRSharpe(Rf=…`</span>
+<span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span>         1                     0.157                     0.325            0.241</span>
+<span class="co">## <span style="color: #BCBCBC;">2</span>         2                     0.134                     0.305            0.216</span>
+<span class="co">## <span style="color: #BCBCBC;">3</span>         3                     0.141                     0.296            0.222</span></code></pre>
 <p>And, with both <code>Rf = 0.03 / 12</code> (adjusted for monthly periodicity) and <code>p = 0.99</code>:</p>
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">RaRb_multiple_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -1126,11 +1126,11 @@
                    p               <span class="op">=</span> <span class="fl">0.99</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 3 × 4</span></span>
 <span class="co">## <span style="color: #949494;"># Groups:   portfolio [3]</span></span>
-<span class="co">##   portfolio `ESSharpe(Rf=0.2%,p=99%)` `StdDevSharpe(Rf=0.2%… `VaRSharpe(Rf=0.2%…</span>
-<span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;">1</span>         1                    0.105                   0.325               0.134</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span>         2                    0.095<span style="text-decoration: underline;">2</span>                  0.305               0.115</span>
-<span class="co">## <span style="color: #BCBCBC;">3</span>         3                    0.091<span style="text-decoration: underline;">5</span>                  0.296               0.117</span></code></pre>
+<span class="co">##   portfolio `ESSharpe(Rf=0.2%,p=99%)` `StdDevSharpe(Rf=0.2%,p…` `VaRSharpe(Rf=…`</span>
+<span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span>         1                    0.105                      0.325            0.134</span>
+<span class="co">## <span style="color: #BCBCBC;">2</span>         2                    0.095<span style="text-decoration: underline;">2</span>                     0.305            0.115</span>
+<span class="co">## <span style="color: #BCBCBC;">3</span>         3                    0.091<span style="text-decoration: underline;">5</span>                     0.296            0.117</span></code></pre>
 </div>
 </div>
   </div>
@@ -1152,7 +1152,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>

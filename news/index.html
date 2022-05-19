@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.4</span>
       </span>
     </div>
 
@@ -35,7 +35,7 @@
   <a href="../reference/index.html">Function Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -87,12 +87,18 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="1.0.4" id="tidyquant-104">tidyquant 1.0.4<a class="anchor" aria-label="anchor" href="#tidyquant-104"></a></h2>
+<p>CRAN requested fixes:</p>
+<ul><li>Moved <code>janitor</code> to suggests</li>
+<li>Reduced file size by removing vignettes from CRAN version.</li>
+</ul><p>Other changes:</p>
+<ul><li>Removed the package start-up message</li></ul></div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.3" id="tidyquant-103">tidyquant 1.0.3<small>2021-03-05</small><a class="anchor" aria-label="anchor" href="#tidyquant-103"></a></h2>
 <div class="section level4">
 <h4 id="fixes-1-0-3">Fixes<a class="anchor" aria-label="anchor" href="#fixes-1-0-3"></a></h4>
 <ul><li>
-<code><a href="../reference/tq_index.html">tq_exchange()</a></code>: Switch to new NASDAQ website.</li>
-</ul></div>
+<code><a href="../reference/tq_index.html">tq_exchange()</a></code>: Switch to new NASDAQ website.</li></ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.2" id="tidyquant-102">tidyquant 1.0.2<small>2020-10-21</small><a class="anchor" aria-label="anchor" href="#tidyquant-102"></a></h2>
@@ -109,8 +115,7 @@
 <div class="section level4">
 <h4 id="improvements-1-0-1">Improvements<a class="anchor" aria-label="anchor" href="#improvements-1-0-1"></a></h4>
 <ul><li>
-<code><a href="../reference/tq_get.html">tq_get()</a></code> - Add <code>"dividends"</code> and <code>"splits"</code> get options, which have been fixed in <code>quantmod</code> 0.4-16. Issue 150.</li>
-</ul></div>
+<code><a href="../reference/tq_get.html">tq_get()</a></code> - Add <code>"dividends"</code> and <code>"splits"</code> get options, which have been fixed in <code>quantmod</code> 0.4-16. Issue 150.</li></ul></div>
 <div class="section level4">
 <h4 id="bug-fixes-1-0-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-0-1"></a></h4>
 <ul><li>Issue 157 - Error on package load with <code><a href="https://rdrr.io/pkg/rstudioapi/man/getThemeInfo.html" class="external-link">rstudioapi::getThemeInfo()</a></code> returns <code>NULL</code>.</li>
@@ -120,9 +125,8 @@
 <div class="section level4">
 <h4 id="deprecation-1-0-1">Deprecation<a class="anchor" aria-label="anchor" href="#deprecation-1-0-1"></a></h4>
 <ul><li>
-<code><a href="https://rdrr.io/pkg/timetk/man/summarise_by_time.html" class="external-link">summarise_by_time()</a></code> - This function has moved to <code><a href="https://rdrr.io/pkg/timetk/man/summarise_by_time.html" class="external-link">timetk::summarise_by_time()</a></code>
-</li>
-</ul></div>
+<code><a href="https://business-science.github.io/timetk/reference/summarise_by_time.html" class="external-link">summarise_by_time()</a></code> - This function has moved to <code><a href="https://business-science.github.io/timetk/reference/summarise_by_time.html" class="external-link">timetk::summarise_by_time()</a></code>
+</li></ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.0" id="tidyquant-100">tidyquant 1.0.0<small>2020-03-04</small><a class="anchor" aria-label="anchor" href="#tidyquant-100"></a></h2>
@@ -135,34 +139,27 @@
 <ul><li>
 <strong>Why Excel functions?</strong> Designed to help users coming from an <strong>Excel Background</strong> more easily transition to the <code>tidyverse</code> and <em>“tidy- finance / business analysis”</em> in R.</li>
 <li>
-<strong>Pivot Table</strong>
-<ul><li>
-<strong><code><a href="../reference/excel_pivot_table.html">pivot_table()</a></code> - A tidyverse-style function to perform data summarizations just like the popular Excel Pivot Table.</strong> Enables stacking calculations using a tidy-esque syntax: <code>.rows = ~ YEAR(order_date)</code>.</li>
-</ul></li>
+<strong>Pivot Table</strong><ul><li>
+<strong><code><a href="../reference/excel_pivot_table.html">pivot_table()</a></code> - A tidyverse-style function to perform data summarizations just like the popular Excel Pivot Table.</strong> Enables stacking calculations using a tidy-esque syntax: <code>.rows = ~ YEAR(order_date)</code>.</li></ul></li>
 <li>
-<strong>Reference Functions</strong>
-<ul><li>
-<strong><code><a href="../reference/excel_ref_functions.html">VLOOKUP()</a></code></strong> - Performs the classic <strong>Excel VLOOKUP.</strong> Excel user’s: rejoice.</li>
-</ul></li>
+<strong>Reference Functions</strong><ul><li>
+<strong><code><a href="../reference/excel_ref_functions.html">VLOOKUP()</a></code></strong> - Performs the classic <strong>Excel VLOOKUP.</strong> Excel user’s: rejoice.</li></ul></li>
 <li>
-<strong>Summarising “IFS” Functions</strong>
-<ul><li>
+<strong>Summarising “IFS” Functions</strong><ul><li>
 <strong>Summarising “IFS” Functions</strong> - Filtering versions of Excel summarization counterparts. Simply add “cases” that filter if a condition is true. <code><a href="../reference/excel_if_functions.html">SUM_IFS()</a></code>, <code><a href="../reference/excel_if_functions.html">COUNT_IFS()</a></code>, <code><a href="../reference/excel_if_functions.html">AVERAGE_IFS()</a></code>
 </li>
 <li>
 <strong>Create your own “IFS” functions</strong> - Have and idea for a new “IFS” function that hasn’t been made yet? Use <code><a href="../reference/excel_if_functions.html">CREATE_IFS()</a></code> to make your own by supplying a summarization function.</li>
 </ul></li>
 <li>
-<strong>Statistical, Date, and Financial Math Functions</strong>
-<ul><li>
+<strong>Statistical, Date, and Financial Math Functions</strong><ul><li>
 <strong><em>100+ Excel-based statistical, date, and financial math functions.</em></strong> Names are similar to Excel function names. By default, missing values are ignored (same as in Excel).</li>
 <li>
 <strong>Summarizations Functions</strong> - <code><a href="../reference/excel_stat_summary_functions.html">SUM()</a></code>, <code><a href="../reference/excel_stat_summary_functions.html">AVERAGE()</a></code>, <code><a href="../reference/excel_stat_summary_functions.html">COUNT()</a></code>, and friends.</li>
 <li>
 <strong>Transformation Functions</strong> - <code><a href="../reference/excel_stat_mutation_functions.html">CHANGE()</a></code>, <code><a href="../reference/excel_stat_mutation_functions.html">PCT_CHANGE()</a></code>, <code><a href="../reference/excel_stat_mutation_functions.html">LAG()</a></code>, <code><a href="../reference/excel_stat_mutation_functions.html">CUMULATIVE_SUM()</a></code>, and friends.</li>
 <li>
-<strong>Date and Date Time Functions</strong>
-<ul><li>Integrated date calculations with <code><a href="https://lubridate.tidyverse.org/reference/lubridate-package.html" class="external-link">lubridate()</a></code> (e.g. <code><a href="../reference/excel_date_functions.html">AS_DATE()</a></code>, <code><a href="../reference/excel_date_functions.html">YEAR()</a></code>)</li>
+<strong>Date and Date Time Functions</strong><ul><li>Integrated date calculations with <code><a href="https://lubridate.tidyverse.org/reference/lubridate-package.html" class="external-link">lubridate()</a></code> (e.g. <code><a href="../reference/excel_date_functions.html">AS_DATE()</a></code>, <code><a href="../reference/excel_date_functions.html">YEAR()</a></code>)</li>
 <li>Holidays and business calendars with <code>timeDate</code> (e.g. <code><a href="../reference/excel_date_functions.html">HOLIDAY_SEQUENCE()</a></code>, <code>HOLIDAY_LIST()</code>)</li>
 <li>Excel Date Math functions: <code><a href="../reference/excel_date_functions.html">NET_WORKDAYS()</a></code>, <code><a href="../reference/excel_date_functions.html">EOMONTH()</a></code>
 </li>
@@ -175,14 +172,13 @@
 <li>
 <p><strong>NEW Tidyverse Functionality</strong></p>
 <ul><li>
-<code><a href="https://rdrr.io/pkg/timetk/man/summarise_by_time.html" class="external-link">summarise_by_time()</a></code> - This is a new time-based variant of <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise()</a></code> that allows collapsing the time-series by “day”, “week”, “month”, “quarter”, “year”, and more.</li>
+<code><a href="https://business-science.github.io/timetk/reference/summarise_by_time.html" class="external-link">summarise_by_time()</a></code> - This is a new time-based variant of <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise()</a></code> that allows collapsing the time-series by “day”, “week”, “month”, “quarter”, “year”, and more.</li>
 <li>Note: I will evaluate the need for <code>summarise_at_by_time()</code>, <code>summarise_all_by_time()</code>, and <code>summarise_if_by_time()</code> after the release of <code>dplyr</code> v1.0.0.</li>
 </ul></li>
 <li>
 <p><strong>NEW API Integrations</strong></p>
 <ul><li>
-<strong>Tiingo API</strong> - A popular Open-Source for stock prices, cryptocurrencies, and intraday feeds from the IEX (Investors Exchange). This can serve as an alternate source of data to Yahoo Finance. Integrated via the <code>riingo</code> package.</li>
-</ul></li>
+<strong>Tiingo API</strong> - A popular Open-Source for stock prices, cryptocurrencies, and intraday feeds from the IEX (Investors Exchange). This can serve as an alternate source of data to Yahoo Finance. Integrated via the <code>riingo</code> package.</li></ul></li>
 <li>
 <p><strong>Bug Fixes &amp; Improvements</strong></p>
 <ul><li>
@@ -195,8 +191,7 @@
 <ul><li>
 <strong>Potential Breaking Change</strong> - Single values now return the symbol column (i.e. <code>tq_get("AAPL")</code> returns symbol = “AAPL” for the 1st column).</li>
 <li>
-<strong>Deprecated Sources:</strong> The following sources have been deprecated due to lack of support from the API:
-<ul><li>Google Finance</li>
+<strong>Deprecated Sources:</strong> The following sources have been deprecated due to lack of support from the API:<ul><li>Google Finance</li>
 <li>Morningstar Key Ratios &amp; Financials (Fundamentals) Data</li>
 <li>Yahoo Dividends and Splits</li>
 <li>Oanda FX and Metal Prices</li>
@@ -214,30 +209,24 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.5.9" id="tidyquant-059">tidyquant 0.5.9<small>2019-12-15</small><a class="anchor" aria-label="anchor" href="#tidyquant-059"></a></h2>
 <ul><li>
-<code><a href="../reference/tq_index.html">tq_index()</a></code>
-<ul><li>Fix issue <a href="https://github.com/business-science/tidyquant/issues/144" class="external-link">#144</a> - <code><a href="../reference/tq_index.html">tq_index()</a></code> download issue. Note that “RUSSEL1000”, “RUSSELL2000”, “RUSSELL3000”, and “SP1000” are no longer available due to changes from www.us.spdrs.com.</li>
+<code><a href="../reference/tq_index.html">tq_index()</a></code><ul><li>Fix issue <a href="https://github.com/business-science/tidyquant/issues/144" class="external-link">#144</a> - <code><a href="../reference/tq_index.html">tq_index()</a></code> download issue. Note that “RUSSEL1000”, “RUSSELL2000”, “RUSSELL3000”, and “SP1000” are no longer available due to changes from www.us.spdrs.com.</li>
 <li>Update Stock Index Fallback.</li>
-</ul></li>
-</ul></div>
+</ul></li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.5.8" id="tidyquant-058">tidyquant 0.5.8<small>2019-10-11</small><a class="anchor" aria-label="anchor" href="#tidyquant-058"></a></h2>
 <ul><li>
-<code><a href="../reference/tq_index.html">tq_index()</a></code> - Fix naming issue with stock index data downloaded from www.us.spdrs.com.</li>
-</ul></div>
+<code><a href="../reference/tq_index.html">tq_index()</a></code> - Fix naming issue with stock index data downloaded from www.us.spdrs.com.</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.5.7" id="tidyquant-057">tidyquant 0.5.7<small>2019-09-20</small><a class="anchor" aria-label="anchor" href="#tidyquant-057"></a></h2>
 <p><em>Stock Index &amp; Exchanges</em></p>
 <ul><li>
-<code><a href="../reference/tq_index.html">tq_exchange()</a></code> - Fix NASDAQ URL change Issue <a href="https://github.com/business-science/tidyquant/issues/138" class="external-link">#138</a>.</li>
-</ul><p><em>Visualizations &amp; Color Palettes</em></p>
+<code><a href="../reference/tq_index.html">tq_exchange()</a></code> - Fix NASDAQ URL change Issue <a href="https://github.com/business-science/tidyquant/issues/138" class="external-link">#138</a>.</li></ul><p><em>Visualizations &amp; Color Palettes</em></p>
 <ul><li>
 <code>geom_candlestick</code> and <code>geom_barchart</code> - Issue <a href="https://github.com/business-science/tidyquant/issues/112" class="external-link">#112</a>.</li>
 <li>Added color names of <code>theme_tq</code> palettes (<code>palette_light</code>, <code>palette_dark</code>, and <code>palette_green</code>) for easier identification.</li>
 </ul><p><em>Compatability with <code>tidyr</code> v1.0.0</em></p>
-<ul><li>Improvements to ensure compatability with <code>tidyr</code> v1.0.0</li>
-</ul><p><em>[Potential Breaking Change] Move <code>tidyverse</code> to suggests</em></p>
-<ul><li>This is actually potentially a “breaking change” (although most users will see no difference since you likely load <code>tidyverse</code> in your scripts) - if you do not load <code>tidyverse</code>, then you will now need to do so. Previously <code>tidyquant</code> loaded <code>tidyverse</code> behind the scenes.</li>
-</ul></div>
+<ul><li>Improvements to ensure compatability with <code>tidyr</code> v1.0.0</li></ul><p><em>[Potential Breaking Change] Move <code>tidyverse</code> to suggests</em></p>
+<ul><li>This is actually potentially a “breaking change” (although most users will see no difference since you likely load <code>tidyverse</code> in your scripts) - if you do not load <code>tidyverse</code>, then you will now need to do so. Previously <code>tidyquant</code> loaded <code>tidyverse</code> behind the scenes.</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.5.6" id="tidyquant-056">tidyquant 0.5.6<small>2019-04-22</small><a class="anchor" aria-label="anchor" href="#tidyquant-056"></a></h2>
 <ul><li><p>Morningstar Key Ratios: The <code><a href="../reference/tq_get.html">tq_get()</a></code> argument <code>get = "key.ratios"</code> has been deprecated due to a change in Morningstar’s website. (Help Wanted - Ref. Issue <a href="https://github.com/business-science/tidyquant/issues/125" class="external-link">#125</a>)</p></li>
@@ -251,47 +240,37 @@
 <li><p><code><a href="../reference/tq_get.html">tq_get()</a></code> <code>get = "stock.prices.google"</code> now returns a warning and <code>NA</code> as Google Finance no longer provides data. Use <code>get = "stock.prices"</code> instead to use Yahoo Finance, or use the <code>riingo</code> package to download from Tiingo.</p></li>
 <li><p>Catch duplicate names in <code>col_rename</code> when you are renaming more than 1 column. Duplicate names are not allowed and return an error.</p></li>
 <li><p>Fix duplicate name collision issue when the original name already includes a <code>.</code>. Duplicate names now get a <code>..1</code>, <code>..2</code>, etc. as opposed to <code>.1</code>, <code>.2</code>.</p></li>
-</ul></li>
-</ul></div>
+</ul></li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.5.4" id="tidyquant-054">tidyquant 0.5.4<small>2018-02-19</small><a class="anchor" aria-label="anchor" href="#tidyquant-054"></a></h2>
-<ul><li>Features:
-<ul><li>Incorporate <code>alphavantager</code>, a lightweight API to the <a href="https://www.alphavantage.co/" class="external-link">Alpha Vantage financial data provider</a>.</li>
+<ul><li>Features:<ul><li>Incorporate <code>alphavantager</code>, a lightweight API to the <a href="https://www.alphavantage.co/" class="external-link">Alpha Vantage financial data provider</a>.</li>
 <li>Integrate <code>Rblpapi</code>, R interface to “Bloomberg”. You must have a Bloomberg account to use this.</li>
 <li>Add Google Finance as a source in <code>tq_get(get = "stock.prices.google")</code>
 </li>
 </ul></li>
-<li>Important Changes:
-<ul><li>Remove Key Statistics from <code>tq_get(get = "key.stats")</code>. Yahoo Finance no longer supports the Key Statistics CSV API.</li>
-<li>Completed deprecation of <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">tidyquant::as_tibble()</a></code> and <code>tidyquant::as_xts()</code>. Use <code><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html" class="external-link">timetk::tk_tbl()</a></code> and <code><a href="https://rdrr.io/pkg/timetk/man/tk_xts.html" class="external-link">timetk::tk_xts()</a></code> instead.</li>
+<li>Important Changes:<ul><li>Remove Key Statistics from <code>tq_get(get = "key.stats")</code>. Yahoo Finance no longer supports the Key Statistics CSV API.</li>
+<li>Completed deprecation of <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">tidyquant::as_tibble()</a></code> and <code>tidyquant::as_xts()</code>. Use <code><a href="https://business-science.github.io/timetk/reference/tk_tbl.html" class="external-link">timetk::tk_tbl()</a></code> and <code><a href="https://business-science.github.io/timetk/reference/tk_xts.html" class="external-link">timetk::tk_xts()</a></code> instead.</li>
 <li>
 <code>tibbletime</code> support was added so that all <code>tidyquant</code> functions play nicely with <code>tbl_time</code> objects.</li>
 <li>A hard dependency on <code>XLConnect</code> was removed. This should ease the use of the package, especially for Mac users.</li>
 </ul></li>
-<li>Bug Fixes:
-<ul><li>Some tests failed with <code>testthat</code> 2.0. They have been updated.</li>
-</ul></li>
+<li>Bug Fixes:<ul><li>Some tests failed with <code>testthat</code> 2.0. They have been updated.</li></ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.5.3" id="tidyquant-053">tidyquant 0.5.3<small>2017-08-03</small><a class="anchor" aria-label="anchor" href="#tidyquant-053"></a></h2>
-<ul><li>Fixes for compatibility with <code>purrr</code> v0.2.3.</li>
-</ul></div>
+<ul><li>Fixes for compatibility with <code>purrr</code> v0.2.3.</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.5.2" id="tidyquant-052">tidyquant 0.5.2<small>2017-07-27</small><a class="anchor" aria-label="anchor" href="#tidyquant-052"></a></h2>
-<ul><li>Incorporated more robust <code>timetk</code> coercion functions. Deprecated <code>tidyquant::as_xts()</code> and <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">tidyquant::as_tibble()</a></code>. Use <code><a href="https://rdrr.io/pkg/timetk/man/tk_xts.html" class="external-link">timetk::tk_xts()</a></code> and <code><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html" class="external-link">timetk::tk_tbl()</a></code> instead.</li>
-<li>Fixes:
-<ul><li>
+<ul><li>Incorporated more robust <code>timetk</code> coercion functions. Deprecated <code>tidyquant::as_xts()</code> and <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">tidyquant::as_tibble()</a></code>. Use <code><a href="https://business-science.github.io/timetk/reference/tk_xts.html" class="external-link">timetk::tk_xts()</a></code> and <code><a href="https://business-science.github.io/timetk/reference/tk_tbl.html" class="external-link">timetk::tk_tbl()</a></code> instead.</li>
+<li>Fixes:<ul><li>
 <code><a href="../reference/tq_index.html">tq_index()</a></code> no longer pulls from marketvolume. Instead, 9 indices are available from SPDR. These indices are more reliable, and include weights for each stock in the index.</li>
 <li>Fixed 2 tests where the results of <code>tq_get(get = "stock.prices")</code> were 1 or 2 rows off of what the tests expected. This likely has to do with the new yahoo finance API.</li>
 </ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.5.1" id="tidyquant-051">tidyquant 0.5.1<small>2017-04-24</small><a class="anchor" aria-label="anchor" href="#tidyquant-051"></a></h2>
-<ul><li>Improvements
-<ul><li>Added <code>pkgdown</code> integration.</li>
-</ul></li>
-<li>Fixes:
-<ul><li>Require new <code>quantmod</code> version 0.4-8 to fix Oanda and Yahoo bugs.</li>
+<ul><li>Improvements<ul><li>Added <code>pkgdown</code> integration.</li></ul></li>
+<li>Fixes:<ul><li>Require new <code>quantmod</code> version 0.4-8 to fix Oanda and Yahoo bugs.</li>
 <li>Quandl data returned newest to oldest. For consistency with other <code><a href="../reference/tq_get.html">tq_get()</a></code> data, it now returns oldest to newest.</li>
 <li>Oanda only returns 180 days of FX and Metals data now. Updated the tests to account for this. Also added error handling to check for valid date ranges.</li>
 <li>Fixed bug with <code><a href="../reference/tq_portfolio.html">tq_portfolio()</a></code> where <code>weights = NULL</code> would not execute an equal weighting scheme.</li>
@@ -300,9 +279,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.5.0" id="tidyquant-050">tidyquant 0.5.0<small>2017-04-03</small><a class="anchor" aria-label="anchor" href="#tidyquant-050"></a></h2>
-<ul><li>New Data:
-<ul><li>Quandl Integration:
-<ul><li>
+<ul><li>New Data:<ul><li>Quandl Integration:<ul><li>
 <code>tq_get(get = "quandl")</code> is a wrapper for <code><a href="https://rdrr.io/pkg/Quandl/man/Quandl.html" class="external-link">Quandl::Quandl()</a></code> that pulls multiple Quandl Codes in a “tidy” fashion.</li>
 <li>
 <code>tq_get(get = "quandl.datatable")</code> is a wrapper for <code>Quandl::Quandl.datable()</code> that pulls Quandl datatables.</li>
@@ -313,8 +290,7 @@
 </ul></li>
 <li>Yahoo Japan Integration: <code>tq_get(get = "stock.prices.japan")</code> is a wrapper for <code>quantmod::getSymbols(src = "yahooj")</code> that enables getting stocks from Yahoo Finance Japan.</li>
 </ul></li>
-<li>Improvements and Fixes:
-<ul><li>
+<li>Improvements and Fixes:<ul><li>
 <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code> and <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code> now accept non-OHLC data through the <code>select</code> argument. They also now work with <code>rollapply</code>.</li>
 <li>
 <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code> and <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code> now accept <code>PerformanceAnalytics</code> functions that work to clean and transform asset returns.</li>
@@ -330,8 +306,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.4.0" id="tidyquant-040">tidyquant 0.4.0<small>2017-03-03</small><a class="anchor" aria-label="anchor" href="#tidyquant-040"></a></h2>
-<ul><li>New Features:
-<ul><li>
+<ul><li>New Features:<ul><li>
 <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code> replaces <code><a href="../reference/deprecated.html">tq_transform()</a></code> for consistency with <code>dplyr</code>.</li>
 <li>
 <code><a href="../reference/tq_performance.html">tq_performance()</a></code> which integrates the performance analysis functions of <code>PerformanceAnalytics</code>.</li>
@@ -340,27 +315,23 @@
 <li>
 <code>tq_tranform()</code>: Added the NA-handling functions from <code>zoo</code> to the list of compatible, which provide a number of useful methods for handling <code>NA</code> values in data sets. Added <code>Return.calculate</code> and <code>Return.excess</code> for calculating returns and returns in excess of the risk-free rate, respectively.</li>
 </ul></li>
-<li>Documentation:
-<ul><li>
+<li>Documentation:<ul><li>
 <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code> and <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code> help pages have been combined.</li>
 <li>Split introduction into four separate vignettes, which improves flow and enables readers to more easily get to needed documentation. Now five docs total covering the primary needs of <code>tidyquant</code> users!</li>
 </ul></li>
-<li>New data:
-<ul><li>
+<li>New data:<ul><li>
 <code><a href="../reference/tq_index.html">tq_exchange()</a></code> gets the stock list for NASDAQ, NYSE, and AMEX exchanges. Use <code><a href="../reference/tq_index.html">tq_exchange_options()</a></code> to exchange options.</li>
 <li>
 <code>FANG</code> data set that can be loaded with <code>data(FANG)</code>.</li>
 </ul></li>
-<li>New visualizations that integrate with <code>ggplot2</code>:
-<ul><li>
+<li>New visualizations that integrate with <code>ggplot2</code>:<ul><li>
 <code>palette_()</code> functions used to create scales are exported.</li>
 <li>
 <code><a href="../reference/theme_tq.html">theme_tq()</a></code> creates light, dark, and green themes for tidyquant visualizations.</li>
 <li>
 <code><a href="../reference/scale_manual.html">scale_color_tq()</a></code> and <code><a href="../reference/scale_manual.html">scale_fill_tq()</a></code> add color/fill scales for the data used in tidyquant visualizations.</li>
 </ul></li>
-<li>Improvements and Fixes:
-<ul><li>The <code>transform_fun</code> argument of <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code> has been replaced with <code>mutate_fun</code> for consistency with <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code>.</li>
+<li>Improvements and Fixes:<ul><li>The <code>transform_fun</code> argument of <code><a href="../reference/tq_mutate.html">tq_transmute()</a></code> has been replaced with <code>mutate_fun</code> for consistency with <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code>.</li>
 <li>Core functions are now generics to allow for extendability.</li>
 <li>Issue <a href="https://github.com/business-science/tidyquant/issues/11" class="external-link">#11</a>: Part 2. Fix multiple stocks that only return 110 lines. Handle stocks that return csv with “We’re sorry” message.</li>
 <li>Issue <a href="https://github.com/business-science/tidyquant/issues/11" class="external-link">#11</a>: Part 1. Fix instability with <code>get = key.ratios</code> failing with HTTP 500 error on download. Use httr RETRY in case of failure.</li>
@@ -373,18 +344,14 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.0" id="tidyquant-030">tidyquant 0.3.0<small>2017-01-21</small><a class="anchor" aria-label="anchor" href="#tidyquant-030"></a></h2>
-<ul><li>New data:
-<ul><li>New <code>tq_get</code> option <code>get = "key.stats"</code>, which retrieves the current key statistics (55 total) from <a href="https://finance.yahoo.com/" class="external-link">www.finance.yahoo.com/</a>. These include various current data such as Ask, Bid, Day’s High, Day’s Low, Last Trade Price, current P/E Ratio, EPS, Current Market Cap, EPS Projected Current Year, EPS Projected Next Year and many more. Example: <code>tq_get("AAPL", get = "key.stats")</code>.</li>
-</ul></li>
-<li>New visualizations that integrate with <code>ggplot2</code>:
-<ul><li>Chart geoms: Bar charts (<code>geom_barchart</code>) and candlestick charts (<code>geom_candlestick</code>) can be quickly created with the new geoms.</li>
+<ul><li>New data:<ul><li>New <code>tq_get</code> option <code>get = "key.stats"</code>, which retrieves the current key statistics (55 total) from <a href="https://finance.yahoo.com/" class="external-link">www.finance.yahoo.com/</a>. These include various current data such as Ask, Bid, Day’s High, Day’s Low, Last Trade Price, current P/E Ratio, EPS, Current Market Cap, EPS Projected Current Year, EPS Projected Next Year and many more. Example: <code>tq_get("AAPL", get = "key.stats")</code>.</li></ul></li>
+<li>New visualizations that integrate with <code>ggplot2</code>:<ul><li>Chart geoms: Bar charts (<code>geom_barchart</code>) and candlestick charts (<code>geom_candlestick</code>) can be quickly created with the new geoms.</li>
 <li>Moving Averages: Seven moving averages can be quickly visualized / prototyped using <code>geom_ma</code>. The geom wraps the <code><a href="https://rdrr.io/pkg/TTR/man/MovingAverages.html" class="external-link">TTR::SMA</a></code> functions.</li>
 <li>Bollinger bands can be visualized with <code>geom_bbands</code>. The same seven moving averages are compatible with the geom.</li>
 <li>Zooming Into Chart Sections: Two functions (<code>coord_x_date</code> and <code>coord_x_datetime</code>) were added to enable zooming into chart sections using dates with no out-of-bounds data loss (e.g. out-of-bounds data loss with the <code>scale_x_</code> functions).</li>
 </ul></li>
 <li>New Vignette: Covers “Charting with tidyquant”.</li>
-<li>Fixes:
-<ul><li>Issue <a href="https://github.com/business-science/tidyquant/issues/5" class="external-link">#5</a>: <code>tq_get</code> can now accept character vectors and data frames for the <code>x</code> arg, in addition to a single character input. This streamlines the getting of data for multiple inputs (e.g. stock symbols, stock indexes, etc).</li>
+<li>Fixes:<ul><li>Issue <a href="https://github.com/business-science/tidyquant/issues/5" class="external-link">#5</a>: <code>tq_get</code> can now accept character vectors and data frames for the <code>x</code> arg, in addition to a single character input. This streamlines the getting of data for multiple inputs (e.g. stock symbols, stock indexes, etc).</li>
 <li>Issue <a href="https://github.com/business-science/tidyquant/issues/4" class="external-link">#4</a>: Added <code>col_rename</code> arg to <code>tq_mutate</code> and <code>tq_transform</code>, which enables fast and easy renaming during the operation.</li>
 <li>Issue <a href="https://github.com/business-science/tidyquant/issues/3" class="external-link">#3</a>: Integrated <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">dplyr::group_by()</a></code> with <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code> and <code><a href="../reference/deprecated.html">tq_transform()</a></code>. The transform and mutate functions now work properly with grouped data frames.</li>
 <li>Issue <a href="https://github.com/business-science/tidyquant/issues/2" class="external-link">#2</a>: Fixed bug with <code><a href="../reference/tq_get.html">tq_get()</a></code>, <code>get = "key.ratios"</code>, where key ratios for stocks from the NYSE returned <code>NA</code>.</li>
@@ -395,8 +362,7 @@
 <h2 class="page-header" data-toc-text="0.2.0" id="tidyquant-020">tidyquant 0.2.0<small>2017-01-08</small><a class="anchor" aria-label="anchor" href="#tidyquant-020"></a></h2>
 <ul><li>New <code>get = "key.ratios"</code> option for <code><a href="../reference/tq_get.html">tq_get()</a></code>, which retrieves 10-years of key performance ratios (89 total) from <a href="https://www.morningstar.com" class="external-link">www.morningstar.com</a>. These include various historical measures of financial performance including profitability, growth, cash flow, financial health, efficiency, and valuation ratios. Example: <code>tq_get("AAPL", get = "key.ratios")</code>.</li>
 <li>Added <code>zoo</code> <code>rollapply()</code> functions to list of compatible / integrated functions used with <code><a href="../reference/deprecated.html">tq_transform()</a></code> and <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code>. See <code>tq_transform_fun_options()</code> for the full list.</li>
-<li>Changed <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code>, <code><a href="../reference/deprecated.html">tq_transform()</a></code>, <code><a href="../reference/tq_mutate.html">tq_mutate_xy()</a></code> and <code><a href="../reference/deprecated.html">tq_transform_xy()</a></code> arguments to be more obvious:
-<ul><li>
+<li>Changed <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code>, <code><a href="../reference/deprecated.html">tq_transform()</a></code>, <code><a href="../reference/tq_mutate.html">tq_mutate_xy()</a></code> and <code><a href="../reference/deprecated.html">tq_transform_xy()</a></code> arguments to be more obvious:<ul><li>
 <code>x_fun</code> is now <code>ohlc_fun</code> for <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code> and <code><a href="../reference/deprecated.html">tq_transform()</a></code>
 </li>
 <li>
@@ -407,8 +373,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.0" id="tidyquant-010">tidyquant 0.1.0<small>2016-12-31</small><a class="anchor" aria-label="anchor" href="#tidyquant-010"></a></h2>
-<ul><li>Initial release of <code>tidyquant</code>, for seamless quantitative financial analysis (<code>xts</code>, <code>quantmod</code>, <code>TTR</code>) package integration with the <code>tidyverse</code>.</li>
-</ul></div>
+<ul><li>Initial release of <code>tidyquant</code>, for seamless quantitative financial analysis (<code>xts</code>, <code>quantmod</code>, <code>TTR</code>) package integration with the <code>tidyverse</code>.</li></ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -423,7 +388,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer></div>

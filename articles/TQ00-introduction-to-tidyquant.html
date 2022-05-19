@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.4</span>
       </span>
     </div>
 
@@ -53,7 +53,7 @@
   <a href="../reference/index.html">Function Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -112,7 +112,7 @@
       <h1 data-toc-skip>Introduction to tidyquant</h1>
                         <h4 data-toc-skip class="author">Matt Dancho</h4>
             
-            <h4 data-toc-skip class="date">2021-12-30</h4>
+            <h4 data-toc-skip class="date">2022-05-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/HEAD/vignettes/TQ00-introduction-to-tidyquant.Rmd" class="external-link"><code>vignettes/TQ00-introduction-to-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ00-introduction-to-tidyquant.Rmd</code></div>
@@ -121,16 +121,16 @@
 
     
     
-<div class="section level2">
-<h2 id="minutes-to-tidyquant">2-Minutes To Tidyquant<a class="anchor" aria-label="anchor" href="#minutes-to-tidyquant"></a>
-</h2>
+<div class="section level3">
+<h3 id="minutes-to-tidyquant">2-Minutes To Tidyquant<a class="anchor" aria-label="anchor" href="#minutes-to-tidyquant"></a>
+</h3>
 <p>Our short introduction to <code>tidyquant</code> on <a href="https://www.youtube.com/embed/woxJZTL2hok" class="external-link">YouTube</a>.</p>
 <p><a href="https://www.youtube.com/embed/woxJZTL2hok" target="_blank" class="external-link"><img src="http://img.youtube.com/vi/woxJZTL2hok/0.jpg" alt="Anomalize" width="100%" height="350"></a></p>
 <p>Check out our entire <a href="https://www.youtube.com/watch?v=Gk_HwjhlQJs&amp;list=PLo32uKohmrXsYNhpdwr15W143rX6uMAze" class="external-link">Software Intro Series</a> on YouTube!</p>
 </div>
-<div class="section level1">
-<h1 id="benefits">Benefits<a class="anchor" aria-label="anchor" href="#benefits"></a>
-</h1>
+<div class="section level2">
+<h2 id="benefits">Benefits<a class="anchor" aria-label="anchor" href="#benefits"></a>
+</h2>
 <ul>
 <li>A few core functions with a lot of power</li>
 <li>Integrates the quantitative analysis functionality of <code>zoo</code>, <code>xts</code>, <code>quantmod</code>, <code>TTR</code>, and <code>PerformanceAnalytics</code>
@@ -140,9 +140,9 @@
 <li>Implements <code>ggplot2</code> functionality for beautiful and meaningful financial visualizations</li>
 <li>User-friendly documentation to get you up to speed quickly!</li>
 </ul>
-<div class="section level2">
-<h2 id="a-few-core-functions-with-a-lot-of-power">A Few Core Functions with A Lot of Power<a class="anchor" aria-label="anchor" href="#a-few-core-functions-with-a-lot-of-power"></a>
-</h2>
+<div class="section level3">
+<h3 id="a-few-core-functions-with-a-lot-of-power">A Few Core Functions with A Lot of Power<a class="anchor" aria-label="anchor" href="#a-few-core-functions-with-a-lot-of-power"></a>
+</h3>
 <p>Minimizing the number of functions reduces the learning curve. What we’ve done is group the core functions into four categories:</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Get a Stock Index, <code><a href="../reference/tq_index.html">tq_index()</a></code>, or a Stock Exchange, <code><a href="../reference/tq_index.html">tq_exchange()</a></code></strong>: Returns the stock symbols and various attributes for every stock in an index or exchange. Eighteen indexes and three exchanges are available.</p></li>
@@ -152,16 +152,16 @@
 </ol>
 <p>For more information, refer to the first topic-specific vignette, <a href="TQ01-core-functions-in-tidyquant.html">Core Functions in tidyquant</a>.</p>
 </div>
-<div class="section level2">
-<h2 id="integrates-the-quantitative-analysis-functionality-of-xtszoo-quantmod-ttr-and-performance-analytics">Integrates the Quantitative Analysis Functionality of xts/zoo, quantmod TTR and Performance Analytics<a class="anchor" aria-label="anchor" href="#integrates-the-quantitative-analysis-functionality-of-xtszoo-quantmod-ttr-and-performance-analytics"></a>
-</h2>
+<div class="section level3">
+<h3 id="integrates-the-quantitative-analysis-functionality-of-xtszoo-quantmod-ttr-and-performance-analytics">Integrates the Quantitative Analysis Functionality of xts/zoo, quantmod TTR and Performance Analytics<a class="anchor" aria-label="anchor" href="#integrates-the-quantitative-analysis-functionality-of-xtszoo-quantmod-ttr-and-performance-analytics"></a>
+</h3>
 <p>There’s a wide range of useful quantitative analysis functions (QAF) that work with time-series objects. The problem is that many of these <em>wonderful</em> functions don’t work with data frames or the <code>tidyverse</code> workflow. That is until now. The <code>tidyquant</code> package integrates the most useful functions from the <code>xts</code>, <code>zoo</code>, <code>quantmod</code>, <code>TTR</code>, and <code>PerformanceAnalytics</code> packages, enabling seamless usage within the <code>tidyverse</code> workflow.</p>
 <p>Refer below for information on the performance analysis and portfolio attribution with the <code>PerformanceAnalytics</code> integration.</p>
 <p>For more information, refer to the second topic-specific vignette, <a href="TQ02-quant-integrations-in-tidyquant.html">R Quantitative Analysis Package Integrations in tidyquant</a>.</p>
 </div>
-<div class="section level2">
-<h2 id="designed-for-the-data-science-workflow-of-the-tidyverse">Designed for the data science workflow of the tidyverse<a class="anchor" aria-label="anchor" href="#designed-for-the-data-science-workflow-of-the-tidyverse"></a>
-</h2>
+<div class="section level3">
+<h3 id="designed-for-the-data-science-workflow-of-the-tidyverse">Designed for the data science workflow of the tidyverse<a class="anchor" aria-label="anchor" href="#designed-for-the-data-science-workflow-of-the-tidyverse"></a>
+</h3>
 <p>The greatest benefit to <code>tidyquant</code> is the ability to easily model and scale your financial analysis. Scaling is the process of creating an analysis for one security and then extending it to multiple groups. This idea of scaling is incredibly useful to financial analysts because typically one wants to compare many securities to make informed decisions. Fortunately, the <code>tidyquant</code> package integrates with the <code>tidyverse</code> making scaling super simple!</p>
 <p>All <code>tidyquant</code> functions return data in the <code>tibble</code> (tidy data frame) format, which allows for interaction within the <code>tidyverse</code>. This means we can:</p>
 <ul>
@@ -173,16 +173,16 @@
 </ul>
 <p>For more information, refer to the third topic-specific vignette, <a href="TQ03-scaling-and-modeling-with-tidyquant.html">Scaling and Modeling with tidyquant</a>.</p>
 </div>
-<div class="section level2">
-<h2 id="implements-ggplot2-functionality-for-financial-visualizations">Implements ggplot2 Functionality for Financial Visualizations<a class="anchor" aria-label="anchor" href="#implements-ggplot2-functionality-for-financial-visualizations"></a>
-</h2>
+<div class="section level3">
+<h3 id="implements-ggplot2-functionality-for-financial-visualizations">Implements ggplot2 Functionality for Financial Visualizations<a class="anchor" aria-label="anchor" href="#implements-ggplot2-functionality-for-financial-visualizations"></a>
+</h3>
 <p>The <code>tidyquant</code> package includes charting tools to assist users in developing quick visualizations in <code>ggplot2</code> using the grammar of graphics format and workflow.</p>
 <p><img src="TQ00-introduction-to-tidyquant_files/figure-html/unnamed-chunk-2-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p>For more information, refer to the fourth topic-specific vignette, <a href="TQ04-charting-with-tidyquant.html">Charting with tidyquant</a>.</p>
 </div>
-<div class="section level2">
-<h2 id="performance-analysis-of-asset-and-portfolio-returns">Performance Analysis of Asset and Portfolio Returns<a class="anchor" aria-label="anchor" href="#performance-analysis-of-asset-and-portfolio-returns"></a>
-</h2>
+<div class="section level3">
+<h3 id="performance-analysis-of-asset-and-portfolio-returns">Performance Analysis of Asset and Portfolio Returns<a class="anchor" aria-label="anchor" href="#performance-analysis-of-asset-and-portfolio-returns"></a>
+</h3>
 <p>Asset and portfolio performance analysis is a deep field with a wide range of theories and methods for analyzing risk versus reward. The <code>PerformanceAnalytics</code> package consolidates many of the most widely used performance metrics as functions that can be applied to stock or portfolio returns. <code>tidquant</code> implements the functionality with two primary functions:</p>
 <ul>
 <li>
@@ -213,7 +213,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>

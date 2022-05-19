@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyquant</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.4</span>
       </span>
     </div>
 
@@ -53,7 +53,7 @@
   <a href="../reference/index.html">Function Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -112,7 +112,7 @@
       <h1 data-toc-skip>Charting with tidyquant</h1>
                         <h4 data-toc-skip class="author">Matt Dancho</h4>
             
-            <h4 data-toc-skip class="date">2021-12-30</h4>
+            <h4 data-toc-skip class="date">2022-05-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/HEAD/vignettes/TQ04-charting-with-tidyquant.Rmd" class="external-link"><code>vignettes/TQ04-charting-with-tidyquant.Rmd</code></a></small>
       <div class="hidden name"><code>TQ04-charting-with-tidyquant.Rmd</code></div>
@@ -124,9 +124,9 @@
 <blockquote>
 <p>Charting financial data using <code>ggplot2</code></p>
 </blockquote>
-<div class="section level1">
-<h1 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
-</h1>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p>The <code>tidyquant</code> package includes charting tools to assist users in developing quick visualizations in <code>ggplot2</code> using the grammar of graphics format and workflow. There are currently three primary geometry (geom) categories and one coordinate manipulation (coord) category within <code>tidyquant</code>:</p>
 <ul>
 <li>
@@ -139,9 +139,9 @@
 <strong>Zooming in on Date Ranges</strong>: Two <code>coord</code> functions are available (<code>coord_x_date</code> and <code>coord_x_datetime</code>), which prevent data loss when zooming in on specific regions of a chart. This is important when using the moving average and Bollinger band geoms.</li>
 </ul>
 </div>
-<div class="section level1">
-<h1 id="prerequisites">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
-</h1>
+<div class="section level2">
+<h2 id="prerequisites">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
+</h2>
 <p>Load the <code>tidyquant</code> package to get started.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Loads tidyquant, lubridate, xts, quantmod, TTR, and PerformanceAnalytics</span>
@@ -159,9 +159,9 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/as_date.html" class="external-link">as_date</a></span><span class="op">(</span><span class="st">"2016-12-31"</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level1">
-<h1 id="chart-types">Chart Types<a class="anchor" aria-label="anchor" href="#chart-types"></a>
-</h1>
+<div class="section level2">
+<h2 id="chart-types">Chart Types<a class="anchor" aria-label="anchor" href="#chart-types"></a>
+</h2>
 <p>Financial charts provide visual cues to open, high, low, and close prices. The following chart geoms are available:</p>
 <ul>
 <li>
@@ -171,9 +171,9 @@
 <a href="https://www.investopedia.com/terms/c/candlestick.asp" class="external-link">Candlestick Chart</a>: Use <code>geom_candlestick</code>
 </li>
 </ul>
-<div class="section level2">
-<h2 id="line-chart">Line Chart<a class="anchor" aria-label="anchor" href="#line-chart"></a>
-</h2>
+<div class="section level3">
+<h3 id="line-chart">Line Chart<a class="anchor" aria-label="anchor" href="#line-chart"></a>
+</h3>
 <p>Before we visualize bar charts and candlestick charts using the <code>tidyquant</code> geoms, let’s visualize stock prices with a simple line chart to get a sense of the “grammar of graphics” workflow. This is done using the <code>geom_line</code> from the <code>ggplot2</code> package. The workflow begins with the stock data, and uses the pipe operator (<code>%&gt;%</code>) to send to the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot()</a></code> function.</p>
 <p>The primary features controlling the chart are the aesthetic arguments: these are used to add data to the chart by way of the <code><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes()</a></code> function. When added inside the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot()</a></code> function, the aesthetic arguments are available to all underlying layers. Alternatively, the aesthetic arguments can be applied to each geom individually, but typically this is minimized in practice because it duplicates code. We set aesthetic arguments, <code>x = date</code> and <code>y = close</code>, to chart the closing price versus date. The <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line()</a></code> function inherits the aesthetic arguments from the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot()</a></code> function and produces a line on the chart. Labels are added separately using the <code><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs()</a></code> function. Thus, the chart is built from the ground up by starting with data and progressively adding geoms, labels, coordinates / scales and other attributes to create a the final chart. This is enables maximum flexibility wherein the analyst can create very complex charts using the “grammar of graphics”.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -184,9 +184,9 @@
     <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-5-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level2">
-<h2 id="bar-chart">Bar Chart<a class="anchor" aria-label="anchor" href="#bar-chart"></a>
-</h2>
+<div class="section level3">
+<h3 id="bar-chart">Bar Chart<a class="anchor" aria-label="anchor" href="#bar-chart"></a>
+</h3>
 <p>Visualizing the bar chart is as simple as replacing <code>geom_line</code> with <code>geom_barchart</code> in the ggplot workflow. Because the bar chart uses open, high, low, and close prices in the visualization, we need to specify these as part of the aesthetic arguments, <code><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes()</a></code>. We can do so internal to the geom or in the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot()</a></code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">AAPL</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -221,9 +221,9 @@
     <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-8-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level2">
-<h2 id="candlestick-chart">Candlestick Chart<a class="anchor" aria-label="anchor" href="#candlestick-chart"></a>
-</h2>
+<div class="section level3">
+<h3 id="candlestick-chart">Candlestick Chart<a class="anchor" aria-label="anchor" href="#candlestick-chart"></a>
+</h3>
 <p>Creating a candlestick chart is very similar to the process with the bar chart. Using <code>geom_candlestick</code>, we can insert into the <code>ggplot</code> workflow.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">AAPL</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -260,9 +260,9 @@
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-11-1.png" width="95%" style="display: block; margin: auto;"></p>
 <p><a class="anchor" id="mult-chart"></a></p>
 </div>
-<div class="section level2">
-<h2 id="charting-multiple-securities">Charting Multiple Securities<a class="anchor" aria-label="anchor" href="#charting-multiple-securities"></a>
-</h2>
+<div class="section level3">
+<h3 id="charting-multiple-securities">Charting Multiple Securities<a class="anchor" aria-label="anchor" href="#charting-multiple-securities"></a>
+</h3>
 <p>We can use <code>facet_wrap</code> to visualize multiple stocks at the same time. By adding a <code>group</code> aesthetic in the main <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot()</a></code> function and combining with a <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap()</a></code> function at the end of the <code>ggplot</code> workflow, all four “FANG” stocks can be viewed simultaneously. You may notice an odd <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter()</a></code> call before the call to <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot()</a></code>. I’ll discuss this next.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">start</span> <span class="op">&lt;-</span> <span class="va">end</span> <span class="op">-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/period.html" class="external-link">weeks</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span>
@@ -295,14 +295,14 @@
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-13-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
-<div class="section level1">
-<h1 id="visualizing-trends">Visualizing Trends<a class="anchor" aria-label="anchor" href="#visualizing-trends"></a>
-</h1>
+<div class="section level2">
+<h2 id="visualizing-trends">Visualizing Trends<a class="anchor" aria-label="anchor" href="#visualizing-trends"></a>
+</h2>
 <p><a href="https://www.investopedia.com/terms/m/movingaverage.asp" class="external-link">Moving averages</a> are critical to evaluating time-series trends. <code>tidyquant</code> includes geoms to enable “rapid prototyping” to quickly visualize signals using moving averages and Bollinger bands.</p>
 <p><a class="anchor" id="mavg"></a></p>
-<div class="section level2">
-<h2 id="moving-averages">Moving Averages<a class="anchor" aria-label="anchor" href="#moving-averages"></a>
-</h2>
+<div class="section level3">
+<h3 id="moving-averages">Moving Averages<a class="anchor" aria-label="anchor" href="#moving-averages"></a>
+</h3>
 <p>The following moving averages are available:</p>
 <ul>
 <li><strong><a href="https://www.investopedia.com/terms/s/sma.asp" class="external-link">Simple moving averages (SMA)</a></strong></li>
@@ -323,9 +323,9 @@
 <li>Apply the moving average geom in your <code>ggplot</code> workflow.</li>
 </ol>
 <p><strong>Important Note</strong>: When zooming in on a section, use <code>coord_x_date</code> or <code>coord_x_datetime</code> to prevent out-of-bounds data loss. Do not use <code>scale_x_date</code>, which will affect the moving average calculation. Refer to <a href="#mult-chart">Charting Multiple Securities</a>.</p>
-<div class="section level3">
-<h3 id="example-1-charting-the-50-day-and-200-day-simple-moving-average">Example 1: Charting the 50-day and 200-day simple moving average<a class="anchor" aria-label="anchor" href="#example-1-charting-the-50-day-and-200-day-simple-moving-average"></a>
-</h3>
+<div class="section level4">
+<h4 id="example-1-charting-the-50-day-and-200-day-simple-moving-average">Example 1: Charting the 50-day and 200-day simple moving average<a class="anchor" aria-label="anchor" href="#example-1-charting-the-50-day-and-200-day-simple-moving-average"></a>
+</h4>
 <p>We want to apply a <code>SMA</code>, so we research the TTR function and we see that it accepts, <code>n</code>, the number of periods to average over. We see that the aesthetics required are <code>x</code>, a date, and <code>y</code>, a price. Since these are already in the main <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot()</a></code> function, we don’t need to add the aesthetics to the geom. We apply the moving average geoms after the candlestick geom to overlay the moving averages on top of the candlesticks. We add two moving average calls, one for the 50-day and the other for the 200-day. We add <code>color = "red"</code> and <code>linetype = 5</code> to distinguish the 200-day from the 50-day.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">AAPL</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -341,9 +341,9 @@
     <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-14-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level3">
-<h3 id="example-2-charting-exponential-moving-averages">Example 2: Charting exponential moving averages<a class="anchor" aria-label="anchor" href="#example-2-charting-exponential-moving-averages"></a>
-</h3>
+<div class="section level4">
+<h4 id="example-2-charting-exponential-moving-averages">Example 2: Charting exponential moving averages<a class="anchor" aria-label="anchor" href="#example-2-charting-exponential-moving-averages"></a>
+</h4>
 <p>We want an <code>EMA</code>, so we research the TTR function and we see that it accepts, <code>n</code>, the number of periods to average over, <code>wilder</code> a Boolean, and <code>ratio</code> arguments. We will use <code>wilder = TRUE</code> and go with the default for the <code>ratio</code> arg. We see that the aesthetics required are <code>x</code>, a date, and <code>y</code>, a price. Since these are already in the main <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot()</a></code> function, we don’t need to modify the geom. We are ready to apply after the bar chart geom.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">AAPL</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -359,9 +359,9 @@
     <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-15-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level3">
-<h3 id="example-3-charting-moving-averages-for-multiple-stocks-at-once">Example 3: Charting moving averages for multiple stocks at once<a class="anchor" aria-label="anchor" href="#example-3-charting-moving-averages-for-multiple-stocks-at-once"></a>
-</h3>
+<div class="section level4">
+<h4 id="example-3-charting-moving-averages-for-multiple-stocks-at-once">Example 3: Charting moving averages for multiple stocks at once<a class="anchor" aria-label="anchor" href="#example-3-charting-moving-averages-for-multiple-stocks-at-once"></a>
+</h4>
 <p>We’ll double up using a volume-weighted average (<code>VWMA</code>) and apply it to the FANG stocks at once. Since VWMA is a volume-weighted function, we need to add volume as an aesthetic. Because we are viewing multiple stocks, we add a group aesthetic setting it to the symbol column which contains the FANG stock symbols. The facet wrap is added at the end to create four charts instead of one overlayed chart.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">start</span> <span class="op">&lt;-</span> <span class="va">end</span> <span class="op">-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/period.html" class="external-link">weeks</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span>
@@ -380,14 +380,14 @@
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-16-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
-<div class="section level2">
-<h2 id="bollinger-bands">Bollinger Bands<a class="anchor" aria-label="anchor" href="#bollinger-bands"></a>
-</h2>
+<div class="section level3">
+<h3 id="bollinger-bands">Bollinger Bands<a class="anchor" aria-label="anchor" href="#bollinger-bands"></a>
+</h3>
 <p><a href="https://en.wikipedia.org/wiki/Bollinger_Bands" class="external-link">Bollinger Bands</a> are used to visualize volatility by plotting a range around a moving average typically two standard deviations up and down. Because they use a moving average, the <code>geom_bbands</code> function works almost identically to <code>geom_ma</code>. The same seven moving averages are compatible. The main difference is the addition of the standard deviation, <code>sd</code>, argument which is 2 by default, and the <code>high</code>, <code>low</code> and <code>close</code> aesthetics which are required to calculate the bands. Refer to <a href="#mavg">Moving Averages</a> for a detailed discussion on what moving averages are available.</p>
 <p><strong>Important Note</strong>: When zooming in on a section, use <code>coord_x_date</code> or <code>coord_x_datetime</code> to prevent out-of-bounds data loss. Do not use <code>scale_x_date</code>, which will affect the moving average calculation. Refer to <a href="#mult-chart">Charting Multiple Securities</a>.</p>
-<div class="section level3">
-<h3 id="example-1-applying-bbands-using-a-sma">Example 1: Applying BBands using a SMA<a class="anchor" aria-label="anchor" href="#example-1-applying-bbands-using-a-sma"></a>
-</h3>
+<div class="section level4">
+<h4 id="example-1-applying-bbands-using-a-sma">Example 1: Applying BBands using a SMA<a class="anchor" aria-label="anchor" href="#example-1-applying-bbands-using-a-sma"></a>
+</h4>
 <p>Let’s do a basic example to add Bollinger Bands using a simple moving average. Because both the candlestick geom and the BBands geom use high, low and close prices, we move these aesthetics to the main <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot()</a></code> function to avoid duplication. We add BBands after the candlestick geom to overlay the BBands on top.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">AAPL</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -403,9 +403,9 @@
     <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-17-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level3">
-<h3 id="example-2-modifying-the-appearance-of-bollinger-bands">Example 2: Modifying the appearance of Bollinger Bands<a class="anchor" aria-label="anchor" href="#example-2-modifying-the-appearance-of-bollinger-bands"></a>
-</h3>
+<div class="section level4">
+<h4 id="example-2-modifying-the-appearance-of-bollinger-bands">Example 2: Modifying the appearance of Bollinger Bands<a class="anchor" aria-label="anchor" href="#example-2-modifying-the-appearance-of-bollinger-bands"></a>
+</h4>
 <p>The appearance can be modified using <code>color_ma</code>, <code>color_bands</code>, <code>alpha</code>, and <code>fill</code> arguments. Here’s the same plot from Example 1, with new formatting applied to the BBands.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">AAPL</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -425,9 +425,9 @@
     <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-18-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level3">
-<h3 id="example-3-adding-bbands-to-multiple-stocks">Example 3: Adding BBands to multiple stocks<a class="anchor" aria-label="anchor" href="#example-3-adding-bbands-to-multiple-stocks"></a>
-</h3>
+<div class="section level4">
+<h4 id="example-3-adding-bbands-to-multiple-stocks">Example 3: Adding BBands to multiple stocks<a class="anchor" aria-label="anchor" href="#example-3-adding-bbands-to-multiple-stocks"></a>
+</h4>
 <p>The process is very similar to charting moving averages for multiple stocks.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">start</span> <span class="op">&lt;-</span> <span class="va">end</span> <span class="op">-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/period.html" class="external-link">weeks</a></span><span class="op">(</span><span class="fl">24</span><span class="op">)</span>
@@ -448,13 +448,13 @@
 </div>
 </div>
 </div>
-<div class="section level1">
-<h1 id="ggplot2-functionality">ggplot2 Functionality<a class="anchor" aria-label="anchor" href="#ggplot2-functionality"></a>
-</h1>
-<p>Base <code>ggplot2</code> has a ton of functionality that can be useful for analyzing financial data. We’ll go through some brief examples using Amazon (<code>AMZN</code>).</p>
 <div class="section level2">
-<h2 id="example-1-log-scale-with-scale_y_log10">Example 1: Log Scale with scale_y_log10<a class="anchor" aria-label="anchor" href="#example-1-log-scale-with-scale_y_log10"></a>
+<h2 id="ggplot2-functionality">ggplot2 Functionality<a class="anchor" aria-label="anchor" href="#ggplot2-functionality"></a>
 </h2>
+<p>Base <code>ggplot2</code> has a ton of functionality that can be useful for analyzing financial data. We’ll go through some brief examples using Amazon (<code>AMZN</code>).</p>
+<div class="section level3">
+<h3 id="example-1-log-scale-with-scale_y_log10">Example 1: Log Scale with scale_y_log10<a class="anchor" aria-label="anchor" href="#example-1-log-scale-with-scale_y_log10"></a>
+</h3>
 <p><code>ggplot2</code> has the <code><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_log10()</a></code> function to scale the y-axis on a logarithmic scale. This is extremely helpful as it tends to expose linear trends that can be analyzed.</p>
 <p><strong>Continuous Scale</strong>:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
@@ -479,9 +479,9 @@
     <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-21-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level2">
-<h2 id="example-2-regression-trendlines-with-geom_smooth">Example 2: Regression trendlines with geom_smooth<a class="anchor" aria-label="anchor" href="#example-2-regression-trendlines-with-geom_smooth"></a>
-</h2>
+<div class="section level3">
+<h3 id="example-2-regression-trendlines-with-geom_smooth">Example 2: Regression trendlines with geom_smooth<a class="anchor" aria-label="anchor" href="#example-2-regression-trendlines-with-geom_smooth"></a>
+</h3>
 <p>We can apply a trend line quickly adding the <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth()</a></code> function to our workflow. The function has several prediction methods including linear (<code>"lm"</code>) and loess (<code>"loess"</code>) to name a few.</p>
 <p><strong>Linear</strong>:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
@@ -496,9 +496,9 @@
     <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-22-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level2">
-<h2 id="example-3-charting-volume-with-geom_segment">Example 3: Charting volume with geom_segment<a class="anchor" aria-label="anchor" href="#example-3-charting-volume-with-geom_segment"></a>
-</h2>
+<div class="section level3">
+<h3 id="example-3-charting-volume-with-geom_segment">Example 3: Charting volume with geom_segment<a class="anchor" aria-label="anchor" href="#example-3-charting-volume-with-geom_segment"></a>
+</h3>
 <p>We can use the <code><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html" class="external-link">geom_segment()</a></code> function to chart daily volume, which uses xy points for the beginning and end of the line. Using the aesthetic color argument, we color based on the value of volume to make these data stick out.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">AMZN</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -529,9 +529,9 @@
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-24-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
-<div class="section level1">
-<h1 id="themes">Themes<a class="anchor" aria-label="anchor" href="#themes"></a>
-</h1>
+<div class="section level2">
+<h2 id="themes">Themes<a class="anchor" aria-label="anchor" href="#themes"></a>
+</h2>
 <p>The <code>tidyquant</code> package comes with three themes to help quickly customize financial charts:</p>
 <ul>
 <li>
@@ -544,9 +544,9 @@
 <strong>Green</strong>: <code><a href="../reference/theme_tq.html">theme_tq_green()</a></code> + <code>scale_color_tq(theme = "green")</code> + <code>scale_fill_tq(theme = "green")</code>
 </li>
 </ul>
-<div class="section level2">
-<h2 id="dark">Dark<a class="anchor" aria-label="anchor" href="#dark"></a>
-</h2>
+<div class="section level3">
+<h3 id="dark">Dark<a class="anchor" aria-label="anchor" href="#dark"></a>
+</h3>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n_mavg</span> <span class="op">&lt;-</span> <span class="fl">50</span> <span class="co"># Number of periods (days) for moving average</span>
 <span class="va">FANG</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -561,7 +561,7 @@
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">symbol</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="../reference/theme_tq.html">theme_tq_dark</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="../reference/scale_manual.html">scale_color_tq</a></span><span class="op">(</span>theme <span class="op">=</span> <span class="st">"dark"</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/label_dollar.html" class="external-link">dollar</a></span><span class="op">)</span></code></pre></div>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/dollar_format.html" class="external-link">dollar</a></span><span class="op">)</span></code></pre></div>
 <p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-25-1.png" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
@@ -584,7 +584,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
