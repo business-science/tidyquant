@@ -242,9 +242,9 @@
 <span class="co">## <span style="color: #949494;"># … with 2,696 more rows</span></span></code></pre>
 </div>
 <div class="section level3">
-<h3 id="quandl-api">2.3 Quandl API<a class="anchor" aria-label="anchor" href="#quandl-api"></a>
+<h3 id="nasdaq-data-link-quandl-api">2.3 Nasdaq Data Link (Quandl) API<a class="anchor" aria-label="anchor" href="#nasdaq-data-link-quandl-api"></a>
 </h3>
-<p><a href="https://www.quandl.com/" class="external-link">Quandl</a> provides access to a vast number of financial and economic databases. The <code>Quandl</code> package has been integrated into <code>tidyquant</code> as follows.</p>
+<p><a href="https://data.nasdaq.com/" class="external-link">Quandl</a> provides access to a vast number of financial and economic databases. The <code>Quandl</code> package has been integrated into <code>tidyquant</code> as follows.</p>
 <div class="section level4">
 <h4 id="authentication">Authentication<a class="anchor" aria-label="anchor" href="#authentication"></a>
 </h4>
@@ -255,7 +255,7 @@
 <div class="section level4">
 <h4 id="search">Search<a class="anchor" aria-label="anchor" href="#search"></a>
 </h4>
-<p>Searching Quandl from within the R console is possible with <code><a href="../reference/quandl_search.html">quandl_search()</a></code>, a wrapper for <code><a href="https://rdrr.io/pkg/Quandl/man/Quandl.search.html" class="external-link">Quandl::Quandl.search()</a></code>. An example search is shown below. The only required argument is <code>query</code>. You can also visit the <a href="https://www.quandl.com/search" class="external-link">Quandl Search</a> webpage to search for available database codes.</p>
+<p>Searching Quandl from within the R console is possible with <code><a href="../reference/quandl_search.html">quandl_search()</a></code>, a wrapper for <code><a href="https://rdrr.io/pkg/Quandl/man/Quandl.search.html" class="external-link">Quandl::Quandl.search()</a></code>. An example search is shown below. The only required argument is <code>query</code>. You can also visit the <a href="https://data.nasdaq.com/search" class="external-link">Quandl Search</a> webpage to search for available database codes.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/quandl_search.html">quandl_search</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">"Oil"</span>, database_code <span class="op">=</span> <span class="st">"NSE"</span>, per_page <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 </div>
@@ -299,7 +299,7 @@
            collapse     <span class="op">=</span> <span class="st">"annual"</span>,      
            transform    <span class="op">=</span> <span class="st">"rdiff"</span><span class="op">)</span>       </code></pre></div>
 <p>Datatables are larger data sets. These can be downloaded using <code>get = "quandl.datatable"</code>. Note that the time series arguments do not work with data tables.</p>
-<p>Here’s several examples of <a href="https://www.quandl.com/databases/ZFB/documentation/about" class="external-link">Zacks Fundamentals Collection B</a></p>
+<p>Here’s several examples of <a href="https://data.nasdaq.com/databases/ZFB/documentation/about" class="external-link">Zacks Fundamentals Collection B</a></p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Zacks Fundamentals Collection B (DOW 30 Available to non subscribers)</span>
 <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"ZACKS/FC"</span>, get <span class="op">=</span> <span class="st">"quandl.datatable"</span><span class="op">)</span>   <span class="co"># Zacks Fundamentals Condensed</span>
