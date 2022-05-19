@@ -1,11 +1,13 @@
-# tidyquant 1.0.3.9000
+# tidyquant 1.0.4
 
 CRAN requested fixes:
+
 - Moved `janitor` to suggests
 - Reduced file size by removing vignettes from CRAN version. 
 
 Other changes:
-- Removed the package startup message
+
+- Removed the package start-up message
 
 # tidyquant 1.0.3
 
