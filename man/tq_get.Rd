@@ -18,14 +18,14 @@ for \code{x}. Options include:
 \itemize{
 \item \code{"stock.prices"}: Get the open, high, low, close, volume and adjusted
 stock prices for a stock symbol from
-\href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for \code{quantmod::getSymbols()}.
+Yahoo Finance (https://finance.yahoo.com/). Wrapper for \code{quantmod::getSymbols()}.
 \item \code{"dividends"}: Get the dividends for a stock symbol from
-\href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for \code{quantmod::getDividends()}.
+Yahoo Finance (https://finance.yahoo.com/). Wrapper for \code{quantmod::getDividends()}.
 \item \code{"splits"}: Get the split ratio for a stock symbol from
-\href{https://finance.yahoo.com/}{Yahoo Finance}. Wrapper for \code{quantmod::getSplits()}.
+Yahoo Finance (https://finance.yahoo.com/). Wrapper for \code{quantmod::getSplits()}.
 \item \code{"stock.prices.japan"}: Get the open, high, low, close, volume and adjusted
 stock prices for a stock symbol from
-\href{https://finance.yahoo.co.jp/}{Yahoo Finance Japan}. Wrapper for \code{quantmod::getSymbols.yahooj()}.
+Yahoo Finance Japan (https://finance.yahoo.co.jp/). Wrapper for \code{quantmod::getSymbols.yahooj()}.
 \item \code{"economic.data"}: Get economic data from
 \href{https://fred.stlouisfed.org/}{FRED}. rapper for \code{quantmod::getSymbols.FRED()}.
 \item \code{"quandl"}: Get data sets from

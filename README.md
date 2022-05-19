@@ -4,7 +4,7 @@
 # tidyquant <img src="man/figures/tidyquant-logo.png" width="147" height="170" align="right" />
 
 [![R-CMD-check](https://github.com/business-science/tidyquant/workflows/R-CMD-check/badge.svg)](https://github.com/business-science/tidyquant/actions)
-[![codecov](https://codecov.io/gh/business-science/tidyquant/branch/master/graph/badge.svg)](https://codecov.io/gh/business-science/tidyquant)
+[![codecov](https://codecov.io/gh/business-science/tidyquant/branch/master/graph/badge.svg)](https://app.codecov.io/gh/business-science/tidyquant)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/tidyquant)](https://cran.r-project.org/package=tidyquant)
 ![](http://cranlogs.r-pkg.org/badges/tidyquant?color=brightgreen)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/tidyquant?color=brightgreen)
