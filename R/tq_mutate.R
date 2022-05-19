@@ -71,10 +71,19 @@
 #'
 #' ##### Basic Functionality
 #'
-#' fb_stock_prices  <- tq_get("FB",
-#'                            get  = "stock.prices",
-#'                            from = "2016-01-01",
-#'                            to   = "2016-12-31")
+#' fb_stock_prices  <- FANG %>%
+#'     filter(symbol == "FB") %>%
+#'         filter(
+#'             date >= "2016-01-01",
+#'             date <= "2016-12-31"
+#'         )
+#'
+#' goog_stock_prices  <- FANG %>%
+#'     filter(symbol == "GOOG") %>%
+#'         filter(
+#'             date >= "2016-01-01",
+#'             date <= "2016-12-31"
+#'         )
 #'
 #' # Example 1: Return logarithmic daily returns using periodReturn()
 #' fb_stock_prices %>%
@@ -93,11 +102,11 @@
 #' # Example 4: Using tq_mutate to apply a rolling regression
 #' fb_returns <- fb_stock_prices %>%
 #'     tq_transmute(adjusted, periodReturn, period = "monthly", col_rename = "fb.returns")
-#' xlk_returns <- tq_get("XLK", from = "2016-01-01", to = "2016-12-31") %>%
-#'     tq_transmute(adjusted, periodReturn, period = "monthly", col_rename = "xlk.returns")
-#' returns_combined <- left_join(fb_returns, xlk_returns, by = "date")
+#' goog_returns <- goog_stock_prices %>%
+#'     tq_transmute(adjusted, periodReturn, period = "monthly", col_rename = "goog.returns")
+#' returns_combined <- left_join(fb_returns, goog_returns, by = "date")
 #' regr_fun <- function(data) {
-#'     coef(lm(fb.returns ~ xlk.returns, data = as_tibble(data)))
+#'     coef(lm(fb.returns ~ goog.returns, data = as_tibble(data)))
 #' }
 #' returns_combined %>%
 #'     tq_mutate(mutate_fun = rollapply,
