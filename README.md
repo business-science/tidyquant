@@ -36,15 +36,7 @@ perform complete financial analyses in the `tidyverse`.
     financial visualizations**
 -   **User-friendly documentation to get you up to speed quickly!**
 
-### NEW EXCEL in tidyquant 1.0.0
-
-Tidyquant 1.0.0 is the *“R for Excel Users”* release. My aim is to build
-functionality that helps users coming from an **Excel Background**
-(background I came from). It’s important to have these users feel at
-home. I have a full suite of functionality to accomplish your Excel-to-R
-transition.
-
-EXCEL Tutorials:
+### New Excel Functionality in tidyquant
 
 -   [**Excel in R - Pivot Tables, VLOOKUPs, and
     more**](https://www.business-science.io/finance/2020/02/26/r-for-excel-users.html):

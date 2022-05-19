@@ -45,10 +45,7 @@ Imports:
     TTR,
     xts,
     rlang,
-    tidyselect, 
-    rstudioapi,
-    crayon,
-    cli
+    tidyselect
 Suggests:
     tidyverse,
     tibbletime,
