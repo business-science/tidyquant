@@ -502,7 +502,7 @@ tq_get_util_1 <-
     })
 
     # coerce financials to tibble
-    if (identical(get, "financial") && class(ret) == "financials") {
+    if (identical(get, "financial") && inherits(ret, "financials")) {
 
         # Tidy a single financial statement
         tidy_fin <- function(x) {
