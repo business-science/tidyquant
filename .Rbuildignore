@@ -18,3 +18,4 @@ img
 ^pkgdown$
 ^codecov\.yml$
 ^\.github$
+^CRAN-SUBMISSION$
