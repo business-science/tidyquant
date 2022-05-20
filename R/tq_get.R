@@ -18,10 +18,10 @@
 #'   \item `"economic.data"`: Get economic data from
 #'   \href{https://fred.stlouisfed.org/}{FRED}. rapper for `quantmod::getSymbols.FRED()`.
 #'   \item `"quandl"`: Get data sets from
-#'   \href{https://www.quandl.com/}{Quandl}. Wrapper for `Quandl::Quandl()`.
+#'   \href{https://data.nasdaq.com/}{Quandl}. Wrapper for `Quandl::Quandl()`.
 #'   See also [quandl_api_key()].
 #'   \item `"quandl.datatable"`: Get data tables from
-#'   \href{https://www.quandl.com/}{Quandl}. Wrapper for `Quandl::Quandl.datatable()`.
+#'   \href{https://data.nasdaq.com/}{Quandl}. Wrapper for `Quandl::Quandl.datatable()`.
 #'   See also [quandl_api_key()].
 #'   \item `"tiingo"`: Get data sets from
 #'   \href{https://api.tiingo.com/}{Tiingo}. Wrapper for `riingo::riingo_prices()`.
