@@ -25,10 +25,7 @@ to quickly rename columns.}
 \item{...}{Additional parameters passed to the appropriate mutatation
 function.}
 
-\item{x}{Parameters used with \verb{_xy} that consist of column names of variables
-to be passed to the mutatation function (instead of OHLC functions).}
-
-\item{y}{Parameters used with \verb{_xy} that consist of column names of variables
+\item{x, y}{Parameters used with \verb{_xy} that consist of column names of variables
 to be passed to the mutatation function (instead of OHLC functions).}
 }
 \description{

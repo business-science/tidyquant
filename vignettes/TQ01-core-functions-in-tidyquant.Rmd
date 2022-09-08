@@ -153,10 +153,10 @@ Getting data is integrated into `tq_get()`. Two get options exist to retrieve Qu
 
 Getting data from Quandl can be achieved in much the same way as the other "get" options. Just pass the "codes" for the data along with desired arguments for the underlying function. 
 
-The following uses `get = "quandl"` and the "WIKI" database to download daily stock prices for FB and AAPL in 2016. The output is a tidy data frame. 
+The following uses `get = "quandl"` and the "WIKI" database to download daily stock prices for AAPL in 2016. The output is a tidy data frame. 
 
 ```{r, eval = F}
-c("WIKI/FB", "WIKI/AAPL") %>%
+c("WIKI/AAPL") %>%
     tq_get(get  = "quandl",
            from = "2016-01-01",
            to   = "2016-12-31")
@@ -173,7 +173,7 @@ The following time series options are available to be passed to the underlying `
 Here's an example to get period returns of the adj.close (column index 11) using the `column_index`, `collapse` and `transform` arguments. 
 
 ```{r, eval = F}
-c("WIKI/FB", "WIKI/AAPL") %>%
+"WIKI/AAPL" %>%
     tq_get(get          = "quandl",
            from         = "2007-01-01",
            to           = "2016-12-31",
@@ -250,11 +250,11 @@ av_api_key("<your-api-key>")
 
 ### Getting Alpha Vantage Data
 
-Getting data is simple as the structure follows the [Alpha Vantage API documentation](https://www.alphavantage.co/documentation/). For example, if you wish to retrieve intraday data at 5 minute intervals for FB and MSFT, you can build the parameters `x = c("FB", "MSFT"), get = "alphavantager", av_fun = "TIME_SERIES_INTRADAY", interval = "5min"`. The familiar `x` and `get` are the same as you always use. The `av_fun` argument comes from `alphavantager::av_get()` and the Alpha Vantage documentation. The `interval` argument comes from the docs as well.
+Getting data is simple as the structure follows the [Alpha Vantage API documentation](https://www.alphavantage.co/documentation/). For example, if you wish to retrieve intraday data at 5 minute intervals for META and MSFT, you can build the parameters `x = c("FB", "MSFT"), get = "alphavantager", av_fun = "TIME_SERIES_INTRADAY", interval = "5min"`. The familiar `x` and `get` are the same as you always use. The `av_fun` argument comes from `alphavantager::av_get()` and the Alpha Vantage documentation. The `interval` argument comes from the docs as well.
 
 ```{r, eval = F}
 # Scaling is as simple as supplying multiple symbols
-c("FB", "MSFT") %>%
+c("META", "MSFT") %>%
     tq_get(get = "alphavantage", av_fun = "TIME_SERIES_INTRADAY", interval = "5min")
 ```
 
@@ -360,7 +360,7 @@ _Step 1: Get Returns_
 First, get combined returns. The asset and baseline returns should be in wide format, which is needed for the `lm` function in the next step.
 
 ```{r}
-fb_returns <- tq_get("FB", get  = "stock.prices", from = "2016-01-01", to   = "2016-12-31") %>%
+fb_returns <- tq_get("META", get  = "stock.prices", from = "2016-01-01", to   = "2016-12-31") %>%
     tq_transmute(adjusted, periodReturn, period = "weekly", col_rename = "fb.returns")
 
 xlk_returns <- tq_get("XLK", from = "2016-01-01", to = "2016-12-31") %>%

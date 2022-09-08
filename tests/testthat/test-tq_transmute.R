@@ -1,4 +1,5 @@
 library(tidyquant)
+library(tidyverse)
 context("Testing tq_transmute")
 
 #### Setup ----
@@ -9,7 +10,7 @@ test1 <- AAPL %>%
     tq_transmute(select = close, mutate_fun = to.period, period = "months")
 
 # Test 1.2: Grouped_df test
-grouped_df <- grouped_df <- tibble(symbol = c("FB", "AMZN")) %>%
+grouped_df <- grouped_df <- tibble(symbol = c("META", "AMZN")) %>%
     tq_get(
         get  = "stock.prices",
         from = "2015-01-01",
@@ -47,7 +48,7 @@ test4 <- AAPL %>%
     tq_transmute(select = NULL, mutate_fun = to.monthly)
 
 # Test 5: Check tq_transmute_data
-fb_returns <- tq_get("FB", get  = "stock.prices", from = "2016-01-01", to   = "2016-12-31") %>%
+fb_returns <- tq_get("META", get  = "stock.prices", from = "2016-01-01", to   = "2016-12-31") %>%
     tq_transmute(adjusted, periodReturn, period = "monthly", col_rename = "fb.returns")
 xlk_returns <- tq_get("XLK", from = "2016-01-01", to = "2016-12-31") %>%
     tq_transmute(adjusted, periodReturn, period = "monthly", col_rename = "xlk.returns")

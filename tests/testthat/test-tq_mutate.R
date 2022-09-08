@@ -1,4 +1,5 @@
 library(tidyquant)
+library(tidyverse)
 context("Testing tq_mutate()")
 
 #### Setup ----
@@ -24,7 +25,7 @@ test1.1_names <- c("symbol", "date", "open", "high", "low", "close", "volume", "
                    "up", "pctB", "dn..1", "mavg..1", "up..1", "pctB..1")
 
 # Test 1.2: Grouped_df test
-grouped_df <- tibble(symbol = c("FB", "AMZN")) %>%
+grouped_df <- tibble(symbol = c("META", "AMZN")) %>%
     tq_get(
         get  = "stock.prices",
         from = "2015-01-01",
@@ -59,7 +60,7 @@ test4 <- tibble(time_index, value) %>%
     tq_mutate_xy(x = value, mutate_fun = MACD)
 
 # Test 5:
-test5 <- c("AAPL", "FB") %>%
+test5 <- c("AAPL", "META") %>%
     tq_get(from = "2016-01-01",
            to   = "2017-01-01") %>%
     group_by(symbol)

@@ -7,7 +7,7 @@ context(paste0("Testing tq_get(get = '", get, "')"))
 test1 <- tq_get("AAPL", get = get,
                 from = "2016-01-01", to = "2016-06-01")
 
-test2 <- c("AAPL", "FB") %>%
+test2 <- c("AAPL", "META") %>%
     tq_get(get = get, from = "2016-01-01", to = "2016-06-01")
 
 #### Tests
