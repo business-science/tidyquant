@@ -59,6 +59,21 @@ The `end` date parameter will be used when setting date limits throughout the ex
 
 ```{r}
 end <- as_date("2016-12-31")
+
+end
+```
+
+The `AAPL_range_60` will be used to adjust the zoom on the plots. 
+
+```{r}
+aapl_range_60_tbl <- AAPL %>%
+    tail(60) %>%
+    summarise(
+        max_high = max(high),
+        min_low  = min(low)
+    )
+
+aapl_range_60_tbl
 ```
 
 
@@ -107,7 +122,7 @@ AAPL %>%
          subtitle = "Zoomed in using coord_x_date",
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(end - weeks(6), end),
-                 ylim = c(100, 120)) + 
+                 ylim = c(aapl_range_60_tbl$min_low, aapl_range_60_tbl$max_high)) +
     theme_tq()
 ```
 
@@ -122,7 +137,7 @@ AAPL %>%
          subtitle = "Zoomed in, Experimenting with Formatting",
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(end - weeks(6), end),
-                 ylim = c(100, 120)) + 
+                 c(aapl_range_60_tbl$min_low, aapl_range_60_tbl$max_high)) + 
     theme_tq()
 ```
 
@@ -148,7 +163,7 @@ AAPL %>%
          subtitle = "Zoomed in using coord_x_date",
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(end - weeks(6), end),
-                 ylim = c(100, 120)) + 
+                 c(aapl_range_60_tbl$min_low, aapl_range_60_tbl$max_high)) + 
     theme_tq()
 ```
 
@@ -164,7 +179,7 @@ AAPL %>%
          subtitle = "Zoomed in, Experimenting with Formatting",
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(end - weeks(6), end),
-                 ylim = c(100, 120)) + 
+                 c(aapl_range_60_tbl$min_low, aapl_range_60_tbl$max_high)) + 
     theme_tq()
 ```
 
@@ -251,7 +266,7 @@ AAPL %>%
          subtitle = "50 and 200-Day SMA", 
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(end - weeks(24), end),
-                 ylim = c(100, 120)) + 
+                 c(aapl_range_60_tbl$min_low * 0.9, aapl_range_60_tbl$max_high)) + 
     theme_tq()
 ```
 
@@ -268,7 +283,7 @@ AAPL %>%
          subtitle = "50 and 200-Day EMA", 
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(end - weeks(24), end),
-                 ylim = c(100, 120)) +
+                 c(aapl_range_60_tbl$min_low * 0.9, aapl_range_60_tbl$max_high)) +
     theme_tq()
 ```
 
@@ -313,7 +328,8 @@ AAPL %>%
          subtitle = "BBands with SMA Applied", 
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(end - weeks(24), end),
-                 ylim = c(100, 120)) + 
+                 ylim = c(aapl_range_60_tbl$min_low * 0.85, 
+                          aapl_range_60_tbl$max_high) * 1.05) + 
     theme_tq()
 ```
 
@@ -335,7 +351,8 @@ AAPL %>%
          subtitle = "BBands with SMA Applied, Experimenting with Formatting", 
          y = "Closing Price", x = "") + 
     coord_x_date(xlim = c(end - weeks(24), end),
-                 ylim = c(100, 120)) + 
+                 ylim = c(aapl_range_60_tbl$min_low * 0.85, 
+                          aapl_range_60_tbl$max_high) * 1.05) + 
     theme_tq()
 ```
 
