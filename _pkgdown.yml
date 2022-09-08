@@ -1,5 +1,5 @@
 template:
-  bootstrap: 3
+  bootstrap: 5
   # bslib:
   #   base_font:
   #     google: Roboto
