@@ -174,6 +174,8 @@
 
 tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
 
+    get <- stringr::str_to_lower(get)
+
     # Validate compound gets
     # if (length(get) > 1) validate_compound_gets(get)
     if (length(get) > 1) stop(call. = FALSE, "tq_get(): Please use only one value for `get` source.")
@@ -197,7 +199,7 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
     }
 
     # Setup Rblpapi
-    if("Rblpapi" %in% get) {
+    if("rblpapi" %in% get) {
         if(!requireNamespace("Rblpapi", quietly = TRUE)) {
             stop("Rblpapi must be installed to get data from Bloomberg.", call. = FALSE)
         }
