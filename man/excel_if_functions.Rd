@@ -66,7 +66,7 @@ Users can create new "IFS" functions using the \code{\link[=CREATE_IFS]{CREATE_I
 The only requirement is that the output of your function (\code{.f}) must be a single
 value (scalar). See examples below.
 }
-\section{Useful functions}{
+\section{Useful Functions}{
 
 
 \strong{Summary Functions} - Return a single value from a vector
@@ -77,8 +77,10 @@ value (scalar). See examples below.
 \item Range: \code{\link[=MIN_IFS]{MIN_IFS()}}, \code{\link[=MAX_IFS]{MAX_IFS()}}
 }
 
-_\emph{Create your own summary "\emph{IF" function}}
-This is a function factory that generates summary "_IFS" functions.
+\strong{Create your own summary "IFS" function}
+\itemize{
+\item \code{\link[=CREATE_IFS]{CREATE_IFS()}}: This is a function factory that generates summary "_IFS" functions.
+}
 }
 
 \examples{

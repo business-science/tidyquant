@@ -12,16 +12,18 @@
 #' - Names are similar to Excel function names
 #' - By default, missing values are ignored (same as in Excel)
 #'
-#' @section Useful functions:
+#' @section Useful Functions:
 #'
 #' __Summary Functions__ - Return a single value from a vector
+#'
 #' * Sum: [SUM_IFS()]
 #' * Center: [AVERAGE_IFS()], [MEDIAN_IFS()]
 #' * Count: [COUNT_IFS()]
 #' * Range: [MIN_IFS()], [MAX_IFS()]
 #'
-#' __Create your own summary "_IF" function__
-#' This is a function factory that generates summary "_IFS" functions.
+#' __Create your own summary "IFS" function__
+#'
+#' * [CREATE_IFS()]: This is a function factory that generates summary "_IFS" functions.
 #'
 #' @param x A vector. Most functions are designed for numeric data.
 #' Some functions like [COUNT_IFS()] handle multiple data types.
