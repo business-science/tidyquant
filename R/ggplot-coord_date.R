@@ -39,8 +39,7 @@
 #'     geom_ma(n = 50) +                     # Plot 50-day Moving Average
 #'     geom_ma(n = 200, color = "red") +     # Plot 200-day Moving Average
 #'     # Zoom in
-#'     coord_x_date(xlim = c("2016-01-01", "2016-12-31"),
-#'                  ylim = c(75, 125))
+#'     coord_x_date(xlim = c("2016-01-01", "2016-12-31"))
 #'
 #'
 #' # coord_x_datetime
