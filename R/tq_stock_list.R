@@ -149,7 +149,7 @@ tq_exchange <- function(x) {
               sector = as.character(sector),
               industry = as.character(industry)
             ) %>%
-            dplyr::select(symbol:industry) %>% 
+            dplyr::select(symbol:industry) %>%
             dplyr::select(-c(netchange, pctchange, volume))
         })
 
@@ -297,6 +297,11 @@ clean_holdings <- function(x) {
 
     # Reorder
     ret <- ret %>% dplyr::select(symbol, company, dplyr::everything())
+
+    # Fix for stocks like BRK.B -> BRK-B for Yahoo Finance
+    ret <- ret %>%
+        dplyr::mutate(symbol = stringr::str_replace(symbol, "\\.", "-"))
+
 
     return(ret)
 }
