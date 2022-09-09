@@ -1,6 +1,7 @@
 # tidyquant 1.0.5
 
-- FIXES: FB to META name change
+- FIX: FB to META name change
+- IMPROVEMENT: `sp_index()` to convert symbols from "BRK.B" to "BRK-B" to work with Yahoo Finance
 
 # tidyquant 1.0.4
 
