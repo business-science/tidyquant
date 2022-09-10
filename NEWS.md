@@ -1,3 +1,5 @@
+# tidyquant 1.0.5.9000
+
 # tidyquant 1.0.5
 
 - FIX: FB to META name change
