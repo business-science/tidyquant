@@ -280,7 +280,10 @@ tq_portfolio_base_ <- function(data, assets_col, returns_col, weights, col_renam
         # Spread for xts form and apply Return.portfolio()
         data %>%
             dplyr::select(!!!rlang::syms(c(date_col_name, assets_col_name, returns_col_name))) %>%
-            tidyr::spread_(key_col = assets_col_name, value_col = returns_col_name) %>%
+            tidyr::spread(
+                key   = dplyr::all_of(assets_col_name),
+                value = dplyr::all_of(returns_col_name)
+            ) %>%
             timetk::tk_xts(silent = TRUE) %>%
             PerformanceAnalytics::Return.portfolio(weights = weights, verbose = FALSE, ...)
 
