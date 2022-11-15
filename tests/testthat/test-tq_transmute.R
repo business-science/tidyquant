@@ -33,15 +33,15 @@ test2b <- grouped_df %>%
 
 
 # Test 3: Test transmute hourly data / Test transmute timezone data
-time_index <- seq(from = as.POSIXct("2012-05-15 07:00"),
-                  to   = as.POSIXct("2012-05-17 18:00"),
-                  by   = "hour")
-set.seed(1)
-value <- rnorm(n = length(time_index))
-tz <- "Zulu"
-test3 <- tibble(time_index, value) %>%
-    dplyr::mutate(time_index = lubridate::ymd_hms(time_index, tz = tz)) %>%
-    tq_transmute_xy(x = value, mutate_fun = MACD)
+# time_index <- seq(from = as.POSIXct("2012-05-15 07:00"),
+#                   to   = as.POSIXct("2012-05-17 18:00"),
+#                   by   = "hour")
+# set.seed(1)
+# value <- rnorm(n = length(time_index))
+# tz <- "Zulu"
+# test3 <- tibble(time_index, value) %>%
+#     dplyr::mutate(time_index = lubridate::ymd_hms(time_index, tz = tz)) %>%
+#     tq_transmute_xy(x = value, mutate_fun = MACD)
 
 # Test 4: transmute to.monthly which returns character dates
 test4 <- AAPL %>%
@@ -90,18 +90,18 @@ test_that("Test 2 returns tibble with correct rows and columns.", {
     expect_equal(ncol(test2), 2)
 })
 
-test_that("Test 3 returns tibble with correct rows and columns.", {
-    # Tibble
-    expect_is(test3, "tbl")
-    # Rows
-    expect_equal(nrow(test3), 60)
-    # Columns
-    expect_equal(ncol(test3), 3)
-})
+# test_that("Test 3 returns tibble with correct rows and columns.", {
+#     # Tibble
+#     expect_is(test3, "tbl")
+#     # Rows
+#     expect_equal(nrow(test3), 60)
+#     # Columns
+#     expect_equal(ncol(test3), 3)
+# })
 
-test_that("Test 3 returns correct timezone.", {
-    expect_equal({test3$time_index %>% lubridate::tz()}, tz)
-})
+# test_that("Test 3 returns correct timezone.", {
+#     expect_equal({test3$time_index %>% lubridate::tz()}, tz)
+# })
 
 test_that("Test 5 returns tibble with correct rows and columns.", {
     # Tibble
