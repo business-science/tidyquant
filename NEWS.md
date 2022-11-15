@@ -3,6 +3,7 @@
 - Fix tq_performance test failure under PerformanceAnalytics 2.0.6 #223
 - Fix failed r-devel test identified by CRAN
 - Remove deprecated `spread_()` function
+- Move `readxl` to imports. #222
 
 # tidyquant 1.0.5
 
