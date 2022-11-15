@@ -36,6 +36,7 @@ Imports:
     Quandl,
     riingo,
     readr, 
+    readxl,
     alphavantager (>= 0.1.2),
     stringr,
     tibble,
@@ -56,7 +57,6 @@ Suggests:
     testthat (>= 2.1.0),
     scales,
     Rblpapi,
-    readxl,
     covr,
     janitor
 RoxygenNote: 7.2.1
