@@ -1,4 +1,8 @@
-# tidyquant 1.0.5.9000
+# tidyquant 1.0.6
+
+- Fix tq_performance test failure under PerformanceAnalytics 2.0.6 #223
+- Fix failed r-devel test identified by CRAN
+- Remove deprecated `spread_()` function
 
 # tidyquant 1.0.5
 
