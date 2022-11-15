@@ -260,7 +260,7 @@
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> FB     2013-01-14  32.1  32.2  30.6  31.0  98<span style="text-decoration: underline;">892</span>800     31.0</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> FB     2013-01-15  30.6  31.7  29.9  30.1 173<span style="text-decoration: underline;">242</span>600     30.1</span></span>
 <span><span class="co">## <span style="color: #949494;"># … with 4,022 more rows</span></span></span></code></pre>
-<p>Second, use <code>group_by</code> to group by stock symbol. Third, apply the mutation. We can do this in one easy workflow. The <code>periodReturns</code> function is applied to each group of stock prices, and a new data frame was returned with the annual returns in the correct periodicity.</p>
+<p>Second, use <code>group_by</code> to group by stock symbol. Third, apply the mutation. We can do this in one easy workflow. The <code>periodReturn</code> function is applied to each group of stock prices, and a new data frame was returned with the annual returns in the correct periodicity.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">FANG_returns_yearly</span> <span class="op">&lt;-</span> <span class="va">FANG</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -365,7 +365,7 @@
 <span><span class="co">## </span></span>
 <span><span class="co">## Coefficients:</span></span>
 <span><span class="co">## (Intercept)   year(date)  </span></span>
-<span><span class="co">##    58.86279     -0.02915</span></span></code></pre>
+<span><span class="co">##    58.86282     -0.02915</span></span></code></pre>
 <p>We can utilize the <code>broom</code> package to get “tidy” data from the model. There’s three primary functions:</p>
 <ol style="list-style-type: decimal">
 <li>
