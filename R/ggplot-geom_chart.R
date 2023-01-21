@@ -130,9 +130,12 @@ StatSegmentLeftBC <- ggplot2::ggproto("StatSegmentLeftBC", ggplot2::Stat,
 
                                         data <-  data %>%
                                             dplyr::mutate(color = ifelse(open < close, colour_up, colour_down))
+                                      
+                                      # Dynamic Size of the Candle (for support Date with Hour, and Minutes) 
+                                      candle_size <- (data$x[2] - data$x[1])/2
 
                                         tibble::tibble(x    = data$x,
-                                                       xend = data$x - 0.5,
+                                                       xend = data$x - candle_size,
                                                        y    = data$open,
                                                        yend = data$open,
                                                        colour = data$color)
@@ -150,8 +153,11 @@ StatSegmentRightBC <- ggplot2::ggproto("StatSegmentRightBC", ggplot2::Stat,
                                           data <-  data %>%
                                               dplyr::mutate(color = ifelse(open < close, colour_up, colour_down))
 
+                                          # Dynamic Size of the Candle (for support Date with Hour, and Minutes) 
+                                          candle_size <- (data$x[2] - data$x[1])/2
+                                        
                                           tibble::tibble(x    = data$x,
-                                                         xend = data$x + 0.5,
+                                                         xend = data$x + candle_size,
                                                          y    = data$close,
                                                          yend = data$close,
                                                          colour = data$color)
@@ -212,9 +218,12 @@ StatRectCS <- ggplot2::ggproto("StatRectCS", ggplot2::Stat,
                                         dplyr::mutate(fill = ifelse(open < close, fill_up, fill_down),
                                                       ymin = ifelse(open < close, open, close),
                                                       ymax = ifelse(open < close, close, open))
-
-                                    tibble::tibble(xmin = data$x - 0.45,
-                                                   xmax = data$x + 0.45,
+                                  
+                                     # Dynamic Size of the Candle (for support Date with Hour, and Minutes) 
+                                     candle_size <- (data$x[2] - data$x[1])/2
+                                  
+                                    tibble::tibble(xmin = data$x - candle_size,
+                                                   xmax = data$x + candle_size,
                                                    ymin = data$ymin,
                                                    ymax = data$ymax,
                                                    fill = data$fill)
