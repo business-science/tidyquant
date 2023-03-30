@@ -1,3 +1,5 @@
+# tidyquant 1.0.6.9000
+
 # tidyquant 1.0.6
 
 - Fix tq_performance test failure under PerformanceAnalytics 2.0.6 #223

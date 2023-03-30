@@ -46,9 +46,9 @@ Imports:
     TTR,
     xts,
     rlang,
+    tidyverse,
     tidyselect
 Suggests:
-    tidyverse,
     tibbletime,
     forcats,
     broom,
@@ -59,6 +59,6 @@ Suggests:
     Rblpapi,
     covr,
     janitor
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
