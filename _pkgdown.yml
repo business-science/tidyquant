@@ -16,14 +16,11 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Function Reference"
-      href: reference/index.html
+    - text: "Getting Started"
+      href: articles/TQ00-introduction-to-tidyquant.html
     - text: "Tutorials"
       href: articles/index.html
       menu:
-        - text: "NEW: Excel in R"
-          href: articles/TQ06-excel-in-r.html
-        - text: '---'
         - text: 'Financial Workflow'
         - text: "Introduction to tidyquant"
           href: articles/TQ00-introduction-to-tidyquant.html
@@ -37,6 +34,12 @@ navbar:
           href: articles/TQ04-charting-with-tidyquant.html
         - text: "Performance analysis"
           href: articles/TQ05-performance-analysis-with-tidyquant.html
+        - text: '---'
+        - text: 'Excel Users'
+        - text: "Excel in R"
+          href: articles/TQ06-excel-in-r.html
+    - text: "API Reference"
+      href: reference/index.html
     - text: "News"
       href: news/index.html
 
