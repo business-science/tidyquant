@@ -109,7 +109,7 @@ x8411T <- tq_get("8411.T", get = "stock.prices.japan", from = "2016-01-01", to  
 ```
 
 
-The data source is [Yahoo Finance](https://finance.yahoo.com/) and [Yahoo Finance Japan](https://finance.yahoo.co.jp/).
+The data source is Yahoo Finance (https://finance.yahoo.com/) and Yahoo Finance Japan (https://finance.yahoo.co.jp/).
 
 ## 2.2 FRED Economic Data
 

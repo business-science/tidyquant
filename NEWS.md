@@ -1,4 +1,6 @@
-# tidyquant 1.0.6.9000
+# tidyquant 1.0.7
+
+- Moved `tidyverse` from suggest to imports to pass cran tests
 
 # tidyquant 1.0.6
 
@@ -255,7 +257,7 @@ _[Potential Breaking Change] Move `tidyverse` to suggests_
 # tidyquant 0.3.0
 
 * New data:
-    * New `tq_get` option `get = "key.stats"`, which retrieves the current key statistics (55 total) from [www.finance.yahoo.com/](https://finance.yahoo.com/). These include various current data such as Ask, Bid, Day's High, Day's Low, Last Trade Price, current P/E Ratio, EPS, Current Market Cap, EPS Projected Current Year, EPS Projected Next Year and many more. Example: `tq_get("AAPL", get = "key.stats")`.
+    * New `tq_get` option `get = "key.stats"`, which retrieves the current key statistics (55 total) from www.finance.yahoo.com/. These include various current data such as Ask, Bid, Day's High, Day's Low, Last Trade Price, current P/E Ratio, EPS, Current Market Cap, EPS Projected Current Year, EPS Projected Next Year and many more. Example: `tq_get("AAPL", get = "key.stats")`.
 * New visualizations that integrate with `ggplot2`:
     * Chart geoms: Bar charts (`geom_barchart`) and candlestick charts (`geom_candlestick`) can be quickly created with the new geoms.
     * Moving Averages: Seven moving averages can be quickly visualized / prototyped using `geom_ma`. The geom wraps the `TTR::SMA` functions.
