@@ -46,13 +46,11 @@
   <a class="nav-link" href="../index.html">Home</a>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Function Reference</a>
+  <a class="nav-link" href="../articles/TQ00-introduction-to-tidyquant.html">Getting Started</a>
 </li>
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
-    <a class="dropdown-item" href="../articles/TQ06-excel-in-r.html">NEW: Excel in R</a>
-    <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Financial Workflow</h6>
     <a class="dropdown-item" href="../articles/TQ00-introduction-to-tidyquant.html">Introduction to tidyquant</a>
     <a class="dropdown-item" href="../articles/TQ01-core-functions-in-tidyquant.html">Core functions</a>
@@ -60,7 +58,13 @@
     <a class="dropdown-item" href="../articles/TQ03-scaling-and-modeling-with-tidyquant.html">Scaling and modeling</a>
     <a class="dropdown-item" href="../articles/TQ04-charting-with-tidyquant.html">Charting</a>
     <a class="dropdown-item" href="../articles/TQ05-performance-analysis-with-tidyquant.html">Performance analysis</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Excel Users</h6>
+    <a class="dropdown-item" href="../articles/TQ06-excel-in-r.html">Excel in R</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">API Reference</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">News</a>
@@ -690,7 +694,7 @@ calculated from the “adjusted” prices using the process in Example
 <span><span class="co">## <span style="color: #BCBCBC;"> 7</span> FB     2013-07-31          0.479              0.037<span style="text-decoration: underline;">3</span> </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> FB     2013-08-30          0.122             -<span style="color: #BB0000;">0.010</span><span style="color: #BB0000; text-decoration: underline;">4</span> </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> FB     2013-09-30          0.217              0.025<span style="text-decoration: underline;">3</span> </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> FB     2013-10-31         -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">398</span>           0.050<span style="text-decoration: underline;">2</span> </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> FB     2013-10-31         -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">398</span>           0.050<span style="text-decoration: underline;">3</span> </span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 182 more rows</span></span></span></code></pre>
 <p>The <code><a href="https://rdrr.io/pkg/TTR/man/runFun.html" class="external-link">TTR::runCor</a></code> function can be used to evaluate rolling
 correlations using the xy pattern. Looking at the documentation
@@ -919,12 +923,12 @@ to increase.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## Residuals:</span></span>
 <span><span class="co">##        Min         1Q     Median         3Q        Max </span></span>
-<span><span class="co">## -0.0269572 -0.0039655  0.0002149  0.0039653  0.0289464 </span></span>
+<span><span class="co">## -0.0269578 -0.0039653  0.0002149  0.0039652  0.0289460 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Coefficients:</span></span>
 <span><span class="co">##              Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
 <span><span class="co">## (Intercept) 0.0001130  0.0003097   0.365    0.715    </span></span>
-<span><span class="co">## V           0.8133668  0.0226393  35.927   &lt;2e-16 ***</span></span>
+<span><span class="co">## V           0.8133676  0.0226393  35.927   &lt;2e-16 ***</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
