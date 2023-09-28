@@ -20,7 +20,7 @@ navbar:
      href: articles/TQ00-introduction-to-tidyquant.html
     news:
      text: News
-     href: news/news.html
+     href: news/index.html
     articles:
      text: Tutorials
      menu:
