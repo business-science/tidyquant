@@ -1,4 +1,3 @@
-library(tidyquant)
 context("Testing pivot_table()")
 
 # NORMAL ----
@@ -13,10 +12,8 @@ piv_1_tbl <- FANG %>%
 test_that("Test 1: Pivot table returns tibble with correct rows and columns.", {
     # Tibble
     expect_is(piv_1_tbl, "tbl")
-    # Rows
-    expect_equal(nrow(piv_1_tbl), 16)
-    # Columns
-    expect_equal(ncol(piv_1_tbl), 14)
+    # Rows + columns
+    expect_equal(dim(piv_1_tbl), c(16, 14))
 })
 
 # PROGRAMMING ----
@@ -34,7 +31,7 @@ piv_2_tbl <- FANG %>%
 
 test_that("Test 2: Pivot table returns tibble with correct rows and columns.", {
     # Tibble
-    expect_is(piv_2_tbl, "tbl")
+    expect_s3_class(piv_2_tbl, "tbl_df")
     # Rows
     expect_equal(nrow(piv_2_tbl), 16)
     # Columns

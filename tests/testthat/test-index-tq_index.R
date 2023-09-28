@@ -1,26 +1,29 @@
 context("Testing tq_index()")
 
-library(tidyquant)
-
 #### Setup
 options <- tq_index_options()
 
 #### Tests
 
 test_that("Test returns list of 5 options", {
-    expect_equal(length(options), 5)
+    expect_length(options, 5)
 })
 
 # Long running script: Collecting all stock lists
 test_that("Test all stock index options to ensure no issues during fetch.", {
 
+
     skip_on_cran()
-    for (i in seq_along(options)) {
-        tq_index(options[[i]]) %>%
-            expect_is("tbl") %>%
-            nrow() %>%
-            expect_gt(3)
+    test_option <- function(object) {
+        expect_s3_class(object, "tbl_df")
+        expect_gt(nrow(object), 3)
     }
+    tq_indexes <- purrr::map(
+        purrr::set_names(options),
+        tq_index
+    )
+    # Apply the test to every option
+    purrr::walk(tq_indexes, test_option)
 
 })
 

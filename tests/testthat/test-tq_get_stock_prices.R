@@ -1,5 +1,3 @@
-library(tidyquant)
-
 #### Setup
 get <- "stock.prices"
 context(paste0("Testing tq_get(get = '", get, "')"))
@@ -23,7 +21,7 @@ test_that("Test 1 returns tibble with correct rows and columns.", {
 
 test_that("Test 2 returns tibble with correct rows and columns.", {
     # Tibble
-    expect_is(test2, "tbl")
+    expect_s3_class(test2, "tbl_df")
     # Rows
     expect_equal(nrow(test2), 206)
     # Columns
