@@ -45,8 +45,7 @@ Imports:
     timeDate,
     TTR,
     xts,
-    rlang,
-    tidyselect
+    rlang
 Suggests:
     tibbletime,
     forcats,
