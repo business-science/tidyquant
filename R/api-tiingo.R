@@ -10,14 +10,11 @@
 #' @seealso [tq_get()] `get = "tiingo"`
 #'
 #'
-#' @examples
+#' @examplesIf rlang::is_installed("riingo")
 #' \dontrun{
-#' if (rlang::is_installed("riingo)) {
 #'   tiingo_api_key(api_key = "foobar")
 #' }
-#' }
 #'
-#' @name tiingo_api_key
 #' @export
 tiingo_api_key <- function(api_key) {
     if(!requireNamespace("riingo", quietly = TRUE)) {

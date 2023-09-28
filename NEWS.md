@@ -1,3 +1,14 @@
+# tidyquant (development version)
+
+- Remove the dependency on tidyverse
+- tidyquant no longer loads lubridate as tidyverse 2.0 now loads lubridate
+- Changed the `size` argument to `linewidth` for ggplot2 3.4.0
+- Removed the last tidyr and dplyr deprecated functions 
+- Add linewidth = to `geom_ma()`
+- Move Quandl, riingo, and alphavantager to Suggests. tidyquant will not explictly install those, but you can install them from CRAN.
+- Fixed CRAN alias
+
+
 # tidyquant 1.0.7
 
 - Moved `tidyverse` from suggest to imports to pass cran tests
@@ -238,7 +249,7 @@ _[Potential Breaking Change] Move `tidyverse` to suggests_
     * Split introduction into four separate vignettes, which improves flow and enables readers to more easily get to needed documentation. Now five docs total covering the primary needs of `tidyquant` users!
 * New data:
     * `tq_exchange()` gets the stock list for NASDAQ, NYSE, and AMEX exchanges. Use `tq_exchange_options()` to exchange options.
-    * `FANG` data set that can be loaded with `data(FANG)`.
+    * `FANG` data set
 * New visualizations that integrate with `ggplot2`:
     * `palette_()` functions used to create scales are exported.
     * `theme_tq()` creates light, dark, and green themes for tidyquant visualizations.
