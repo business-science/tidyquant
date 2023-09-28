@@ -42,6 +42,7 @@ Load the `tidyquant` package to get started.
 library(tidyquant)
 library(lubridate)
 library(dplyr)
+library(tidyr)
 library(ggplot2)
 ```
 

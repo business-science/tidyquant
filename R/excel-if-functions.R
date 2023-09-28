@@ -48,7 +48,7 @@
 #' value (scalar). See examples below.
 #'
 #'
-#' @examples
+#' @examplesIf rlang::is_installed("forcats")
 #' library(tidyquant)
 #' library(dplyr)
 #' library(timetk)
@@ -81,7 +81,7 @@
 #'
 #' # Count negative returns by month
 #' FANG %>%
-#'     mutate(symbol = as_factor(symbol)) %>%
+#'     mutate(symbol = forcats::as_factor(symbol)) %>%
 #'     group_by(symbol) %>%
 #'
 #'     # Collapse from daily to FIRST value by month

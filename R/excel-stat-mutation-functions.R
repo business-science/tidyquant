@@ -26,10 +26,10 @@
 #' @return
 #' - __Mutation functions__ return a mutated / transformed version of the vector
 #'
-#' @examples
+#' @examplesIf rlang::is_installed("forcats")
+#'
 #' # Libraries
 #' library(timetk)
-#' library(forcats)
 #' library(dplyr)
 #'
 #' # --- Basic Usage ----
@@ -43,7 +43,7 @@
 #' # Go from daily to monthly periodicity,
 #' # then calculate returns and growth of $1 USD
 #' FANG %>%
-#'     mutate(symbol = as_factor(symbol)) %>%
+#'     mutate(symbol = forcats::as_factor(symbol)) %>%
 #'     group_by(symbol) %>%
 #'
 #'     # Summarization - Collapse from daily to FIRST value by month

@@ -84,6 +84,7 @@ value (scalar). See examples below.
 }
 
 \examples{
+\dontshow{if (rlang::is_installed("forcats")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(tidyquant)
 library(dplyr)
 library(timetk)
@@ -116,7 +117,7 @@ FANG \%>\%
 
 # Count negative returns by month
 FANG \%>\%
-    mutate(symbol = as_factor(symbol)) \%>\%
+    mutate(symbol = forcats::as_factor(symbol)) \%>\%
     group_by(symbol) \%>\%
 
     # Collapse from daily to FIRST value by month
@@ -136,5 +137,5 @@ FANG \%>\%
     summarise(
         negative_monthly_returns = COUNT_IFS(returns, returns < 0)
     )
-
+\dontshow{\}) # examplesIf}
 }
