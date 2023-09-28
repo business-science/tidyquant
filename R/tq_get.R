@@ -511,7 +511,7 @@ tq_get_util_1 <-
         # Tidy a single financial statement
         tidy_fin <- function(x) {
 
-            group <- seq_len(row(x))
+            group <- seq_len(nrow(x))
 
             df <- dplyr::bind_cols(
                     tibble::tibble(group),
