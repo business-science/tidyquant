@@ -29,13 +29,14 @@ Imports:
     ggplot2,
     jsonlite, 
     httr,
-    curl, 
+    curl,
+    forcats,
     lazyeval,
     magrittr,
     purrr,
     Quandl,
     riingo,
-    readr, 
+    readr,
     readxl,
     alphavantager (>= 0.1.2),
     stringr,
@@ -48,14 +49,12 @@ Imports:
     rlang
 Suggests:
     tibbletime,
-    forcats,
     broom,
     knitr,
     rmarkdown,
     testthat (>= 2.1.0),
     scales,
     Rblpapi,
-    covr,
     janitor
 RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
