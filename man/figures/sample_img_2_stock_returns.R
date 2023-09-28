@@ -21,7 +21,7 @@ FANG_wealth <- FANG_returns %>%
 # Visualize!!!
 FANG_wealth %>%
     ggplot(aes(x = date, y = wealth.index, color = symbol)) +
-    geom_line(size = 2) +
+    geom_line(linewidth = 2) +
     geom_smooth(method = "loess") +
     labs(title = "Individual Stocks: Comparing the Growth of $10K",
          subtitle = "Quickly visualize stock performance",

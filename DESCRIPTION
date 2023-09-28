@@ -26,8 +26,8 @@ Depends:
     quantmod (>= 0.4-13)
 Imports:
     dplyr (>= 1.0.0),
-    ggplot2,
-    jsonlite, 
+    ggplot2 (>= 3.4.0),
+    jsonlite,
     httr,
     curl,
     forcats,

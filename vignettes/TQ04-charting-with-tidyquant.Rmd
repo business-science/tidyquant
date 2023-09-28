@@ -136,7 +136,7 @@ AAPL %>%
     labs(title = "AAPL Bar Chart", 
          subtitle = "Zoomed in, Experimenting with Formatting",
          y = "Closing Price", x = "") + 
-    coord_x_date(xlim = c(end - weeks(6), end),
+    coord_x_date(xlim = c(end - lubridate::weeks(6), end),
                  c(aapl_range_60_tbl$min_low, aapl_range_60_tbl$max_high)) + 
     theme_tq()
 ```
@@ -484,7 +484,7 @@ n_mavg <- 50 # Number of periods (days) for moving average
 FANG %>%
     filter(date >= start - days(2 * n_mavg)) %>%
     ggplot(aes(x = date, y = close, color = symbol)) +
-    geom_line(size = 1) +
+    geom_line(linewidth = 1) +
     geom_ma(n = 15, color = "darkblue", size = 1) + 
     geom_ma(n = n_mavg, color = "red", size = 1) +
     labs(title = "Dark Theme",
@@ -493,6 +493,6 @@ FANG %>%
     facet_wrap(~ symbol, scales = "free_y") +
     theme_tq_dark() +
     scale_color_tq(theme = "dark") +
-    scale_y_continuous(labels = scales::dollar)
+    scale_y_continuous(labels = scales::label_dollar())
 ```
 

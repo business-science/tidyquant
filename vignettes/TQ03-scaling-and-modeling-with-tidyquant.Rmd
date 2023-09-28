@@ -202,7 +202,7 @@ AAPL_annual_log_returns %>%
     ggplot(aes(x = year(date), y = yearly.returns)) + 
     geom_hline(yintercept = 0, color = palette_light()[[1]]) +
     geom_point(size = 2, color = palette_light()[[3]]) +
-    geom_line(size = 1, color = palette_light()[[3]]) + 
+    geom_line(linewidth = 1, color = palette_light()[[3]]) + 
     geom_smooth(method = "lm", se = FALSE) +
     labs(title = "AAPL: Visualizing Trends in Annual Returns",
          x = "", y = "Annual Returns", color = "") +

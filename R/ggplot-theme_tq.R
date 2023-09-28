@@ -48,10 +48,10 @@ theme_tq <- function(base_size = 11, base_family = "") {
         ggplot2::theme(
 
             # Base Inherited Elements
-            line               =  ggplot2::element_line(colour = blue, size = 0.5, linetype = 1,
+            line               =  ggplot2::element_line(colour = blue, linewidth = 0.5, linetype = 1,
                                                         lineend = "butt"),
             rect               =  ggplot2::element_rect(fill = white, colour = blue,
-                                                        size = 0.5, linetype = 1),
+                                                        linewidth = 0.5, linetype = 1),
             text               =  ggplot2::element_text(family = base_family, face = "plain",
                                                         colour = blue, size = base_size,
                                                         lineheight = 0.9, hjust = 0.5, vjust = 0.5, angle = 0,
@@ -60,14 +60,14 @@ theme_tq <- function(base_size = 11, base_family = "") {
             # Axes
             axis.line          = ggplot2::element_blank(),
             axis.text          = ggplot2::element_text(size = ggplot2::rel(0.8)),
-            axis.ticks         = ggplot2::element_line(color = grey, size = ggplot2::rel(1/3)),
+            axis.ticks         = ggplot2::element_line(color = grey, linewidth = ggplot2::rel(1/3)),
             axis.title         = ggplot2::element_text(size = ggplot2::rel(1.0)),
 
             # Panel
             panel.background   = ggplot2::element_rect(fill = white, color = NA),
-            panel.border       = ggplot2::element_rect(fill = NA, size = ggplot2::rel(1/2), color = blue),
-            panel.grid.major   = ggplot2::element_line(color = grey, size = ggplot2::rel(1/3)),
-            panel.grid.minor   = ggplot2::element_line(color = grey, size = ggplot2::rel(1/3)),
+            panel.border       = ggplot2::element_rect(fill = NA, linewidth = ggplot2::rel(1/2), color = blue),
+            panel.grid.major   = ggplot2::element_line(color = grey, linewidth = ggplot2::rel(1/3)),
+            panel.grid.minor   = ggplot2::element_line(color = grey, linewidth = ggplot2::rel(1/3)),
             panel.grid.minor.x = ggplot2::element_blank(),
             panel.spacing      = ggplot2::unit(.75, "cm"),
 
@@ -105,12 +105,12 @@ theme_tq_dark <- function(base_size = 11, base_family = "") {
         ggplot2::theme(
 
             # Axes
-            axis.ticks         = ggplot2::element_line(color = blue, size = ggplot2::rel(1/3)),
+            axis.ticks         = ggplot2::element_line(color = blue, linewidth = ggplot2::rel(1/3)),
 
             # Panel
             panel.background   = ggplot2::element_rect(fill = grey, color = NA),
-            panel.grid.major   = ggplot2::element_line(color = white, size = ggplot2::rel(1/3)),
-            panel.grid.minor   = ggplot2::element_line(color = white, size = ggplot2::rel(1/3)),
+            panel.grid.major   = ggplot2::element_line(color = white, linewidth = ggplot2::rel(1/3)),
+            panel.grid.minor   = ggplot2::element_line(color = white, linewidth = ggplot2::rel(1/3)),
 
             # Complete theme
             complete = TRUE
@@ -132,12 +132,12 @@ theme_tq_green <- function(base_size = 11, base_family = "") {
         ggplot2::theme(
 
             # Axes
-            axis.ticks         = ggplot2::element_line(color = blue, size = ggplot2::rel(1/3)),
+            axis.ticks         = ggplot2::element_line(color = blue, linewidth = ggplot2::rel(1/3)),
 
             # Panel
             panel.background   = ggplot2::element_rect(fill = green, color = NA),
-            panel.grid.major   = ggplot2::element_line(color = white, size = ggplot2::rel(1/3)),
-            panel.grid.minor   = ggplot2::element_line(color = white, size = ggplot2::rel(1/3)),
+            panel.grid.major   = ggplot2::element_line(color = white, linewidth = ggplot2::rel(1/3)),
+            panel.grid.minor   = ggplot2::element_line(color = white, linewidth = ggplot2::rel(1/3)),
 
             # Complete theme
             complete = TRUE

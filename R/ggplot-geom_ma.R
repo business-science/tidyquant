@@ -71,6 +71,8 @@
 #'    \item `colour`
 #'    \item `group`
 #'    \item `linetype`
+#'    \item `linewidth`
+#'
 #'    \item `size`
 #' }
 #'
@@ -207,7 +209,7 @@ StatMA_vol <- ggplot2::ggproto("StatSMA_vol", ggplot2::Stat,
 GeomMA <- ggplot2::ggproto("GeomMA", ggplot2::GeomLine,
                   default_aes = ggplot2::aes(colour = "darkblue",
                                     linetype = 2,
-                                    size = 0.5,
+                                    linewidth = 0.5,
                                     alpha = NA)
 )
 

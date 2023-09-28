@@ -52,7 +52,7 @@ FANG_portfolio_wealth <- FANG_returns_mult %>%
 # Visualize!!!
 FANG_portfolio_wealth  %>%
     ggplot(aes(x = date, y = wealth.index, color = factor(portfolio))) +
-    geom_line(size = 2) +
+    geom_line(linewidth = 2) +
     geom_smooth(method = "loess") +
     labs(title = "Portfolios: Comparing the Growth of $10K",
          subtitle = "Quickly visualize blended portfolio performance",

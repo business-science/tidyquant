@@ -131,6 +131,8 @@ The following aesthetics are understood (required are in bold):
 \item \code{colour}
 \item \code{group}
 \item \code{linetype}
+\item \code{linewidth}
+
 \item \code{size}
 }
 }
