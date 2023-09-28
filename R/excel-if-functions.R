@@ -49,8 +49,8 @@
 #'
 #'
 #' @examples
-#' library(tidyverse)
 #' library(tidyquant)
+#' library(dplyr)
 #' library(timetk)
 #' library(stringr)
 #' library(lubridate)

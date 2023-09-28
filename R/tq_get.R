@@ -95,8 +95,6 @@
 #'
 #' @examples
 #' # Load libraries
-#' library(tidyquant)
-#' library(tidyverse)
 #'
 #' # Get the list of `get` options
 #' tq_get_options()
@@ -251,8 +249,7 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
 
         names(x)[[1]] <- "symbol.."
 
-        x_tib <- x %>%
-            tibble::as_tibble()
+        x_tib <- tibble::as_tibble(x)
 
         ret <- tq_get_map(x = x_tib, get = get, complete_cases = complete_cases, ...)
 

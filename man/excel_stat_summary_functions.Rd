@@ -103,8 +103,8 @@ Most functions replicate the behavior of Excel:
 # Libraries
 library(tidyquant)
 library(timetk)
-library(tidyverse)
 library(forcats)
+library(dplyr)
 
 # --- Basic Usage ----
 

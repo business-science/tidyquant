@@ -46,7 +46,6 @@ Imports:
     TTR,
     xts,
     rlang,
-    tidyverse,
     tidyselect
 Suggests:
     tibbletime,

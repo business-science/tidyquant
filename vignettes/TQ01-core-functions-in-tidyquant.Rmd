@@ -44,7 +44,7 @@ Load the `tidyquant` package to get started.
 
 ```{r}
 # Loads tidyquant, lubridate, xts, quantmod, TTR 
-library(tidyverse)
+library(dplyr)
 library(tidyquant)
 ```
 

@@ -39,7 +39,7 @@ Most functions replicate the behavior of Excel:
 }
 \examples{
 library(tidyquant)
-library(tidyverse)
+library(dplyr)
 
 lookup_table <- tibble(
     stock   = c("FB", "AMZN", "NFLX", "GOOG"),

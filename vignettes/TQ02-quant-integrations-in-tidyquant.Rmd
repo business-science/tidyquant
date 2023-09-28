@@ -39,8 +39,10 @@ Load the `tidyquant` package to get started.
 
 ```{r}
 # Loads tidyquant, lubridate, xts, quantmod, TTR 
-library(tidyverse)
 library(tidyquant)
+library(lubridate)
+library(dplyr)
+library(ggplot2)
 ```
 
 # 1.0 Function Compatibility

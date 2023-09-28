@@ -25,7 +25,7 @@
 #'
 #' @examples
 #' library(tidyquant)
-#' library(tidyverse)
+#' library(dplyr)
 #'
 #' lookup_table <- tibble(
 #'     stock   = c("FB", "AMZN", "NFLX", "GOOG"),
@@ -46,7 +46,7 @@
 #'     mutate(company = VLOOKUP(symbol, lookup_table, stock, company))
 #'
 #' @name excel_ref_functions
-
+NULL
 
 #' @rdname excel_ref_functions
 #' @export
@@ -60,6 +60,6 @@ VLOOKUP <- function(.lookup_values, .data, .lookup_column, .return_column) {
             y  = .data,
             by = c(x = rlang::quo_name(key_expr)),
         ) %>%
-        dplyr::pull(!! var_expr)
+        dplyr::pull(!!var_expr)
 }
 

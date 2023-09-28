@@ -1,5 +1,5 @@
 library(tidyquant)
-library(tidyverse)
+library(dplyr)
 context("Testing tq_transmute")
 
 #### Setup ----

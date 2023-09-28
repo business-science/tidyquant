@@ -45,7 +45,9 @@ Load the `tidyquant` package to get started.
 
 ```{r}
 # Loads tidyquant, lubridate, xts, quantmod, TTR, and PerformanceAnalytics
-library(tidyverse)
+library(lubridate)
+library(dplyr)
+library(ggplot2)
 library(tidyquant)  
 ```
 
