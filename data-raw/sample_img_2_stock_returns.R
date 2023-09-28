@@ -1,7 +1,7 @@
 library(tidyquant)
 
 # Get some data
-FANG <- c("FB", "AMZN", "NFLX", "GOOG") %>%
+FANG <- c("META", "AMZN", "NFLX", "GOOG") %>%
     tq_get(get = "stock.prices", from = "2013-01-01", to = "2017-01-01")
 
 # Transform to monthly returns using split, apply, combine framework

@@ -1,7 +1,7 @@
 library(tidyquant)
 
 # Get some data
-FANG <- c("FB", "AMZN", "NFLX", "GOOG") %>%
+FANG <- c("META", "AMZN", "NFLX", "GOOG") %>%
     tq_get(get = "stock.prices", from = "2013-01-01", to = "2017-01-01")
 
 # Transform to monthly returns using split, apply, combine framework
@@ -21,22 +21,22 @@ FANG_returns_mult <- FANG_returns %>%
 # B: Make weights table
 weights_table <- tribble(
     ~portfolio, ~stocks, ~weights,
-    1,          "FB",    0.50,
+    1,          "META",    0.50,
     1,          "AMZN",  0.25,
     1,          "NFLX",  0.25,
     1,          "GOOG",  0.00,
 
-    2,          "FB",    0.00,
+    2,          "META",    0.00,
     2,          "AMZN",  0.50,
     2,          "NFLX",  0.25,
     2,          "GOOG",  0.25,
 
-    3,          "FB",    0.25,
+    3,          "META",    0.25,
     3,          "AMZN",  0.00,
     3,          "NFLX",  0.50,
     3,          "GOOG",  0.25,
 
-    4,          "FB",    0.25,
+    4,          "META",    0.25,
     4,          "AMZN",  0.25,
     4,          "NFLX",  0.00,
     4,          "GOOG",  0.50) %>%
@@ -62,4 +62,4 @@ FANG_portfolio_wealth  %>%
     scale_color_tq() +
     scale_y_continuous(labels = scales::label_dollar())
 
-ggsave("img/sample_img_3_portfolio_returns.png", width = 7.64, height = 4.5)
+ggsave("man/figures/sample_img_3_portfolio_returns.png", width = 7.64, height = 4.5)
