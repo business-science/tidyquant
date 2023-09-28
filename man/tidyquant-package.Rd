@@ -33,6 +33,7 @@ To learn more about tidyquant, start with the vignettes:
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://business-science.github.io/tidyquant/}
   \item \url{https://github.com/business-science/tidyquant}
   \item Report bugs at \url{https://github.com/business-science/tidyquant/issues}
 }

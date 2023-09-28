@@ -14,7 +14,7 @@ Description: Bringing business and financial analysis to the 'tidyverse'. The 't
     advantage is being able to use quantitative functions with the 'tidyverse'
     functions including 'purrr', 'dplyr', 'tidyr', 'ggplot2', 'lubridate', etc. See 
     the 'tidyquant' website for more information, documentation and examples.
-URL: https://github.com/business-science/tidyquant
+URL: https://business-science.github.io/tidyquant/, https://github.com/business-science/tidyquant
 BugReports: https://github.com/business-science/tidyquant/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
