@@ -1,7 +1,7 @@
 #' Stock prices for the "FANG" stocks.
 #'
 #' A dataset containing the daily historical stock prices for the "FANG" tech stocks,
-#' "FB", "AMZN", "NFLX", and "GOOG", spanning from the beginning of
+#' "META", "AMZN", "NFLX", and "GOOG", spanning from the beginning of
 #' 2013 through the end of 2016.
 #'
 #' @format A "tibble" ("tidy" data frame) with 4,032 rows and 8 variables:

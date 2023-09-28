@@ -27,4 +27,4 @@ d <- FANG %>%
     scale_y_continuous(labels = scales::label_dollar())
 # Add dropped_aes
 d
-ggsave("figures/man/sample_img_1_volatility.png")
+ggsave("man/figures/sample_img_1_volatility.png")

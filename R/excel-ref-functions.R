@@ -27,7 +27,7 @@
 #' library(dplyr)
 #'
 #' lookup_table <- tibble(
-#'     stock   = c("FB", "AMZN", "NFLX", "GOOG"),
+#'     stock   = c("META", "AMZN", "NFLX", "GOOG"),
 #'     company = c("Facebook", "Amazon", "Netflix", "Google")
 #' )
 #'

@@ -25,7 +25,7 @@
 #' library(ggplot2)
 #'
 #' # Get stock prices
-#' stocks <- c("AAPL", "FB", "NFLX") %>%
+#' stocks <- c("AAPL", "META", "NFLX") %>%
 #'     tq_get(from = "2013-01-01",
 #'            to   = "2017-01-01")
 #'

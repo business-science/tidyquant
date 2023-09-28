@@ -62,11 +62,11 @@ A very basic example is retrieving the stock prices for multiple stocks. There a
 ## Method 1: Map a character vector with multiple stock symbols
 
 ```{r}
-c("AAPL", "GOOG", "FB") %>%
+c("AAPL", "GOOG", "META") %>%
     tq_get(get = "stock.prices", from = "2016-01-01", to = "2017-01-01")
 ```
 
-The output is a single level tibble with all or the stock prices in one tibble. The auto-generated column name is "symbol", which can be pre-emptively renamed by giving the vector a name (e.g. `stocks <- c("AAPL", "GOOG", "FB")`) and then piping to `tq_get`.
+The output is a single level tibble with all or the stock prices in one tibble. The auto-generated column name is "symbol", which can be pre-emptively renamed by giving the vector a name (e.g. `stocks <- c("AAPL", "GOOG", "META")`) and then piping to `tq_get`.
 
 
 ## Method 2: Map a tibble with stocks in first column

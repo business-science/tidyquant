@@ -103,7 +103,7 @@
 #' aapl_stock_prices <- tq_get("AAPL")
 #'
 #' # Get stock prices for multiple stocks
-#' mult_stocks <- tq_get(c("FB", "AMZN"),
+#' mult_stocks <- tq_get(c("META", "AMZN"),
 #'                       get  = "stock.prices",
 #'                       from = "2016-01-01",
 #'                       to   = "2017-01-01")

@@ -7,7 +7,7 @@
 - Add linewidth = to `geom_ma()`
 - Move Quandl, riingo, and alphavantager to Suggests. tidyquant will not explictly install those, but you can install them from CRAN.
 - Fixed CRAN alias
-
+- FB to META change  in `FANG`
 
 # tidyquant 1.0.7
 

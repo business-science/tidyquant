@@ -179,7 +179,7 @@ The `PerformanceAnalytics` mutation functions all deal with returns:
 
 # 2.0 Quantitative Power In Action
 
-We'll go through some examples, but first let's get some data. The `FANG` data set will be used which consists of stock prices for FB, AMZN, NFLX, and GOOG from the beginning of 2013 to the end of 2016.
+We'll go through some examples, but first let's get some data. The `FANG` data set will be used which consists of stock prices for META, AMZN, NFLX, and GOOG from the beginning of 2013 to the end of 2016.
 
 ```{r}
 FANG

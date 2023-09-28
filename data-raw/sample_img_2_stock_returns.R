@@ -30,4 +30,4 @@ FANG_wealth %>%
     scale_color_tq() +
     scale_y_continuous(labels = scales::dollar)
 
-ggsave("img/sample_img_2_stock_returns.png")
+ggsave("man/figures/sample_img_2_stock_returns.png")

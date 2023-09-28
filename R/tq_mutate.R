@@ -71,7 +71,7 @@
 #' ##### Basic Functionality
 #'
 #' fb_stock_prices  <- FANG %>%
-#'     filter(symbol == "FB") %>%
+#'     filter(symbol == "META") %>%
 #'         filter(
 #'             date >= "2016-01-01",
 #'             date <= "2016-12-31"

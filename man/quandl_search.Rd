@@ -6,15 +6,6 @@
 \usage{
 quandl_search(query, silent = FALSE, per_page = 10, ...)
 }
-\arguments{
-\item{query}{Search terms}
-
-\item{silent}{Prints the results when FALSE.}
-
-\item{per_page}{Number of results returned per page.}
-
-\item{...}{Additional named values that are interpretted as Quandl API parameters.}
-}
 \value{
 Returns a tibble with search results.
 }

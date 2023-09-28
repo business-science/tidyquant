@@ -260,7 +260,7 @@ av_api_key("<your-api-key>")
 
 ### Getting Alpha Vantage Data
 
-Getting data is simple as the structure follows the [Alpha Vantage API documentation](https://www.alphavantage.co/documentation/). For example, if you wish to retrieve intraday data at 5 minute intervals for META and MSFT, you can build the parameters `x = c("FB", "MSFT"), get = "alphavantager", av_fun = "TIME_SERIES_INTRADAY", interval = "5min"`. The familiar `x` and `get` are the same as you always use. The `av_fun` argument comes from `alphavantager::av_get()` and the Alpha Vantage documentation. The `interval` argument comes from the docs as well.
+Getting data is simple as the structure follows the [Alpha Vantage API documentation](https://www.alphavantage.co/documentation/). For example, if you wish to retrieve intraday data at 5 minute intervals for META and MSFT, you can build the parameters `x = c("META", "MSFT"), get = "alphavantager", av_fun = "TIME_SERIES_INTRADAY", interval = "5min"`. The familiar `x` and `get` are the same as you always use. The `av_fun` argument comes from `alphavantager::av_get()` and the Alpha Vantage documentation. The `interval` argument comes from the docs as well.
 
 ```{r, eval = F}
 # Scaling is as simple as supplying multiple symbols
@@ -308,7 +308,7 @@ my_bloomberg_data <- c('SPX Index','ODMAX Equity') %>%
 
 # 3.0 Mutate Quantitative Data
 
-Mutating functions enable the `xts`/`zoo`, `quantmod` and `TTR` functions to shine. We'll touch on the mutation functions briefly using the `FANG` data set, which consists of daily prices for FB, AMZN, GOOG, and NFLX from the beginning of 2013 to the end of 2016. We'll apply the functions to grouped data sets to get a feel for how each works
+Mutating functions enable the `xts`/`zoo`, `quantmod` and `TTR` functions to shine. We'll touch on the mutation functions briefly using the `FANG` data set, which consists of daily prices for META, AMZN, GOOG, and NFLX from the beginning of 2013 to the end of 2016. We'll apply the functions to grouped data sets to get a feel for how each works
 
 ```{r}
 FANG
