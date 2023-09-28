@@ -3,7 +3,6 @@
 ^data-raw$
 ^README\.Rmd$
 ^README-.*\.png$
-^\.travis\.yml$
 ^cran-comments\.md$
 ^revdep$
 img
@@ -11,7 +10,6 @@ img
 ^_pkgdown\.yml$
 ^index\.Rmd$
 ^docs$
-^appveyor\.yml$
 ^doc$
 ^Meta$
 ^CRAN-RELEASE$

@@ -1,5 +1,6 @@
 #' Set Tiingo API Key
 #'
+#' Requires the riingo package to be installled.
 #' @param api_key Optionally passed parameter to set Tiingo `api_key`.
 #'
 #' @return Returns invisibly the currently set `api_key`
@@ -9,12 +10,11 @@
 #' @seealso [tq_get()] `get = "tiingo"`
 #'
 #'
-#' @export
-#'
 #' @examples
-#'
 #' \dontrun{
-#' tiingo_api_key(api_key = "foobar")
+#' if (rlang::is_installed("riingo)) {
+#'   tiingo_api_key(api_key = "foobar")
+#' }
 #' }
 #'
 #' @name tiingo_api_key

@@ -28,8 +28,6 @@
 #'
 #'
 #' @examples
-#' # Load libraries
-#' library(tidyquant)
 #'
 #' # Get the list of stock index options
 #' tq_index_options()

@@ -33,7 +33,6 @@ For use when \code{fill} is specified as an \code{aes()} in a ggplot.}
 }
 \examples{
 # Load libraries
-library(tidyquant)
 library(dplyr)
 library(ggplot2)
 

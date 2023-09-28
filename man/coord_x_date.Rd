@@ -37,7 +37,6 @@ that enables quickly zooming in on plot regions using a date-time range.
 }
 \examples{
 # Load libraries
-library(tidyquant)
 library(dplyr)
 library(ggplot2)
 

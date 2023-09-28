@@ -13,17 +13,10 @@ tiingo_api_key(api_key)
 Returns invisibly the currently set \code{api_key}
 }
 \description{
-Set Tiingo API Key
+Requires the riingo package to be installled.
 }
 \details{
 A wrapper for \code{riingo::ringo_set_token()}
-}
-\examples{
-
-\dontrun{
-tiingo_api_key(api_key = "foobar")
-}
-
 }
 \seealso{
 \code{\link[=tq_get]{tq_get()}} \code{get = "tiingo"}

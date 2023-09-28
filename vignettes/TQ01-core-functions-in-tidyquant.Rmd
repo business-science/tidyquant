@@ -126,7 +126,12 @@ wti_price_usd
 
 ## 2.3 Nasdaq Data Link (Quandl) API
 
-[Quandl](https://data.nasdaq.com/) provides access to a vast number of financial and economic databases. The `Quandl` package has been integrated into `tidyquant` as follows.
+[Quandl](https://data.nasdaq.com/) provides access to a vast number of financial and economic databases. 
+The Quandl packages must be installed separately.
+
+```r
+install.packages("Quandl")
+```
 
 ### Authentication
 
@@ -238,13 +243,18 @@ tq_get(c("btcusd"),
 
 ## 2.5 Alpha Vantage API
 
-[Alpha Vantage](https://www.alphavantage.co/) provides access to a real-time and historical financial data. The `alphavantager` package, a lightweight R interface, has been integrated into `tidyquant` as follows. The benefit of the integration is the __scalability since we can now get multiple symbols returned in a tidy format__. 
+[Alpha Vantage](https://www.alphavantage.co/) provides access to a real-time and historical financial data. The `alphavantager` package, a lightweight R interface, has been integrated into `tidyquant` as follows. The benefit of the integration is the __scalability since we can now get multiple symbols returned in a tidy format__. You will need to install it first.
+
+```r
+install.packages("alphavantager")
+```
 
 ### Authentication
 
 To make full use of the integration you need to get an API key and then set your api key. If you don't have one already, go to [Alpha Vantage](https://www.alphavantage.co/) account and get your FREE API key. You can then set it as follows:
 
 ```{r, eval = F}
+# install.packages("alphavantager")
 av_api_key("<your-api-key>")
 ```
 
@@ -267,7 +277,8 @@ c("META", "MSFT") %>%
 To make full use of the integration you need to have a Bloomberg Terminal account (Note this is not a free service). If you have Bloomberg Terminal running on your machine, you can connect as follows:
 
 ```{r, eval = F}
-blpConnect()
+# install.packages("Rblpapi")
+Rblpapi::blpConnect()
 ```
 
 ### Getting Bloomberg Data

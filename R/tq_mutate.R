@@ -66,7 +66,6 @@
 #'
 #' @examples
 #' # Load libraries
-#' library(tidyquant)
 #' library(dplyr)
 #'
 #' ##### Basic Functionality
@@ -382,9 +381,9 @@ arrange_by_date <- function(tib) {
         tib <- tib %>%
             tidyr::nest() %>%
             dplyr::mutate(nested.col =
-                              purrr::map(data, arrange_date)
+                              purrr::map(.data$data, arrange_date)
             ) %>%
-            dplyr::select(-data) %>%
+            dplyr::select(-"data") %>%
             tidyr::unnest(cols = nested.col) %>%
             dplyr::group_by_at(.vars = group_names)
 

@@ -21,7 +21,9 @@ A wrapper for \code{Quandl::Quandl.api_key()}
 \examples{
 
 \dontrun{
+if (rlang::is_installed("Quandl")) {
 quandl_api_key(api_key = "foobar")
+}
 }
 }
 \seealso{

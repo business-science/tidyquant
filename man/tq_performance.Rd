@@ -57,11 +57,9 @@ that can be supplied to the \code{performance_fun} argument.
 }
 \examples{
 # Load libraries
-library(tidyquant)
 library(dplyr)
 
 # Use FANG data set
-data(FANG)
 
 # Get returns for individual stock components grouped by symbol
 Ra <- FANG \%>\%
