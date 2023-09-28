@@ -222,7 +222,10 @@ spdr_mapper <- function(x) {
            DOWGLOBAL   = "DGT",
            SP400       = "MDY",
            SP500       = "SPY",
-           SP600       = "SLY",
+           # SLY seems broken.
+           # Using SLYG for S&P 600
+           # https://www.ssga.com/us/en/institutional/etfs/funds/spdr-sp-600-small-cap-growth-etf-slyg
+           SP600       = "SLYG",
            SP1000      = "SMD"
            )
 }
