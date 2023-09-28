@@ -42,8 +42,6 @@
 #'     - __All grouping and summarizing functions MUST BE prefixed with `~`__. Example: `.rows = ~ YEAR(order_date)`
 #'
 #' @examples
-#' library(tidyquant)
-#'
 #' # PIVOT TABLE ----
 #' # Calculate returns by year/quarter
 #' FANG %>%

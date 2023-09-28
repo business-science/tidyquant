@@ -85,7 +85,6 @@ value (scalar). See examples below.
 
 \examples{
 \dontshow{if (rlang::is_installed("forcats")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-library(tidyquant)
 library(dplyr)
 library(timetk)
 library(stringr)

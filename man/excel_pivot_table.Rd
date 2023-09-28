@@ -70,8 +70,6 @@ The key parameters are:
 }
 }
 \examples{
-library(tidyquant)
-
 # PIVOT TABLE ----
 # Calculate returns by year/quarter
 FANG \%>\%

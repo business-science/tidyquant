@@ -24,7 +24,6 @@
 #' - Can only return values from one column only. Use `dplyr::left_join()` to perform table joining.
 #'
 #' @examples
-#' library(tidyquant)
 #' library(dplyr)
 #'
 #' lookup_table <- tibble(

@@ -50,8 +50,6 @@ The following stock data will be used for the examples. Use `tq_get` to get the 
 
 ```{r}
 # Use FANG data set
-data("FANG") 
-
 # Get AAPL and AMZN Stock Prices
 AAPL <- tq_get("AAPL", get = "stock.prices", from = "2015-09-01", to = "2016-12-31")
 AMZN <- tq_get("AMZN", get = "stock.prices", from = "2000-01-01", to = "2016-12-31")

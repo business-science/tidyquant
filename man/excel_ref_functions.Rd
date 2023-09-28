@@ -38,7 +38,6 @@ Most functions replicate the behavior of Excel:
 }
 }
 \examples{
-library(tidyquant)
 library(dplyr)
 
 lookup_table <- tibble(

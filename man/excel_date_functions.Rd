@@ -314,7 +314,6 @@ factor in workdays and \code{timeDate} holiday calendars for popular business ca
 }
 \examples{
 # Libraries
-library(tidyquant)
 library(lubridate)
 
 # --- Basic Usage ----

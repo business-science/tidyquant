@@ -78,7 +78,6 @@
 #'
 #' @examples
 #' # Libraries
-#' library(tidyquant)
 #' library(lubridate)
 #'
 #' # --- Basic Usage ----

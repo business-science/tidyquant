@@ -49,7 +49,6 @@
 #'
 #'
 #' @examplesIf rlang::is_installed("forcats")
-#' library(tidyquant)
 #' library(dplyr)
 #' library(timetk)
 #' library(stringr)

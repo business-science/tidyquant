@@ -27,7 +27,6 @@
 #' - __Mutation functions__ return a mutated / transformed version of the vector
 #'
 #' @examplesIf rlang::is_installed("forcats")
-#'
 #' # Libraries
 #' library(timetk)
 #' library(dplyr)

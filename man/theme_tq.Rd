@@ -22,7 +22,6 @@ The \code{theme_tq()} function creates a custom theme using tidyquant colors.
 }
 \examples{
 # Load libraries
-library(tidyquant)
 library(dplyr)
 library(ggplot2)
 

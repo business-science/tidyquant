@@ -55,11 +55,9 @@
 #'
 #' @examples
 #' # Load libraries
-#' library(tidyquant)
 #' library(dplyr)
 #'
 #' # Use FANG data set
-#' data(FANG)
 #'
 #' # Get returns for individual stock components
 #' monthly_returns_stocks <- FANG %>%
