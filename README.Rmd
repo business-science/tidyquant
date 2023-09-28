@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# tidyquant <img src="man/figures/tidyquant-logo.png" width="147" height="170" align="right" />
+# tidyquant <img src="man/figures/logo.png" width="147" height="170" align="right" />
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/business-science/tidyquant/workflows/R-CMD-check/badge.svg)](https://github.com/business-science/tidyquant/actions)

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidyquant <img src="man/figures/tidyquant-logo.png" width="147" height="170" align="right" />
+# tidyquant <img src="man/figures/logo.png" width="147" height="170" align="right" />
 
 <!-- badges: start -->
 
