@@ -1,12 +1,11 @@
 Package: tidyquant
 Type: Package
 Title: Tidy Quantitative Financial Analysis
-Version: 1.0.7
+Version: 1.0.7.9000
 Authors@R: c(
     person("Matt", "Dancho", email = "mdancho@business-science.io", role = c("aut", "cre")),
     person("Davis", "Vaughan", email = "dvaughan@business-science.io", role = c("aut"))
   )
-Maintainer: Matt Dancho <mdancho@business-science.io>
 Description: Bringing business and financial analysis to the 'tidyverse'. The 'tidyquant' 
     package provides a convenient wrapper to various 'xts', 'zoo', 'quantmod', 'TTR' 
     and 'PerformanceAnalytics' package 
