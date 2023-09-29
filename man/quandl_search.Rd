@@ -25,10 +25,12 @@ Search the Quandl database
 A wrapper for \code{Quandl::Quandl.search()}
 }
 \examples{
+\dontshow{if (rlang::is_installed("Quandl")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 \dontrun{
 quandl_search(query = "oil")
 }
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tq_get]{tq_get()}} \code{get = "quandl"}

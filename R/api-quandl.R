@@ -15,13 +15,16 @@
 #' @examples
 #'
 #' \dontrun{
+#' if (rlang::is_installed("Quandl")) {
 #' quandl_api_key(api_key = "foobar")
+#' }
 #' }
 NULL
 
 #' @rdname quandl_api_key
 #' @export
 quandl_api_key <- function(api_key) {
+    rlang::check_installed("Quandl")
 
     if (!missing(api_key)) {
         options(Quandl.api_key = api_key)
@@ -45,7 +48,7 @@ quandl_api_key <- function(api_key) {
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf rlang::is_installed("Quandl")
 #'
 #' \dontrun{
 #' quandl_search(query = "oil")
@@ -55,8 +58,8 @@ NULL
 #' @rdname quandl_search
 #' @export
 quandl_search <- function(query, silent = FALSE, per_page = 10, ...) {
-
-    Quandl.search(query = query, silent = silent, per_page = per_page, ...) %>%
+    rlang::check_installed("Quandl")
+    Quandl::Quandl.search(query = query, silent = silent, per_page = per_page, ...) %>%
         tibble::as_tibble()
 
 }

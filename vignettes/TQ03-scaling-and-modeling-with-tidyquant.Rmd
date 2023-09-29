@@ -7,7 +7,7 @@ output:
     toc: true
     toc_depth: 2
 vignette: >
-  %\VignetteIndexEntry{Scaling Your Analysis with tidyquant}
+  %\VignetteIndexEntry{Scaling and Modeling with tidyquant}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -45,7 +45,11 @@ Load the `tidyquant` package to get started.
 
 ```{r}
 # Loads tidyquant, lubridate, xts, quantmod, TTR, and PerformanceAnalytics
-library(tidyverse)
+library(lubridate)
+library(dplyr)
+library(purrr)
+library(ggplot2)
+library(tidyr)
 library(tidyquant)  
 ```
 
@@ -58,11 +62,11 @@ A very basic example is retrieving the stock prices for multiple stocks. There a
 ## Method 1: Map a character vector with multiple stock symbols
 
 ```{r}
-c("AAPL", "GOOG", "FB") %>%
+c("AAPL", "GOOG", "META") %>%
     tq_get(get = "stock.prices", from = "2016-01-01", to = "2017-01-01")
 ```
 
-The output is a single level tibble with all or the stock prices in one tibble. The auto-generated column name is "symbol", which can be pre-emptively renamed by giving the vector a name (e.g. `stocks <- c("AAPL", "GOOG", "FB")`) and then piping to `tq_get`.
+The output is a single level tibble with all or the stock prices in one tibble. The auto-generated column name is "symbol", which can be pre-emptively renamed by giving the vector a name (e.g. `stocks <- c("AAPL", "GOOG", "META")`) and then piping to `tq_get`.
 
 
 ## Method 2: Map a tibble with stocks in first column
@@ -117,8 +121,6 @@ You can use any applicable "getter" to get data for __every stock in an index or
 Once you get the data, you typically want to do something with it. You can easily do this at scale. Let's get the yearly returns for multiple stocks using `tq_transmute`. First, get the prices. We'll use the `FANG` data set, but you typically will use `tq_get` to retrieve data in "tibble" format.
 
 ```{r}
-data("FANG")
-
 FANG
 ```
 
@@ -200,7 +202,7 @@ AAPL_annual_log_returns %>%
     ggplot(aes(x = year(date), y = yearly.returns)) + 
     geom_hline(yintercept = 0, color = palette_light()[[1]]) +
     geom_point(size = 2, color = palette_light()[[3]]) +
-    geom_line(size = 1, color = palette_light()[[3]]) + 
+    geom_line(linewidth = 1, color = palette_light()[[3]]) + 
     geom_smooth(method = "lm", se = FALSE) +
     labs(title = "AAPL: Visualizing Trends in Annual Returns",
          x = "", y = "Annual Returns", color = "") +

@@ -12,40 +12,30 @@ template:
     ganalytics: UA-76139189-2
 
 navbar:
-  title: "tidyquant"
-  left:
-    - text: "Home"
-      href: index.html
-    - text: "Getting Started"
-      href: articles/TQ00-introduction-to-tidyquant.html
-    - text: "Tutorials"
-      href: articles/index.html
-      menu:
-        - text: 'Financial Workflow'
-        - text: "Introduction to tidyquant"
-          href: articles/TQ00-introduction-to-tidyquant.html
-        - text: "Core functions"
-          href: articles/TQ01-core-functions-in-tidyquant.html
-        - text: "Quantitative integrations"
-          href: articles/TQ02-quant-integrations-in-tidyquant.html
-        - text: "Scaling and modeling"
-          href: articles/TQ03-scaling-and-modeling-with-tidyquant.html
-        - text: "Charting"
-          href: articles/TQ04-charting-with-tidyquant.html
-        - text: "Performance analysis"
-          href: articles/TQ05-performance-analysis-with-tidyquant.html
-        - text: '---'
-        - text: 'Excel Users'
-        - text: "Excel in R"
-          href: articles/TQ06-excel-in-r.html
-    - text: "API Reference"
-      href: reference/index.html
-    - text: "News"
-      href: news/index.html
+  structure:
+    left:  [intro, articles, reference, news]
+  components:
+    intro:
+     text: Getting Started
+     href: articles/TQ00-introduction-to-tidyquant.html
+    news:
+     text: News
+     href: news/index.html
 
-  right:
-    - icon: fab fa-github
-      href: https://github.com/business-science/tidyquant
+articles:
+- title: Financial
+  navbar: Financial Workflow
+  contents:
+  - TQ00-introduction-to-tidyquant
+  - TQ01-core-functions-in-tidyquant
+  - TQ02-quant-integrations-in-tidyquant
+  - TQ03-scaling-and-modeling-with-tidyquant
+  - TQ04-charting-with-tidyquant
+  - TQ05-performance-analysis-with-tidyquant
+- title: Excel
+  navbar: Excel Users
+  contents:
+  - TQ06-excel-in-r
 
 reference:
 

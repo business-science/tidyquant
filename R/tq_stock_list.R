@@ -28,8 +28,6 @@
 #'
 #'
 #' @examples
-#' # Load libraries
-#' library(tidyquant)
 #'
 #' # Get the list of stock index options
 #' tq_index_options()
@@ -222,7 +220,10 @@ spdr_mapper <- function(x) {
            DOWGLOBAL   = "DGT",
            SP400       = "MDY",
            SP500       = "SPY",
-           SP600       = "SLY",
+           # SLY seems broken.
+           # Using SLYG for S&P 600
+           # https://www.ssga.com/us/en/institutional/etfs/funds/spdr-sp-600-small-cap-growth-etf-slyg
+           SP600       = "SLYG",
            SP1000      = "SMD"
            )
 }
@@ -246,7 +247,7 @@ index_download <- function(x, index_name) {
     tryCatch({
 
         # Download to disk, force as a xlsx
-        httr::GET(spdr_link, httr::write_disk(tf <- tempfile(fileext = ".xlsx")))
+        curl::curl_download(spdr_link, tf <- tempfile(fileext = ".xlsx"))
 
         # Read the xls file
         suppressMessages({
@@ -261,7 +262,7 @@ index_download <- function(x, index_name) {
     }, error = function(e) {
 
         # On error, catch it and return
-        res$err <- paste0("Error at ", index_name, " during download. \n", e)
+        res$err <- paste0("Error at ", index_name, x, " during download. \n", e)
 
         return(res)
 

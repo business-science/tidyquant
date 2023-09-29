@@ -24,18 +24,13 @@
 #' To learn more about tidyquant, start with the vignettes:
 #'  `browseVignettes(package = "tidyquant")`
 #'
-#' @docType package
-#' @name tidyquant
 #'
 #' @import quantmod
 #' @import lubridate
 #' @import PerformanceAnalytics
-#' @importFrom rlang ":="
-#' @importFrom magrittr "%>%"
-#' @importFrom magrittr "%$%"
-#' @importFrom utils "data" "download.file" "read.csv"
-#' @importFrom TTR "SMA"
-#' @importFrom xts "to.period"
-#' @importFrom Quandl "Quandl" "Quandl.datatable" "Quandl.api_key" "Quandl.search"
-
-NULL
+#' @importFrom rlang ":=" .data
+#' @importFrom magrittr %$%
+#' @importFrom utils download.file read.csv
+#' @importFrom TTR SMA
+#' @importFrom xts to.period
+"_PACKAGE"

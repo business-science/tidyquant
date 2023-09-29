@@ -1,5 +1,3 @@
-library(tidyquant)
-
 #### Setup
 
 context(paste0("Testing tq_portfolio"))
@@ -13,7 +11,7 @@ stock_prices <- c("AAPL", "GOOG", "NFLX") %>%
 
 # Get returns for individual stock components
 portfolio_monthly_returns <- stock_prices %>%
-    group_by(symbol) %>%
+    dplyr::group_by(symbol) %>%
     tq_transmute(adjusted, periodReturn, period = "monthly")
 
 # Method 1: Use tq_portfolio with numeric vector of weights
@@ -26,7 +24,7 @@ test1 <- tq_portfolio(data = portfolio_monthly_returns,
                       wealth.index = FALSE)
 
 
-weights_df <- tibble(symbol = c("AAPL", "NFLX"),
+weights_df <- dplyr::tibble(symbol = c("AAPL", "NFLX"),
                      weights = c(0.5, 0.5))
 test2 <- tq_portfolio(data = portfolio_monthly_returns,
                       assets_col = symbol,
@@ -57,7 +55,7 @@ test3_equivalence <- tq_portfolio(data = portfolio_monthly_returns,
 
 test_that("Tests return equivalent tibbles", {
     # Tibble
-    expect_is(test1, "tbl")
+    expect_s3_class(test1, "tbl_df")
     # Equivalence
     expect_equal(test1, test2)
     # Rows

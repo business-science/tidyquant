@@ -86,11 +86,10 @@ Most functions replicate the behavior of Excel:
 }
 
 \examples{
+\dontshow{if (rlang::is_installed("forcats")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Libraries
-library(tidyquant)
 library(timetk)
-library(tidyverse)
-library(forcats)
+library(dplyr)
 
 # --- Basic Usage ----
 
@@ -103,7 +102,7 @@ PCT_CHANGE(c(21, 24, 22, 25), fill_na = 0)
 # Go from daily to monthly periodicity,
 # then calculate returns and growth of $1 USD
 FANG \%>\%
-    mutate(symbol = as_factor(symbol)) \%>\%
+    mutate(symbol = forcats::as_factor(symbol)) \%>\%
     group_by(symbol) \%>\%
 
     # Summarization - Collapse from daily to FIRST value by month
@@ -119,5 +118,5 @@ FANG \%>\%
         returns = PCT_CHANGE(adjusted, fill_na = 0),
         growth  = CUMULATIVE_SUM(returns) + 1
     )
-
+\dontshow{\}) # examplesIf}
 }

@@ -1,5 +1,3 @@
-library(tidyquant)
-
 #### Setup
 
 context(paste0("Testing tq_performance"))
@@ -9,7 +7,7 @@ Ra <- c("AAPL", "GOOG", "NFLX") %>%
     tq_get(get  = "stock.prices",
            from = "2010-01-01",
            to   = "2015-12-31") %>%
-    group_by(symbol) %>%
+    dplyr::group_by(symbol) %>%
     tq_transmute(adjusted, periodReturn, period = "monthly", col_rename = "Ra")
 
 # Get returns for SP500 as baseline
@@ -20,7 +18,7 @@ Rb <- "^GSPC" %>%
     tq_transmute(adjusted, periodReturn, period = "monthly", col_rename = "Rb")
 
 # Merge stock returns with baseline
-RaRb <- left_join(Ra, Rb, by = c("date" = "date"))
+RaRb <- dplyr::left_join(Ra, Rb, by = c("date" = "date"))
 
 # Get performance metrics
 test1 <- RaRb %>%

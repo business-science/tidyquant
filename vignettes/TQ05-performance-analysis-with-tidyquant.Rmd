@@ -60,7 +60,8 @@ We'll use the `PerformanceAnalytics` function, `table.CAPM`, to evaluate the ret
 First, load the `tidyquant` package.
 
 ```{r}
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
 library(tidyquant)
 ```
 
@@ -617,7 +618,7 @@ portfolio_growth_monthly <- stock_returns_monthly %>%
 ```{r}
 portfolio_growth_monthly %>%
     ggplot(aes(x = date, y = investment.growth)) +
-    geom_line(size = 2, color = palette_light()[[1]]) +
+    geom_line(linewidth = 2, color = palette_light()[[1]]) +
     labs(title = "Portfolio Growth",
          subtitle = "50% AAPL, 0% GOOG, and 50% NFLX",
          caption = "Now we can really visualize performance!",
@@ -648,7 +649,7 @@ portfolio_growth_monthly_multi <- stock_returns_monthly_multi %>%
 ```{r}
 portfolio_growth_monthly_multi %>%
     ggplot(aes(x = date, y = investment.growth, color = factor(portfolio))) +
-    geom_line(size = 2) +
+    geom_line(linewidth = 2) +
     labs(title = "Portfolio Growth",
          subtitle = "Comparing Multiple Portfolios",
          caption = "Portfolio 3 is a Standout!",

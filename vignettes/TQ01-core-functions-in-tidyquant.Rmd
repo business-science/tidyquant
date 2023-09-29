@@ -44,7 +44,7 @@ Load the `tidyquant` package to get started.
 
 ```{r}
 # Loads tidyquant, lubridate, xts, quantmod, TTR 
-library(tidyverse)
+library(dplyr)
 library(tidyquant)
 ```
 
@@ -126,7 +126,12 @@ wti_price_usd
 
 ## 2.3 Nasdaq Data Link (Quandl) API
 
-[Quandl](https://data.nasdaq.com/) provides access to a vast number of financial and economic databases. The `Quandl` package has been integrated into `tidyquant` as follows.
+[Quandl](https://data.nasdaq.com/) provides access to a vast number of financial and economic databases. 
+The Quandl packages must be installed separately.
+
+```r
+install.packages("Quandl")
+```
 
 ### Authentication
 
@@ -238,19 +243,24 @@ tq_get(c("btcusd"),
 
 ## 2.5 Alpha Vantage API
 
-[Alpha Vantage](https://www.alphavantage.co/) provides access to a real-time and historical financial data. The `alphavantager` package, a lightweight R interface, has been integrated into `tidyquant` as follows. The benefit of the integration is the __scalability since we can now get multiple symbols returned in a tidy format__. 
+[Alpha Vantage](https://www.alphavantage.co/) provides access to a real-time and historical financial data. The `alphavantager` package, a lightweight R interface, has been integrated into `tidyquant` as follows. The benefit of the integration is the __scalability since we can now get multiple symbols returned in a tidy format__. You will need to install it first.
+
+```r
+install.packages("alphavantager")
+```
 
 ### Authentication
 
 To make full use of the integration you need to get an API key and then set your api key. If you don't have one already, go to [Alpha Vantage](https://www.alphavantage.co/) account and get your FREE API key. You can then set it as follows:
 
 ```{r, eval = F}
+# install.packages("alphavantager")
 av_api_key("<your-api-key>")
 ```
 
 ### Getting Alpha Vantage Data
 
-Getting data is simple as the structure follows the [Alpha Vantage API documentation](https://www.alphavantage.co/documentation/). For example, if you wish to retrieve intraday data at 5 minute intervals for META and MSFT, you can build the parameters `x = c("FB", "MSFT"), get = "alphavantager", av_fun = "TIME_SERIES_INTRADAY", interval = "5min"`. The familiar `x` and `get` are the same as you always use. The `av_fun` argument comes from `alphavantager::av_get()` and the Alpha Vantage documentation. The `interval` argument comes from the docs as well.
+Getting data is simple as the structure follows the [Alpha Vantage API documentation](https://www.alphavantage.co/documentation/). For example, if you wish to retrieve intraday data at 5 minute intervals for META and MSFT, you can build the parameters `x = c("META", "MSFT"), get = "alphavantager", av_fun = "TIME_SERIES_INTRADAY", interval = "5min"`. The familiar `x` and `get` are the same as you always use. The `av_fun` argument comes from `alphavantager::av_get()` and the Alpha Vantage documentation. The `interval` argument comes from the docs as well.
 
 ```{r, eval = F}
 # Scaling is as simple as supplying multiple symbols
@@ -267,7 +277,8 @@ c("META", "MSFT") %>%
 To make full use of the integration you need to have a Bloomberg Terminal account (Note this is not a free service). If you have Bloomberg Terminal running on your machine, you can connect as follows:
 
 ```{r, eval = F}
-blpConnect()
+# install.packages("Rblpapi")
+Rblpapi::blpConnect()
 ```
 
 ### Getting Bloomberg Data
@@ -297,11 +308,9 @@ my_bloomberg_data <- c('SPX Index','ODMAX Equity') %>%
 
 # 3.0 Mutate Quantitative Data
 
-Mutating functions enable the `xts`/`zoo`, `quantmod` and `TTR` functions to shine. We'll touch on the mutation functions briefly using the `FANG` data set, which consists of daily prices for FB, AMZN, GOOG, and NFLX from the beginning of 2013 to the end of 2016. We'll apply the functions to grouped data sets to get a feel for how each works
+Mutating functions enable the `xts`/`zoo`, `quantmod` and `TTR` functions to shine. We'll touch on the mutation functions briefly using the `FANG` data set, which consists of daily prices for META, AMZN, GOOG, and NFLX from the beginning of 2013 to the end of 2016. We'll apply the functions to grouped data sets to get a feel for how each works
 
 ```{r}
-data("FANG")
-
 FANG
 ```
 

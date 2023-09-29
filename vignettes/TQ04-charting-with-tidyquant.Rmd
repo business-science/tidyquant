@@ -40,7 +40,9 @@ Load the `tidyquant` package to get started.
 
 ```{r}
 # Loads tidyquant, lubridate, xts, quantmod, TTR, and PerformanceAnalytics
-library(tidyverse)
+library(lubridate)
+library(dplyr)
+library(ggplot2)
 library(tidyquant)  
 ```
 
@@ -48,8 +50,6 @@ The following stock data will be used for the examples. Use `tq_get` to get the 
 
 ```{r}
 # Use FANG data set
-data("FANG") 
-
 # Get AAPL and AMZN Stock Prices
 AAPL <- tq_get("AAPL", get = "stock.prices", from = "2015-09-01", to = "2016-12-31")
 AMZN <- tq_get("AMZN", get = "stock.prices", from = "2000-01-01", to = "2016-12-31")
@@ -136,7 +136,7 @@ AAPL %>%
     labs(title = "AAPL Bar Chart", 
          subtitle = "Zoomed in, Experimenting with Formatting",
          y = "Closing Price", x = "") + 
-    coord_x_date(xlim = c(end - weeks(6), end),
+    coord_x_date(xlim = c(end - lubridate::weeks(6), end),
                  c(aapl_range_60_tbl$min_low, aapl_range_60_tbl$max_high)) + 
     theme_tq()
 ```
@@ -194,7 +194,7 @@ We can use `facet_wrap` to visualize multiple stocks at the same time. By adding
 ```{r, fig.height=5}
 start <- end - weeks(6)
 FANG %>%
-    filter(date >= start - days(2 * 15)) %>%
+    dplyr::filter(date >= start - days(2 * 15)) %>%
     ggplot(aes(x = date, y = close, group = symbol)) +
     geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
     labs(title = "FANG Candlestick Chart", 
@@ -212,7 +212,7 @@ The `coord_x_date` coordinate function is designed to zoom into specific section
 ```{r, fig.height=5}
 start <- end - weeks(6)
 FANG %>%
-    filter(date >= start - days(2 * 15)) %>%
+    dplyr::filter(date >= start - days(2 * 15)) %>%
     ggplot(aes(x = date, y = close, group = symbol)) +
     geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
     geom_ma(ma_fun = SMA, n = 15, color = "darkblue", size = 1) +
@@ -295,7 +295,7 @@ We'll double up using a volume-weighted average (`VWMA`) and apply it to the FAN
 ```{r, fig.height=5}
 start <- end - weeks(6)
 FANG %>%
-    filter(date >= start - days(2 * 50)) %>%
+    dplyr::filter(date >= start - days(2 * 50)) %>%
     ggplot(aes(x = date, y = close, volume = volume, group = symbol)) +
     geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
     geom_ma(ma_fun = VWMA, n = 15, wilder = TRUE, linetype = 5) +
@@ -364,7 +364,7 @@ The process is very similar to charting moving averages for multiple stocks.
 ```{r, fig.height=5}
 start <- end - weeks(24)
 FANG %>%
-    filter(date >= start - days(2 * 20)) %>%
+    dplyr::filter(date >= start - days(2 * 20)) %>%
     ggplot(aes(x = date, y = close, 
                open = open, high = high, low = low, close = close, 
                group = symbol)) +
@@ -455,7 +455,7 @@ And, we can zoom in on a specific region. Using `scale_color_gradient` we can qu
 ```{r}
 start <- end - weeks(24)
 AMZN %>%
-    filter(date >= start - days(50)) %>%
+    dplyr::filter(date >= start - days(50)) %>%
     ggplot(aes(x = date, y = volume)) +
     geom_segment(aes(xend = date, yend = 0, color = volume)) +
     geom_smooth(method = "loess", se = FALSE) +
@@ -482,9 +482,9 @@ The `tidyquant` package comes with three themes to help quickly customize financ
 ```{r, fig.height = 6}
 n_mavg <- 50 # Number of periods (days) for moving average
 FANG %>%
-    filter(date >= start - days(2 * n_mavg)) %>%
+    dplyr::filter(date >= start - days(2 * n_mavg)) %>%
     ggplot(aes(x = date, y = close, color = symbol)) +
-    geom_line(size = 1) +
+    geom_line(linewidth = 1) +
     geom_ma(n = 15, color = "darkblue", size = 1) + 
     geom_ma(n = n_mavg, color = "red", size = 1) +
     labs(title = "Dark Theme",
@@ -493,6 +493,6 @@ FANG %>%
     facet_wrap(~ symbol, scales = "free_y") +
     theme_tq_dark() +
     scale_color_tq(theme = "dark") +
-    scale_y_continuous(labels = scales::dollar)
+    scale_y_continuous(labels = scales::label_dollar())
 ```
 

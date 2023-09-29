@@ -39,8 +39,11 @@ Load the `tidyquant` package to get started.
 
 ```{r}
 # Loads tidyquant, lubridate, xts, quantmod, TTR 
-library(tidyverse)
 library(tidyquant)
+library(lubridate)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
 ```
 
 # 1.0 Function Compatibility
@@ -176,11 +179,9 @@ The `PerformanceAnalytics` mutation functions all deal with returns:
 
 # 2.0 Quantitative Power In Action
 
-We'll go through some examples, but first let's get some data. The `FANG` data set will be used which consists of stock prices for FB, AMZN, NFLX, and GOOG from the beginning of 2013 to the end of 2016.
+We'll go through some examples, but first let's get some data. The `FANG` data set will be used which consists of stock prices for META, AMZN, NFLX, and GOOG from the beginning of 2013 to the end of 2016.
 
 ```{r}
-data("FANG")
-
 FANG
 ```
 
@@ -269,7 +270,7 @@ FANG_daily <- FANG %>%
 
 FANG_daily %>%
     ggplot(aes(x = date, y = adjusted, color = symbol)) +
-    geom_line(size = 1) +
+    geom_line(linewidth = 1) +
     labs(title = "Daily Stock Prices",
          x = "", y = "Adjusted Prices", color = "") +
     facet_wrap(~ symbol, ncol = 2, scales = "free_y") +
@@ -289,7 +290,7 @@ FANG_monthly <- FANG %>%
 
 FANG_monthly %>%
     ggplot(aes(x = date, y = adjusted, color = symbol)) +
-    geom_line(size = 1) +
+    geom_line(linewidth = 1) +
     labs(title = "Monthly Stock Prices",
          x = "", y = "Adjusted Prices", color = "") +
     facet_wrap(~ symbol, ncol = 2, scales = "free_y") +
@@ -306,7 +307,7 @@ Return correlations are a common way to analyze how closely an asset or portfoli
 ```{r}
 # Asset Returns
 FANG_returns_monthly <- FANG %>%
-    group_by(symbol) %>%
+    dplyr::group_by(symbol) %>%
     tq_transmute(select     = adjusted, 
                  mutate_fun = periodReturn,
                  period     = "monthly")
@@ -347,7 +348,7 @@ And, we can plot the rolling correlations for the FANG stocks.
 FANG_rolling_corr %>%
     ggplot(aes(x = date, y = rolling.corr.6, color = symbol)) +
     geom_hline(yintercept = 0, color = palette_light()[[1]]) +
-    geom_line(size = 1) +
+    geom_line(linewidth = 1) +
     labs(title = "FANG: Six Month Rolling Correlation to XLK",
          x = "", y = "Correlation", color = "") +
     facet_wrap(~ symbol, ncol = 2) +
@@ -433,7 +434,7 @@ And, we can visualize the data like so.
 FANG_by_qtr %>%
     ggplot(aes(x = year.qtr, color = symbol)) +
     geom_segment(aes(xend = year.qtr, y = min.close, yend = max.close),
-                 size = 1) +
+                 linewidth = 1) +
     geom_point(aes(y = max.close), size = 2) +
     geom_point(aes(y = min.close), size = 2) +
     facet_wrap(~ symbol, ncol = 2, scale = "free_y") +
@@ -518,8 +519,8 @@ Finally, we can visualize the first coefficient like so. A horizontal line is ad
 ```{r}
 stock_pairs %>%
     ggplot(aes(x = date, y = coef.1)) +
-    geom_line(size = 1, color = palette_light()[[1]]) +
-    geom_hline(yintercept = 0.8134, size = 1, color = palette_light()[[2]]) +
+    geom_line(linewidth = 1, color = palette_light()[[1]]) +
+    geom_hline(yintercept = 0.8134, linewidth = 1, color = palette_light()[[2]]) +
     labs(title = "MA ~ V: Visualizing Rolling Regression Coefficient", x = "") +
     theme_tq()
 ```
@@ -535,7 +536,7 @@ stock_prices %>%
                  col_rename = "returns") %>%
     mutate(wealth.index = 100 * cumprod(1 + returns)) %>%
     ggplot(aes(x = date, y = wealth.index, color = symbol)) +
-    geom_line(size = 1) +
+    geom_line(linewidth = 1) +
     labs(title = "MA and V: Stock Prices") +
     theme_tq() + 
     scale_color_tq()

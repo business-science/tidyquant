@@ -33,12 +33,11 @@ For use when \code{fill} is specified as an \code{aes()} in a ggplot.}
 }
 \examples{
 # Load libraries
-library(tidyquant)
 library(dplyr)
 library(ggplot2)
 
 # Get stock prices
-stocks <- c("AAPL", "FB", "NFLX") \%>\%
+stocks <- c("AAPL", "META", "NFLX") \%>\%
     tq_get(from = "2013-01-01",
            to   = "2017-01-01")
 

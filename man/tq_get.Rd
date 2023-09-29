@@ -94,8 +94,6 @@ next version. Please use \code{tq_index_options()} instead.
 }
 \examples{
 # Load libraries
-library(tidyquant)
-library(tidyverse)
 
 # Get the list of `get` options
 tq_get_options()
@@ -104,7 +102,7 @@ tq_get_options()
 aapl_stock_prices <- tq_get("AAPL")
 
 # Get stock prices for multiple stocks
-mult_stocks <- tq_get(c("FB", "AMZN"),
+mult_stocks <- tq_get(c("META", "AMZN"),
                       get  = "stock.prices",
                       from = "2016-01-01",
                       to   = "2017-01-01")
@@ -113,15 +111,18 @@ mult_stocks <- tq_get(c("FB", "AMZN"),
 \dontrun{
 
 # --- Quandl ---
-
+if (rlang::is_installed("quandl")) {
 quandl_api_key('<your_api_key>')
+tq_get("EIA/PET_MTTIMUS1_M", get = "quandl", from = "2010-01-01")
+}
+
 
 # Energy data from EIA
-tq_get("EIA/PET_MTTIMUS1_M", get = "quandl", from = "2010-01-01")
+
 
 
 # --- Tiingo ---
-
+if (rlang::is_installed("riingo")) {
 tiingo_api_key('<your_api_key>')
 
 # Tiingo Prices (Free alternative to Yahoo Finance!)
@@ -142,8 +143,11 @@ tq_get(c("btcusd", "btceur"),
        resample_frequency = "5min")
 
 
+}
+
 # --- Alpha Vantage ---
 
+if (rlang::is_installed("alphavantager")) {
 av_api_key('<your_api_key>')
 
 # Daily Time Series
@@ -158,13 +162,13 @@ tq_get("AAPL",
        av_fun     = "TIME_SERIES_INTRADAY",
        interval   = "15min",
        outputsize = "full")
-
 # FX DAILY
 tq_get("USD/EUR", get = "alphavantage", av_fun = "FX_DAILY", outputsize = "full")
 
 # FX REAL-TIME QUOTE
 tq_get("USD/EUR", get = "alphavantage", av_fun = "CURRENCY_EXCHANGE_RATE")
 
+}
 }
 }
 \seealso{

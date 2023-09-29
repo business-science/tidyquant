@@ -65,8 +65,6 @@
 #' @export
 #'
 #' @examples
-#' # Load libraries
-#' library(tidyquant)
 #' library(dplyr)
 #' library(ggplot2)
 #'
@@ -276,7 +274,7 @@ StatBBandsMA_vol <- ggplot2::ggproto("StatBBandsMA", ggplot2::Stat,
 GeomBBandsRibbon <- ggplot2::ggproto("GeomBBandsRibbon", ggplot2::GeomRibbon,
                             default_aes = ggplot2::aes(colour = "red",
                                               fill = "grey20",
-                                              size = 0.5,
+                                              linewidth = 0.5,
                                               linetype = 2,
                                               alpha = 0.15)
 )
@@ -284,7 +282,7 @@ GeomBBandsRibbon <- ggplot2::ggproto("GeomBBandsRibbon", ggplot2::GeomRibbon,
 GeomBBandsMA <- ggplot2::ggproto("GeomBBandsMA", ggplot2::GeomLine,
                         default_aes = ggplot2::aes(colour = "darkblue",
                                           linetype = 2,
-                                          size = 0.5,
+                                          linewidth = 0.5,
                                           alpha = NA)
 )
 

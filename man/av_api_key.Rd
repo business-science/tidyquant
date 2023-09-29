@@ -13,7 +13,7 @@ av_api_key(api_key)
 Returns invisibly the currently set \code{api_key}
 }
 \description{
-Set Alpha Vantage API Key
+Requires the alphavantager packager to use.
 }
 \details{
 A wrapper for \code{alphavantager::av_api_key()}
@@ -21,7 +21,9 @@ A wrapper for \code{alphavantager::av_api_key()}
 \examples{
 
 \dontrun{
+if (rlang::is_installed("alphavantager")) {
 av_api_key(api_key = "foobar")
+}
 }
 
 }

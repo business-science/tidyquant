@@ -95,8 +95,6 @@
 #'
 #' @examples
 #' # Load libraries
-#' library(tidyquant)
-#' library(tidyverse)
 #'
 #' # Get the list of `get` options
 #' tq_get_options()
@@ -105,7 +103,7 @@
 #' aapl_stock_prices <- tq_get("AAPL")
 #'
 #' # Get stock prices for multiple stocks
-#' mult_stocks <- tq_get(c("FB", "AMZN"),
+#' mult_stocks <- tq_get(c("META", "AMZN"),
 #'                       get  = "stock.prices",
 #'                       from = "2016-01-01",
 #'                       to   = "2017-01-01")
@@ -114,15 +112,18 @@
 #' \dontrun{
 #'
 #' # --- Quandl ---
-#'
+#' if (rlang::is_installed("quandl")) {
 #' quandl_api_key('<your_api_key>')
+#' tq_get("EIA/PET_MTTIMUS1_M", get = "quandl", from = "2010-01-01")
+#' }
+#'
 #'
 #' # Energy data from EIA
-#' tq_get("EIA/PET_MTTIMUS1_M", get = "quandl", from = "2010-01-01")
+#'
 #'
 #'
 #' # --- Tiingo ---
-#'
+#' if (rlang::is_installed("riingo")) {
 #' tiingo_api_key('<your_api_key>')
 #'
 #' # Tiingo Prices (Free alternative to Yahoo Finance!)
@@ -143,8 +144,11 @@
 #'        resample_frequency = "5min")
 #'
 #'
+#' }
+#'
 #' # --- Alpha Vantage ---
 #'
+#' if (rlang::is_installed("alphavantager")) {
 #' av_api_key('<your_api_key>')
 #'
 #' # Daily Time Series
@@ -159,7 +163,6 @@
 #'        av_fun     = "TIME_SERIES_INTRADAY",
 #'        interval   = "15min",
 #'        outputsize = "full")
-#'
 #' # FX DAILY
 #' tq_get("USD/EUR", get = "alphavantage", av_fun = "FX_DAILY", outputsize = "full")
 #'
@@ -167,8 +170,7 @@
 #' tq_get("USD/EUR", get = "alphavantage", av_fun = "CURRENCY_EXCHANGE_RATE")
 #'
 #' }
-
-
+#' }
 
 # PRIMARY FUNCTIONS ----
 
@@ -182,27 +184,28 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
 
     # Validate quandl api key
     if("quandl" %in% get) {
+      rlang::check_installed("Quandl")
         if (is.null(quandl_api_key())) warning("No Quandl API key detected. Limited to 50 anonymous calls per day. Set key with 'quandl_api_key()'.",
                                                call. = FALSE)
     }
 
     # Validate Alpha Vantage api key
     if(stringr::str_detect("alphavantage", get)) {
+        rlang::check_installed("alphavantager", "to access the alphavantage API.")
         if (is.null(tidyquant::av_api_key())) stop("No Alpha Vantager API key detected. Set key with 'av_api_key()'.",
                                                call. = FALSE)
     }
 
     # Validate Alpha Vantage api key
     if(stringr::str_detect("tiingo", get)) {
+        rlang::check_installed("riingo", "to use to riingo API.")
         if (is.null(riingo::riingo_get_token())) stop("No Tiingo API key detected. Set key with 'tiingo_api_key()'.",
                                                    call. = FALSE)
     }
 
     # Setup Rblpapi
     if("rblpapi" %in% get) {
-        if(!requireNamespace("Rblpapi", quietly = TRUE)) {
-            stop("Rblpapi must be installed to get data from Bloomberg.", call. = FALSE)
-        }
+        rlang::check_installed("Rblpapi")
         Rblpapi::blpConnect() #must have a valid blp session running
     }
 
@@ -251,8 +254,7 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
 
         names(x)[[1]] <- "symbol.."
 
-        x_tib <- x %>%
-            tibble::as_tibble()
+        x_tib <- tibble::as_tibble(x)
 
         ret <- tq_get_map(x = x_tib, get = get, complete_cases = complete_cases, ...)
 
@@ -509,7 +511,7 @@ tq_get_util_1 <-
         # Tidy a single financial statement
         tidy_fin <- function(x) {
 
-            group <- 1:nrow(x)
+            group <- seq_len(nrow(x))
 
             df <- dplyr::bind_cols(
                     tibble::tibble(group),
@@ -530,9 +532,9 @@ tq_get_util_1 <-
             period = rep(c("A", "Q"), 3)) %>%
             dplyr::mutate(retrieve = paste0("ret$", type, "$", period)) %>%
             dplyr::mutate(data = purrr::map(.x = retrieve, .f = function(x) eval(parse(text = x)))) %>%
-            dplyr::mutate(data = purrr::map(.x = data, .f = tidy_fin)) %>%
+            dplyr::mutate(data = purrr::map(.x = .data$data, .f = tidy_fin)) %>%
             dplyr::select(-retrieve) %>%
-            tidyr::spread(key = period, value = data) %>%
+            tidyr::spread(key = period, value = "data") %>%
             dplyr::rename(annual = A, quarter = Q)
 
     }
@@ -624,7 +626,7 @@ tq_get_util_4 <- function(x, get, type = "raw",  meta = FALSE, order = "asc", co
 
 # Util 5: Quandl.datatable -----
 tq_get_util_5 <- function(x, get, paginate = FALSE, complete_cases, map, ...) {
-
+  rlang::check_installed("Quandl")
     # Check x
     if (!is.character(x)) {
         stop("x must be a character string in the form of a valid symbol.")
@@ -636,14 +638,14 @@ tq_get_util_5 <- function(x, get, paginate = FALSE, complete_cases, map, ...) {
 
     ret <- tryCatch({
 
-        Quandl.datatable(code = x, paginate = paginate, ...) %>%
+        Quandl::Quandl.datatable(code = x, paginate = paginate, ...) %>%
             tibble::as_tibble()
 
 
     }, error = function(e) {
 
         warn <- paste0("x = '", x, "', get = 'quandl.datatable", "': ", e)
-        if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
+        if (map && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
         warning(warn, call. = FALSE)
         return(NA) # Return NA on error
 
@@ -701,9 +703,7 @@ tq_get_util_6 <- function(x, get, av_fun, complete_cases, map, ...) {
 # Util : tiingo -----
 tq_get_util_7 <- function(x, get, tiingo_fun, complete_cases, map, ...) {
 
-  if(!requireNamespace("riingo", quietly = TRUE)) {
-    stop("riingo must be installed to use this functionality.", call. = FALSE)
-  }
+  rlang::check_installed("riingo", "to get the Tiingo API.")
 
   # Check x
   if (!is.character(x)) {
@@ -738,14 +738,14 @@ tq_get_util_7 <- function(x, get, tiingo_fun, complete_cases, map, ...) {
     # Make columns consistent with Yahoo Finance!
     if (get == "tiingo") {
       ret <- ret %>%
-        dplyr::select(ticker, date, open, high, low, close, volume, adjClose, dplyr::everything()) %>%
+        dplyr::relocate("ticker", "date", "open", "high", "low", "close", "volume", "adjClose") %>%
         dplyr::rename(adjusted = adjClose,
                symbol   = ticker)
     }
 
     if (get == "tiingoiex") {
       ret <- ret %>%
-        dplyr::select(ticker, date, open, high, low, close, dplyr::everything()) %>%
+        dplyr::relocate(ticker, date, open, high, low, close) %>%
         dplyr::rename(symbol = ticker)
     }
 
@@ -757,7 +757,7 @@ tq_get_util_7 <- function(x, get, tiingo_fun, complete_cases, map, ...) {
   }, error = function(e) {
 
     warn <- paste0("x = '", x, "', get = '", get, "': ", e)
-    if (map == TRUE && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
+    if (map && complete_cases) warn <- paste0(warn, " Removing ", x, ".")
     warning(warn, call. = FALSE)
     return(NA) # Return NA on error
 

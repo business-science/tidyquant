@@ -55,11 +55,9 @@
 #'
 #' @examples
 #' # Load libraries
-#' library(tidyquant)
 #' library(dplyr)
 #'
 #' # Use FANG data set
-#' data(FANG)
 #'
 #' # Get returns for individual stock components
 #' monthly_returns_stocks <- FANG %>%
@@ -82,7 +80,7 @@
 #'
 #' # Note that GOOG's weighting is zero in Method 1. In Method 2,
 #' # GOOG is not added and same result is achieved.
-#' weights_df <- tibble(symbol = c("FB", "AMZN", "NFLX"),
+#' weights_df <- tibble(symbol = c("META", "AMZN", "NFLX"),
 #'                      weights = c(0.50, 0.25, 0.25))
 #' tq_portfolio(data = monthly_returns_stocks,
 #'              assets_col = symbol,
@@ -101,7 +99,7 @@
 #'              0.00, 0.50, 0.25, 0.25,
 #'              0.25, 0.00, 0.50, 0.25,
 #'              0.25, 0.25, 0.00, 0.50)
-#' stocks <- c("FB", "AMZN", "NFLX", "GOOG")
+#' stocks <- c("META", "AMZN", "NFLX", "GOOG")
 #' weights_table <- tibble(stocks) %>%
 #'     tq_repeat_df(n = 4) %>%
 #'     bind_cols(tibble(weights)) %>%

@@ -44,8 +44,6 @@
 #' @export
 #'
 #' @examples
-#' # Load libraries
-#' library(tidyquant)
 #' library(dplyr)
 #' library(ggplot2)
 #'
@@ -159,13 +157,15 @@ StatSegmentRightBC <- ggplot2::ggproto("StatSegmentRightBC", ggplot2::Stat,
 )
 
 GeomLinerangeBC <- ggplot2::ggproto("GeomLinerangeBC", ggplot2::GeomLinerange,
-                           default_aes = ggplot2::aes(size = 0.5,
+                           default_aes = ggplot2::aes(
+                                                      linewidth = 0.5,
                                              linetype = 1,
                                              alpha = NA)
 )
 
 GeomSegmentBC <- ggplot2::ggproto("GeomSegmentBC", ggplot2::GeomSegment,
-                       default_aes = ggplot2::aes(size = 0.5,
+                       default_aes = ggplot2::aes(
+                                                  linewidth = 0.5,
                                          linetype = 1,
                                          alpha = NA)
 )
@@ -227,7 +227,7 @@ StatRectCS <- ggplot2::ggproto("StatRectCS", ggplot2::Stat,
 
 GeomRectCS <- ggplot2::ggproto("GeomRectCS", ggplot2::GeomRect,
                       default_aes = ggplot2::aes(colour = NA,
-                                        size = 0.5,
+                                        linewidth = 0.5,
                                         linetype = 1,
                                         alpha = NA)
 )

@@ -45,8 +45,6 @@ in an exchange. Three stock exchanges are available (AMEX, NASDAQ, and NYSE).
 choose from. The options are AMEX, NASDAQ and NYSE.
 }
 \examples{
-# Load libraries
-library(tidyquant)
 
 # Get the list of stock index options
 tq_index_options()

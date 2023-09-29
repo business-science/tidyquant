@@ -27,7 +27,6 @@
 #'
 #' @examples
 #' # Load libraries
-#' library(tidyquant)
 #' library(dplyr)
 #' library(ggplot2)
 #'

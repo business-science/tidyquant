@@ -42,9 +42,6 @@
 #'     - __All grouping and summarizing functions MUST BE prefixed with `~`__. Example: `.rows = ~ YEAR(order_date)`
 #'
 #' @examples
-#' library(tidyquant)
-#' library(tidyverse)
-#'
 #' # PIVOT TABLE ----
 #' # Calculate returns by year/quarter
 #' FANG %>%
@@ -124,7 +121,7 @@ pivot_table <- function(.data, .rows, .columns, .values,
     if (length(.col_names) == 0) return(summarized_tbl)
 
     pivoted_tbl <- summarized_tbl %>%
-        tidyr::pivot_wider(names_from = tidyselect::all_of(.col_names), values_from = tidyselect::all_of(.val_names))
+        tidyr::pivot_wider(names_from = dplyr::all_of(.col_names), values_from = dplyr::all_of(.val_names))
 
     pivoted_tbl[is.na(pivoted_tbl)] <- fill_na
 

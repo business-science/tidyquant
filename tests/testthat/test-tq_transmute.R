@@ -1,5 +1,3 @@
-library(tidyquant)
-library(tidyverse)
 context("Testing tq_transmute")
 
 #### Setup ----
@@ -10,16 +8,16 @@ test1 <- AAPL %>%
     tq_transmute(select = close, mutate_fun = to.period, period = "months")
 
 # Test 1.2: Grouped_df test
-grouped_df <- grouped_df <- tibble(symbol = c("META", "AMZN")) %>%
+grouped_df <- grouped_df <- dplyr::tibble(symbol = c("META", "AMZN")) %>%
     tq_get(
         get  = "stock.prices",
         from = "2015-01-01",
         to   = "2016-01-01"
     ) %>%
-    group_by(symbol)
+    dplyr::group_by(symbol)
 
-test1.2a  <- mutate(grouped_df, V1 = runSD(adjusted)) %>%
-    select(-(open:adjusted))
+test1.2a  <- dplyr::mutate(grouped_df, V1 = runSD(adjusted)) %>%
+    dplyr::select(!open:adjusted)
 
 test1.2b <- tq_transmute(grouped_df, adjusted, runSD, col_rename = "V1")
 
@@ -39,7 +37,7 @@ test2b <- grouped_df %>%
 # set.seed(1)
 # value <- rnorm(n = length(time_index))
 # tz <- "Zulu"
-# test3 <- tibble(time_index, value) %>%
+# test3 <- dplyr::tibble(time_index, value) %>%
 #     dplyr::mutate(time_index = lubridate::ymd_hms(time_index, tz = tz)) %>%
 #     tq_transmute_xy(x = value, mutate_fun = MACD)
 
@@ -52,7 +50,7 @@ fb_returns <- tq_get("META", get  = "stock.prices", from = "2016-01-01", to   = 
     tq_transmute(adjusted, periodReturn, period = "monthly", col_rename = "fb.returns")
 xlk_returns <- tq_get("XLK", from = "2016-01-01", to = "2016-12-31") %>%
     tq_transmute(adjusted, periodReturn, period = "monthly", col_rename = "xlk.returns")
-test5 <- left_join(fb_returns, xlk_returns, by = "date")
+test5 <- dplyr::left_join(fb_returns, xlk_returns, by = "date")
 regr_fun <- function(data) {
     coef(lm(fb.returns ~ xlk.returns, data = as.data.frame(data)))
 }
@@ -83,7 +81,7 @@ test_that("Test 1.2 grouped data frames are same with mutate and tq_transmute", 
 
 test_that("Test 2 returns tibble with correct rows and columns.", {
     # Tibble
-    expect_is(test2, "tbl")
+    expect_s3_class(test2, "tbl_df")
     # Rows
     expect_equal(nrow(test2), 60)
     # Columns
@@ -130,12 +128,12 @@ test_that("Test error on invalid data inputs.", {
 
     # No date columns
     expect_error(
-        tibble(a = seq(1:100)) %>%
+        dplyr::tibble(a = seq(1:100)) %>%
             tq_transmute(select = NULL, mutate_fun = to.monthly),
         "No date or POSIXct column found in `data`."
     )
     expect_error(
-        tibble(a = seq(1:100)) %>%
+        dplyr::tibble(a = seq(1:100)) %>%
             tq_mutate_xy(x = a, mutate_fun = to.monthly),
         "No date or POSIXct column found in `data`."
     )

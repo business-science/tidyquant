@@ -36,12 +36,11 @@
 #' __Summary Functions__
 #' - All functions remove missing values (`NA`). This is the same behavior as in Excel and most commonly what is desired.
 #'
-#' @examples
+#' @examplesIf rlang::is_installed("forcats")
 #' # Libraries
-#' library(tidyquant)
 #' library(timetk)
-#' library(tidyverse)
 #' library(forcats)
+#' library(dplyr)
 #'
 #' # --- Basic Usage ----
 #'
@@ -54,7 +53,7 @@
 #' # Go from daily to monthly periodicity,
 #' # then calculate returns and growth of $1 USD
 #' FANG %>%
-#'     mutate(symbol = as_factor(symbol)) %>%
+#'     mutate(symbol = forcats::as_factor(symbol)) %>%
 #'     group_by(symbol) %>%
 #'
 #'     # Summarization - Collapse from daily to FIRST value by month

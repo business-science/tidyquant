@@ -55,11 +55,9 @@
 #'
 #' @examples
 #' # Load libraries
-#' library(tidyquant)
 #' library(dplyr)
 #'
 #' # Use FANG data set
-#' data(FANG)
 #'
 #' # Get returns for individual stock components grouped by symbol
 #' Ra <- FANG %>%
@@ -235,7 +233,7 @@ tq_performance_.grouped_df <- function(data, Ra, Rb = NULL, performance_fun, ...
             performance_fun = performance_fun,
             ...)
         ) %>%
-        dplyr::select(-data) %>%
+        dplyr::select(-"data") %>%
         tidyr::unnest(cols = nested.col) %>%
         dplyr::group_by_at(.vars = group_names)
 }

@@ -1,8 +1,8 @@
 ---
-title: "Excel in R - tidyquant 1.0.0"
+title: "Excel in R with tidyquant"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Excel in R - tidyquant 1.0.0}
+  %\VignetteIndexEntry{Excel in R with tidyquant}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

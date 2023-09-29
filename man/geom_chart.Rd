@@ -119,8 +119,6 @@ The following aesthetics are understood (required are in bold):
 }
 
 \examples{
-# Load libraries
-library(tidyquant)
 library(dplyr)
 library(ggplot2)
 

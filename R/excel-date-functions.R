@@ -78,8 +78,6 @@
 #'
 #' @examples
 #' # Libraries
-#' library(tidyquant)
-#' library(tidyverse)
 #' library(lubridate)
 #'
 #' # --- Basic Usage ----
@@ -134,7 +132,7 @@
 #'     )
 #'
 #' @name excel_date_functions
-
+NULL
 
 # CONVERTERS ----
 
