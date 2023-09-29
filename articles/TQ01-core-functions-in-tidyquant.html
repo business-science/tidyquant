@@ -7,6 +7,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="tidyquant">
 <title>Core Functions in tidyquant • tidyquant</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -14,6 +20,7 @@
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Core Functions in tidyquant">
 <meta property="og:description" content="tidyquant">
+<meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -33,7 +40,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyquant</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.7.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,28 +50,25 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
-  <a class="nav-link" href="../index.html">Home</a>
-</li>
-<li class="nav-item">
   <a class="nav-link" href="../articles/TQ00-introduction-to-tidyquant.html">Getting Started</a>
 </li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <h6 class="dropdown-header" data-toc-skip>Financial Workflow</h6>
     <a class="dropdown-item" href="../articles/TQ00-introduction-to-tidyquant.html">Introduction to tidyquant</a>
-    <a class="dropdown-item" href="../articles/TQ01-core-functions-in-tidyquant.html">Core functions</a>
-    <a class="dropdown-item" href="../articles/TQ02-quant-integrations-in-tidyquant.html">Quantitative integrations</a>
-    <a class="dropdown-item" href="../articles/TQ03-scaling-and-modeling-with-tidyquant.html">Scaling and modeling</a>
-    <a class="dropdown-item" href="../articles/TQ04-charting-with-tidyquant.html">Charting</a>
-    <a class="dropdown-item" href="../articles/TQ05-performance-analysis-with-tidyquant.html">Performance analysis</a>
+    <a class="dropdown-item" href="../articles/TQ01-core-functions-in-tidyquant.html">Core Functions in tidyquant</a>
+    <a class="dropdown-item" href="../articles/TQ02-quant-integrations-in-tidyquant.html">R Quantitative Analysis Package Integrations in tidyquant</a>
+    <a class="dropdown-item" href="../articles/TQ03-scaling-and-modeling-with-tidyquant.html">Scaling and Modeling with tidyquant</a>
+    <a class="dropdown-item" href="../articles/TQ04-charting-with-tidyquant.html">Charting with tidyquant</a>
+    <a class="dropdown-item" href="../articles/TQ05-performance-analysis-with-tidyquant.html">Performance Analysis with tidyquant</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Excel Users</h6>
-    <a class="dropdown-item" href="../articles/TQ06-excel-in-r.html">Excel in R</a>
+    <a class="dropdown-item" href="../articles/TQ06-excel-in-r.html">Excel in R with tidyquant</a>
   </div>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">API Reference</a>
+  <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">News</a>
@@ -76,8 +80,8 @@
 
       <ul class="navbar-nav">
 <li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/business-science/tidyquant">
-    <span class="fab fa fab fa-github"></span>
+  <a class="external-link nav-link" href="https://github.com/business-science/tidyquant/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -93,11 +97,11 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>Core Functions in tidyquant</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Core Functions in tidyquant</h1>
                         <h4 data-toc-skip class="author">Matt
 Dancho</h4>
             
-            <h4 data-toc-skip class="date">2023-03-31</h4>
+            <h4 data-toc-skip class="date">2023-09-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/HEAD/vignettes/TQ01-core-functions-in-tidyquant.Rmd" class="external-link"><code>vignettes/TQ01-core-functions-in-tidyquant.Rmd</code></a></small>
       <div class="d-none name"><code>TQ01-core-functions-in-tidyquant.Rmd</code></div>
@@ -143,8 +147,8 @@ Analysis with tidyquant</a> for a tutorial on these functions.</p></li>
 <p>Load the <code>tidyquant</code> package to get started.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Loads tidyquant, lubridate, xts, quantmod, TTR </span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/business-science/tidyquant" class="external-link">tidyquant</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://business-science.github.io/tidyquant/" class="external-link">tidyquant</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="retrieve-consolidated-symbol-data">1.0 Retrieve Consolidated Symbol Data<a class="anchor" aria-label="anchor" href="#retrieve-consolidated-symbol-data"></a>
@@ -215,20 +219,20 @@ Yahoo Finance.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aapl_prices</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"AAPL"</span>, get <span class="op">=</span> <span class="st">"stock.prices"</span>, from <span class="op">=</span> <span class="st">" 1990-01-01"</span><span class="op">)</span></span>
 <span><span class="va">aapl_prices</span> </span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 8,376 × 8</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 8,501 × 8</span></span></span>
 <span><span class="co">##    symbol date        open  high   low close    volume adjusted</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   1990-01-02 0.315 0.335 0.312 0.333 183<span style="text-decoration: underline;">198</span>400    0.264</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 2</span> AAPL   1990-01-03 0.339 0.339 0.335 0.335 207<span style="text-decoration: underline;">995</span>200    0.266</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> AAPL   1990-01-04 0.342 0.346 0.333 0.336 221<span style="text-decoration: underline;">513</span>600    0.267</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> AAPL   1990-01-05 0.337 0.342 0.330 0.337 123<span style="text-decoration: underline;">312</span>000    0.268</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> AAPL   1990-01-08 0.335 0.339 0.330 0.339 101<span style="text-decoration: underline;">572</span>800    0.270</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> AAPL   1990-01-09 0.339 0.339 0.330 0.336  86<span style="text-decoration: underline;">139</span>200    0.267</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> AAPL   1990-01-10 0.336 0.336 0.319 0.321 199<span style="text-decoration: underline;">718</span>400    0.256</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   1990-01-11 0.324 0.324 0.308 0.308 211<span style="text-decoration: underline;">052</span>800    0.245</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   1990-01-12 0.306 0.310 0.301 0.308 171<span style="text-decoration: underline;">897</span>600    0.245</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> AAPL   1990-01-04 0.342 0.346 0.333 0.336 221<span style="text-decoration: underline;">513</span>600    0.266</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> AAPL   1990-01-05 0.337 0.342 0.330 0.337 123<span style="text-decoration: underline;">312</span>000    0.267</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> AAPL   1990-01-08 0.335 0.339 0.330 0.339 101<span style="text-decoration: underline;">572</span>800    0.269</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> AAPL   1990-01-09 0.339 0.339 0.330 0.336  86<span style="text-decoration: underline;">139</span>200    0.266</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> AAPL   1990-01-10 0.336 0.336 0.319 0.321 199<span style="text-decoration: underline;">718</span>400    0.255</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   1990-01-11 0.324 0.324 0.308 0.308 211<span style="text-decoration: underline;">052</span>800    0.244</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   1990-01-12 0.306 0.310 0.301 0.308 171<span style="text-decoration: underline;">897</span>600    0.244</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   1990-01-15 0.308 0.319 0.306 0.306 161<span style="text-decoration: underline;">739</span>200    0.243</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 8,366 more rows</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;"># ℹ 8,491 more rows</span></span></span></code></pre>
 <p>Yahoo Japan stock prices can be retrieved using a similar call,
 <code>get = "stock.prices.japan"</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -246,7 +250,7 @@ Prices</a> are shown below.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wti_price_usd</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"DCOILWTICO"</span>, get <span class="op">=</span> <span class="st">"economic.data"</span><span class="op">)</span></span>
 <span><span class="va">wti_price_usd</span> </span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 2,670 × 3</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 2,800 × 3</span></span></span>
 <span><span class="co">##    symbol     date       price</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 1</span> DCOILWTICO 2013-01-01  <span style="color: #BB0000;">NA</span>  </span></span>
@@ -259,21 +263,23 @@ Prices</a> are shown below.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> DCOILWTICO 2013-01-10  93.8</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> DCOILWTICO 2013-01-11  93.6</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> DCOILWTICO 2013-01-14  94.3</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 2,660 more rows</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;"># ℹ 2,790 more rows</span></span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="nasdaq-data-link-quandl-api">2.3 Nasdaq Data Link (Quandl) API<a class="anchor" aria-label="anchor" href="#nasdaq-data-link-quandl-api"></a>
 </h3>
 <p><a href="https://data.nasdaq.com/" class="external-link">Quandl</a> provides access to a
-vast number of financial and economic databases. The <code>Quandl</code>
-package has been integrated into <code>tidyquant</code> as follows.</p>
+vast number of financial and economic databases. The Quandl packages
+must be installed separately.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"Quandl"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level4">
 <h4 id="authentication">Authentication<a class="anchor" aria-label="anchor" href="#authentication"></a>
 </h4>
 <p>To make full use of the integration we recommend you set your api
 key. To do this create or sign into your Quandl account and go to your
 account api key page.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/quandl_api_key.html">quandl_api_key</a></span><span class="op">(</span><span class="st">"&lt;your-api-key&gt;"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
@@ -285,7 +291,7 @@ account api key page.</p>
 The only required argument is <code>query</code>. You can also visit the
 <a href="https://data.nasdaq.com/search" class="external-link">Quandl Search</a> webpage to
 search for available database codes.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/quandl_search.html">quandl_search</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">"Oil"</span>, database_code <span class="op">=</span> <span class="st">"NSE"</span>, per_page <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
@@ -308,7 +314,7 @@ desired arguments for the underlying function.</p>
 <p>The following uses <code>get = "quandl"</code> and the “WIKI”
 database to download daily stock prices for AAPL in 2016. The output is
 a tidy data frame.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"WIKI/AAPL"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get  <span class="op">=</span> <span class="st">"quandl"</span>,</span>
 <span>           from <span class="op">=</span> <span class="st">"2016-01-01"</span>,</span>
@@ -334,7 +340,7 @@ underlying <code>Quandl()</code> function:</p>
 <p>Here’s an example to get period returns of the adj.close (column
 index 11) using the <code>column_index</code>, <code>collapse</code> and
 <code>transform</code> arguments.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="st">"WIKI/AAPL"</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get          <span class="op">=</span> <span class="st">"quandl"</span>,</span>
 <span>           from         <span class="op">=</span> <span class="st">"2007-01-01"</span>,</span>
@@ -347,7 +353,7 @@ index 11) using the <code>column_index</code>, <code>collapse</code> and
 arguments do not work with data tables.</p>
 <p>Here’s several examples of <a href="https://data.nasdaq.com/databases/ZFB/documentation/about" class="external-link">Zacks
 Fundamentals Collection B</a></p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Zacks Fundamentals Collection B (DOW 30 Available to non subscribers)</span></span>
 <span><span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"ZACKS/FC"</span>, get <span class="op">=</span> <span class="st">"quandl.datatable"</span><span class="op">)</span>   <span class="co"># Zacks Fundamentals Condensed</span></span>
 <span><span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"ZACKS/FR"</span>, get <span class="op">=</span> <span class="st">"quandl.datatable"</span><span class="op">)</span>   <span class="co"># Zacks Fundamental Ratios</span></span>
@@ -369,7 +375,7 @@ Yahoo! Finance.</p>
 <p>To make full use of the integration you need to get an API key and
 then set your api key. If you don’t have one already, go to <a href="https://www.tiingo.com/" class="external-link">Tiingo</a> account and get your FREE API
 key. You can then set it as follows:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tiingo_api_key.html">tiingo_api_key</a></span><span class="op">(</span><span class="st">'&lt;your-api-key&gt;'</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
@@ -389,7 +395,7 @@ the <code>riingo</code> package (R interface to Tiingo). Here’s how
 <code>tq_get(get = "tiingo.crypto") = riingo::riingo_crypto_prices()</code>
 </li>
 </ul>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Tiingo Prices (Free alternative to Yahoo Finance!)</span></span>
 <span><span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AAPL"</span>, <span class="st">"GOOG"</span><span class="op">)</span>, get <span class="op">=</span> <span class="st">"tiingo"</span>, from <span class="op">=</span> <span class="st">"2010-01-01"</span><span class="op">)</span></span>
 <span></span>
@@ -416,15 +422,19 @@ access to a real-time and historical financial data. The
 <code>alphavantager</code> package, a lightweight R interface, has been
 integrated into <code>tidyquant</code> as follows. The benefit of the
 integration is the <strong>scalability since we can now get multiple
-symbols returned in a tidy format</strong>.</p>
+symbols returned in a tidy format</strong>. You will need to install it
+first.</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"alphavantager"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level4">
 <h4 id="authentication-2">Authentication<a class="anchor" aria-label="anchor" href="#authentication-2"></a>
 </h4>
 <p>To make full use of the integration you need to get an API key and
 then set your api key. If you don’t have one already, go to <a href="https://www.alphavantage.co/" class="external-link">Alpha Vantage</a> account and get
 your FREE API key. You can then set it as follows:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/av_api_key.html">av_api_key</a></span><span class="op">(</span><span class="st">"&lt;your-api-key&gt;"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("alphavantager")</span></span>
+<span><span class="fu"><a href="../reference/av_api_key.html">av_api_key</a></span><span class="op">(</span><span class="st">"&lt;your-api-key&gt;"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="getting-alpha-vantage-data">Getting Alpha Vantage Data<a class="anchor" aria-label="anchor" href="#getting-alpha-vantage-data"></a>
@@ -432,13 +442,13 @@ your FREE API key. You can then set it as follows:</p>
 <p>Getting data is simple as the structure follows the <a href="https://www.alphavantage.co/documentation/" class="external-link">Alpha Vantage API
 documentation</a>. For example, if you wish to retrieve intraday data at
 5 minute intervals for META and MSFT, you can build the parameters
-<code>x = c("FB", "MSFT"), get = "alphavantager", av_fun = "TIME_SERIES_INTRADAY", interval = "5min"</code>.
+<code>x = c("META", "MSFT"), get = "alphavantager", av_fun = "TIME_SERIES_INTRADAY", interval = "5min"</code>.
 The familiar <code>x</code> and <code>get</code> are the same as you
 always use. The <code>av_fun</code> argument comes from
 <code><a href="https://rdrr.io/pkg/alphavantager/man/av_get.html" class="external-link">alphavantager::av_get()</a></code> and the Alpha Vantage
 documentation. The <code>interval</code> argument comes from the docs as
 well.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Scaling is as simple as supplying multiple symbols</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"META"</span>, <span class="st">"MSFT"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get <span class="op">=</span> <span class="st">"alphavantage"</span>, av_fun <span class="op">=</span> <span class="st">"TIME_SERIES_INTRADAY"</span>, interval <span class="op">=</span> <span class="st">"5min"</span><span class="op">)</span></span></code></pre></div>
@@ -461,8 +471,9 @@ now get multiple symbols returned in a tidy format</strong>.</p>
 Terminal account (Note this is not a free service). If you have
 Bloomberg Terminal running on your machine, you can connect as
 follows:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">blpConnect</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("Rblpapi")</span></span>
+<span><span class="fu">Rblpapi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Rblpapi/man/blpConnect.html" class="external-link">blpConnect</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="getting-bloomberg-data">Getting Bloomberg Data<a class="anchor" aria-label="anchor" href="#getting-bloomberg-data"></a>
@@ -487,7 +498,7 @@ datetime.</li>
 <li>Other arguments: These are options that depend on the
 <code>rblpapi_fun</code>. See <code>Rblpapi</code> documentation.</li>
 </ul>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get Bloomberg data in a tidy data frame</span></span>
 <span><span class="va">my_bloomberg_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'SPX Index'</span>,<span class="st">'ODMAX Equity'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get         <span class="op">=</span> <span class="st">"Rblpapi"</span>,</span>
@@ -505,26 +516,24 @@ datetime.</li>
 <p>Mutating functions enable the <code>xts</code>/<code>zoo</code>,
 <code>quantmod</code> and <code>TTR</code> functions to shine. We’ll
 touch on the mutation functions briefly using the <code>FANG</code> data
-set, which consists of daily prices for FB, AMZN, GOOG, and NFLX from
+set, which consists of daily prices for META, AMZN, GOOG, and NFLX from
 the beginning of 2013 to the end of 2016. We’ll apply the functions to
 grouped data sets to get a feel for how each works</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"FANG"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">FANG</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">FANG</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 4,032 × 8</span></span></span>
 <span><span class="co">##    symbol date        open  high   low close    volume adjusted</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> FB     2013-01-02  27.4  28.2  27.4  28    69<span style="text-decoration: underline;">846</span>400     28  </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> FB     2013-01-03  27.9  28.5  27.6  27.8  63<span style="text-decoration: underline;">140</span>600     27.8</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> FB     2013-01-04  28.0  28.9  27.8  28.8  72<span style="text-decoration: underline;">715</span>400     28.8</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> FB     2013-01-07  28.7  29.8  28.6  29.4  83<span style="text-decoration: underline;">781</span>800     29.4</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> FB     2013-01-08  29.5  29.6  28.9  29.1  45<span style="text-decoration: underline;">871</span>300     29.1</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> FB     2013-01-09  29.7  30.6  29.5  30.6 104<span style="text-decoration: underline;">787</span>700     30.6</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> FB     2013-01-10  30.6  31.5  30.3  31.3  95<span style="text-decoration: underline;">316</span>400     31.3</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> FB     2013-01-11  31.3  32.0  31.1  31.7  89<span style="text-decoration: underline;">598</span>000     31.7</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> FB     2013-01-14  32.1  32.2  30.6  31.0  98<span style="text-decoration: underline;">892</span>800     31.0</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> FB     2013-01-15  30.6  31.7  29.9  30.1 173<span style="text-decoration: underline;">242</span>600     30.1</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> META   2013-01-02  27.4  28.2  27.4  28    69<span style="text-decoration: underline;">846</span>400     28  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> META   2013-01-03  27.9  28.5  27.6  27.8  63<span style="text-decoration: underline;">140</span>600     27.8</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> META   2013-01-04  28.0  28.9  27.8  28.8  72<span style="text-decoration: underline;">715</span>400     28.8</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> META   2013-01-07  28.7  29.8  28.6  29.4  83<span style="text-decoration: underline;">781</span>800     29.4</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> META   2013-01-08  29.5  29.6  28.9  29.1  45<span style="text-decoration: underline;">871</span>300     29.1</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> META   2013-01-09  29.7  30.6  29.5  30.6 104<span style="text-decoration: underline;">787</span>700     30.6</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> META   2013-01-10  30.6  31.5  30.3  31.3  95<span style="text-decoration: underline;">316</span>400     31.3</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> META   2013-01-11  31.3  32.0  31.1  31.7  89<span style="text-decoration: underline;">598</span>000     31.7</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> META   2013-01-14  32.1  32.2  30.6  31.0  98<span style="text-decoration: underline;">892</span>800     31.0</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> META   2013-01-15  30.6  31.7  29.9  30.1 173<span style="text-decoration: underline;">242</span>600     30.1</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 4,022 more rows</span></span></span></code></pre>
 <p>For a detailed walkthrough of the compatible functions, see the next
 vignette in the series, <a href="TQ02-quant-integrations-in-tidyquant.html">R Quantitative Analysis
@@ -538,7 +547,7 @@ columns will be returned, but with <code><a href="../reference/tq_mutate.html">t
 number of rows returned can be different than the original data frame.
 This is important for changing periodicity. An example is periodicity
 aggregation from daily to monthly.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">FANG</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span>select <span class="op">=</span> <span class="va">adjusted</span>, mutate_fun <span class="op">=</span> <span class="va">to.monthly</span>, indexAt <span class="op">=</span> <span class="st">"lastof"</span><span class="op">)</span></span></code></pre></div>
@@ -546,16 +555,16 @@ aggregation from daily to monthly.</p>
 <span><span class="co">## <span style="color: #949494;"># Groups:   symbol [4]</span></span></span>
 <span><span class="co">##    symbol date       adjusted</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> FB     2013-01-31     31.0</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> FB     2013-02-28     27.2</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> FB     2013-03-31     25.6</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> FB     2013-04-30     27.8</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> FB     2013-05-31     24.4</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> FB     2013-06-30     24.9</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> FB     2013-07-31     36.8</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> FB     2013-08-31     41.3</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> FB     2013-09-30     50.2</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> FB     2013-10-31     50.2</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> META   2013-01-31     31.0</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> META   2013-02-28     27.2</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> META   2013-03-31     25.6</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> META   2013-04-30     27.8</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> META   2013-05-31     24.4</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> META   2013-06-30     24.9</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> META   2013-07-31     36.8</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> META   2013-08-31     41.3</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> META   2013-09-30     50.2</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> META   2013-10-31     50.2</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 182 more rows</span></span></span></code></pre>
 <p>Let’s go through what happened. <code>select</code> allows you to
 easily choose what columns get passed to <code>mutate_fun</code>. In
@@ -576,14 +585,14 @@ Crude daily prices to monthly prices. Since we only have a single column
 to pass, we can leave the <code>select</code> argument as
 <code>NULL</code> which selects all columns by default. This sends the
 price column to the <code>to.period</code> mutate function.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wti_prices</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"DCOILWTICO"</span>, get <span class="op">=</span> <span class="st">"economic.data"</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="va">wti_prices</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>    </span>
 <span>    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span>mutate_fun <span class="op">=</span> <span class="va">to.period</span>,</span>
 <span>                 period     <span class="op">=</span> <span class="st">"months"</span>, </span>
 <span>                 col_rename <span class="op">=</span> <span class="st">"WTI Price"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 123 × 2</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 129 × 2</span></span></span>
 <span><span class="co">##    date       `WTI Price`</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 1</span> 2013-01-31        97.6</span></span>
@@ -596,7 +605,7 @@ price column to the <code>to.period</code> mutate function.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> 2013-08-30       108. </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> 2013-09-30       102. </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> 2013-10-31        96.3</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 113 more rows</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;"># ℹ 119 more rows</span></span></span></code></pre>
 </div>
 </div>
 <div class="section level3">
@@ -608,7 +617,7 @@ additional columns). An example is getting the <code>MACD</code> from
 <code>close</code>, which mutates the original input by adding MACD and
 Signal columns. Note that we can quickly rename the columns using the
 <code>col_rename</code> argument.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">FANG</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/tq_mutate.html">tq_mutate</a></span><span class="op">(</span>select     <span class="op">=</span> <span class="va">close</span>, </span>
@@ -618,16 +627,16 @@ Signal columns. Note that we can quickly rename the columns using the
 <span><span class="co">## <span style="color: #949494;"># Groups:   symbol [4]</span></span></span>
 <span><span class="co">##    symbol date        open  high   low close    volume adjusted  MACD Signal</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> FB     2013-01-02  27.4  28.2  27.4  28    69<span style="text-decoration: underline;">846</span>400     28      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> FB     2013-01-03  27.9  28.5  27.6  27.8  63<span style="text-decoration: underline;">140</span>600     27.8    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> FB     2013-01-04  28.0  28.9  27.8  28.8  72<span style="text-decoration: underline;">715</span>400     28.8    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> FB     2013-01-07  28.7  29.8  28.6  29.4  83<span style="text-decoration: underline;">781</span>800     29.4    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> FB     2013-01-08  29.5  29.6  28.9  29.1  45<span style="text-decoration: underline;">871</span>300     29.1    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> FB     2013-01-09  29.7  30.6  29.5  30.6 104<span style="text-decoration: underline;">787</span>700     30.6    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> FB     2013-01-10  30.6  31.5  30.3  31.3  95<span style="text-decoration: underline;">316</span>400     31.3    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> FB     2013-01-11  31.3  32.0  31.1  31.7  89<span style="text-decoration: underline;">598</span>000     31.7    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> FB     2013-01-14  32.1  32.2  30.6  31.0  98<span style="text-decoration: underline;">892</span>800     31.0    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> FB     2013-01-15  30.6  31.7  29.9  30.1 173<span style="text-decoration: underline;">242</span>600     30.1    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> META   2013-01-02  27.4  28.2  27.4  28    69<span style="text-decoration: underline;">846</span>400     28      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> META   2013-01-03  27.9  28.5  27.6  27.8  63<span style="text-decoration: underline;">140</span>600     27.8    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> META   2013-01-04  28.0  28.9  27.8  28.8  72<span style="text-decoration: underline;">715</span>400     28.8    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> META   2013-01-07  28.7  29.8  28.6  29.4  83<span style="text-decoration: underline;">781</span>800     29.4    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> META   2013-01-08  29.5  29.6  28.9  29.1  45<span style="text-decoration: underline;">871</span>300     29.1    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> META   2013-01-09  29.7  30.6  29.5  30.6 104<span style="text-decoration: underline;">787</span>700     30.6    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> META   2013-01-10  30.6  31.5  30.3  31.3  95<span style="text-decoration: underline;">316</span>400     31.3    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> META   2013-01-11  31.3  32.0  31.1  31.7  89<span style="text-decoration: underline;">598</span>000     31.7    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> META   2013-01-14  32.1  32.2  30.6  31.0  98<span style="text-decoration: underline;">892</span>800     31.0    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> META   2013-01-15  30.6  31.7  29.9  30.1 173<span style="text-decoration: underline;">242</span>600     30.1    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 4,022 more rows</span></span></span></code></pre>
 <p>Note that a mutation can occur if, and only if, the mutation has the
 same structure of the original tibble. In other words, the calculation
@@ -652,7 +661,7 @@ broken down into three steps:</p>
 <p>First, get combined returns. The asset and baseline returns should be
 in wide format, which is needed for the <code>lm</code> function in the
 next step.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fb_returns</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"META"</span>, get  <span class="op">=</span> <span class="st">"stock.prices"</span>, from <span class="op">=</span> <span class="st">"2016-01-01"</span>, to   <span class="op">=</span> <span class="st">"2016-12-31"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span><span class="va">adjusted</span>, <span class="va">periodReturn</span>, period <span class="op">=</span> <span class="st">"weekly"</span>, col_rename <span class="op">=</span> <span class="st">"fb.returns"</span><span class="op">)</span></span>
 <span></span>
@@ -682,7 +691,7 @@ apply over the rolling window in Step 3. An important point is that the
 object. The <code><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html" class="external-link">timetk::tk_tbl</a></code> function takes care of
 converting to a data frame for the <code>lm</code> function to work
 properly with the columns “fb.returns” and “xlk.returns”.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">regr_fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">fb.returns</span> <span class="op">~</span> <span class="va">xlk.returns</span>, data <span class="op">=</span> <span class="fu">timetk</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html" class="external-link">tk_tbl</a></span><span class="op">(</span><span class="va">data</span>, silent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
@@ -702,7 +711,7 @@ tells <code>rollapply</code> to perform the computation using the data
 as a whole rather than apply the function to each column independently.
 The <code>col_rename</code> argument is used to rename the added
 columns.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">returns_combined</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/tq_mutate.html">tq_mutate</a></span><span class="op">(</span>mutate_fun <span class="op">=</span> <span class="va">rollapply</span>,</span>
 <span>              width      <span class="op">=</span> <span class="fl">12</span>,</span>
@@ -723,7 +732,7 @@ columns.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> 2016-03-04    0.004<span style="text-decoration: underline;">36</span>     0.028<span style="text-decoration: underline;">1</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> 2016-03-11    0.009<span style="text-decoration: underline;">41</span>     0.010<span style="text-decoration: underline;">6</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 42 more rows</span></span></span></code></pre>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">returns_combined</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 52 × 3</span></span></span>
 <span><span class="co">##    date       fb.returns xlk.returns</span></span>
@@ -758,7 +767,7 @@ the xy variants, <code><a href="../reference/tq_mutate.html">tq_transmute_xy()</
 <code>select</code> argument, you use <code>x</code> and <code>y</code>
 arguments to pass the columns needed based on the
 <code>mutate_fun</code> documentation.</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">FANG</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/tq_mutate.html">tq_mutate_xy</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">close</span>, y <span class="op">=</span> <span class="va">volume</span>, </span>
@@ -767,16 +776,16 @@ arguments to pass the columns needed based on the
 <span><span class="co">## <span style="color: #949494;"># Groups:   symbol [4]</span></span></span>
 <span><span class="co">##    symbol date        open  high   low close    volume adjusted EVWMA</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> FB     2013-01-02  27.4  28.2  27.4  28    69<span style="text-decoration: underline;">846</span>400     28    <span style="color: #BB0000;">NA</span>  </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> FB     2013-01-03  27.9  28.5  27.6  27.8  63<span style="text-decoration: underline;">140</span>600     27.8  <span style="color: #BB0000;">NA</span>  </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> FB     2013-01-04  28.0  28.9  27.8  28.8  72<span style="text-decoration: underline;">715</span>400     28.8  <span style="color: #BB0000;">NA</span>  </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> FB     2013-01-07  28.7  29.8  28.6  29.4  83<span style="text-decoration: underline;">781</span>800     29.4  <span style="color: #BB0000;">NA</span>  </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> FB     2013-01-08  29.5  29.6  28.9  29.1  45<span style="text-decoration: underline;">871</span>300     29.1  <span style="color: #BB0000;">NA</span>  </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> FB     2013-01-09  29.7  30.6  29.5  30.6 104<span style="text-decoration: underline;">787</span>700     30.6  <span style="color: #BB0000;">NA</span>  </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> FB     2013-01-10  30.6  31.5  30.3  31.3  95<span style="text-decoration: underline;">316</span>400     31.3  <span style="color: #BB0000;">NA</span>  </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> FB     2013-01-11  31.3  32.0  31.1  31.7  89<span style="text-decoration: underline;">598</span>000     31.7  <span style="color: #BB0000;">NA</span>  </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> FB     2013-01-14  32.1  32.2  30.6  31.0  98<span style="text-decoration: underline;">892</span>800     31.0  <span style="color: #BB0000;">NA</span>  </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> FB     2013-01-15  30.6  31.7  29.9  30.1 173<span style="text-decoration: underline;">242</span>600     30.1  30.1</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> META   2013-01-02  27.4  28.2  27.4  28    69<span style="text-decoration: underline;">846</span>400     28    <span style="color: #BB0000;">NA</span>  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> META   2013-01-03  27.9  28.5  27.6  27.8  63<span style="text-decoration: underline;">140</span>600     27.8  <span style="color: #BB0000;">NA</span>  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> META   2013-01-04  28.0  28.9  27.8  28.8  72<span style="text-decoration: underline;">715</span>400     28.8  <span style="color: #BB0000;">NA</span>  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> META   2013-01-07  28.7  29.8  28.6  29.4  83<span style="text-decoration: underline;">781</span>800     29.4  <span style="color: #BB0000;">NA</span>  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> META   2013-01-08  29.5  29.6  28.9  29.1  45<span style="text-decoration: underline;">871</span>300     29.1  <span style="color: #BB0000;">NA</span>  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> META   2013-01-09  29.7  30.6  29.5  30.6 104<span style="text-decoration: underline;">787</span>700     30.6  <span style="color: #BB0000;">NA</span>  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> META   2013-01-10  30.6  31.5  30.3  31.3  95<span style="text-decoration: underline;">316</span>400     31.3  <span style="color: #BB0000;">NA</span>  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> META   2013-01-11  31.3  32.0  31.1  31.7  89<span style="text-decoration: underline;">598</span>000     31.7  <span style="color: #BB0000;">NA</span>  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> META   2013-01-14  32.1  32.2  30.6  31.0  98<span style="text-decoration: underline;">892</span>800     31.0  <span style="color: #BB0000;">NA</span>  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> META   2013-01-15  30.6  31.7  29.9  30.1 173<span style="text-decoration: underline;">242</span>600     30.1  30.1</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 4,022 more rows</span></span></span></code></pre>
 </div>
 </div>
