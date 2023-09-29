@@ -10,11 +10,11 @@
 #' to quickly rename columns.
 #' @param n Number of times to repeat a data frame row-wise.
 #' @param index_col_name A renaming function for the "index" column, used when repeating data frames.
-#' @param ... Additional parameters passed to `PerformanceAnalytics::Returns.portfolio`
+#' @param ... Additional parameters passed to `PerformanceAnalytics::Return.portfolio`
 #'
 #' @return Returns data in the form of a `tibble` object.
 #'
-#' @details `tq_portfolio` is a wrapper for `PerformanceAnalytics::Returns.portfolio`.
+#' @details `tq_portfolio` is a wrapper for `PerformanceAnalytics::Return.portfolio`.
 #' The main advantage is the results are returned as a `tibble` and the
 #' function can be used with the `tidyverse`.
 #'

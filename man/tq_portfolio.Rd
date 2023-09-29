@@ -40,7 +40,7 @@ and weights in second column.}
 \item{col_rename}{A string or character vector containing names that can be used
 to quickly rename columns.}
 
-\item{...}{Additional parameters passed to \code{PerformanceAnalytics::Returns.portfolio}}
+\item{...}{Additional parameters passed to \code{PerformanceAnalytics::Return.portfolio}}
 
 \item{n}{Number of times to repeat a data frame row-wise.}
 
@@ -53,7 +53,7 @@ Returns data in the form of a \code{tibble} object.
 Aggregates a group of returns by asset into portfolio returns
 }
 \details{
-\code{tq_portfolio} is a wrapper for \code{PerformanceAnalytics::Returns.portfolio}.
+\code{tq_portfolio} is a wrapper for \code{PerformanceAnalytics::Return.portfolio}.
 The main advantage is the results are returned as a \code{tibble} and the
 function can be used with the \code{tidyverse}.
 
