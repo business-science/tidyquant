@@ -48,7 +48,7 @@ quandl_api_key <- function(api_key) {
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf rlang::is_installed("Quandl")
 #'
 #' \dontrun{
 #' quandl_search(query = "oil")

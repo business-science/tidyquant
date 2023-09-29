@@ -6,6 +6,15 @@
 \usage{
 quandl_search(query, silent = FALSE, per_page = 10, ...)
 }
+\arguments{
+\item{query}{Search terms}
+
+\item{silent}{Prints the results when FALSE.}
+
+\item{per_page}{Number of results returned per page.}
+
+\item{...}{Additional named values that are interpretted as Quandl API parameters.}
+}
 \value{
 Returns a tibble with search results.
 }
@@ -16,10 +25,12 @@ Search the Quandl database
 A wrapper for \code{Quandl::Quandl.search()}
 }
 \examples{
+\dontshow{if (rlang::is_installed("Quandl")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 \dontrun{
 quandl_search(query = "oil")
 }
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tq_get]{tq_get()}} \code{get = "quandl"}

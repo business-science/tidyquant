@@ -307,7 +307,7 @@ Return correlations are a common way to analyze how closely an asset or portfoli
 ```{r}
 # Asset Returns
 FANG_returns_monthly <- FANG %>%
-    group_by(symbol) %>%
+    dplyr::group_by(symbol) %>%
     tq_transmute(select     = adjusted, 
                  mutate_fun = periodReturn,
                  period     = "monthly")
