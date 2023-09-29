@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/business-science/tidyquant/workflows/R-CMD-check/badge.svg)](https://github.com/business-science/tidyquant/actions)
+[![R-CMD-check](https://github.com/business-science/tidyquant/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/business-science/tidyquant/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/business-science/tidyquant/branch/master/graph/badge.svg)](https://app.codecov.io/gh/business-science/tidyquant)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/tidyquant)](https://cran.r-project.org/package=tidyquant)
 ![](http://cranlogs.r-pkg.org/badges/tidyquant?color=brightgreen)
