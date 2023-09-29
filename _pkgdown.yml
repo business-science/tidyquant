@@ -1,17 +1,11 @@
 template:
   bootstrap: 5
-  # bslib:
-  #   base_font:
-  #     google: Roboto
-  #   heading_font:
-  #     google: Montserrat
-    # code_font:
-    #   google: "JetBrains Mono"
+  bootswatch: lux
   params:
-    bootswatch: flatly
     ganalytics: UA-76139189-2
 
 navbar:
+  bg: primary
   structure:
     left:  [intro, articles, reference, news]
   components:
