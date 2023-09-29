@@ -26,9 +26,11 @@ knitr::opts_chunk$set(
 ![](http://cranlogs.r-pkg.org/badges/grand-total/tidyquant?color=brightgreen)
 <!-- badges: end -->
 
-> Bringing financial and business analysis to the tidyverse
+> Bringing financial and business analysis to the `tidyverse` in R.
 
-## 2-Minutes To tidyquant
+Mission: Our number 1 goal is to make financial analysis easier in R. We've designed `tidyquant` to give you the flexibility of the tidyverse with the performance of the R `xts` system. The result: easier, faster, and more scalable financial analysis. 
+
+## Start: 2-Minutes To tidyquant
 
 Our short introduction to `tidyquant` on
 [YouTube](https://www.youtube.com/embed/woxJZTL2hok).

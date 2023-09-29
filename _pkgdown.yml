@@ -10,7 +10,7 @@ navbar:
     left:  [intro, articles, reference, news]
   components:
     intro:
-     text: Getting Started
+     text: Start
      href: articles/TQ00-introduction-to-tidyquant.html
     news:
      text: News
