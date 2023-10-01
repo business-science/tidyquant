@@ -101,7 +101,7 @@
                         <h4 data-toc-skip class="author">Matt
 Dancho</h4>
             
-            <h4 data-toc-skip class="date">2023-09-29</h4>
+            <h4 data-toc-skip class="date">2023-10-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/HEAD/vignettes/TQ03-scaling-and-modeling-with-tidyquant.Rmd" class="external-link"><code>vignettes/TQ03-scaling-and-modeling-with-tidyquant.Rmd</code></a></small>
       <div class="d-none name"><code>TQ03-scaling-and-modeling-with-tidyquant.Rmd</code></div>
@@ -259,7 +259,7 @@ the vignette.</em></p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tq_index.html">tq_index</a></span><span class="op">(</span><span class="st">"DOW"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get <span class="op">=</span> <span class="st">"stock.prices"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 8,112 × 15</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 8,115 × 15</span></span></span>
 <span><span class="co">##    symbol company      identifier sedol weight sector shares_held local_currency</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 1</span> UNH    UNITEDHEALT… 91324P102  2917… 0.099<span style="text-decoration: underline;">6</span> -          5<span style="text-decoration: underline;">477</span>820 USD           </span></span>
@@ -272,7 +272,7 @@ the vignette.</em></p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> UNH    UNITEDHEALT… 91324P102  2917… 0.099<span style="text-decoration: underline;">6</span> -          5<span style="text-decoration: underline;">477</span>820 USD           </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> UNH    UNITEDHEALT… 91324P102  2917… 0.099<span style="text-decoration: underline;">6</span> -          5<span style="text-decoration: underline;">477</span>820 USD           </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> UNH    UNITEDHEALT… 91324P102  2917… 0.099<span style="text-decoration: underline;">6</span> -          5<span style="text-decoration: underline;">477</span>820 USD           </span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 8,102 more rows</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 8,105 more rows</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 7 more variables: date &lt;date&gt;, open &lt;dbl&gt;, high &lt;dbl&gt;, low &lt;dbl&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   close &lt;dbl&gt;, volume &lt;dbl&gt;, adjusted &lt;dbl&gt;</span></span></span></code></pre>
 <p>You can use any applicable “getter” to get data for <strong>every
@@ -429,7 +429,7 @@ function. However, there is one problem: the output is not “tidy”.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## Coefficients:</span></span>
 <span><span class="co">## (Intercept)   year(date)  </span></span>
-<span><span class="co">##    58.86281     -0.02915</span></span></code></pre>
+<span><span class="co">##    58.86280     -0.02915</span></span></code></pre>
 <p>We can utilize the <code>broom</code> package to get “tidy” data from
 the model. There’s three primary functions:</p>
 <ol style="list-style-type: decimal">
@@ -588,7 +588,7 @@ results.</p>
 <span><span class="co">## <span style="color: #BBBB00;">!</span> x = 'BAD APPLE', get = 'stock.prices': Error in getSymbols.yahoo(Symbols = "BAD APPLE", env = &lt;environment&gt;, : Unable to import "BAD APPLE".</span></span>
 <span><span class="co">## URL using bad/illegal format or missing URL</span></span>
 <span><span class="co">##  Removing BAD APPLE.</span></span></code></pre>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 5,408 × 8</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 5,410 × 8</span></span></span>
 <span><span class="co">##    symbol date        open  high   low close    volume adjusted</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   2013-01-02  19.8  19.8  19.3  19.6 560<span style="text-decoration: underline;">518</span>000     16.8</span></span>
@@ -601,7 +601,7 @@ results.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   2013-01-11  18.6  18.8  18.5  18.6 350<span style="text-decoration: underline;">506</span>800     15.9</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   2013-01-14  18.0  18.1  17.8  17.9 734<span style="text-decoration: underline;">207</span>600     15.3</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   2013-01-15  17.8  17.8  17.3  17.4 876<span style="text-decoration: underline;">772</span>400     14.9</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 5,398 more rows</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;"># ℹ 5,400 more rows</span></span></span></code></pre>
 <p>Now switching <code>complete_cases = FALSE</code> will retain any
 errors as <code>NA</code> values in a nested data frame. Notice that the
 error message and output change. The error message now states that the
@@ -615,7 +615,7 @@ data structure.</p>
 <span><span class="co">## Caused by warning:</span></span>
 <span><span class="co">## <span style="color: #BBBB00;">!</span> x = 'BAD APPLE', get = 'stock.prices': Error in getSymbols.yahoo(Symbols = "BAD APPLE", env = &lt;environment&gt;, : Unable to import "BAD APPLE".</span></span>
 <span><span class="co">## URL using bad/illegal format or missing URL</span></span></code></pre>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 5,409 × 8</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 5,411 × 8</span></span></span>
 <span><span class="co">##    symbol date        open  high   low close    volume adjusted</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   2013-01-02  19.8  19.8  19.3  19.6 560<span style="text-decoration: underline;">518</span>000     16.8</span></span>
@@ -628,7 +628,7 @@ data structure.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   2013-01-11  18.6  18.8  18.5  18.6 350<span style="text-decoration: underline;">506</span>800     15.9</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   2013-01-14  18.0  18.1  17.8  17.9 734<span style="text-decoration: underline;">207</span>600     15.3</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   2013-01-15  17.8  17.8  17.3  17.4 876<span style="text-decoration: underline;">772</span>400     14.9</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 5,399 more rows</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;"># ℹ 5,401 more rows</span></span></span></code></pre>
 <p>In both cases, the prudent user will review the warnings to determine
 what happened and whether or not this is acceptable. In the
 <code>complete_cases = FALSE</code> example, if the user attempts to
