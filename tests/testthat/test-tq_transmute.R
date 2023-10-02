@@ -1,5 +1,5 @@
 context("Testing tq_transmute")
-
+skip_if_offline()
 #### Setup ----
 AAPL <- tq_get("AAPL", get = "stock.prices", from = "2010-01-01", to = "2015-01-01")
 
