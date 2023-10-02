@@ -150,7 +150,7 @@ AAPL \%>\%
     geom_ma(ma_fun = SMA, n = 50) +                 # Plot 50-day SMA
     geom_ma(ma_fun = SMA, n = 200, color = "red") + # Plot 200-day SMA
     coord_x_date(xlim = c("2016-01-01", "2016-12-31"),
-                 ylim = c(75, 125))                     # Zoom in
+                 ylim = c(20, 30))                     # Zoom in
 
 # EVWMA
 AAPL \%>\%
@@ -158,7 +158,7 @@ AAPL \%>\%
     geom_line() +                                                   # Plot stock price
     geom_ma(aes(volume = volume), ma_fun = EVWMA, n = 50) +   # Plot 50-day EVWMA
     coord_x_date(xlim = c("2016-01-01", "2016-12-31"),
-                 ylim = c(75, 125))                                  # Zoom in
+                 ylim = c(20, 30))                                  # Zoom in
 }
 \seealso{
 See individual modeling functions for underlying parameters:
