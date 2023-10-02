@@ -46,7 +46,7 @@
 #' (as ordered factors) or numeric values.
 #' @param abbr A logical used for [MONTH()] and [WEEKDAY()]. If `label = TRUE`, used to determine if
 #' full names (e.g. Wednesday) or abbreviated names (e.g. Wed) should be returned.
-#' @param include_year A logicial value used in [QUARTER()]. Determines whether or not to return 2020 Q3 as `3` or `2020.3`.
+#' @param include_year A logical value used in [QUARTER()]. Determines whether or not to return 2020 Q3 as `3` or `2020.3`.
 #' @param fiscal_start A numeric value used in [QUARTER()]. Determines the fiscal-year starting quarter.
 #' @param by Used to determine the gap in Date Sequence calculations and value to round to in Date Collapsing operations.
 #' Acceptable values are: A character string, containing one of `"day"`, `"week"`, `"month"`, `"quarter"` or `"year"`.

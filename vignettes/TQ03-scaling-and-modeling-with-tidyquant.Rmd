@@ -72,7 +72,7 @@ c("AAPL", "GOOG", "META") %>%
     tq_get(get = "stock.prices", from = "2016-01-01", to = "2017-01-01")
 ```
 
-The output is a single level tibble with all or the stock prices in one tibble. The auto-generated column name is "symbol", which can be pre-emptively renamed by giving the vector a name (e.g. `stocks <- c("AAPL", "GOOG", "META")`) and then piping to `tq_get`.
+The output is a single level tibble with all or the stock prices in one tibble. The auto-generated column name is "symbol", which can be preemptively renamed by giving the vector a name (e.g. `stocks <- c("AAPL", "GOOG", "META")`) and then piping to `tq_get`.
 
 
 ## Method 2: Map a tibble with stocks in first column
@@ -245,7 +245,7 @@ get_model <- function(stock_data) {
 }
 ```
 
-Testing it out on a single stock. We can see that the "term" that contains the direction of the trend (the slope) is "year(date)". The interpetation is that as year increases one unit, the annual returns decrease by 3%. 
+Testing it out on a single stock. We can see that the "term" that contains the direction of the trend (the slope) is "year(date)". The interpretation is that as year increases one unit, the annual returns decrease by 3%. 
 
 ```{r}
 get_model(AAPL)
@@ -264,7 +264,7 @@ stocks_tbl <- tq_index("SP500") %>%
 stocks_tbl
 ```
 
-We can now apply our analysis function to the stocks using `dplyr::mutate` and `purrr::map`. The `mutate()` function adds a column to our tibble, and the `map()` function maps our custom `get_model` function to our tibble of stocks using the `symbol` column. The `tidyr::unnest` function unrolls the nested data frame so all of the model statistics are accessable in the top data frame level. The `filter`, `arrange` and `select` steps just manipulate the data frame to isolate and arrange the data for our viewing. 
+We can now apply our analysis function to the stocks using `dplyr::mutate()` and `purrr::map()`. The `mutate()` function adds a column to our tibble, and the `map()` function maps our custom `get_model` function to our tibble of stocks using the `symbol` column. The `tidyr::unnest()` function unrolls the nested data frame so all of the model statistics are accessible in the top data frame level. The `filter`, `arrange` and `select` steps just manipulate the data frame to isolate and arrange the data for our viewing. 
 
 ```{r}
 stocks_model_stats <- stocks_tbl %>%
@@ -329,4 +329,4 @@ c("AAPL", "GOOG", "BAD APPLE") %>%
     tq_get(get = "stock.prices", complete_cases = FALSE)
 ```
 
-In both cases, the prudent user will review the warnings to determine what happened and whether or not this is acceptable. In the `complete_cases = FALSE` example, if the user attempts to perform downstream computations at scale, the computations will likely fail grinding the analysis to a hault. But, the advantage is that the user will more easily be able to filter to the problem childs to determine what happened and decide whether this is acceptable or not.
+In both cases, the prudent user will review the warnings to determine what happened and whether or not this is acceptable. In the `complete_cases = FALSE` example, if the user attempts to perform downstream computations at scale, the computations will likely fail grinding the analysis to a halt. But, the advantage is that the user will more easily be able to filter to the problem root to determine what happened and decide whether this is acceptable or not.

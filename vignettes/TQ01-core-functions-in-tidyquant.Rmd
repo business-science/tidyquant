@@ -367,7 +367,7 @@ A very powerful example is applying __custom functions__ across a rolling window
 
 1. Get returns
 2. Create a custom function
-3. Apply the custom function accross a rolling window using `tq_mutate(mutate_fun = rollapply)`
+3. Apply the custom function across a rolling window using `tq_mutate(mutate_fun = rollapply)`
 
 _Step 1: Get Returns_
 

@@ -76,17 +76,17 @@ display.}
 
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
-that define both data and aesthetics and shouldn't inherit behaviour from
+that define both data and aesthetics and shouldn't inherit behavior from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{ggplot2::borders()}}.}
 
 \item{colour_up, colour_down}{Select colors to be applied based on price movement
-from open to close. If close >= open, \code{colour_up} is used. Otherwise,
-\code{colour_down} is used. The default is "darkblue" and "red", respectively.}
+from open to close. If \code{close >= open}, \code{colour_up} is used. Otherwise,
+\code{colour_down} is used. The default is \code{"darkblue"} and \code{"red"}, respectively.}
 
 \item{fill_up, fill_down}{Select fills to be applied based on price movement
 from open to close. If close >= open, \code{fill_up} is used. Otherwise,
-\code{fill_down} is used. The default is "darkblue" and "red", respectively.
-Only affects \code{geom_candlestick}.}
+\code{fill_down} is used. The default is \code{"darkblue"} and "red", respectively.
+Only affects \code{geom_candlestick()}.}
 
 \item{...}{Other arguments passed on to \code{\link[ggplot2:layer]{ggplot2::layer()}}. These are
 often aesthetics, used to set an aesthetic to a fixed value, like

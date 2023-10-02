@@ -172,7 +172,7 @@ ls_env <- function(env) {
     if (env == "package:lubridate") {
         x <- setdiff(x, c(
             "as.difftime", # lubridate makes into an S4 generic
-            "date"         # matches base behaviour
+            "date"         # matches base behavior
         ))
     }
 

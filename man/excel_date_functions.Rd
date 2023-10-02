@@ -223,7 +223,7 @@ ROUND_YEAR(x, ...)
 \item{abbr}{A logical used for \code{\link[=MONTH]{MONTH()}} and \code{\link[=WEEKDAY]{WEEKDAY()}}. If \code{label = TRUE}, used to determine if
 full names (e.g. Wednesday) or abbreviated names (e.g. Wed) should be returned.}
 
-\item{include_year}{A logicial value used in \code{\link[=QUARTER]{QUARTER()}}. Determines whether or not to return 2020 Q3 as \code{3} or \code{2020.3}.}
+\item{include_year}{A logical value used in \code{\link[=QUARTER]{QUARTER()}}. Determines whether or not to return 2020 Q3 as \code{3} or \code{2020.3}.}
 
 \item{fiscal_start}{A numeric value used in \code{\link[=QUARTER]{QUARTER()}}. Determines the fiscal-year starting quarter.}
 

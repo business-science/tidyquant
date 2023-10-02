@@ -288,7 +288,7 @@ We now have an aggregated portfolio that is a 50/50 blend of AAPL and NFLX.
 
 You may be asking why didn't we use GOOG? __The important thing to understand is that all of the assets from the asset returns don't need to be used when creating the portfolio!__ This enables us to scale individual stock returns and then vary weights to optimize the portfolio (this will be a further subject that we address in the future!)
 
-##### Method 2: Aggregating a Portfolio using Two Column Tibble with Symbols and Weights
+##### Method 2: Aggregating a Portfolio using Two Column tibble with Symbols and Weights
 
 A possibly more useful method of aggregating returns is using a tibble of symbols and weights that are mapped to the portfolio. We'll recreate the previous portfolio example using mapped weights.
 

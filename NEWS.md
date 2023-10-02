@@ -1,12 +1,23 @@
 # tidyquant (development version)
 
-- Remove the dependency on tidyverse
-- tidyquant no longer loads lubridate as tidyverse 2.0 now loads lubridate
+## Breaking changes
+
+- tidyquant no longer loads lubridate. (#237, @olivroy)
+  
+  If you use tidyquant with tidyverse, there is no change for you.
+
+tidyquant no longer loads many packages.
+
+## Fixes
+
+- tidyquant startup messages mimics the tidyverse messages for clarity. (#163, #116)
+- Remove the dependency on tidyverse (#236, @olivroy)
+- tidyquant no longer loads lubridate as tidyverse 2.0 now loads lubridate.
 - Changed the `size` argument to `linewidth` for ggplot2 3.4.0
-- Removed the last tidyr and dplyr deprecated functions 
-- Add linewidth = to `geom_ma()`
-- Move Quandl, riingo, and alphavantager to Suggests. tidyquant will not explictly install those, but you can install them from CRAN.
-- Fixed CRAN alias
+- Removed the last tidyr and dplyr deprecated functions.
+- Add `linewidth` to `geom_ma()`
+- Move `Quandl`, `riingo`, and `alphavantager` to Suggests. tidyquant will not explicitly install those, but you can install them from CRAN.
+- Fixed CRAN package alias
 - FB to META change  in `FANG`
 
 # tidyquant 1.0.7
@@ -96,7 +107,7 @@ Other changes:
             - Excel Date Math functions: `NET_WORKDAYS()`, `EOMONTH()`
         - __Financial Math Functions__ - `NPV()`, `IRR()`, `FV()`, `PV()`, `PMT()`, `RATE()`
   
-* __NEW Tidyverse Functionality__
+* __NEW tidyverse Functionality__
     - `summarise_by_time()` - This is a new time-based variant of `summarise()` that allows collapsing the time-series by "day", "week", "month", "quarter", "year", and more. 
     - Note: I will evaluate the need for `summarise_at_by_time()`, `summarise_all_by_time()`, and `summarise_if_by_time()` after the release of `dplyr` v1.0.0.
 
@@ -119,7 +130,7 @@ Other changes:
 
 # tidyquant 0.5.10
 
-* `tq_get()` - Temporarily adjust tests for `tq_get(get = "dividends")` and `tq_get(get = "splits")` until API is stabilizes. Yahoo! Dividends and Splits intermitently returns errors.
+* `tq_get()` - Temporarily adjust tests for `tq_get(get = "dividends")` and `tq_get(get = "splits")` until API is stabilizes. Yahoo! Dividends and Splits intermittently returns errors.
 * Fix documentation warnings during package build checks. Documentation moved from `tq_stocklist` to `?tq_index`. 
 
 # tidyquant 0.5.9
@@ -144,9 +155,9 @@ _Visualizations & Color Palettes_
 * `geom_candlestick` and `geom_barchart` - Issue #112.
 * Added color names of `theme_tq` palettes (`palette_light`, `palette_dark`, and  `palette_green`) for easier identification.
 
-_Compatability with `tidyr` v1.0.0_
+_Compatibility with `tidyr` v1.0.0_
 
-* Improvements to ensure compatability with `tidyr` v1.0.0
+* Improvements to ensure compatibility with `tidyr` v1.0.0
 
 _[Potential Breaking Change] Move `tidyverse` to suggests_
 
@@ -289,9 +300,10 @@ _[Potential Breaking Change] Move `tidyverse` to suggests_
 * Changed `tq_mutate()`, `tq_transform()`, `tq_mutate_xy()` and `tq_transform_xy()` arguments to be more obvious:
     * `x_fun` is now `ohlc_fun` for `tq_mutate()` and `tq_transform()`
     * `.x` is now `x` and `.y` is now `y` for `tq_mutate_xy()` and `tq_transform_xy()`
-* Fixed duplication of column names during `tq_mutate`. Names are now sequentually indexed with duplicate names starting at `.1` suffix.  
+* Fixed duplication of column names during `tq_mutate`. Names are now sequentially indexed with duplicate names starting at `.1` suffix.  
 
 
 # tidyquant 0.1.0 
+
 
 * Initial release of `tidyquant`, for seamless quantitative financial analysis (`xts`, `quantmod`, `TTR`) package integration with the `tidyverse`.

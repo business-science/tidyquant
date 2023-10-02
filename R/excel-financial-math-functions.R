@@ -14,7 +14,7 @@
 #' @param cashflow Cash flow values. When one value is provided, it's assumed constant cash flow.
 #' @param rate One or more rate. When one rate is provided it's assumed constant rate.
 #' @param nper Number of periods. When `nper`` is provided, the cashflow values and rate are assumed constant.
-#' @param pv Present value. Initial investments (cash inflows) are typcially a negative value.
+#' @param pv Present value. Initial investments (cash inflows) are typically a negative value.
 #' @param fv Future value. Cash outflows are typically a positive value.
 #' @param pmt Number of payments per period.
 #' @param type Should payments (`pmt`) occur at the beginning (`type = 0`) or
