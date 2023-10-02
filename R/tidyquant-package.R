@@ -24,13 +24,19 @@
 #' To learn more about tidyquant, start with the vignettes:
 #'  `browseVignettes(package = "tidyquant")`
 #'
-#'
+"_PACKAGE"
+
+## usethis namespace: start
 #' @import quantmod
 #' @import lubridate
-#' @import PerformanceAnalytics
-#' @importFrom rlang ":=" .data
+#' @import TTR
+#' @import zoo
+#' @import xts
+#' @importFrom rlang := .data
 #' @importFrom magrittr %$%
 #' @importFrom utils download.file read.csv
-#' @importFrom TTR SMA
-#' @importFrom xts to.period
-"_PACKAGE"
+#' @importFrom TTR SMA runSD MACD runCor BBands
+#' @importFrom xts to.period xts to.monthly lag.xts
+#' @importFrom zoo rollapply
+## usethis namespace: end
+NULL
