@@ -20,7 +20,6 @@ knitr::opts_chunk$set(message = FALSE,
                       fig.align = 'center',
                       out.width='95%', 
                       dpi = 200)
-# devtools::load_all() # Travis CI fails on load_all()
 ```
 
 > A few core functions with a lot of power
@@ -42,12 +41,18 @@ The `tidyquant` package has a __core functions with a lot of power__. Few functi
 
 Load the `tidyquant` package to get started.
 
-```{r}
+```r
 # Loads tidyquant, lubridate, xts, quantmod, TTR 
-library(dplyr)
+library(tidyverse)
 library(tidyquant)
 ```
 
+```{r, include=FALSE}
+# Load for R CMD CHECK
+library(dplyr)
+library(lubridate)
+library(tidyquant)
+```
 
 # 1.0 Retrieve Consolidated Symbol Data
 

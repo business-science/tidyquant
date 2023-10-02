@@ -37,8 +37,14 @@ Refer to [Performance Analysis with tidyquant](TQ05-performance-analysis-with-ti
 
 Load the `tidyquant` package to get started.
 
-```{r}
-# Loads tidyquant, lubridate, xts, quantmod, TTR 
+```r
+# Loads tidyquant, xts, quantmod, TTR 
+library(tidyquant)
+library(tidyverse)
+```
+
+```{r, include=FALSE}
+# Loads packages individually for R CMD CHECK
 library(tidyquant)
 library(lubridate)
 library(dplyr)

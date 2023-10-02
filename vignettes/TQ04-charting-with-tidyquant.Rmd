@@ -38,8 +38,14 @@ The `tidyquant` package includes charting tools to assist users in developing qu
 
 Load the `tidyquant` package to get started.
 
-```{r}
-# Loads tidyquant, lubridate, xts, quantmod, TTR, and PerformanceAnalytics
+```r
+# Loads tidyquant, xts, quantmod, TTR, and PerformanceAnalytics
+library(tidyverse)
+library(tidyquant)  
+```
+
+```{r,include=FALSE}
+# Loads tidyquant, xts, quantmod, TTR, and PerformanceAnalytics
 library(lubridate)
 library(dplyr)
 library(ggplot2)
@@ -58,7 +64,7 @@ AMZN <- tq_get("AMZN", get = "stock.prices", from = "2000-01-01", to = "2016-12-
 The `end` date parameter will be used when setting date limits throughout the examples.
 
 ```{r}
-end <- as_date("2016-12-31")
+end <- lubridate::as_date("2016-12-31")
 
 end
 ```

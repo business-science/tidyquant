@@ -43,8 +43,14 @@ We'll go through some useful techniques for getting and manipulating groups of d
 
 Load the `tidyquant` package to get started.
 
-```{r}
-# Loads tidyquant, lubridate, xts, quantmod, TTR, and PerformanceAnalytics
+```r
+# Loads tidyquant, xts, quantmod, TTR, and PerformanceAnalytics
+library(tidyverse)
+library(tidyquant)  
+```
+
+```{r, include=FALSE}
+# Loads packages for R CMD CHECK
 library(lubridate)
 library(dplyr)
 library(purrr)
@@ -53,7 +59,7 @@ library(tidyr)
 library(tidyquant)  
 ```
 
- 
+
 # 1.0 Scaling the Getting of Financial Data
 
 A very basic example is retrieving the stock prices for multiple stocks. There are three primary ways to do this:

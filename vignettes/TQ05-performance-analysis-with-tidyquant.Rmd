@@ -20,7 +20,6 @@ knitr::opts_chunk$set(message = FALSE,
                       fig.align = 'center',
                       out.width='95%', 
                       dpi = 200)
-library(tidyquant)
 # devtools::load_all() # Travis CI fails on load_all()
 ```
 
@@ -59,9 +58,15 @@ We'll use the `PerformanceAnalytics` function, `table.CAPM`, to evaluate the ret
 
 First, load the `tidyquant` package.
 
-```{r}
+```r
+library(tidyverse)
+library(tidyquant)
+```
+
+```{r, include=FALSE}
 library(dplyr)
 library(ggplot2)
+library(lubridate)
 library(tidyquant)
 ```
 

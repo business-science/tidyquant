@@ -22,6 +22,7 @@ knitr::opts_chunk$set(message = FALSE,
                       dpi = 200)
 
 library(tidyquant)
+library(lubridate)
 library(dplyr)
 library(ggplot2)
 # devtools::load_all() # Travis CI fails on load_all()
@@ -87,7 +88,7 @@ For more information, refer to the third topic-specific vignette, [Scaling and M
 The `tidyquant` package includes charting tools to assist users in developing quick visualizations in `ggplot2` using the grammar of graphics format and workflow. 
 
 ```{r, echo = F}
-end <- as_date("2017-01-01")
+end <- lubridate::as_date("2017-01-01")
 start <- end - weeks(24)
 FANG %>%
     filter(date >= start - days(2 * 20)) %>%
