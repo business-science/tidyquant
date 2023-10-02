@@ -27,7 +27,7 @@ knitr::opts_chunk$set(message = FALSE,
 
 # Overview
 
-Financial asset (individual stocks, securities, etc) and portfolio (groups of stocks, securities, etc) performance analysis is a deep field with a wide range of theories and methods for analyzing risk versus reward. The `PerformanceAnalytics` package consolidates functions to compute many of the most widely used performance metrics. `tidquant` integrates this functionality so it can be used at scale using the split, apply, combine framework within the `tidyverse`. Two primary functions integrate the performance analysis functionality:
+Financial asset (individual stocks, securities, etc) and portfolio (groups of stocks, securities, etc) performance analysis is a deep field with a wide range of theories and methods for analyzing risk versus reward. The `PerformanceAnalytics` package consolidates functions to compute many of the most widely used performance metrics. `tidyquant` integrates this functionality so it can be used at scale using the split, apply, combine framework within the `tidyverse`. Two primary functions integrate the performance analysis functionality:
 
 * `tq_performance` implements the performance analysis functions in a tidy way, enabling scaling analysis using the split, apply, combine framework.
 * `tq_portfolio` provides a useful tool set for aggregating a group of individual asset returns into one or many portfolios. 
@@ -415,7 +415,7 @@ weights_table <-  tibble(stocks) %>%
 weights_table
 ```
 
-Now just pass the the expanded `stock_returns_monthly_multi` and the `weights_table` to `tq_portfolio` for portfolio aggregation.
+Now just pass the expanded `stock_returns_monthly_multi` and the `weights_table` to `tq_portfolio` for portfolio aggregation.
 
 ```{r}
 portfolio_returns_monthly_multi <- stock_returns_monthly_multi %>%
@@ -426,7 +426,7 @@ portfolio_returns_monthly_multi <- stock_returns_monthly_multi %>%
 portfolio_returns_monthly_multi
 ```
 
-Let's assess the output. We now have a single, "long" format data frame of portfolio returns. It has three groups with the aggregated portfolios blended by mapping the `weight_table`.
+Let's assess the output. We now have a single, "long" format data frame of portfolio returns. It has three groups with the aggregated portfolios blended by mapping the `weights_table`.
 
 #### Steps 3B and 4: Merging and Assessing Performance
 

@@ -229,7 +229,7 @@ FANG_annual_returns %>%
 
 ### Example 1B: Getting Daily Log Returns
 
-Daily log returns follows a similar approach. Normally I go with a transmute function, `tq_transmute`, because the `periodReturn` function accepts different periodicity options, and anything other than daily will blow up a mutation. But, in our situation the period returns periodicity is the same as the stock prices periodicity (both daily), so we can use either. We want to use the adjusted closing prices column (adjusted for stock splits, which can make it appear that a stock is performing poorly if a split is included), so we set `select = adjusted`. We researched the `periodReturn` function, and we found that it accepts `type = "log"` and `period = "daily"`, which returns the daily log returns. 
+Daily log returns follow a similar approach. Normally I go with a transmute function, `tq_transmute()`, because the `periodReturn` function accepts different periodicity options, and anything other than daily will blow up a mutation. But, in our situation the period returns periodicity is the same as the stock prices periodicity (both daily), so we can use either. We want to use the adjusted closing prices column (adjusted for stock splits, which can make it appear that a stock is performing poorly if a split is included), so we set `select = adjusted`. We researched the `periodReturn` function, and we found that it accepts `type = "log"` and `period = "daily"`, which returns the daily log returns. 
 
 
 ```{r}
@@ -239,15 +239,15 @@ FANG_daily_log_returns <- FANG %>%
                  mutate_fun = periodReturn, 
                  period     = "daily", 
                  type       = "log",
-                 col_rename = "monthly.returns")
+                 col_rename = "daily.returns")
 ```
 
 ```{r, fig.height = 4.5}
 FANG_daily_log_returns %>%
-    ggplot(aes(x = monthly.returns, fill = symbol)) +
+    ggplot(aes(x = daily.returns, fill = symbol)) +
     geom_density(alpha = 0.5) +
     labs(title = "FANG: Charting the Daily Log Returns",
-         x = "Monthly Returns", y = "Density") +
+         x = "Daily Returns", y = "Density") +
     theme_tq() +
     scale_fill_tq() + 
     facet_wrap(~ symbol, ncol = 2)
@@ -256,7 +256,7 @@ FANG_daily_log_returns %>%
 
 ## Example 2: Use xts to.period to Change the Periodicity from Daily to Monthly
 
-The `xts::to.period` function is used for periodicity aggregation (converting from a lower level periodicity to a higher level such as minutes to hours or months to years). Because we are seeking a return structure that is on a different time scale than the input (daily versus weekly), we need to use a transmute function. We select `tq_transmute()` and pass the open, high, low, close and volume columns via `select = open:volume`. Looking at the documentation for `to.period`, we see that it accepts a `period` argument that we can set to `"weeks"`. The result is the OHLCV data returned with the dates changed to one day per week.
+The `xts::to.period` function is used for periodicity aggregation (converting from a lower level periodicity to a higher level such as minutes to hours or months to years). Because we are seeking a return structure that is on a different time scale than the input (daily versus weekly), we need to use a transmute function. We select `tq_transmute()` and pass the open, high, low, close and volume columns via `select = open:volume`. Looking at the documentation for `to.period`, we see that it accepts a `period` argument that we can set to `"months"`. The result is the OHLCV data returned with the dates changed to one day per month.
 
 ```{r}
 FANG %>%
@@ -266,7 +266,7 @@ FANG %>%
                  period     = "months")
 ```
 
-A common usage case is to reduce the number of points to smooth time series plots. Let's check out difference between daily and monthly plots. 
+A common usage case is to reduce the number of points to smooth time series plots. Let's check out the difference between daily and monthly plots. 
 
 ### Without Periodicity Aggregation
 
@@ -495,7 +495,7 @@ lm(MA ~ V, data = stock_pairs) %>%
     summary()
 ```
 
-While this characterizes the overall relationship, it's missing the time aspect. Fortunately, we can use the `rollapply` function from the `zoo` package to plot a rolling regression, showing how the model coefficent varies on a rolling basis over time. We calculate rolling regressions with `tq_mutate()` in two additional steps:
+While this characterizes the overall relationship, it's missing the time aspect. Fortunately, we can use the `zoo::rollapply()` function to plot a rolling regression, showing how the model coefficient varies on a rolling basis over time. We calculate rolling regressions with `tq_mutate()` in two additional steps:
 
 1. Create a custom function
 2. Apply the function with `tq_mutate(mutate_fun = rollapply)`

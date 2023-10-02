@@ -32,7 +32,7 @@ perform complete financial analyses in the `tidyverse`.
 - **A few core functions with a lot of power**
 - **Integrates the quantitative analysis functionality of `zoo`, `xts`,
   `quantmod`, `TTR`, and *now* `PerformanceAnalytics`**
-- **Designed for modeling and scaling analyses using the the `tidyverse`
+- **Designed for modeling and scaling analyses using the `tidyverse`
   tools in [*R for Data Science*](https://r4ds.hadley.nz/)**
 - **Implements `ggplot2` functionality for beautiful and meaningful
   financial visualizations**

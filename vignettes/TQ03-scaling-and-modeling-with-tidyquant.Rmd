@@ -27,15 +27,15 @@ knitr::opts_chunk$set(message = FALSE,
 
 # Overview
 
-The greatest benefit to `tidyquant` is the ability to apply the data science workflow to easily model and scale your financial analysis as described in [_R for Data Science_](https://r4ds.had.co.nz/). Scaling is the process of creating an analysis for one asset and then extending it to multiple groups. This idea of scaling is incredibly useful to financial analysts because typically one wants to compare many assets to make informed decisions. Fortunately, the `tidyquant` package integrates with the `tidyverse` making scaling super simple!
+The greatest benefit to `tidyquant` is the ability to apply the data science workflow to easily model and scale your financial analysis as described in [_R for Data Science_](https://r4ds.hadley.nz/). Scaling is the process of creating an analysis for one asset and then extending it to multiple groups. This idea of scaling is incredibly useful to financial analysts because typically one wants to compare many assets to make informed decisions. Fortunately, the `tidyquant` package integrates with the `tidyverse` making scaling super simple!
 
 All `tidyquant` functions return data in the `tibble` (tidy data frame) format, which allows for interaction within the `tidyverse`. This means we can:
 
 * Seamlessly scale data retrieval and mutations
 * Use the pipe (`%>%`) for chaining operations
 * Use `dplyr` and `tidyr`: `select`, `filter`, `group_by`, `nest`/`unnest`, `spread`/`gather`, etc
-* Use `purrr`: mapping functions with `map`
-* Model financial analysis using the data science workflow in [_R for Data Science_](https://r4ds.had.co.nz/)
+* Use `purrr`: mapping functions with `map()`
+* Model financial analysis using the data science workflow in [_R for Data Science_](https://r4ds.hadley.nz/)
 
 We'll go through some useful techniques for getting and manipulating groups of data.
 
@@ -161,7 +161,7 @@ FANG_returns_yearly %>%
 
 # 3.0 Modeling Financial Data using purrr
 
-Eventually you will want to begin modeling (or more generally applying functions) at scale! One of the __best__ features of the `tidyverse` is the ability to map functions to nested tibbles using `purrr`. From the Many Models chapter of "[R for Data Science](https://r4ds.had.co.nz/)", we can apply the same modeling workflow to financial analysis. Using a two step workflow:
+Eventually you will want to begin modeling (or more generally applying functions) at scale! One of the __best__ features of the `tidyverse` is the ability to map functions to nested tibbles using `purrr`. From the Many Models chapter of "[R for Data Science](https://r4ds.hadley.nz/)", we can apply the same modeling workflow to financial analysis. Using a two step workflow:
 
 1. Model a single stock
 2. Scale to many stocks
@@ -310,7 +310,7 @@ There are pros and cons to this approach that you may not agree with, but I beli
 
 * __Pros__: Long running scripts are not interrupted because of one error
 
-* __Cons__: Errors can be inadvertently handled or flow downstream if the users does not read the warnings
+* __Cons__: Errors can be inadvertently handled or flow downstream if the user does not read the warnings
 
 
 ## Bad Apples Fail Gracefully, tq_get

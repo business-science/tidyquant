@@ -182,7 +182,7 @@ StatMA <- ggplot2::ggproto("StatSMA", ggplot2::Stat,
 
 StatMA_vol <- ggplot2::ggproto("StatSMA_vol", ggplot2::Stat,
                            required_aes = c("x", "y", "volume"),
-
+                           dropped_aes = "volume",
                            compute_group = function(data, scales, params,
                                                     ma_fun, n = 10,
                                                     wilder = FALSE, ratio = NULL,
