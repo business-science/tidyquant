@@ -101,7 +101,7 @@
                         <h4 data-toc-skip class="author">Matt
 Dancho</h4>
             
-            <h4 data-toc-skip class="date">2023-10-01</h4>
+            <h4 data-toc-skip class="date">2023-10-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/HEAD/vignettes/TQ05-performance-analysis-with-tidyquant.Rmd" class="external-link"><code>vignettes/TQ05-performance-analysis-with-tidyquant.Rmd</code></a></small>
       <div class="d-none name"><code>TQ05-performance-analysis-with-tidyquant.Rmd</code></div>
@@ -121,8 +121,8 @@ Dancho</h4>
 with a wide range of theories and methods for analyzing risk versus
 reward. The <code>PerformanceAnalytics</code> package consolidates
 functions to compute many of the most widely used performance metrics.
-<code>tidquant</code> integrates this functionality so it can be used at
-scale using the split, apply, combine framework within the
+<code>tidyquant</code> integrates this functionality so it can be used
+at scale using the split, apply, combine framework within the
 <code>tidyverse</code>. Two primary functions integrate the performance
 analysis functionality:</p>
 <ul>
@@ -184,8 +184,7 @@ given the risk of those assets and calculating costs of capital.</p>
 stocks against the SPDR Technology ETF (XLK).</p>
 <p>First, load the <code>tidyquant</code> package.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://business-science.github.io/tidyquant/" class="external-link">tidyquant</a></span><span class="op">)</span></span></code></pre></div>
 <p>Second, get the stock returns for the stocks we wish to evaluate. We
 use <code>tq_get</code> to get stock prices from Yahoo Finance,
@@ -324,7 +323,7 @@ reward-to-risk.</p>
 <p>Before we get started let’s find the performance function we want to
 use from <code>PerformanceAnalytics</code>. Searching
 <code>tq_performance_fun_options</code>, we can see that
-<code>SharpeRatio</code> is available. Type <code><a href="https://rdrr.io/pkg/PerformanceAnalytics/man/SharpeRatio.html" class="external-link">?SharpeRatio</a></code>,
+<code>SharpeRatio</code> is available. Type <code>?SharpeRatio</code>,
 and we can see that the arguments are:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/args.html" class="external-link">args</a></span><span class="op">(</span><span class="va">SharpeRatio</span><span class="op">)</span></span></code></pre></div>
@@ -589,7 +588,7 @@ portfolio (this will be a further subject that we address in the
 future!)</p>
 </div>
 <div class="section level6">
-<h6 id="method-2-aggregating-a-portfolio-using-two-column-tibble-with-symbols-and-weights">Method 2: Aggregating a Portfolio using Two Column Tibble with
+<h6 id="method-2-aggregating-a-portfolio-using-two-column-tibble-with-symbols-and-weights">Method 2: Aggregating a Portfolio using Two Column tibble with
 Symbols and Weights<a class="anchor" aria-label="anchor" href="#method-2-aggregating-a-portfolio-using-two-column-tibble-with-symbols-and-weights"></a>
 </h6>
 <p>A possibly more useful method of aggregating returns is using a
@@ -809,10 +808,9 @@ name for mapping.</li>
 <span><span class="co">## <span style="color: #BCBCBC;">7</span>         3 AAPL      0.25</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">8</span>         3 GOOG      0.25</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">9</span>         3 NFLX      0.5</span></span></code></pre>
-<p>Now just pass the the expanded
-<code>stock_returns_monthly_multi</code> and the
-<code>weights_table</code> to <code>tq_portfolio</code> for portfolio
-aggregation.</p>
+<p>Now just pass the expanded <code>stock_returns_monthly_multi</code>
+and the <code>weights_table</code> to <code>tq_portfolio</code> for
+portfolio aggregation.</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">portfolio_returns_monthly_multi</span> <span class="op">&lt;-</span> <span class="va">stock_returns_monthly_multi</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/tq_portfolio.html">tq_portfolio</a></span><span class="op">(</span>assets_col  <span class="op">=</span> <span class="va">symbol</span>, </span>
@@ -837,7 +835,7 @@ aggregation.</p>
 <span><span class="co">## <span style="color: #949494;"># ℹ 206 more rows</span></span></span></code></pre>
 <p>Let’s assess the output. We now have a single, “long” format data
 frame of portfolio returns. It has three groups with the aggregated
-portfolios blended by mapping the <code>weight_table</code>.</p>
+portfolios blended by mapping the <code>weights_table</code>.</p>
 </div>
 <div class="section level5">
 <h5 id="steps-3b-and-4-merging-and-assessing-performance">Steps 3B and 4: Merging and Assessing Performance<a class="anchor" aria-label="anchor" href="#steps-3b-and-4-merging-and-assessing-performance"></a>

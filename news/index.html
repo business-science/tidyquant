@@ -70,17 +70,29 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="tidyquant-development-version">tidyquant (development version)<a class="anchor" aria-label="anchor" href="#tidyquant-development-version"></a></h2>
-<ul><li>Remove the dependency on tidyverse</li>
-<li>tidyquant no longer loads lubridate as tidyverse 2.0 now loads lubridate</li>
-<li>Changed the <code>size</code> argument to <code>linewidth</code> for ggplot2 3.4.0</li>
-<li>Removed the last tidyr and dplyr deprecated functions</li>
-<li>Add linewidth = to <code><a href="../reference/geom_ma.html">geom_ma()</a></code>
+<div class="section level3">
+<h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
+<ul><li>
+<p>tidyquant no longer loads lubridate. (<a href="https://github.com/business-science/tidyquant/issues/237" class="external-link">#237</a>, <a href="https://github.com/olivroy" class="external-link">@olivroy</a>)</p>
+<p>If you use tidyquant with tidyverse, there is no change for you.</p>
 </li>
-<li>Move Quandl, riingo, and alphavantager to Suggests. tidyquant will not explictly install those, but you can install them from CRAN.</li>
-<li>Fixed CRAN alias</li>
+</ul><p>tidyquant no longer loads many packages.</p>
+</div>
+<div class="section level3">
+<h3 id="fixes-development-version">Fixes<a class="anchor" aria-label="anchor" href="#fixes-development-version"></a></h3>
+<ul><li>tidyquant startup messages mimics the tidyverse messages for clarity. (<a href="https://github.com/business-science/tidyquant/issues/163" class="external-link">#163</a>, <a href="https://github.com/business-science/tidyquant/issues/116" class="external-link">#116</a>)</li>
+<li>Remove the dependency on tidyverse (<a href="https://github.com/business-science/tidyquant/issues/236" class="external-link">#236</a>, <a href="https://github.com/olivroy" class="external-link">@olivroy</a>)</li>
+<li>tidyquant no longer loads lubridate as tidyverse 2.0 now loads lubridate.</li>
+<li>Changed the <code>size</code> argument to <code>linewidth</code> for ggplot2 3.4.0</li>
+<li>Removed the last tidyr and dplyr deprecated functions.</li>
+<li>Add <code>linewidth</code> to <code><a href="../reference/geom_ma.html">geom_ma()</a></code>
+</li>
+<li>Move <code>Quandl</code>, <code>riingo</code>, and <code>alphavantager</code> to Suggests. tidyquant will not explicitly install those, but you can install them from CRAN.</li>
+<li>Fixed CRAN package alias</li>
 <li>FB to META change in <code>FANG</code>
 </li>
 </ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.7" id="tidyquant-107">tidyquant 1.0.7<a class="anchor" aria-label="anchor" href="#tidyquant-107"></a></h2><p class="text-muted">CRAN release: 2023-03-31</p>
 <ul><li>Moved <code>tidyverse</code> from suggest to imports to pass cran tests</li>
@@ -89,7 +101,7 @@
 <h2 class="pkg-version" data-toc-text="1.0.6" id="tidyquant-106">tidyquant 1.0.6<a class="anchor" aria-label="anchor" href="#tidyquant-106"></a></h2><p class="text-muted">CRAN release: 2022-11-16</p>
 <ul><li>Fix tq_performance test failure under PerformanceAnalytics 2.0.6 <a href="https://github.com/business-science/tidyquant/issues/223" class="external-link">#223</a></li>
 <li>Fix failed r-devel test identified by CRAN</li>
-<li>Remove deprecated <code><a href="https://tidyr.tidyverse.org/reference/deprecated-se.html" class="external-link">spread_()</a></code> function</li>
+<li>Remove deprecated <code>spread_()</code> function</li>
 <li>Move <code>readxl</code> to imports. <a href="https://github.com/business-science/tidyquant/issues/222" class="external-link">#222</a></li>
 </ul></div>
     <div class="section level2">
@@ -192,7 +204,7 @@
 </ul></li>
 </ul></li>
 <li>
-<p><strong>NEW Tidyverse Functionality</strong></p>
+<p><strong>NEW tidyverse Functionality</strong></p>
 <ul><li>
 <code><a href="https://rdrr.io/pkg/timetk/man/summarise_by_time.html" class="external-link">summarise_by_time()</a></code> - This is a new time-based variant of <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise()</a></code> that allows collapsing the time-series by “day”, “week”, “month”, “quarter”, “year”, and more.</li>
 <li>Note: I will evaluate the need for <code>summarise_at_by_time()</code>, <code>summarise_all_by_time()</code>, and <code>summarise_if_by_time()</code> after the release of <code>dplyr</code> v1.0.0.</li>
@@ -227,7 +239,7 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.10" id="tidyquant-0510">tidyquant 0.5.10<a class="anchor" aria-label="anchor" href="#tidyquant-0510"></a></h2><p class="text-muted">CRAN release: 2020-01-27</p>
 <ul><li>
-<code><a href="../reference/tq_get.html">tq_get()</a></code> - Temporarily adjust tests for <code>tq_get(get = "dividends")</code> and <code>tq_get(get = "splits")</code> until API is stabilizes. Yahoo! Dividends and Splits intermitently returns errors.</li>
+<code><a href="../reference/tq_get.html">tq_get()</a></code> - Temporarily adjust tests for <code>tq_get(get = "dividends")</code> and <code>tq_get(get = "splits")</code> until API is stabilizes. Yahoo! Dividends and Splits intermittently returns errors.</li>
 <li>Fix documentation warnings during package build checks. Documentation moved from <code>tq_stocklist</code> to <code><a href="../reference/tq_index.html">?tq_index</a></code>.</li>
 </ul></div>
     <div class="section level2">
@@ -252,8 +264,8 @@
 <ul><li>
 <code>geom_candlestick</code> and <code>geom_barchart</code> - Issue <a href="https://github.com/business-science/tidyquant/issues/112" class="external-link">#112</a>.</li>
 <li>Added color names of <code>theme_tq</code> palettes (<code>palette_light</code>, <code>palette_dark</code>, and <code>palette_green</code>) for easier identification.</li>
-</ul><p><em>Compatability with <code>tidyr</code> v1.0.0</em></p>
-<ul><li>Improvements to ensure compatability with <code>tidyr</code> v1.0.0</li>
+</ul><p><em>Compatibility with <code>tidyr</code> v1.0.0</em></p>
+<ul><li>Improvements to ensure compatibility with <code>tidyr</code> v1.0.0</li>
 </ul><p><em>[Potential Breaking Change] Move <code>tidyverse</code> to suggests</em></p>
 <ul><li>This is actually potentially a “breaking change” (although most users will see no difference since you likely load <code>tidyverse</code> in your scripts) - if you do not load <code>tidyverse</code>, then you will now need to do so. Previously <code>tidyquant</code> loaded <code>tidyverse</code> behind the scenes.</li>
 </ul></div>
@@ -422,7 +434,7 @@
 <code>.x</code> is now <code>x</code> and <code>.y</code> is now <code>y</code> for <code><a href="../reference/tq_mutate.html">tq_mutate_xy()</a></code> and <code><a href="../reference/deprecated.html">tq_transform_xy()</a></code>
 </li>
 </ul></li>
-<li>Fixed duplication of column names during <code>tq_mutate</code>. Names are now sequentually indexed with duplicate names starting at <code>.1</code> suffix.</li>
+<li>Fixed duplication of column names during <code>tq_mutate</code>. Names are now sequentially indexed with duplicate names starting at <code>.1</code> suffix.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="tidyquant-010">tidyquant 0.1.0<a class="anchor" aria-label="anchor" href="#tidyquant-010"></a></h2><p class="text-muted">CRAN release: 2016-12-31</p>

@@ -278,7 +278,7 @@ full names (e.g. Wednesday) or abbreviated names (e.g. Wed) should be returned.<
 
 
 <dt>include_year</dt>
-<dd><p>A logicial value used in <code>QUARTER()</code>. Determines whether or not to return 2020 Q3 as <code>3</code> or <code>2020.3</code>.</p></dd>
+<dd><p>A logical value used in <code>QUARTER()</code>. Determines whether or not to return 2020 Q3 as <code>3</code> or <code>2020.3</code>.</p></dd>
 
 
 <dt>fiscal_start</dt>
@@ -355,6 +355,11 @@ factor in workdays and <code>timeDate</code> holiday calendars for popular busin
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Libraries</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org" class="external-link">lubridate</a></span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘lubridate’</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:base’:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     date, intersect, setdiff, union</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># --- Basic Usage ----</span></span></span>
 <span class="r-in"><span></span></span>
@@ -384,9 +389,9 @@ factor in workdays and <code>timeDate</code> holiday calendars for popular busin
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Current Date-Time ---</span></span></span>
 <span class="r-in"><span><span class="fu">NOW</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2023-10-01 00:11:35 UTC"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2023-10-03 16:44:10 UTC"</span>
 <span class="r-in"><span><span class="fu">TODAY</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2023-10-01"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2023-10-03"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Date Math ---</span></span></span>
 <span class="r-in"><span><span class="fu">EOMONTH</span><span class="op">(</span><span class="st">"2020-01-01"</span><span class="op">)</span></span></span>

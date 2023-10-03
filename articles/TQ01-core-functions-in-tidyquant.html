@@ -101,7 +101,7 @@
                         <h4 data-toc-skip class="author">Matt
 Dancho</h4>
             
-            <h4 data-toc-skip class="date">2023-10-01</h4>
+            <h4 data-toc-skip class="date">2023-10-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/HEAD/vignettes/TQ01-core-functions-in-tidyquant.Rmd" class="external-link"><code>vignettes/TQ01-core-functions-in-tidyquant.Rmd</code></a></small>
       <div class="d-none name"><code>TQ01-core-functions-in-tidyquant.Rmd</code></div>
@@ -115,11 +115,11 @@ Dancho</h4>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>The <code>tidyquant</code> package has a <strong>core functions with
-a lot of power</strong>. Few functions means less of a learning curve
-for the user, which is why there are only a handful of functions the
-user needs to learn to perform the vast majority of financial analysis
-tasks. The main functions are:</p>
+<p>The <code>tidyquant</code> package has a <strong>few core functions
+with a lot of power</strong>. Few functions means less of a learning
+curve for the user, which is why there are only a handful of functions
+the user needs to learn to perform the vast majority of financial
+analysis tasks. The main functions are:</p>
 <ul>
 <li><p><strong>Get a Stock Index, <code><a href="../reference/tq_index.html">tq_index()</a></code>, or a Stock
 Exchange, <code><a href="../reference/tq_index.html">tq_exchange()</a></code></strong>: Returns the stock symbols
@@ -147,7 +147,7 @@ Analysis with tidyquant</a> for a tutorial on these functions.</p></li>
 <p>Load the <code>tidyquant</code> package to get started.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Loads tidyquant, lubridate, xts, quantmod, TTR </span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://business-science.github.io/tidyquant/" class="external-link">tidyquant</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -219,7 +219,7 @@ Yahoo Finance.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aapl_prices</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"AAPL"</span>, get <span class="op">=</span> <span class="st">"stock.prices"</span>, from <span class="op">=</span> <span class="st">" 1990-01-01"</span><span class="op">)</span></span>
 <span><span class="va">aapl_prices</span> </span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 8,502 × 8</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 8,503 × 8</span></span></span>
 <span><span class="co">##    symbol date        open  high   low close    volume adjusted</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   1990-01-02 0.315 0.335 0.312 0.333 183<span style="text-decoration: underline;">198</span>400    0.264</span></span>
@@ -232,7 +232,7 @@ Yahoo Finance.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   1990-01-11 0.324 0.324 0.308 0.308 211<span style="text-decoration: underline;">052</span>800    0.244</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   1990-01-12 0.306 0.310 0.301 0.308 171<span style="text-decoration: underline;">897</span>600    0.244</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   1990-01-15 0.308 0.319 0.306 0.306 161<span style="text-decoration: underline;">739</span>200    0.243</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 8,492 more rows</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;"># ℹ 8,493 more rows</span></span></span></code></pre>
 <p>Yahoo Japan stock prices can be retrieved using a similar call,
 <code>get = "stock.prices.japan"</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -459,7 +459,7 @@ well.</p>
 </h3>
 <p><a href="https://www.bloomberg.com/professional/solution/bloomberg-terminal/" class="external-link">Bloomberg</a>
 provides access to arguably the most comprehensive financial data and is
-actively used by most major financial instutions that work with
+actively used by most major financial institutions that work with
 financial data. The <code>Rblpapi</code> package, an R interface to
 Bloomberg, has been integrated into <code>tidyquant</code> as follows.
 The benefit of the integration is the <strong>scalability since we can
@@ -653,7 +653,7 @@ broken down into three steps:</p>
 <ol style="list-style-type: decimal">
 <li>Get returns</li>
 <li>Create a custom function</li>
-<li>Apply the custom function accross a rolling window using
+<li>Apply the custom function across a rolling window using
 <code>tq_mutate(mutate_fun = rollapply)</code>
 </li>
 </ol>

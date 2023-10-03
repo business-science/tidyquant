@@ -101,7 +101,7 @@
                         <h4 data-toc-skip class="author">Matt
 Dancho</h4>
             
-            <h4 data-toc-skip class="date">2023-10-01</h4>
+            <h4 data-toc-skip class="date">2023-10-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/HEAD/vignettes/TQ00-introduction-to-tidyquant.Rmd" class="external-link"><code>vignettes/TQ00-introduction-to-tidyquant.Rmd</code></a></small>
       <div class="d-none name"><code>TQ00-introduction-to-tidyquant.Rmd</code></div>
@@ -126,8 +126,8 @@ Intro Series</a> on YouTube!</p>
 <code>zoo</code>, <code>xts</code>, <code>quantmod</code>,
 <code>TTR</code>, and <code>PerformanceAnalytics</code>
 </li>
-<li>Designed for modeling and scaling analyses using the the
-<code>tidyverse</code> tools in <a href="https://r4ds.had.co.nz/" class="external-link"><em>R
+<li>Designed for modeling and scaling analyses using the
+<code>tidyverse</code> tools in <a href="https://r4ds.hadley.nz/" class="external-link"><em>R
 for Data Science</em></a>
 </li>
 <li>Implements <code>ggplot2</code> functionality for beautiful and
@@ -222,16 +222,17 @@ tidyquant</a>.</p>
 range of theories and methods for analyzing risk versus reward. The
 <code>PerformanceAnalytics</code> package consolidates many of the most
 widely used performance metrics as functions that can be applied to
-stock or portfolio returns. <code>tidquant</code> implements the
+stock or portfolio returns. <code>tidyquant</code> implements the
 functionality with two primary functions:</p>
 <ul>
 <li>
-<code>tq_performance</code> implements the performance analysis
+<code><a href="../reference/tq_performance.html">tq_performance()</a></code> implements the performance analysis
 functions in a tidy way, enabling scaling analysis using the split,
 apply, combine framework.</li>
 <li>
-<code>tq_portfolio</code> provides a useful toolset for aggregating
-a group of individual asset returns into one or many portfolios.</li>
+<code><a href="../reference/tq_portfolio.html">tq_portfolio()</a></code> provides a useful toolset for
+aggregating a group of individual asset returns into one or many
+portfolios.</li>
 </ul>
 <p>Performance is based on the statistical properties of returns, and as
 a result both functions use <strong>returns as opposed to stock
