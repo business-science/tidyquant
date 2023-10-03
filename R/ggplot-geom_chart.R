@@ -11,12 +11,12 @@
 #' @inheritParams geom_ma
 #' @inheritParams ggplot2::geom_linerange
 #' @param colour_up,colour_down Select colors to be applied based on price movement
-#' from open to close. If close >= open, `colour_up` is used. Otherwise,
-#' `colour_down` is used. The default is "darkblue" and "red", respectively.
+#' from open to close. If `close >= open`, `colour_up` is used. Otherwise,
+#' `colour_down` is used. The default is `"darkblue"` and `"red"`, respectively.
 #' @param fill_up,fill_down Select fills to be applied based on price movement
 #' from open to close. If close >= open, `fill_up` is used. Otherwise,
-#' `fill_down` is used. The default is "darkblue" and "red", respectively.
-#' Only affects `geom_candlestick`.
+#' `fill_down` is used. The default is `"darkblue"` and "red", respectively.
+#' Only affects `geom_candlestick()`.
 #'
 #' @section Aesthetics:
 #' The following aesthetics are understood (required are in bold):
@@ -46,6 +46,7 @@
 #' @examples
 #' library(dplyr)
 #' library(ggplot2)
+#' library(lubridate)
 #'
 #' AAPL <- tq_get("AAPL", from = "2013-01-01", to = "2016-12-31")
 #'

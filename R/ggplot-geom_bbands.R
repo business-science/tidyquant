@@ -67,7 +67,7 @@
 #' @examples
 #' library(dplyr)
 #' library(ggplot2)
-#'
+#' library(lubridate)
 #'
 #' AAPL <- tq_get("AAPL", from = "2013-01-01", to = "2016-12-31")
 #'

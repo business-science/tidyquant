@@ -62,9 +62,124 @@ run_yahoo_finance_tags <- function() {
     yahoo_tags
 }
 
+# TQ Performance -------
+
 # Script ----
 
 stock_indexes <- re_run_fallback()
 yahoo_tags <- run_yahoo_finance_tags()
 
-usethis::use_data(stock_indexes, yahoo_tags, internal = TRUE, overwrite = TRUE)
+if (FALSE) {
+    # If yahoo tags and stock indexes are updated
+    readr::write_rds(stock_indexes, "data-raw/stock_index.RDS")
+    readr::write_rds(yahoo_tags, "data-raw/yahoo_tags.RDS")
+}
+
+# To improve reproducibility, I saved stock_indexes and yahoo_tags as RDS files.
+stock_indexes <- readr::read_rds("data-raw/stock_index.RDS")
+yahoo_tags <- readr::read_rds("data-raw/yahoo_tags.RDS")
+
+library(PerformanceAnalytics)
+pkg_regex_table <- "^table"
+funs_table <- stringr::str_detect(ls("package:PerformanceAnalytics"), pkg_regex_table)
+funs_table <- ls("package:PerformanceAnalytics")[funs_table]
+funs_table <- funs_table[!stringr::str_detect(funs_table, "(Drawdowns$|CalendarReturns$|ProbOutPerformance$)")] # remove table.Drawdowns
+
+pkg_regex_capm <- "^CAPM"
+funs_capm <- stringr::str_detect(ls("package:PerformanceAnalytics"), pkg_regex_capm)
+funs_capm <- c(ls("package:PerformanceAnalytics")[funs_capm], "TimingRatio", "MarketTiming")
+
+pkg_regex_sfm <- "^SFM"
+funs_sfm <- stringr::str_detect(ls("package:PerformanceAnalytics"), pkg_regex_sfm)
+funs_sfm <- ls("package:PerformanceAnalytics")[funs_sfm]
+
+funs_VaR <- c("VaR", "ES", "ETL", "CDD", "CVaR")
+
+funs_descriptive <- c("mean", "sd", "min", "max", "cor", "mean.geometric", "mean.stderr", "mean.LCL", "mean.UCL")
+
+funs_annualized <- c("Return.annualized", "Return.annualized.excess", "sd.annualized", "SharpeRatio.annualized")
+
+funs_moments <- c(
+    "var", "cov", "skewness", "kurtosis", "CoVariance", "CoSkewness", "CoSkewnessMatrix",
+    "CoKurtosis", "CoKurtosisMatrix", "M3.MM", "M4.MM", "BetaCoVariance", "BetaCoSkewness", "BetaCoKurtosis"
+)
+
+funs_drawdown <- c("AverageDrawdown", "AverageLength", "AverageRecovery", "DrawdownDeviation", "DrawdownPeak", "maxDrawdown")
+
+funs_risk <- c("MeanAbsoluteDeviation", "Frequency", "SharpeRatio", "MSquared", "MSquaredExcess", "HurstIndex")
+
+funs_regression <- c(
+    "CAPM.alpha", "CAPM.beta", "CAPM.epsilon", "CAPM.jensenAlpha", "SystematicRisk",
+    "SpecificRisk", "TotalRisk", "TreynorRatio", "AppraisalRatio", "FamaBeta",
+    "Selectivity", "NetSelectivity"
+)
+
+funs_rel_risk <- c("ActivePremium", "ActiveReturn", "TrackingError", "InformationRatio")
+
+funs_drw_dn <- c("PainIndex", "PainRatio", "CalmarRatio", "SterlingRatio", "BurkeRatio", "MartinRatio", "UlcerIndex")
+
+funs_dside_risk <- c(
+    "DownsideDeviation", "DownsidePotential", "DownsideFrequency", "SemiDeviation", "SemiVariance",
+    "UpsideRisk", "UpsidePotentialRatio", "UpsideFrequency",
+    "BernardoLedoitRatio", "DRatio", "Omega", "OmegaSharpeRatio", "OmegaExcessReturn", "SortinoRatio", "M2Sortino", "Kappa",
+    "VolatilitySkewness", "AdjustedSharpeRatio", "SkewnessKurtosisRatio", "ProspectRatio"
+)
+
+funs_misc <- c("KellyRatio", "Modigliani", "UpDownRatios")
+
+tq_performance_options <- list(
+    table.funs = funs_table,
+    CAPM.funs = funs_capm,
+    SFM.funs = funs_sfm,
+    descriptive.funs = funs_descriptive,
+    annualized.funs = funs_annualized,
+    VaR.funs = funs_VaR,
+    moment.funs = funs_moments,
+    drawdown.funs = funs_drawdown,
+    Bacon.risk.funs = funs_risk,
+    Bacon.regression.funs = funs_regression,
+    Bacon.relative.risk.funs = funs_rel_risk,
+    Bacon.drawdown.funs = funs_drw_dn,
+    Bacon.downside.risk.funs = funs_dside_risk,
+    misc.funs = funs_misc
+)
+
+library(zoo)
+library(quantmod)
+library(xts)
+library(PerformanceAnalytics)
+library(TTR)
+# zoo rollapply functions
+pkg_regex_zoo <- "roll"
+funs_zoo <- ls("package:zoo")[stringr::str_detect(ls("package:zoo"), pkg_regex_zoo)]
+
+# xts apply.period, to.period, lag and diff functions
+pkg_regex_xts <- "apply|to\\.|period|lag|diff"
+funs_xts <- ls("package:xts")[stringr::str_detect(ls("package:xts"), pkg_regex_xts)]
+
+# quantmod periodReturns, Delt, series functions
+pkg_regex_quantmod <- "Return|Delt|Lag|Next|^Op..|^Cl..|^Hi..|^Lo..|^series"
+funs_quantmod <- ls("package:quantmod")[stringr::str_detect(ls("package:quantmod"), pkg_regex_quantmod)]
+
+# TTR functions
+pkg_regex_ttr <- "^get*|^stock|^naCh" # NOT these
+funs_ttr <- ls("package:TTR")[!stringr::str_detect(ls("package:TTR"), pkg_regex_ttr)]
+
+# PerformanceAnalytics apply.rolling, Return...
+pkg_PA <- "package:PerformanceAnalytics"
+pkg_regex_PA <- "Return.annualized|Return.excess|Return.Geltner|Return.cumulative|Return.clean|zerofill"
+funs_PA <- ls(pkg_PA)[stringr::str_detect(ls(pkg_PA), pkg_regex_PA)]
+
+
+
+tq_transmute_options <- list(
+    zoo = funs_zoo,
+    xts = funs_xts,
+    quantmod = funs_quantmod,
+    TTR = funs_ttr,
+    PerformanceAnalytics = funs_PA
+)
+
+
+
+usethis::use_data(stock_indexes, yahoo_tags,tq_performance_options, tq_transmute_options, internal = TRUE, overwrite = TRUE)

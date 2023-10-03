@@ -82,7 +82,7 @@ display.}
 
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
-that define both data and aesthetics and shouldn't inherit behaviour from
+that define both data and aesthetics and shouldn't inherit behavior from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{ggplot2::borders()}}.}
 
 \item{ma_fun}{The function used to calculate the moving average. Seven options are
@@ -162,7 +162,7 @@ The following aesthetics are understood (required are in bold):
 \examples{
 library(dplyr)
 library(ggplot2)
-
+library(lubridate)
 
 AAPL <- tq_get("AAPL", from = "2013-01-01", to = "2016-12-31")
 

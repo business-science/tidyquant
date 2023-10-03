@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/business-science/tidyquant/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/business-science/tidyquant/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/business-science/tidyquant/branch/master/graph/badge.svg)](https://app.codecov.io/gh/business-science/tidyquant)
+[![Codecov](https://codecov.io/gh/business-science/tidyquant/branch/master/graph/badge.svg)](https://app.codecov.io/gh/business-science/tidyquant)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/tidyquant)](https://cran.r-project.org/package=tidyquant)
 ![](http://cranlogs.r-pkg.org/badges/tidyquant?color=brightgreen)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/tidyquant?color=brightgreen)
@@ -32,7 +32,7 @@ perform complete financial analyses in the `tidyverse`.
 - **A few core functions with a lot of power**
 - **Integrates the quantitative analysis functionality of `zoo`, `xts`,
   `quantmod`, `TTR`, and *now* `PerformanceAnalytics`**
-- **Designed for modeling and scaling analyses using the the `tidyverse`
+- **Designed for modeling and scaling analyses using the `tidyverse`
   tools in [*R for Data Science*](https://r4ds.hadley.nz/)**
 - **Implements `ggplot2` functionality for beautiful and meaningful
   financial visualizations**

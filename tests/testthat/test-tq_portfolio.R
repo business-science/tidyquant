@@ -1,7 +1,7 @@
 #### Setup
 
 context(paste0("Testing tq_portfolio"))
-
+skip_if_offline()
 # Get stock prices
 stock_prices <- c("AAPL", "GOOG", "NFLX") %>%
     tq_get(get   = "stock.prices",

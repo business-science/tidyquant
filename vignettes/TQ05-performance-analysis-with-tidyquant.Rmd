@@ -20,7 +20,6 @@ knitr::opts_chunk$set(message = FALSE,
                       fig.align = 'center',
                       out.width='95%', 
                       dpi = 200)
-library(tidyquant)
 # devtools::load_all() # Travis CI fails on load_all()
 ```
 
@@ -28,7 +27,7 @@ library(tidyquant)
 
 # Overview
 
-Financial asset (individual stocks, securities, etc) and portfolio (groups of stocks, securities, etc) performance analysis is a deep field with a wide range of theories and methods for analyzing risk versus reward. The `PerformanceAnalytics` package consolidates functions to compute many of the most widely used performance metrics. `tidquant` integrates this functionality so it can be used at scale using the split, apply, combine framework within the `tidyverse`. Two primary functions integrate the performance analysis functionality:
+Financial asset (individual stocks, securities, etc) and portfolio (groups of stocks, securities, etc) performance analysis is a deep field with a wide range of theories and methods for analyzing risk versus reward. The `PerformanceAnalytics` package consolidates functions to compute many of the most widely used performance metrics. `tidyquant` integrates this functionality so it can be used at scale using the split, apply, combine framework within the `tidyverse`. Two primary functions integrate the performance analysis functionality:
 
 * `tq_performance` implements the performance analysis functions in a tidy way, enabling scaling analysis using the split, apply, combine framework.
 * `tq_portfolio` provides a useful tool set for aggregating a group of individual asset returns into one or many portfolios. 
@@ -59,9 +58,15 @@ We'll use the `PerformanceAnalytics` function, `table.CAPM`, to evaluate the ret
 
 First, load the `tidyquant` package.
 
-```{r}
+```r
+library(tidyverse)
+library(tidyquant)
+```
+
+```{r, include=FALSE}
 library(dplyr)
 library(ggplot2)
+library(lubridate)
 library(tidyquant)
 ```
 
@@ -283,7 +288,7 @@ We now have an aggregated portfolio that is a 50/50 blend of AAPL and NFLX.
 
 You may be asking why didn't we use GOOG? __The important thing to understand is that all of the assets from the asset returns don't need to be used when creating the portfolio!__ This enables us to scale individual stock returns and then vary weights to optimize the portfolio (this will be a further subject that we address in the future!)
 
-##### Method 2: Aggregating a Portfolio using Two Column Tibble with Symbols and Weights
+##### Method 2: Aggregating a Portfolio using Two Column tibble with Symbols and Weights
 
 A possibly more useful method of aggregating returns is using a tibble of symbols and weights that are mapped to the portfolio. We'll recreate the previous portfolio example using mapped weights.
 
@@ -410,7 +415,7 @@ weights_table <-  tibble(stocks) %>%
 weights_table
 ```
 
-Now just pass the the expanded `stock_returns_monthly_multi` and the `weights_table` to `tq_portfolio` for portfolio aggregation.
+Now just pass the expanded `stock_returns_monthly_multi` and the `weights_table` to `tq_portfolio` for portfolio aggregation.
 
 ```{r}
 portfolio_returns_monthly_multi <- stock_returns_monthly_multi %>%
@@ -421,7 +426,7 @@ portfolio_returns_monthly_multi <- stock_returns_monthly_multi %>%
 portfolio_returns_monthly_multi
 ```
 
-Let's assess the output. We now have a single, "long" format data frame of portfolio returns. It has three groups with the aggregated portfolios blended by mapping the `weight_table`.
+Let's assess the output. We now have a single, "long" format data frame of portfolio returns. It has three groups with the aggregated portfolios blended by mapping the `weights_table`.
 
 #### Steps 3B and 4: Merging and Assessing Performance
 

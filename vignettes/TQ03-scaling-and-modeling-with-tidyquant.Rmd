@@ -27,15 +27,15 @@ knitr::opts_chunk$set(message = FALSE,
 
 # Overview
 
-The greatest benefit to `tidyquant` is the ability to apply the data science workflow to easily model and scale your financial analysis as described in [_R for Data Science_](https://r4ds.had.co.nz/). Scaling is the process of creating an analysis for one asset and then extending it to multiple groups. This idea of scaling is incredibly useful to financial analysts because typically one wants to compare many assets to make informed decisions. Fortunately, the `tidyquant` package integrates with the `tidyverse` making scaling super simple!
+The greatest benefit to `tidyquant` is the ability to apply the data science workflow to easily model and scale your financial analysis as described in [_R for Data Science_](https://r4ds.hadley.nz/). Scaling is the process of creating an analysis for one asset and then extending it to multiple groups. This idea of scaling is incredibly useful to financial analysts because typically one wants to compare many assets to make informed decisions. Fortunately, the `tidyquant` package integrates with the `tidyverse` making scaling super simple!
 
 All `tidyquant` functions return data in the `tibble` (tidy data frame) format, which allows for interaction within the `tidyverse`. This means we can:
 
 * Seamlessly scale data retrieval and mutations
 * Use the pipe (`%>%`) for chaining operations
 * Use `dplyr` and `tidyr`: `select`, `filter`, `group_by`, `nest`/`unnest`, `spread`/`gather`, etc
-* Use `purrr`: mapping functions with `map`
-* Model financial analysis using the data science workflow in [_R for Data Science_](https://r4ds.had.co.nz/)
+* Use `purrr`: mapping functions with `map()`
+* Model financial analysis using the data science workflow in [_R for Data Science_](https://r4ds.hadley.nz/)
 
 We'll go through some useful techniques for getting and manipulating groups of data.
 
@@ -43,8 +43,14 @@ We'll go through some useful techniques for getting and manipulating groups of d
 
 Load the `tidyquant` package to get started.
 
-```{r}
-# Loads tidyquant, lubridate, xts, quantmod, TTR, and PerformanceAnalytics
+```r
+# Loads tidyquant, xts, quantmod, TTR, and PerformanceAnalytics
+library(tidyverse)
+library(tidyquant)  
+```
+
+```{r, include=FALSE}
+# Loads packages for R CMD CHECK
 library(lubridate)
 library(dplyr)
 library(purrr)
@@ -53,7 +59,7 @@ library(tidyr)
 library(tidyquant)  
 ```
 
- 
+
 # 1.0 Scaling the Getting of Financial Data
 
 A very basic example is retrieving the stock prices for multiple stocks. There are three primary ways to do this:
@@ -66,7 +72,7 @@ c("AAPL", "GOOG", "META") %>%
     tq_get(get = "stock.prices", from = "2016-01-01", to = "2017-01-01")
 ```
 
-The output is a single level tibble with all or the stock prices in one tibble. The auto-generated column name is "symbol", which can be pre-emptively renamed by giving the vector a name (e.g. `stocks <- c("AAPL", "GOOG", "META")`) and then piping to `tq_get`.
+The output is a single level tibble with all or the stock prices in one tibble. The auto-generated column name is "symbol", which can be preemptively renamed by giving the vector a name (e.g. `stocks <- c("AAPL", "GOOG", "META")`) and then piping to `tq_get`.
 
 
 ## Method 2: Map a tibble with stocks in first column
@@ -155,7 +161,7 @@ FANG_returns_yearly %>%
 
 # 3.0 Modeling Financial Data using purrr
 
-Eventually you will want to begin modeling (or more generally applying functions) at scale! One of the __best__ features of the `tidyverse` is the ability to map functions to nested tibbles using `purrr`. From the Many Models chapter of "[R for Data Science](https://r4ds.had.co.nz/)", we can apply the same modeling workflow to financial analysis. Using a two step workflow:
+Eventually you will want to begin modeling (or more generally applying functions) at scale! One of the __best__ features of the `tidyverse` is the ability to map functions to nested tibbles using `purrr`. From the Many Models chapter of "[R for Data Science](https://r4ds.hadley.nz/)", we can apply the same modeling workflow to financial analysis. Using a two step workflow:
 
 1. Model a single stock
 2. Scale to many stocks
@@ -239,7 +245,7 @@ get_model <- function(stock_data) {
 }
 ```
 
-Testing it out on a single stock. We can see that the "term" that contains the direction of the trend (the slope) is "year(date)". The interpetation is that as year increases one unit, the annual returns decrease by 3%. 
+Testing it out on a single stock. We can see that the "term" that contains the direction of the trend (the slope) is "year(date)". The interpretation is that as year increases one unit, the annual returns decrease by 3%. 
 
 ```{r}
 get_model(AAPL)
@@ -258,7 +264,7 @@ stocks_tbl <- tq_index("SP500") %>%
 stocks_tbl
 ```
 
-We can now apply our analysis function to the stocks using `dplyr::mutate` and `purrr::map`. The `mutate()` function adds a column to our tibble, and the `map()` function maps our custom `get_model` function to our tibble of stocks using the `symbol` column. The `tidyr::unnest` function unrolls the nested data frame so all of the model statistics are accessable in the top data frame level. The `filter`, `arrange` and `select` steps just manipulate the data frame to isolate and arrange the data for our viewing. 
+We can now apply our analysis function to the stocks using `dplyr::mutate()` and `purrr::map()`. The `mutate()` function adds a column to our tibble, and the `map()` function maps our custom `get_model` function to our tibble of stocks using the `symbol` column. The `tidyr::unnest()` function unrolls the nested data frame so all of the model statistics are accessible in the top data frame level. The `filter`, `arrange` and `select` steps just manipulate the data frame to isolate and arrange the data for our viewing. 
 
 ```{r}
 stocks_model_stats <- stocks_tbl %>%
@@ -304,7 +310,7 @@ There are pros and cons to this approach that you may not agree with, but I beli
 
 * __Pros__: Long running scripts are not interrupted because of one error
 
-* __Cons__: Errors can be inadvertently handled or flow downstream if the users does not read the warnings
+* __Cons__: Errors can be inadvertently handled or flow downstream if the user does not read the warnings
 
 
 ## Bad Apples Fail Gracefully, tq_get
@@ -323,4 +329,4 @@ c("AAPL", "GOOG", "BAD APPLE") %>%
     tq_get(get = "stock.prices", complete_cases = FALSE)
 ```
 
-In both cases, the prudent user will review the warnings to determine what happened and whether or not this is acceptable. In the `complete_cases = FALSE` example, if the user attempts to perform downstream computations at scale, the computations will likely fail grinding the analysis to a hault. But, the advantage is that the user will more easily be able to filter to the problem childs to determine what happened and decide whether this is acceptable or not.
+In both cases, the prudent user will review the warnings to determine what happened and whether or not this is acceptable. In the `complete_cases = FALSE` example, if the user attempts to perform downstream computations at scale, the computations will likely fail grinding the analysis to a halt. But, the advantage is that the user will more easily be able to filter to the problem root to determine what happened and decide whether this is acceptable or not.

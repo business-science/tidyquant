@@ -243,65 +243,7 @@ tq_performance_.grouped_df <- function(data, Ra, Rb = NULL, performance_fun, ...
 #' @rdname tq_performance
 #' @export
 tq_performance_fun_options <- function() {
-
-    # Performance Analytics functions
-    pkg_regex_table <- "^table"
-    funs_table <- stringr::str_detect(ls("package:PerformanceAnalytics"), pkg_regex_table)
-    funs_table <- ls("package:PerformanceAnalytics")[funs_table]
-    funs_table <- funs_table[!stringr::str_detect(funs_table, "(Drawdowns$|CalendarReturns$|ProbOutPerformance$)")] # remove table.Drawdowns
-
-    pkg_regex_capm <- "^CAPM"
-    funs_capm <- stringr::str_detect(ls("package:PerformanceAnalytics"), pkg_regex_capm)
-    funs_capm <- c(ls("package:PerformanceAnalytics")[funs_capm], "TimingRatio", "MarketTiming")
-
-    pkg_regex_sfm <- "^SFM"
-    funs_sfm <- stringr::str_detect(ls("package:PerformanceAnalytics"), pkg_regex_sfm)
-    funs_sfm <- ls("package:PerformanceAnalytics")[funs_sfm]
-
-    funs_VaR <- c("VaR", "ES", "ETL", "CDD", "CVaR")
-
-    funs_descriptive <- c("mean", "sd", "min", "max", "cor", "mean.geometric", "mean.stderr", "mean.LCL", "mean.UCL")
-
-    funs_annualized <- c("Return.annualized", "Return.annualized.excess", "sd.annualized", "SharpeRatio.annualized")
-
-    funs_moments <- c("var", "cov", "skewness", "kurtosis", "CoVariance", "CoSkewness", "CoSkewnessMatrix",
-                      "CoKurtosis", "CoKurtosisMatrix", "M3.MM", "M4.MM", "BetaCoVariance", "BetaCoSkewness", "BetaCoKurtosis")
-
-    funs_drawdown <- c("AverageDrawdown", "AverageLength", "AverageRecovery", "DrawdownDeviation", "DrawdownPeak", "maxDrawdown")
-
-    funs_risk <- c("MeanAbsoluteDeviation", "Frequency", "SharpeRatio", "MSquared", "MSquaredExcess", "HurstIndex")
-
-    funs_regression <- c("CAPM.alpha", "CAPM.beta", "CAPM.epsilon", "CAPM.jensenAlpha", "SystematicRisk",
-                         "SpecificRisk", "TotalRisk", "TreynorRatio", "AppraisalRatio", "FamaBeta",
-                         "Selectivity", "NetSelectivity")
-
-    funs_rel_risk <- c("ActivePremium", "ActiveReturn", "TrackingError", "InformationRatio")
-
-    funs_drw_dn <- c("PainIndex", "PainRatio", "CalmarRatio", "SterlingRatio", "BurkeRatio", "MartinRatio", "UlcerIndex")
-
-    funs_dside_risk <- c("DownsideDeviation", "DownsidePotential", "DownsideFrequency", "SemiDeviation", "SemiVariance",
-                         "UpsideRisk", "UpsidePotentialRatio", "UpsideFrequency",
-                         "BernardoLedoitRatio", "DRatio", "Omega", "OmegaSharpeRatio", "OmegaExcessReturn", "SortinoRatio", "M2Sortino", "Kappa",
-                         "VolatilitySkewness", "AdjustedSharpeRatio", "SkewnessKurtosisRatio", "ProspectRatio")
-
-    funs_misc <- c("KellyRatio", "Modigliani", "UpDownRatios")
-
-    fun_options <- list(table.funs                     = funs_table,
-                        CAPM.funs                      = funs_capm,
-                        SFM.funs                       = funs_sfm,
-                        descriptive.funs               = funs_descriptive,
-                        annualized.funs                = funs_annualized,
-                        VaR.funs                       = funs_VaR,
-                        moment.funs                    = funs_moments,
-                        drawdown.funs                  = funs_drawdown,
-                        Bacon.risk.funs                = funs_risk,
-                        Bacon.regression.funs          = funs_regression,
-                        Bacon.relative.risk.funs       = funs_rel_risk,
-                        Bacon.drawdown.funs            = funs_drw_dn,
-                        Bacon.downside.risk.funs       = funs_dside_risk,
-                        misc.funs                      = funs_misc)
-
-    fun_options
+    tq_performance_options
 }
 
 # Utility ---------------------------------------------------------------------------------------------------

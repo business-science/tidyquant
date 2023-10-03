@@ -278,37 +278,10 @@ tq_transmute_xy_.grouped_df <- function(data, x, y = NULL, mutate_fun, col_renam
 #' @rdname tq_mutate
 #' @export
 tq_transmute_fun_options <- function() {
-
-    # zoo rollapply functions
-    pkg_regex_zoo <- "roll"
-    funs_zoo <- ls("package:zoo")[stringr::str_detect(ls("package:zoo"), pkg_regex_zoo)]
-
-    # xts apply.period, to.period, lag and diff functions
-    pkg_regex_xts <- "apply|to\\.|period|lag|diff"
-    funs_xts <- ls("package:xts")[stringr::str_detect(ls("package:xts"), pkg_regex_xts)]
-
-    # quantmod periodReturns, Delt, series functions
-    pkg_regex_quantmod <- "Return|Delt|Lag|Next|^Op..|^Cl..|^Hi..|^Lo..|^series"
-    funs_quantmod <- ls("package:quantmod")[stringr::str_detect(ls("package:quantmod"), pkg_regex_quantmod)]
-
-    # TTR functions
-    pkg_regex_ttr <- "^get*|^stock|^naCh" # NOT these
-    funs_ttr <- ls("package:TTR")[!stringr::str_detect(ls("package:TTR"), pkg_regex_ttr)]
-
-    # PerformanceAnalytics apply.rolling, Return...
-    pkg_PA <- "package:PerformanceAnalytics"
-    pkg_regex_PA <- "Return.annualized|Return.excess|Return.Geltner|Return.cumulative|Return.clean|zerofill"
-    funs_PA <- ls(pkg_PA)[stringr::str_detect(ls(pkg_PA), pkg_regex_PA)]
-
-
-
-    fun_options <- list(zoo                  = funs_zoo,
-                        xts                  = funs_xts,
-                        quantmod             = funs_quantmod,
-                        TTR                  = funs_ttr,
-                        PerformanceAnalytics = funs_PA)
-
-    fun_options
+    # Moved to an internal dataset to avoid requiring to load (and modify a user namespace)
+    # This needs to be updated if new functions are added / removed.
+    # Run data-raw/fun-options.R script to regenerate this.
+    tq_transmute_options
 }
 
 # Checks ----------------------------------------------------------------------------------------------------

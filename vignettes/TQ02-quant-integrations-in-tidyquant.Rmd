@@ -26,7 +26,7 @@ knitr::opts_chunk$set(message = FALSE,
 
 # Overview
 
-There's a wide range of useful quantitative analysis functions that work with time-series objects. The problem is that many of these _wonderful_ functions don't work with data frames or the `tidyverse` workflow. That is until now! The `tidyquant` package integrates the most useful functions from the `xts`, `zoo`, `quantmod`, `TTR`, and `PerformanceAnalytics` packages. This vignette focuses on the following _core functions_ to demonstrate how the integratation works with the quantitative finance packages:
+There's a wide range of useful quantitative analysis functions that work with time-series objects. The problem is that many of these _wonderful_ functions don't work with data frames or the `tidyverse` workflow. That is until now! The `tidyquant` package integrates the most useful functions from the `xts`, `zoo`, `quantmod`, `TTR`, and `PerformanceAnalytics` packages. This vignette focuses on the following _core functions_ to demonstrate how the integration works with the quantitative finance packages:
 
 * Transmute, `tq_transmute()`: Returns a new tidy data frame typically in a different periodicity than the input.
 * Mutate, `tq_mutate()`: Adds columns to the existing tidy data frame.
@@ -37,8 +37,14 @@ Refer to [Performance Analysis with tidyquant](TQ05-performance-analysis-with-ti
 
 Load the `tidyquant` package to get started.
 
-```{r}
-# Loads tidyquant, lubridate, xts, quantmod, TTR 
+```r
+# Loads tidyquant, xts, quantmod, TTR 
+library(tidyquant)
+library(tidyverse)
+```
+
+```{r, include=FALSE}
+# Loads packages individually for R CMD CHECK
 library(tidyquant)
 library(lubridate)
 library(dplyr)
@@ -156,7 +162,7 @@ Here' a brief description of the most popular functions from `TTR`:
     * `runVar(x, y = NULL, n = 10, sample = TRUE, cumulative = FALSE)`: returns variances over a n-period moving window.
     * `runSD(x, n = 10, sample = TRUE, cumulative = FALSE)`: returns standard deviations over a n-period moving window.
     * `runMAD(x, n = 10, center = NULL, stat = "median", constant = 1.4826, non.unique = "mean", cumulative = FALSE)`: returns median/mean absolute deviations over a n-period moving window.
-    * `wilderSum(x, n = 10)`: retuns a Welles Wilder style weighted sum over a n-period moving window.
+    * `wilderSum(x, n = 10)`: returns a Welles Wilder style weighted sum over a n-period moving window.
 * Stochastic Oscillator / Stochastic Momentum Index:
     * `stoch(HLC, nFastK = 14, nFastD = 3, nSlowD = 3, maType, bounded = TRUE, smooth = 1, ...)`: Stochastic Oscillator
     * `SMI(HLC, n = 13, nFast = 2, nSlow = 25, nSig = 9, maType, bounded = TRUE, ...)`: Stochastic Momentum Index
@@ -223,7 +229,7 @@ FANG_annual_returns %>%
 
 ### Example 1B: Getting Daily Log Returns
 
-Daily log returns follows a similar approach. Normally I go with a transmute function, `tq_transmute`, because the `periodReturn` function accepts different periodicity options, and anything other than daily will blow up a mutation. But, in our situation the period returns periodicity is the same as the stock prices periodicity (both daily), so we can use either. We want to use the adjusted closing prices column (adjusted for stock splits, which can make it appear that a stock is performing poorly if a split is included), so we set `select = adjusted`. We researched the `periodReturn` function, and we found that it accepts `type = "log"` and `period = "daily"`, which returns the daily log returns. 
+Daily log returns follow a similar approach. Normally I go with a transmute function, `tq_transmute()`, because the `periodReturn` function accepts different periodicity options, and anything other than daily will blow up a mutation. But, in our situation the period returns periodicity is the same as the stock prices periodicity (both daily), so we can use either. We want to use the adjusted closing prices column (adjusted for stock splits, which can make it appear that a stock is performing poorly if a split is included), so we set `select = adjusted`. We researched the `periodReturn` function, and we found that it accepts `type = "log"` and `period = "daily"`, which returns the daily log returns. 
 
 
 ```{r}
@@ -233,15 +239,15 @@ FANG_daily_log_returns <- FANG %>%
                  mutate_fun = periodReturn, 
                  period     = "daily", 
                  type       = "log",
-                 col_rename = "monthly.returns")
+                 col_rename = "daily.returns")
 ```
 
 ```{r, fig.height = 4.5}
 FANG_daily_log_returns %>%
-    ggplot(aes(x = monthly.returns, fill = symbol)) +
+    ggplot(aes(x = daily.returns, fill = symbol)) +
     geom_density(alpha = 0.5) +
     labs(title = "FANG: Charting the Daily Log Returns",
-         x = "Monthly Returns", y = "Density") +
+         x = "Daily Returns", y = "Density") +
     theme_tq() +
     scale_fill_tq() + 
     facet_wrap(~ symbol, ncol = 2)
@@ -250,7 +256,7 @@ FANG_daily_log_returns %>%
 
 ## Example 2: Use xts to.period to Change the Periodicity from Daily to Monthly
 
-The `xts::to.period` function is used for periodicity aggregation (converting from a lower level periodicity to a higher level such as minutes to hours or months to years). Because we are seeking a return structure that is on a different time scale than the input (daily versus weekly), we need to use a transmute function. We select `tq_transmute()` and pass the open, high, low, close and volume columns via `select = open:volume`. Looking at the documentation for `to.period`, we see that it accepts a `period` argument that we can set to `"weeks"`. The result is the OHLCV data returned with the dates changed to one day per week.
+The `xts::to.period` function is used for periodicity aggregation (converting from a lower level periodicity to a higher level such as minutes to hours or months to years). Because we are seeking a return structure that is on a different time scale than the input (daily versus weekly), we need to use a transmute function. We select `tq_transmute()` and pass the open, high, low, close and volume columns via `select = open:volume`. Looking at the documentation for `to.period`, we see that it accepts a `period` argument that we can set to `"months"`. The result is the OHLCV data returned with the dates changed to one day per month.
 
 ```{r}
 FANG %>%
@@ -260,7 +266,7 @@ FANG %>%
                  period     = "months")
 ```
 
-A common usage case is to reduce the number of points to smooth time series plots. Let's check out difference between daily and monthly plots. 
+A common usage case is to reduce the number of points to smooth time series plots. Let's check out the difference between daily and monthly plots. 
 
 ### Without Periodicity Aggregation
 
@@ -450,7 +456,7 @@ FANG_by_qtr %>%
 
 ## Example 6: Use zoo rollapply to visualize a rolling regression
 
-A good way to analyze relationships over time is using rolling calculations that compare two assets. Pairs trading is a common mechanism for similar assets. While we will not go into a pairs trade analysis, we will analyze the relationship between two similar assets as a precursor to a pairs trade. In this example we will analyze two similar assets, Mastercard (MA) and Visa (V) to show the relationship via regression. 
+A good way to analyze relationships over time is using rolling calculations that compare two assets. Pairs trading is a common mechanism for similar assets. While we will not go into a pairs trade analysis, we will analyze the relationship between two similar assets as a precursor to a pairs trade. In this example we will analyze two similar assets, MasterCard (MA) and Visa (V) to show the relationship via regression. 
 
 Before we analyze a rolling regression, it's helpful to view the overall trend in returns. To do this, we use `tq_get()` to get stock prices for the assets and `tq_transmute()` to transform the daily prices to daily returns. We'll collect the data and visualize via a scatter plot.
 
@@ -482,14 +488,14 @@ stock_pairs %>%
     theme_tq()
 ```
 
-We can get statistcs on the relationship from the `lm` function. The model is highly correlated with a p-value of essential zero. The coefficient estimate for V (Coefficient 1) is 0.8134 indicating a positive relationship, meaning as V increases MA also tends to increase. 
+We can get statistics on the relationship from the `lm` function. The model is highly correlated with a p-value of essential zero. The coefficient estimate for V (Coefficient 1) is 0.8134 indicating a positive relationship, meaning as V increases MA also tends to increase. 
 
 ```{r}
 lm(MA ~ V, data = stock_pairs) %>%
     summary()
 ```
 
-While this characterizes the overall relationship, it's missing the time aspect. Fortunately, we can use the `rollapply` function from the `zoo` package to plot a rolling regression, showing how the model coefficent varies on a rolling basis over time. We calculate rolling regressions with `tq_mutate()` in two additional steps:
+While this characterizes the overall relationship, it's missing the time aspect. Fortunately, we can use the `zoo::rollapply()` function to plot a rolling regression, showing how the model coefficient varies on a rolling basis over time. We calculate rolling regressions with `tq_mutate()` in two additional steps:
 
 1. Create a custom function
 2. Apply the function with `tq_mutate(mutate_fun = rollapply)`
@@ -544,7 +550,7 @@ stock_prices %>%
 
 ## Example 7: Use Return.clean and Return.excess to clean and calculate excess returns 
 
-In this example we use several of the `PerformanceAnalytics` functions to clean and format returns. The example uses three progressive applications of `tq_transmute` to apply various quant functions to the grouped stock prices from the `FANG` data set. First, we calculate daily returns using `quantmod::periodReturn`. Next, we use `Return.clean` to clean outliers from the return data. The `alpha` parameter is the percentage of oultiers to be cleaned. Finally, the excess returns are calculated using a risk-free rate of 3% (divided by 252 for 252 trade days in one year).  
+In this example we use several of the `PerformanceAnalytics` functions to clean and format returns. The example uses three progressive applications of `tq_transmute` to apply various quant functions to the grouped stock prices from the `FANG` data set. First, we calculate daily returns using `quantmod::periodReturn`. Next, we use `Return.clean` to clean outliers from the return data. The `alpha` parameter is the percentage of outliers to be cleaned. Finally, the excess returns are calculated using a risk-free rate of 3% (divided by 252 for 252 trade days in one year).  
 
 ```{r}
 FANG %>%

@@ -20,9 +20,6 @@ Encoding: UTF-8
 LazyData: true
 Depends:
     R (>= 3.5.0),
-    lubridate,
-    PerformanceAnalytics,
-    quantmod (>= 0.4-13)
 Imports:
     dplyr (>= 1.0.0),
     ggplot2 (>= 3.4.0),
@@ -30,7 +27,10 @@ Imports:
     httr,
     curl,
     lazyeval,
+    lubridate,
     magrittr,
+    PerformanceAnalytics,
+    quantmod (>= 0.4-13),
     purrr,
     readr,
     readxl,
@@ -41,11 +41,13 @@ Imports:
     timeDate,
     TTR,
     xts,
-    rlang
+    rlang,
+    zoo,
+    cli
 Suggests:
     alphavantager (>= 0.1.2),
     Quandl,
-    riingo,   
+    riingo,
     tibbletime,
     broom,
     knitr,

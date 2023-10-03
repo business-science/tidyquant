@@ -13,7 +13,7 @@ tiingo_api_key(api_key)
 Returns invisibly the currently set \code{api_key}
 }
 \description{
-Requires the riingo package to be installled.
+Requires the riingo package to be installed.
 }
 \details{
 A wrapper for \code{riingo::ringo_set_token()}

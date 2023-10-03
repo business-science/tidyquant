@@ -83,7 +83,7 @@ functions, \code{Quandl} functions, and also gets data from websources unavailab
 in other packages.
 The results are always returned as a \code{tibble}. The advantages
 are (1) only one function is needed for all data sources and (2) the function
-can be seemlessly used with the tidyverse: \code{purrr}, \code{tidyr}, and
+can be seamlessly used with the tidyverse: \code{purrr}, \code{tidyr}, and
 \code{dplyr} verbs.
 
 \code{tq_get_options()} returns a list of valid \code{get} options you can

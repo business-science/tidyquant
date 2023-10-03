@@ -22,6 +22,7 @@ knitr::opts_chunk$set(message = FALSE,
                       dpi = 200)
 
 library(tidyquant)
+library(lubridate)
 library(dplyr)
 library(ggplot2)
 # devtools::load_all() # Travis CI fails on load_all()
@@ -43,7 +44,7 @@ Check out our entire [Software Intro Series](https://www.youtube.com/watch?v=Gk_
 
 * A few core functions with a lot of power
 * Integrates the quantitative analysis functionality of `zoo`, `xts`, `quantmod`, `TTR`, and `PerformanceAnalytics`
-* Designed for modeling and scaling analyses using the the `tidyverse` tools in [_R for Data Science_](https://r4ds.had.co.nz/)
+* Designed for modeling and scaling analyses using the `tidyverse` tools in [_R for Data Science_](https://r4ds.hadley.nz/)
 * Implements `ggplot2` functionality for beautiful and meaningful financial visualizations
 * User-friendly documentation to get you up to speed quickly!
 
@@ -87,7 +88,7 @@ For more information, refer to the third topic-specific vignette, [Scaling and M
 The `tidyquant` package includes charting tools to assist users in developing quick visualizations in `ggplot2` using the grammar of graphics format and workflow. 
 
 ```{r, echo = F}
-end <- as_date("2017-01-01")
+end <- lubridate::as_date("2017-01-01")
 start <- end - weeks(24)
 FANG %>%
     filter(date >= start - days(2 * 20)) %>%
@@ -110,10 +111,10 @@ For more information, refer to the fourth topic-specific vignette, [Charting wit
 
 ## Performance Analysis of Asset and Portfolio Returns
 
-Asset and portfolio performance analysis is a deep field with a wide range of theories and methods for analyzing risk versus reward. The `PerformanceAnalytics` package consolidates many of the most widely used performance metrics as functions that can be applied to stock or portfolio returns. `tidquant` implements the functionality with two primary functions:
+Asset and portfolio performance analysis is a deep field with a wide range of theories and methods for analyzing risk versus reward. The `PerformanceAnalytics` package consolidates many of the most widely used performance metrics as functions that can be applied to stock or portfolio returns. `tidyquant` implements the functionality with two primary functions:
 
-* `tq_performance` implements the performance analysis functions in a tidy way, enabling scaling analysis using the split, apply, combine framework.
-* `tq_portfolio` provides a useful toolset for aggregating a group of individual asset returns into one or many portfolios. 
+* `tq_performance()` implements the performance analysis functions in a tidy way, enabling scaling analysis using the split, apply, combine framework.
+* `tq_portfolio()` provides a useful toolset for aggregating a group of individual asset returns into one or many portfolios. 
 
 Performance is based on the statistical properties of returns, and as a result both functions use __returns as opposed to stock prices__.
 

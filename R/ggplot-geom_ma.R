@@ -49,7 +49,7 @@
 #'
 #' @param inherit.aes If `FALSE`, overrides the default aesthetics,
 #' rather than combining with them. This is most useful for helper functions
-#' that define both data and aesthetics and shouldn't inherit behaviour from
+#' that define both data and aesthetics and shouldn't inherit behavior from
 #' the default plot specification, e.g. [ggplot2::borders()].
 #'
 #' @param ma_fun The function used to calculate the moving average. Seven options are
@@ -107,7 +107,7 @@
 #'     geom_ma(ma_fun = SMA, n = 50) +                 # Plot 50-day SMA
 #'     geom_ma(ma_fun = SMA, n = 200, color = "red") + # Plot 200-day SMA
 #'     coord_x_date(xlim = c("2016-01-01", "2016-12-31"),
-#'                  ylim = c(75, 125))                     # Zoom in
+#'                  ylim = c(20, 30))                     # Zoom in
 #'
 #' # EVWMA
 #' AAPL %>%
@@ -115,7 +115,7 @@
 #'     geom_line() +                                                   # Plot stock price
 #'     geom_ma(aes(volume = volume), ma_fun = EVWMA, n = 50) +   # Plot 50-day EVWMA
 #'     coord_x_date(xlim = c("2016-01-01", "2016-12-31"),
-#'                  ylim = c(75, 125))                                  # Zoom in
+#'                  ylim = c(20, 30))                                  # Zoom in
 
 
 #' @rdname geom_ma
@@ -182,7 +182,7 @@ StatMA <- ggplot2::ggproto("StatSMA", ggplot2::Stat,
 
 StatMA_vol <- ggplot2::ggproto("StatSMA_vol", ggplot2::Stat,
                            required_aes = c("x", "y", "volume"),
-
+                           dropped_aes = "volume",
                            compute_group = function(data, scales, params,
                                                     ma_fun, n = 10,
                                                     wilder = FALSE, ratio = NULL,

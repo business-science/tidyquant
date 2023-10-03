@@ -1,6 +1,6 @@
 #' Set Tiingo API Key
 #'
-#' Requires the riingo package to be installled.
+#' Requires the riingo package to be installed.
 #' @param api_key Optionally passed parameter to set Tiingo `api_key`.
 #'
 #' @return Returns invisibly the currently set `api_key`

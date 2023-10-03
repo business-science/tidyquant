@@ -72,7 +72,7 @@ display.}
 
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
-that define both data and aesthetics and shouldn't inherit behaviour from
+that define both data and aesthetics and shouldn't inherit behavior from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{ggplot2::borders()}}.}
 
 \item{ma_fun}{The function used to calculate the moving average. Seven options are
@@ -150,7 +150,7 @@ AAPL \%>\%
     geom_ma(ma_fun = SMA, n = 50) +                 # Plot 50-day SMA
     geom_ma(ma_fun = SMA, n = 200, color = "red") + # Plot 200-day SMA
     coord_x_date(xlim = c("2016-01-01", "2016-12-31"),
-                 ylim = c(75, 125))                     # Zoom in
+                 ylim = c(20, 30))                     # Zoom in
 
 # EVWMA
 AAPL \%>\%
@@ -158,7 +158,7 @@ AAPL \%>\%
     geom_line() +                                                   # Plot stock price
     geom_ma(aes(volume = volume), ma_fun = EVWMA, n = 50) +   # Plot 50-day EVWMA
     coord_x_date(xlim = c("2016-01-01", "2016-12-31"),
-                 ylim = c(75, 125))                                  # Zoom in
+                 ylim = c(20, 30))                                  # Zoom in
 }
 \seealso{
 See individual modeling functions for underlying parameters:

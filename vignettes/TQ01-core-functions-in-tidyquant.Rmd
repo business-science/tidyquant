@@ -20,14 +20,13 @@ knitr::opts_chunk$set(message = FALSE,
                       fig.align = 'center',
                       out.width='95%', 
                       dpi = 200)
-# devtools::load_all() # Travis CI fails on load_all()
 ```
 
 > A few core functions with a lot of power
 
 # Overview
 
-The `tidyquant` package has a __core functions with a lot of power__. Few functions means less of a learning curve for the user, which is why there are only a handful of functions the user needs to learn to perform the vast majority of financial analysis tasks. The main functions are:
+The `tidyquant` package has a __few core functions with a lot of power__. Few functions means less of a learning curve for the user, which is why there are only a handful of functions the user needs to learn to perform the vast majority of financial analysis tasks. The main functions are:
 
 * __Get a Stock Index, `tq_index()`, or a Stock Exchange, `tq_exchange()`__: Returns the stock symbols and various attributes for every stock in an index or exchange. Eighteen indexes and three exchanges are available.
 
@@ -42,12 +41,18 @@ The `tidyquant` package has a __core functions with a lot of power__. Few functi
 
 Load the `tidyquant` package to get started.
 
-```{r}
+```r
 # Loads tidyquant, lubridate, xts, quantmod, TTR 
-library(dplyr)
+library(tidyverse)
 library(tidyquant)
 ```
 
+```{r, include=FALSE}
+# Load for R CMD CHECK
+library(dplyr)
+library(lubridate)
+library(tidyquant)
+```
 
 # 1.0 Retrieve Consolidated Symbol Data
 
@@ -270,7 +275,7 @@ c("META", "MSFT") %>%
 
 ## 2.6 Bloomberg
 
-[Bloomberg](https://www.bloomberg.com/professional/solution/bloomberg-terminal/) provides access to arguably the most comprehensive financial data and is actively used by most major financial instutions that work with financial data. The `Rblpapi` package, an R interface to Bloomberg, has been integrated into `tidyquant` as follows. The benefit of the integration is the __scalability since we can now get multiple symbols returned in a tidy format__. 
+[Bloomberg](https://www.bloomberg.com/professional/solution/bloomberg-terminal/) provides access to arguably the most comprehensive financial data and is actively used by most major financial institutions that work with financial data. The `Rblpapi` package, an R interface to Bloomberg, has been integrated into `tidyquant` as follows. The benefit of the integration is the __scalability since we can now get multiple symbols returned in a tidy format__. 
 
 ### Authentication
 
@@ -362,7 +367,7 @@ A very powerful example is applying __custom functions__ across a rolling window
 
 1. Get returns
 2. Create a custom function
-3. Apply the custom function accross a rolling window using `tq_mutate(mutate_fun = rollapply)`
+3. Apply the custom function across a rolling window using `tq_mutate(mutate_fun = rollapply)`
 
 _Step 1: Get Returns_
 

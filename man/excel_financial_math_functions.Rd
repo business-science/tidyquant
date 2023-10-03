@@ -29,7 +29,7 @@ RATE(nper, pmt, pv, fv = 0, type = 0)
 
 \item{nper}{Number of periods. When `nper`` is provided, the cashflow values and rate are assumed constant.}
 
-\item{pv}{Present value. Initial investments (cash inflows) are typcially a negative value.}
+\item{pv}{Present value. Initial investments (cash inflows) are typically a negative value.}
 
 \item{pmt}{Number of payments per period.}
 

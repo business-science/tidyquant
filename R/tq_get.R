@@ -48,15 +48,13 @@
 #' @param ... Additional parameters passed to the "wrapped"
 #' function. Investigate underlying functions to see full list of arguments.
 #' Common optional parameters include:
-#' \itemize{
-#'   \item `from`: Standardized for time series functions in `quantmod`, `quandl`, `tiingo`, `alphavantager` packages.
+#'
+#' * `from`: Standardized for time series functions in `quantmod`, `quandl`, `tiingo`, `alphavantager` packages.
 #'   A character string representing a start date in
 #'   YYYY-MM-DD format.
-#'   \item `to`: Standardized for time series functions in `quantmod`, `quandl`, `tiingo`, `alphavantager` packages.
+#' * `to`: Standardized for time series functions in `quantmod`, `quandl`, `tiingo`, `alphavantager` packages.
 #'   A character string representing a end date in
 #'   YYYY-MM-DD format.
-#' }
-#'
 #'
 #' @return Returns data in the form of a `tibble` object.
 #'
@@ -67,7 +65,7 @@
 #' in other packages.
 #' The results are always returned as a `tibble`. The advantages
 #' are (1) only one function is needed for all data sources and (2) the function
-#' can be seemlessly used with the tidyverse: `purrr`, `tidyr`, and
+#' can be seamlessly used with the tidyverse: `purrr`, `tidyr`, and
 #' `dplyr` verbs.
 #'
 #' `tq_get_options()` returns a list of valid `get` options you can

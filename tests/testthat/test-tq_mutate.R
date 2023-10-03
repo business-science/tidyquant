@@ -3,6 +3,9 @@ context("Testing tq_mutate()")
 #### Setup ----
 AAPL <- tq_get("AAPL", get = "stock.prices", from = "2010-01-01", to = "2015-01-01")
 
+if (nrow(AAPL) == 0) {
+    skip("Could not load AAPL")
+}
 # Test 1: tq_mutate piping test
 test1 <- AAPL %>%
     tq_mutate(close, MACD) %>%
