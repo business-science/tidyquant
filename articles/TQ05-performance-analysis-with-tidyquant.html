@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Performance Analysis with tidyquant">
@@ -101,7 +101,7 @@
                         <h4 data-toc-skip class="author">Matt
 Dancho</h4>
             
-            <h4 data-toc-skip class="date">2023-11-01</h4>
+            <h4 data-toc-skip class="date">2023-12-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/HEAD/vignettes/TQ05-performance-analysis-with-tidyquant.Rmd" class="external-link"><code>vignettes/TQ05-performance-analysis-with-tidyquant.Rmd</code></a></small>
       <div class="d-none name"><code>TQ05-performance-analysis-with-tidyquant.Rmd</code></div>
@@ -349,16 +349,16 @@ of foresight saves us some work.</p>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 4,527 × 8</span></span></span>
 <span><span class="co">##    symbol date        open  high   low close    volume adjusted</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   2010-01-04  7.62  7.66  7.59  7.64 493<span style="text-decoration: underline;">729</span>600     6.49</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> AAPL   2010-01-05  7.66  7.70  7.62  7.66 601<span style="text-decoration: underline;">904</span>800     6.50</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> AAPL   2010-01-06  7.66  7.69  7.53  7.53 552<span style="text-decoration: underline;">160</span>000     6.40</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   2010-01-04  7.62  7.66  7.59  7.64 493<span style="text-decoration: underline;">729</span>600     6.48</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> AAPL   2010-01-05  7.66  7.70  7.62  7.66 601<span style="text-decoration: underline;">904</span>800     6.49</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> AAPL   2010-01-06  7.66  7.69  7.53  7.53 552<span style="text-decoration: underline;">160</span>000     6.39</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 4</span> AAPL   2010-01-07  7.56  7.57  7.47  7.52 477<span style="text-decoration: underline;">131</span>200     6.38</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> AAPL   2010-01-08  7.51  7.57  7.47  7.57 447<span style="text-decoration: underline;">610</span>800     6.43</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> AAPL   2010-01-11  7.60  7.61  7.44  7.50 462<span style="text-decoration: underline;">229</span>600     6.37</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> AAPL   2010-01-12  7.47  7.49  7.37  7.42 594<span style="text-decoration: underline;">459</span>600     6.30</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   2010-01-13  7.42  7.53  7.29  7.52 605<span style="text-decoration: underline;">892</span>000     6.39</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   2010-01-14  7.50  7.52  7.47  7.48 432<span style="text-decoration: underline;">894</span>000     6.35</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   2010-01-15  7.53  7.56  7.35  7.35 594<span style="text-decoration: underline;">067</span>600     6.24</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> AAPL   2010-01-08  7.51  7.57  7.47  7.57 447<span style="text-decoration: underline;">610</span>800     6.42</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> AAPL   2010-01-11  7.60  7.61  7.44  7.50 462<span style="text-decoration: underline;">229</span>600     6.36</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> AAPL   2010-01-12  7.47  7.49  7.37  7.42 594<span style="text-decoration: underline;">459</span>600     6.29</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   2010-01-13  7.42  7.53  7.29  7.52 605<span style="text-decoration: underline;">892</span>000     6.38</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   2010-01-14  7.50  7.52  7.47  7.48 432<span style="text-decoration: underline;">894</span>000     6.34</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   2010-01-15  7.53  7.56  7.35  7.35 594<span style="text-decoration: underline;">067</span>600     6.23</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 4,517 more rows</span></span></span></code></pre>
 </div>
 <div class="section level4">

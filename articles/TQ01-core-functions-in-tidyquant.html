@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Core Functions in tidyquant">
@@ -101,7 +101,7 @@
                         <h4 data-toc-skip class="author">Matt
 Dancho</h4>
             
-            <h4 data-toc-skip class="date">2023-11-01</h4>
+            <h4 data-toc-skip class="date">2023-12-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/HEAD/vignettes/TQ01-core-functions-in-tidyquant.Rmd" class="external-link"><code>vignettes/TQ01-core-functions-in-tidyquant.Rmd</code></a></small>
       <div class="d-none name"><code>TQ01-core-functions-in-tidyquant.Rmd</code></div>
@@ -219,11 +219,11 @@ Yahoo Finance.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aapl_prices</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"AAPL"</span>, get <span class="op">=</span> <span class="st">"stock.prices"</span>, from <span class="op">=</span> <span class="st">" 1990-01-01"</span><span class="op">)</span></span>
 <span><span class="va">aapl_prices</span> </span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 8,524 × 8</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 8,545 × 8</span></span></span>
 <span><span class="co">##    symbol date        open  high   low close    volume adjusted</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   1990-01-02 0.315 0.335 0.312 0.333 183<span style="text-decoration: underline;">198</span>400    0.264</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> AAPL   1990-01-03 0.339 0.339 0.335 0.335 207<span style="text-decoration: underline;">995</span>200    0.266</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   1990-01-02 0.315 0.335 0.312 0.333 183<span style="text-decoration: underline;">198</span>400    0.263</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> AAPL   1990-01-03 0.339 0.339 0.335 0.335 207<span style="text-decoration: underline;">995</span>200    0.265</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 3</span> AAPL   1990-01-04 0.342 0.346 0.333 0.336 221<span style="text-decoration: underline;">513</span>600    0.266</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 4</span> AAPL   1990-01-05 0.337 0.342 0.330 0.337 123<span style="text-decoration: underline;">312</span>000    0.267</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 5</span> AAPL   1990-01-08 0.335 0.339 0.330 0.339 101<span style="text-decoration: underline;">572</span>800    0.269</span></span>
@@ -231,8 +231,8 @@ Yahoo Finance.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 7</span> AAPL   1990-01-10 0.336 0.336 0.319 0.321 199<span style="text-decoration: underline;">718</span>400    0.255</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   1990-01-11 0.324 0.324 0.308 0.308 211<span style="text-decoration: underline;">052</span>800    0.244</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   1990-01-12 0.306 0.310 0.301 0.308 171<span style="text-decoration: underline;">897</span>600    0.244</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   1990-01-15 0.308 0.319 0.306 0.306 161<span style="text-decoration: underline;">739</span>200    0.243</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 8,514 more rows</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   1990-01-15 0.308 0.319 0.306 0.306 161<span style="text-decoration: underline;">739</span>200    0.242</span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 8,535 more rows</span></span></span></code></pre>
 <p>Yahoo Japan stock prices can be retrieved using a similar call,
 <code>get = "stock.prices.japan"</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -250,7 +250,7 @@ Prices</a> are shown below.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wti_price_usd</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"DCOILWTICO"</span>, get <span class="op">=</span> <span class="st">"economic.data"</span><span class="op">)</span></span>
 <span><span class="va">wti_price_usd</span> </span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 2,820 × 3</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 2,845 × 3</span></span></span>
 <span><span class="co">##    symbol     date       price</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 1</span> DCOILWTICO 2013-01-01  <span style="color: #BB0000;">NA</span>  </span></span>
@@ -263,7 +263,7 @@ Prices</a> are shown below.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> DCOILWTICO 2013-01-10  93.8</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> DCOILWTICO 2013-01-11  93.6</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> DCOILWTICO 2013-01-14  94.3</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 2,810 more rows</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;"># ℹ 2,835 more rows</span></span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="nasdaq-data-link-quandl-api">2.3 Nasdaq Data Link (Quandl) API<a class="anchor" aria-label="anchor" href="#nasdaq-data-link-quandl-api"></a>
@@ -592,7 +592,7 @@ price column to the <code>to.period</code> mutate function.</p>
 <span>    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span>mutate_fun <span class="op">=</span> <span class="va">to.period</span>,</span>
 <span>                 period     <span class="op">=</span> <span class="st">"months"</span>, </span>
 <span>                 col_rename <span class="op">=</span> <span class="st">"WTI Price"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 130 × 2</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 131 × 2</span></span></span>
 <span><span class="co">##    date       `WTI Price`</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 1</span> 2013-01-31        97.6</span></span>
@@ -605,7 +605,7 @@ price column to the <code>to.period</code> mutate function.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> 2013-08-30       108. </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> 2013-09-30       102. </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> 2013-10-31        96.3</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 120 more rows</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;"># ℹ 121 more rows</span></span></span></code></pre>
 </div>
 </div>
 <div class="section level3">
