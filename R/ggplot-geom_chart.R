@@ -56,7 +56,7 @@
 #'     geom_barchart(aes(open = open, high = high, low = low, close = close)) +
 #'     geom_ma(color = "darkgreen") +
 #'     coord_x_date(xlim = c("2016-01-01", "2016-12-31"),
-#'                  ylim = c(75, 125))
+#'                  ylim = c(20, 30))
 #'
 #' # Candlestick Chart
 #' AAPL %>%
@@ -64,7 +64,7 @@
 #'     geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
 #'     geom_ma(color = "darkgreen") +
 #'     coord_x_date(xlim = c("2016-01-01", "2016-12-31"),
-#'                  ylim = c(75, 125))
+#'                  ylim = c(20, 30))
 
 # Bar Chart -----
 
@@ -105,7 +105,7 @@ geom_barchart <- function(mapping = NULL, data = NULL, stat = "identity",
 
 StatLinerangeBC <- ggplot2::ggproto("StatLinerangeBC", ggplot2::Stat,
                                     required_aes = c("x", "open", "high", "low", "close"),
-
+                                    dropped_aes = c("open", "high", "low", "close", "y"),
                                     compute_group = function(data, scales, params,
                                                              fill_up, fill_down,
                                                              colour_up, colour_down) {
@@ -122,7 +122,7 @@ StatLinerangeBC <- ggplot2::ggproto("StatLinerangeBC", ggplot2::Stat,
 
 StatSegmentLeftBC <- ggplot2::ggproto("StatSegmentLeftBC", ggplot2::Stat,
                                     required_aes = c("x", "open", "high", "low", "close"),
-
+                                    dropped_aes = c("open", "high", "low", "close"),
                                     compute_group = function(data, scales, params,
                                                              fill_up, fill_down,
                                                              colour_up, colour_down) {
@@ -141,7 +141,7 @@ StatSegmentLeftBC <- ggplot2::ggproto("StatSegmentLeftBC", ggplot2::Stat,
 
 StatSegmentRightBC <- ggplot2::ggproto("StatSegmentRightBC", ggplot2::Stat,
                                       required_aes = c("x", "open", "high", "low", "close"),
-
+                                      dropped_aes = c("open", "high", "low", "close"),
                                       compute_group = function(data, scales, params,
                                                                fill_up, fill_down,
                                                                colour_up, colour_down) {
@@ -204,7 +204,7 @@ geom_candlestick <- function(mapping = NULL, data = NULL, stat = "identity",
 
 StatRectCS <- ggplot2::ggproto("StatRectCS", ggplot2::Stat,
                                 required_aes = c("x", "open", "high", "low", "close"),
-
+                                dropped_aes = c("open", "high", "low", "close", "x", "y"),
                                 compute_group = function(data, scales, params,
                                                          fill_up, fill_down,
                                                          colour_up, colour_down) {

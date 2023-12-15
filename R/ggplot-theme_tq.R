@@ -23,7 +23,7 @@
 #'                    ratio = NULL,
 #'                    n = 50) +
 #'        coord_x_date(xlim = c("2016-01-01", "2016-12-31"),
-#'                  ylim = c(75, 125)) +
+#'                  ylim = c(20, 35)) +
 #'        labs(title = "Apple BBands",
 #'             x = "Date",
 #'             y = "Price") +
