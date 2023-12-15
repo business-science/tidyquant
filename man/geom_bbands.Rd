@@ -98,7 +98,7 @@ available including: SMA, EMA, WMA, DEMA, ZLEMA, VWMA, and EVWMA. The default is
 calculated; see notes.}
 
 \item{ratio}{A smoothing/decay ratio.  \code{ratio} overrides \code{wilder}
-in \code{EMA}, and provides additional smoothing in \code{VMA}.}
+in \code{EMA}.}
 
 \item{v}{The 'volume factor' (a number in [0,1]).  See Notes.}
 

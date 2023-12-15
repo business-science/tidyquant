@@ -50,7 +50,7 @@
 #'
 #' @examplesIf rlang::is_installed("forcats")
 #' library(dplyr)
-#' library(timetk)
+#' library(timetk, exclude = "FANG")
 #' library(stringr)
 #' library(lubridate)
 #'
