@@ -2,16 +2,16 @@
 
 ## Breaking changes
 
-- tidyquant no longer loads lubridate. (#237, @olivroy)
+- tidyquant no longer loads lubridate. (@olivroy, #237)
   
   If you use tidyquant with tidyverse, there is no change for you.
 
-tidyquant no longer loads many packages.
+- tidyquant no longer loads many packages on load.
 
 ## Fixes
 
-- tidyquant startup messages mimics the tidyverse messages for clarity. (#163, #116)
-- Remove the dependency on tidyverse (#236, @olivroy)
+- tidyquant startup messages mimics the tidyverse messages for clarity. (@olivroy, #163, #116)
+- Remove the dependency on tidyverse (@olivroy, #236)
 - tidyquant no longer loads lubridate as tidyverse 2.0 now loads lubridate.
 - Changed the `size` argument to `linewidth` for ggplot2 3.4.0
 - Removed the last tidyr and dplyr deprecated functions.
@@ -19,6 +19,8 @@ tidyquant no longer loads many packages.
 - Move `Quandl`, `riingo`, and `alphavantager` to Suggests. tidyquant will not explicitly install those, but you can install them from CRAN.
 - Fixed CRAN package alias
 - FB to META change  in `FANG`
+- `geom_bbands()`, `geom_candlestick()`, and `geom_barchart()` no longer emit dropped aesthetics warnings. (@olivroy, #235)
+
 
 # tidyquant 1.0.7
 
