@@ -73,15 +73,15 @@
 <div class="section level3">
 <h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
 <ul><li>
-<p>tidyquant no longer loads lubridate. (<a href="https://github.com/business-science/tidyquant/issues/237" class="external-link">#237</a>, <a href="https://github.com/olivroy" class="external-link">@olivroy</a>)</p>
+<p>tidyquant no longer loads lubridate. (<a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/business-science/tidyquant/issues/237" class="external-link">#237</a>)</p>
 <p>If you use tidyquant with tidyverse, there is no change for you.</p>
 </li>
-</ul><p>tidyquant no longer loads many packages.</p>
-</div>
+<li><p>tidyquant no longer loads many packages on load.</p></li>
+</ul></div>
 <div class="section level3">
 <h3 id="fixes-development-version">Fixes<a class="anchor" aria-label="anchor" href="#fixes-development-version"></a></h3>
-<ul><li>tidyquant startup messages mimics the tidyverse messages for clarity. (<a href="https://github.com/business-science/tidyquant/issues/163" class="external-link">#163</a>, <a href="https://github.com/business-science/tidyquant/issues/116" class="external-link">#116</a>)</li>
-<li>Remove the dependency on tidyverse (<a href="https://github.com/business-science/tidyquant/issues/236" class="external-link">#236</a>, <a href="https://github.com/olivroy" class="external-link">@olivroy</a>)</li>
+<ul><li>tidyquant startup messages mimics the tidyverse messages for clarity. (<a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/business-science/tidyquant/issues/163" class="external-link">#163</a>, <a href="https://github.com/business-science/tidyquant/issues/116" class="external-link">#116</a>)</li>
+<li>Remove the dependency on tidyverse (<a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/business-science/tidyquant/issues/236" class="external-link">#236</a>)</li>
 <li>tidyquant no longer loads lubridate as tidyverse 2.0 now loads lubridate.</li>
 <li>Changed the <code>size</code> argument to <code>linewidth</code> for ggplot2 3.4.0</li>
 <li>Removed the last tidyr and dplyr deprecated functions.</li>
@@ -91,6 +91,8 @@
 <li>Fixed CRAN package alias</li>
 <li>FB to META change in <code>FANG</code>
 </li>
+<li>
+<code><a href="../reference/geom_bbands.html">geom_bbands()</a></code>, <code><a href="../reference/geom_chart.html">geom_candlestick()</a></code>, and <code><a href="../reference/geom_chart.html">geom_barchart()</a></code> no longer emit dropped aesthetics warnings. (<a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/business-science/tidyquant/issues/235" class="external-link">#235</a>)</li>
 </ul></div>
 </div>
     <div class="section level2">

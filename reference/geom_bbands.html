@@ -248,7 +248,7 @@ calculated; see notes.</p></dd>
 
 <dt>ratio</dt>
 <dd><p>A smoothing/decay ratio.  <code>ratio</code> overrides <code>wilder</code>
-in <code>EMA</code>, and provides additional smoothing in <code>VMA</code>.</p></dd>
+in <code>EMA</code>.</p></dd>
 
 
 <dt>v</dt>
@@ -323,19 +323,7 @@ to the paired geom/stat.</p></dd>
 <span class="r-in"><span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>           <span class="co"># Plot stock price</span></span></span>
 <span class="r-in"><span>    <span class="fu">geom_bbands</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>high <span class="op">=</span> <span class="va">high</span>, low <span class="op">=</span> <span class="va">low</span>, close <span class="op">=</span> <span class="va">close</span><span class="op">)</span>, ma_fun <span class="op">=</span> <span class="va">SMA</span>, n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="coord_x_date.html">coord_x_date</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/as_date.html" class="external-link">as_date</a></span><span class="op">(</span><span class="st">"2016-12-31"</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/duration.html" class="external-link">dyears</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://lubridate.tidyverse.org/reference/as_date.html" class="external-link">as_date</a></span><span class="op">(</span><span class="st">"2016-12-31"</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                 ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">75</span>, <span class="fl">125</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The following aesthetics were dropped during statistical transformation: <span style="color: #00BB00;">high,</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">low, close, y</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> This can happen when ggplot fails to infer the correct grouping structure in</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   the data.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Did you forget to specify a `group` aesthetic or to convert a numerical</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   variable into a factor?</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The following aesthetics were dropped during statistical transformation: <span style="color: #00BB00;">high,</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">low, close</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> This can happen when ggplot fails to infer the correct grouping structure in</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   the data.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Did you forget to specify a `group` aesthetic or to convert a numerical</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   variable into a factor?</span>
+<span class="r-in"><span>                 ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">35</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="geom_bbands-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
@@ -346,19 +334,7 @@ to the paired geom/stat.</p></dd>
 <span class="r-in"><span>   <span class="fu">geom_bbands</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>high <span class="op">=</span> <span class="va">high</span>, low <span class="op">=</span> <span class="va">low</span>, close <span class="op">=</span> <span class="va">close</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                  ma_fun <span class="op">=</span> <span class="va">EMA</span>, wilder <span class="op">=</span> <span class="cn">TRUE</span>, ratio <span class="op">=</span> <span class="cn">NULL</span>, n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="coord_x_date.html">coord_x_date</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/as_date.html" class="external-link">as_date</a></span><span class="op">(</span><span class="st">"2016-12-31"</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/duration.html" class="external-link">dyears</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://lubridate.tidyverse.org/reference/as_date.html" class="external-link">as_date</a></span><span class="op">(</span><span class="st">"2016-12-31"</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">75</span>, <span class="fl">125</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The following aesthetics were dropped during statistical transformation: <span style="color: #00BB00;">high,</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">low, close, y</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> This can happen when ggplot fails to infer the correct grouping structure in</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   the data.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Did you forget to specify a `group` aesthetic or to convert a numerical</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   variable into a factor?</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The following aesthetics were dropped during statistical transformation: <span style="color: #00BB00;">high,</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">low, close</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> This can happen when ggplot fails to infer the correct grouping structure in</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   the data.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Did you forget to specify a `group` aesthetic or to convert a numerical</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   variable into a factor?</span>
+<span class="r-in"><span>                ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">35</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="geom_bbands-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
@@ -369,19 +345,7 @@ to the paired geom/stat.</p></dd>
 <span class="r-in"><span>    <span class="fu">geom_bbands</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>high <span class="op">=</span> <span class="va">high</span>, low <span class="op">=</span> <span class="va">low</span>, close <span class="op">=</span> <span class="va">close</span>, volume <span class="op">=</span> <span class="va">volume</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                   ma_fun <span class="op">=</span> <span class="va">VWMA</span>, n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="coord_x_date.html">coord_x_date</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/as_date.html" class="external-link">as_date</a></span><span class="op">(</span><span class="st">"2016-12-31"</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/duration.html" class="external-link">dyears</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://lubridate.tidyverse.org/reference/as_date.html" class="external-link">as_date</a></span><span class="op">(</span><span class="st">"2016-12-31"</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">75</span>, <span class="fl">125</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The following aesthetics were dropped during statistical transformation: <span style="color: #00BB00;">high,</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">low, close, volume, y</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> This can happen when ggplot fails to infer the correct grouping structure in</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   the data.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Did you forget to specify a `group` aesthetic or to convert a numerical</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   variable into a factor?</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The following aesthetics were dropped during statistical transformation: <span style="color: #00BB00;">high,</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">low, close, volume</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> This can happen when ggplot fails to infer the correct grouping structure in</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   the data.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Did you forget to specify a `group` aesthetic or to convert a numerical</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   variable into a factor?</span>
+<span class="r-in"><span>                ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">35</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="geom_bbands-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>

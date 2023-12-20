@@ -101,7 +101,7 @@
                         <h4 data-toc-skip class="author">Matt
 Dancho</h4>
             
-            <h4 data-toc-skip class="date">2023-12-08</h4>
+            <h4 data-toc-skip class="date">2023-12-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/HEAD/vignettes/TQ03-scaling-and-modeling-with-tidyquant.Rmd" class="external-link"><code>vignettes/TQ03-scaling-and-modeling-with-tidyquant.Rmd</code></a></small>
       <div class="d-none name"><code>TQ03-scaling-and-modeling-with-tidyquant.Rmd</code></div>
@@ -234,16 +234,16 @@ stock prices.</p>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 31 × 8</span></span></span>
 <span><span class="co">##    symbol company      identifier sedol weight sector shares_held local_currency</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> UNH    UNITEDHEALT… 91324P102  2917… 0.100  -          5<span style="text-decoration: underline;">675</span>460 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> MSFT   MICROSOFT C… 594918104  2588… 0.067<span style="text-decoration: underline;">4</span> -          5<span style="text-decoration: underline;">675</span>460 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> GS     GOLDMAN SAC… 38141G104  2407… 0.062<span style="text-decoration: underline;">5</span> -          5<span style="text-decoration: underline;">675</span>460 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> HD     HOME DEPOT … 437076102  2434… 0.059<span style="text-decoration: underline;">6</span> -          5<span style="text-decoration: underline;">675</span>460 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> MCD    MCDONALD S … 580135101  2550… 0.052<span style="text-decoration: underline;">4</span> -          5<span style="text-decoration: underline;">675</span>460 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> AMGN   AMGEN INC    031162100  2023… 0.049<span style="text-decoration: underline;">2</span> -          5<span style="text-decoration: underline;">675</span>460 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> CAT    CATERPILLAR… 149123101  2180… 0.046<span style="text-decoration: underline;">7</span> -          5<span style="text-decoration: underline;">675</span>460 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> V      VISA INC CL… 92826C839  B2PZ… 0.046<span style="text-decoration: underline;">4</span> -          5<span style="text-decoration: underline;">675</span>460 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> CRM    SALESFORCE … 79466L302  2310… 0.045<span style="text-decoration: underline;">5</span> -          5<span style="text-decoration: underline;">675</span>460 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> BA     BOEING CO/T… 097023105  2108… 0.043<span style="text-decoration: underline;">3</span> -          5<span style="text-decoration: underline;">675</span>460 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> UNH    UNITEDHEALT… 91324P102  2917… 0.091<span style="text-decoration: underline;">8</span> -          5<span style="text-decoration: underline;">691</span>930 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> GS     GOLDMAN SAC… 38141G104  2407… 0.067<span style="text-decoration: underline;">0</span> -          5<span style="text-decoration: underline;">691</span>930 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> MSFT   MICROSOFT C… 594918104  2588… 0.065<span style="text-decoration: underline;">4</span> -          5<span style="text-decoration: underline;">691</span>930 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> HD     HOME DEPOT … 437076102  2434… 0.061<span style="text-decoration: underline;">7</span> -          5<span style="text-decoration: underline;">691</span>930 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> CAT    CATERPILLAR… 149123101  2180… 0.051<span style="text-decoration: underline;">3</span> -          5<span style="text-decoration: underline;">691</span>930 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> MCD    MCDONALD S … 580135101  2550… 0.050<span style="text-decoration: underline;">9</span> -          5<span style="text-decoration: underline;">691</span>930 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> AMGN   AMGEN INC    031162100  2023… 0.048<span style="text-decoration: underline;">8</span> -          5<span style="text-decoration: underline;">691</span>930 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> CRM    SALESFORCE … 79466L302  2310… 0.046<span style="text-decoration: underline;">3</span> -          5<span style="text-decoration: underline;">691</span>930 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> BA     BOEING CO/T… 097023105  2108… 0.046<span style="text-decoration: underline;">2</span> -          5<span style="text-decoration: underline;">691</span>930 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> V      VISA INC CL… 92826C839  B2PZ… 0.045<span style="text-decoration: underline;">5</span> -          5<span style="text-decoration: underline;">691</span>930 USD           </span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 21 more rows</span></span></span></code></pre>
 <p>…or, get an exchange.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -256,20 +256,20 @@ the vignette.</em></p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tq_index.html">tq_index</a></span><span class="op">(</span><span class="st">"DOW"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span>get <span class="op">=</span> <span class="st">"stock.prices"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 8,259 × 15</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 8,283 × 15</span></span></span>
 <span><span class="co">##    symbol company      identifier sedol weight sector shares_held local_currency</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> UNH    UNITEDHEALT… 91324P102  2917…  0.100 -          5<span style="text-decoration: underline;">675</span>460 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> UNH    UNITEDHEALT… 91324P102  2917…  0.100 -          5<span style="text-decoration: underline;">675</span>460 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> UNH    UNITEDHEALT… 91324P102  2917…  0.100 -          5<span style="text-decoration: underline;">675</span>460 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> UNH    UNITEDHEALT… 91324P102  2917…  0.100 -          5<span style="text-decoration: underline;">675</span>460 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> UNH    UNITEDHEALT… 91324P102  2917…  0.100 -          5<span style="text-decoration: underline;">675</span>460 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> UNH    UNITEDHEALT… 91324P102  2917…  0.100 -          5<span style="text-decoration: underline;">675</span>460 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> UNH    UNITEDHEALT… 91324P102  2917…  0.100 -          5<span style="text-decoration: underline;">675</span>460 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> UNH    UNITEDHEALT… 91324P102  2917…  0.100 -          5<span style="text-decoration: underline;">675</span>460 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> UNH    UNITEDHEALT… 91324P102  2917…  0.100 -          5<span style="text-decoration: underline;">675</span>460 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> UNH    UNITEDHEALT… 91324P102  2917…  0.100 -          5<span style="text-decoration: underline;">675</span>460 USD           </span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 8,249 more rows</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> UNH    UNITEDHEALT… 91324P102  2917… 0.091<span style="text-decoration: underline;">8</span> -          5<span style="text-decoration: underline;">691</span>930 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> UNH    UNITEDHEALT… 91324P102  2917… 0.091<span style="text-decoration: underline;">8</span> -          5<span style="text-decoration: underline;">691</span>930 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> UNH    UNITEDHEALT… 91324P102  2917… 0.091<span style="text-decoration: underline;">8</span> -          5<span style="text-decoration: underline;">691</span>930 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> UNH    UNITEDHEALT… 91324P102  2917… 0.091<span style="text-decoration: underline;">8</span> -          5<span style="text-decoration: underline;">691</span>930 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> UNH    UNITEDHEALT… 91324P102  2917… 0.091<span style="text-decoration: underline;">8</span> -          5<span style="text-decoration: underline;">691</span>930 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> UNH    UNITEDHEALT… 91324P102  2917… 0.091<span style="text-decoration: underline;">8</span> -          5<span style="text-decoration: underline;">691</span>930 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> UNH    UNITEDHEALT… 91324P102  2917… 0.091<span style="text-decoration: underline;">8</span> -          5<span style="text-decoration: underline;">691</span>930 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> UNH    UNITEDHEALT… 91324P102  2917… 0.091<span style="text-decoration: underline;">8</span> -          5<span style="text-decoration: underline;">691</span>930 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> UNH    UNITEDHEALT… 91324P102  2917… 0.091<span style="text-decoration: underline;">8</span> -          5<span style="text-decoration: underline;">691</span>930 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> UNH    UNITEDHEALT… 91324P102  2917… 0.091<span style="text-decoration: underline;">8</span> -          5<span style="text-decoration: underline;">691</span>930 USD           </span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 8,273 more rows</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 7 more variables: date &lt;date&gt;, open &lt;dbl&gt;, high &lt;dbl&gt;, low &lt;dbl&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   close &lt;dbl&gt;, volume &lt;dbl&gt;, adjusted &lt;dbl&gt;</span></span></span></code></pre>
 <p>You can use any applicable “getter” to get data for <strong>every
@@ -426,7 +426,7 @@ function. However, there is one problem: the output is not “tidy”.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## Coefficients:</span></span>
 <span><span class="co">## (Intercept)   year(date)  </span></span>
-<span><span class="co">##    58.86283     -0.02915</span></span></code></pre>
+<span><span class="co">##    58.86277     -0.02915</span></span></code></pre>
 <p>We can utilize the <code>broom</code> package to get “tidy” data from
 the model. There’s three primary functions:</p>
 <ol style="list-style-type: decimal">
@@ -484,11 +484,11 @@ S&amp;P500 with a call to <code><a href="https://dplyr.tidyverse.org/reference/s
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 5 × 8</span></span></span>
 <span><span class="co">##   symbol company      identifier sedol  weight sector shares_held local_currency</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> BIO    BIO RAD LAB… 090572207  2098… 1.70<span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span> -           <span style="text-decoration: underline;">241</span>187 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span> GD     GENERAL DYN… 369550108  2365… 1.49<span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span> -          2<span style="text-decoration: underline;">608</span>674 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span> TRGP   TARGA RESOU… 87612G101  B55P… 5.02<span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span> -          2<span style="text-decoration: underline;">586</span>337 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">4</span> AXON   AXON ENTERP… 05464C101  BDT5… 4.29<span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span> -           <span style="text-decoration: underline;">814</span>458 USD           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">5</span> AOS    SMITH (A.O.… 831865209  2816… 2.52<span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span> -          1<span style="text-decoration: underline;">440</span>563 USD</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> PARA   PARAMOUNT G… 92556H206  BKTN… 1.90<span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span> -          5<span style="text-decoration: underline;">967</span>877 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> ANET   ARISTA NETW… 040413106  BN33… 1.48<span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span> -          3<span style="text-decoration: underline;">103</span>802 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> IRM    IRON MOUNTA… 46284V101  BVFT… 4.99<span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span> -          3<span style="text-decoration: underline;">602</span>171 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> HOLX   HOLOGIC INC  436440101  2433… 4.35<span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span> -          3<span style="text-decoration: underline;">030</span>937 USD           </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">5</span> ALLE   ALLEGION PLC G0176J109  BFRT… 2.62<span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span> -          1<span style="text-decoration: underline;">085</span>003 USD</span></span></code></pre>
 <p>We can now apply our analysis function to the stocks using
 <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate()</a></code> and <code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">purrr::map()</a></code>. The
 <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code> function adds a column to our tibble, and the
@@ -520,13 +520,13 @@ arrange the data for our viewing.</p>
 <span><span class="va">stocks_model_stats</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 5 × 7</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># Groups:   symbol, company [5]</span></span></span>
-<span><span class="co">##   symbol company                data     estimate std.error statistic p.value</span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> AXON   AXON ENTERPRISE INC    <span style="color: #949494;">&lt;tibble&gt;</span>   0.043<span style="text-decoration: underline;">4</span>    0.059<span style="text-decoration: underline;">4</span>     0.730   0.486</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span> GD     GENERAL DYNAMICS CORP  <span style="color: #949494;">&lt;tibble&gt;</span>   0.032<span style="text-decoration: underline;">9</span>    0.024<span style="text-decoration: underline;">3</span>     1.35    0.213</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span> AOS    SMITH (A.O.) CORP      <span style="color: #949494;">&lt;tibble&gt;</span>   0.030<span style="text-decoration: underline;">6</span>    0.024<span style="text-decoration: underline;">4</span>     1.25    0.246</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">4</span> BIO    BIO RAD LABORATORIES A <span style="color: #949494;">&lt;tibble&gt;</span>   0.016<span style="text-decoration: underline;">1</span>    0.020<span style="text-decoration: underline;">3</span>     0.794   0.450</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">5</span> TRGP   TARGA RESOURCES CORP   <span style="color: #949494;">&lt;tibble&gt;</span>  -<span style="color: #BB0000;">0.048</span><span style="color: #BB0000; text-decoration: underline;">5</span>    0.143     -<span style="color: #BB0000;">0.341</span>   0.747</span></span></code></pre>
+<span><span class="co">##   symbol company                  data     estimate std.error statistic p.value</span></span>
+<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> ANET   ARISTA NETWORKS INC      <span style="color: #949494;">&lt;tibble&gt;</span>   0.059<span style="text-decoration: underline;">0</span>    0.051<span style="text-decoration: underline;">4</span>     1.15    0.456</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> PARA   PARAMOUNT GLOBAL CLASS B <span style="color: #949494;">&lt;tibble&gt;</span>   0.046<span style="text-decoration: underline;">8</span>    0.056<span style="text-decoration: underline;">2</span>     0.833   0.429</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> HOLX   HOLOGIC INC              <span style="color: #949494;">&lt;tibble&gt;</span>   0.039<span style="text-decoration: underline;">7</span>    0.042<span style="text-decoration: underline;">5</span>     0.935   0.377</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> ALLE   ALLEGION PLC             <span style="color: #949494;">&lt;tibble&gt;</span>   0.015<span style="text-decoration: underline;">7</span>    0.085<span style="text-decoration: underline;">0</span>     0.185   0.870</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">5</span> IRM    IRON MOUNTAIN INC        <span style="color: #949494;">&lt;tibble&gt;</span>   0.013<span style="text-decoration: underline;">7</span>    0.030<span style="text-decoration: underline;">0</span>     0.458   0.659</span></span></code></pre>
 <p>We’re done! We now have the coefficient of the linear regression that
 tracks the direction of the trend line. We can easily extend this type
 of analysis to larger lists or stock indexes. For example, the entire
@@ -585,7 +585,7 @@ results.</p>
 <span><span class="co">## <span style="color: #BBBB00;">!</span> x = 'BAD APPLE', get = 'stock.prices': Error in getSymbols.yahoo(Symbols = "BAD APPLE", env = &lt;environment&gt;, : Unable to import "BAD APPLE".</span></span>
 <span><span class="co">## URL using bad/illegal format or missing URL</span></span>
 <span><span class="co">##  Removing BAD APPLE.</span></span></code></pre>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 5,506 × 8</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 5,522 × 8</span></span></span>
 <span><span class="co">##    symbol date        open  high   low close    volume adjusted</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   2013-01-02  19.8  19.8  19.3  19.6 560<span style="text-decoration: underline;">518</span>000     16.8</span></span>
@@ -598,7 +598,7 @@ results.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   2013-01-11  18.6  18.8  18.5  18.6 350<span style="text-decoration: underline;">506</span>800     15.9</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   2013-01-14  18.0  18.1  17.8  17.9 734<span style="text-decoration: underline;">207</span>600     15.3</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   2013-01-15  17.8  17.8  17.3  17.4 876<span style="text-decoration: underline;">772</span>400     14.8</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 5,496 more rows</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;"># ℹ 5,512 more rows</span></span></span></code></pre>
 <p>Now switching <code>complete_cases = FALSE</code> will retain any
 errors as <code>NA</code> values in a nested data frame. Notice that the
 error message and output change. The error message now states that the
@@ -612,7 +612,7 @@ data structure.</p>
 <span><span class="co">## Caused by warning:</span></span>
 <span><span class="co">## <span style="color: #BBBB00;">!</span> x = 'BAD APPLE', get = 'stock.prices': Error in getSymbols.yahoo(Symbols = "BAD APPLE", env = &lt;environment&gt;, : Unable to import "BAD APPLE".</span></span>
 <span><span class="co">## URL using bad/illegal format or missing URL</span></span></code></pre>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 5,507 × 8</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 5,523 × 8</span></span></span>
 <span><span class="co">##    symbol date        open  high   low close    volume adjusted</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   2013-01-02  19.8  19.8  19.3  19.6 560<span style="text-decoration: underline;">518</span>000     16.8</span></span>
@@ -625,7 +625,7 @@ data structure.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   2013-01-11  18.6  18.8  18.5  18.6 350<span style="text-decoration: underline;">506</span>800     15.9</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   2013-01-14  18.0  18.1  17.8  17.9 734<span style="text-decoration: underline;">207</span>600     15.3</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   2013-01-15  17.8  17.8  17.3  17.4 876<span style="text-decoration: underline;">772</span>400     14.8</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 5,497 more rows</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;"># ℹ 5,513 more rows</span></span></span></code></pre>
 <p>In both cases, the prudent user will review the warnings to determine
 what happened and whether or not this is acceptable. In the
 <code>complete_cases = FALSE</code> example, if the user attempts to
