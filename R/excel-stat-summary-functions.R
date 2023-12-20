@@ -38,7 +38,7 @@
 #'
 #' @examplesIf rlang::is_installed("forcats")
 #' # Libraries
-#' library(timetk)
+#' library(timetk, exclude = "FANG")
 #' library(forcats)
 #' library(dplyr)
 #'

@@ -88,7 +88,7 @@ Most functions replicate the behavior of Excel:
 \examples{
 \dontshow{if (rlang::is_installed("forcats")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Libraries
-library(timetk)
+library(timetk, exclude = "FANG")
 library(dplyr)
 
 # --- Basic Usage ----

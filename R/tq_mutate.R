@@ -70,7 +70,7 @@
 #'
 #' ##### Basic Functionality
 #'
-#' fb_stock_prices  <- FANG %>%
+#' fb_stock_prices  <- tidyquant::FANG %>%
 #'     filter(symbol == "META") %>%
 #'         filter(
 #'             date >= "2016-01-01",
