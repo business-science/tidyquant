@@ -131,7 +131,7 @@ AAPL \%>\%
     geom_barchart(aes(open = open, high = high, low = low, close = close)) +
     geom_ma(color = "darkgreen") +
     coord_x_date(xlim = c("2016-01-01", "2016-12-31"),
-                 ylim = c(75, 125))
+                 ylim = c(20, 30))
 
 # Candlestick Chart
 AAPL \%>\%
@@ -139,7 +139,7 @@ AAPL \%>\%
     geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
     geom_ma(color = "darkgreen") +
     coord_x_date(xlim = c("2016-01-01", "2016-12-31"),
-                 ylim = c(75, 125))
+                 ylim = c(20, 30))
 }
 \seealso{
 See individual modeling functions for underlying parameters:

@@ -98,7 +98,7 @@ available including: SMA, EMA, WMA, DEMA, ZLEMA, VWMA, and EVWMA. The default is
 calculated; see notes.}
 
 \item{ratio}{A smoothing/decay ratio.  \code{ratio} overrides \code{wilder}
-in \code{EMA}, and provides additional smoothing in \code{VMA}.}
+in \code{EMA}.}
 
 \item{v}{The 'volume factor' (a number in [0,1]).  See Notes.}
 
@@ -172,7 +172,7 @@ AAPL \%>\%
     geom_line() +           # Plot stock price
     geom_bbands(aes(high = high, low = low, close = close), ma_fun = SMA, n = 50) +
     coord_x_date(xlim = c(as_date("2016-12-31") - dyears(1), as_date("2016-12-31")),
-                 ylim = c(75, 125))
+                 ylim = c(20, 35))
 
 
 # EMA
@@ -182,7 +182,7 @@ AAPL \%>\%
    geom_bbands(aes(high = high, low = low, close = close),
                   ma_fun = EMA, wilder = TRUE, ratio = NULL, n = 50) +
    coord_x_date(xlim = c(as_date("2016-12-31") - dyears(1), as_date("2016-12-31")),
-                ylim = c(75, 125))
+                ylim = c(20, 35))
 
 
 # VWMA
@@ -192,7 +192,7 @@ AAPL \%>\%
     geom_bbands(aes(high = high, low = low, close = close, volume = volume),
                    ma_fun = VWMA, n = 50) +
     coord_x_date(xlim = c(as_date("2016-12-31") - dyears(1), as_date("2016-12-31")),
-                ylim = c(75, 125))
+                ylim = c(20, 35))
 }
 \seealso{
 See individual modeling functions for underlying parameters:
