@@ -1,4 +1,12 @@
 
+.navbar-brand {
+    color: #FFFFFF !important;
+}
+
+.nav-link {
+    color: #FFFFFF !important;
+}
+
 .navbar-dark .navbar-nav .active>.nav-link {
     background-color: #18bc9c;
 }
