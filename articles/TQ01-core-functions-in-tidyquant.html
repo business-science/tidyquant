@@ -101,7 +101,7 @@
                         <h4 data-toc-skip class="author">Matt
 Dancho</h4>
             
-            <h4 data-toc-skip class="date">2023-12-28</h4>
+            <h4 data-toc-skip class="date">2024-01-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/HEAD/vignettes/TQ01-core-functions-in-tidyquant.Rmd" class="external-link"><code>vignettes/TQ01-core-functions-in-tidyquant.Rmd</code></a></small>
       <div class="d-none name"><code>TQ01-core-functions-in-tidyquant.Rmd</code></div>
@@ -219,7 +219,7 @@ Yahoo Finance.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aapl_prices</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"AAPL"</span>, get <span class="op">=</span> <span class="st">"stock.prices"</span>, from <span class="op">=</span> <span class="st">" 1990-01-01"</span><span class="op">)</span></span>
 <span><span class="va">aapl_prices</span> </span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 8,563 × 8</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 8,565 × 8</span></span></span>
 <span><span class="co">##    symbol date        open  high   low close    volume adjusted</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   1990-01-02 0.315 0.335 0.312 0.333 183<span style="text-decoration: underline;">198</span>400    0.263</span></span>
@@ -232,7 +232,7 @@ Yahoo Finance.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   1990-01-11 0.324 0.324 0.308 0.308 211<span style="text-decoration: underline;">052</span>800    0.244</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   1990-01-12 0.306 0.310 0.301 0.308 171<span style="text-decoration: underline;">897</span>600    0.244</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   1990-01-15 0.308 0.319 0.306 0.306 161<span style="text-decoration: underline;">739</span>200    0.242</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 8,553 more rows</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;"># ℹ 8,555 more rows</span></span></span></code></pre>
 <p>Yahoo Japan stock prices can be retrieved using a similar call,
 <code>get = "stock.prices.japan"</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -250,20 +250,20 @@ Prices</a> are shown below.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wti_price_usd</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"DCOILWTICO"</span>, get <span class="op">=</span> <span class="st">"economic.data"</span><span class="op">)</span></span>
 <span><span class="va">wti_price_usd</span> </span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 2,860 × 3</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 2,605 × 3</span></span></span>
 <span><span class="co">##    symbol     date       price</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> DCOILWTICO 2013-01-01  <span style="color: #BB0000;">NA</span>  </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> DCOILWTICO 2013-01-02  93.1</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> DCOILWTICO 2013-01-03  93.0</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> DCOILWTICO 2013-01-04  93.1</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> DCOILWTICO 2013-01-07  93.2</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> DCOILWTICO 2013-01-08  93.2</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> DCOILWTICO 2013-01-09  93.1</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> DCOILWTICO 2013-01-10  93.8</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> DCOILWTICO 2013-01-11  93.6</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> DCOILWTICO 2013-01-14  94.3</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 2,850 more rows</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> DCOILWTICO 2014-01-01  <span style="color: #BB0000;">NA</span>  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> DCOILWTICO 2014-01-02  95.1</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> DCOILWTICO 2014-01-03  93.7</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> DCOILWTICO 2014-01-06  93.1</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> DCOILWTICO 2014-01-07  93.3</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> DCOILWTICO 2014-01-08  91.9</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> DCOILWTICO 2014-01-09  91.4</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> DCOILWTICO 2014-01-10  92.4</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> DCOILWTICO 2014-01-13  91.4</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> DCOILWTICO 2014-01-14  92.2</span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 2,595 more rows</span></span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="nasdaq-data-link-quandl-api">2.3 Nasdaq Data Link (Quandl) API<a class="anchor" aria-label="anchor" href="#nasdaq-data-link-quandl-api"></a>
@@ -592,20 +592,20 @@ price column to the <code>to.period</code> mutate function.</p>
 <span>    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span>mutate_fun <span class="op">=</span> <span class="va">to.period</span>,</span>
 <span>                 period     <span class="op">=</span> <span class="st">"months"</span>, </span>
 <span>                 col_rename <span class="op">=</span> <span class="st">"WTI Price"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 132 × 2</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 120 × 2</span></span></span>
 <span><span class="co">##    date       `WTI Price`</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> 2013-01-31        97.6</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> 2013-02-28        92.0</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> 2013-03-28        97.2</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> 2013-04-30        93.2</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> 2013-05-31        91.9</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> 2013-06-28        96.4</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> 2013-07-31       105. </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> 2013-08-30       108. </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> 2013-09-30       102. </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> 2013-10-31        96.3</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 122 more rows</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> 2014-01-31        97.6</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> 2014-02-28       103. </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> 2014-03-31       102. </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> 2014-04-30       100. </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> 2014-05-30       103. </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> 2014-06-30       106. </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> 2014-07-31        98.2</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> 2014-08-29        97.9</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> 2014-09-30        91.2</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> 2014-10-31        80.5</span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 110 more rows</span></span></span></code></pre>
 </div>
 </div>
 <div class="section level3">
