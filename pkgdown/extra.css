@@ -3,6 +3,10 @@
     color: #FFFFFF !important;
 }
 
+#toc>.nav a.nav-link {
+    color: #000000 !important;
+}
+
 .nav-link {
     color: #FFFFFF !important;
 }
