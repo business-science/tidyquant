@@ -101,7 +101,7 @@
                         <h4 data-toc-skip class="author">Matt
 Dancho</h4>
             
-            <h4 data-toc-skip class="date">2024-05-01</h4>
+            <h4 data-toc-skip class="date">2024-06-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/HEAD/vignettes/TQ02-quant-integrations-in-tidyquant.Rmd" class="external-link"><code>vignettes/TQ02-quant-integrations-in-tidyquant.Rmd</code></a></small>
       <div class="d-none name"><code>TQ02-quant-integrations-in-tidyquant.Rmd</code></div>
@@ -696,7 +696,7 @@ calculated from the “adjusted” prices using the process in Example
 <span><span class="co">## <span style="color: #BCBCBC;"> 7</span> META   2013-07-31          0.479              0.037<span style="text-decoration: underline;">3</span> </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> META   2013-08-30          0.122             -<span style="color: #BB0000;">0.010</span><span style="color: #BB0000; text-decoration: underline;">4</span> </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> META   2013-09-30          0.217              0.025<span style="text-decoration: underline;">3</span> </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> META   2013-10-31         -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">398</span>           0.050<span style="text-decoration: underline;">3</span> </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> META   2013-10-31         -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">398</span>           0.050<span style="text-decoration: underline;">2</span> </span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 182 more rows</span></span></span></code></pre>
 <p>The <code><a href="https://rdrr.io/pkg/TTR/man/runFun.html" class="external-link">TTR::runCor</a></code> function can be used to evaluate rolling
 correlations using the xy pattern. Looking at the documentation
@@ -924,13 +924,13 @@ to increase.</p>
 <span><span class="co">## lm(formula = MA ~ V, data = stock_pairs)</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Residuals:</span></span>
-<span><span class="co">##       Min        1Q    Median        3Q       Max </span></span>
-<span><span class="co">## -0.026957 -0.003965  0.000215  0.003965  0.028946 </span></span>
+<span><span class="co">##        Min         1Q     Median         3Q        Max </span></span>
+<span><span class="co">## -0.0269567 -0.0039655  0.0002149  0.0039650  0.0289460 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Coefficients:</span></span>
 <span><span class="co">##              Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
 <span><span class="co">## (Intercept) 0.0001130  0.0003097   0.365    0.715    </span></span>
-<span><span class="co">## V           0.8133641  0.0226393  35.927   &lt;2e-16 ***</span></span>
+<span><span class="co">## V           0.8133666  0.0226393  35.927   &lt;2e-16 ***</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
