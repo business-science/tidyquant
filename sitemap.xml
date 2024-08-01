@@ -1,129 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://business-science.github.io/tidyquant/404.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/articles/TQ00-introduction-to-tidyquant.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/articles/TQ01-core-functions-in-tidyquant.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/articles/TQ02-quant-integrations-in-tidyquant.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/articles/TQ03-scaling-and-modeling-with-tidyquant.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/articles/TQ04-charting-with-tidyquant.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/articles/TQ05-performance-analysis-with-tidyquant.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/articles/TQ06-excel-in-r.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/index.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/FANG.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/av_api_key.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/coord_x_date.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/deprecated.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/excel_date_functions.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/excel_financial_math_functions.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/excel_if_functions.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/excel_pivot_table.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/excel_ref_functions.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/excel_stat_mutation_functions.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/excel_stat_summary_functions.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/geom_bbands.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/geom_chart.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/geom_ma.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/palette_tq.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/quandl_api_key.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/quandl_search.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/scale_manual.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/theme_tq.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/tidyquant-package.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/tidyquant_conflicts.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/tiingo_api_key.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/tq_get.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/tq_index.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/tq_mutate.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/tq_performance.html</loc>
-  </url>
-  <url>
-    <loc>https://business-science.github.io/tidyquant/reference/tq_portfolio.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://business-science.github.io/tidyquant/404.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/LICENSE-text.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/articles/TQ00-introduction-to-tidyquant.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/articles/TQ01-core-functions-in-tidyquant.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/articles/TQ02-quant-integrations-in-tidyquant.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/articles/TQ03-scaling-and-modeling-with-tidyquant.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/articles/TQ04-charting-with-tidyquant.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/articles/TQ05-performance-analysis-with-tidyquant.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/articles/TQ06-excel-in-r.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/articles/index.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/authors.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/index.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/news/index.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/FANG.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/av_api_key.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/coord_x_date.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/deprecated.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/excel_date_functions.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/excel_financial_math_functions.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/excel_if_functions.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/excel_pivot_table.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/excel_ref_functions.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/excel_stat_mutation_functions.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/excel_stat_summary_functions.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/geom_bbands.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/geom_chart.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/geom_ma.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/index.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/palette_tq.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/pipe.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/quandl_api_key.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/quandl_search.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/scale_manual.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/theme_tq.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/tidyquant-package.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/tidyquant_conflicts.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/tiingo_api_key.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/tq_get.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/tq_index.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/tq_mutate.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/tq_performance.html</loc></url>
+<url><loc>https://business-science.github.io/tidyquant/reference/tq_portfolio.html</loc></url>
 </urlset>
+
