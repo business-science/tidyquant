@@ -111,44 +111,52 @@ tq_exchange <- function(x) {
     }
 
     # Download
+
+    # Example: https://api.nasdaq.com/api/screener/stocks?tableonly=true&exchange=nasdaq&download=true
+
     message("Getting data...\n")
     base_path_1 <- "https://api.nasdaq.com/api/screener/stocks?tableonly=true&exchange="
     base_path_2 <- "&download=true"
     url         <- paste0(base_path_1, x, base_path_2)
-    # res         <- csv_downloader(path = url)
-    res         <- jsonlite::fromJSON(url)
+    # res         <- jsonlite::fromJSON(url)
+
+    # Use HTTR2 to make the HTTP request:
+    response <- httr2::request(url) %>%
+        httr2::req_user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36") %>%
+        httr2::req_perform()
+
+    content <- httr2::resp_body_json(response)
 
     # Evaluate Response / Clean & Return
     if (is.null(res$err)) {
-        exchange_raw <- res$data$rows
 
         # Post-process response
         suppressWarnings({
-          exchange <- exchange_raw %>%
-            dplyr::mutate_if(is.character, stringr::str_trim) %>%
-            dplyr::as_tibble() %>%
-            dplyr::rename(
-              symbol = symbol,
-              company = name,
-              last.sale.price = lastsale,
-              market.cap = marketCap,
-              country = country,
-              ipo.year = ipoyear,
-              sector = sector,
-              industry = industry
-            ) %>%
-            dplyr::mutate(
-              symbol = as.character(symbol),
-              company = as.character(company),
-              last.sale.price = as.numeric(stringr::str_remove(last.sale.price, "\\$")),
-              market.cap = as.numeric(market.cap),
-              country = as.character(country),
-              ipo.year = as.integer(ipo.year),
-              sector = as.character(sector),
-              industry = as.character(industry)
-            ) %>%
-            dplyr::select(symbol:industry) %>%
-            dplyr::select(-c(netchange, pctchange, volume))
+
+            exchange_tbl <- do.call(rbind, lapply(content$data$rows, as_tibble))
+            exchange <- exchange_tbl %>%
+                dplyr::rename(
+                  symbol = symbol,
+                  company = name,
+                  last.sale.price = lastsale,
+                  market.cap = marketCap,
+                  country = country,
+                  ipo.year = ipoyear,
+                  sector = sector,
+                  industry = industry
+                ) %>%
+                dplyr::mutate(
+                  symbol = as.character(symbol),
+                  company = as.character(company),
+                  last.sale.price = as.numeric(stringr::str_remove(last.sale.price, "\\$")),
+                  market.cap = as.numeric(market.cap),
+                  country = as.character(country),
+                  ipo.year = as.integer(ipo.year),
+                  sector = as.character(sector),
+                  industry = as.character(industry)
+                ) %>%
+                dplyr::select(symbol:industry) %>%
+                dplyr::select(-c(netchange, pctchange, volume))
         })
 
         return(exchange)

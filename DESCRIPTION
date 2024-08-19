@@ -25,6 +25,7 @@ Imports:
     ggplot2 (>= 3.4.0),
     jsonlite,
     httr,
+    httr2,
     curl,
     lazyeval,
     lubridate,
