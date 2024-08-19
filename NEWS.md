@@ -1,5 +1,12 @@
 # tidyquant (development version)
 
+# tidyquant 1.0.8
+
+## TQ INDEX AND EXCHANGE:
+
+- `tq_index("SP500")`: Fixed broken API call (#246)
+- `tq_exchange("NASDAQ")`: Fixed broken API call (#226, #248)
+
 ## Breaking changes
 
 - tidyquant no longer loads lubridate. (@olivroy, #237)
