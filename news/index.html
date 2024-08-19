@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tidyquant</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.7.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.8</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,8 +56,18 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="tidyquant-development-version">tidyquant (development version)<a class="anchor" aria-label="anchor" href="#tidyquant-development-version"></a></h2>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.8" id="tidyquant-108">tidyquant 1.0.8<a class="anchor" aria-label="anchor" href="#tidyquant-108"></a></h2>
 <div class="section level3">
-<h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
+<h3 id="tq-index-and-exchange-1-0-8">TQ INDEX AND EXCHANGE:<a class="anchor" aria-label="anchor" href="#tq-index-and-exchange-1-0-8"></a></h3>
+<ul><li>
+<code>tq_index("SP500")</code>: Fixed broken API call (<a href="https://github.com/business-science/tidyquant/issues/246" class="external-link">#246</a>)</li>
+<li>
+<code>tq_exchange("NASDAQ")</code>: Fixed broken API call (<a href="https://github.com/business-science/tidyquant/issues/226" class="external-link">#226</a>, <a href="https://github.com/business-science/tidyquant/issues/248" class="external-link">#248</a>)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="breaking-changes-1-0-8">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-0-8"></a></h3>
 <ul><li>
 <p>tidyquant no longer loads lubridate. (@olivroy, <a href="https://github.com/business-science/tidyquant/issues/237" class="external-link">#237</a>)</p>
 <p>If you use tidyquant with tidyverse, there is no change for you.</p>
@@ -65,7 +75,7 @@
 <li><p>tidyquant no longer loads many packages on load.</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="fixes-development-version">Fixes<a class="anchor" aria-label="anchor" href="#fixes-development-version"></a></h3>
+<h3 id="fixes-1-0-8">Fixes<a class="anchor" aria-label="anchor" href="#fixes-1-0-8"></a></h3>
 <ul><li>tidyquant startup messages mimics the tidyverse messages for clarity. (@olivroy, <a href="https://github.com/business-science/tidyquant/issues/163" class="external-link">#163</a>, <a href="https://github.com/business-science/tidyquant/issues/116" class="external-link">#116</a>)</li>
 <li>Remove the dependency on tidyverse (@olivroy, <a href="https://github.com/business-science/tidyquant/issues/236" class="external-link">#236</a>)</li>
 <li>tidyquant no longer loads lubridate as tidyverse 2.0 now loads lubridate.</li>
