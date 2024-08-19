@@ -233,9 +233,10 @@ index_download <- function(x, index_name) {
 
     # Contruct download link
     #     OLD (< 2019-12-15): https://us.spdrs.com/site-content/xls/SPY_All_Holdings.xls
-    #     NEW (> 2019-12-15) https://www.ssga.com/us/en/institutional/etfs/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx
+    #     NEW (> 2019-12-15): https://www.ssga.com/us/en/institutional/etfs/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx
+    #     NEW (> 2024-08-16): https://www.ssga.com/us/en/institutional/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx
     # spdr_link <- paste0("https://us.spdrs.com/site-content/xls/", x, "_All_Holdings.xls")
-    spdr_link <- paste0("https://www.ssga.com/us/en/institutional/etfs/library-content/products/fund-data/etfs/us/holdings-daily-us-en-", tolower(x), ".xlsx")
+    spdr_link <- paste0("https://www.ssga.com/us/en/institutional/library-content/products/fund-data/etfs/us/holdings-daily-us-en-", tolower(x), ".xlsx")
 
     # Results container
     res <- list(df = NULL, err = NULL)
