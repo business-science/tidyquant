@@ -118,22 +118,23 @@ tq_exchange <- function(x) {
     base_path_1 <- "https://api.nasdaq.com/api/screener/stocks?tableonly=true&exchange="
     base_path_2 <- "&download=true"
     url         <- paste0(base_path_1, x, base_path_2)
-    # res         <- jsonlite::fromJSON(url)
 
     # Use HTTR2 to make the HTTP request:
     response <- httr2::request(url) %>%
         httr2::req_user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36") %>%
         httr2::req_perform()
 
-    content <- httr2::resp_body_json(response)
-
     # Evaluate Response / Clean & Return
-    if (is.null(res$err)) {
+    if (response$status_code == 200) {
+
+        # Collect JSON
+        content <- httr2::resp_body_json(response)
 
         # Post-process response
         suppressWarnings({
 
-            exchange_tbl <- do.call(rbind, lapply(content$data$rows, as_tibble))
+            exchange_tbl <- do.call(rbind, lapply(content$data$rows, tibble::as_tibble))
+
             exchange <- exchange_tbl %>%
                 dplyr::rename(
                   symbol = symbol,
@@ -162,7 +163,7 @@ tq_exchange <- function(x) {
         return(exchange)
 
     } else {
-        warn <- paste0("Error at ", x, " during call to tq_exchange.\n\n", res$err)
+        warn <- paste0("Error at ", x, " during call to tq_exchange.\n\n", response)
         warning(warn)
         return(NA) # Return NA on error
     }
