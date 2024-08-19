@@ -3,105 +3,124 @@ template:
   bootstrap: 5
   bootswatch: lux
   params:
-    ganalytics: UA-76139189-2
+    ganalytics: G-20GDZ5LL77
 
 navbar:
   bg: primary
-  structure:
-    left:  [intro, articles, reference, news]
-  components:
-    intro:
-     text: Start
-     href: articles/TQ00-introduction-to-tidyquant.html
-    news:
-     text: News
-     href: news/index.html
-
-articles:
-- title: Financial
-  navbar: Financial Workflow
-  contents:
-  - TQ00-introduction-to-tidyquant
-  - TQ01-core-functions-in-tidyquant
-  - TQ02-quant-integrations-in-tidyquant
-  - TQ03-scaling-and-modeling-with-tidyquant
-  - TQ04-charting-with-tidyquant
-  - TQ05-performance-analysis-with-tidyquant
-- title: Excel
-  navbar: Excel Users
-  contents:
-  - TQ06-excel-in-r
+  title: tidyquant
+  left:
+  - icon: fa-home
+    href: index.html
+  - text: Start
+    href: articles/TQ00-introduction-to-tidyquant.html
+  - text: Articles
+    href: articles/index.html
+    menu:
+    - text: Getting Started
+    - text: Introduction to Tidyquant
+      href: articles/TQ00-introduction-to-tidyquant.html
+    - text: Core Functions in Tidyquant
+      href: articles/TQ01-core-functions-in-tidyquant.html
+    - text: Quant Integrations in Tidyquant
+      href: articles/TQ02-quant-integrations-in-tidyquant.html
+    - text: Scaling and Modeling with Tidyquant
+      href: articles/TQ03-scaling-and-modeling-with-tidyquant.html
+    - text: Charting with Tidyquant
+      href: articles/TQ04-charting-with-tidyquant.html
+    - text: Performance Analysis with Tidyquant
+      href: articles/TQ05-performance-analysis-with-tidyquant.html
+    - text: Excel Integrations in R
+      href: articles/TQ06-excel-in-r.html
+  - text: API
+    href: reference/index.html
+    menu:
+    - text: API Functions
+      href: reference/index.html
+    - text: News
+      href: news/index.html
+  - icon: fab fa-github
+    href: https://github.com/business-science/tidyquant
 
 reference:
+- title: Financial APIs
+  desc: Functions for getting financial data from various API sources.
+- subtitle: Get Data from APIs
+  contents:
+  - starts_with("tq_get")
+  - starts_with("tq_index")
+  - starts_with("tq_exchange")
+- subtitle: API Keys
+  contents:
+  - starts_with("quandl")
+  - contains("api")
 
-  - title: Financial APIs
-    desc: Functions for getting financial data from various API sources.
-  - subtitle: Get Data from APIs
-    contents:
-    - starts_with("tq_get")
-    - starts_with("tq_index")
-    - starts_with("tq_exchange")
-  - subtitle: API Keys
-    contents:
-    - starts_with("quandl")
-    - contains("api")
+- title: Financial Analysis
+  desc: Functions for performing various financial analyses.
 
-  - title: Financial Analysis
+- subtitle: Quantitative Transformations
+  desc: Functions for mutating quantitative data.
+  contents:
+  - starts_with("tq_mutate")
+  - starts_with("tq_transmute")
+- subtitle: Portfolio Aggregation
+  desc: Functions for aggregating 1 or more portfolios.
+  contents:
+  - starts_with("tq_portfolio")
+- subtitle: Performance Analytics
+  desc: Functions for performing various financial performance analyses.
+  contents:
+  - starts_with("tq_performance")
+- subtitle: Charting with ggplot2
+  desc: Functions for creating `ggplots` for financial charting.
+  contents:
+  - starts_with("geom_")
+  - starts_with("theme_")
+  - starts_with("palette_")
+  - starts_with("scale_")
+  - starts_with("coord_")
 
-  - subtitle: Quantitative Transformations
-    desc: Functions for mutating quantitative data.
-    contents:
-    - starts_with("tq_mutate")
-    - starts_with("tq_transmute")
-  - subtitle: Portfolio Aggregation
-    desc: Functions for aggregating 1 or more portfolios.
-    contents:
-    - starts_with("tq_portfolio")
-  - subtitle: Performance Analytics
-    desc: Functions for performing various financial performance analyses.
-    contents:
-    - starts_with("tq_performance")
-  - subtitle: Charting with ggplot2
-    desc: Functions for creating `ggplots` for financial charting.
-    contents:
-    - starts_with("geom_")
-    - starts_with("theme_")
-    - starts_with("palette_")
-    - starts_with("scale_")
-    - starts_with("coord_")
+- title: Excel
+  desc: Functions providing Excel-like functionality.
 
-  - title: Excel
+- subtitle: Pivot Table, VLOOKUP, & Sum-Ifs
+  desc: Common functions for Excel power-users.
+  contents:
+  - pivot_table
+  - VLOOKUP
+  - ends_with("_IFS")
+- subtitle: Summary Functions
+  desc: Functions returning a single value from a vector of values.
+  contents:
+  - SUM
+- subtitle: Mutation Functions
+  desc: Functions returning multiple values from a vector.
+  contents:
+  - ABS
+- subtitle: Date & Time Functions
+  desc: Functions providing date and time functionality.
+  contents:
+  - HOLIDAY_SEQUENCE
+- subtitle: Financial Functions
+  desc: Common financial calculations from Excel.
+  contents:
+  - NPV
 
-  - subtitle: Pivot Table, VLOOKUP, & Sum-Ifs
-    desc: These __Power-Excel Functions__ provide common functionality that power-users coming from Excel use frequently.
-    contents:
-    - "pivot_table"
-    - "VLOOKUP"
-    - ends_with("_IFS")
-  - subtitle: Summary Functions
-    desc: These functions return a __single value__ from a vector of values
-    contents:
-    - SUM
-  - subtitle:  Mutation Functions
-    desc: These functions return a vector of __multiple values__ the length of the input vector
-    contents:
-    - ABS
-  - subtitle: Date & Time Functions
-    desc: These functions provide `lubridate` (__date & date-time__) and `timeDate` (__Business Calendar Holiday__) functionality
-    contents:
-    - HOLIDAY_SEQUENCE
-  - subtitle: Financial Functions
-    desc: These functions provide common financial calcuations from Excel
-    contents:
-    - NPV
-  - title: Data Sets
-    contents:
-    - FANG
-  - title: Tidyquant
-    desc: Package level information.
-    contents:
-    - starts_with("tidyquant")
-  - title: Deprecated
-    contents:
-    - starts_with("deprecated")
+- title: Data Sets
+  contents:
+  - FANG
+
+- title: Tidyquant
+  desc: Package-level information.
+  contents:
+  - starts_with("tidyquant")
+
+- title: Deprecated
+  contents:
+  - starts_with("deprecated")
+
+repo:
+  url:
+    home: https://github.com/business-science/tidyquant
+    source: https://github.com/business-science/tidyquant/blob/master/
+    issue: https://github.com/business-science/tidyquant/issues/
 
