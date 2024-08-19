@@ -17,7 +17,7 @@
 #' @seealso [theme_tq()]
 #'
 #' @param theme one of "light", "dark", or "green". This should match the `theme_tq()` that is used with it.
-#' @param ... common discrete scale parameters: `name`, `breaks`, `labels`, `na.value`, `limits` and `guide`. See [discrete_scale()] for more details
+#' @param ... common parameters for `scale_color_manual()` or `scale_fill_manual()`: `name`, `breaks`, `labels`, `na.value`, `limits` and `guide`.
 #'
 #' @examples
 #' # Load libraries
@@ -57,7 +57,7 @@ scale_color_tq <- function(..., theme = "light") {
          "green" = unname(palette_green() %>% rep(100))
          )
 
-  scale_color_manual(values = pal)
+  scale_color_manual(values = pal, ...)
 }
 
 #' @rdname scale_manual
@@ -74,7 +74,7 @@ scale_fill_tq <- function(..., theme = "light") {
                 "green" = unname(palette_green()) %>% rep(100)
   )
 
-  scale_fill_manual(values = pal)
+  scale_fill_manual(values = pal, ...)
 }
 
 #' tidyquant palettes for use with scales
