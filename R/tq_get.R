@@ -14,7 +14,7 @@
 #'   Yahoo Finance (https://finance.yahoo.com/). Wrapper for `quantmod::getSplits()`.
 #'   \item `"stock.prices.japan"`: Get the open, high, low, close, volume and adjusted
 #'   stock prices for a stock symbol from
-#'   Yahoo Finance Japan (https://finance.yahoo.co.jp/). Wrapper for `quantmod::getSymbols.yahooj()`.
+#'   Yahoo Finance Japan. Wrapper for `quantmod::getSymbols.yahooj()`.
 #'   \item `"economic.data"`: Get economic data from
 #'   \href{https://fred.stlouisfed.org/}{FRED}. rapper for `quantmod::getSymbols.FRED()`.
 #'   \item `"quandl"`: Get data sets from
@@ -24,13 +24,13 @@
 #'   \href{https://data.nasdaq.com/}{Quandl}. Wrapper for `Quandl::Quandl.datatable()`.
 #'   See also [quandl_api_key()].
 #'   \item `"tiingo"`: Get data sets from
-#'   \href{https://api.tiingo.com/}{Tiingo}. Wrapper for `riingo::riingo_prices()`.
+#'   \href{https://www.tiingo.com/}{Tiingo}. Wrapper for `riingo::riingo_prices()`.
 #'   See also [tiingo_api_key()].
 #'   \item `"tiingo.iex"`: Get data sets from
-#'   \href{https://api.tiingo.com/}{Tiingo}. Wrapper for `riingo::riingo_iex_prices()`.
+#'   \href{https://www.tiingo.com/}{Tiingo}. Wrapper for `riingo::riingo_iex_prices()`.
 #'   See also [tiingo_api_key()].
 #'   \item `"tiingo.crypto"`: Get data sets from
-#'   \href{https://api.tiingo.com/}{Tiingo}. Wrapper for `riingo::riingo_crypto_prices()`.
+#'   \href{https://www.tiingo.com/}{Tiingo}. Wrapper for `riingo::riingo_crypto_prices()`.
 #'   See also [tiingo_api_key()].
 #'   \item `"alphavantager"`: Get data sets from
 #'   \href{https://www.alphavantage.co/}{Alpha Vantage}. Wrapper for `alphavantager::av_get()`.

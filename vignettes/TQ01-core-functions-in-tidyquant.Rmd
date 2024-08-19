@@ -70,7 +70,7 @@ Set `x` as one of the options in the list of options above to get the desired st
 tq_index("SP500")
 ```
 
-The data source is [State Street Global Advisors - US SPDRS ETFs](https://www.ssga.com/us/en/institutional/etfs).
+The data source is [State Street Global Advisors](https://www.ssga.com/).
 
 ## 1.2 Stock Exchanges
 
@@ -114,7 +114,7 @@ x8411T <- tq_get("8411.T", get = "stock.prices.japan", from = "2016-01-01", to  
 ```
 
 
-The data source is Yahoo Finance (https://finance.yahoo.com/) and Yahoo Finance Japan (https://finance.yahoo.co.jp/).
+The data source is Yahoo Finance (https://finance.yahoo.com/) and Yahoo Finance Japan.
 
 ## 2.2 FRED Economic Data
 
@@ -207,11 +207,11 @@ tq_get("ZACKS/SHRS", get = "quandl.datatable") # Zacks Shares Out Supplement
 
 ## 2.4 Tiingo API
 
-The [Tiingo API](https://www.tiingo.com/) is a free source for stock prices, cryptocurrencies, and intraday feeds from the IEX (Investors Exchange). This can serve as an alternate source of data to Yahoo! Finance.
+The Tiingo API (https://www.tiingo.com/) is a free source for stock prices, cryptocurrencies, and intraday feeds from the IEX (Investors Exchange). This can serve as an alternate source of data to Yahoo! Finance.
 
 ### Authentication
 
-To make full use of the integration you need to get an API key and then set your api key. If you don't have one already, go to [Tiingo](https://www.tiingo.com/) account and get your FREE API key. You can then set it as follows:
+To make full use of the integration you need to get an API key and then set your api key. If you don't have one already, go to Tiingo (https://www.tiingo.com/) account and get your FREE API key. You can then set it as follows:
 
 ```{r, eval=FALSE}
 tiingo_api_key('<your-api-key>')
