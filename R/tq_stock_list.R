@@ -22,11 +22,20 @@
 #' `tq_exchange_options()` returns a list of stock exchanges you can
 #' choose from. The options are AMEX, NASDAQ and NYSE.
 #'
+#' `tq_fund_holdings()` returns the the stock symbol, company name, weight, and sector of every stock
+#' in an fund. The `source` parameter specifies which investment management company to use.
+#' Example: `source = "SSGA"` connects to State Street Global Advisors (SSGA).
+#' If `x = "SPY"`, then SPDR SPY ETF holdings will be returned.
+#'
+#' `tq_fund_source_options()`: returns the options that can be used for the `source` API for `tq_fund_holdings()`.
+#'
 #' @seealso
 #' [tq_get()] to get stock prices, financials, key stats, etc using the stock symbols.
 #'
 #'
 #' @examples
+#'
+#' # Stock Indexes:
 #'
 #' # Get the list of stock index options
 #' tq_index_options()
@@ -36,12 +45,24 @@
 #' tq_index("DOW")
 #' }
 #'
+#' # Stock Exchanges:
+#'
 #' # Get the list of stock exchange options
 #' tq_exchange_options()
 #'
 #' # Get all stocks in a stock exchange
 #' \dontrun{
 #' tq_exchange("NYSE")
+#' }
+#'
+#' # Mutual Funds and ETFs:
+#'
+#' # Get the list of stock exchange options
+#' tq_fund_source_options()
+#'
+#' # Get all stocks in a fund
+#' \dontrun{
+#' tq_fund_holdings("SPY", source = "SSGA")
 #' }
 #'
 #' @name tq_index
@@ -95,7 +116,7 @@ tq_index <- function(x, use_fallback = FALSE) {
 
     # Download the index data
     dload <- tryCatch({
-        index_download(x_spdr, index_name = x)
+        ssga_download(x_spdr, index_name = x)
     }, error = function(e) {
         warning(paste("Error downloading index data:", e$message), call. = FALSE)
         return(NULL)
@@ -116,6 +137,18 @@ tq_index <- function(x, use_fallback = FALSE) {
     })
 
     df
+}
+
+#' @rdname tq_index
+#' @export
+tq_index_options <- function() {
+    c(
+        "DOW",
+        "DOWGLOBAL",
+        "SP400",
+        "SP500",
+        "SP600"
+    )
 }
 
 
@@ -215,21 +248,69 @@ tq_exchange <- function(x) {
 
 #' @rdname tq_index
 #' @export
-tq_index_options <- function() {
-    c(
-      "DOW",
-      "DOWGLOBAL",
-      "SP400",
-      "SP500",
-      "SP600"
-      )
+tq_exchange_options <- function() {
+    c("AMEX", "NASDAQ", "NYSE")
 }
 
+# tq_fund_holdings ----
+
+#' @rdname tq_index
+#' @param source The API source to use.
+#' @export
+tq_fund_holdings <- function(x, source = "SSGA") {
+
+    # Verify index
+    verified <- tryCatch({
+        verify_fund_source(source)
+    }, error = function(e) {
+        warning(paste("Error verifying index:", e$message), call. = FALSE)
+        return(NULL)
+    })
+
+    # If verification failed or not a verified index, return a warning and empty tibble
+    if(is.null(verified) || !verified$is_verified) {
+        warning(verified$err)
+        return(tibble::tibble())
+    }
+
+    # Download the index data
+    dload <- tryCatch({
+        source <- stringr::str_to_upper(source)
+
+        if (source == "SSGA") {
+            ssga_download(x, index_name = x)
+        } else {
+
+        }
+
+
+    }, error = function(e) {
+        warning(paste("Error downloading index data:", e$message), call. = FALSE)
+        return(NULL)
+    })
+
+    # If download failed, return a warning and empty tibble
+    if(is.null(dload) || !is.null(dload$err)) {
+        warning(dload$err)
+        return(tibble::tibble())
+    }
+
+    # Clean holdings
+    df <- tryCatch({
+        clean_holdings(dload$df)
+    }, error = function(e) {
+        warning(paste("Error cleaning index holdings:", e$message), call. = FALSE)
+        return(tibble::tibble())
+    })
+
+    df
+
+}
 
 #' @rdname tq_index
 #' @export
-tq_exchange_options <- function() {
-    c("AMEX", "NASDAQ", "NYSE")
+tq_fund_source_options <- function() {
+    c("SSGA")
 }
 
 # Utility ----------------------------------------------------------------------------------------------------
@@ -261,6 +342,23 @@ verify_index <- function(x) {
     verified
 }
 
+verify_fund_source <- function(x) {
+
+    # Setup with initial values
+    verified <- list(is_verified = FALSE, err = "")
+
+    if(!(x %in% tq_fund_source_options())) {
+
+        verified$err <- paste0(x, " must be a character string in the form of a valid Fund Source. ",
+                               "The following are valid options:\n",
+                               stringr::str_c(tq_fund_source_options(), collapse = ", "))
+    } else {
+        verified$is_verified <- TRUE
+    }
+
+    verified
+}
+
 # Map the index to the SPDR ETF name
 spdr_mapper <- function(x) {
 
@@ -281,7 +379,7 @@ spdr_mapper <- function(x) {
 }
 
 # Download the index data from SPDR
-index_download <- function(x, index_name) {
+ssga_download <- function(x, index_name) {
 
     # Contruct download link
     #     OLD (< 2019-12-15): https://us.spdrs.com/site-content/xls/SPY_All_Holdings.xls

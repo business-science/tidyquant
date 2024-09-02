@@ -2,18 +2,24 @@
 % Please edit documentation in R/tq_stock_list.R
 \name{tq_index}
 \alias{tq_index}
-\alias{tq_exchange}
 \alias{tq_index_options}
+\alias{tq_exchange}
 \alias{tq_exchange_options}
+\alias{tq_fund_holdings}
+\alias{tq_fund_source_options}
 \title{Get all stocks in a stock index or stock exchange in \code{tibble} format}
 \usage{
 tq_index(x, use_fallback = FALSE)
 
-tq_exchange(x)
-
 tq_index_options()
 
+tq_exchange(x)
+
 tq_exchange_options()
+
+tq_fund_holdings(x, source = "SSGA")
+
+tq_fund_source_options()
 }
 \arguments{
 \item{x}{A single character string, a character vector or tibble representing a
@@ -22,6 +28,8 @@ single stock index or multiple stock indexes.}
 \item{use_fallback}{A boolean that can be used to return a fallback data set
 last downloaded when the package was updated. Useful if the website is down.
 Set to \code{FALSE} by default.}
+
+\item{source}{The API source to use.}
 }
 \value{
 Returns data in the form of a \code{tibble} object.
@@ -42,8 +50,17 @@ in an exchange. Three stock exchanges are available (AMEX, NASDAQ, and NYSE).
 
 \code{tq_exchange_options()} returns a list of stock exchanges you can
 choose from. The options are AMEX, NASDAQ and NYSE.
+
+\code{tq_fund_holdings()} returns the the stock symbol, company name, weight, and sector of every stock
+in an fund. The \code{source} parameter specifies which investment management company to use.
+Example: \code{source = "SSGA"} connects to State Street Global Advisors (SSGA).
+If \code{x = "SPY"}, then SPDR SPY ETF holdings will be returned.
+
+\code{tq_fund_source_options()}: returns the options that can be used for the \code{source} API for \code{tq_fund_holdings()}.
 }
 \examples{
+
+# Stock Indexes:
 
 # Get the list of stock index options
 tq_index_options()
@@ -53,12 +70,24 @@ tq_index_options()
 tq_index("DOW")
 }
 
+# Stock Exchanges:
+
 # Get the list of stock exchange options
 tq_exchange_options()
 
 # Get all stocks in a stock exchange
 \dontrun{
 tq_exchange("NYSE")
+}
+
+# Mutual Funds and ETFs:
+
+# Get the list of stock exchange options
+tq_fund_source_options()
+
+# Get all stocks in a fund
+\dontrun{
+tq_fund_holdings("SPY", source = "SSGA")
 }
 
 }

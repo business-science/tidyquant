@@ -49,6 +49,7 @@ reference:
   - starts_with("tq_get")
   - starts_with("tq_index")
   - starts_with("tq_exchange")
+  - starts_with("tq_fund")
 - subtitle: API Keys
   contents:
   - starts_with("quandl")

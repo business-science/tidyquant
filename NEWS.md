@@ -1,10 +1,17 @@
 # tidyquant 1.0.9
 
-- Fixes to CRAN's API policy:
+## New Function: 
+
+- `tq_fund_holdings()`: Retrieves the fund holdings and compositions for a fund and source combination. Example: `tq_fund_holdings("SPY", source = "SSGA")` #250
+
+## Fixes and Improvements:
+
+- Fixes to CRAN's API policy #249:
 
 > "Packages which use Internet resources should fail gracefully with an
 informative message if the resource is not available or has changed (and
 not give a check warning nor error)."
+
 
 
 
