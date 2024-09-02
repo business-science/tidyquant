@@ -57,34 +57,67 @@ tq_index <- function(x, use_fallback = FALSE) {
     x <- clean_index(x)
 
     # Verify index
-    verified <- verify_index(x)
+    verified <- tryCatch({
+        verify_index(x)
+    }, error = function(e) {
+        warning(paste("Error verifying index:", e$message), call. = FALSE)
+        return(NULL)
+    })
 
-    # If not a verified index, error
-    if(!verified$is_verified) {
+    # If verification failed or not a verified index, return a warning and empty tibble
+    if(is.null(verified) || !verified$is_verified) {
         warning(verified$err)
         return(tibble::tibble())
     }
 
     # Use fallback if requested
-    if(use_fallback) return(index_fallback(x))
+    if(use_fallback) {
+        return(tryCatch({
+            index_fallback(x)
+        }, error = function(e) {
+            warning(paste("Error using fallback for index:", e$message), call. = FALSE)
+            return(tibble::tibble())
+        }))
+    }
 
     # Convert index name to SPDR ETF name
-    x_spdr <- spdr_mapper(x)
+    x_spdr <- tryCatch({
+        spdr_mapper(x)
+    }, error = function(e) {
+        warning(paste("Error mapping SPDR ETF name:", e$message), call. = FALSE)
+        return(NULL)
+    })
 
-    # Download
-    dload <- index_download(x_spdr, index_name = x)
+    # If SPDR mapping failed, return an empty tibble
+    if(is.null(x_spdr)) {
+        return(tibble::tibble())
+    }
 
-    # Report download errors
-    if(!is.null(dload$err)) {
+    # Download the index data
+    dload <- tryCatch({
+        index_download(x_spdr, index_name = x)
+    }, error = function(e) {
+        warning(paste("Error downloading index data:", e$message), call. = FALSE)
+        return(NULL)
+    })
+
+    # If download failed, return a warning and empty tibble
+    if(is.null(dload) || !is.null(dload$err)) {
         warning(dload$err)
         return(tibble::tibble())
     }
 
     # Clean holdings
-    df <- clean_holdings(dload$df)
+    df <- tryCatch({
+        clean_holdings(dload$df)
+    }, error = function(e) {
+        warning(paste("Error cleaning index holdings:", e$message), call. = FALSE)
+        return(tibble::tibble())
+    })
 
     df
 }
+
 
 # tq_exchange ----
 
@@ -104,70 +137,81 @@ tq_exchange <- function(x) {
     if (!(x %in% c(exchange_list))) {
         err <- paste0("Error: x must be a character string in the form of a valid exchange.",
                       " The following are valid options:\n",
-                      stringr::str_c(tq_exchange_options(), collapse = ", ")
-        )
-        stop(err)
+                      stringr::str_c(tq_exchange_options(), collapse = ", "))
+        stop(err, call. = FALSE)
     }
 
-    # Download
-
-    # Example: https://api.nasdaq.com/api/screener/stocks?tableonly=true&exchange=nasdaq&download=true
-
+    # Download data
     message("Getting data...\n")
     base_path_1 <- "https://api.nasdaq.com/api/screener/stocks?tableonly=true&exchange="
     base_path_2 <- "&download=true"
-    url         <- paste0(base_path_1, x, base_path_2)
+    url <- paste0(base_path_1, x, base_path_2)
 
-    # Use HTTR2 to make the HTTP request:
-    response <- httr2::request(url) %>%
-        httr2::req_user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36") %>%
-        httr2::req_perform()
+    # Perform the HTTP request with error handling
+    response <- tryCatch({
+        httr2::request(url) %>%
+            httr2::req_user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36") %>%
+            httr2::req_perform()
+    }, error = function(e) {
+        warning(paste0("Failed to retrieve data for exchange '", x, "'. ", e$message), call. = FALSE)
+        return(NULL)
+    })
 
-    # Evaluate Response / Clean & Return
+    # If the response is NULL (failed request), return NA
+    if (is.null(response)) {
+        return(NA)
+    }
+
+    # Evaluate the response
     if (response$status_code == 200) {
-
-        # Collect JSON
+        # Collect JSON and process the data
         content <- httr2::resp_body_json(response)
-
-        # Post-process response
-        suppressWarnings({
-
-            exchange_tbl <- do.call(rbind, lapply(content$data$rows, tibble::as_tibble))
-
-            exchange <- exchange_tbl %>%
-                dplyr::rename(
-                  symbol = symbol,
-                  company = name,
-                  last.sale.price = lastsale,
-                  market.cap = marketCap,
-                  country = country,
-                  ipo.year = ipoyear,
-                  sector = sector,
-                  industry = industry
-                ) %>%
-                dplyr::mutate(
-                  symbol = as.character(symbol),
-                  company = as.character(company),
-                  last.sale.price = as.numeric(stringr::str_remove(last.sale.price, "\\$")),
-                  market.cap = as.numeric(market.cap),
-                  country = as.character(country),
-                  ipo.year = as.integer(ipo.year),
-                  sector = as.character(sector),
-                  industry = as.character(industry)
-                ) %>%
-                dplyr::select(symbol:industry) %>%
-                dplyr::select(-c(netchange, pctchange, volume))
+        exchange_tbl <- tryCatch({
+            do.call(rbind, lapply(content$data$rows, tibble::as_tibble))
+        }, error = function(e) {
+            warning("Failed to process data from the response.", call. = FALSE)
+            return(NULL)
         })
+
+        # If the processing failed, return NA
+        if (is.null(exchange_tbl)) {
+            return(NA)
+        }
+
+        # Post-process and clean the data
+        exchange <- exchange_tbl %>%
+            dplyr::rename(
+                symbol = symbol,
+                company = name,
+                last.sale.price = lastsale,
+                market.cap = marketCap,
+                country = country,
+                ipo.year = ipoyear,
+                sector = sector,
+                industry = industry
+            ) %>%
+            dplyr::mutate(
+                symbol = as.character(symbol),
+                company = as.character(company),
+                last.sale.price = as.numeric(stringr::str_remove(last.sale.price, "\\$")),
+                market.cap = as.numeric(market.cap),
+                country = as.character(country),
+                ipo.year = as.integer(ipo.year),
+                sector = as.character(sector),
+                industry = as.character(industry)
+            ) %>%
+            dplyr::select(symbol:industry) %>%
+            dplyr::select(-c(netchange, pctchange, volume))
 
         return(exchange)
 
     } else {
-        warn <- paste0("Error at ", x, " during call to tq_exchange.\n\n", response)
-        warning(warn)
-        return(NA) # Return NA on error
+        warn <- paste0("Error retrieving data for exchange '", x, "'. Status code: ", response$status_code)
+        warning(warn, call. = FALSE)
+        return(NA)
     }
-
 }
+
 
 #' @rdname tq_index
 #' @export

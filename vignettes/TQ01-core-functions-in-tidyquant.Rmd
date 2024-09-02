@@ -19,7 +19,7 @@ knitr::opts_chunk$set(message = FALSE,
                       fig.height = 4.5,
                       fig.align = 'center',
                       out.width='95%', 
-                      dpi = 200)
+                      dpi = 150)
 ```
 
 > A few core functions with a lot of power
@@ -106,6 +106,16 @@ The stock prices can be retrieved succinctly using `get = "stock.prices"`. This 
 aapl_prices  <- tq_get("AAPL", get = "stock.prices", from = " 1990-01-01")
 aapl_prices 
 ```
+
+We can get multiple stocks:
+
+```{r}
+stocks <- c("AAPL", "META", "NFLX") %>%
+    tq_get(from = "2013-01-01",
+           to   = "2017-01-01")
+stocks
+```
+
 
 Yahoo Japan stock prices can be retrieved using a similar call, `get = "stock.prices.japan"`.
 
@@ -207,11 +217,11 @@ tq_get("ZACKS/SHRS", get = "quandl.datatable") # Zacks Shares Out Supplement
 
 ## 2.4 Tiingo API
 
-The Tiingo API (https://www.tiingo.com/) is a free source for stock prices, cryptocurrencies, and intraday feeds from the IEX (Investors Exchange). This can serve as an alternate source of data to Yahoo! Finance.
+The Tiingo API is a free source for stock prices, cryptocurrencies, and intraday feeds from the IEX (Investors Exchange). This can serve as an alternate source of data to Yahoo! Finance.
 
 ### Authentication
 
-To make full use of the integration you need to get an API key and then set your api key. If you don't have one already, go to Tiingo (https://www.tiingo.com/) account and get your FREE API key. You can then set it as follows:
+To make full use of the integration you need to get an API key and then set your api key. If you don't have one already, go to Tiingo account and get your FREE API key. You can then set it as follows:
 
 ```{r, eval=FALSE}
 tiingo_api_key('<your-api-key>')

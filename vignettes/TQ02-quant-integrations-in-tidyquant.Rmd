@@ -18,7 +18,8 @@ knitr::opts_chunk$set(message = FALSE,
                       fig.width = 8, 
                       fig.height = 4.5,
                       fig.align = 'center',
-                      out.width='95%')
+                      out.width='95%',
+                      dpi=150)
 # devtools::load_all() # Travis CI fails on load_all()
 ```
 
