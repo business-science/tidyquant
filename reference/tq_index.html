@@ -63,11 +63,15 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tq_index</span><span class="op">(</span><span class="va">x</span>, use_fallback <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">tq_exchange</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span></span>
 <span><span class="fu">tq_index_options</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">tq_exchange_options</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">tq_exchange</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">tq_exchange_options</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">tq_fund_holdings</span><span class="op">(</span><span class="va">x</span>, source <span class="op">=</span> <span class="st">"SSGA"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">tq_fund_source_options</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -83,6 +87,10 @@ single stock index or multiple stock indexes.</p></dd>
 <dd><p>A boolean that can be used to return a fallback data set
 last downloaded when the package was updated. Useful if the website is down.
 Set to <code>FALSE</code> by default.</p></dd>
+
+
+<dt id="arg-source">source<a class="anchor" aria-label="anchor" href="#arg-source"></a></dt>
+<dd><p>The API source to use.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -100,6 +108,11 @@ market capitalization, sector and industry of every stock
 in an exchange. Three stock exchanges are available (AMEX, NASDAQ, and NYSE).</p>
 <p><code>tq_exchange_options()</code> returns a list of stock exchanges you can
 choose from. The options are AMEX, NASDAQ and NYSE.</p>
+<p><code>tq_fund_holdings()</code> returns the the stock symbol, company name, weight, and sector of every stock
+in an fund. The <code>source</code> parameter specifies which investment management company to use.
+Example: <code>source = "SSGA"</code> connects to State Street Global Advisors (SSGA).
+If <code>x = "SPY"</code>, then SPDR SPY ETF holdings will be returned.</p>
+<p><code>tq_fund_source_options()</code>: returns the options that can be used for the <code>source</code> API for <code>tq_fund_holdings()</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -109,6 +122,8 @@ choose from. The options are AMEX, NASDAQ and NYSE.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Stock Indexes:</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get the list of stock index options</span></span></span>
 <span class="r-in"><span><span class="fu">tq_index_options</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "DOW"       "DOWGLOBAL" "SP400"     "SP500"     "SP600"    </span>
@@ -118,6 +133,8 @@ choose from. The options are AMEX, NASDAQ and NYSE.</p>
 <span class="r-in"><span><span class="fu">tq_index</span><span class="op">(</span><span class="st">"DOW"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Stock Exchanges:</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get the list of stock exchange options</span></span></span>
 <span class="r-in"><span><span class="fu">tq_exchange_options</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "AMEX"   "NASDAQ" "NYSE"  </span>
@@ -125,6 +142,17 @@ choose from. The options are AMEX, NASDAQ and NYSE.</p>
 <span class="r-in"><span><span class="co"># Get all stocks in a stock exchange</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="fu">tq_exchange</span><span class="op">(</span><span class="st">"NYSE"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Mutual Funds and ETFs:</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Get the list of stock exchange options</span></span></span>
+<span class="r-in"><span><span class="fu">tq_fund_source_options</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "SSGA"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Get all stocks in a fund</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="fu">tq_fund_holdings</span><span class="op">(</span><span class="st">"SPY"</span>, source <span class="op">=</span> <span class="st">"SSGA"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
