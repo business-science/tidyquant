@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="R Quantitative Analysis Package Integrations in tidyquant">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-20GDZ5LL77"></script><script>
@@ -88,7 +88,7 @@
                         <h4 data-toc-skip class="author">Matt
 Dancho</h4>
             
-            <h4 data-toc-skip class="date">2024-11-01</h4>
+            <h4 data-toc-skip class="date">2024-12-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ02-quant-integrations-in-tidyquant.Rmd" class="external-link"><code>vignettes/TQ02-quant-integrations-in-tidyquant.Rmd</code></a></small>
       <div class="d-none name"><code>TQ02-quant-integrations-in-tidyquant.Rmd</code></div>
@@ -683,7 +683,7 @@ calculated from the “adjusted” prices using the process in Example
 <span><span class="co">## <span style="color: #BCBCBC;"> 7</span> META   2013-07-31          0.479              0.037<span style="text-decoration: underline;">3</span> </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> META   2013-08-30          0.122             -<span style="color: #BB0000;">0.010</span><span style="color: #BB0000; text-decoration: underline;">4</span> </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> META   2013-09-30          0.217              0.025<span style="text-decoration: underline;">3</span> </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> META   2013-10-31         -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">398</span>           0.050<span style="text-decoration: underline;">3</span> </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> META   2013-10-31         -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">398</span>           0.050<span style="text-decoration: underline;">2</span> </span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 182 more rows</span></span></span></code></pre>
 <p>The <code><a href="https://rdrr.io/pkg/TTR/man/runFun.html" class="external-link">TTR::runCor</a></code> function can be used to evaluate rolling
 correlations using the xy pattern. Looking at the documentation
@@ -912,12 +912,12 @@ to increase.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## Residuals:</span></span>
 <span><span class="co">##        Min         1Q     Median         3Q        Max </span></span>
-<span><span class="co">## -0.0269578 -0.0039653  0.0002153  0.0039659  0.0289461 </span></span>
+<span><span class="co">## -0.0269576 -0.0039654  0.0002148  0.0039652  0.0289458 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Coefficients:</span></span>
 <span><span class="co">##              Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
 <span><span class="co">## (Intercept) 0.0001130  0.0003097   0.365    0.715    </span></span>
-<span><span class="co">## V           0.8133647  0.0226393  35.927   &lt;2e-16 ***</span></span>
+<span><span class="co">## V           0.8133648  0.0226393  35.927   &lt;2e-16 ***</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
