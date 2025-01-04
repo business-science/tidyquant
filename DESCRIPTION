@@ -30,6 +30,7 @@ Imports:
     lubridate,
     magrittr,
     PerformanceAnalytics,
+    RobStatTM,
     quantmod (>= 0.4-13),
     purrr,
     readr,
@@ -57,6 +58,6 @@ Suggests:
     scales,
     Rblpapi,
     janitor
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr

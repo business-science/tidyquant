@@ -32,6 +32,8 @@
 #' @import TTR
 #' @import zoo
 #' @import xts
+#' @import PerformanceAnalytics
+#' @import RobStatTM
 #' @importFrom rlang := .data
 #' @importFrom magrittr %$%
 #' @importFrom utils download.file read.csv
