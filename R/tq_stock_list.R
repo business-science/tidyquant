@@ -254,6 +254,10 @@ tq_exchange_options <- function() {
 
 # tq_fund_holdings ----
 
+# TODO : BLACKROCK
+# https://www.ishares.com/us/products/239705/ishares-phlx-semiconductor-etf/1467271812596.ajax?fileType=csv&fileName=SOXX_holdings&dataType=fund
+# https://www.blackrock.com/us/individual/products/239710/ishares-russell-2000-etf/1464253357814.ajax?fileType=csv&fileName=IWM_holdings&dataType=fund
+
 #' @rdname tq_index
 #' @param source The API source to use.
 #' @export
