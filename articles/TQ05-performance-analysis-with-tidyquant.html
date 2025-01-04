@@ -34,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tidyquant</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.9</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.9.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,7 +88,7 @@
                         <h4 data-toc-skip class="author">Matt
 Dancho</h4>
             
-            <h4 data-toc-skip class="date">2024-12-01</h4>
+            <h4 data-toc-skip class="date">2025-01-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ05-performance-analysis-with-tidyquant.Rmd" class="external-link"><code>vignettes/TQ05-performance-analysis-with-tidyquant.Rmd</code></a></small>
       <div class="d-none name"><code>TQ05-performance-analysis-with-tidyquant.Rmd</code></div>
@@ -265,15 +265,17 @@ compatible performance functions.</p>
 <span>                   Rb <span class="op">=</span> <span class="va">Rb</span>, </span>
 <span>                   performance_fun <span class="op">=</span> <span class="va">table.CAPM</span><span class="op">)</span></span>
 <span><span class="va">RaRb_capm</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 13</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 18</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># Groups:   symbol [3]</span></span></span>
-<span><span class="co">##   symbol ActivePremium  Alpha AnnualizedAlpha  Beta `Beta-` `Beta+` Correlation</span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> AAPL           0.119 0.008<span style="text-decoration: underline;">9</span>           0.112 1.11    0.578  1.04        0.659 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span> GOOG           0.034 0.002<span style="text-decoration: underline;">8</span>           0.034 1.14    1.39   1.16        0.644 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span> NFLX           0.447 0.053            0.859 0.384  -<span style="color: #BB0000;">1.52</span>   0.004<span style="text-decoration: underline;">5</span>      0.081<span style="text-decoration: underline;">7</span></span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 5 more variables: `Correlationp-value` &lt;dbl&gt;, InformationRatio &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;, TreynorRatio &lt;dbl&gt;</span></span></span></code></pre>
+<span><span class="co">##   symbol ActivePremium  Alpha AlphaRobust AnnualizedAlpha  Beta `Beta-`</span></span>
+<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> AAPL           0.119 0.008<span style="text-decoration: underline;">9</span>      0.009<span style="text-decoration: underline;">5</span>           0.112 1.11    0.578</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> GOOG           0.034 0.002<span style="text-decoration: underline;">8</span>     -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">5</span>           0.034 1.14    1.39 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> NFLX           0.447 0.053       0.043<span style="text-decoration: underline;">9</span>           0.859 0.384  -<span style="color: #BB0000;">1.52</span> </span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 11 more variables: `Beta-Robust` &lt;dbl&gt;, `Beta+` &lt;dbl&gt;, `Beta+Robust` &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   BetaRobust &lt;dbl&gt;, Correlation &lt;dbl&gt;, `Correlationp-value` &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   InformationRatio &lt;dbl&gt;, `R-squared` &lt;dbl&gt;, `R-squaredRobust` &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   TrackingError &lt;dbl&gt;, TreynorRatio &lt;dbl&gt;</span></span></span></code></pre>
 <p>We can quickly isolate attributes, such as alpha, the measure of
 growth, and beta, the measure of risk.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -314,9 +316,9 @@ use from <code>PerformanceAnalytics</code>. Searching
 and we can see that the arguments are:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/args.html" class="external-link">args</a></span><span class="op">(</span><span class="va">SharpeRatio</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## function (R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR", "ES"), </span></span>
-<span><span class="co">##     weights = NULL, annualize = FALSE, SE = FALSE, SE.control = NULL, </span></span>
-<span><span class="co">##     ...) </span></span>
+<pre><code><span><span class="co">## function (R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR", "ES", </span></span>
+<span><span class="co">##     "SemiSD"), weights = NULL, annualize = FALSE, SE = FALSE, </span></span>
+<span><span class="co">##     SE.control = NULL, ...) </span></span>
 <span><span class="co">## NULL</span></span></code></pre>
 <p>We can actually skip the baseline path because the function does not
 require <code>Rb</code>. The function takes <code>R</code>, which is
@@ -411,14 +413,16 @@ example.</p>
 <span>        Rb <span class="op">=</span> <span class="cn">NULL</span>, </span>
 <span>        performance_fun <span class="op">=</span> <span class="va">SharpeRatio</span></span>
 <span>    <span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 4</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 5</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># Groups:   symbol [3]</span></span></span>
-<span><span class="co">##   symbol `ESSharpe(Rf=0%,p=95%)` StdDevSharpe(Rf=0%,p=9…¹ VaRSharpe(Rf=0%,p=95…²</span></span>
+<span><span class="co">##   symbol `ESSharpe(Rf=0%,p=95%)` SemiSDSharpe(Rf=0%,p=9…¹ StdDevSharpe(Rf=0%,p…²</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> AAPL                     0.173                    0.292                  0.218</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span> GOOG                     0.129                    0.203                  0.157</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span> NFLX                     0.237                    0.284                  0.272</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ abbreviated names: ¹​`StdDevSharpe(Rf=0%,p=95%)`, ²​`VaRSharpe(Rf=0%,p=95%)`</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> AAPL                     0.173                    0.297                  0.292</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> GOOG                     0.129                    0.220                  0.203</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> NFLX                     0.237                    0.313                  0.284</span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ abbreviated names: ¹​`SemiSDSharpe(Rf=0%,p=95%)`,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   ²​`StdDevSharpe(Rf=0%,p=95%)`</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 1 more variable: `VaRSharpe(Rf=0%,p=95%)` &lt;dbl&gt;</span></span></span></code></pre>
 <p>Now we have the Sharpe Ratio for each of the three stocks. What if we
 want to adjust the parameters of the function? We can just add on the
 arguments of the underlying function.</p>
@@ -431,15 +435,16 @@ arguments of the underlying function.</p>
 <span>        Rf <span class="op">=</span> <span class="fl">0.03</span> <span class="op">/</span> <span class="fl">12</span>, </span>
 <span>        p  <span class="op">=</span> <span class="fl">0.99</span></span>
 <span>    <span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 4</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 5</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># Groups:   symbol [3]</span></span></span>
-<span><span class="co">##   symbol `ESSharpe(Rf=0.2%,p=99%)` StdDevSharpe(Rf=0.2%…¹ VaRSharpe(Rf=0.2%,p=…²</span></span>
+<span><span class="co">##   symbol `ESSharpe(Rf=0.2%,p=99%)` SemiSDSharpe(Rf=0.2%…¹ StdDevSharpe(Rf=0.2%…²</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> AAPL                      0.116                   0.258                 0.134 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span> GOOG                      0.082<span style="text-decoration: underline;">6</span>                  0.170                 0.099<span style="text-decoration: underline;">8</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span> NFLX                      0.115                   0.272                 0.142 </span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ abbreviated names: ¹​`StdDevSharpe(Rf=0.2%,p=99%)`,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   ²​`VaRSharpe(Rf=0.2%,p=99%)`</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> AAPL                      0.116                   0.262                  0.258</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> GOOG                      0.082<span style="text-decoration: underline;">6</span>                  0.184                  0.170</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> NFLX                      0.115                   0.300                  0.272</span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ abbreviated names: ¹​`SemiSDSharpe(Rf=0.2%,p=99%)`,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   ²​`StdDevSharpe(Rf=0.2%,p=99%)`</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 1 more variable: `VaRSharpe(Rf=0.2%,p=99%)` &lt;dbl&gt;</span></span></span></code></pre>
 </div>
 </div>
 <div class="section level3">
@@ -660,12 +665,14 @@ that we performed in the “Quick Example”.</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">RaRb_single_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/tq_performance.html">tq_performance</a></span><span class="op">(</span>Ra <span class="op">=</span> <span class="va">Ra</span>, Rb <span class="op">=</span> <span class="va">Rb</span>, performance_fun <span class="op">=</span> <span class="va">table.CAPM</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 12</span></span></span>
-<span><span class="co">##   ActivePremium  Alpha AnnualizedAlpha  Beta `Beta-` `Beta+` Correlation</span></span>
-<span><span class="co">##           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>         0.327 0.029<span style="text-decoration: underline;">9</span>           0.425 0.754  -<span style="color: #BB0000;">0.243</span>   0.503       0.283</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 5 more variables: `Correlationp-value` &lt;dbl&gt;, InformationRatio &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;, TreynorRatio &lt;dbl&gt;</span></span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 17</span></span></span>
+<span><span class="co">##   ActivePremium  Alpha AlphaRobust AnnualizedAlpha  Beta `Beta-` `Beta-Robust`</span></span>
+<span><span class="co">##           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>         0.327 0.029<span style="text-decoration: underline;">9</span>      0.033<span style="text-decoration: underline;">5</span>           0.425 0.754  -<span style="color: #BB0000;">0.243</span>        -<span style="color: #BB0000;">0.203</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 10 more variables: `Beta+` &lt;dbl&gt;, `Beta+Robust` &lt;dbl&gt;, BetaRobust &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   Correlation &lt;dbl&gt;, `Correlationp-value` &lt;dbl&gt;, InformationRatio &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   `R-squared` &lt;dbl&gt;, `R-squaredRobust` &lt;dbl&gt;, TrackingError &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   TreynorRatio &lt;dbl&gt;</span></span></span></code></pre>
 <p>Now we have the CAPM performance metrics for a portfolio! While this
 is cool, it’s cooler to do multiple portfolios. Let’s see how.</p>
 </div>
@@ -855,31 +862,33 @@ portfolios blended by mapping the <code>weights_table</code>.</p>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">RaRb_multiple_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/tq_performance.html">tq_performance</a></span><span class="op">(</span>Ra <span class="op">=</span> <span class="va">Ra</span>, Rb <span class="op">=</span> <span class="va">Rb</span>, performance_fun <span class="op">=</span> <span class="va">table.CAPM</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 13</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 18</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># Groups:   portfolio [3]</span></span></span>
-<span><span class="co">##   portfolio ActivePremium  Alpha AnnualizedAlpha  Beta `Beta-` `Beta+`</span></span>
-<span><span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>         1         0.231 0.019<span style="text-decoration: underline;">3</span>           0.258 0.908   0.312   0.741</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span>         2         0.219 0.019<span style="text-decoration: underline;">2</span>           0.256 0.886   0.436   0.660</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span>         3         0.319 0.030<span style="text-decoration: underline;">8</span>           0.439 0.721  -<span style="color: #BB0000;">0.179</span>   0.394</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 6 more variables: Correlation &lt;dbl&gt;, `Correlationp-value` &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   InformationRatio &lt;dbl&gt;, `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   TreynorRatio &lt;dbl&gt;</span></span></span></code></pre>
+<span><span class="co">##   portfolio ActivePremium  Alpha AlphaRobust AnnualizedAlpha  Beta `Beta-`</span></span>
+<span><span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>         1         0.231 0.019<span style="text-decoration: underline;">3</span>      0.023<span style="text-decoration: underline;">7</span>           0.258 0.908   0.312</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span>         2         0.219 0.019<span style="text-decoration: underline;">2</span>      0.024<span style="text-decoration: underline;">4</span>           0.256 0.886   0.436</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span>         3         0.319 0.030<span style="text-decoration: underline;">8</span>      0.033<span style="text-decoration: underline;">5</span>           0.439 0.721  -<span style="color: #BB0000;">0.179</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 11 more variables: `Beta-Robust` &lt;dbl&gt;, `Beta+` &lt;dbl&gt;, `Beta+Robust` &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   BetaRobust &lt;dbl&gt;, Correlation &lt;dbl&gt;, `Correlationp-value` &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   InformationRatio &lt;dbl&gt;, `R-squared` &lt;dbl&gt;, `R-squaredRobust` &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   TrackingError &lt;dbl&gt;, TreynorRatio &lt;dbl&gt;</span></span></span></code></pre>
 <p>Inspecting the results, we now have a multiple portfolio comparison
 of the CAPM table from <code>PerformanceAnalytics</code>. We can do the
 same thing with <code>SharpeRatio</code> as well.</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">RaRb_multiple_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/tq_performance.html">tq_performance</a></span><span class="op">(</span>Ra <span class="op">=</span> <span class="va">Ra</span>, Rb <span class="op">=</span> <span class="cn">NULL</span>, performance_fun <span class="op">=</span> <span class="va">SharpeRatio</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 4</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 5</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># Groups:   portfolio [3]</span></span></span>
-<span><span class="co">##   portfolio ESSharpe(Rf=0%,p=95%…¹ StdDevSharpe(Rf=0%,p…² VaRSharpe(Rf=0%,p=95…³</span></span>
+<span><span class="co">##   portfolio ESSharpe(Rf=0%,p=95%…¹ SemiSDSharpe(Rf=0%,p…² StdDevSharpe(Rf=0%,p…³</span></span>
 <span><span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>         1                  0.172                  0.355                  0.263</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span>         2                  0.146                  0.334                  0.236</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span>         3                  0.150                  0.317                  0.238</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ abbreviated names: ¹​`ESSharpe(Rf=0%,p=95%)`, ²​`StdDevSharpe(Rf=0%,p=95%)`,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   ³​`VaRSharpe(Rf=0%,p=95%)`</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>         1                  0.172                  0.348                  0.355</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span>         2                  0.146                  0.320                  0.334</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span>         3                  0.150                  0.315                  0.317</span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ abbreviated names: ¹​`ESSharpe(Rf=0%,p=95%)`, ²​`SemiSDSharpe(Rf=0%,p=95%)`,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   ³​`StdDevSharpe(Rf=0%,p=95%)`</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 1 more variable: `VaRSharpe(Rf=0%,p=95%)` &lt;dbl&gt;</span></span></span></code></pre>
 </div>
 </div>
 </div>
@@ -996,16 +1005,17 @@ model, or CAPM.</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">RaRb_multiple_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/tq_performance.html">tq_performance</a></span><span class="op">(</span>Ra <span class="op">=</span> <span class="va">Ra</span>, Rb <span class="op">=</span> <span class="va">Rb</span>, performance_fun <span class="op">=</span> <span class="va">table.CAPM</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 13</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 18</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># Groups:   portfolio [3]</span></span></span>
-<span><span class="co">##   portfolio ActivePremium  Alpha AnnualizedAlpha  Beta `Beta-` `Beta+`</span></span>
-<span><span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>         1         0.231 0.019<span style="text-decoration: underline;">3</span>           0.258 0.908   0.312   0.741</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span>         2         0.219 0.019<span style="text-decoration: underline;">2</span>           0.256 0.886   0.436   0.660</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span>         3         0.319 0.030<span style="text-decoration: underline;">8</span>           0.439 0.721  -<span style="color: #BB0000;">0.179</span>   0.394</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 6 more variables: Correlation &lt;dbl&gt;, `Correlationp-value` &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   InformationRatio &lt;dbl&gt;, `R-squared` &lt;dbl&gt;, TrackingError &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   TreynorRatio &lt;dbl&gt;</span></span></span></code></pre>
+<span><span class="co">##   portfolio ActivePremium  Alpha AlphaRobust AnnualizedAlpha  Beta `Beta-`</span></span>
+<span><span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>         1         0.231 0.019<span style="text-decoration: underline;">3</span>      0.023<span style="text-decoration: underline;">7</span>           0.258 0.908   0.312</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span>         2         0.219 0.019<span style="text-decoration: underline;">2</span>      0.024<span style="text-decoration: underline;">4</span>           0.256 0.886   0.436</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span>         3         0.319 0.030<span style="text-decoration: underline;">8</span>      0.033<span style="text-decoration: underline;">5</span>           0.439 0.721  -<span style="color: #BB0000;">0.179</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 11 more variables: `Beta-Robust` &lt;dbl&gt;, `Beta+` &lt;dbl&gt;, `Beta+Robust` &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   BetaRobust &lt;dbl&gt;, Correlation &lt;dbl&gt;, `Correlationp-value` &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   InformationRatio &lt;dbl&gt;, `R-squared` &lt;dbl&gt;, `R-squaredRobust` &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   TrackingError &lt;dbl&gt;, TreynorRatio &lt;dbl&gt;</span></span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="table-annualizedreturns">4.3 table.AnnualizedReturns<a class="anchor" aria-label="anchor" href="#table-annualizedreturns"></a>
@@ -1153,15 +1163,16 @@ deviation of the returns.</p>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">RaRb_multiple_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/tq_performance.html">tq_performance</a></span><span class="op">(</span>Ra <span class="op">=</span> <span class="va">Ra</span>, Rb <span class="op">=</span> <span class="cn">NULL</span>, performance_fun <span class="op">=</span> <span class="va">SharpeRatio</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 4</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 5</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># Groups:   portfolio [3]</span></span></span>
-<span><span class="co">##   portfolio ESSharpe(Rf=0%,p=95%…¹ StdDevSharpe(Rf=0%,p…² VaRSharpe(Rf=0%,p=95…³</span></span>
+<span><span class="co">##   portfolio ESSharpe(Rf=0%,p=95%…¹ SemiSDSharpe(Rf=0%,p…² StdDevSharpe(Rf=0%,p…³</span></span>
 <span><span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>         1                  0.172                  0.355                  0.263</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span>         2                  0.146                  0.334                  0.236</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span>         3                  0.150                  0.317                  0.238</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ abbreviated names: ¹​`ESSharpe(Rf=0%,p=95%)`, ²​`StdDevSharpe(Rf=0%,p=95%)`,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   ³​`VaRSharpe(Rf=0%,p=95%)`</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>         1                  0.172                  0.348                  0.355</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span>         2                  0.146                  0.320                  0.334</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span>         3                  0.150                  0.315                  0.317</span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ abbreviated names: ¹​`ESSharpe(Rf=0%,p=95%)`, ²​`SemiSDSharpe(Rf=0%,p=95%)`,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   ³​`StdDevSharpe(Rf=0%,p=95%)`</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 1 more variable: `VaRSharpe(Rf=0%,p=95%)` &lt;dbl&gt;</span></span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -1286,9 +1297,9 @@ the “Multiple Portfolio” example:</p>
 <code>SharpeRatio</code>, which has the following arguments.</p>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/args.html" class="external-link">args</a></span><span class="op">(</span><span class="va">SharpeRatio</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## function (R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR", "ES"), </span></span>
-<span><span class="co">##     weights = NULL, annualize = FALSE, SE = FALSE, SE.control = NULL, </span></span>
-<span><span class="co">##     ...) </span></span>
+<pre><code><span><span class="co">## function (R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR", "ES", </span></span>
+<span><span class="co">##     "SemiSD"), weights = NULL, annualize = FALSE, SE = FALSE, </span></span>
+<span><span class="co">##     SE.control = NULL, ...) </span></span>
 <span><span class="co">## NULL</span></span></code></pre>
 <p>We can see that the parameters <code>Rf</code> allows us to apply a
 risk-free rate and <code>p</code> allows us to vary the confidence
@@ -1299,15 +1310,16 @@ rate of 3% and a confidence interval of 0.99.</p>
 <code class="sourceCode R"><span><span class="va">RaRb_multiple_portfolio</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/tq_performance.html">tq_performance</a></span><span class="op">(</span>Ra              <span class="op">=</span> <span class="va">Ra</span>, </span>
 <span>                   performance_fun <span class="op">=</span> <span class="va">SharpeRatio</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 4</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 5</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># Groups:   portfolio [3]</span></span></span>
-<span><span class="co">##   portfolio ESSharpe(Rf=0%,p=95%…¹ StdDevSharpe(Rf=0%,p…² VaRSharpe(Rf=0%,p=95…³</span></span>
+<span><span class="co">##   portfolio ESSharpe(Rf=0%,p=95%…¹ SemiSDSharpe(Rf=0%,p…² StdDevSharpe(Rf=0%,p…³</span></span>
 <span><span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>         1                  0.172                  0.355                  0.263</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span>         2                  0.146                  0.334                  0.236</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span>         3                  0.150                  0.317                  0.238</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ abbreviated names: ¹​`ESSharpe(Rf=0%,p=95%)`, ²​`StdDevSharpe(Rf=0%,p=95%)`,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   ³​`VaRSharpe(Rf=0%,p=95%)`</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>         1                  0.172                  0.348                  0.355</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span>         2                  0.146                  0.320                  0.334</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span>         3                  0.150                  0.315                  0.317</span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ abbreviated names: ¹​`ESSharpe(Rf=0%,p=95%)`, ²​`SemiSDSharpe(Rf=0%,p=95%)`,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   ³​`StdDevSharpe(Rf=0%,p=95%)`</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 1 more variable: `VaRSharpe(Rf=0%,p=95%)` &lt;dbl&gt;</span></span></span></code></pre>
 <p>With <code>Rf = 0.03 / 12</code> (adjusted for monthly
 periodicity):</p>
 <div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
@@ -1315,15 +1327,16 @@ periodicity):</p>
 <span>    <span class="fu"><a href="../reference/tq_performance.html">tq_performance</a></span><span class="op">(</span>Ra              <span class="op">=</span> <span class="va">Ra</span>, </span>
 <span>                   performance_fun <span class="op">=</span> <span class="va">SharpeRatio</span>,</span>
 <span>                   Rf              <span class="op">=</span> <span class="fl">0.03</span> <span class="op">/</span> <span class="fl">12</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 4</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 5</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># Groups:   portfolio [3]</span></span></span>
-<span><span class="co">##   portfolio ESSharpe(Rf=0.2%,p=9…¹ StdDevSharpe(Rf=0.2%…² VaRSharpe(Rf=0.2%,p=…³</span></span>
+<span><span class="co">##   portfolio ESSharpe(Rf=0.2%,p=9…¹ SemiSDSharpe(Rf=0.2%…² StdDevSharpe(Rf=0.2%…³</span></span>
 <span><span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>         1                  0.157                  0.325                  0.241</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span>         2                  0.134                  0.305                  0.216</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span>         3                  0.141                  0.296                  0.222</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>         1                  0.157                  0.318                  0.325</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span>         2                  0.134                  0.292                  0.305</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span>         3                  0.141                  0.295                  0.296</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ abbreviated names: ¹​`ESSharpe(Rf=0.2%,p=95%)`,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   ²​`StdDevSharpe(Rf=0.2%,p=95%)`, ³​`VaRSharpe(Rf=0.2%,p=95%)`</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;">#   ²​`SemiSDSharpe(Rf=0.2%,p=95%)`, ³​`StdDevSharpe(Rf=0.2%,p=95%)`</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 1 more variable: `VaRSharpe(Rf=0.2%,p=95%)` &lt;dbl&gt;</span></span></span></code></pre>
 <p>And, with both <code>Rf = 0.03 / 12</code> (adjusted for monthly
 periodicity) and <code>p = 0.99</code>:</p>
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
@@ -1332,15 +1345,16 @@ periodicity) and <code>p = 0.99</code>:</p>
 <span>                   performance_fun <span class="op">=</span> <span class="va">SharpeRatio</span>,</span>
 <span>                   Rf              <span class="op">=</span> <span class="fl">0.03</span> <span class="op">/</span> <span class="fl">12</span>, </span>
 <span>                   p               <span class="op">=</span> <span class="fl">0.99</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 4</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 5</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># Groups:   portfolio [3]</span></span></span>
-<span><span class="co">##   portfolio ESSharpe(Rf=0.2%,p=9…¹ StdDevSharpe(Rf=0.2%…² VaRSharpe(Rf=0.2%,p=…³</span></span>
+<span><span class="co">##   portfolio ESSharpe(Rf=0.2%,p=9…¹ SemiSDSharpe(Rf=0.2%…² StdDevSharpe(Rf=0.2%…³</span></span>
 <span><span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>         1                 0.105                   0.325                  0.134</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span>         2                 0.095<span style="text-decoration: underline;">2</span>                  0.305                  0.115</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span>         3                 0.091<span style="text-decoration: underline;">5</span>                  0.296                  0.117</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>         1                 0.105                   0.318                  0.325</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span>         2                 0.095<span style="text-decoration: underline;">2</span>                  0.292                  0.305</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span>         3                 0.091<span style="text-decoration: underline;">5</span>                  0.295                  0.296</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ abbreviated names: ¹​`ESSharpe(Rf=0.2%,p=99%)`,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   ²​`StdDevSharpe(Rf=0.2%,p=99%)`, ³​`VaRSharpe(Rf=0.2%,p=99%)`</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;">#   ²​`SemiSDSharpe(Rf=0.2%,p=99%)`, ³​`StdDevSharpe(Rf=0.2%,p=99%)`</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 1 more variable: `VaRSharpe(Rf=0.2%,p=99%)` &lt;dbl&gt;</span></span></span></code></pre>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
