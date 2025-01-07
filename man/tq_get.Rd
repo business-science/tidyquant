@@ -35,13 +35,13 @@ See also \code{\link[=quandl_api_key]{quandl_api_key()}}.
 \href{https://data.nasdaq.com/}{Quandl}. Wrapper for \code{Quandl::Quandl.datatable()}.
 See also \code{\link[=quandl_api_key]{quandl_api_key()}}.
 \item \code{"tiingo"}: Get data sets from
-\href{https://www.tiingo.com/}{Tiingo}. Wrapper for \code{riingo::riingo_prices()}.
+Tingo (https://www.tiingo.com/). Wrapper for \code{riingo::riingo_prices()}.
 See also \code{\link[=tiingo_api_key]{tiingo_api_key()}}.
 \item \code{"tiingo.iex"}: Get data sets from
-\href{https://www.tiingo.com/}{Tiingo}. Wrapper for \code{riingo::riingo_iex_prices()}.
+Tingo (https://www.tiingo.com/). Wrapper for \code{riingo::riingo_iex_prices()}.
 See also \code{\link[=tiingo_api_key]{tiingo_api_key()}}.
 \item \code{"tiingo.crypto"}: Get data sets from
-\href{https://www.tiingo.com/}{Tiingo}. Wrapper for \code{riingo::riingo_crypto_prices()}.
+Tingo (https://www.tiingo.com/). Wrapper for \code{riingo::riingo_crypto_prices()}.
 See also \code{\link[=tiingo_api_key]{tiingo_api_key()}}.
 \item \code{"alphavantager"}: Get data sets from
 \href{https://www.alphavantage.co/}{Alpha Vantage}. Wrapper for \code{alphavantager::av_get()}.

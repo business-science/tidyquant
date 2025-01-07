@@ -70,7 +70,7 @@ Set `x` as one of the options in the list of options above to get the desired st
 tq_index("SP500")
 ```
 
-The data source is [State Street Global Advisors](https://www.ssga.com/).
+The data source is State Street Global Advisors.
 
 ## 1.2 Stock Exchanges
 

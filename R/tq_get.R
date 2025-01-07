@@ -24,13 +24,13 @@
 #'   \href{https://data.nasdaq.com/}{Quandl}. Wrapper for `Quandl::Quandl.datatable()`.
 #'   See also [quandl_api_key()].
 #'   \item `"tiingo"`: Get data sets from
-#'   \href{https://www.tiingo.com/}{Tiingo}. Wrapper for `riingo::riingo_prices()`.
+#'   Tingo (https://www.tiingo.com/). Wrapper for `riingo::riingo_prices()`.
 #'   See also [tiingo_api_key()].
 #'   \item `"tiingo.iex"`: Get data sets from
-#'   \href{https://www.tiingo.com/}{Tiingo}. Wrapper for `riingo::riingo_iex_prices()`.
+#'   Tingo (https://www.tiingo.com/). Wrapper for `riingo::riingo_iex_prices()`.
 #'   See also [tiingo_api_key()].
 #'   \item `"tiingo.crypto"`: Get data sets from
-#'   \href{https://www.tiingo.com/}{Tiingo}. Wrapper for `riingo::riingo_crypto_prices()`.
+#'   Tingo (https://www.tiingo.com/). Wrapper for `riingo::riingo_crypto_prices()`.
 #'   See also [tiingo_api_key()].
 #'   \item `"alphavantager"`: Get data sets from
 #'   \href{https://www.alphavantage.co/}{Alpha Vantage}. Wrapper for `alphavantager::av_get()`.
