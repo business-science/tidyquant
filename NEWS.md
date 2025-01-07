@@ -1,3 +1,7 @@
+# tidyquant 1.0.10
+
+Fixes error with `tq_performance()` #252 
+
 # tidyquant 1.0.9
 
 ## New Function: 
