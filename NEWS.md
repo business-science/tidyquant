@@ -1,3 +1,7 @@
+# tidyquant 1.0.011
+
+Fixes text: XYZ is now a live symbol. 
+
 # tidyquant 1.0.10
 
 Fixes error with `tq_performance()` #252 
