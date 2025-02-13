@@ -34,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tidyquant</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.10</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.10.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,7 +88,7 @@
                         <h4 data-toc-skip class="author">Matt
 Dancho</h4>
             
-            <h4 data-toc-skip class="date">2025-02-01</h4>
+            <h4 data-toc-skip class="date">2025-02-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ01-core-functions-in-tidyquant.Rmd" class="external-link"><code>vignettes/TQ01-core-functions-in-tidyquant.Rmd</code></a></small>
       <div class="d-none name"><code>TQ01-core-functions-in-tidyquant.Rmd</code></div>
@@ -205,20 +205,20 @@ Yahoo Finance.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aapl_prices</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"AAPL"</span>, get <span class="op">=</span> <span class="st">"stock.prices"</span>, from <span class="op">=</span> <span class="st">" 1990-01-01"</span><span class="op">)</span></span>
 <span><span class="va">aapl_prices</span> </span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 8,837 × 8</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 8,845 × 8</span></span></span>
 <span><span class="co">##    symbol date        open  high   low close    volume adjusted</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 1</span> AAPL   1990-01-02 0.315 0.335 0.312 0.333 183<span style="text-decoration: underline;">198</span>400    0.262</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 2</span> AAPL   1990-01-03 0.339 0.339 0.335 0.335 207<span style="text-decoration: underline;">995</span>200    0.264</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> AAPL   1990-01-04 0.342 0.346 0.333 0.336 221<span style="text-decoration: underline;">513</span>600    0.265</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> AAPL   1990-01-05 0.337 0.342 0.330 0.337 123<span style="text-decoration: underline;">312</span>000    0.266</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> AAPL   1990-01-04 0.342 0.346 0.333 0.336 221<span style="text-decoration: underline;">513</span>600    0.264</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> AAPL   1990-01-05 0.337 0.342 0.330 0.337 123<span style="text-decoration: underline;">312</span>000    0.265</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 5</span> AAPL   1990-01-08 0.335 0.339 0.330 0.339 101<span style="text-decoration: underline;">572</span>800    0.267</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> AAPL   1990-01-09 0.339 0.339 0.330 0.336  86<span style="text-decoration: underline;">139</span>200    0.265</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> AAPL   1990-01-09 0.339 0.339 0.330 0.336  86<span style="text-decoration: underline;">139</span>200    0.264</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 7</span> AAPL   1990-01-10 0.336 0.336 0.319 0.321 199<span style="text-decoration: underline;">718</span>400    0.253</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   1990-01-11 0.324 0.324 0.308 0.308 211<span style="text-decoration: underline;">052</span>800    0.243</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   1990-01-12 0.306 0.310 0.301 0.308 171<span style="text-decoration: underline;">897</span>600    0.243</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   1990-01-15 0.308 0.319 0.306 0.306 161<span style="text-decoration: underline;">739</span>200    0.241</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 8,827 more rows</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;"># ℹ 8,835 more rows</span></span></span></code></pre>
 <p>We can get multiple stocks:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stocks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AAPL"</span>, <span class="st">"META"</span>, <span class="st">"NFLX"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -232,11 +232,11 @@ Yahoo Finance.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 2</span> AAPL   2013-01-03  19.6  19.6  19.3  19.4 352<span style="text-decoration: underline;">965</span>200     16.5</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 3</span> AAPL   2013-01-04  19.2  19.2  18.8  18.8 594<span style="text-decoration: underline;">333</span>600     16.0</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 4</span> AAPL   2013-01-07  18.6  18.9  18.4  18.7 484<span style="text-decoration: underline;">156</span>400     15.9</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> AAPL   2013-01-08  18.9  19.0  18.6  18.8 458<span style="text-decoration: underline;">707</span>200     16.0</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> AAPL   2013-01-08  18.9  19.0  18.6  18.8 458<span style="text-decoration: underline;">707</span>200     15.9</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 6</span> AAPL   2013-01-09  18.7  18.8  18.4  18.5 407<span style="text-decoration: underline;">604</span>400     15.7</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 7</span> AAPL   2013-01-10  18.9  18.9  18.4  18.7 601<span style="text-decoration: underline;">146</span>000     15.9</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> AAPL   2013-01-11  18.6  18.8  18.5  18.6 350<span style="text-decoration: underline;">506</span>800     15.8</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   2013-01-14  18.0  18.1  17.8  17.9 734<span style="text-decoration: underline;">207</span>600     15.3</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> AAPL   2013-01-14  18.0  18.1  17.8  17.9 734<span style="text-decoration: underline;">207</span>600     15.2</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> AAPL   2013-01-15  17.8  17.8  17.3  17.4 876<span style="text-decoration: underline;">772</span>400     14.8</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 3,014 more rows</span></span></span></code></pre>
 <p>Yahoo Japan stock prices can be retrieved using a similar call,
@@ -256,7 +256,7 @@ Prices</a> are shown below.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wti_price_usd</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"DCOILWTICO"</span>, get <span class="op">=</span> <span class="st">"economic.data"</span><span class="op">)</span></span>
 <span><span class="va">wti_price_usd</span> </span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 2,628 × 3</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 2,638 × 3</span></span></span>
 <span><span class="co">##    symbol     date       price</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 1</span> DCOILWTICO 2015-01-01  <span style="color: #BB0000;">NA</span>  </span></span>
@@ -269,7 +269,7 @@ Prices</a> are shown below.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> DCOILWTICO 2015-01-12  46.1</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> DCOILWTICO 2015-01-13  45.9</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> DCOILWTICO 2015-01-14  48.5</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 2,618 more rows</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;"># ℹ 2,628 more rows</span></span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="nasdaq-data-link-quandl-api">2.3 Nasdaq Data Link (Quandl) API<a class="anchor" aria-label="anchor" href="#nasdaq-data-link-quandl-api"></a>
@@ -597,7 +597,7 @@ price column to the <code>to.period</code> mutate function.</p>
 <span>    <span class="fu"><a href="../reference/tq_mutate.html">tq_transmute</a></span><span class="op">(</span>mutate_fun <span class="op">=</span> <span class="va">to.period</span>,</span>
 <span>                 period     <span class="op">=</span> <span class="st">"months"</span>, </span>
 <span>                 col_rename <span class="op">=</span> <span class="st">"WTI Price"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 121 × 2</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 122 × 2</span></span></span>
 <span><span class="co">##    date       `WTI Price`</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 1</span> 2015-01-30        47.8</span></span>
@@ -610,7 +610,7 @@ price column to the <code>to.period</code> mutate function.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> 2015-08-31        49.2</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> 2015-09-30        45.1</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> 2015-10-30        46.6</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 111 more rows</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;"># ℹ 112 more rows</span></span></span></code></pre>
 </div>
 </div>
 <div class="section level3">
@@ -686,7 +686,7 @@ next step.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 6</span> 2016-02-12   -<span style="color: #BB0000;">0.019</span><span style="color: #BB0000; text-decoration: underline;">8</span>     -<span style="color: #BB0000;">0.005</span><span style="color: #BB0000; text-decoration: underline;">82</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 7</span> 2016-02-19    0.025<span style="text-decoration: underline;">1</span>      0.035<span style="text-decoration: underline;">4</span> </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> 2016-02-26    0.032<span style="text-decoration: underline;">0</span>      0.014<span style="text-decoration: underline;">8</span> </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> 2016-03-04    0.004<span style="text-decoration: underline;">36</span>     0.028<span style="text-decoration: underline;">1</span> </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> 2016-03-04    0.004<span style="text-decoration: underline;">35</span>     0.028<span style="text-decoration: underline;">1</span> </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> 2016-03-11    0.009<span style="text-decoration: underline;">41</span>     0.010<span style="text-decoration: underline;">6</span> </span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 42 more rows</span></span></span></code></pre>
 <p><em>Step 2: Create a custom function</em></p>
@@ -734,7 +734,7 @@ columns.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 6</span> 2016-02-12   -<span style="color: #BB0000;">0.019</span><span style="color: #BB0000; text-decoration: underline;">8</span>     -<span style="color: #BB0000;">0.005</span><span style="color: #BB0000; text-decoration: underline;">82</span>     <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 7</span> 2016-02-19    0.025<span style="text-decoration: underline;">1</span>      0.035<span style="text-decoration: underline;">4</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> 2016-02-26    0.032<span style="text-decoration: underline;">0</span>      0.014<span style="text-decoration: underline;">8</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> 2016-03-04    0.004<span style="text-decoration: underline;">36</span>     0.028<span style="text-decoration: underline;">1</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> 2016-03-04    0.004<span style="text-decoration: underline;">35</span>     0.028<span style="text-decoration: underline;">1</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> 2016-03-11    0.009<span style="text-decoration: underline;">41</span>     0.010<span style="text-decoration: underline;">6</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 42 more rows</span></span></span></code></pre>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
@@ -750,7 +750,7 @@ columns.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 6</span> 2016-02-12   -<span style="color: #BB0000;">0.019</span><span style="color: #BB0000; text-decoration: underline;">8</span>     -<span style="color: #BB0000;">0.005</span><span style="color: #BB0000; text-decoration: underline;">82</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 7</span> 2016-02-19    0.025<span style="text-decoration: underline;">1</span>      0.035<span style="text-decoration: underline;">4</span> </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> 2016-02-26    0.032<span style="text-decoration: underline;">0</span>      0.014<span style="text-decoration: underline;">8</span> </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> 2016-03-04    0.004<span style="text-decoration: underline;">36</span>     0.028<span style="text-decoration: underline;">1</span> </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> 2016-03-04    0.004<span style="text-decoration: underline;">35</span>     0.028<span style="text-decoration: underline;">1</span> </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> 2016-03-11    0.009<span style="text-decoration: underline;">41</span>     0.010<span style="text-decoration: underline;">6</span> </span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 42 more rows</span></span></span></code></pre>
 <p>As shown above, the rolling regression coefficients were added to the
