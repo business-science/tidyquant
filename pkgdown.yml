@@ -9,7 +9,7 @@ articles:
   TQ04-charting-with-tidyquant: TQ04-charting-with-tidyquant.html
   TQ05-performance-analysis-with-tidyquant: TQ05-performance-analysis-with-tidyquant.html
   TQ06-excel-in-r: TQ06-excel-in-r.html
-last_built: 2025-03-01T00:15Z
+last_built: 2025-04-01T00:16Z
 urls:
   reference: https://business-science.github.io/tidyquant/reference
   article: https://business-science.github.io/tidyquant/articles
