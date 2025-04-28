@@ -24,9 +24,9 @@ Our short introduction to `tidyquant` on
 # Features of tidyquant
 
 `tidyquant` integrates the best resources for collecting and analyzing
-financial data, `zoo`, `xts`, `quantmod`, `TTR`, and
+financial data using `zoo`, `xts`, `quantmod`, `TTR`, and
 `PerformanceAnalytics`, with the tidy data infrastructure of the
-`tidyverse` allowing for seamless interaction between each. You can now
+`tidyverse` allows for seamless interaction between each. You can now
 perform complete financial analyses in the `tidyverse`.
 
 - **A few core functions with a lot of power**
@@ -46,7 +46,7 @@ perform complete financial analyses in the `tidyverse`.
 
 ## One-Stop Shop for Serious Financial Analysis
 
-With `tidyquant` all the benefits add up to one thing: *a one-stop shop
+With `tidyquant`, all the benefits add up to one thing: *a one-stop shop
 for serious financial analysis!*
 
 ### Core Functions
@@ -60,7 +60,7 @@ for serious financial analysis!*
 
 - **Manipulating Financial Data: `tq_transmute()` and `tq_mutate()`**.
   Integration for many financial functions from `xts`, `zoo`,
-  `quantmod`,`TTR` and `PerformanceAnalytics` packages. `tq_mutate()` is
+  `quantmod`, `TTR` and `PerformanceAnalytics` packages. `tq_mutate()` is
   used to add a column to the data frame, and `tq_transmute()` is used
   to return a new data frame which is necessary for periodicity changes.
 
@@ -88,7 +88,7 @@ investment in various stocks would perform.
 ### Evaluating Portfolio Performance
 
 Ok, stocks are too easy. What about portfolios? With the
-`PerformanceAnalytics` integration, visualizing blended portfolios are
+`PerformanceAnalytics` integration, visualizing blended portfolios is
 easy too!
 
 - Portfolio 1: 50% FB, 25% AMZN, 25% NFLX, 0% GOOG
@@ -133,7 +133,7 @@ to speed quickly:
   `tidyquant`](https://business-science.github.io/tidyquant/articles/TQ04-charting-with-tidyquant.html)
 - [TQ05 - Performance Analysis with
   `tidyquant`](https://business-science.github.io/tidyquant/articles/TQ05-performance-analysis-with-tidyquant.html)
-- [Blog Article: Excel in R - Pivot Tables, VLOOKUPs, and
+- [Blog Article: Excel in R - PivotTables, VLOOKUPs, and
   more!](https://www.business-science.io/finance/2020/02/26/r-for-excel-users.html)
 
 # Want to Learn tidyquant?
@@ -162,4 +162,4 @@ to speed quickly:
 
   - **Shiny Financial Analysis with Tidyquant API & Excel Pivot
     Tables** - Learn how to use the new Excel Functionality to make
-    Pivot Tables, VLOOKUPs, Sum-If’s, and more!
+    Pivot Tables, VLOOKUPs, SUMIFs, and more!
