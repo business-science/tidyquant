@@ -169,7 +169,7 @@
 <div class="section level4">
 <h4 id="deprecation-1-0-1">Deprecation<a class="anchor" aria-label="anchor" href="#deprecation-1-0-1"></a></h4>
 <ul><li>
-<code><a href="https://rdrr.io/pkg/timetk/man/summarise_by_time.html" class="external-link">summarise_by_time()</a></code> - This function has moved to <code><a href="https://rdrr.io/pkg/timetk/man/summarise_by_time.html" class="external-link">timetk::summarise_by_time()</a></code>
+<code><a href="https://business-science.github.io/timetk/reference/summarise_by_time.html" class="external-link">summarise_by_time()</a></code> - This function has moved to <code><a href="https://business-science.github.io/timetk/reference/summarise_by_time.html" class="external-link">timetk::summarise_by_time()</a></code>
 </li>
 </ul></div>
 </div>
@@ -224,7 +224,7 @@
 <li>
 <p><strong>NEW tidyverse Functionality</strong></p>
 <ul><li>
-<code><a href="https://rdrr.io/pkg/timetk/man/summarise_by_time.html" class="external-link">summarise_by_time()</a></code> - This is a new time-based variant of <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise()</a></code> that allows collapsing the time-series by “day”, “week”, “month”, “quarter”, “year”, and more.</li>
+<code><a href="https://business-science.github.io/timetk/reference/summarise_by_time.html" class="external-link">summarise_by_time()</a></code> - This is a new time-based variant of <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise()</a></code> that allows collapsing the time-series by “day”, “week”, “month”, “quarter”, “year”, and more.</li>
 <li>Note: I will evaluate the need for <code>summarise_at_by_time()</code>, <code>summarise_all_by_time()</code>, and <code>summarise_if_by_time()</code> after the release of <code>dplyr</code> v1.0.0.</li>
 </ul></li>
 <li>
@@ -312,7 +312,7 @@
 </ul></li>
 <li>Important Changes:
 <ul><li>Remove Key Statistics from <code>tq_get(get = "key.stats")</code>. Yahoo Finance no longer supports the Key Statistics CSV API.</li>
-<li>Completed deprecation of <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">tidyquant::as_tibble()</a></code> and <code>tidyquant::as_xts()</code>. Use <code><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html" class="external-link">timetk::tk_tbl()</a></code> and <code><a href="https://rdrr.io/pkg/timetk/man/tk_xts.html" class="external-link">timetk::tk_xts()</a></code> instead.</li>
+<li>Completed deprecation of <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">tidyquant::as_tibble()</a></code> and <code>tidyquant::as_xts()</code>. Use <code><a href="https://business-science.github.io/timetk/reference/tk_tbl.html" class="external-link">timetk::tk_tbl()</a></code> and <code><a href="https://business-science.github.io/timetk/reference/tk_xts.html" class="external-link">timetk::tk_xts()</a></code> instead.</li>
 <li>
 <code>tibbletime</code> support was added so that all <code>tidyquant</code> functions play nicely with <code>tbl_time</code> objects.</li>
 <li>A hard dependency on <code>XLConnect</code> was removed. This should ease the use of the package, especially for Mac users.</li>
@@ -327,7 +327,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.2" id="tidyquant-052">tidyquant 0.5.2<a class="anchor" aria-label="anchor" href="#tidyquant-052"></a></h2><p class="text-muted">CRAN release: 2017-07-27</p>
-<ul><li>Incorporated more robust <code>timetk</code> coercion functions. Deprecated <code>tidyquant::as_xts()</code> and <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">tidyquant::as_tibble()</a></code>. Use <code><a href="https://rdrr.io/pkg/timetk/man/tk_xts.html" class="external-link">timetk::tk_xts()</a></code> and <code><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html" class="external-link">timetk::tk_tbl()</a></code> instead.</li>
+<ul><li>Incorporated more robust <code>timetk</code> coercion functions. Deprecated <code>tidyquant::as_xts()</code> and <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">tidyquant::as_tibble()</a></code>. Use <code><a href="https://business-science.github.io/timetk/reference/tk_xts.html" class="external-link">timetk::tk_xts()</a></code> and <code><a href="https://business-science.github.io/timetk/reference/tk_tbl.html" class="external-link">timetk::tk_tbl()</a></code> instead.</li>
 <li>Fixes:
 <ul><li>
 <code><a href="../reference/tq_index.html">tq_index()</a></code> no longer pulls from marketvolume. Instead, 9 indices are available from SPDR. These indices are more reliable, and include weights for each stock in the index.</li>

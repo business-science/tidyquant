@@ -87,7 +87,7 @@
                         <h4 data-toc-skip class="author">Matt
 Dancho</h4>
             
-            <h4 data-toc-skip class="date">2025-08-01</h4>
+            <h4 data-toc-skip class="date">2025-08-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ02-quant-integrations-in-tidyquant.Rmd" class="external-link"><code>vignettes/TQ02-quant-integrations-in-tidyquant.Rmd</code></a></small>
       <div class="d-none name"><code>TQ02-quant-integrations-in-tidyquant.Rmd</code></div>
@@ -911,12 +911,12 @@ to increase.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## Residuals:</span></span>
 <span><span class="co">##        Min         1Q     Median         3Q        Max </span></span>
-<span><span class="co">## -0.0269575 -0.0039656  0.0002146  0.0039656  0.0289465 </span></span>
+<span><span class="co">## -0.0269571 -0.0039658  0.0002149  0.0039653  0.0289457 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Coefficients:</span></span>
 <span><span class="co">##              Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
 <span><span class="co">## (Intercept) 0.0001130  0.0003097   0.365    0.715    </span></span>
-<span><span class="co">## V           0.8133645  0.0226394  35.927   &lt;2e-16 ***</span></span>
+<span><span class="co">## V           0.8133650  0.0226393  35.927   &lt;2e-16 ***</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
@@ -936,11 +936,11 @@ with <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code> in two a
 </ol>
 <p>First, create a custom regression function. An important point is
 that the “data” will be passed to the regression function as an
-<code>xts</code> object. The <code><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html" class="external-link">timetk::tk_tbl</a></code> function takes
+<code>xts</code> object. The <code><a href="https://business-science.github.io/timetk/reference/tk_tbl.html" class="external-link">timetk::tk_tbl</a></code> function takes
 care of converting to a data frame.</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">regr_fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">MA</span> <span class="op">~</span> <span class="va">V</span>, data <span class="op">=</span> <span class="fu">timetk</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/timetk/man/tk_tbl.html" class="external-link">tk_tbl</a></span><span class="op">(</span><span class="va">data</span>, silent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">MA</span> <span class="op">~</span> <span class="va">V</span>, data <span class="op">=</span> <span class="fu">timetk</span><span class="fu">::</span><span class="fu"><a href="https://business-science.github.io/timetk/reference/tk_tbl.html" class="external-link">tk_tbl</a></span><span class="op">(</span><span class="va">data</span>, silent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Now we can use <code><a href="../reference/tq_mutate.html">tq_mutate()</a></code> to apply the custom
 regression function over a rolling window using <code>rollapply</code>
