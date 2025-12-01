@@ -87,7 +87,7 @@
                         <h4 data-toc-skip class="author">Matt
 Dancho</h4>
             
-            <h4 data-toc-skip class="date">2025-11-01</h4>
+            <h4 data-toc-skip class="date">2025-12-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/business-science/tidyquant/blob/master/vignettes/TQ04-charting-with-tidyquant.Rmd" class="external-link"><code>vignettes/TQ04-charting-with-tidyquant.Rmd</code></a></small>
       <div class="d-none name"><code>TQ04-charting-with-tidyquant.Rmd</code></div>
@@ -211,7 +211,7 @@ flexibility wherein the analyst can create very complex charts using the
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"AAPL Line Chart"</span>, y <span class="op">=</span> <span class="st">"Closing Price"</span>, x <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-6-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="bar-chart">Bar Chart<a class="anchor" aria-label="anchor" href="#bar-chart"></a>
@@ -228,7 +228,7 @@ the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="e
 <span>    <span class="fu"><a href="../reference/geom_chart.html">geom_barchart</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>open <span class="op">=</span> <span class="va">open</span>, high <span class="op">=</span> <span class="va">high</span>, low <span class="op">=</span> <span class="va">low</span>, close <span class="op">=</span> <span class="va">close</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"AAPL Bar Chart"</span>, y <span class="op">=</span> <span class="st">"Closing Price"</span>, x <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-7-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 <p>We zoom into specific sections using <code>coord_x_date</code>, which
 has <code>xlim</code> and <code>ylim</code> arguments specified as
 <code>c(start, end)</code> to focus on a specific region of the chart.
@@ -246,7 +246,7 @@ prices in the range from 100 to 120.</p>
 <span>    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/period.html" class="external-link">weeks</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span>, <span class="va">end</span><span class="op">)</span>,</span>
 <span>                 ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">aapl_range_60_tbl</span><span class="op">$</span><span class="va">min_low</span>, <span class="va">aapl_range_60_tbl</span><span class="op">$</span><span class="va">max_high</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-8-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 <p>The colors can be modified using <code>colour_up</code> and
 <code>colour_down</code> arguments, and parameters such as
 <code>size</code> can be used to control the appearance.</p>
@@ -261,7 +261,7 @@ prices in the range from 100 to 120.</p>
 <span>    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/period.html" class="external-link">weeks</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span>, <span class="va">end</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">aapl_range_60_tbl</span><span class="op">$</span><span class="va">min_low</span>, <span class="va">aapl_range_60_tbl</span><span class="op">$</span><span class="va">max_high</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-9-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="candlestick-chart">Candlestick Chart<a class="anchor" aria-label="anchor" href="#candlestick-chart"></a>
@@ -275,7 +275,7 @@ bar chart. Using <code>geom_candlestick</code>, we can insert into the
 <span>    <span class="fu"><a href="../reference/geom_chart.html">geom_candlestick</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>open <span class="op">=</span> <span class="va">open</span>, high <span class="op">=</span> <span class="va">high</span>, low <span class="op">=</span> <span class="va">low</span>, close <span class="op">=</span> <span class="va">close</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"AAPL Candlestick Chart"</span>, y <span class="op">=</span> <span class="st">"Closing Price"</span>, x <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-10-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 <p>We zoom into specific sections using <code>coord_x_date</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">AAPL</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -287,7 +287,7 @@ bar chart. Using <code>geom_candlestick</code>, we can insert into the
 <span>    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/period.html" class="external-link">weeks</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span>, <span class="va">end</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">aapl_range_60_tbl</span><span class="op">$</span><span class="va">min_low</span>, <span class="va">aapl_range_60_tbl</span><span class="op">$</span><span class="va">max_high</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-11-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 <p>The colors can be modified using <code>colour_up</code> and
 <code>colour_down</code>, which control the line color, and
 <code>fill_up</code> and <code>fill_down</code>, which control the
@@ -304,7 +304,7 @@ rectangle fills.</p>
 <span>    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/period.html" class="external-link">weeks</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span>, <span class="va">end</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">aapl_range_60_tbl</span><span class="op">$</span><span class="va">min_low</span>, <span class="va">aapl_range_60_tbl</span><span class="op">$</span><span class="va">max_high</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-12-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-12-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 <p><a class="anchor" id="mult-chart"></a></p>
 </div>
 <div class="section level3">
@@ -329,7 +329,7 @@ notice an odd <code><a href="https://dplyr.tidyverse.org/reference/filter.html" 
 <span>    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">start</span>, <span class="va">end</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">symbol</span>, ncol <span class="op">=</span> <span class="fl">2</span>, scale <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-13-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-13-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 <p><em>A note about out-of-bounds data (or “clipping”), which is
 particularly important with faceting and charting moving
 averages</em>:</p>
@@ -362,7 +362,7 @@ y-axis scale and still allows us to create a moving average line using
 <span>    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">start</span>, <span class="va">end</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">symbol</span>, ncol <span class="op">=</span> <span class="fl">2</span>, scale <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-14-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-14-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level2">
@@ -445,7 +445,7 @@ distinguish the 200-day from the 50-day.</p>
 <span>    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/period.html" class="external-link">weeks</a></span><span class="op">(</span><span class="fl">24</span><span class="op">)</span>, <span class="va">end</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">aapl_range_60_tbl</span><span class="op">$</span><span class="va">min_low</span> <span class="op">*</span> <span class="fl">0.9</span>, <span class="va">aapl_range_60_tbl</span><span class="op">$</span><span class="va">max_high</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-15-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-15-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
 <h4 id="example-2-charting-exponential-moving-averages">Example 2: Charting exponential moving averages<a class="anchor" aria-label="anchor" href="#example-2-charting-exponential-moving-averages"></a>
@@ -470,7 +470,7 @@ modify the geom. We are ready to apply after the bar chart geom.</p>
 <span>    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/period.html" class="external-link">weeks</a></span><span class="op">(</span><span class="fl">24</span><span class="op">)</span>, <span class="va">end</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">aapl_range_60_tbl</span><span class="op">$</span><span class="va">min_low</span> <span class="op">*</span> <span class="fl">0.9</span>, <span class="va">aapl_range_60_tbl</span><span class="op">$</span><span class="va">max_high</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-16-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-16-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
 <h4 id="example-3-charting-moving-averages-for-multiple-stocks-at-once">Example 3: Charting moving averages for multiple stocks at once<a class="anchor" aria-label="anchor" href="#example-3-charting-moving-averages-for-multiple-stocks-at-once"></a>
@@ -495,7 +495,7 @@ the end to create four charts instead of one overlayed chart.</p>
 <span>    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">start</span>, <span class="va">end</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">symbol</span>, ncol <span class="op">=</span> <span class="fl">2</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-17-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-17-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level3">
@@ -536,7 +536,7 @@ the candlestick geom to overlay the BBands on top.</p>
 <span>                 ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">aapl_range_60_tbl</span><span class="op">$</span><span class="va">min_low</span> <span class="op">*</span> <span class="fl">0.85</span>, </span>
 <span>                          <span class="va">aapl_range_60_tbl</span><span class="op">$</span><span class="va">max_high</span><span class="op">)</span> <span class="op">*</span> <span class="fl">1.05</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-18-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-18-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
 <h4 id="example-2-modifying-the-appearance-of-bollinger-bands">Example 2: Modifying the appearance of Bollinger Bands<a class="anchor" aria-label="anchor" href="#example-2-modifying-the-appearance-of-bollinger-bands"></a>
@@ -562,7 +562,7 @@ applied to the BBands.</p>
 <span>                 ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">aapl_range_60_tbl</span><span class="op">$</span><span class="va">min_low</span> <span class="op">*</span> <span class="fl">0.85</span>, </span>
 <span>                          <span class="va">aapl_range_60_tbl</span><span class="op">$</span><span class="va">max_high</span><span class="op">)</span> <span class="op">*</span> <span class="fl">1.05</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-19-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-19-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
 <h4 id="example-3-adding-bbands-to-multiple-stocks">Example 3: Adding BBands to multiple stocks<a class="anchor" aria-label="anchor" href="#example-3-adding-bbands-to-multiple-stocks"></a>
@@ -584,7 +584,7 @@ stocks.</p>
 <span>    <span class="fu"><a href="../reference/coord_x_date.html">coord_x_date</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">start</span>, <span class="va">end</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">symbol</span>, ncol <span class="op">=</span> <span class="fl">2</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-20-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-20-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
 </div>
@@ -610,7 +610,7 @@ tends to expose linear trends that can be analyzed.</p>
 <span>         subtitle <span class="op">=</span> <span class="st">"Continuous Scale"</span>, </span>
 <span>         y <span class="op">=</span> <span class="st">"Closing Price"</span>, x <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-21-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-21-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 <p><strong>Log Scale</strong>:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">AMZN</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -621,7 +621,7 @@ tends to expose linear trends that can be analyzed.</p>
 <span>         subtitle <span class="op">=</span> <span class="st">"Log Scale"</span>, </span>
 <span>         y <span class="op">=</span> <span class="st">"Closing Price"</span>, x <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-22-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-22-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="example-2-regression-trendlines-with-geom_smooth">Example 2: Regression trendlines with geom_smooth<a class="anchor" aria-label="anchor" href="#example-2-regression-trendlines-with-geom_smooth"></a>
@@ -641,7 +641,7 @@ loess (<code>"loess"</code>) to name a few.</p>
 <span>         subtitle <span class="op">=</span> <span class="st">"Log Scale, Applying Linear Trendline"</span>, </span>
 <span>         y <span class="op">=</span> <span class="st">"Adjusted Closing Price"</span>, x <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-23-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-23-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="example-3-charting-volume-with-geom_segment">Example 3: Charting volume with geom_segment<a class="anchor" aria-label="anchor" href="#example-3-charting-volume-with-geom_segment"></a>
@@ -660,7 +660,7 @@ volume to make these data stick out.</p>
 <span>         y <span class="op">=</span> <span class="st">"Volume"</span>, x <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> </span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-24-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-24-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 <p>And, we can zoom in on a specific region. Using
 <code>scale_color_gradient</code> we can quickly visualize the high and
 low points, and using <code>geom_smooth</code> we can see the trend.</p>
@@ -678,7 +678,7 @@ low points, and using <code>geom_smooth</code> we can see the trend.</p>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_color_gradient</a></span><span class="op">(</span>low <span class="op">=</span> <span class="st">"red"</span>, high <span class="op">=</span> <span class="st">"darkblue"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> </span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-25-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-25-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level2">
@@ -720,7 +720,7 @@ quickly customize financial charts:</p>
 <span>    <span class="fu"><a href="../reference/theme_tq.html">theme_tq_dark</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="../reference/scale_manual.html">scale_color_tq</a></span><span class="op">(</span>theme <span class="op">=</span> <span class="st">"dark"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/dollar_format.html" class="external-link">label_dollar</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-26-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p><img src="TQ04-charting-with-tidyquant_files/figure-html/unnamed-chunk-26-1.png" class="r-plt" width="95%" style="display: block; margin: auto;"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -734,7 +734,7 @@ quickly customize financial charts:</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

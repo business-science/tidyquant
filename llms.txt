@@ -1,0 +1,457 @@
+# tidyquant
+
+> Bringing financial and business analysis to the tidyverse
+
+## 2-Minutes To tidyquant
+
+Our short introduction to `tidyquant` on
+[YouTube](https://www.youtube.com/embed/woxJZTL2hok).
+
+[![Anomalize](http://img.youtube.com/vi/woxJZTL2hok/0.jpg)](https://www.youtube.com/embed/woxJZTL2hok)
+
+# Features of tidyquant
+
+`tidyquant` integrates the best resources for collecting and analyzing
+financial data using `zoo`, `xts`, `quantmod`, `TTR`, and
+`PerformanceAnalytics`, with the tidy data infrastructure of the
+`tidyverse` allows for seamless interaction between each. You can now
+perform complete financial analyses in the `tidyverse`.
+
+- **A few core functions with a lot of power**
+- **Integrates the quantitative analysis functionality of `zoo`, `xts`,
+  `quantmod`, `TTR`, and *now* `PerformanceAnalytics`**
+- **Designed for modeling and scaling analyses using the `tidyverse`
+  tools in [*R for Data Science*](https://r4ds.hadley.nz/)**
+- **Implements `ggplot2` functionality for beautiful and meaningful
+  financial visualizations**
+- **User-friendly documentation to get you up to speed quickly!**
+
+### New Excel Functionality in tidyquant
+
+- [**Excel in R - Pivot Tables, VLOOKUPs, and
+  more**](https://www.business-science.io/finance/2020/02/26/r-for-excel-users.html):
+  Details on the **Excel integrations** are covered in the blog article.
+
+## One-Stop Shop for Serious Financial Analysis
+
+With `tidyquant`, all the benefits add up to one thing: *a one-stop shop
+for serious financial analysis!*
+
+### Core Functions
+
+- **Getting Financial Data from the web:
+  [`tq_get()`](https://business-science.github.io/tidyquant/reference/tq_get.md)**.
+  This is a one-stop shop for getting web-based financial data in a
+  “tidy” data frame format. Get data for daily stock prices
+  (historical), key statistics (real-time), key ratios (historical),
+  financial statements, dividends, splits, economic data from the FRED,
+  FOREX rates from Oanda.
+
+- **Manipulating Financial Data:
+  [`tq_transmute()`](https://business-science.github.io/tidyquant/reference/tq_mutate.md)
+  and
+  [`tq_mutate()`](https://business-science.github.io/tidyquant/reference/tq_mutate.md)**.
+  Integration for many financial functions from `xts`, `zoo`,
+  `quantmod`, `TTR` and `PerformanceAnalytics` packages.
+  [`tq_mutate()`](https://business-science.github.io/tidyquant/reference/tq_mutate.md)
+  is used to add a column to the data frame, and
+  [`tq_transmute()`](https://business-science.github.io/tidyquant/reference/tq_mutate.md)
+  is used to return a new data frame which is necessary for periodicity
+  changes.
+
+- **Performance Analysis and Portfolio Analysis:
+  [`tq_performance()`](https://business-science.github.io/tidyquant/reference/tq_performance.md)
+  and
+  [`tq_portfolio()`](https://business-science.github.io/tidyquant/reference/tq_portfolio.md)**.
+  The newest additions to the `tidyquant` family integrate
+  `PerformanceAnalytics` functions.
+  [`tq_performance()`](https://business-science.github.io/tidyquant/reference/tq_performance.md)
+  converts investment returns into performance metrics.
+  [`tq_portfolio()`](https://business-science.github.io/tidyquant/reference/tq_portfolio.md)
+  aggregates a group (or multiple groups) of asset returns into one or
+  more portfolios.
+
+### Comparing Stock Prices
+
+Visualizing the stock price volatility of four stocks side-by-side is
+quick and easy…
+
+![](reference/figures/sample_img_1_volatility.png)
+
+### Evaluating Stock Performance
+
+What about stock performance? Quickly visualize how a \$10,000
+investment in various stocks would perform.
+
+![](reference/figures/sample_img_2_stock_returns.png)
+
+### Evaluating Portfolio Performance
+
+Ok, stocks are too easy. What about portfolios? With the
+`PerformanceAnalytics` integration, visualizing blended portfolios is
+easy too!
+
+- Portfolio 1: 50% FB, 25% AMZN, 25% NFLX, 0% GOOG
+- Portfolio 2: 0% FB, 50% AMZN, 25% NFLX, 25% GOOG
+- Portfolio 3: 25% FB, 0% AMZN, 50% NFLX, 25% GOOG
+- Portfolio 4: 25% FB, 25% AMZN, 0% NFLX, 50% GOOG
+
+![](reference/figures/sample_img_3_portfolio_returns.png)
+
+This just scratches the surface of `tidyquant`. Here’s how to install to
+get started.
+
+## Installation
+
+Development Version with Latest Features:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("business-science/tidyquant")
+```
+
+CRAN Approved Version:
+
+``` r
+install.packages("tidyquant")
+```
+
+## Further Information
+
+The `tidyquant` package includes several vignettes to help users get up
+to speed quickly:
+
+- [TQ00 - Introduction to
+  `tidyquant`](https://business-science.github.io/tidyquant/articles/TQ00-introduction-to-tidyquant.html)
+- [TQ01 - Core Functions in
+  `tidyquant`](https://business-science.github.io/tidyquant/articles/TQ01-core-functions-in-tidyquant.html)
+- [TQ02 - R Quantitative Analysis Package Integrations in
+  `tidyquant`](https://business-science.github.io/tidyquant/articles/TQ02-quant-integrations-in-tidyquant.html)
+- [TQ03 - Scaling and Modeling with
+  `tidyquant`](https://business-science.github.io/tidyquant/articles/TQ03-scaling-and-modeling-with-tidyquant.html)
+- [TQ04 - Charting with
+  `tidyquant`](https://business-science.github.io/tidyquant/articles/TQ04-charting-with-tidyquant.html)
+- [TQ05 - Performance Analysis with
+  `tidyquant`](https://business-science.github.io/tidyquant/articles/TQ05-performance-analysis-with-tidyquant.html)
+- [Blog Article: Excel in R - PivotTables, VLOOKUPs, and
+  more!](https://www.business-science.io/finance/2020/02/26/r-for-excel-users.html)
+
+# Want to Learn tidyquant?
+
+- [Learning Lab
+  \#9:](https://university.business-science.io/p/learning-labs-pro)
+
+  - **Performance Analysis & Portfolio Optimization with `tidyquant`** -
+    A 1-hour course on `tidyquant` in Learning Labs PRO
+
+- [Learning Lab
+  \#10:](https://university.business-science.io/p/learning-labs-pro)
+
+  - **Building an API with `plumber`** - Build a stock optimization API
+    with `plumber` and `tidyquant`
+
+- [Learning Lab
+  \#16:](https://university.business-science.io/p/learning-labs-pro)
+
+  - **Stock Portfolio Optimization and Nonlinear Programming** - Use the
+    `ROI` package with `tidyquant` to calculate optimal minimum variance
+    portfolios and develop an efficient frontier.
+
+- [Learning Lab
+  \#30:](https://university.business-science.io/courses/learning-labs-pro/lectures/14630075)
+
+  - **Shiny Financial Analysis with Tidyquant API & Excel Pivot
+    Tables** - Learn how to use the new Excel Functionality to make
+    Pivot Tables, VLOOKUPs, SUMIFs, and more!
+
+# Package index
+
+## Financial APIs
+
+Functions for getting financial data from various API sources.
+
+### Get Data from APIs
+
+- [`tq_get()`](https://business-science.github.io/tidyquant/reference/tq_get.md)
+  [`tq_get_options()`](https://business-science.github.io/tidyquant/reference/tq_get.md)
+  :
+
+  Get quantitative data in `tibble` format
+
+- [`tq_index()`](https://business-science.github.io/tidyquant/reference/tq_index.md)
+  [`tq_index_options()`](https://business-science.github.io/tidyquant/reference/tq_index.md)
+  [`tq_exchange()`](https://business-science.github.io/tidyquant/reference/tq_index.md)
+  [`tq_exchange_options()`](https://business-science.github.io/tidyquant/reference/tq_index.md)
+  [`tq_fund_holdings()`](https://business-science.github.io/tidyquant/reference/tq_index.md)
+  [`tq_fund_source_options()`](https://business-science.github.io/tidyquant/reference/tq_index.md)
+  :
+
+  Get all stocks in a stock index or stock exchange in `tibble` format
+
+### API Keys
+
+- [`quandl_api_key()`](https://business-science.github.io/tidyquant/reference/quandl_api_key.md)
+  : Query or set Quandl API Key
+- [`quandl_search()`](https://business-science.github.io/tidyquant/reference/quandl_search.md)
+  : Search the Quandl database
+- [`av_api_key()`](https://business-science.github.io/tidyquant/reference/av_api_key.md)
+  : Set Alpha Vantage API Key
+- [`tiingo_api_key()`](https://business-science.github.io/tidyquant/reference/tiingo_api_key.md)
+  : Set Tiingo API Key
+
+## Financial Analysis
+
+Functions for performing various financial analyses.
+
+### Quantitative Transformations
+
+Functions for mutating quantitative data.
+
+- [`tq_mutate()`](https://business-science.github.io/tidyquant/reference/tq_mutate.md)
+  [`tq_mutate_()`](https://business-science.github.io/tidyquant/reference/tq_mutate.md)
+  [`tq_mutate_xy()`](https://business-science.github.io/tidyquant/reference/tq_mutate.md)
+  [`tq_mutate_xy_()`](https://business-science.github.io/tidyquant/reference/tq_mutate.md)
+  [`tq_mutate_fun_options()`](https://business-science.github.io/tidyquant/reference/tq_mutate.md)
+  [`tq_transmute()`](https://business-science.github.io/tidyquant/reference/tq_mutate.md)
+  [`tq_transmute_()`](https://business-science.github.io/tidyquant/reference/tq_mutate.md)
+  [`tq_transmute_xy()`](https://business-science.github.io/tidyquant/reference/tq_mutate.md)
+  [`tq_transmute_xy_()`](https://business-science.github.io/tidyquant/reference/tq_mutate.md)
+  [`tq_transmute_fun_options()`](https://business-science.github.io/tidyquant/reference/tq_mutate.md)
+  : Mutates quantitative data
+
+### Portfolio Aggregation
+
+Functions for aggregating 1 or more portfolios.
+
+- [`tq_portfolio()`](https://business-science.github.io/tidyquant/reference/tq_portfolio.md)
+  [`tq_portfolio_()`](https://business-science.github.io/tidyquant/reference/tq_portfolio.md)
+  [`tq_repeat_df()`](https://business-science.github.io/tidyquant/reference/tq_portfolio.md)
+  : Aggregates a group of returns by asset into portfolio returns
+
+### Performance Analytics
+
+Functions for performing various financial performance analyses.
+
+- [`tq_performance()`](https://business-science.github.io/tidyquant/reference/tq_performance.md)
+  [`tq_performance_()`](https://business-science.github.io/tidyquant/reference/tq_performance.md)
+  [`tq_performance_fun_options()`](https://business-science.github.io/tidyquant/reference/tq_performance.md)
+  : Computes a wide variety of summary performance metrics from stock or
+  portfolio returns
+
+### Charting with ggplot2
+
+Functions for creating `ggplots` for financial charting.
+
+- [`geom_bbands()`](https://business-science.github.io/tidyquant/reference/geom_bbands.md)
+  [`geom_bbands_()`](https://business-science.github.io/tidyquant/reference/geom_bbands.md)
+  : Plot Bollinger Bands using Moving Averages
+- [`geom_barchart()`](https://business-science.github.io/tidyquant/reference/geom_chart.md)
+  [`geom_candlestick()`](https://business-science.github.io/tidyquant/reference/geom_chart.md)
+  : Plot Financial Charts in ggplot2
+- [`geom_ma()`](https://business-science.github.io/tidyquant/reference/geom_ma.md)
+  [`geom_ma_()`](https://business-science.github.io/tidyquant/reference/geom_ma.md)
+  : Plot moving averages
+- [`theme_tq()`](https://business-science.github.io/tidyquant/reference/theme_tq.md)
+  [`theme_tq_dark()`](https://business-science.github.io/tidyquant/reference/theme_tq.md)
+  [`theme_tq_green()`](https://business-science.github.io/tidyquant/reference/theme_tq.md)
+  : tidyquant themes for ggplot2.
+- [`palette_light()`](https://business-science.github.io/tidyquant/reference/palette_tq.md)
+  [`palette_dark()`](https://business-science.github.io/tidyquant/reference/palette_tq.md)
+  [`palette_green()`](https://business-science.github.io/tidyquant/reference/palette_tq.md)
+  : tidyquant palettes for use with scales
+- [`scale_color_tq()`](https://business-science.github.io/tidyquant/reference/scale_manual.md)
+  [`scale_colour_tq()`](https://business-science.github.io/tidyquant/reference/scale_manual.md)
+  [`scale_fill_tq()`](https://business-science.github.io/tidyquant/reference/scale_manual.md)
+  : tidyquant colors and fills for ggplot2.
+- [`coord_x_date()`](https://business-science.github.io/tidyquant/reference/coord_x_date.md)
+  [`coord_x_datetime()`](https://business-science.github.io/tidyquant/reference/coord_x_date.md)
+  : Zoom in on plot regions using date ranges or date-time ranges
+
+## Excel
+
+Functions providing Excel-like functionality.
+
+### Pivot Table, VLOOKUP, & Sum-Ifs
+
+Common functions for Excel power-users.
+
+- [`pivot_table()`](https://business-science.github.io/tidyquant/reference/excel_pivot_table.md)
+  : Excel Pivot Table
+- [`VLOOKUP()`](https://business-science.github.io/tidyquant/reference/excel_ref_functions.md)
+  : Excel Reference Functions
+- [`SUM_IFS()`](https://business-science.github.io/tidyquant/reference/excel_if_functions.md)
+  [`COUNT_IFS()`](https://business-science.github.io/tidyquant/reference/excel_if_functions.md)
+  [`AVERAGE_IFS()`](https://business-science.github.io/tidyquant/reference/excel_if_functions.md)
+  [`MEDIAN_IFS()`](https://business-science.github.io/tidyquant/reference/excel_if_functions.md)
+  [`MIN_IFS()`](https://business-science.github.io/tidyquant/reference/excel_if_functions.md)
+  [`MAX_IFS()`](https://business-science.github.io/tidyquant/reference/excel_if_functions.md)
+  [`CREATE_IFS()`](https://business-science.github.io/tidyquant/reference/excel_if_functions.md)
+  : Excel Summarising "If" Functions
+
+### Summary Functions
+
+Functions returning a single value from a vector of values.
+
+- [`SUM()`](https://business-science.github.io/tidyquant/reference/excel_stat_summary_functions.md)
+  [`AVERAGE()`](https://business-science.github.io/tidyquant/reference/excel_stat_summary_functions.md)
+  [`MEDIAN()`](https://business-science.github.io/tidyquant/reference/excel_stat_summary_functions.md)
+  [`MIN()`](https://business-science.github.io/tidyquant/reference/excel_stat_summary_functions.md)
+  [`MAX()`](https://business-science.github.io/tidyquant/reference/excel_stat_summary_functions.md)
+  [`COUNT()`](https://business-science.github.io/tidyquant/reference/excel_stat_summary_functions.md)
+  [`COUNT_UNIQUE()`](https://business-science.github.io/tidyquant/reference/excel_stat_summary_functions.md)
+  [`STDEV()`](https://business-science.github.io/tidyquant/reference/excel_stat_summary_functions.md)
+  [`VAR()`](https://business-science.github.io/tidyquant/reference/excel_stat_summary_functions.md)
+  [`COR()`](https://business-science.github.io/tidyquant/reference/excel_stat_summary_functions.md)
+  [`COV()`](https://business-science.github.io/tidyquant/reference/excel_stat_summary_functions.md)
+  [`FIRST()`](https://business-science.github.io/tidyquant/reference/excel_stat_summary_functions.md)
+  [`LAST()`](https://business-science.github.io/tidyquant/reference/excel_stat_summary_functions.md)
+  [`NTH()`](https://business-science.github.io/tidyquant/reference/excel_stat_summary_functions.md)
+  [`CHANGE_FIRSTLAST()`](https://business-science.github.io/tidyquant/reference/excel_stat_summary_functions.md)
+  [`PCT_CHANGE_FIRSTLAST()`](https://business-science.github.io/tidyquant/reference/excel_stat_summary_functions.md)
+  : Excel Statistical Summary Functions
+
+### Mutation Functions
+
+Functions returning multiple values from a vector.
+
+- [`ABS()`](https://business-science.github.io/tidyquant/reference/excel_stat_mutation_functions.md)
+  [`SQRT()`](https://business-science.github.io/tidyquant/reference/excel_stat_mutation_functions.md)
+  [`LOG()`](https://business-science.github.io/tidyquant/reference/excel_stat_mutation_functions.md)
+  [`EXP()`](https://business-science.github.io/tidyquant/reference/excel_stat_mutation_functions.md)
+  [`RETURN()`](https://business-science.github.io/tidyquant/reference/excel_stat_mutation_functions.md)
+  [`PCT_CHANGE()`](https://business-science.github.io/tidyquant/reference/excel_stat_mutation_functions.md)
+  [`CHANGE()`](https://business-science.github.io/tidyquant/reference/excel_stat_mutation_functions.md)
+  [`LAG()`](https://business-science.github.io/tidyquant/reference/excel_stat_mutation_functions.md)
+  [`LEAD()`](https://business-science.github.io/tidyquant/reference/excel_stat_mutation_functions.md)
+  [`CUMULATIVE_SUM()`](https://business-science.github.io/tidyquant/reference/excel_stat_mutation_functions.md)
+  [`CUMULATIVE_PRODUCT()`](https://business-science.github.io/tidyquant/reference/excel_stat_mutation_functions.md)
+  [`CUMULATIVE_MAX()`](https://business-science.github.io/tidyquant/reference/excel_stat_mutation_functions.md)
+  [`CUMULATIVE_MIN()`](https://business-science.github.io/tidyquant/reference/excel_stat_mutation_functions.md)
+  [`CUMULATIVE_MEAN()`](https://business-science.github.io/tidyquant/reference/excel_stat_mutation_functions.md)
+  [`CUMULATIVE_MEDIAN()`](https://business-science.github.io/tidyquant/reference/excel_stat_mutation_functions.md)
+  : Excel Statistical Mutation Functions
+
+### Date & Time Functions
+
+Functions providing date and time functionality.
+
+- [`AS_DATE()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`AS_DATETIME()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`DATE()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`DATEVALUE()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`YMD()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`MDY()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`DMY()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`YMD_HMS()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`MDY_HMS()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`DMY_HMS()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`YMD_HM()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`MDY_HM()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`DMY_HM()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`YMD_H()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`MDY_H()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`DMY_H()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`WEEKDAY()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`WDAY()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`DOW()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`MONTHDAY()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`MDAY()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`DOM()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`QUARTERDAY()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`QDAY()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`DAY()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`WEEKNUM()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`WEEK()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`WEEKNUM_ISO()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`MONTH()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`QUARTER()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`YEAR()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`YEAR_ISO()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`DATE_TO_NUMERIC()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`DATE_TO_DECIMAL()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`SECOND()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`MINUTE()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`HOUR()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`NOW()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`TODAY()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`EOMONTH()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`EDATE()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`NET_WORKDAYS()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`COUNT_DAYS()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`YEARFRAC()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`DATE_SEQUENCE()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`WORKDAY_SEQUENCE()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`HOLIDAY_SEQUENCE()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`HOLIDAY_TABLE()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`FLOOR_DATE()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`FLOOR_DAY()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`FLOOR_WEEK()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`FLOOR_MONTH()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`FLOOR_QUARTER()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`FLOOR_YEAR()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`CEILING_DATE()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`CEILING_DAY()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`CEILING_WEEK()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`CEILING_MONTH()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`CEILING_QUARTER()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`CEILING_YEAR()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`ROUND_DATE()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`ROUND_DAY()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`ROUND_WEEK()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`ROUND_MONTH()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`ROUND_QUARTER()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  [`ROUND_YEAR()`](https://business-science.github.io/tidyquant/reference/excel_date_functions.md)
+  : Excel Date and Time Functions
+
+### Financial Functions
+
+Common financial calculations from Excel.
+
+- [`NPV()`](https://business-science.github.io/tidyquant/reference/excel_financial_math_functions.md)
+  [`IRR()`](https://business-science.github.io/tidyquant/reference/excel_financial_math_functions.md)
+  [`FV()`](https://business-science.github.io/tidyquant/reference/excel_financial_math_functions.md)
+  [`PV()`](https://business-science.github.io/tidyquant/reference/excel_financial_math_functions.md)
+  [`PMT()`](https://business-science.github.io/tidyquant/reference/excel_financial_math_functions.md)
+  [`RATE()`](https://business-science.github.io/tidyquant/reference/excel_financial_math_functions.md)
+  : Excel Financial Math Functions
+
+## Data Sets
+
+- [`FANG`](https://business-science.github.io/tidyquant/reference/FANG.md)
+  : Stock prices for the "FANG" stocks.
+
+## Tidyquant
+
+Package-level information.
+
+- [`tidyquant`](https://business-science.github.io/tidyquant/reference/tidyquant-package.md)
+  [`tidyquant-package`](https://business-science.github.io/tidyquant/reference/tidyquant-package.md)
+  : tidyquant: Integrating quantitative financial analysis tools with
+  the tidyverse
+- [`tidyquant_conflicts()`](https://business-science.github.io/tidyquant/reference/tidyquant_conflicts.md)
+  : Conflicts between the tidyquant and other packages
+
+## Deprecated
+
+- [`tq_transform()`](https://business-science.github.io/tidyquant/reference/deprecated.md)
+  [`tq_transform_xy()`](https://business-science.github.io/tidyquant/reference/deprecated.md)
+  : Deprecated functions
+
+# Articles
+
+### All vignettes
+
+- [Introduction to
+  tidyquant](https://business-science.github.io/tidyquant/articles/TQ00-introduction-to-tidyquant.md):
+- [Core Functions in
+  tidyquant](https://business-science.github.io/tidyquant/articles/TQ01-core-functions-in-tidyquant.md):
+- [R Quantitative Analysis Package Integrations in
+  tidyquant](https://business-science.github.io/tidyquant/articles/TQ02-quant-integrations-in-tidyquant.md):
+- [Scaling and Modeling with
+  tidyquant](https://business-science.github.io/tidyquant/articles/TQ03-scaling-and-modeling-with-tidyquant.md):
+- [Charting with
+  tidyquant](https://business-science.github.io/tidyquant/articles/TQ04-charting-with-tidyquant.md):
+- [Performance Analysis with
+  tidyquant](https://business-science.github.io/tidyquant/articles/TQ05-performance-analysis-with-tidyquant.md):
+- [Excel in R with
+  tidyquant](https://business-science.github.io/tidyquant/articles/TQ06-excel-in-r.md):
