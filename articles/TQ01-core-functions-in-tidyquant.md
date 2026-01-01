@@ -125,7 +125,7 @@ aapl_prices  <- tq_get("AAPL", get = "stock.prices", from = " 1990-01-01")
 aapl_prices 
 ```
 
-    ## # A tibble: 9,045 × 8
+    ## # A tibble: 9,067 × 8
     ##    symbol date        open  high   low close    volume adjusted
     ##    <chr>  <date>     <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl>
     ##  1 AAPL   1990-01-02 0.315 0.335 0.312 0.333 183198400    0.261
@@ -138,7 +138,7 @@ aapl_prices
     ##  8 AAPL   1990-01-11 0.324 0.324 0.308 0.308 211052800    0.242
     ##  9 AAPL   1990-01-12 0.306 0.310 0.301 0.308 171897600    0.242
     ## 10 AAPL   1990-01-15 0.308 0.319 0.306 0.306 161739200    0.240
-    ## # ℹ 9,035 more rows
+    ## # ℹ 9,057 more rows
 
 We can get multiple stocks:
 
@@ -188,20 +188,20 @@ wti_price_usd <- tq_get("DCOILWTICO", get = "economic.data")
 wti_price_usd 
 ```
 
-    ## # A tibble: 2,843 × 3
+    ## # A tibble: 2,607 × 3
     ##    symbol     date       price
     ##    <chr>      <date>     <dbl>
-    ##  1 DCOILWTICO 2015-01-01  NA  
-    ##  2 DCOILWTICO 2015-01-02  52.7
-    ##  3 DCOILWTICO 2015-01-05  50.0
-    ##  4 DCOILWTICO 2015-01-06  48.0
-    ##  5 DCOILWTICO 2015-01-07  48.7
-    ##  6 DCOILWTICO 2015-01-08  48.8
-    ##  7 DCOILWTICO 2015-01-09  48.4
-    ##  8 DCOILWTICO 2015-01-12  46.1
-    ##  9 DCOILWTICO 2015-01-13  45.9
-    ## 10 DCOILWTICO 2015-01-14  48.5
-    ## # ℹ 2,833 more rows
+    ##  1 DCOILWTICO 2016-01-01  NA  
+    ##  2 DCOILWTICO 2016-01-04  36.8
+    ##  3 DCOILWTICO 2016-01-05  36.0
+    ##  4 DCOILWTICO 2016-01-06  34.0
+    ##  5 DCOILWTICO 2016-01-07  33.3
+    ##  6 DCOILWTICO 2016-01-08  33.2
+    ##  7 DCOILWTICO 2016-01-11  31.4
+    ##  8 DCOILWTICO 2016-01-12  30.4
+    ##  9 DCOILWTICO 2016-01-13  30.4
+    ## 10 DCOILWTICO 2016-01-14  31.2
+    ## # ℹ 2,597 more rows
 
 ### 2.3 Nasdaq Data Link (Quandl) API
 
@@ -536,20 +536,20 @@ wti_prices %>%
                  col_rename = "WTI Price")
 ```
 
-    ## # A tibble: 131 × 2
+    ## # A tibble: 120 × 2
     ##    date       `WTI Price`
     ##    <date>           <dbl>
-    ##  1 2015-01-30        47.8
-    ##  2 2015-02-27        49.8
-    ##  3 2015-03-31        47.7
-    ##  4 2015-04-30        59.6
-    ##  5 2015-05-29        60.2
-    ##  6 2015-06-30        59.5
-    ##  7 2015-07-31        47.1
-    ##  8 2015-08-31        49.2
-    ##  9 2015-09-30        45.1
-    ## 10 2015-10-30        46.6
-    ## # ℹ 121 more rows
+    ##  1 2016-01-29        33.7
+    ##  2 2016-02-29        32.7
+    ##  3 2016-03-31        36.9
+    ##  4 2016-04-29        46.0
+    ##  5 2016-05-31        49.1
+    ##  6 2016-06-30        48.3
+    ##  7 2016-07-29        41.5
+    ##  8 2016-08-31        44.7
+    ##  9 2016-09-30        47.7
+    ## 10 2016-10-31        46.8
+    ## # ℹ 110 more rows
 
 ### 3.2 Mutate Quantitative Data, tq_mutate
 

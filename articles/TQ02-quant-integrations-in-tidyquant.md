@@ -782,13 +782,13 @@ lm(MA ~ V, data = stock_pairs) %>%
     ## lm(formula = MA ~ V, data = stock_pairs)
     ## 
     ## Residuals:
-    ##        Min         1Q     Median         3Q        Max 
-    ## -0.0269575 -0.0039655  0.0002153  0.0039651  0.0289461 
+    ##       Min        1Q    Median        3Q       Max 
+    ## -0.026957 -0.003965  0.000215  0.003965  0.028946 
     ## 
     ## Coefficients:
     ##              Estimate Std. Error t value Pr(>|t|)    
     ## (Intercept) 0.0001130  0.0003097   0.365    0.715    
-    ## V           0.8133667  0.0226394  35.927   <2e-16 ***
+    ## V           0.8133667  0.0226393  35.927   <2e-16 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
