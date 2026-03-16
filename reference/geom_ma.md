@@ -25,16 +25,15 @@ available:
   (DEMA)](https://www.investopedia.com/articles/trading/10/double-exponential-moving-average.asp)**:
   Uses `v` volume factor, `wilder` and `ratio` args.
 
-- **[Zero-lag exponential moving averages
-  (ZLEMA)](https://en.wikipedia.org/wiki/Zero_lag_exponential_moving_average)**:
-  Uses `wilder` and `ratio` args.
+- **Zero-lag exponential moving averages (ZLEMA)**: Uses `wilder` and
+  `ratio` args.
 
 - **[Volume-weighted moving averages
   (VWMA)](https://www.investopedia.com/articles/trading/11/trading-with-vwap-mvwap.asp)**:
   Requires `volume` aesthetic.
 
 - **[Elastic, volume-weighted moving averages
-  (EVWMA)](https://www.motivewave.com/studies/elastic_volume_weighted_moving_average.htm)**:
+  (EVWMA)](https://docs.motivewave.com/studies/e-f#elastic-volume-weighted-moving-average)**:
   Requires `volume` aesthetic.
 
 ## Usage

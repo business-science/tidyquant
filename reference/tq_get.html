@@ -90,10 +90,12 @@ Yahoo Finance Japan. Wrapper for <code><a href="https://rdrr.io/pkg/quantmod/man
 <li><p><code>"economic.data"</code>: Get economic data from
 <a href="https://fred.stlouisfed.org/" class="external-link">FRED</a>. rapper for <code><a href="https://rdrr.io/pkg/quantmod/man/getSymbols.FRED.html" class="external-link">quantmod::getSymbols.FRED()</a></code>.</p></li>
 <li><p><code>"quandl"</code>: Get data sets from
-<a href="https://data.nasdaq.com/" class="external-link">Quandl</a>. Wrapper for <code><a href="https://rdrr.io/pkg/Quandl/man/Quandl.html" class="external-link">Quandl::Quandl()</a></code>.
+<a href="https://data.nasdaq.com/" class="external-link">Nasdaq Data Link</a>. Wrapper for tidyquant's
+built-in Data Link client.
 See also <code><a href="quandl_api_key.html">quandl_api_key()</a></code>.</p></li>
 <li><p><code>"quandl.datatable"</code>: Get data tables from
-<a href="https://data.nasdaq.com/" class="external-link">Quandl</a>. Wrapper for <code><a href="https://rdrr.io/pkg/Quandl/man/Quandl.datatable.html" class="external-link">Quandl::Quandl.datatable()</a></code>.
+<a href="https://data.nasdaq.com/" class="external-link">Nasdaq Data Link</a>. Wrapper for tidyquant's
+built-in Data Link datatable client.
 See also <code><a href="quandl_api_key.html">quandl_api_key()</a></code>.</p></li>
 <li><p><code>"tiingo"</code>: Get data sets from
 Tingo (https://www.tiingo.com/). Wrapper for <code><a href="https://rdrr.io/pkg/riingo/man/riingo_prices.html" class="external-link">riingo::riingo_prices()</a></code>.
@@ -142,7 +144,7 @@ YYYY-MM-DD format.</p></li>
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p><code>tq_get()</code> is a consolidated function that gets data from various
 web sources. The function is a wrapper for several <code>quantmod</code>
-functions, <code>Quandl</code> functions, and also gets data from websources unavailable
+functions, several web APIs, and also gets data from websources unavailable
 in other packages.
 The results are always returned as a <code>tibble</code>. The advantages
 are (1) only one function is needed for all data sources and (2) the function
@@ -191,11 +193,9 @@ get option.</p></li>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># --- Quandl ---</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/is_installed.html" class="external-link">is_installed</a></span><span class="op">(</span><span class="st">"quandl"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># --- Nasdaq Data Link (formerly Quandl) ---</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="quandl_api_key.html">quandl_api_key</a></span><span class="op">(</span><span class="st">'&lt;your_api_key&gt;'</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">tq_get</span><span class="op">(</span><span class="st">"EIA/PET_MTTIMUS1_M"</span>, get <span class="op">=</span> <span class="st">"quandl"</span>, from <span class="op">=</span> <span class="st">"2010-01-01"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Energy data from EIA</span></span></span>

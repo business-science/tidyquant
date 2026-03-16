@@ -45,16 +45,14 @@ tq_get_options()
     [FRED](https://fred.stlouisfed.org/). rapper for
     [`quantmod::getSymbols.FRED()`](https://rdrr.io/pkg/quantmod/man/getSymbols.FRED.html).
 
-  - `"quandl"`: Get data sets from [Quandl](https://data.nasdaq.com/).
-    Wrapper for
-    [`Quandl::Quandl()`](https://rdrr.io/pkg/Quandl/man/Quandl.html).
-    See also
+  - `"quandl"`: Get data sets from [Nasdaq Data
+    Link](https://data.nasdaq.com/). Wrapper for tidyquant's built-in
+    Data Link client. See also
     [`quandl_api_key()`](https://business-science.github.io/tidyquant/reference/quandl_api_key.md).
 
-  - `"quandl.datatable"`: Get data tables from
-    [Quandl](https://data.nasdaq.com/). Wrapper for
-    [`Quandl::Quandl.datatable()`](https://rdrr.io/pkg/Quandl/man/Quandl.datatable.html).
-    See also
+  - `"quandl.datatable"`: Get data tables from [Nasdaq Data
+    Link](https://data.nasdaq.com/). Wrapper for tidyquant's built-in
+    Data Link datatable client. See also
     [`quandl_api_key()`](https://business-science.github.io/tidyquant/reference/quandl_api_key.md).
 
   - `"tiingo"`: Get data sets from Tingo (https://www.tiingo.com/).
@@ -119,7 +117,7 @@ Returns data in the form of a `tibble` object.
 
 `tq_get()` is a consolidated function that gets data from various web
 sources. The function is a wrapper for several `quantmod` functions,
-`Quandl` functions, and also gets data from websources unavailable in
+several web APIs, and also gets data from websources unavailable in
 other packages. The results are always returned as a `tibble`. The
 advantages are (1) only one function is needed for all data sources and
 (2) the function can be seamlessly used with the tidyverse: `purrr`,
@@ -176,11 +174,9 @@ mult_stocks <- tq_get(c("META", "AMZN"),
 
 if (FALSE) { # \dontrun{
 
-# --- Quandl ---
-if (rlang::is_installed("quandl")) {
+# --- Nasdaq Data Link (formerly Quandl) ---
 quandl_api_key('<your_api_key>')
 tq_get("EIA/PET_MTTIMUS1_M", get = "quandl", from = "2010-01-01")
-}
 
 
 # Energy data from EIA

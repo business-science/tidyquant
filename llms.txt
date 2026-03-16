@@ -191,9 +191,9 @@ Functions for getting financial data from various API sources.
 ### API Keys
 
 - [`quandl_api_key()`](https://business-science.github.io/tidyquant/reference/quandl_api_key.md)
-  : Query or set Quandl API Key
+  : Query or set Nasdaq Data Link API Key
 - [`quandl_search()`](https://business-science.github.io/tidyquant/reference/quandl_search.md)
-  : Search the Quandl database
+  : Search the Nasdaq Data Link database
 - [`av_api_key()`](https://business-science.github.io/tidyquant/reference/av_api_key.md)
   : Set Alpha Vantage API Key
 - [`tiingo_api_key()`](https://business-science.github.io/tidyquant/reference/tiingo_api_key.md)

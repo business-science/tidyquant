@@ -1,6 +1,6 @@
-# Search the Quandl database
+# Search the Nasdaq Data Link database
 
-Search the Quandl database
+Search the Nasdaq Data Link database
 
 ## Usage
 
@@ -12,13 +12,13 @@ quandl_search(query, silent = FALSE, per_page = 10, ...)
 
 - query:
 
-  A character string giving the search term passed to
-  [`Quandl::Quandl.search()`](https://rdrr.io/pkg/Quandl/man/Quandl.search.html).
+  A character string giving the search term passed to the Nasdaq Data
+  Link dataset search endpoint.
 
 - silent:
 
-  A logical indicating whether to suppress messages from
-  [`Quandl::Quandl.search()`](https://rdrr.io/pkg/Quandl/man/Quandl.search.html).
+  A logical indicating whether to suppress console output for matching
+  datasets.
 
 - per_page:
 
@@ -26,8 +26,7 @@ quandl_search(query, silent = FALSE, per_page = 10, ...)
 
 - ...:
 
-  Additional arguments passed to
-  [`Quandl::Quandl.search()`](https://rdrr.io/pkg/Quandl/man/Quandl.search.html).
+  Additional arguments passed to the Nasdaq Data Link search API.
 
 ## Value
 
@@ -35,8 +34,7 @@ Returns a tibble with search results.
 
 ## Details
 
-A wrapper for
-[`Quandl::Quandl.search()`](https://rdrr.io/pkg/Quandl/man/Quandl.search.html)
+A wrapper around the Nasdaq Data Link dataset search endpoint.
 
 ## See also
 

@@ -1,6 +1,6 @@
-# Query or set Quandl API Key
+# Query or set Nasdaq Data Link API Key
 
-Query or set Quandl API Key
+Query or set Nasdaq Data Link API Key
 
 ## Usage
 
@@ -12,16 +12,17 @@ quandl_api_key(api_key)
 
 - api_key:
 
-  Optionally passed parameter to set Quandl `api_key`.
+  Optionally passed parameter to set the Nasdaq Data Link `api_key`.
 
 ## Value
 
-Returns invisibly the currently set `api_key`
+Returns invisibly the currently set `api_key`.
 
 ## Details
 
-A wrapper for
-[`Quandl::Quandl.api_key()`](https://rdrr.io/pkg/Quandl/man/Quandl.api_key.html)
+`quandl_api_key()` stores the API key used by tidyquant's built-in
+Nasdaq Data Link client. The option name remains `Quandl.api_key` for
+backward compatibility.
 
 ## See also
 
@@ -32,8 +33,6 @@ A wrapper for
 
 ``` r
 if (FALSE) { # \dontrun{
-if (rlang::is_installed("Quandl")) {
 quandl_api_key(api_key = "foobar")
-}
 } # }
 ```
