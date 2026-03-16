@@ -56,7 +56,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.12" id="tidyquant-1012">tidyquant 1.0.12<a class="anchor" aria-label="anchor" href="#tidyquant-1012"></a></h2>
-<ul><li>Patched the FRED-dependent CRAN failure path so an unavailable economic.data endpoint no longer cascades into example/test errors.</li>
+<ul><li>Remove dependency to Quandl R package</li>
+<li>Patched the FRED-dependent CRAN failure path so an unavailable economic.data endpoint no longer cascades into example/test errors.</li>
 <li>Added explicit parameter docs for quandl_search() in R/api-quandl.R (line 38) and synced the generated Rd in man/quandl_search.Rd (line 9). The missing items were query, silent, per_page, and …, which is what triggered the checking Rd sections warning.</li>
 </ul></div>
     <div class="section level2">

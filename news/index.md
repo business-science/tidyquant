@@ -2,6 +2,7 @@
 
 ## tidyquant 1.0.12
 
+- Remove dependency to Quandl R package
 - Patched the FRED-dependent CRAN failure path so an unavailable
   economic.data endpoint no longer cascades into example/test errors.
 - Added explicit parameter docs for quandl_search() in R/api-quandl.R

@@ -523,7 +523,7 @@ returns_joined
     ##  7 META   2013-07-31          0.479              0.0373 
     ##  8 META   2013-08-30          0.122             -0.0104 
     ##  9 META   2013-09-30          0.217              0.0253 
-    ## 10 META   2013-10-31         -0.000398           0.0502 
+    ## 10 META   2013-10-31         -0.000398           0.0503 
     ## # ℹ 182 more rows
 
 The [`TTR::runCor`](https://rdrr.io/pkg/TTR/man/runFun.html) function
@@ -782,13 +782,13 @@ lm(MA ~ V, data = stock_pairs) %>%
     ## lm(formula = MA ~ V, data = stock_pairs)
     ## 
     ## Residuals:
-    ##       Min        1Q    Median        3Q       Max 
-    ## -0.026957 -0.003966  0.000215  0.003965  0.028946 
+    ##        Min         1Q     Median         3Q        Max 
+    ## -0.0269569 -0.0039655  0.0002151  0.0039654  0.0289465 
     ## 
     ## Coefficients:
     ##              Estimate Std. Error t value Pr(>|t|)    
     ## (Intercept) 0.0001130  0.0003097   0.365    0.715    
-    ## V           0.8133659  0.0226394  35.927   <2e-16 ***
+    ## V           0.8133643  0.0226394  35.927   <2e-16 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
