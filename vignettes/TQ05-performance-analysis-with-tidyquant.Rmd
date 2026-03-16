@@ -703,4 +703,3 @@ RaRb_multiple_portfolio %>%
                    Rf              = 0.03 / 12, 
                    p               = 0.99)
 ```
-
