@@ -1,4 +1,10 @@
-# tidyquant 1.0.011
+# tidyquant 1.0.12
+
+- Patched the FRED-dependent CRAN failure path so an unavailable economic.data endpoint no longer cascades into example/test errors.
+- Added explicit parameter docs for quandl_search() in R/api-quandl.R (line 38) and synced the generated Rd in man/quandl_search.Rd (line 9). The missing items were query, silent, per_page, and ..., which is what triggered the checking Rd \usage sections warning.
+
+
+# tidyquant 1.0.11
 
 Fixes text: XYZ is now a live symbol. 
 

@@ -36,7 +36,12 @@ quandl_api_key <- function(api_key) {
 
 #' Search the Quandl database
 #'
-#' @inheritParams Quandl::Quandl.search
+#' @param query A character string giving the search term passed to
+#'   `Quandl::Quandl.search()`.
+#' @param silent A logical indicating whether to suppress messages from
+#'   `Quandl::Quandl.search()`.
+#' @param per_page An integer specifying how many search results to return per page.
+#' @param ... Additional arguments passed to `Quandl::Quandl.search()`.
 #'
 #' @return Returns a tibble with search results.
 #'

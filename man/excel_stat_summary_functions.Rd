@@ -100,7 +100,7 @@ Most functions replicate the behavior of Excel:
 }
 
 \examples{
-\dontshow{if (rlang::is_installed("forcats")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("forcats")) withAutoprint(\{ # examplesIf}
 # Libraries
 library(timetk, exclude = "FANG")
 library(forcats)

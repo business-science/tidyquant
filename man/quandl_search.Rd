@@ -7,13 +7,15 @@
 quandl_search(query, silent = FALSE, per_page = 10, ...)
 }
 \arguments{
-\item{query}{Search terms}
+\item{query}{A character string giving the search term passed to
+\code{Quandl::Quandl.search()}.}
 
-\item{silent}{Prints the results when FALSE.}
+\item{silent}{A logical indicating whether to suppress messages from
+\code{Quandl::Quandl.search()}.}
 
-\item{per_page}{Number of results returned per page.}
+\item{per_page}{An integer specifying how many search results to return per page.}
 
-\item{...}{Additional named values that are interpretted as Quandl API parameters.}
+\item{...}{Additional arguments passed to \code{Quandl::Quandl.search()}.}
 }
 \value{
 Returns a tibble with search results.
@@ -25,7 +27,7 @@ Search the Quandl database
 A wrapper for \code{Quandl::Quandl.search()}
 }
 \examples{
-\dontshow{if (rlang::is_installed("Quandl")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("Quandl")) withAutoprint(\{ # examplesIf}
 
 \dontrun{
 quandl_search(query = "oil")

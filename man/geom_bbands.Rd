@@ -86,12 +86,14 @@ typically desired for moving averages.}
 \code{NA}, the default, includes if any aesthetics are mapped.
 \code{FALSE} never includes, and \code{TRUE} always includes.
 It can also be a named logical vector to finely select the aesthetics to
-display.}
+display. To include legend keys for all levels, even
+when no data exists, use \code{TRUE}.  If \code{NA}, all levels are shown in legend,
+but unobserved levels are omitted.}
 
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behavior from
-the default plot specification, e.g. \code{\link[ggplot2:borders]{ggplot2::borders()}}.}
+the default plot specification, e.g. \code{\link[ggplot2:annotation_borders]{ggplot2::borders()}}.}
 
 \item{ma_fun}{The function used to calculate the moving average. Seven options are
 available including: SMA, EMA, WMA, DEMA, ZLEMA, VWMA, and EVWMA. The default is

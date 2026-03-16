@@ -19,7 +19,7 @@ Requires the riingo package to be installed.
 A wrapper for \code{riingo::ringo_set_token()}
 }
 \examples{
-\dontshow{if (rlang::is_installed("riingo")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("riingo")) withAutoprint(\{ # examplesIf}
 \dontrun{
   tiingo_api_key(api_key = "foobar")
 }
