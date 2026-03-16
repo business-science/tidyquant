@@ -316,6 +316,14 @@ quandl_handle_errors <- function(response) {
         )
 
         message <- NULL
+        if (status == 403 &&
+            grepl("Incapsula|Request unsuccessful", content, ignore.case = TRUE)) {
+            message <- paste(
+                "Nasdaq Data Link blocked this request before API authentication",
+                "(HTTP 403 / edge security challenge).",
+                "This is typically a site-side access restriction rather than an invalid API key."
+            )
+        }
         if (!is.null(parsed$quandl_error$message)) {
             message <- parsed$quandl_error$message
         }
