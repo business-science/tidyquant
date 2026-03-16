@@ -188,9 +188,17 @@ fb_stock_prices %>%
 #> # ℹ 242 more rows
 
 # Example 3: Using tq_mutate to work with non-OHLC data
-tq_get("DCOILWTICO", get = "economic.data") %>%
-    tq_mutate(select = price, mutate_fun = lag.xts, k = 1, na.pad = TRUE)
-#> # A tibble: 2,607 × 4
+wti_prices <- suppressWarnings(
+    tq_get("DCOILWTICO", get = "economic.data")
+)
+
+if (tibble::is_tibble(wti_prices)) {
+    wti_prices %>%
+        tq_mutate(select = price, mutate_fun = lag.xts, k = 1, na.pad = TRUE)
+} else {
+    message("Economic data unavailable; skipping web-dependent example.")
+}
+#> # A tibble: 2,657 × 4
 #>    symbol     date       price lag.xts
 #>    <chr>      <date>     <dbl>   <dbl>
 #>  1 DCOILWTICO 2016-01-01  NA      NA  
@@ -203,7 +211,7 @@ tq_get("DCOILWTICO", get = "economic.data") %>%
 #>  8 DCOILWTICO 2016-01-12  30.4    31.4
 #>  9 DCOILWTICO 2016-01-13  30.4    30.4
 #> 10 DCOILWTICO 2016-01-14  31.2    30.4
-#> # ℹ 2,597 more rows
+#> # ℹ 2,647 more rows
 
 # Example 4: Using tq_mutate to apply a rolling regression
 fb_returns <- fb_stock_prices %>%

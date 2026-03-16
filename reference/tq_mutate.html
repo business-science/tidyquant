@@ -17,7 +17,7 @@ used when periodicity changes"><meta property="og:image" content="https://busine
 
     <a class="navbar-brand me-2" href="../index.html">tidyquant</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.11.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.12</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -245,9 +245,17 @@ respectively.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 242 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example 3: Using tq_mutate to work with non-OHLC data</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"DCOILWTICO"</span>, get <span class="op">=</span> <span class="st">"economic.data"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>    <span class="fu">tq_mutate</span><span class="op">(</span>select <span class="op">=</span> <span class="va">price</span>, mutate_fun <span class="op">=</span> <span class="va">lag.xts</span>, k <span class="op">=</span> <span class="fl">1</span>, na.pad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2,607 × 4</span></span>
+<span class="r-in"><span><span class="va">wti_prices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="tq_get.html">tq_get</a></span><span class="op">(</span><span class="st">"DCOILWTICO"</span>, get <span class="op">=</span> <span class="st">"economic.data"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/is_tibble.html" class="external-link">is_tibble</a></span><span class="op">(</span><span class="va">wti_prices</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="va">wti_prices</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>        <span class="fu">tq_mutate</span><span class="op">(</span>select <span class="op">=</span> <span class="va">price</span>, mutate_fun <span class="op">=</span> <span class="va">lag.xts</span>, k <span class="op">=</span> <span class="fl">1</span>, na.pad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Economic data unavailable; skipping web-dependent example."</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2,657 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    symbol     date       price lag.xts</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> DCOILWTICO 2016-01-01  <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>  </span>
@@ -260,7 +268,7 @@ respectively.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> DCOILWTICO 2016-01-12  30.4    31.4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> DCOILWTICO 2016-01-13  30.4    30.4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> DCOILWTICO 2016-01-14  31.2    30.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2,597 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2,647 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example 4: Using tq_mutate to apply a rolling regression</span></span></span>
 <span class="r-in"><span><span class="va">fb_returns</span> <span class="op">&lt;-</span> <span class="va">fb_stock_prices</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>

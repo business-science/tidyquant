@@ -53,14 +53,14 @@ c("AAPL", "GOOG", "META") %>%
     ## # A tibble: 756 × 8
     ##    symbol date        open  high   low close    volume adjusted
     ##    <chr>  <date>     <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl>
-    ##  1 AAPL   2016-01-04  25.7  26.3  25.5  26.3 270597600     23.8
-    ##  2 AAPL   2016-01-05  26.4  26.5  25.6  25.7 223164000     23.2
+    ##  1 AAPL   2016-01-04  25.7  26.3  25.5  26.3 270597600     23.7
+    ##  2 AAPL   2016-01-05  26.4  26.5  25.6  25.7 223164000     23.1
     ##  3 AAPL   2016-01-06  25.1  25.6  25.0  25.2 273829600     22.7
     ##  4 AAPL   2016-01-07  24.7  25.0  24.1  24.1 324377600     21.7
-    ##  5 AAPL   2016-01-08  24.6  24.8  24.2  24.2 283192000     21.9
+    ##  5 AAPL   2016-01-08  24.6  24.8  24.2  24.2 283192000     21.8
     ##  6 AAPL   2016-01-11  24.7  24.8  24.3  24.6 198957600     22.2
     ##  7 AAPL   2016-01-12  25.1  25.2  24.7  25.0 196616800     22.5
-    ##  8 AAPL   2016-01-13  25.1  25.3  24.3  24.3 249758400     22.0
+    ##  8 AAPL   2016-01-13  25.1  25.3  24.3  24.3 249758400     21.9
     ##  9 AAPL   2016-01-14  24.5  25.1  23.9  24.9 252680400     22.4
     ## 10 AAPL   2016-01-15  24.0  24.4  23.8  24.3 319335600     21.9
     ## # ℹ 746 more rows
@@ -104,14 +104,14 @@ stock_list %>%
     ## # A tibble: 756 × 9
     ##    stocks industry   date        open  high   low close    volume adjusted
     ##    <chr>  <chr>      <date>     <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl>
-    ##  1 AAPL   Technology 2016-01-04  25.7  26.3  25.5  26.3 270597600     23.8
-    ##  2 AAPL   Technology 2016-01-05  26.4  26.5  25.6  25.7 223164000     23.2
+    ##  1 AAPL   Technology 2016-01-04  25.7  26.3  25.5  26.3 270597600     23.7
+    ##  2 AAPL   Technology 2016-01-05  26.4  26.5  25.6  25.7 223164000     23.1
     ##  3 AAPL   Technology 2016-01-06  25.1  25.6  25.0  25.2 273829600     22.7
     ##  4 AAPL   Technology 2016-01-07  24.7  25.0  24.1  24.1 324377600     21.7
-    ##  5 AAPL   Technology 2016-01-08  24.6  24.8  24.2  24.2 283192000     21.9
+    ##  5 AAPL   Technology 2016-01-08  24.6  24.8  24.2  24.2 283192000     21.8
     ##  6 AAPL   Technology 2016-01-11  24.7  24.8  24.3  24.6 198957600     22.2
     ##  7 AAPL   Technology 2016-01-12  25.1  25.2  24.7  25.0 196616800     22.5
-    ##  8 AAPL   Technology 2016-01-13  25.1  25.3  24.3  24.3 249758400     22.0
+    ##  8 AAPL   Technology 2016-01-13  25.1  25.3  24.3  24.3 249758400     21.9
     ##  9 AAPL   Technology 2016-01-14  24.5  25.1  23.9  24.9 252680400     22.4
     ## 10 AAPL   Technology 2016-01-15  24.0  24.4  23.8  24.3 319335600     21.9
     ## # ℹ 746 more rows
@@ -127,16 +127,16 @@ tq_index("DOW")
     ## # A tibble: 31 × 8
     ##    symbol company      identifier sedol weight sector shares_held local_currency
     ##    <chr>  <chr>        <chr>      <chr>  <dbl> <chr>        <dbl> <chr>         
-    ##  1 GS     GOLDMAN SAC… 38141G104  2407… 0.112  -          5692280 USD           
-    ##  2 CAT    CATERPILLAR… 149123101  2180… 0.0733 -          5692280 USD           
-    ##  3 MSFT   MICROSOFT C… 594918104  2588… 0.0619 -          5692280 USD           
-    ##  4 AXP    AMERICAN EX… 025816109  2026… 0.0474 -          5692280 USD           
-    ##  5 V      VISA INC CL… 92826C839  B2PZ… 0.0449 -          5692280 USD           
-    ##  6 HD     HOME DEPOT … 437076102  2434… 0.0440 -          5692280 USD           
-    ##  7 UNH    UNITEDHEALT… 91324P102  2917… 0.0422 -          5692280 USD           
-    ##  8 AMGN   AMGEN INC    031162100  2023… 0.0417 -          5692280 USD           
-    ##  9 SHW    SHERWIN WIL… 824348106  2804… 0.0414 -          5692280 USD           
-    ## 10 JPM    JPMORGAN CH… 46625H100  2190… 0.0411 -          5692280 USD           
+    ##  1 GS     GOLDMAN SAC… 38141G104  2407… 0.103  -          5636894 USD           
+    ##  2 CAT    CATERPILLAR… 149123101  2180… 0.0917 -          5636894 USD           
+    ##  3 MSFT   MICROSOFT C… 594918104  2588… 0.0523 -          5636894 USD           
+    ##  4 AMGN   AMGEN INC    031162100  2023… 0.0484 -          5636894 USD           
+    ##  5 HD     HOME DEPOT … 437076102  2434… 0.0448 -          5636894 USD           
+    ##  6 MCD    MCDONALD S … 580135101  2550… 0.0431 -          5636894 USD           
+    ##  7 SHW    SHERWIN WIL… 824348106  2804… 0.0422 -          5636894 USD           
+    ##  8 V      VISA INC CL… 92826C839  B2PZ… 0.0406 -          5636894 USD           
+    ##  9 TRV    TRAVELERS C… 89417E109  2769… 0.0400 -          5636894 USD           
+    ## 10 AXP    AMERICAN EX… 025816109  2026… 0.0396 -          5636894 USD           
     ## # ℹ 21 more rows
 
 …or, get an exchange.
@@ -155,20 +155,20 @@ tq_index("DOW") %>%
     tq_get(get = "stock.prices")
 ```
 
-    ## # A tibble: 7,542 × 15
+    ## # A tibble: 7,689 × 15
     ##    symbol company      identifier sedol weight sector shares_held local_currency
     ##    <chr>  <chr>        <chr>      <chr>  <dbl> <chr>        <dbl> <chr>         
-    ##  1 GS     GOLDMAN SAC… 38141G104  2407…  0.112 -          5692280 USD           
-    ##  2 GS     GOLDMAN SAC… 38141G104  2407…  0.112 -          5692280 USD           
-    ##  3 GS     GOLDMAN SAC… 38141G104  2407…  0.112 -          5692280 USD           
-    ##  4 GS     GOLDMAN SAC… 38141G104  2407…  0.112 -          5692280 USD           
-    ##  5 GS     GOLDMAN SAC… 38141G104  2407…  0.112 -          5692280 USD           
-    ##  6 GS     GOLDMAN SAC… 38141G104  2407…  0.112 -          5692280 USD           
-    ##  7 GS     GOLDMAN SAC… 38141G104  2407…  0.112 -          5692280 USD           
-    ##  8 GS     GOLDMAN SAC… 38141G104  2407…  0.112 -          5692280 USD           
-    ##  9 GS     GOLDMAN SAC… 38141G104  2407…  0.112 -          5692280 USD           
-    ## 10 GS     GOLDMAN SAC… 38141G104  2407…  0.112 -          5692280 USD           
-    ## # ℹ 7,532 more rows
+    ##  1 GS     GOLDMAN SAC… 38141G104  2407…  0.103 -          5636894 USD           
+    ##  2 GS     GOLDMAN SAC… 38141G104  2407…  0.103 -          5636894 USD           
+    ##  3 GS     GOLDMAN SAC… 38141G104  2407…  0.103 -          5636894 USD           
+    ##  4 GS     GOLDMAN SAC… 38141G104  2407…  0.103 -          5636894 USD           
+    ##  5 GS     GOLDMAN SAC… 38141G104  2407…  0.103 -          5636894 USD           
+    ##  6 GS     GOLDMAN SAC… 38141G104  2407…  0.103 -          5636894 USD           
+    ##  7 GS     GOLDMAN SAC… 38141G104  2407…  0.103 -          5636894 USD           
+    ##  8 GS     GOLDMAN SAC… 38141G104  2407…  0.103 -          5636894 USD           
+    ##  9 GS     GOLDMAN SAC… 38141G104  2407…  0.103 -          5636894 USD           
+    ## 10 GS     GOLDMAN SAC… 38141G104  2407…  0.103 -          5636894 USD           
+    ## # ℹ 7,679 more rows
     ## # ℹ 7 more variables: date <date>, open <dbl>, high <dbl>, low <dbl>,
     ## #   close <dbl>, volume <dbl>, adjusted <dbl>
 
@@ -271,12 +271,12 @@ AAPL
     ##  2 AAPL   2007-01-04  3.00  3.07  2.99  3.06  847260400     2.57
     ##  3 AAPL   2007-01-05  3.06  3.08  3.01  3.04  834741600     2.55
     ##  4 AAPL   2007-01-08  3.07  3.09  3.05  3.05  797106800     2.56
-    ##  5 AAPL   2007-01-09  3.09  3.32  3.04  3.31 3349298400     2.78
+    ##  5 AAPL   2007-01-09  3.09  3.32  3.04  3.31 3349298400     2.77
     ##  6 AAPL   2007-01-10  3.38  3.49  3.34  3.46 2952880000     2.91
     ##  7 AAPL   2007-01-11  3.43  3.46  3.40  3.42 1440252800     2.87
     ##  8 AAPL   2007-01-12  3.38  3.39  3.33  3.38 1312690400     2.84
     ##  9 AAPL   2007-01-16  3.42  3.47  3.41  3.47 1244076400     2.91
-    ## 10 AAPL   2007-01-17  3.48  3.49  3.39  3.39 1646260000     2.85
+    ## 10 AAPL   2007-01-17  3.48  3.49  3.39  3.39 1646260000     2.84
     ## # ℹ 2,508 more rows
 
 Next, come up with a function to help us collect annual log returns. The
@@ -350,7 +350,7 @@ mod
     ## 
     ## Coefficients:
     ## (Intercept)   year(date)  
-    ##    58.86282     -0.02915
+    ##    58.86281     -0.02915
 
 We can utilize the `broom` package to get “tidy” data from the model.
 There’s three primary functions:
@@ -419,11 +419,11 @@ stocks_tbl
     ## # A tibble: 5 × 8
     ##   symbol company      identifier sedol  weight sector shares_held local_currency
     ##   <chr>  <chr>        <chr>      <chr>   <dbl> <chr>        <dbl> <chr>         
-    ## 1 MGM    MGM RESORTS… 552953101  2547… 1.30e-4 -          2541251 USD           
-    ## 2 AON    AON PLC CLA… G0403H108  BLP1… 1.30e-3 -          2618679 USD           
-    ## 3 CFG    CITIZENS FI… 174610105  BQRX… 4.29e-4 -          5231385 USD           
-    ## 4 IP     INTERNATION… 460146103  2465… 3.53e-4 -          6397135 USD           
-    ## 5 DOC    HEALTHPEAK … 42250P103  BJBL… 1.93e-4 -          8585966 USD
+    ## 1 BEN    FRANKLIN RE… 354613101  2350… 1.33e-4 -          3652171 USD           
+    ## 2 CDNS   CADENCE DES… 127387108  2302… 1.37e-3 -          3183210 USD           
+    ## 3 OMC    OMNICOM GRO… 681919106  2279… 4.36e-4 -          3727286 USD           
+    ## 4 CF     CF INDUSTRI… 125269100  B0G4… 3.56e-4 -          1827310 USD           
+    ## 5 GDDY   GODADDY INC… 380237107  BWFR… 1.93e-4 -          1583142 USD
 
 We can now apply our analysis function to the stocks using
 [`dplyr::mutate()`](https://dplyr.tidyverse.org/reference/mutate.html)
@@ -463,11 +463,11 @@ stocks_model_stats
     ## # Groups:   symbol, company [5]
     ##   symbol company                   data     estimate std.error statistic p.value
     ##   <chr>  <chr>                     <list>      <dbl>     <dbl>     <dbl>   <dbl>
-    ## 1 CFG    CITIZENS FINANCIAL GROUP  <tibble>  0.125      0.0780     1.60    0.356
-    ## 2 MGM    MGM RESORTS INTERNATIONAL <tibble>  0.0880     0.0763     1.15    0.282
-    ## 3 IP     INTERNATIONAL PAPER CO    <tibble>  0.0335     0.0544     0.616   0.555
-    ## 4 AON    AON PLC CLASS A           <tibble>  0.00845    0.0201     0.421   0.685
-    ## 5 DOC    HEALTHPEAK PROPERTIES INC <tibble> -0.00705    0.0193    -0.365   0.725
+    ## 1 CDNS   CADENCE DESIGN SYS INC    <tibble>  0.0724     0.0619    1.17     0.276
+    ## 2 OMC    OMNICOM GROUP             <tibble>  0.0299     0.0299    0.999    0.347
+    ## 3 BEN    FRANKLIN RESOURCES INC    <tibble>  0.00223    0.0389    0.0573   0.956
+    ## 4 CF     CF INDUSTRIES HOLDINGS I… <tibble> -0.0832     0.0626   -1.33     0.220
+    ## 5 GDDY   GODADDY INC   CLASS A     <tibble> -0.386    NaN       NaN      NaN
 
 We’re done! We now have the coefficient of the linear regression that
 tracks the direction of the trend line. We can easily extend this type
@@ -497,7 +497,7 @@ an `NA` value is returned when an error is generated along with a
 tq_get("XYZ", "stock.prices")
 ```
 
-    ## # A tibble: 2,514 × 8
+    ## # A tibble: 2,563 × 8
     ##    symbol date        open  high   low close  volume adjusted
     ##    <chr>  <date>     <dbl> <dbl> <dbl> <dbl>   <dbl>    <dbl>
     ##  1 XYZ    2016-01-04  12.8  12.9  12.1  12.2 2751500     12.2
@@ -510,7 +510,7 @@ tq_get("XYZ", "stock.prices")
     ##  8 XYZ    2016-01-13  12.1  12.2  11.1  11.6 2095200     11.6
     ##  9 XYZ    2016-01-14  11.5  11.6  10.8  10.8 1604900     10.8
     ## 10 XYZ    2016-01-15  10.6  10.8  10.1  10.3 1203700     10.3
-    ## # ℹ 2,504 more rows
+    ## # ℹ 2,553 more rows
 
 ### Pros and Cons to Built-In Error-Handling
 
@@ -545,20 +545,20 @@ c("AAPL", "GOOG", "BAD APPLE") %>%
     ## cannot open the connection
     ##  Removing BAD APPLE.
 
-    ## # A tibble: 5,028 × 8
+    ## # A tibble: 5,126 × 8
     ##    symbol date        open  high   low close    volume adjusted
     ##    <chr>  <date>     <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl>
-    ##  1 AAPL   2016-01-04  25.7  26.3  25.5  26.3 270597600     23.8
-    ##  2 AAPL   2016-01-05  26.4  26.5  25.6  25.7 223164000     23.2
+    ##  1 AAPL   2016-01-04  25.7  26.3  25.5  26.3 270597600     23.7
+    ##  2 AAPL   2016-01-05  26.4  26.5  25.6  25.7 223164000     23.1
     ##  3 AAPL   2016-01-06  25.1  25.6  25.0  25.2 273829600     22.7
     ##  4 AAPL   2016-01-07  24.7  25.0  24.1  24.1 324377600     21.7
-    ##  5 AAPL   2016-01-08  24.6  24.8  24.2  24.2 283192000     21.9
+    ##  5 AAPL   2016-01-08  24.6  24.8  24.2  24.2 283192000     21.8
     ##  6 AAPL   2016-01-11  24.7  24.8  24.3  24.6 198957600     22.2
     ##  7 AAPL   2016-01-12  25.1  25.2  24.7  25.0 196616800     22.5
-    ##  8 AAPL   2016-01-13  25.1  25.3  24.3  24.3 249758400     22.0
+    ##  8 AAPL   2016-01-13  25.1  25.3  24.3  24.3 249758400     21.9
     ##  9 AAPL   2016-01-14  24.5  25.1  23.9  24.9 252680400     22.4
     ## 10 AAPL   2016-01-15  24.0  24.4  23.8  24.3 319335600     21.9
-    ## # ℹ 5,018 more rows
+    ## # ℹ 5,116 more rows
 
 Now switching `complete_cases = FALSE` will retain any errors as `NA`
 values in a nested data frame. Notice that the error message and output
@@ -576,20 +576,20 @@ c("AAPL", "GOOG", "BAD APPLE") %>%
     ## ! x = 'BAD APPLE', get = 'stock.prices': Error in getSymbols.yahoo(Symbols = "BAD APPLE", env = <environment>, : Unable to import "BAD APPLE".
     ## cannot open the connection
 
-    ## # A tibble: 5,029 × 8
+    ## # A tibble: 5,127 × 8
     ##    symbol date        open  high   low close    volume adjusted
     ##    <chr>  <date>     <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl>
-    ##  1 AAPL   2016-01-04  25.7  26.3  25.5  26.3 270597600     23.8
-    ##  2 AAPL   2016-01-05  26.4  26.5  25.6  25.7 223164000     23.2
+    ##  1 AAPL   2016-01-04  25.7  26.3  25.5  26.3 270597600     23.7
+    ##  2 AAPL   2016-01-05  26.4  26.5  25.6  25.7 223164000     23.1
     ##  3 AAPL   2016-01-06  25.1  25.6  25.0  25.2 273829600     22.7
     ##  4 AAPL   2016-01-07  24.7  25.0  24.1  24.1 324377600     21.7
-    ##  5 AAPL   2016-01-08  24.6  24.8  24.2  24.2 283192000     21.9
+    ##  5 AAPL   2016-01-08  24.6  24.8  24.2  24.2 283192000     21.8
     ##  6 AAPL   2016-01-11  24.7  24.8  24.3  24.6 198957600     22.2
     ##  7 AAPL   2016-01-12  25.1  25.2  24.7  25.0 196616800     22.5
-    ##  8 AAPL   2016-01-13  25.1  25.3  24.3  24.3 249758400     22.0
+    ##  8 AAPL   2016-01-13  25.1  25.3  24.3  24.3 249758400     21.9
     ##  9 AAPL   2016-01-14  24.5  25.1  23.9  24.9 252680400     22.4
     ## 10 AAPL   2016-01-15  24.0  24.4  23.8  24.3 319335600     21.9
-    ## # ℹ 5,019 more rows
+    ## # ℹ 5,117 more rows
 
 In both cases, the prudent user will review the warnings to determine
 what happened and whether or not this is acceptable. In the

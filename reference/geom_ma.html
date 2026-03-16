@@ -51,7 +51,7 @@ Requires volume aesthetic.
 
     <a class="navbar-brand me-2" href="../index.html">tidyquant</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.11.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.12</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -194,7 +194,9 @@ typically desired for moving averages.</p></dd>
 <code>NA</code>, the default, includes if any aesthetics are mapped.
 <code>FALSE</code> never includes, and <code>TRUE</code> always includes.
 It can also be a named logical vector to finely select the aesthetics to
-display.</p></dd>
+display. To include legend keys for all levels, even
+when no data exists, use <code>TRUE</code>.  If <code>NA</code>, all levels are shown in legend,
+but unobserved levels are omitted.</p></dd>
 
 
 <dt id="arg-inherit-aes">inherit.aes<a class="anchor" aria-label="anchor" href="#arg-inherit-aes"></a></dt>

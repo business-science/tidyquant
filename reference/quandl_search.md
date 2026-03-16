@@ -12,20 +12,22 @@ quandl_search(query, silent = FALSE, per_page = 10, ...)
 
 - query:
 
-  Search terms
+  A character string giving the search term passed to
+  [`Quandl::Quandl.search()`](https://rdrr.io/pkg/Quandl/man/Quandl.search.html).
 
 - silent:
 
-  Prints the results when FALSE.
+  A logical indicating whether to suppress messages from
+  [`Quandl::Quandl.search()`](https://rdrr.io/pkg/Quandl/man/Quandl.search.html).
 
 - per_page:
 
-  Number of results returned per page.
+  An integer specifying how many search results to return per page.
 
 - ...:
 
-  Additional named values that are interpretted as Quandl API
-  parameters.
+  Additional arguments passed to
+  [`Quandl::Quandl.search()`](https://rdrr.io/pkg/Quandl/man/Quandl.search.html).
 
 ## Value
 
