@@ -26,6 +26,7 @@ Imports:
     httr,
     httr2,
     curl,
+    jsonlite,
     lazyeval,
     lubridate,
     magrittr,
@@ -47,7 +48,6 @@ Imports:
     cli
 Suggests:
     alphavantager (>= 0.1.2),
-    Quandl,
     riingo,
     tibbletime,
     broom,

@@ -29,10 +29,12 @@ Yahoo Finance Japan. Wrapper for \code{quantmod::getSymbols.yahooj()}.
 \item \code{"economic.data"}: Get economic data from
 \href{https://fred.stlouisfed.org/}{FRED}. rapper for \code{quantmod::getSymbols.FRED()}.
 \item \code{"quandl"}: Get data sets from
-\href{https://data.nasdaq.com/}{Quandl}. Wrapper for \code{Quandl::Quandl()}.
+\href{https://data.nasdaq.com/}{Nasdaq Data Link}. Wrapper for tidyquant's
+built-in Data Link client.
 See also \code{\link[=quandl_api_key]{quandl_api_key()}}.
 \item \code{"quandl.datatable"}: Get data tables from
-\href{https://data.nasdaq.com/}{Quandl}. Wrapper for \code{Quandl::Quandl.datatable()}.
+\href{https://data.nasdaq.com/}{Nasdaq Data Link}. Wrapper for tidyquant's
+built-in Data Link datatable client.
 See also \code{\link[=quandl_api_key]{quandl_api_key()}}.
 \item \code{"tiingo"}: Get data sets from
 Tingo (https://www.tiingo.com/). Wrapper for \code{riingo::riingo_prices()}.
@@ -79,7 +81,7 @@ Get quantitative data in \code{tibble} format
 \details{
 \code{tq_get()} is a consolidated function that gets data from various
 web sources. The function is a wrapper for several \code{quantmod}
-functions, \code{Quandl} functions, and also gets data from websources unavailable
+functions, several web APIs, and also gets data from websources unavailable
 in other packages.
 The results are always returned as a \code{tibble}. The advantages
 are (1) only one function is needed for all data sources and (2) the function
@@ -110,11 +112,9 @@ mult_stocks <- tq_get(c("META", "AMZN"),
 
 \dontrun{
 
-# --- Quandl ---
-if (rlang::is_installed("quandl")) {
+# --- Nasdaq Data Link (formerly Quandl) ---
 quandl_api_key('<your_api_key>')
 tq_get("EIA/PET_MTTIMUS1_M", get = "quandl", from = "2010-01-01")
-}
 
 
 # Energy data from EIA

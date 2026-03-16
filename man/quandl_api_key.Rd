@@ -2,28 +2,28 @@
 % Please edit documentation in R/api-quandl.R
 \name{quandl_api_key}
 \alias{quandl_api_key}
-\title{Query or set Quandl API Key}
+\title{Query or set Nasdaq Data Link API Key}
 \usage{
 quandl_api_key(api_key)
 }
 \arguments{
-\item{api_key}{Optionally passed parameter to set Quandl \code{api_key}.}
+\item{api_key}{Optionally passed parameter to set the Nasdaq Data Link
+\code{api_key}.}
 }
 \value{
-Returns invisibly the currently set \code{api_key}
+Returns invisibly the currently set \code{api_key}.
 }
 \description{
-Query or set Quandl API Key
+Query or set Nasdaq Data Link API Key
 }
 \details{
-A wrapper for \code{Quandl::Quandl.api_key()}
+\code{quandl_api_key()} stores the API key used by tidyquant's
+built-in Nasdaq Data Link client. The option name remains
+\code{Quandl.api_key} for backward compatibility.
 }
 \examples{
-
 \dontrun{
-if (rlang::is_installed("Quandl")) {
 quandl_api_key(api_key = "foobar")
-}
 }
 }
 \seealso{

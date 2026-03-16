@@ -18,10 +18,12 @@
 #'   \item `"economic.data"`: Get economic data from
 #'   \href{https://fred.stlouisfed.org/}{FRED}. rapper for `quantmod::getSymbols.FRED()`.
 #'   \item `"quandl"`: Get data sets from
-#'   \href{https://data.nasdaq.com/}{Quandl}. Wrapper for `Quandl::Quandl()`.
+#'   \href{https://data.nasdaq.com/}{Nasdaq Data Link}. Wrapper for tidyquant's
+#'   built-in Data Link client.
 #'   See also [quandl_api_key()].
 #'   \item `"quandl.datatable"`: Get data tables from
-#'   \href{https://data.nasdaq.com/}{Quandl}. Wrapper for `Quandl::Quandl.datatable()`.
+#'   \href{https://data.nasdaq.com/}{Nasdaq Data Link}. Wrapper for tidyquant's
+#'   built-in Data Link datatable client.
 #'   See also [quandl_api_key()].
 #'   \item `"tiingo"`: Get data sets from
 #'   Tingo (https://www.tiingo.com/). Wrapper for `riingo::riingo_prices()`.
@@ -61,7 +63,7 @@
 #' @details
 #' `tq_get()` is a consolidated function that gets data from various
 #' web sources. The function is a wrapper for several `quantmod`
-#' functions, `Quandl` functions, and also gets data from websources unavailable
+#' functions, several web APIs, and also gets data from websources unavailable
 #' in other packages.
 #' The results are always returned as a `tibble`. The advantages
 #' are (1) only one function is needed for all data sources and (2) the function
@@ -109,11 +111,9 @@
 #'
 #' \dontrun{
 #'
-#' # --- Quandl ---
-#' if (rlang::is_installed("quandl")) {
+#' # --- Nasdaq Data Link (formerly Quandl) ---
 #' quandl_api_key('<your_api_key>')
 #' tq_get("EIA/PET_MTTIMUS1_M", get = "quandl", from = "2010-01-01")
-#' }
 #'
 #'
 #' # Energy data from EIA
@@ -179,7 +179,6 @@ tq_get <- function(x, get = "stock.prices", complete_cases = TRUE, ...) {
     if (length(get) > 1) stop(call. = FALSE, "tq_get(): Please use only one value for `get` source.")
 
     if("quandl" %in% get) {
-        rlang::check_installed("Quandl")
         if (is.null(quandl_api_key())) warning("No Quandl API key detected. Limited to 50 anonymous calls per day. Set key with 'quandl_api_key()'.", call. = FALSE)
     }
 
@@ -573,9 +572,9 @@ tq_get_util_4 <- function(x, get, type = "raw",  meta = FALSE, order = "asc", co
     if (!is.null(args$from)) args$start_date <- args$from
     if (!is.null(args$to)) args$end_date <- args$to
 
-    tryCatch({
+    ret <- tryCatch({
 
-      ret <- do.call("Quandl", args) %>% tibble::as_tibble()
+      ret <- do.call(quandl_get, args) %>% tibble::as_tibble()
 
     }, error = function(e) {
 
@@ -599,7 +598,6 @@ tq_get_util_4 <- function(x, get, type = "raw",  meta = FALSE, order = "asc", co
 
 # Util 5: Quandl.datatable -----
 tq_get_util_5 <- function(x, get, paginate = FALSE, complete_cases, map, ...) {
-  rlang::check_installed("Quandl")
     # Check x
     if (!is.character(x)) {
         stop("x must be a character string in the form of a valid symbol.")
@@ -611,7 +609,7 @@ tq_get_util_5 <- function(x, get, paginate = FALSE, complete_cases, map, ...) {
 
     ret <- tryCatch({
 
-        Quandl::Quandl.datatable(code = x, paginate = paginate, ...) %>%
+        quandl_datatable(code = x, paginate = paginate, ...) %>%
             tibble::as_tibble()
 
 
@@ -803,5 +801,3 @@ validate_get <- function(get) {
 
     return(get)
 }
-
-

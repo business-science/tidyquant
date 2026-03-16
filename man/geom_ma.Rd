@@ -122,11 +122,11 @@ Uses \code{wilder} and \code{ratio} args.
 Uses a set of weights, \code{wts}, to weight observations in the moving average.
 \item \strong{\href{https://www.investopedia.com/articles/trading/10/double-exponential-moving-average.asp}{Double exponential moving averages (DEMA)}}:
 Uses \code{v} volume factor, \code{wilder} and \code{ratio} args.
-\item \strong{\href{https://en.wikipedia.org/wiki/Zero_lag_exponential_moving_average}{Zero-lag exponential moving averages (ZLEMA)}}:
+\item \strong{Zero-lag exponential moving averages (ZLEMA)}:
 Uses \code{wilder} and \code{ratio} args.
 \item \strong{\href{https://www.investopedia.com/articles/trading/11/trading-with-vwap-mvwap.asp}{Volume-weighted moving averages (VWMA)}}:
 Requires \code{volume} aesthetic.
-\item \strong{\href{https://www.motivewave.com/studies/elastic_volume_weighted_moving_average.htm}{Elastic, volume-weighted moving averages (EVWMA)}}:
+\item \strong{\href{https://docs.motivewave.com/studies/e-f#elastic-volume-weighted-moving-average}{Elastic, volume-weighted moving averages (EVWMA)}}:
 Requires \code{volume} aesthetic.
 }
 }
