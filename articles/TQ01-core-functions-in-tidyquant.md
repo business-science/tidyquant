@@ -184,8 +184,15 @@ data base and to get data codes. The [WTI Crude Oil
 Prices](https://fred.stlouisfed.org/series/DCOILWTICO) are shown below.
 
 ``` r
-wti_price_usd <- tq_get("DCOILWTICO", get = "economic.data")
-wti_price_usd 
+wti_price_usd <- suppressWarnings(
+    tq_get("DCOILWTICO", get = "economic.data")
+)
+
+if (tibble::is_tibble(wti_price_usd)) {
+    wti_price_usd
+} else {
+    tibble::tibble()
+}
 ```
 
     ## # A tibble: 2,657 × 3
@@ -205,19 +212,16 @@ wti_price_usd
 
 ### 2.3 Nasdaq Data Link (Quandl) API
 
-[Quandl](https://data.nasdaq.com/) provides access to a vast number of
-financial and economic databases. The Quandl packages must be installed
-separately.
-
-``` r
-install.packages("Quandl")
-```
+[Nasdaq Data Link](https://data.nasdaq.com/) provides access to a vast
+number of financial and economic databases. tidyquant includes a
+built-in client for this API, so no extra package installation is
+required.
 
 #### Authentication
 
 To make full use of the integration we recommend you set your api key.
-To do this create or sign into your Quandl account and go to your
-account api key page.
+To do this create or sign into your Nasdaq Data Link account and go to
+your account api key page.
 
 ``` r
 quandl_api_key("<your-api-key>")
@@ -225,32 +229,30 @@ quandl_api_key("<your-api-key>")
 
 #### Search
 
-Searching Quandl from within the R console is possible with
-[`quandl_search()`](https://business-science.github.io/tidyquant/reference/quandl_search.md),
-a wrapper for
-[`Quandl::Quandl.search()`](https://rdrr.io/pkg/Quandl/man/Quandl.search.html).
+Searching Nasdaq Data Link from within the R console is possible with
+[`quandl_search()`](https://business-science.github.io/tidyquant/reference/quandl_search.md).
 An example search is shown below. The only required argument is `query`.
-You can also visit the [Quandl Search](https://data.nasdaq.com/search)
-webpage to search for available database codes.
+You can also visit the [Nasdaq Data Link
+Search](https://data.nasdaq.com/search) webpage to search for available
+database codes.
 
 ``` r
 quandl_search(query = "Oil", database_code = "NSE", per_page = 3)
 ```
 
-#### Getting Quandl Data
+#### Getting Nasdaq Data Link Data
 
 Getting data is integrated into
 [`tq_get()`](https://business-science.github.io/tidyquant/reference/tq_get.md).
-Two get options exist to retrieve Quandl data:
+Two get options exist to retrieve Nasdaq Data Link data:
 
-1.  `get = "quandl"`: Get’s Quandl time series data. A wrapper for
-    `Quandl()`.
-2.  `get = "quandl.datatable"`: Gets Quandl datatables (larger data sets
-    that may not be time series). A wrapper for `Quandl.datatable()`.
+1.  `get = "quandl"`: Gets Nasdaq Data Link time series data.
+2.  `get = "quandl.datatable"`: Gets Nasdaq Data Link datatables (larger
+    data sets that may not be time series).
 
-Getting data from Quandl can be achieved in much the same way as the
-other “get” options. Just pass the “codes” for the data along with
-desired arguments for the underlying function.
+Getting data from Nasdaq Data Link can be achieved in much the same way
+as the other “get” options. Just pass the “codes” for the data along
+with desired arguments for the underlying endpoint.
 
 The following uses `get = "quandl"` and the “WIKI” database to download
 daily stock prices for AAPL in 2016. The output is a tidy data frame.
@@ -263,7 +265,7 @@ c("WIKI/AAPL") %>%
 ```
 
 The following time series options are available to be passed to the
-underlying `Quandl()` function:
+underlying data request:
 
 - `start_date` (`from`) = “yyyy-mm-dd” \| `end_date` (`to`) =
   “yyyy-mm-dd”
@@ -528,12 +530,18 @@ the `select` argument as `NULL` which selects all columns by default.
 This sends the price column to the `to.period` mutate function.
 
 ``` r
-wti_prices <- tq_get("DCOILWTICO", get = "economic.data") 
+wti_prices <- suppressWarnings(
+    tq_get("DCOILWTICO", get = "economic.data")
+)
 
-wti_prices %>%    
-    tq_transmute(mutate_fun = to.period,
-                 period     = "months", 
-                 col_rename = "WTI Price")
+if (tibble::is_tibble(wti_prices)) {
+    wti_prices %>%
+        tq_transmute(mutate_fun = to.period,
+                     period     = "months", 
+                     col_rename = "WTI Price")
+} else {
+    tibble::tibble()
+}
 ```
 
     ## # A tibble: 123 × 2
