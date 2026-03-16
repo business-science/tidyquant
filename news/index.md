@@ -2,6 +2,8 @@
 
 ## tidyquant 1.0.12
 
+CRAN release: 2026-03-16
+
 - Remove dependency to Quandl R package
 - Patched the FRED-dependent CRAN failure path so an unavailable
   economic.data endpoint no longer cascades into example/test errors.
