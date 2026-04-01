@@ -125,7 +125,7 @@ aapl_prices  <- tq_get("AAPL", get = "stock.prices", from = " 1990-01-01")
 aapl_prices 
 ```
 
-    ## # A tibble: 9,116 × 8
+    ## # A tibble: 9,128 × 8
     ##    symbol date        open  high   low close    volume adjusted
     ##    <chr>  <date>     <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl>
     ##  1 AAPL   1990-01-02 0.315 0.335 0.312 0.333 183198400    0.261
@@ -138,7 +138,7 @@ aapl_prices
     ##  8 AAPL   1990-01-11 0.324 0.324 0.308 0.308 211052800    0.241
     ##  9 AAPL   1990-01-12 0.306 0.310 0.301 0.308 171897600    0.241
     ## 10 AAPL   1990-01-15 0.308 0.319 0.306 0.306 161739200    0.240
-    ## # ℹ 9,106 more rows
+    ## # ℹ 9,118 more rows
 
 We can get multiple stocks:
 
@@ -195,7 +195,7 @@ if (tibble::is_tibble(wti_price_usd)) {
 }
 ```
 
-    ## # A tibble: 2,657 × 3
+    ## # A tibble: 2,667 × 3
     ##    symbol     date       price
     ##    <chr>      <date>     <dbl>
     ##  1 DCOILWTICO 2016-01-01  NA  
@@ -208,7 +208,7 @@ if (tibble::is_tibble(wti_price_usd)) {
     ##  8 DCOILWTICO 2016-01-12  30.4
     ##  9 DCOILWTICO 2016-01-13  30.4
     ## 10 DCOILWTICO 2016-01-14  31.2
-    ## # ℹ 2,647 more rows
+    ## # ℹ 2,657 more rows
 
 ### 2.3 Nasdaq Data Link (Quandl) API
 

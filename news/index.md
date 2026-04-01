@@ -464,16 +464,13 @@ CRAN release: 2017-04-03
 
 - New Data:
   - Quandl Integration:
-    - `tq_get(get = "quandl")` is a wrapper for
-      [`Quandl::Quandl()`](https://rdrr.io/pkg/Quandl/man/Quandl.html)
-      that pulls multiple Quandl Codes in a “tidy” fashion.
+    - `tq_get(get = "quandl")` is a wrapper for `Quandl::Quandl()` that
+      pulls multiple Quandl Codes in a “tidy” fashion.
     - `tq_get(get = "quandl.datatable")` is a wrapper for
       `Quandl::Quandl.datable()` that pulls Quandl datatables.
     - [`quandl_api_key()`](https://business-science.github.io/tidyquant/reference/quandl_api_key.md)
-      is a wrapper for
-      [`Quandl::Quandl.api_key()`](https://rdrr.io/pkg/Quandl/man/Quandl.api_key.html).
-    - `quandl_search` is a wrapper for
-      [`Quandl::Quandl.search()`](https://rdrr.io/pkg/Quandl/man/Quandl.search.html).
+      is a wrapper for `Quandl::Quandl.api_key()`.
+    - `quandl_search` is a wrapper for `Quandl::Quandl.search()`.
   - Yahoo Japan Integration: `tq_get(get = "stock.prices.japan")` is a
     wrapper for `quantmod::getSymbols(src = "yahooj")` that enables
     getting stocks from Yahoo Finance Japan.
