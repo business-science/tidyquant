@@ -32,6 +32,7 @@ with `tidyquant`.
 Load the `tidyquant` package to get started.
 
 ``` r
+
 # Loads tidyquant, xts, quantmod, TTR 
 library(tidyquant)
 library(tidyverse)
@@ -44,6 +45,7 @@ returns a list the **compatible mutate functions** by each package.
 We’ll discuss these options by package briefly.
 
 ``` r
+
 tq_transmute_fun_options() %>% str()
 ```
 
@@ -57,6 +59,7 @@ tq_transmute_fun_options() %>% str()
 ### zoo Functionality
 
 ``` r
+
 # Get zoo functions that work with tq_transmute and tq_mutate
 tq_transmute_fun_options()$zoo
 ```
@@ -79,6 +82,7 @@ speaking, these are the:
 ### xts Functionality
 
 ``` r
+
 # Get xts functions that work with tq_transmute and tq_mutate
 tq_transmute_fun_options()$xts
 ```
@@ -115,6 +119,7 @@ speaking, these are the:
 ### quantmod Functionality
 
 ``` r
+
 # Get quantmod functions that work with tq_transmute and tq_mutate
 tq_transmute_fun_options()$quantmod
 ```
@@ -152,6 +157,7 @@ speaking, these are the:
 ### TTR Functionality
 
 ``` r
+
 # Get TTR functions that work with tq_transmute and tq_mutate
 tq_transmute_fun_options()$TTR
 ```
@@ -243,6 +249,7 @@ Here’ a brief description of the most popular functions from `TTR`:
 ### PerformanceAnalytics Functionality
 
 ``` r
+
 # Get PerformanceAnalytics functions that work with tq_transmute and tq_mutate
 tq_transmute_fun_options()$PerformanceAnalytics
 ```
@@ -268,6 +275,7 @@ We’ll go through some examples, but first let’s get some data. The
 AMZN, NFLX, and GOOG from the beginning of 2013 to the end of 2016.
 
 ``` r
+
 FANG
 ```
 
@@ -303,6 +311,7 @@ split is included). We set `select = adjusted`. We research the
 returns.
 
 ``` r
+
 FANG_annual_returns <- FANG %>%
     group_by(symbol) %>%
     tq_transmute(select     = adjusted, 
@@ -336,6 +345,7 @@ FANG_annual_returns
 Charting annual returns is just a quick use of the `ggplot2` package.
 
 ``` r
+
 FANG_annual_returns %>%
     ggplot(aes(x = date, y = yearly.returns, fill = symbol)) +
     geom_col() +
@@ -367,6 +377,7 @@ included), so we set `select = adjusted`. We researched the
 `period = "daily"`, which returns the daily log returns.
 
 ``` r
+
 FANG_daily_log_returns <- FANG %>%
     group_by(symbol) %>%
     tq_transmute(select     = adjusted, 
@@ -377,6 +388,7 @@ FANG_daily_log_returns <- FANG %>%
 ```
 
 ``` r
+
 FANG_daily_log_returns %>%
     ggplot(aes(x = daily.returns, fill = symbol)) +
     geom_density(alpha = 0.5) +
@@ -405,6 +417,7 @@ The result is the OHLCV data returned with the dates changed to one day
 per month.
 
 ``` r
+
 FANG %>%
     group_by(symbol) %>%
     tq_transmute(select     = open:volume, 
@@ -435,6 +448,7 @@ plots.
 #### Without Periodicity Aggregation
 
 ``` r
+
 FANG_daily <- FANG %>%
     group_by(symbol)
 
@@ -454,6 +468,7 @@ FANG_daily %>%
 #### With Monthly Periodicity Aggregation
 
 ``` r
+
 FANG_monthly <- FANG %>%
     group_by(symbol) %>%
     tq_transmute(select     = adjusted, 
@@ -484,6 +499,7 @@ prices. The returns can be calculated from the “adjusted” prices using
 the process in Example 1.
 
 ``` r
+
 # Asset Returns
 FANG_returns_monthly <- FANG %>%
     dplyr::group_by(symbol) %>%
@@ -504,6 +520,7 @@ baseline_returns_monthly <- "XLK" %>%
 Next, join the asset returns with the baseline returns by date.
 
 ``` r
+
 returns_joined <- left_join(FANG_returns_monthly, 
                             baseline_returns_monthly,
                             by = "date")
@@ -535,6 +552,7 @@ we’ll go with `n = 6` for a 6-month rolling correlation. The
 `col_rename` argument enables easy renaming of the output column(s).
 
 ``` r
+
 FANG_rolling_corr <- returns_joined %>%
     tq_transmute_xy(x          = monthly.returns.x, 
                     y          = monthly.returns.y,
@@ -546,6 +564,7 @@ FANG_rolling_corr <- returns_joined %>%
 And, we can plot the rolling correlations for the FANG stocks.
 
 ``` r
+
 FANG_rolling_corr %>%
     ggplot(aes(x = date, y = rolling.corr.6, color = symbol)) +
     geom_hline(yintercept = 0, color = palette_light()[[1]]) +
@@ -569,6 +588,7 @@ the input and the functions work with OHLC functions, so we can use
 MACD requires a price, so we select `close`.
 
 ``` r
+
 FANG_macd <- FANG %>%
     group_by(symbol) %>%
     tq_mutate(select     = close, 
@@ -601,6 +621,7 @@ FANG_macd
 And, we can visualize the data like so.
 
 ``` r
+
 FANG_macd %>%
     filter(date >= as_date("2016-10-01")) %>%
     ggplot(aes(x = date)) + 
@@ -634,6 +655,7 @@ the quarters returned as a date and the maximum closing price during the
 quarter returned as a double.
 
 ``` r
+
 FANG_max_by_qtr <- FANG %>%
     group_by(symbol) %>%
     tq_transmute(select     = adjusted, 
@@ -666,6 +688,7 @@ frames can be joined using `left_join` to get the max and min by
 quarter.
 
 ``` r
+
 FANG_min_by_qtr <- FANG %>%
     group_by(symbol) %>%
     tq_transmute(select     = adjusted, 
@@ -700,6 +723,7 @@ FANG_by_qtr
 And, we can visualize the data like so.
 
 ``` r
+
 FANG_by_qtr %>%
     ggplot(aes(x = year.qtr, color = symbol)) +
     geom_segment(aes(xend = year.qtr, y = min.close, yend = max.close),
@@ -737,6 +761,7 @@ to transform the daily prices to daily returns. We’ll collect the data
 and visualize via a scatter plot.
 
 ``` r
+
 # Get stock pairs
 stock_prices <- c("MA", "V") %>%
     tq_get(get  = "stock.prices",
@@ -757,6 +782,7 @@ We can visualize the relationship between the returns of the stock pairs
 like so.
 
 ``` r
+
 stock_pairs %>%
     ggplot(aes(x = V, y = MA)) +
     geom_point(color = palette_light()[[1]], alpha = 0.5) +
@@ -773,6 +799,7 @@ coefficient estimate for V (Coefficient 1) is 0.8134 indicating a
 positive relationship, meaning as V increases MA also tends to increase.
 
 ``` r
+
 lm(MA ~ V, data = stock_pairs) %>%
     summary()
 ```
@@ -783,12 +810,12 @@ lm(MA ~ V, data = stock_pairs) %>%
     ## 
     ## Residuals:
     ##        Min         1Q     Median         3Q        Max 
-    ## -0.0269575 -0.0039657  0.0002149  0.0039652  0.0289458 
+    ## -0.0269582 -0.0039655  0.0002149  0.0039652  0.0289459 
     ## 
     ## Coefficients:
     ##              Estimate Std. Error t value Pr(>|t|)    
     ## (Intercept) 0.0001130  0.0003097   0.365    0.715    
-    ## V           0.8133646  0.0226393  35.927   <2e-16 ***
+    ## V           0.8133667  0.0226393  35.927   <2e-16 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
@@ -815,6 +842,7 @@ The
 function takes care of converting to a data frame.
 
 ``` r
+
 regr_fun <- function(data) {
     coef(lm(MA ~ V, data = timetk::tk_tbl(data, silent = TRUE)))
 }
@@ -835,6 +863,7 @@ whole rather than apply the function to each column independently. The
 `col_rename` argument is used to rename the added columns.
 
 ``` r
+
 stock_pairs <- stock_pairs %>%
          tq_mutate(mutate_fun = rollapply,
                    width      = 90,
@@ -866,6 +895,7 @@ long run trend which can be explored for potential pair trade
 opportunities.
 
 ``` r
+
 stock_pairs %>%
     ggplot(aes(x = date, y = coef.1)) +
     geom_line(linewidth = 1, color = palette_light()[[1]]) +
@@ -879,6 +909,7 @@ stock_pairs %>%
 Stock returns during this time period.
 
 ``` r
+
 stock_prices %>%
     tq_transmute(adjusted, 
                  periodReturn, 
@@ -909,6 +940,7 @@ the excess returns are calculated using a risk-free rate of 3% (divided
 by 252 for 252 trade days in one year).
 
 ``` r
+
 FANG %>%
     group_by(symbol) %>%
     tq_transmute(adjusted, periodReturn, period = "daily") %>%

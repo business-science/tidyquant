@@ -71,6 +71,7 @@ the returns of several technology stocks against the SPDR Technology ETF
 First, load the `tidyquant` package.
 
 ``` r
+
 library(tidyverse)
 library(tidyquant)
 ```
@@ -85,6 +86,7 @@ there are three groups of symbols indicating the data has been grouped
 appropriately.
 
 ``` r
+
 Ra <- c("AAPL", "GOOG", "NFLX") %>%
     tq_get(get  = "stock.prices",
            from = "2010-01-01",
@@ -117,6 +119,7 @@ Next, we get the baseline prices. We’ll use the XLK. Note that there is
 no need to group because we are just getting one data set.
 
 ``` r
+
 Rb <- "XLK" %>%
     tq_get(get  = "stock.prices",
            from = "2010-01-01",
@@ -149,6 +152,7 @@ still have three groups of returns, and columns “Ra” and “Rb” are
 side-by-side.
 
 ``` r
+
 RaRb <- left_join(Ra, Rb, by = c("date" = "date"))
 RaRb
 ```
@@ -176,6 +180,7 @@ You can use
 to see the full list of compatible performance functions.
 
 ``` r
+
 RaRb_capm <- RaRb %>%
     tq_performance(Ra = Ra, 
                    Rb = Rb, 
@@ -199,6 +204,7 @@ We can quickly isolate attributes, such as alpha, the measure of growth,
 and beta, the measure of risk.
 
 ``` r
+
 RaRb_capm %>% select(symbol, Alpha, Beta)
 ```
 
@@ -238,12 +244,13 @@ can see that `SharpeRatio` is available. Type `?SharpeRatio`, and we can
 see that the arguments are:
 
 ``` r
+
 args(SharpeRatio)
 ```
 
     ## function (R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR", "ES", 
-    ##     "SemiSD"), weights = NULL, annualize = FALSE, SE = FALSE, 
-    ##     SE.control = NULL, ...) 
+    ##     "SemiSD"), weights = NULL, annualize = FALSE, geometric = FALSE, 
+    ##     SE = FALSE, SE.control = NULL, ...) 
     ## NULL
 
 We can actually skip the baseline path because the function does not
@@ -258,6 +265,7 @@ Use
 to get stock prices.
 
 ``` r
+
 stock_prices <- c("AAPL", "GOOG", "NFLX") %>%
     tq_get(get  = "stock.prices",
            from = "2010-01-01",
@@ -290,6 +298,7 @@ mutating function using `tq_transmute`. We use the `quantmod` function
 we use the `col_rename` argument to rename the output column.
 
 ``` r
+
 stock_returns_monthly <- stock_prices %>%
     group_by(symbol) %>%
     tq_transmute(select     = adjusted, 
@@ -334,6 +343,7 @@ with the arguments `Ra = Ra`, `Rb = NULL` (not required), and
 will just use the defaults for this example.
 
 ``` r
+
 stock_returns_monthly %>%
     tq_performance(
         Ra = Ra, 
@@ -342,22 +352,20 @@ stock_returns_monthly %>%
     )
 ```
 
-    ## # A tibble: 3 × 5
+    ## # A tibble: 3 × 2
     ## # Groups:   symbol [3]
-    ##   symbol `ESSharpe(Rf=0%,p=95%)` SemiSDSharpe(Rf=0%,p=9…¹ StdDevSharpe(Rf=0%,p…²
-    ##   <chr>                    <dbl>                    <dbl>                  <dbl>
-    ## 1 AAPL                     0.173                    0.297                  0.292
-    ## 2 GOOG                     0.129                    0.220                  0.203
-    ## 3 NFLX                     0.237                    0.313                  0.284
-    ## # ℹ abbreviated names: ¹​`SemiSDSharpe(Rf=0%,p=95%)`,
-    ## #   ²​`StdDevSharpe(Rf=0%,p=95%)`
-    ## # ℹ 1 more variable: `VaRSharpe(Rf=0%,p=95%)` <dbl>
+    ##   symbol `SharpeRatio(Rf=0%,p=95%)`
+    ##   <chr>                       <dbl>
+    ## 1 AAPL                        0.292
+    ## 2 GOOG                        0.203
+    ## 3 NFLX                        0.284
 
 Now we have the Sharpe Ratio for each of the three stocks. What if we
 want to adjust the parameters of the function? We can just add on the
 arguments of the underlying function.
 
 ``` r
+
 stock_returns_monthly %>%
     tq_performance(
         Ra = Ra, 
@@ -368,16 +376,13 @@ stock_returns_monthly %>%
     )
 ```
 
-    ## # A tibble: 3 × 5
+    ## # A tibble: 3 × 2
     ## # Groups:   symbol [3]
-    ##   symbol `ESSharpe(Rf=0.2%,p=99%)` SemiSDSharpe(Rf=0.2%…¹ StdDevSharpe(Rf=0.2%…²
-    ##   <chr>                      <dbl>                  <dbl>                  <dbl>
-    ## 1 AAPL                      0.116                   0.262                  0.258
-    ## 2 GOOG                      0.0826                  0.184                  0.170
-    ## 3 NFLX                      0.115                   0.300                  0.272
-    ## # ℹ abbreviated names: ¹​`SemiSDSharpe(Rf=0.2%,p=99%)`,
-    ## #   ²​`StdDevSharpe(Rf=0.2%,p=99%)`
-    ## # ℹ 1 more variable: `VaRSharpe(Rf=0.2%,p=99%)` <dbl>
+    ##   symbol `SharpeRatio(Rf=0.2%,p=99%)`
+    ##   <chr>                         <dbl>
+    ## 1 AAPL                          0.258
+    ## 2 GOOG                          0.170
+    ## 3 NFLX                          0.272
 
 ### 3.2 Portfolios (Asset Groups)
 
@@ -401,6 +406,7 @@ framework using the workflow of `tq_get`, `group_by`, and
 `tq_transmute`.
 
 ``` r
+
 stock_returns_monthly <- c("AAPL", "GOOG", "NFLX") %>%
     tq_get(get  = "stock.prices",
            from = "2010-01-01",
@@ -434,6 +440,7 @@ stock_returns_monthly
 This was also done previously.
 
 ``` r
+
 baseline_returns_monthly <- "XLK" %>%
     tq_get(get  = "stock.prices",
            from = "2010-01-01",
@@ -487,6 +494,7 @@ be distributed accordingly by scaling the vector to 1, and a warning
 message will appear.
 
 ``` r
+
 wts <- c(0.5, 0.0, 0.5)
 portfolio_returns_monthly <- stock_returns_monthly %>%
     tq_portfolio(assets_col  = symbol, 
@@ -527,6 +535,7 @@ of symbols and weights that are mapped to the portfolio. We’ll recreate
 the previous portfolio example using mapped weights.
 
 ``` r
+
 wts_map <- tibble(
     symbols = c("AAPL", "NFLX"),
     weights = c(0.5, 0.5)
@@ -545,6 +554,7 @@ and weights in the second, to the `weights` argument in
 [`tq_performance()`](https://business-science.github.io/tidyquant/reference/tq_performance.md).
 
 ``` r
+
 stock_returns_monthly %>%
     tq_portfolio(assets_col  = symbol, 
                  returns_col = Ra, 
@@ -584,6 +594,7 @@ and the baseline returns (“Rb”) from Step 2B, we can merge to get our
 consolidated table of asset and baseline returns. Nothing new here.
 
 ``` r
+
 RaRb_single_portfolio <- left_join(portfolio_returns_monthly, 
                                    baseline_returns_monthly,
                                    by = "date")
@@ -612,6 +623,7 @@ The CAPM table is computed with the function `table.CAPM` from
 in the “Quick Example”.
 
 ``` r
+
 RaRb_single_portfolio %>%
     tq_performance(Ra = Ra, Rb = Rb, performance_fun = table.CAPM)
 ```
@@ -646,6 +658,7 @@ First, get individual asset returns grouped by asset, which is the exact
 same as Steps 1A and 1B from the Single Portfolio example.
 
 ``` r
+
 stock_returns_monthly <- c("AAPL", "GOOG", "NFLX") %>%
     tq_get(get  = "stock.prices",
            from = "2010-01-01",
@@ -661,6 +674,7 @@ Second, get baseline asset returns, which is the exact same as Steps 1B
 and 2B from the Single Portfolio example.
 
 ``` r
+
 baseline_returns_monthly <- "XLK" %>%
     tq_get(get  = "stock.prices",
            from = "2010-01-01",
@@ -686,6 +700,7 @@ sequential index. Let’s see how it works for our example. We need three
 portfolios:
 
 ``` r
+
 stock_returns_monthly_multi <- stock_returns_monthly %>%
     tq_repeat_df(n = 3)
 stock_returns_monthly_multi
@@ -734,6 +749,7 @@ few requirements:
 Here’s what the weights table should look like for our example:
 
 ``` r
+
 weights <- c(
     0.50, 0.25, 0.25,
     0.25, 0.50, 0.25,
@@ -765,6 +781,7 @@ Now just pass the expanded `stock_returns_monthly_multi` and the
 `weights_table` to `tq_portfolio` for portfolio aggregation.
 
 ``` r
+
 portfolio_returns_monthly_multi <- stock_returns_monthly_multi %>%
     tq_portfolio(assets_col  = symbol, 
                  returns_col = Ra, 
@@ -800,6 +817,7 @@ These steps are the exact same as the Single Portfolio example.
 First, we merge with the baseline using “date” as the key.
 
 ``` r
+
 RaRb_multiple_portfolio <- left_join(portfolio_returns_monthly_multi, 
                                      baseline_returns_monthly,
                                      by = "date")
@@ -826,6 +844,7 @@ Finally, we calculate the performance of each of the portfolios using
 `tq_performance`. Make sure the data frame is grouped on “portfolio”.
 
 ``` r
+
 RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = Rb, performance_fun = table.CAPM)
 ```
@@ -847,20 +866,18 @@ the CAPM table from `PerformanceAnalytics`. We can do the same thing
 with `SharpeRatio` as well.
 
 ``` r
+
 RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = NULL, performance_fun = SharpeRatio)
 ```
 
-    ## # A tibble: 3 × 5
+    ## # A tibble: 3 × 2
     ## # Groups:   portfolio [3]
-    ##   portfolio ESSharpe(Rf=0%,p=95%…¹ SemiSDSharpe(Rf=0%,p…² StdDevSharpe(Rf=0%,p…³
-    ##       <int>                  <dbl>                  <dbl>                  <dbl>
-    ## 1         1                  0.172                  0.348                  0.355
-    ## 2         2                  0.146                  0.320                  0.334
-    ## 3         3                  0.150                  0.315                  0.317
-    ## # ℹ abbreviated names: ¹​`ESSharpe(Rf=0%,p=95%)`, ²​`SemiSDSharpe(Rf=0%,p=95%)`,
-    ## #   ³​`StdDevSharpe(Rf=0%,p=95%)`
-    ## # ℹ 1 more variable: `VaRSharpe(Rf=0%,p=95%)` <dbl>
+    ##   portfolio `SharpeRatio(Rf=0%,p=95%)`
+    ##       <int>                      <dbl>
+    ## 1         1                      0.355
+    ## 2         2                      0.334
+    ## 3         3                      0.317
 
 ## 4.0 Available Functions
 
@@ -872,6 +889,7 @@ We’ll also go over `VaR` and `SharpeRatio` as these are very commonly
 used as performance measures.
 
 ``` r
+
 tq_performance_fun_options()
 ```
 
@@ -954,6 +972,7 @@ passed in (e.g., monthly returns will get monthly statistics, daily will
 be daily stats, and so on).
 
 ``` r
+
 RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = NULL, performance_fun = table.Stats)
 ```
@@ -976,6 +995,7 @@ a set of measures related to an excess return single factor model, or
 CAPM.
 
 ``` r
+
 RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = Rb, performance_fun = table.CAPM)
 ```
@@ -997,6 +1017,7 @@ RaRb_multiple_portfolio %>%
 Table of Annualized Return, Annualized Std Dev, and Annualized Sharpe.
 
 ``` r
+
 RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = NULL, performance_fun = table.AnnualizedReturns)
 ```
@@ -1015,6 +1036,7 @@ This is a wrapper for calculating correlation and significance against
 each column of the data provided.
 
 ``` r
+
 RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = Rb, performance_fun = table.Correlation)
 ```
@@ -1033,6 +1055,7 @@ Creates a table of estimates of downside risk measures for comparison
 across multiple instruments or funds.
 
 ``` r
+
 RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = NULL, performance_fun = table.DownsideRisk)
 ```
@@ -1057,6 +1080,7 @@ potential, Omega, Sortino ratio, Upside potential, Upside potential
 ratio and Omega-Sharpe ratio.
 
 ``` r
+
 RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = NULL, performance_fun = table.DownsideRiskRatio)
 ```
@@ -1078,6 +1102,7 @@ Used to determine diversification potential. Also called “systematic”
 moments by several papers.
 
 ``` r
+
 RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = Rb, performance_fun = table.HigherMoments)
 ```
@@ -1096,6 +1121,7 @@ Table of Tracking error, Annualized tracking error and Information
 ratio.
 
 ``` r
+
 RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = Rb, performance_fun = table.InformationRatio)
 ```
@@ -1114,6 +1140,7 @@ Table of Mean absolute difference, Monthly standard deviation and
 annualized standard deviation.
 
 ``` r
+
 RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = NULL, performance_fun = table.Variability)
 ```
@@ -1132,6 +1159,7 @@ Calculates Value-at-Risk (VaR) for univariate, component, and marginal
 cases using a variety of analytical methods.
 
 ``` r
+
 RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = NULL, performance_fun = VaR)
 ```
@@ -1151,20 +1179,18 @@ variability). In the classic case, the unit of risk is the standard
 deviation of the returns.
 
 ``` r
+
 RaRb_multiple_portfolio %>%
     tq_performance(Ra = Ra, Rb = NULL, performance_fun = SharpeRatio)
 ```
 
-    ## # A tibble: 3 × 5
+    ## # A tibble: 3 × 2
     ## # Groups:   portfolio [3]
-    ##   portfolio ESSharpe(Rf=0%,p=95%…¹ SemiSDSharpe(Rf=0%,p…² StdDevSharpe(Rf=0%,p…³
-    ##       <int>                  <dbl>                  <dbl>                  <dbl>
-    ## 1         1                  0.172                  0.348                  0.355
-    ## 2         2                  0.146                  0.320                  0.334
-    ## 3         3                  0.150                  0.315                  0.317
-    ## # ℹ abbreviated names: ¹​`ESSharpe(Rf=0%,p=95%)`, ²​`SemiSDSharpe(Rf=0%,p=95%)`,
-    ## #   ³​`StdDevSharpe(Rf=0%,p=95%)`
-    ## # ℹ 1 more variable: `VaRSharpe(Rf=0%,p=95%)` <dbl>
+    ##   portfolio `SharpeRatio(Rf=0%,p=95%)`
+    ##       <int>                      <dbl>
+    ## 1         1                      0.355
+    ## 2         2                      0.334
+    ## 3         3                      0.317
 
 ## 5.0 Customizing using the …
 
@@ -1184,13 +1210,14 @@ most of the `Return.portfolio` arguments such as `wealth.index`,
 arguments of the underlying function:
 
 ``` r
+
 args(Return.portfolio)
 ```
 
     ## function (R, weights = NULL, wealth.index = FALSE, contribution = FALSE, 
     ##     geometric = TRUE, rebalance_on = c(NA, "years", "quarters", 
     ##         "months", "weeks", "days"), value = 1, verbose = FALSE, 
-    ##     ...) 
+    ##     ..., rebal_cost = 0, full_investment = FALSE) 
     ## NULL
 
 Let’s see an example of passing parameters to the `...`. Suppose we want
@@ -1205,6 +1232,7 @@ simplicity, we’ll examine the first.
 Here’s the original output, without adjusting parameters.
 
 ``` r
+
 wts <- c(0.5, 0.0, 0.5)
 portfolio_returns_monthly <- stock_returns_monthly %>%
     tq_portfolio(assets_col  = symbol, 
@@ -1214,6 +1242,7 @@ portfolio_returns_monthly <- stock_returns_monthly %>%
 ```
 
 ``` r
+
 portfolio_returns_monthly %>%
     ggplot(aes(x = date, y = Ra)) +
     geom_bar(stat = "identity", fill = palette_light()[[1]]) +
@@ -1235,6 +1264,7 @@ growing. This is simple with the underlying `Return.portfolio` argument,
 parameters to `tq_portfolio`!
 
 ``` r
+
 wts <- c(0.5, 0, 0.5)
 portfolio_growth_monthly <- stock_returns_monthly %>%
     tq_portfolio(assets_col   = symbol, 
@@ -1246,6 +1276,7 @@ portfolio_growth_monthly <- stock_returns_monthly %>%
 ```
 
 ``` r
+
 portfolio_growth_monthly %>%
     ggplot(aes(x = date, y = investment.growth)) +
     geom_line(linewidth = 2, color = palette_light()[[1]]) +
@@ -1269,6 +1300,7 @@ Finally, taking this one step further, we apply the same process to the
 3.  25% AAPL, 25% GOOG, 50% NFLX
 
 ``` r
+
 portfolio_growth_monthly_multi <- stock_returns_monthly_multi %>%
     tq_portfolio(assets_col   = symbol, 
                  returns_col  = Ra, 
@@ -1279,6 +1311,7 @@ portfolio_growth_monthly_multi <- stock_returns_monthly_multi %>%
 ```
 
 ``` r
+
 portfolio_growth_monthly_multi %>%
     ggplot(aes(x = date, y = investment.growth, color = factor(portfolio))) +
     geom_line(linewidth = 2) +
@@ -1303,12 +1336,13 @@ Finally, the same concept of passing arguments works with all the
 `SharpeRatio`, which has the following arguments.
 
 ``` r
+
 args(SharpeRatio)
 ```
 
     ## function (R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR", "ES", 
-    ##     "SemiSD"), weights = NULL, annualize = FALSE, SE = FALSE, 
-    ##     SE.control = NULL, ...) 
+    ##     "SemiSD"), weights = NULL, annualize = FALSE, geometric = FALSE, 
+    ##     SE = FALSE, SE.control = NULL, ...) 
     ## NULL
 
 We can see that the parameters `Rf` allows us to apply a risk-free rate
@@ -1319,46 +1353,43 @@ interval of 0.99.
 Default:
 
 ``` r
+
 RaRb_multiple_portfolio %>%
     tq_performance(Ra              = Ra, 
                    performance_fun = SharpeRatio)
 ```
 
-    ## # A tibble: 3 × 5
+    ## # A tibble: 3 × 2
     ## # Groups:   portfolio [3]
-    ##   portfolio ESSharpe(Rf=0%,p=95%…¹ SemiSDSharpe(Rf=0%,p…² StdDevSharpe(Rf=0%,p…³
-    ##       <int>                  <dbl>                  <dbl>                  <dbl>
-    ## 1         1                  0.172                  0.348                  0.355
-    ## 2         2                  0.146                  0.320                  0.334
-    ## 3         3                  0.150                  0.315                  0.317
-    ## # ℹ abbreviated names: ¹​`ESSharpe(Rf=0%,p=95%)`, ²​`SemiSDSharpe(Rf=0%,p=95%)`,
-    ## #   ³​`StdDevSharpe(Rf=0%,p=95%)`
-    ## # ℹ 1 more variable: `VaRSharpe(Rf=0%,p=95%)` <dbl>
+    ##   portfolio `SharpeRatio(Rf=0%,p=95%)`
+    ##       <int>                      <dbl>
+    ## 1         1                      0.355
+    ## 2         2                      0.334
+    ## 3         3                      0.317
 
 With `Rf = 0.03 / 12` (adjusted for monthly periodicity):
 
 ``` r
+
 RaRb_multiple_portfolio %>%
     tq_performance(Ra              = Ra, 
                    performance_fun = SharpeRatio,
                    Rf              = 0.03 / 12)
 ```
 
-    ## # A tibble: 3 × 5
+    ## # A tibble: 3 × 2
     ## # Groups:   portfolio [3]
-    ##   portfolio ESSharpe(Rf=0.2%,p=9…¹ SemiSDSharpe(Rf=0.2%…² StdDevSharpe(Rf=0.2%…³
-    ##       <int>                  <dbl>                  <dbl>                  <dbl>
-    ## 1         1                  0.157                  0.318                  0.325
-    ## 2         2                  0.134                  0.292                  0.305
-    ## 3         3                  0.141                  0.295                  0.296
-    ## # ℹ abbreviated names: ¹​`ESSharpe(Rf=0.2%,p=95%)`,
-    ## #   ²​`SemiSDSharpe(Rf=0.2%,p=95%)`, ³​`StdDevSharpe(Rf=0.2%,p=95%)`
-    ## # ℹ 1 more variable: `VaRSharpe(Rf=0.2%,p=95%)` <dbl>
+    ##   portfolio `SharpeRatio(Rf=0.2%,p=95%)`
+    ##       <int>                        <dbl>
+    ## 1         1                        0.325
+    ## 2         2                        0.305
+    ## 3         3                        0.296
 
 And, with both `Rf = 0.03 / 12` (adjusted for monthly periodicity) and
 `p = 0.99`:
 
 ``` r
+
 RaRb_multiple_portfolio %>%
     tq_performance(Ra              = Ra, 
                    performance_fun = SharpeRatio,
@@ -1366,13 +1397,10 @@ RaRb_multiple_portfolio %>%
                    p               = 0.99)
 ```
 
-    ## # A tibble: 3 × 5
+    ## # A tibble: 3 × 2
     ## # Groups:   portfolio [3]
-    ##   portfolio ESSharpe(Rf=0.2%,p=9…¹ SemiSDSharpe(Rf=0.2%…² StdDevSharpe(Rf=0.2%…³
-    ##       <int>                  <dbl>                  <dbl>                  <dbl>
-    ## 1         1                 0.105                   0.318                  0.325
-    ## 2         2                 0.0952                  0.292                  0.305
-    ## 3         3                 0.0915                  0.295                  0.296
-    ## # ℹ abbreviated names: ¹​`ESSharpe(Rf=0.2%,p=99%)`,
-    ## #   ²​`SemiSDSharpe(Rf=0.2%,p=99%)`, ³​`StdDevSharpe(Rf=0.2%,p=99%)`
-    ## # ℹ 1 more variable: `VaRSharpe(Rf=0.2%,p=99%)` <dbl>
+    ##   portfolio `SharpeRatio(Rf=0.2%,p=99%)`
+    ##       <int>                        <dbl>
+    ## 1         1                        0.325
+    ## 2         2                        0.305
+    ## 3         3                        0.296

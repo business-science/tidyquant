@@ -1,4 +1,4 @@
-pandoc: 3.1.11
+pandoc: 3.8.3
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
@@ -9,7 +9,7 @@ articles:
   TQ04-charting-with-tidyquant: TQ04-charting-with-tidyquant.html
   TQ05-performance-analysis-with-tidyquant: TQ05-performance-analysis-with-tidyquant.html
   TQ06-excel-in-r: TQ06-excel-in-r.html
-last_built: 2026-04-01T00:25Z
+last_built: 2026-05-01T00:35Z
 urls:
   reference: https://business-science.github.io/tidyquant/reference
   article: https://business-science.github.io/tidyquant/articles

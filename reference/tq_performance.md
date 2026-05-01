@@ -190,17 +190,14 @@ tq_performance_fun_options()
 # Get performance metrics
 RaRb %>%
     tq_performance(Ra = Ra, performance_fun = SharpeRatio, p = 0.95)
-#> # A tibble: 4 × 5
+#> # A tibble: 4 × 2
 #> # Groups:   symbol [4]
-#>   symbol `ESSharpe(Rf=0%,p=95%)` SemiSDSharpe(Rf=0%,p=9…¹ StdDevSharpe(Rf=0%,p…²
-#>   <chr>                    <dbl>                    <dbl>                  <dbl>
-#> 1 META                     0.193                    0.424                  0.345
-#> 2 AMZN                     0.215                    0.339                  0.314
-#> 3 NFLX                     0.199                    0.438                  0.355
-#> 4 GOOG                     0.213                    0.354                  0.296
-#> # ℹ abbreviated names: ¹​`SemiSDSharpe(Rf=0%,p=95%)`,
-#> #   ²​`StdDevSharpe(Rf=0%,p=95%)`
-#> # ℹ 1 more variable: `VaRSharpe(Rf=0%,p=95%)` <dbl>
+#>   symbol `SharpeRatio(Rf=0%,p=95%)`
+#>   <chr>                       <dbl>
+#> 1 META                        0.345
+#> 2 AMZN                        0.314
+#> 3 NFLX                        0.355
+#> 4 GOOG                        0.296
 
 RaRb %>%
     tq_performance(Ra = Ra, Rb = Rb, performance_fun = table.CAPM)

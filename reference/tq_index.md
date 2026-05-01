@@ -71,6 +71,7 @@ to get stock prices, financials, key stats, etc using the stock symbols.
 ## Examples
 
 ``` r
+
 # Stock Indexes:
 
 # Get the list of stock index options

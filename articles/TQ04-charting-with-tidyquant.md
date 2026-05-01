@@ -27,6 +27,7 @@ within `tidyquant`:
 Load the `tidyquant` package to get started.
 
 ``` r
+
 # Loads tidyquant, xts, quantmod, TTR, and PerformanceAnalytics
 library(tidyverse)
 library(tidyquant)  
@@ -36,6 +37,7 @@ The following stock data will be used for the examples. Use `tq_get` to
 get the stock prices.
 
 ``` r
+
 # Use FANG data set
 # Get AAPL and AMZN Stock Prices
 AAPL <- tq_get("AAPL", get = "stock.prices", from = "2015-09-01", to = "2016-12-31")
@@ -46,6 +48,7 @@ The `end` date parameter will be used when setting date limits
 throughout the examples.
 
 ``` r
+
 end <- lubridate::as_date("2016-12-31")
 
 end
@@ -56,6 +59,7 @@ end
 The `AAPL_range_60` will be used to adjust the zoom on the plots.
 
 ``` r
+
 aapl_range_60_tbl <- AAPL %>%
     tail(60) %>%
     summarise(
@@ -114,6 +118,7 @@ flexibility wherein the analyst can create very complex charts using the
 “grammar of graphics”.
 
 ``` r
+
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
     geom_line() +
@@ -135,6 +140,7 @@ so internal to the geom or in the
 function.
 
 ``` r
+
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
     geom_barchart(aes(open = open, high = high, low = low, close = close)) +
@@ -152,6 +158,7 @@ character date to date class, and then subtract six weeks using the
 function. For `ylim` we zoom in on prices in the range from 100 to 120.
 
 ``` r
+
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
     geom_barchart(aes(open = open, high = high, low = low, close = close)) +
@@ -170,6 +177,7 @@ arguments, and parameters such as `size` can be used to control the
 appearance.
 
 ``` r
+
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
     geom_barchart(aes(open = open, high = high, low = low, close = close),
@@ -191,6 +199,7 @@ chart. Using `geom_candlestick`, we can insert into the `ggplot`
 workflow.
 
 ``` r
+
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
     geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
@@ -203,6 +212,7 @@ AAPL %>%
 We zoom into specific sections using `coord_x_date`.
 
 ``` r
+
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
     geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
@@ -221,6 +231,7 @@ control the line color, and `fill_up` and `fill_down`, which control the
 rectangle fills.
 
 ``` r
+
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
     geom_candlestick(aes(open = open, high = high, low = low, close = close),
@@ -251,6 +262,7 @@ before the call to
 discuss this next.
 
 ``` r
+
 start <- end - weeks(6)
 FANG %>%
     dplyr::filter(date >= start - days(2 * 15)) %>%
@@ -286,6 +298,7 @@ nice y-axis scale and still allows us to create a moving average line
 using `geom_ma`.
 
 ``` r
+
 start <- end - weeks(6)
 FANG %>%
     dplyr::filter(date >= start - days(2 * 15)) %>%
@@ -366,6 +379,7 @@ one for the 50-day and the other for the 200-day. We add `color = "red"`
 and `linetype = 5` to distinguish the 200-day from the 50-day.
 
 ``` r
+
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
     geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
@@ -393,6 +407,7 @@ function, we don’t need to modify the geom. We are ready to apply after
 the bar chart geom.
 
 ``` r
+
 AAPL %>%
     ggplot(aes(x = date, y = close)) +
     geom_barchart(aes(open = open, high = high, low = low, close = close)) +
@@ -418,6 +433,7 @@ contains the FANG stock symbols. The facet wrap is added at the end to
 create four charts instead of one overlayed chart.
 
 ``` r
+
 start <- end - weeks(6)
 FANG %>%
     dplyr::filter(date >= start - days(2 * 50)) %>%
@@ -463,6 +479,7 @@ function to avoid duplication. We add BBands after the candlestick geom
 to overlay the BBands on top.
 
 ``` r
+
 AAPL %>%
     ggplot(aes(x = date, y = close, open = open,
                high = high, low = low, close = close)) +
@@ -486,6 +503,7 @@ and `fill` arguments. Here’s the same plot from Example 1, with new
 formatting applied to the BBands.
 
 ``` r
+
 AAPL %>%
     ggplot(aes(x = date, y = close, open = open,
                high = high, low = low, close = close)) +
@@ -512,6 +530,7 @@ The process is very similar to charting moving averages for multiple
 stocks.
 
 ``` r
+
 start <- end - weeks(24)
 FANG %>%
     dplyr::filter(date >= start - days(2 * 20)) %>%
@@ -546,6 +565,7 @@ helpful as it tends to expose linear trends that can be analyzed.
 **Continuous Scale**:
 
 ``` r
+
 AMZN %>%
     ggplot(aes(x = date, y = adjusted)) +
     geom_line(color = palette_light()[[1]]) + 
@@ -561,6 +581,7 @@ AMZN %>%
 **Log Scale**:
 
 ``` r
+
 AMZN %>%
     ggplot(aes(x = date, y = adjusted)) +
     geom_line(color = palette_light()[[1]]) + 
@@ -583,6 +604,7 @@ including linear (`"lm"`) and loess (`"loess"`) to name a few.
 **Linear**:
 
 ``` r
+
 AMZN %>%
     ggplot(aes(x = date, y = adjusted)) +
     geom_line(color = palette_light()[[1]]) + 
@@ -605,6 +627,7 @@ and end of the line. Using the aesthetic color argument, we color based
 on the value of volume to make these data stick out.
 
 ``` r
+
 AMZN %>%
     ggplot(aes(x = date, y = volume)) +
     geom_segment(aes(xend = date, yend = 0, color = volume)) + 
@@ -623,6 +646,7 @@ we can quickly visualize the high and low points, and using
 `geom_smooth` we can see the trend.
 
 ``` r
+
 start <- end - weeks(24)
 AMZN %>%
     dplyr::filter(date >= start - days(50)) %>%
@@ -659,6 +683,7 @@ customize financial charts:
 ### Dark
 
 ``` r
+
 n_mavg <- 50 # Number of periods (days) for moving average
 FANG %>%
     dplyr::filter(date >= start - days(2 * n_mavg)) %>%

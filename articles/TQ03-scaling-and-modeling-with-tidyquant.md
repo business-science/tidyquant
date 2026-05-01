@@ -33,6 +33,7 @@ groups of data.
 Load the `tidyquant` package to get started.
 
 ``` r
+
 # Loads tidyquant, xts, quantmod, TTR, and PerformanceAnalytics
 library(tidyverse)
 library(tidyquant)  
@@ -46,6 +47,7 @@ There are three primary ways to do this:
 ### Method 1: Map a character vector with multiple stock symbols
 
 ``` r
+
 c("AAPL", "GOOG", "META") %>%
     tq_get(get = "stock.prices", from = "2016-01-01", to = "2017-01-01")
 ```
@@ -80,6 +82,7 @@ in the first column.
 #### Method 2A: Make a tibble
 
 ``` r
+
 stock_list <- tibble(stocks = c("AAPL", "JPM", "CVX"),
                      industry = c("Technology", "Financial", "Energy"))
 stock_list
@@ -97,6 +100,7 @@ industry columns are automatically expanded the length of the stock
 prices.
 
 ``` r
+
 stock_list %>%
     tq_get(get = "stock.prices", from = "2016-01-01", to = "2017-01-01")
 ```
@@ -121,27 +125,29 @@ stock_list %>%
 Get an index…
 
 ``` r
+
 tq_index("DOW")
 ```
 
     ## # A tibble: 31 × 8
     ##    symbol company      identifier sedol weight sector shares_held local_currency
     ##    <chr>  <chr>        <chr>      <chr>  <dbl> <chr>        <dbl> <chr>         
-    ##  1 GS     GOLDMAN SAC… 38141G104  2407… 0.110  -          5547661 USD           
-    ##  2 CAT    CATERPILLAR… 149123101  2180… 0.0906 -          5547661 USD           
-    ##  3 MSFT   MICROSOFT C… 594918104  2588… 0.0487 -          5547661 USD           
-    ##  4 AMGN   AMGEN INC    031162100  2023… 0.0474 -          5547661 USD           
-    ##  5 HD     HOME DEPOT … 437076102  2434… 0.0439 -          5547661 USD           
-    ##  6 SHW    SHERWIN WIL… 824348106  2804… 0.0429 -          5547661 USD           
-    ##  7 MCD    MCDONALD S … 580135101  2550… 0.0419 -          5547661 USD           
-    ##  8 V      VISA INC CL… 92826C839  B2PZ… 0.0407 -          5547661 USD           
-    ##  9 AXP    AMERICAN EX… 025816109  2026… 0.0404 -          5547661 USD           
-    ## 10 TRV    TRAVELERS C… 89417E109  2769… 0.0396 -          5547661 USD           
+    ##  1 GS     GOLDMAN SAC… 38141G104  2407… 0.114  -          5295347 USD           
+    ##  2 CAT    CATERPILLAR… 149123101  2180… 0.102  -          5295347 USD           
+    ##  3 MSFT   MICROSOFT C… 594918104  2588… 0.0534 -          5295347 USD           
+    ##  4 UNH    UNITEDHEALT… 91324P102  2917… 0.0467 -          5295347 USD           
+    ##  5 AMGN   AMGEN INC    031162100  2023… 0.0426 -          5295347 USD           
+    ##  6 V      VISA INC CL… 92826C839  B2PZ… 0.0422 -          5295347 USD           
+    ##  7 HD     HOME DEPOT … 437076102  2434… 0.0406 -          5295347 USD           
+    ##  8 SHW    SHERWIN WIL… 824348106  2804… 0.0400 -          5295347 USD           
+    ##  9 AXP    AMERICAN EX… 025816109  2026… 0.0397 -          5295347 USD           
+    ## 10 JPM    JPMORGAN CH… 46625H100  2190… 0.0389 -          5295347 USD           
     ## # ℹ 21 more rows
 
 …or, get an exchange.
 
 ``` r
+
 tq_exchange("NYSE")
 ```
 
@@ -150,25 +156,26 @@ several minutes depending on the size of the index or exchange, which is
 why only the first three stocks are evaluated in the vignette.*
 
 ``` r
+
 tq_index("DOW") %>%
     slice(1:3) %>%
     tq_get(get = "stock.prices")
 ```
 
-    ## # A tibble: 7,725 × 15
+    ## # A tibble: 7,788 × 15
     ##    symbol company      identifier sedol weight sector shares_held local_currency
     ##    <chr>  <chr>        <chr>      <chr>  <dbl> <chr>        <dbl> <chr>         
-    ##  1 GS     GOLDMAN SAC… 38141G104  2407…  0.110 -          5547661 USD           
-    ##  2 GS     GOLDMAN SAC… 38141G104  2407…  0.110 -          5547661 USD           
-    ##  3 GS     GOLDMAN SAC… 38141G104  2407…  0.110 -          5547661 USD           
-    ##  4 GS     GOLDMAN SAC… 38141G104  2407…  0.110 -          5547661 USD           
-    ##  5 GS     GOLDMAN SAC… 38141G104  2407…  0.110 -          5547661 USD           
-    ##  6 GS     GOLDMAN SAC… 38141G104  2407…  0.110 -          5547661 USD           
-    ##  7 GS     GOLDMAN SAC… 38141G104  2407…  0.110 -          5547661 USD           
-    ##  8 GS     GOLDMAN SAC… 38141G104  2407…  0.110 -          5547661 USD           
-    ##  9 GS     GOLDMAN SAC… 38141G104  2407…  0.110 -          5547661 USD           
-    ## 10 GS     GOLDMAN SAC… 38141G104  2407…  0.110 -          5547661 USD           
-    ## # ℹ 7,715 more rows
+    ##  1 GS     GOLDMAN SAC… 38141G104  2407…  0.114 -          5295347 USD           
+    ##  2 GS     GOLDMAN SAC… 38141G104  2407…  0.114 -          5295347 USD           
+    ##  3 GS     GOLDMAN SAC… 38141G104  2407…  0.114 -          5295347 USD           
+    ##  4 GS     GOLDMAN SAC… 38141G104  2407…  0.114 -          5295347 USD           
+    ##  5 GS     GOLDMAN SAC… 38141G104  2407…  0.114 -          5295347 USD           
+    ##  6 GS     GOLDMAN SAC… 38141G104  2407…  0.114 -          5295347 USD           
+    ##  7 GS     GOLDMAN SAC… 38141G104  2407…  0.114 -          5295347 USD           
+    ##  8 GS     GOLDMAN SAC… 38141G104  2407…  0.114 -          5295347 USD           
+    ##  9 GS     GOLDMAN SAC… 38141G104  2407…  0.114 -          5295347 USD           
+    ## 10 GS     GOLDMAN SAC… 38141G104  2407…  0.114 -          5295347 USD           
+    ## # ℹ 7,778 more rows
     ## # ℹ 7 more variables: date <date>, open <dbl>, high <dbl>, low <dbl>,
     ## #   close <dbl>, volume <dbl>, adjusted <dbl>
 
@@ -185,6 +192,7 @@ data set, but you typically will use `tq_get` to retrieve data in
 “tibble” format.
 
 ``` r
+
 FANG
 ```
 
@@ -209,6 +217,7 @@ function is applied to each group of stock prices, and a new data frame
 was returned with the annual returns in the correct periodicity.
 
 ``` r
+
 FANG_returns_yearly <- FANG %>%
     group_by(symbol) %>%
     tq_transmute(select     = adjusted, 
@@ -220,6 +229,7 @@ FANG_returns_yearly <- FANG %>%
 Last, we can visualize the returns.
 
 ``` r
+
 FANG_returns_yearly %>%
     ggplot(aes(x = year(date), y = yearly.returns, fill = symbol)) +
     geom_bar(position = "dodge", stat = "identity") +
@@ -260,6 +270,7 @@ First, let’s collect stock data with
 [`tq_get()`](https://business-science.github.io/tidyquant/reference/tq_get.md)
 
 ``` r
+
 AAPL <- tq_get("AAPL", from = "2007-01-01", to = "2016-12-31")
 AAPL
 ```
@@ -287,6 +298,7 @@ we retrieve a tibble of monthly log returns. Last, we take the mean of
 the monthly returns to get MMLR.
 
 ``` r
+
 get_annual_returns <- function(stock.returns) {
     stock.returns %>%
         tq_transmute(select     = adjusted, 
@@ -300,6 +312,7 @@ Let’s test `get_annual_returns` out. We now have the annual log returns
 over the past ten years.
 
 ``` r
+
 AAPL_annual_log_returns <- get_annual_returns(AAPL)
 AAPL_annual_log_returns
 ```
@@ -322,6 +335,7 @@ Let’s visualize to identify trends. We can see from the linear trend
 line that AAPL’s stock returns are declining.
 
 ``` r
+
 AAPL_annual_log_returns %>%
     ggplot(aes(x = year(date), y = yearly.returns)) + 
     geom_hline(yintercept = 0, color = palette_light()[[1]]) +
@@ -340,6 +354,7 @@ Now, we can get the linear model using the
 one problem: the output is not “tidy”.
 
 ``` r
+
 mod <- lm(yearly.returns ~ year(date), data = AAPL_annual_log_returns)
 mod
 ```
@@ -350,7 +365,7 @@ mod
     ## 
     ## Coefficients:
     ## (Intercept)   year(date)  
-    ##    58.86279     -0.02915
+    ##    58.86280     -0.02915
 
 We can utilize the `broom` package to get “tidy” data from the model.
 There’s three primary functions:
@@ -364,6 +379,7 @@ There’s three primary functions:
 We’ll use `tidy` to retrieve the model coefficients.
 
 ``` r
+
 library(broom)
 tidy(mod)
 ```
@@ -377,6 +393,7 @@ tidy(mod)
 Adding to our workflow, we have the following:
 
 ``` r
+
 get_model <- function(stock_data) {
     annual_returns <- get_annual_returns(stock_data)
     mod <- lm(yearly.returns ~ year(date), data = annual_returns)
@@ -390,6 +407,7 @@ interpretation is that as year increases one unit, the annual returns
 decrease by 3%.
 
 ``` r
+
 get_model(AAPL)
 ```
 
@@ -410,6 +428,7 @@ call to
 [`dplyr::sample_n()`](https://dplyr.tidyverse.org/reference/sample_n.html).
 
 ``` r
+
 set.seed(10)
 stocks_tbl <- tq_index("SP500") %>%
     sample_n(5) 
@@ -419,11 +438,11 @@ stocks_tbl
     ## # A tibble: 5 × 8
     ##   symbol company      identifier sedol  weight sector shares_held local_currency
     ##   <chr>  <chr>        <chr>      <chr>   <dbl> <chr>        <dbl> <chr>         
-    ## 1 HSIC   HENRY SCHEI… 806407102  2416… 1.34e-4 -          1169741 USD           
-    ## 2 SLB    SLB LTD      806857108  2779… 1.42e-3 -         17437207 USD           
-    ## 3 FICO   FAIR ISAAC … 303250104  2330… 4.57e-4 -           277037 USD           
-    ## 4 NTAP   NETAPP INC   64110D104  2630… 3.66e-4 -          2294876 USD           
-    ## 5 AIZ    ASSURANT INC 04621X108  2331… 2.01e-4 -           590221 USD
+    ## 1 MOS    MOSAIC CO/T… 61945C103  B3NP… 1.20e-4 -          3796648 USD           
+    ## 2 ELV    ELEVANCE HE… 036752103  BSPH… 1.36e-3 -          2621020 USD           
+    ## 3 SYF    SYNCHRONY F… 87165B103  BP96… 4.25e-4 -          4115423 USD           
+    ## 4 STE    STERIS PLC   G8473T100  BFY8… 3.42e-4 -          1171396 USD           
+    ## 5 IVZ    INVESCO LTD  G491BT108  B28X… 1.86e-4 -          5268148 USD
 
 We can now apply our analysis function to the stocks using
 [`dplyr::mutate()`](https://dplyr.tidyverse.org/reference/mutate.html)
@@ -439,6 +458,7 @@ are accessible in the top data frame level. The `filter`, `arrange` and
 data for our viewing.
 
 ``` r
+
 stocks_model_stats <- stocks_tbl %>%
     select(symbol, company) %>%
     tq_get(from = "2007-01-01", to = "2016-12-31") %>%
@@ -461,13 +481,13 @@ stocks_model_stats
 
     ## # A tibble: 5 × 7
     ## # Groups:   symbol, company [5]
-    ##   symbol company          data      estimate std.error statistic p.value
-    ##   <chr>  <chr>            <list>       <dbl>     <dbl>     <dbl>   <dbl>
-    ## 1 FICO   FAIR ISAAC CORP  <tibble>  0.0649      0.0297   2.18     0.0604
-    ## 2 AIZ    ASSURANT INC     <tibble>  0.0467      0.0398   1.17     0.274 
-    ## 3 NTAP   NETAPP INC       <tibble>  0.0200      0.0558   0.358    0.729 
-    ## 4 HSIC   HENRY SCHEIN INC <tibble>  0.0125      0.0291   0.430    0.678 
-    ## 5 SLB    SLB LTD          <tibble> -0.000450    0.0455  -0.00988  0.992
+    ##   symbol company             data     estimate std.error statistic p.value
+    ##   <chr>  <chr>               <list>      <dbl>     <dbl>     <dbl>   <dbl>
+    ## 1 ELV    ELEVANCE HEALTH INC <tibble>  0.0396     0.0353    1.12     0.293
+    ## 2 STE    STERIS PLC          <tibble>  0.00832    0.0231    0.360    0.728
+    ## 3 IVZ    INVESCO LTD         <tibble>  0.00198    0.0420    0.0471   0.964
+    ## 4 SYF    SYNCHRONY FINANCIAL <tibble> -0.0359     0.115    -0.312    0.807
+    ## 5 MOS    MOSAIC CO/THE       <tibble> -0.0746     0.0732   -1.02     0.338
 
 We’re done! We now have the coefficient of the linear regression that
 tracks the direction of the trend line. We can easily extend this type
@@ -494,10 +514,11 @@ an `NA` value is returned when an error is generated along with a
 *gentle error warning*.
 
 ``` r
+
 tq_get("XYZ", "stock.prices")
 ```
 
-    ## # A tibble: 2,575 × 8
+    ## # A tibble: 2,596 × 8
     ##    symbol date        open  high   low close  volume adjusted
     ##    <chr>  <date>     <dbl> <dbl> <dbl> <dbl>   <dbl>    <dbl>
     ##  1 XYZ    2016-01-04  12.8  12.9  12.1  12.2 2751500     12.2
@@ -510,7 +531,7 @@ tq_get("XYZ", "stock.prices")
     ##  8 XYZ    2016-01-13  12.1  12.2  11.1  11.6 2095200     11.6
     ##  9 XYZ    2016-01-14  11.5  11.6  10.8  10.8 1604900     10.8
     ## 10 XYZ    2016-01-15  10.6  10.8  10.1  10.3 1203700     10.3
-    ## # ℹ 2,565 more rows
+    ## # ℹ 2,586 more rows
 
 ### Pros and Cons to Built-In Error-Handling
 
@@ -534,6 +555,7 @@ compute on. Note that a gentle warning stating that an error occurred
 and was dealt with by removing the rows from the results.
 
 ``` r
+
 c("AAPL", "GOOG", "BAD APPLE") %>%
     tq_get(get = "stock.prices", complete_cases = TRUE)
 ```
@@ -545,7 +567,7 @@ c("AAPL", "GOOG", "BAD APPLE") %>%
     ## cannot open the connection
     ##  Removing BAD APPLE.
 
-    ## # A tibble: 5,150 × 8
+    ## # A tibble: 5,192 × 8
     ##    symbol date        open  high   low close    volume adjusted
     ##    <chr>  <date>     <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl>
     ##  1 AAPL   2016-01-04  25.7  26.3  25.5  26.3 270597600     23.7
@@ -558,7 +580,7 @@ c("AAPL", "GOOG", "BAD APPLE") %>%
     ##  8 AAPL   2016-01-13  25.1  25.3  24.3  24.3 249758400     21.9
     ##  9 AAPL   2016-01-14  24.5  25.1  23.9  24.9 252680400     22.4
     ## 10 AAPL   2016-01-15  24.0  24.4  23.8  24.3 319335600     21.9
-    ## # ℹ 5,140 more rows
+    ## # ℹ 5,182 more rows
 
 Now switching `complete_cases = FALSE` will retain any errors as `NA`
 values in a nested data frame. Notice that the error message and output
@@ -566,6 +588,7 @@ change. The error message now states that the `NA` values exist in the
 output and the return is a “nested” data structure.
 
 ``` r
+
 c("AAPL", "GOOG", "BAD APPLE") %>%
     tq_get(get = "stock.prices", complete_cases = FALSE)
 ```
@@ -576,7 +599,7 @@ c("AAPL", "GOOG", "BAD APPLE") %>%
     ## ! x = 'BAD APPLE', get = 'stock.prices': Error in getSymbols.yahoo(Symbols = "BAD APPLE", env = <environment>, : Unable to import "BAD APPLE".
     ## cannot open the connection
 
-    ## # A tibble: 5,151 × 8
+    ## # A tibble: 5,193 × 8
     ##    symbol date        open  high   low close    volume adjusted
     ##    <chr>  <date>     <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl>
     ##  1 AAPL   2016-01-04  25.7  26.3  25.5  26.3 270597600     23.7
@@ -589,7 +612,7 @@ c("AAPL", "GOOG", "BAD APPLE") %>%
     ##  8 AAPL   2016-01-13  25.1  25.3  24.3  24.3 249758400     21.9
     ##  9 AAPL   2016-01-14  24.5  25.1  23.9  24.9 252680400     22.4
     ## 10 AAPL   2016-01-15  24.0  24.4  23.8  24.3 319335600     21.9
-    ## # ℹ 5,141 more rows
+    ## # ℹ 5,183 more rows
 
 In both cases, the prudent user will review the warnings to determine
 what happened and whether or not this is acceptable. In the

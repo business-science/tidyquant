@@ -106,6 +106,7 @@ get started.
 Development Version with Latest Features:
 
 ``` r
+
 # install.packages("devtools")
 devtools::install_github("business-science/tidyquant")
 ```
@@ -113,6 +114,7 @@ devtools::install_github("business-science/tidyquant")
 CRAN Approved Version:
 
 ``` r
+
 install.packages("tidyquant")
 ```
 

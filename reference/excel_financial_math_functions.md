@@ -111,6 +111,7 @@ investment. For example, use 6%/4 for quarterly payments at 6% APR.
 ## Examples
 
 ``` r
+
 NPV(c(-1000, 250, 350, 450, 450), rate = 0.05)
 #> [1] 314.4986
 

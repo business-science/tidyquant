@@ -44,6 +44,7 @@ functions are:
 Load the `tidyquant` package to get started.
 
 ``` r
+
 # Loads tidyquant, lubridate, xts, quantmod, TTR 
 library(tidyverse)
 library(tidyquant)
@@ -59,6 +60,7 @@ To get a full list of the options, use
 [`tq_index_options()`](https://business-science.github.io/tidyquant/reference/tq_index.md).
 
 ``` r
+
 tq_index_options()
 ```
 
@@ -68,6 +70,7 @@ Set `x` as one of the options in the list of options above to get the
 desired stock index / exchange.
 
 ``` r
+
 tq_index("SP500")
 ```
 
@@ -81,6 +84,7 @@ AMEX. If you forget, just use
 We can easily get the full list of stocks on the NASDAQ exchange.
 
 ``` r
+
 tq_exchange("NASDAQ")
 ```
 
@@ -105,6 +109,7 @@ Use
 to see the full list.
 
 ``` r
+
 tq_get_options()
 ```
 
@@ -121,11 +126,12 @@ The stock prices can be retrieved succinctly using
 Finance.
 
 ``` r
+
 aapl_prices  <- tq_get("AAPL", get = "stock.prices", from = " 1990-01-01")
 aapl_prices 
 ```
 
-    ## # A tibble: 9,128 × 8
+    ## # A tibble: 9,149 × 8
     ##    symbol date        open  high   low close    volume adjusted
     ##    <chr>  <date>     <dbl> <dbl> <dbl> <dbl>     <dbl>    <dbl>
     ##  1 AAPL   1990-01-02 0.315 0.335 0.312 0.333 183198400    0.261
@@ -138,11 +144,12 @@ aapl_prices
     ##  8 AAPL   1990-01-11 0.324 0.324 0.308 0.308 211052800    0.241
     ##  9 AAPL   1990-01-12 0.306 0.310 0.301 0.308 171897600    0.241
     ## 10 AAPL   1990-01-15 0.308 0.319 0.306 0.306 161739200    0.240
-    ## # ℹ 9,118 more rows
+    ## # ℹ 9,139 more rows
 
 We can get multiple stocks:
 
 ``` r
+
 stocks <- c("AAPL", "META", "NFLX") %>%
     tq_get(from = "2013-01-01",
            to   = "2017-01-01")
@@ -168,6 +175,7 @@ Yahoo Japan stock prices can be retrieved using a similar call,
 `get = "stock.prices.japan"`.
 
 ``` r
+
 x8411T <- tq_get("8411.T", get = "stock.prices.japan", from = "2016-01-01", to  = "2016-12-31")
 ```
 
@@ -184,6 +192,7 @@ data base and to get data codes. The [WTI Crude Oil
 Prices](https://fred.stlouisfed.org/series/DCOILWTICO) are shown below.
 
 ``` r
+
 wti_price_usd <- suppressWarnings(
     tq_get("DCOILWTICO", get = "economic.data")
 )
@@ -195,7 +204,7 @@ if (tibble::is_tibble(wti_price_usd)) {
 }
 ```
 
-    ## # A tibble: 2,667 × 3
+    ## # A tibble: 2,692 × 3
     ##    symbol     date       price
     ##    <chr>      <date>     <dbl>
     ##  1 DCOILWTICO 2016-01-01  NA  
@@ -208,7 +217,7 @@ if (tibble::is_tibble(wti_price_usd)) {
     ##  8 DCOILWTICO 2016-01-12  30.4
     ##  9 DCOILWTICO 2016-01-13  30.4
     ## 10 DCOILWTICO 2016-01-14  31.2
-    ## # ℹ 2,657 more rows
+    ## # ℹ 2,682 more rows
 
 ### 2.3 Nasdaq Data Link (Quandl) API
 
@@ -224,6 +233,7 @@ To do this create or sign into your Nasdaq Data Link account and go to
 your account api key page.
 
 ``` r
+
 quandl_api_key("<your-api-key>")
 ```
 
@@ -237,6 +247,7 @@ Search](https://data.nasdaq.com/search) webpage to search for available
 database codes.
 
 ``` r
+
 quandl_search(query = "Oil", database_code = "NSE", per_page = 3)
 ```
 
@@ -258,6 +269,7 @@ The following uses `get = "quandl"` and the “WIKI” database to download
 daily stock prices for AAPL in 2016. The output is a tidy data frame.
 
 ``` r
+
 c("WIKI/AAPL") %>%
     tq_get(get  = "quandl",
            from = "2016-01-01",
@@ -279,6 +291,7 @@ Here’s an example to get period returns of the adj.close (column index
 11) using the `column_index`, `collapse` and `transform` arguments.
 
 ``` r
+
 "WIKI/AAPL" %>%
     tq_get(get          = "quandl",
            from         = "2007-01-01",
@@ -296,6 +309,7 @@ Here’s several examples of [Zacks Fundamentals Collection
 B](https://data.nasdaq.com/databases/ZFB/documentation/about)
 
 ``` r
+
 # Zacks Fundamentals Collection B (DOW 30 Available to non subscribers)
 tq_get("ZACKS/FC", get = "quandl.datatable")   # Zacks Fundamentals Condensed
 tq_get("ZACKS/FR", get = "quandl.datatable")   # Zacks Fundamental Ratios
@@ -317,6 +331,7 @@ set your api key. If you don’t have one already, go to Tiingo account
 and get your FREE API key. You can then set it as follows:
 
 ``` r
+
 tiingo_api_key('<your-api-key>')
 ```
 
@@ -334,6 +349,7 @@ maps to `riingo`:
   `tq_get(get = "tiingo.crypto") = riingo::riingo_crypto_prices()`
 
 ``` r
+
 # Tiingo Prices (Free alternative to Yahoo Finance!)
 tq_get(c("AAPL", "GOOG"), get = "tiingo", from = "2010-01-01")
 
@@ -362,6 +378,7 @@ can now get multiple symbols returned in a tidy format**. You will need
 to install it first.
 
 ``` r
+
 install.packages("alphavantager")
 ```
 
@@ -373,6 +390,7 @@ Vantage](https://www.alphavantage.co/) account and get your FREE API
 key. You can then set it as follows:
 
 ``` r
+
 # install.packages("alphavantager")
 av_api_key("<your-api-key>")
 ```
@@ -391,6 +409,7 @@ and the Alpha Vantage documentation. The `interval` argument comes from
 the docs as well.
 
 ``` r
+
 # Scaling is as simple as supplying multiple symbols
 c("META", "MSFT") %>%
     tq_get(get = "alphavantage", av_fun = "TIME_SERIES_INTRADAY", interval = "5min")
@@ -413,6 +432,7 @@ Terminal account (Note this is not a free service). If you have
 Bloomberg Terminal running on your machine, you can connect as follows:
 
 ``` r
+
 # install.packages("Rblpapi")
 Rblpapi::blpConnect()
 ```
@@ -437,6 +457,7 @@ can build the `tq_get` parameters as follows:
   See `Rblpapi` documentation.
 
 ``` r
+
 # Get Bloomberg data in a tidy data frame
 my_bloomberg_data <- c('SPX Index','ODMAX Equity') %>%
     tq_get(get         = "Rblpapi",
@@ -457,6 +478,7 @@ apply the functions to grouped data sets to get a feel for how each
 works
 
 ``` r
+
 FANG
 ```
 
@@ -491,6 +513,7 @@ frame. This is important for changing periodicity. An example is
 periodicity aggregation from daily to monthly.
 
 ``` r
+
 FANG %>%
     group_by(symbol) %>%
     tq_transmute(select = adjusted, mutate_fun = to.monthly, indexAt = "lastof")
@@ -530,6 +553,7 @@ the `select` argument as `NULL` which selects all columns by default.
 This sends the price column to the `to.period` mutate function.
 
 ``` r
+
 wti_prices <- suppressWarnings(
     tq_get("DCOILWTICO", get = "economic.data")
 )
@@ -544,7 +568,7 @@ if (tibble::is_tibble(wti_prices)) {
 }
 ```
 
-    ## # A tibble: 123 × 2
+    ## # A tibble: 124 × 2
     ##    date       `WTI Price`
     ##    <date>           <dbl>
     ##  1 2016-01-29        33.7
@@ -557,7 +581,7 @@ if (tibble::is_tibble(wti_prices)) {
     ##  8 2016-08-31        44.7
     ##  9 2016-09-30        47.7
     ## 10 2016-10-31        46.8
-    ## # ℹ 113 more rows
+    ## # ℹ 114 more rows
 
 ### 3.2 Mutate Quantitative Data, tq_mutate
 
@@ -568,6 +592,7 @@ which mutates the original input by adding MACD and Signal columns. Note
 that we can quickly rename the columns using the `col_rename` argument.
 
 ``` r
+
 FANG %>%
     group_by(symbol) %>%
     tq_mutate(select     = close, 
@@ -614,6 +639,7 @@ First, get combined returns. The asset and baseline returns should be in
 wide format, which is needed for the `lm` function in the next step.
 
 ``` r
+
 fb_returns <- tq_get("META", get  = "stock.prices", from = "2016-01-01", to   = "2016-12-31") %>%
     tq_transmute(adjusted, periodReturn, period = "weekly", col_rename = "fb.returns")
 
@@ -635,7 +661,7 @@ returns_combined
     ##  6 2016-02-12   -0.0198     -0.00582
     ##  7 2016-02-19    0.0251      0.0354 
     ##  8 2016-02-26    0.0320      0.0148 
-    ##  9 2016-03-04    0.00436     0.0281 
+    ##  9 2016-03-04    0.00435     0.0281 
     ## 10 2016-03-11    0.00941     0.0106 
     ## # ℹ 42 more rows
 
@@ -649,6 +675,7 @@ function takes care of converting to a data frame for the `lm` function
 to work properly with the columns “fb.returns” and “xlk.returns”.
 
 ``` r
+
 regr_fun <- function(data) {
     coef(lm(fb.returns ~ xlk.returns, data = timetk::tk_tbl(data, silent = TRUE)))
 }
@@ -672,6 +699,7 @@ independently. The `col_rename` argument is used to rename the added
 columns.
 
 ``` r
+
 returns_combined %>%
     tq_mutate(mutate_fun = rollapply,
               width      = 12,
@@ -691,11 +719,12 @@ returns_combined %>%
     ##  6 2016-02-12   -0.0198     -0.00582     NA     NA
     ##  7 2016-02-19    0.0251      0.0354      NA     NA
     ##  8 2016-02-26    0.0320      0.0148      NA     NA
-    ##  9 2016-03-04    0.00436     0.0281      NA     NA
+    ##  9 2016-03-04    0.00435     0.0281      NA     NA
     ## 10 2016-03-11    0.00941     0.0106      NA     NA
     ## # ℹ 42 more rows
 
 ``` r
+
 returns_combined
 ```
 
@@ -710,7 +739,7 @@ returns_combined
     ##  6 2016-02-12   -0.0198     -0.00582
     ##  7 2016-02-19    0.0251      0.0354 
     ##  8 2016-02-26    0.0320      0.0148 
-    ##  9 2016-03-04    0.00436     0.0281 
+    ##  9 2016-03-04    0.00435     0.0281 
     ## 10 2016-03-11    0.00941     0.0106 
     ## # ℹ 42 more rows
 
@@ -735,6 +764,7 @@ The only difference is instead of the `select` argument, you use `x` and
 documentation.
 
 ``` r
+
 FANG %>%
     group_by(symbol) %>%
     tq_mutate_xy(x = close, y = volume, 

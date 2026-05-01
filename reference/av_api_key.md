@@ -31,6 +31,7 @@ A wrapper for
 ## Examples
 
 ``` r
+
 if (FALSE) { # \dontrun{
 if (rlang::is_installed("alphavantager")) {
 av_api_key(api_key = "foobar")
