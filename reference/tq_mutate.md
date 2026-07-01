@@ -198,20 +198,20 @@ if (tibble::is_tibble(wti_prices)) {
 } else {
     message("Economic data unavailable; skipping web-dependent example.")
 }
-#> # A tibble: 2,713 × 4
+#> # A tibble: 2,731 × 4
 #>    symbol     date       price lag.xts
 #>    <chr>      <date>     <dbl>   <dbl>
-#>  1 DCOILWTICO 2016-01-01  NA      NA  
-#>  2 DCOILWTICO 2016-01-04  36.8    NA  
-#>  3 DCOILWTICO 2016-01-05  36.0    36.8
-#>  4 DCOILWTICO 2016-01-06  34.0    36.0
-#>  5 DCOILWTICO 2016-01-07  33.3    34.0
-#>  6 DCOILWTICO 2016-01-08  33.2    33.3
-#>  7 DCOILWTICO 2016-01-11  31.4    33.2
-#>  8 DCOILWTICO 2016-01-12  30.4    31.4
-#>  9 DCOILWTICO 2016-01-13  30.4    30.4
-#> 10 DCOILWTICO 2016-01-14  31.2    30.4
-#> # ℹ 2,703 more rows
+#>  1 DCOILWTICO 2016-01-04  36.8    NA  
+#>  2 DCOILWTICO 2016-01-05  36.0    36.8
+#>  3 DCOILWTICO 2016-01-06  34.0    36.0
+#>  4 DCOILWTICO 2016-01-07  33.3    34.0
+#>  5 DCOILWTICO 2016-01-08  33.2    33.3
+#>  6 DCOILWTICO 2016-01-11  31.4    33.2
+#>  7 DCOILWTICO 2016-01-12  30.4    31.4
+#>  8 DCOILWTICO 2016-01-13  30.4    30.4
+#>  9 DCOILWTICO 2016-01-14  31.2    30.4
+#> 10 DCOILWTICO 2016-01-15  29.4    31.2
+#> # ℹ 2,721 more rows
 
 # Example 4: Using tq_mutate to apply a rolling regression
 fb_returns <- fb_stock_prices %>%
