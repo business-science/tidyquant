@@ -1,3 +1,7 @@
+# tidyquant 1.0.12.9000
+
+- `PMT()`, `FV()` and `PV()`: Return the same result as Excel instead of `NaN` when `rate = 0` (#256)
+
 # tidyquant 1.0.12
 
 - Remove dependency to Quandl R package
