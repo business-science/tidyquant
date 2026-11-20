@@ -146,19 +146,22 @@ IRR <- function(cashflow) {
 #' @rdname excel_financial_math_functions
 #' @export
 FV <- function(rate, nper, pv = 0, pmt = 0, type = 0) {
-    (-1 * pv * (1 + rate)^nper) + (-1 * ( pmt / rate * ((1 + rate)^nper - 1) ) * (1 + rate)^type)
+    fv <- (-1 * pv * (1 + rate)^nper) + (-1 * ( pmt / rate * ((1 + rate)^nper - 1) ) * (1 + rate)^type)
+    replace_zero_rate(fv, rate, zero_rate_value = -1 * pv - pmt * nper)
 }
 
 #' @rdname excel_financial_math_functions
 #' @export
 PV <- function(rate, nper, fv = 0, pmt = 0, type = 0) {
-    (-1 * fv / (1 + rate)^nper) + (-1 * (pmt / rate * (1 - 1 / (1 + rate)^nper))*(1 + rate)^type)
+    pv <- (-1 * fv / (1 + rate)^nper) + (-1 * (pmt / rate * (1 - 1 / (1 + rate)^nper))*(1 + rate)^type)
+    replace_zero_rate(pv, rate, zero_rate_value = -1 * fv - pmt * nper)
 }
 
 #' @rdname excel_financial_math_functions
 #' @export
 PMT <- function(rate, nper, pv, fv = 0, type = 0) {
-    ( pv + fv / (1 + rate)^nper ) * rate/ (1 - 1 / (1 + rate)^nper) * (-1) * (1 + rate)^(-1 * type)
+    pmt <- ( pv + fv / (1 + rate)^nper ) * rate/ (1 - 1 / (1 + rate)^nper) * (-1) * (1 + rate)^(-1 * type)
+    replace_zero_rate(pmt, rate, zero_rate_value = -1 * (pv + fv) / nper)
 }
 
 #' @rdname excel_financial_math_functions
@@ -186,5 +189,14 @@ RATE <- function(nper, pmt, pv, fv = 0, type = 0) {
 
 }
 
+# Utilities ----
+
+# FV(), PV() and PMT() divide by `rate`, so their formulas return NaN when
+# rate = 0. Excel uses the zero-rate limit instead; substitute it element-wise.
+replace_zero_rate <- function(x, rate, zero_rate_value) {
+    is_zero_rate <- rep_len(!is.na(rate) & rate == 0, length(x))
+    x[is_zero_rate] <- rep_len(zero_rate_value, length(x))[is_zero_rate]
+    x
+}
 
 
